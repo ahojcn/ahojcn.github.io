@@ -2,16 +2,16 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>http://ahoj.cc/photos/data.json</loc>
+    <loc>http://ahoj.cc/photos/index.html</loc>
     
-    <lastmod>2018-10-06T13:36:37.606Z</lastmod>
+    <lastmod>2018-10-06T13:40:44.500Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://ahoj.cc/photos/index.html</loc>
+    <loc>http://ahoj.cc/photos/data.json</loc>
     
-    <lastmod>2018-10-06T13:35:33.224Z</lastmod>
+    <lastmod>2018-10-06T13:36:37.606Z</lastmod>
     
   </url>
   
