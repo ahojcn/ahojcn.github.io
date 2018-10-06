@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://ahoj.cc/photos/data.json</loc>
+    
+    <lastmod>2018-10-06T15:56:36.294Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://ahoj.cc/photos/index.html</loc>
     
     <lastmod>2018-10-06T15:41:44.038Z</lastmod>
@@ -9,30 +16,9 @@
   </url>
   
   <url>
-    <loc>http://ahoj.cc/photos/1index.html</loc>
-    
-    <lastmod>2018-10-06T15:40:19.658Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://ahoj.cc/photos/data.json</loc>
-    
-    <lastmod>2018-10-06T13:49:46.085Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>http://ahoj.cc/about/index.html</loc>
     
     <lastmod>2018-10-06T13:45:13.700Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://ahoj.cc/photos/output.json</loc>
-    
-    <lastmod>2018-10-06T13:32:42.655Z</lastmod>
     
   </url>
   
