@@ -15,18 +15,18 @@
 
 
 
-<meta name="description" content="还在完善中…… Github项目地址">
+<meta name="description" content="Github地址 分析  需要个游戏控制函数，决定是继续游戏，还是退出程序。 人走完后，电脑走棋。 每次走完棋，需要显示当前棋盘状态。 在每次走完后，需要判断是否胜利。 当三种相同的在一条线上时，胜利。 当地图填满时，还没有胜利者，则为平局。">
 <meta name="keywords" content="C语言,练习">
 <meta property="og:type" content="article">
 <meta property="og:title" content="15【练习】三子棋游戏">
 <meta property="og:url" content="http://ahoj.cc/2018/10/cjng1bh4d0000su6zmdl20zhe/index.html">
 <meta property="og:site_name" content="ahoj的博客">
-<meta property="og:description" content="还在完善中…… Github项目地址">
+<meta property="og:description" content="Github地址 分析  需要个游戏控制函数，决定是继续游戏，还是退出程序。 人走完后，电脑走棋。 每次走完棋，需要显示当前棋盘状态。 在每次走完后，需要判断是否胜利。 当三种相同的在一条线上时，胜利。 当地图填满时，还没有胜利者，则为平局。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-10-19T15:20:09.709Z">
+<meta property="og:updated_time" content="2018-10-19T15:21:33.725Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="15【练习】三子棋游戏">
-<meta name="twitter:description" content="还在完善中…… Github项目地址">
+<meta name="twitter:description" content="Github地址 分析  需要个游戏控制函数，决定是继续游戏，还是退出程序。 人走完后，电脑走棋。 每次走完棋，需要显示当前棋盘状态。 在每次走完后，需要判断是否胜利。 当三种相同的在一条线上时，胜利。 当地图填满时，还没有胜利者，则为平局。">
 
 <link rel="apple-touch-icon" href= "/apple-touch-icon.png">
 
@@ -261,9 +261,7 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <p>还在完善中……</p>
-<p><a href="http://ahoj.cc/">Github项目地址</a></p>
-<a id="more"></a>
+        <p><a href="https://github.com/ahojcn/Practice/tree/master/bit/MySanZiChessGame/MySanZiChessGame" target="_blank" rel="noopener">Github地址</a></p>
 <h3 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h3><blockquote>
 <ol>
 <li>需要个游戏控制函数，决定是继续游戏，还是退出程序。</li>
@@ -274,6 +272,7 @@
 <li>当地图填满时，还没有胜利者，则为平局。</li>
 </ol>
 </blockquote>
+<a id="more"></a>
 <h3 id="0-地图大小和坐标"><a href="#0-地图大小和坐标" class="headerlink" title="0. 地图大小和坐标"></a>0. 地图大小和坐标</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">#define ROW 3</span><br><span class="line">#define COL 3</span><br><span class="line"></span><br><span class="line">typedef struct</span><br><span class="line">&#123;</span><br><span class="line">    int x;</span><br><span class="line">    int y;</span><br><span class="line">&#125;Point;</span><br></pre></td></tr></table></figure>
 <h3 id="1-菜单"><a href="#1-菜单" class="headerlink" title="1. 菜单"></a>1. 菜单</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">void game_menu()</span><br><span class="line">&#123;</span><br><span class="line">    printf(&quot;*********************\n&quot;);</span><br><span class="line">    printf(&quot;*** 1.play 0.exit ***\n&quot;);</span><br><span class="line">    printf(&quot;*********************\n&quot;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h3 id="2-主函数"><a href="#2-主函数" class="headerlink" title="2. 主函数"></a>2. 主函数</h3><blockquote>
