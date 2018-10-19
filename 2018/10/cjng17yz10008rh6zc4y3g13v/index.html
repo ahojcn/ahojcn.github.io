@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+
+    <!--[if lt IE 9]>
+        <style>body {display: none; background: none !important} </style>
+        <meta http-equiv="Refresh" Content="0; url=//outdatedbrowser.com/" />
+    <![endif]-->
+
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="format-detection" content="telephone=no" />
+<meta name="author" content="ahoj" />
+
+
+
+<meta name="description" content="目录1 最好、最坏情况时间复杂度2 平均时间复杂度3 均摊时间复杂度">
+<meta name="keywords" content="数据结构">
+<meta property="og:type" content="article">
+<meta property="og:title" content="12【数据结构】浅析最好、最坏、平均、均摊时间复杂度">
+<meta property="og:url" content="http://ahoj.cc/2018/10/cjng17yz10008rh6zc4y3g13v/index.html">
+<meta property="og:site_name" content="ahoj的博客">
+<meta property="og:description" content="目录1 最好、最坏情况时间复杂度2 平均时间复杂度3 均摊时间复杂度">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-10-17T14:26:41.443Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="12【数据结构】浅析最好、最坏、平均、均摊时间复杂度">
+<meta name="twitter:description" content="目录1 最好、最坏情况时间复杂度2 平均时间复杂度3 均摊时间复杂度">
+
+<link rel="apple-touch-icon" href= "/apple-touch-icon.png">
+
+
+    <link rel="alternate" href="/atom.xml" title="ahoj的博客" type="application/atom+xml">
+
+
+
+    <link rel="shortcut icon" href="https://avatars1.githubusercontent.com/u/43307215?s=460&v=4">
+
+
+
+    <link href="//cdn.bootcss.com/animate.css/3.5.1/animate.min.css" rel="stylesheet">
+
+
+
+    <link href="//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.css" rel="stylesheet">
+
+
+
+    <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+    <link href="//cdn.bootcss.com/pace/1.0.2/themes/blue/pace-theme-minimal.css" rel="stylesheet">
+
+
+<link rel="stylesheet" href="/css/style.css">
+
+
+
+<link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+
+
+<title>12【数据结构】浅析最好、最坏、平均、均摊时间复杂度 | ahoj的博客</title>
+
+<script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+<script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+
+<script>
+    var yiliaConfig = {
+        fancybox: true,
+        animate: true,
+        isHome: false,
+        isPost: true,
+        isArchive: false,
+        isTag: false,
+        isCategory: false,
+        fancybox_js: "//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.js",
+        scrollreveal: "//cdn.bootcss.com/scrollReveal.js/3.1.4/scrollreveal.min.js",
+        search: true
+    }
+</script>
+
+
+    <script>
+        yiliaConfig.jquery_ui = [true, "//cdn.bootcss.com/jqueryui/1.10.4/jquery-ui.min.js", "//cdn.bootcss.com/jqueryui/1.10.4/css/jquery-ui.min.css"];
+    </script>
+
+
+
+    <script> yiliaConfig.rootUrl = "\/";</script>
+
+
+
+
+
+
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <a href="/" class="profilepic">
+            <img src="https://avatars1.githubusercontent.com/u/43307215?s=460&amp;v=4" class="animated zoomIn">
+        </a>
+        <hgroup>
+          <h1 class="header-author"><a href="/">ahoj</a></h1>
+        </hgroup>
+
+        
+        <p class="header-subtitle">平凡有一点理想,想让世界不一样。</p>
+        
+
+        
+            <form id="search-form">
+            <input type="text" id="local-search-input" name="q" placeholder="search..." class="search form-control" autocomplete="off" autocorrect="off" searchonload="false" />
+            <i class="fa fa-times" onclick="resetSearch()"></i>
+            </form>
+            <div id="local-search-result"></div>
+            <p class='no-result'>No results found <i class='fa fa-spinner fa-pulse'></i></p>
+        
+
+
+        
+
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                            <li><a href="/">主页</a></li>
+                        
+                            <li><a href="/archives/">文章</a></li>
+                        
+                            <li><a href="/tags/">标签</a></li>
+                        
+                            <li><a href="/about/">关于我</a></li>
+                        
+                            <li><a href="/photos/">相册</a></li>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" href="mailto:2076430492@qq.com" title="Email"></a>
+                            
+                        </ul>
+                    </nav>
+                </section>
+
+                
+
+                
+                <section class="switch-part switch-part3">
+                    <div id="js-friends">
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://blog.csdn.net/m0_38032942">Tim</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://blog.csdn.net/Hanoi_ahoj">MyCSDN</a>
+                    
+                    </div>
+                </section>
+                
+
+                
+            </div>
+        </div>
+        <div style="margin-top:30px;">
+          <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=260 height=86 src="//music.163.com/outchain/player?type=2&id=469249441&auto=1&height=66"></iframe>
+      </div>
+    </header>
+</div>
+
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="回到主页">ahoj</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                <img src="https://avatars1.githubusercontent.com/u/43307215?s=460&amp;v=4" class="animated zoomIn">
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="回到主页">ahoj</a></h1>
+            </hgroup>
+            
+            <p class="header-subtitle">平凡有一点理想,想让世界不一样。</p>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="/">主页</a></li>
+                
+                    <li><a href="/archives/">文章</a></li>
+                
+                    <li><a href="/tags/">标签</a></li>
+                
+                    <li><a href="/about/">关于我</a></li>
+                
+                    <li><a href="/photos/">相册</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" target="_blank" href="mailto:2076430492@qq.com" title="Email"></a>
+                            
+                        </ul>
+            </nav>
+        </header>                
+    </div>
+    <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
+</nav>
+      <div class="body-wrap"><article id="post-12【数据结构】最好、最坏、平均、均摊时间复杂度" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2018/10/cjng17yz10008rh6zc4y3g13v/" class="article-date">
+      <time datetime="2018-10-04T12:48:44.000Z" itemprop="datePublished">2018-10-04</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      12【数据结构】浅析最好、最坏、平均、均摊时间复杂度
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/数据结构/">数据结构</a>
+    </div>
+
+
+        
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/数据结构/">数据结构</a></li></ul>
+    </div>
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h2 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h2><h3 id="1-最好、最坏情况时间复杂度"><a href="#1-最好、最坏情况时间复杂度" class="headerlink" title="1 最好、最坏情况时间复杂度"></a>1 最好、最坏情况时间复杂度</h3><h3 id="2-平均时间复杂度"><a href="#2-平均时间复杂度" class="headerlink" title="2 平均时间复杂度"></a>2 平均时间复杂度</h3><h3 id="3-均摊时间复杂度"><a href="#3-均摊时间复杂度" class="headerlink" title="3 均摊时间复杂度"></a>3 均摊时间复杂度</h3><a id="more"></a>
+<hr>
+<h2 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h2><h3 id="1-最好、最坏时间复杂度"><a href="#1-最好、最坏时间复杂度" class="headerlink" title="1 最好、最坏时间复杂度"></a>1 最好、最坏时间复杂度</h3>   <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// n 为 数组arr的长度</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">fun1</span><span class="params">(<span class="keyword">int</span> arr[], <span class="keyword">int</span> n, <span class="keyword">int</span> x)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> i = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">int</span> pos = <span class="number">-1</span>;</span><br><span class="line">    <span class="keyword">for</span>( ; i&lt;n; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(arr[i] == x)</span><br><span class="line">        &#123;</span><br><span class="line">            pos = i;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> pos;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>上面这段代码的意思是：在无序的数组arr[]中，查找变量x出现的位置，如果没有找到就返回-1。</p>
+</blockquote>
+<p>这段代码的复杂度为<code>O(n)</code>，n为数组长度。</p>
+<p>这段代码的问题：如果我们查找的数据就在第一个位置，就不需要遍历后面的了。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 对上边代码的优化</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">fun2</span><span class="params">(<span class="keyword">int</span> arr[], <span class="keyword">int</span> n, <span class="keyword">int</span> x)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> i = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">int</span> pos = <span class="number">-1</span>;</span><br><span class="line">    <span class="keyword">for</span>( ; i&lt;n; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(arr[i] == x)</span><br><span class="line">        &#123;</span><br><span class="line">            pos = i;</span><br><span class="line">            <span class="keyword">break</span>;	<span class="comment">// 这里</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> pos;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这个时间复杂度怎么分析？</p>
+<p>最好情况时间复杂度：<code>O(1)</code></p>
+<p>最坏情况时间复杂度：<code>O(n)</code></p>
+<h3 id="2-平均时间复杂度-1"><a href="#2-平均时间复杂度-1" class="headerlink" title="2 平均时间复杂度"></a>2 平均时间复杂度</h3><p>对于<code>fun2()</code>来说：要查找的变量x在数组中的位置有n+1种情况，在数组0～n-1位置中和不在数组中。</p>
+<p>把每种情况下，查找所需要遍历的元素个数累加起来，然后再除以n+1，就可以得到需要遍历的元素个数平均值。</p>
+<p><code>(1+2+3+...+n+n)/(n+1) = (n(n+3))/2(n+1)</code></p>
+<p>但是，要查找的变量x，要么在数组里，要么不在数组里。这两种情况对应的概率统计起来很麻烦，假设这两种情况的概率都为1/2。要查找的数据在0～n-1这n个位置的概率也是一样的，为1/n。所以根据概率乘法法则，要查找的数据出现在0～n-1中任意位置的概率为1/2n。</p>
+<p>把每种情况发生的概率也考虑上：</p>
+<p><code>1*1/2n + 2*1/2n + 3*1/2n + ... + n*1/2n + n*1/2 =</code> <strong><code>(3n+1)/4</code></strong></p>
+<p>这个值就是概率论中的加权平均值，也是期望值。</p>
+<p>所以平均时间复杂度的全称为<strong>加权平均时间复杂度或期望时间复杂度</strong>。</p>
+<p>所以fun2()的复杂度为<code>O(n)</code>。</p>
+<h3 id="3-均摊时间复杂度-1"><a href="#3-均摊时间复杂度-1" class="headerlink" title="3 均摊时间复杂度"></a>3 均摊时间复杂度</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> arr[SIZE] = &#123;<span class="number">0</span>&#125;;</span><br><span class="line"><span class="keyword">int</span> n = <span class="keyword">sizeof</span>(arr)/<span class="keyword">sizeof</span>(arr[<span class="number">0</span>]);</span><br><span class="line"><span class="keyword">int</span> count = <span class="number">0</span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">fun3</span><span class="params">(<span class="keyword">int</span> val)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(count == n)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">int</span> sum = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;n; i++)</span><br><span class="line">        &#123;</span><br><span class="line">            sum = sum + arr[i];</span><br><span class="line">        &#125;</span><br><span class="line">        arr[<span class="number">0</span>] = sum;</span><br><span class="line">        count = <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    arr[count] = val;</span><br><span class="line">    ++count;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这段代码的意思是：往数组中插入数据，当数组满后<code>count == n</code>，用for循环遍历数组求和，并清空数组。求和之后的sum值当道数组的第一个位置，然后再进行插入，如果数组一开始就有空闲空间，直接插入。</p>
+<p>最好情况时间复杂度：<code>O(1)</code></p>
+<p>最坏情况时间复杂度：<code>O(n)</code></p>
+<p>平均时间复杂度：假设数组的长度是n，根据数据插入位置的不同，我们可以分为n种情况，每种情况的时间复杂度为O(1)。除此外，还有一种情况，就是当数组没有空闲空间时，这时的时间复杂度为O(n)。而且，这n+1种情况发生的概率一样，都是1/(n+1)。所以有：</p>
+<p><code>1*1/(n+1) + 1*1/(n+1) + ... + 1*1/(n+1) + n*1/(n+1) =</code> <strong><code>O(1)</code></strong>。</p>
+<h4 id="对比fun2-和fun3-："><a href="#对比fun2-和fun3-：" class="headerlink" title="对比fun2()和fun3()："></a>对比<code>fun2()</code>和<code>fun3()</code>：</h4><ul>
+<li>fun2函数在极端情况下，复杂度才为O(1)。但是fun3在大部分情况下，时间复杂度都为O(1)，只有个别情况下，复杂度才比较高。</li>
+<li>对于fun3来说，O(1)时间复杂度的插入和O(n)时间复杂度的插入的出现是有规律的，而且有一定的前后时序关系，一般是O(n)插入后，紧跟着n-1个O(1)的插入操作，循环往复。</li>
+</ul>
+<p>针对这种场景，有一种更加简单的方法：<strong>摊还分析法</strong>，通过摊还分析得到的时间复杂度成为<strong>均摊时间复杂度</strong>。</p>
+<p>对于每一次的O(n)操作，将时间均摊给n-1个O(1)的操作，这样均摊下来，总的时间复杂度为O(1)。</p>
+<hr>
+<h2 id="完"><a href="#完" class="headerlink" title="完"></a>完</h2>
+      
+    </div>
+    
+  </div>
+  
+    
+
+
+    <nav id="article-nav">
+        
+            <div id="article-nav-newer" class="article-nav-title">
+                <a href="/2018/10/cjng17yz00007rh6z4m4075d6/">
+                    13【博客】GitHubPages+Hexo搭建个人博客的相关资料
+                </a>
+            </div>
+        
+        
+            <div id="article-nav-older" class="article-nav-title">
+                <a href="/2018/10/cjng17yyt0002rh6zb5n0gf0c/">
+                    11【数据结构】复杂度分析
+                </a>
+            </div>
+        
+    </nav>
+
+  
+</article>
+
+
+
+    
+<div class="share">
+    
+        <div class="bdsharebuttonbox">
+            <a href="#" class="fa fa-twitter bds_twi" data-cmd="twi" title="分享到推特"></a>
+            <a href="#" class="fa fa-weibo bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+            <a href="#" class="fa fa-qq bds_sqq" data-cmd="sqq" title="分享给 QQ 好友"></a>
+            <a href="#" class="fa fa-files-o bds_copy" data-cmd="copy" title="复制网址"></a>
+            <a href="#" class="fa fa fa-envelope-o bds_mail" data-cmd="mail" title="通过邮件分享"></a>
+            <a href="#" class="fa fa-weixin bds_weixin" data-cmd="weixin" title="生成文章二维码"></a>
+            <a href="#" class="fa fa-share-alt bds_more" data-cmd="more"></i></a>
+        </div>
+        <script>
+            window._bd_share_config={
+                "common":{"bdSnsKey":{},"bdText":"12【数据结构】浅析最好、最坏、平均、均摊时间复杂度　| ahoj的博客　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+        </script>
+    
+
+    
+</div>
+
+
+
+
+
+
+
+    
+      <!-- 来必力City版安装代码 -->
+<div id="lv-container" data-id="city" data-uid="MTAyMC80MDExOS8xNjY0Ng==">
+<script type="text/javascript">
+   (function(d, s) {
+       var j, e = d.getElementsByTagName(s)[0];
+
+       if (typeof LivereTower === 'function') { return; }
+
+       j = d.createElement(s);
+       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+       j.async = true;
+
+       e.parentNode.insertBefore(j, e);
+   })(document, 'script');
+</script>
+<noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+</div>
+<!-- City版安装代码已完成 -->
+
+    
+
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/2018/10/cjng17yz00007rh6z4m4075d6/" title="上一篇: 13【博客】GitHubPages+Hexo搭建个人博客的相关资料">
+                <i class="fa fa-angle-left"></i>
+            </a>
+        
+
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+
+        
+            <a href="/2018/10/cjng17yyt0002rh6zb5n0gf0c/" title="下一篇: 11【数据结构】复杂度分析">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2018/10/cjng17yyz0006rh6zqxwd8qg5/">15【项目】三子棋游戏</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/cjng17yz4000brh6zsp1siktp/">14【数据结构】单链表及其基本操作</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/cjng17yz00007rh6z4m4075d6/">13【博客】GitHubPages+Hexo搭建个人博客的相关资料</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/cjng17yz10008rh6zc4y3g13v/">12【数据结构】浅析最好、最坏、平均、均摊时间复杂度</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/cjng17yyt0002rh6zb5n0gf0c/">11【数据结构】复杂度分析</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/cjng17yyo0000rh6zr20yzfeh/">10【数据结构】自定义数组的增删改查</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/cjng17yzk0014rh6zmsegg2pn/">9【数据结构】深入理解数组</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/cjng17yzi0010rh6zvf9hincr/">8【回忆】老韩语录和我们的故事</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/cjng17yzh000yrh6zarxwv8hw/">7【练习】菱形图案的两种方法对比</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/cjng17yzl0017rh6zxxu6tkgb/">6【练习】水仙花数代码优化</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/cjng17yzf000trh6zi456gzay/">5【反思】不要在二三十岁就开始老去</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/cjng17yzd000qrh6zlus1ers3/">4【数据结构】带密码的约瑟夫环</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/cjng17yz6000drh6za81oju71/">3【反思】人之患在好为人师</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/cjng17yz8000irh6zeqb0e48m/">2【网络安全】fluxion伪造ap获取wifi密码</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/cjng17yzb000lrh6zhgzlvuqo/">1【离散数学】实验三</a></li></ul>
+
+
+
+
+    <script>
+        
+    </script>
+
+
+<!--搜索引擎优化（SEO），百度主动推送代码，让搜索引擎最快发现文章-->
+
+<script>
+(function(){
+    var bp = document.createElement('script');
+    bp.src = '//push.zhanzhang.baidu.com/push.js';
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+</div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                <i class="fa fa-copyright"></i>
+                2018 ahoj
+            </div>
+            <div class="footer-right">
+                <a href="http://hexo.io/" target="_blank" title="快速、简洁且高效的博客框架">Hexo</a>  Theme <a href="https://github.com/MOxFIVE/hexo-theme-yelee" target="_blank" title="简而不减 Hexo 双栏博客主题  v3.5">Yelee</a> by MOxFIVE <i class="fa fa-heart animated infinite pulse"></i>
+            </div>
+        </div>
+        
+            <div class="visit">
+                
+                    <span id="busuanzi_container_site_pv" style='display:none'>
+                        <span id="site-visit" title="本站到访数"><i class="fa fa-user" aria-hidden="true"></i><span id="busuanzi_value_site_uv"></span>
+                        </span>
+                    </span>
+                
+                
+                    <span>| </span>
+                
+                
+                    <span id="busuanzi_container_page_pv" style='display:none'>
+                        <span id="page-visit"  title="本页阅读量"><i class="fa fa-eye animated infinite pulse" aria-hidden="true"></i><span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    </span>
+                
+            </div>
+        
+    </div>
+</footer>
+
+<!--页面点击小红心-->
+<script type="text/javascript" src="/love.js"></script>
+<!--字数统计-->
+
+    </div>
+    
+<script data-main="/js/main.js" src="//cdn.bootcss.com/require.js/2.2.0/require.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            var iPad = window.navigator.userAgent.indexOf('iPad');
+            if (iPad > -1 || $(".left-col").css("display") === "none") {
+                var bgColorList = ["#9db3f4", "#414141", "#e5a859", "#f5dfc6", "#c084a0", "#847e72", "#cd8390", "#996731"];
+                var bgColor = Math.ceil(Math.random() * (bgColorList.length - 1));
+                $("body").css({"background-color": bgColorList[bgColor], "background-size": "cover"});
+            }
+            else {
+                var backgroundnum = 5;
+                var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
+                $("body").css({"background": backgroundimg, "background-attachment": "fixed", "background-size": "cover"});
+            }
+        })
+    </script>
+
+
+
+
+
+<div class="scroll" id="scroll">
+    <a href="#" title="返回顶部"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments" onclick="load$hide();" title="查看评论"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer" title="转到底部"><i class="fa fa-arrow-down"></i></a>
+</div>
+<script>
+    // Open in New Window
+    
+        var oOpenInNew = {
+            
+             title: "a.article-title, .article-more-link a", 
+            
+            
+            
+            
+            
+            
+            
+             friends: "#js-friends a", 
+             socail: ".social a" 
+        }
+        for (var x in oOpenInNew) {
+            $(oOpenInNew[x]).attr("target", "_blank");
+        }
+    
+</script>
+
+    <script>
+        var originTitle = document.title;
+        var titleTime;
+        document.addEventListener("visibilitychange", function() {
+            if (document.hidden) {
+                document.title = "🙈" + originTitle;
+                clearTimeout(titleTime);
+            }
+            else {
+                document.title = "(*´∇｀*) " + originTitle;
+                titleTime = setTimeout(function() {
+                    document.title = originTitle;
+                }, 2000);
+            }
+        })
+    </script>
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+  </div>
+<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","model":{"jsonPath":"/live2dw/assets/wanko.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true},"log":false,"tagMode":false});</script></body>
+</html>
