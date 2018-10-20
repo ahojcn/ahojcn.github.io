@@ -27,7 +27,8 @@
 <meta property="og:image" content="https://wx3.sinaimg.cn/mw690/006wR0dcly1fwevv12pxtj31kw0jqdoo.jpg">
 <meta property="og:image" content="https://wx3.sinaimg.cn/mw690/006wR0dcly1fwewl2plwrj30l007474r.jpg">
 <meta property="og:image" content="https://wx2.sinaimg.cn/mw690/006wR0dcly1fwewllmfn3j30bo06m3yv.jpg">
-<meta property="og:updated_time" content="2018-10-20T11:29:05.929Z">
+<meta property="og:image" content="https://wx4.sinaimg.cn/mw690/006wR0dcly1fwex4o70t5j30im08swfd.jpg">
+<meta property="og:updated_time" content="2018-10-20T11:39:55.089Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="16【C语言】指针类型">
 <meta name="twitter:description" content="目录1 指针类型的大小2 指针类型的作用">
@@ -285,7 +286,6 @@
 </blockquote>
 <h3 id="2-指针类型的作用-1"><a href="#2-指针类型的作用-1" class="headerlink" title="2. 指针类型的作用"></a>2. 指针类型的作用</h3><ul>
 <li>指针类型决定了对指针解引用的时候有多大的权限（能操作几个字节）。比如：<code>char*</code>的指针解引用只能访问一个字节，而<code>int*</code>的指针解引用就能访问四个字节。</li>
-<li>指针类型决定了指针指向前或者向后一步有多大距离。</li>
 </ul>
 <p>看下面的这段代码：</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">const</span> <span class="keyword">char</span> * argv[])</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> i = <span class="number">0x11223344</span>;</span><br><span class="line">    <span class="keyword">int</span> *pi = &amp;i;</span><br><span class="line">    *pi = <span class="number">0</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">int</span> c = <span class="number">0x11223344</span>;</span><br><span class="line">    <span class="keyword">char</span> *pc = &amp;c;</span><br><span class="line">    *pc = <span class="number">0</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -297,6 +297,7 @@
 <p><code>c=0x11223344</code>在执行<code>*pc=0;</code>后只有高位变成了0</p>
 <p>说明：int*类型的指针解引用后，操作权限是4个字节(int的大小)。</p>
 <p>char*解引用后，操作权限仅为一个字节。</p>
+<p>验证了：指针类型决定了对指针解引用的时候有多大的权限（能操作几个字节）。</p>
 <p><strong>问题又来了：</strong></p>
 <p>为什么高位的44变为0了呢？</p>
 <p>这和数据在内存中存储的模式有关。<a href="https://baike.baidu.com/item/%E5%A4%A7%E5%B0%8F%E7%AB%AF%E6%A8%A1%E5%BC%8F/6750542?fr=aladdin" target="_blank" rel="noopener">大小端模式</a></p>
@@ -304,6 +305,20 @@
 <p>大端模式，是指数据的高字节保存在内存的低地址中，而数据的低字节保存在内存的高地址中，这样的存储模式有点儿类似于把数据当作字符串顺序处理：地址由小向大增加，而数据从高位往低位放；这和我们的阅读习惯一致。</p>
 <p>小端模式，是指数据的高字节保存在内存的高地址中，而数据的低字节保存在内存的低地址中，这种存储模式将地址的高低和数据位权有效地结合起来，高地址部分权值高，低地址部分权值低。</p>
 </blockquote>
+<ul>
+<li>指针类型决定了指针指向前或者向后一步有多大距离。</li>
+</ul>
+<p>对于以下代码：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">const</span> <span class="keyword">char</span> * argv[])</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> n = <span class="number">10</span>;</span><br><span class="line">    <span class="keyword">int</span> *pi = &amp;n;</span><br><span class="line">    <span class="keyword">char</span> *pc = (<span class="keyword">char</span>*)&amp;n;</span><br><span class="line">    </span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"&amp;n : %p\n"</span>, &amp;n);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"pi : %p\n"</span>, pi);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"pi+1 : %p\n"</span>, pi+<span class="number">1</span>);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"-----------------------\n"</span>);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"pc : %p\n"</span>, pc);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"pc+1 : %p\n"</span>, pc+<span class="number">1</span>);</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>有在64位机下有如下输出：</p>
+<p><img src="https://wx4.sinaimg.cn/mw690/006wR0dcly1fwex4o70t5j30im08swfd.jpg" alt="pic"></p>
+<p>可以看到：</p>
+<p><code>pi=pc=&amp;n</code></p>
+<p>但是：</p>
+<p><code>pi+1</code> 和 <code>pc+1</code> 不同</p>
+<p><code>pi+1 - pi</code> = 8</p>
+<p><code>pc+1 - pc</code> = 1</p>
+<p>验证了：指针类型决定了指针指向前或者向后一步有多大距离。</p>
 <hr>
 <h2 id="完"><a href="#完" class="headerlink" title="完"></a>完</h2>
       
