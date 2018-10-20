@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+
+    <!--[if lt IE 9]>
+        <style>body {display: none; background: none !important} </style>
+        <meta http-equiv="Refresh" Content="0; url=//outdatedbrowser.com/" />
+    <![endif]-->
+
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="format-detection" content="telephone=no" />
+<meta name="author" content="ahoj" />
+
+
+
+<meta name="description" content="目录1 指针类型的大小2 指针类型的作用">
+<meta name="keywords" content="C语言,指针">
+<meta property="og:type" content="article">
+<meta property="og:title" content="16【C语言】指针类型">
+<meta property="og:url" content="http://ahoj.cc/2018/10/cjnhd22i5000hho6z28mxcgai/index.html">
+<meta property="og:site_name" content="ahoj的博客">
+<meta property="og:description" content="目录1 指针类型的大小2 指针类型的作用">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://wx1.sinaimg.cn/mw690/006wR0dcly1fwevv86xjfj30iu09074y.jpg">
+<meta property="og:image" content="https://wx3.sinaimg.cn/mw690/006wR0dcly1fwevv12pxtj31kw0jqdoo.jpg">
+<meta property="og:image" content="https://wx3.sinaimg.cn/mw690/006wR0dcly1fwewl2plwrj30l007474r.jpg">
+<meta property="og:image" content="https://wx2.sinaimg.cn/mw690/006wR0dcly1fwewllmfn3j30bo06m3yv.jpg">
+<meta property="og:updated_time" content="2018-10-20T11:29:05.929Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="16【C语言】指针类型">
+<meta name="twitter:description" content="目录1 指针类型的大小2 指针类型的作用">
+<meta name="twitter:image" content="https://wx1.sinaimg.cn/mw690/006wR0dcly1fwevv86xjfj30iu09074y.jpg">
+
+<link rel="apple-touch-icon" href= "/apple-touch-icon.png">
+
+
+    <link rel="alternate" href="/atom.xml" title="ahoj的博客" type="application/atom+xml">
+
+
+
+    <link rel="shortcut icon" href="https://avatars1.githubusercontent.com/u/43307215?s=460&v=4">
+
+
+
+    <link href="//cdn.bootcss.com/animate.css/3.5.1/animate.min.css" rel="stylesheet">
+
+
+
+    <link href="//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.css" rel="stylesheet">
+
+
+
+    <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+    <link href="//cdn.bootcss.com/pace/1.0.2/themes/blue/pace-theme-minimal.css" rel="stylesheet">
+
+
+<link rel="stylesheet" href="/css/style.css">
+
+
+
+<link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+
+
+<title>16【C语言】指针类型 | ahoj的博客</title>
+
+<script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+<script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+
+<script>
+    var yiliaConfig = {
+        fancybox: true,
+        animate: true,
+        isHome: false,
+        isPost: true,
+        isArchive: false,
+        isTag: false,
+        isCategory: false,
+        fancybox_js: "//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.js",
+        scrollreveal: "//cdn.bootcss.com/scrollReveal.js/3.1.4/scrollreveal.min.js",
+        search: true
+    }
+</script>
+
+
+    <script>
+        yiliaConfig.jquery_ui = [true, "//cdn.bootcss.com/jqueryui/1.10.4/jquery-ui.min.js", "//cdn.bootcss.com/jqueryui/1.10.4/css/jquery-ui.min.css"];
+    </script>
+
+
+
+    <script> yiliaConfig.rootUrl = "\/";</script>
+
+
+
+
+
+
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <a href="/" class="profilepic">
+            <img src="https://avatars1.githubusercontent.com/u/43307215?s=460&amp;v=4" class="animated zoomIn">
+        </a>
+        <hgroup>
+          <h1 class="header-author"><a href="/">ahoj</a></h1>
+        </hgroup>
+
+        
+        <p class="header-subtitle">平凡有一点理想,想让世界不一样。</p>
+        
+
+        
+            <form id="search-form">
+            <input type="text" id="local-search-input" name="q" placeholder="search..." class="search form-control" autocomplete="off" autocorrect="off" searchonload="false" />
+            <i class="fa fa-times" onclick="resetSearch()"></i>
+            </form>
+            <div id="local-search-result"></div>
+            <p class='no-result'>No results found <i class='fa fa-spinner fa-pulse'></i></p>
+        
+
+
+        
+
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                            <li><a href="/">主页</a></li>
+                        
+                            <li><a href="/archives/">文章</a></li>
+                        
+                            <li><a href="/tags/">标签</a></li>
+                        
+                            <li><a href="/about/">关于我</a></li>
+                        
+                            <li><a href="/photos/">相册</a></li>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" href="mailto:2076430492@qq.com" title="Email"></a>
+                            
+                        </ul>
+                    </nav>
+                </section>
+
+                
+
+                
+                <section class="switch-part switch-part3">
+                    <div id="js-friends">
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://blog.csdn.net/m0_38032942">Tim</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://blog.csdn.net/Hanoi_ahoj">MyCSDN</a>
+                    
+                    </div>
+                </section>
+                
+
+                
+            </div>
+        </div>
+        <div style="margin-top:30px;">
+          <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=260 height=86 src="//music.163.com/outchain/player?type=2&id=469249441&auto=1&height=66"></iframe>
+      </div>
+    </header>
+</div>
+
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="回到主页">ahoj</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                <img src="https://avatars1.githubusercontent.com/u/43307215?s=460&amp;v=4" class="animated zoomIn">
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="回到主页">ahoj</a></h1>
+            </hgroup>
+            
+            <p class="header-subtitle">平凡有一点理想,想让世界不一样。</p>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="/">主页</a></li>
+                
+                    <li><a href="/archives/">文章</a></li>
+                
+                    <li><a href="/tags/">标签</a></li>
+                
+                    <li><a href="/about/">关于我</a></li>
+                
+                    <li><a href="/photos/">相册</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" target="_blank" href="mailto:2076430492@qq.com" title="Email"></a>
+                            
+                        </ul>
+            </nav>
+        </header>                
+    </div>
+    <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
+</nav>
+      <div class="body-wrap"><article id="post-16【C语言】指针" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2018/10/cjnhd22i5000hho6z28mxcgai/" class="article-date">
+      <time datetime="2018-10-20T10:40:11.000Z" itemprop="datePublished">2018-10-20</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      16【C语言】指针类型
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+
+        
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C语言/">C语言</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/指针/">指针</a></li></ul>
+    </div>
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h2 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h2><h3 id="1-指针类型的大小"><a href="#1-指针类型的大小" class="headerlink" title="1 指针类型的大小"></a>1 指针类型的大小</h3><h3 id="2-指针类型的作用"><a href="#2-指针类型的作用" class="headerlink" title="2 指针类型的作用"></a>2 指针类型的作用</h3><hr>
+<a id="more"></a>
+<hr>
+<h2 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h2><h3 id="指针类型"><a href="#指针类型" class="headerlink" title="指针类型"></a>指针类型</h3><h3 id="1-指针类型的大小-1"><a href="#1-指针类型的大小-1" class="headerlink" title="1. 指针类型的大小"></a>1. 指针类型的大小</h3><blockquote>
+<p>在32位机器上，地址是32个0或1组成的二进制序列，如果每个比特位都给一个地址位，则32为机能编址的范围只为512MB，若以4字节编址，32位机则可以编址4GB。</p>
+<p>在64位机器上，有64根地址线，则一个指针变量的大小是8字节。</p>
+</blockquote>
+<p>对于以下代码：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">const</span> <span class="keyword">char</span> * argv[])</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"char* : %lu\n"</span>,<span class="keyword">sizeof</span>(<span class="keyword">char</span>*));</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"short* : %lu\n"</span>,<span class="keyword">sizeof</span>(<span class="keyword">short</span>*));</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"int* : %lu\n"</span>,<span class="keyword">sizeof</span>(<span class="keyword">int</span>*));</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"float* : %lu\n"</span>,<span class="keyword">sizeof</span>(<span class="keyword">float</span>*));</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"double* : %lu\n"</span>,<span class="keyword">sizeof</span>(<span class="keyword">double</span>*));</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"long double* : %lu\n"</span>,<span class="keyword">sizeof</span>(<span class="keyword">long</span> <span class="keyword">double</span>*));</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>在<strong>64位</strong>机下的输出为：</li>
+</ul>
+<p><img src="https://wx1.sinaimg.cn/mw690/006wR0dcly1fwevv86xjfj30iu09074y.jpg" alt="-64"></p>
+<ul>
+<li>在<strong>32位</strong>机下的输出为：</li>
+</ul>
+<p><img src="https://wx3.sinaimg.cn/mw690/006wR0dcly1fwevv12pxtj31kw0jqdoo.jpg" alt="gcc main.c -m32"></p>
+<p><strong>问题来了：</strong></p>
+<blockquote>
+<p>为什么不同类型的指针大小都是一样的呢？为什么要这么设计？</p>
+</blockquote>
+<h3 id="2-指针类型的作用-1"><a href="#2-指针类型的作用-1" class="headerlink" title="2. 指针类型的作用"></a>2. 指针类型的作用</h3><ul>
+<li>指针类型决定了对指针解引用的时候有多大的权限（能操作几个字节）。比如：<code>char*</code>的指针解引用只能访问一个字节，而<code>int*</code>的指针解引用就能访问四个字节。</li>
+<li>指针类型决定了指针指向前或者向后一步有多大距离。</li>
+</ul>
+<p>看下面的这段代码：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">const</span> <span class="keyword">char</span> * argv[])</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> i = <span class="number">0x11223344</span>;</span><br><span class="line">    <span class="keyword">int</span> *pi = &amp;i;</span><br><span class="line">    *pi = <span class="number">0</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">int</span> c = <span class="number">0x11223344</span>;</span><br><span class="line">    <span class="keyword">char</span> *pc = &amp;c;</span><br><span class="line">    *pc = <span class="number">0</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Debug看内存变化：</p>
+<p><img src="https://wx3.sinaimg.cn/mw690/006wR0dcly1fwewl2plwrj30l007474r.jpg" alt="p"></p>
+<p><img src="https://wx2.sinaimg.cn/mw690/006wR0dcly1fwewllmfn3j30bo06m3yv.jpg" alt=""></p>
+<p>发现：</p>
+<p><code>i=0x11223344</code>在执行<code>*pi=0;</code>后全部变为了0</p>
+<p><code>c=0x11223344</code>在执行<code>*pc=0;</code>后只有高位变成了0</p>
+<p>说明：int*类型的指针解引用后，操作权限是4个字节(int的大小)。</p>
+<p>char*解引用后，操作权限仅为一个字节。</p>
+<p><strong>问题又来了：</strong></p>
+<p>为什么高位的44变为0了呢？</p>
+<p>这和数据在内存中存储的模式有关。<a href="https://baike.baidu.com/item/%E5%A4%A7%E5%B0%8F%E7%AB%AF%E6%A8%A1%E5%BC%8F/6750542?fr=aladdin" target="_blank" rel="noopener">大小端模式</a></p>
+<blockquote>
+<p>大端模式，是指数据的高字节保存在内存的低地址中，而数据的低字节保存在内存的高地址中，这样的存储模式有点儿类似于把数据当作字符串顺序处理：地址由小向大增加，而数据从高位往低位放；这和我们的阅读习惯一致。</p>
+<p>小端模式，是指数据的高字节保存在内存的高地址中，而数据的低字节保存在内存的低地址中，这种存储模式将地址的高低和数据位权有效地结合起来，高地址部分权值高，低地址部分权值低。</p>
+</blockquote>
+<hr>
+<h2 id="完"><a href="#完" class="headerlink" title="完"></a>完</h2>
+      
+    </div>
+    
+  </div>
+  
+    
+
+
+    <nav id="article-nav">
+        
+        
+            <div id="article-nav-older" class="article-nav-title">
+                <a href="/2018/10/cjnhd22i3000fho6z2ps7brdo/">
+                    15【练习】三子棋游戏
+                </a>
+            </div>
+        
+    </nav>
+
+  
+</article>
+
+
+
+    
+<div class="share">
+    
+        <div class="bdsharebuttonbox">
+            <a href="#" class="fa fa-twitter bds_twi" data-cmd="twi" title="分享到推特"></a>
+            <a href="#" class="fa fa-weibo bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+            <a href="#" class="fa fa-qq bds_sqq" data-cmd="sqq" title="分享给 QQ 好友"></a>
+            <a href="#" class="fa fa-files-o bds_copy" data-cmd="copy" title="复制网址"></a>
+            <a href="#" class="fa fa fa-envelope-o bds_mail" data-cmd="mail" title="通过邮件分享"></a>
+            <a href="#" class="fa fa-weixin bds_weixin" data-cmd="weixin" title="生成文章二维码"></a>
+            <a href="#" class="fa fa-share-alt bds_more" data-cmd="more"></i></a>
+        </div>
+        <script>
+            window._bd_share_config={
+                "common":{"bdSnsKey":{},"bdText":"16【C语言】指针类型　| ahoj的博客　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+        </script>
+    
+
+    
+</div>
+
+
+
+
+
+
+
+    
+      <!-- 来必力City版安装代码 -->
+<div id="lv-container" data-id="city" data-uid="MTAyMC80MDExOS8xNjY0Ng==">
+<script type="text/javascript">
+   (function(d, s) {
+       var j, e = d.getElementsByTagName(s)[0];
+
+       if (typeof LivereTower === 'function') { return; }
+
+       j = d.createElement(s);
+       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+       j.async = true;
+
+       e.parentNode.insertBefore(j, e);
+   })(document, 'script');
+</script>
+<noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+</div>
+<!-- City版安装代码已完成 -->
+
+    
+
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
+        
+
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+
+        
+            <a href="/2018/10/cjnhd22i3000fho6z2ps7brdo/" title="下一篇: 15【练习】三子棋游戏">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2018/10/cjnhd22i5000hho6z28mxcgai/">16【C语言】指针类型</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/cjnhd22i3000fho6z2ps7brdo/">15【练习】三子棋游戏</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/cjnhd22i0000bho6z849ma3rk/">14【数据结构】单链表及其基本操作</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/cjnhd22hy0009ho6zoxopfpfb/">13【博客】GitHubPages+Hexo搭建个人博客的相关资料</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/cjnhd22hw0007ho6zrv132dg8/">12【数据结构】浅析最好、最坏、平均、均摊时间复杂度</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/cjnhd22hr0003ho6z5l64k5d8/">11【数据结构】复杂度分析</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/cjnhd22hn0001ho6zcx4ha20r/">10【数据结构】自定义数组的增删改查</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/cjnhd22ij001fho6znqz2nqs9/">9【数据结构】深入理解数组</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/cjnhd22ii001bho6z8gg0ginb/">8【回忆】老韩语录和我们的故事</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/cjnhd22ih0018ho6zx7rdryn2/">7【练习】菱形图案的两种方法对比</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/cjnhd22if0013ho6z29btr0wc/">6【练习】水仙花数代码优化</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/cjnhd22ie0011ho6zn8vmj5cc/">5【反思】不要在二三十岁就开始老去</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/cjnhd22id000xho6zb5283v5i/">4【数据结构】带密码的约瑟夫环</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/cjnhd22ib000vho6z6avzs6cw/">3【反思】人之患在好为人师</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/cjnhd22ia000qho6zz6mrdsih/">2【网络安全】fluxion伪造ap获取wifi密码</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/cjnhd22i8000mho6zpxthhyg8/">1【离散数学】实验三</a></li></ul>
+
+
+
+
+    <script>
+        
+    </script>
+
+
+<!--搜索引擎优化（SEO），百度主动推送代码，让搜索引擎最快发现文章-->
+
+<script>
+(function(){
+    var bp = document.createElement('script');
+    bp.src = '//push.zhanzhang.baidu.com/push.js';
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+</div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                <i class="fa fa-copyright"></i>
+                2018 ahoj
+            </div>
+            <div class="footer-right">
+                <a href="http://hexo.io/" target="_blank" title="快速、简洁且高效的博客框架">Hexo</a>  Theme <a href="https://github.com/MOxFIVE/hexo-theme-yelee" target="_blank" title="简而不减 Hexo 双栏博客主题  v3.5">Yelee</a> by MOxFIVE <i class="fa fa-heart animated infinite pulse"></i>
+            </div>
+        </div>
+        <!--->
+        
+    </div>
+</footer>
+
+<!--页面点击小红心-->
+<script type="text/javascript" src="/love.js"></script>
+<!--字数统计-->
+
+    </div>
+    
+<script data-main="/js/main.js" src="//cdn.bootcss.com/require.js/2.2.0/require.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            var iPad = window.navigator.userAgent.indexOf('iPad');
+            if (iPad > -1 || $(".left-col").css("display") === "none") {
+                var bgColorList = ["#9db3f4", "#414141", "#e5a859", "#f5dfc6", "#c084a0", "#847e72", "#cd8390", "#996731"];
+                var bgColor = Math.ceil(Math.random() * (bgColorList.length - 1));
+                $("body").css({"background-color": bgColorList[bgColor], "background-size": "cover"});
+            }
+            else {
+                var backgroundnum = 5;
+                var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
+                $("body").css({"background": backgroundimg, "background-attachment": "fixed", "background-size": "cover"});
+            }
+        })
+    </script>
+
+
+
+
+
+<div class="scroll" id="scroll">
+    <a href="#" title="返回顶部"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments" onclick="load$hide();" title="查看评论"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer" title="转到底部"><i class="fa fa-arrow-down"></i></a>
+</div>
+<script>
+    // Open in New Window
+    
+        var oOpenInNew = {
+            
+             title: "a.article-title, .article-more-link a", 
+            
+            
+            
+            
+            
+            
+            
+             friends: "#js-friends a", 
+             socail: ".social a" 
+        }
+        for (var x in oOpenInNew) {
+            $(oOpenInNew[x]).attr("target", "_blank");
+        }
+    
+</script>
+
+    <script>
+        var originTitle = document.title;
+        var titleTime;
+        document.addEventListener("visibilitychange", function() {
+            if (document.hidden) {
+                document.title = "🙈" + originTitle;
+                clearTimeout(titleTime);
+            }
+            else {
+                document.title = "(*´∇｀*) " + originTitle;
+                titleTime = setTimeout(function() {
+                    document.title = originTitle;
+                }, 2000);
+            }
+        })
+    </script>
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+  </div>
+<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","model":{"jsonPath":"/live2dw/assets/wanko.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true},"log":false,"tagMode":false});</script></body>
+</html>
