@@ -23,7 +23,7 @@
 <meta property="og:site_name" content="ahoj的博客">
 <meta property="og:description" content="目录一、操作符 C语言操作符的一些需要注意的坑。  二、表达式 问题表达式问题在哪里。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-10-22T10:10:27.989Z">
+<meta property="og:updated_time" content="2018-10-22T13:51:48.002Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="20【C语言】操作符和表达式总结">
 <meta name="twitter:description" content="目录一、操作符 C语言操作符的一些需要注意的坑。  二、表达式 问题表达式问题在哪里。">
@@ -313,8 +313,22 @@
 <p>2）求一个整数存储在内存中的二进制序列（或求二进制中1的个数）。</p>
 </li>
 <li><p>赋值操作符</p>
+<blockquote>
+<p><strong>😂不要在if中用<code>=</code>，不要连续赋值，如：<code>a=x=y+1</code>，可读性下降。</strong></p>
+<p>复合赋值符号会让代码简洁一点。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&gt; <span class="keyword">int</span> a = <span class="number">10</span>;</span><br><span class="line">&gt; x = x+<span class="number">10</span>;</span><br><span class="line">&gt; x += <span class="number">10</span>;</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
+</blockquote>
 </li>
 <li><p>单目操作符</p>
+<blockquote>
+<p>！ +  -   </p>
+<p>&amp;(取地址)  </p>
+<p>sizeof(以字节为单位)   </p>
+<p>~(对于一个数的二进制按位取反)  </p>
+<p>前置和后置– ++   </p>
+<p>*(解引用)</p>
+<p>(类型)  强制类型转换</p>
+</blockquote>
 </li>
 <li><p>关系操作符</p>
 </li>
