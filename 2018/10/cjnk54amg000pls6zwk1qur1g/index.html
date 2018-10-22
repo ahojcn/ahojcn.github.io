@@ -23,7 +23,7 @@
 <meta property="og:site_name" content="ahoj的博客">
 <meta property="og:description" content="目录一、操作符 C语言操作符的一些需要注意的坑。  二、表达式 问题表达式问题在哪里。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-10-22T13:51:48.002Z">
+<meta property="og:updated_time" content="2018-10-22T14:54:43.441Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="20【C语言】操作符和表达式总结">
 <meta name="twitter:description" content="目录一、操作符 C语言操作符的一些需要注意的坑。  二、表达式 问题表达式问题在哪里。">
@@ -329,8 +329,16 @@
 <p>*(解引用)</p>
 <p>(类型)  强制类型转换</p>
 </blockquote>
+<ul>
+<li><p>sizeof()</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> a = <span class="number">10</span>;</span><br><span class="line"><span class="keyword">short</span> s = <span class="number">1</span>;</span><br><span class="line"><span class="built_in">printf</span>(<span class="string">"%d\n"</span>, <span class="keyword">sizeof</span>(a));	<span class="comment">//OK!</span></span><br><span class="line"><span class="built_in">printf</span>(<span class="string">"%d\n"</span>, <span class="keyword">sizeof</span> a);	<span class="comment">//OK!</span></span><br><span class="line"><span class="built_in">printf</span>(<span class="string">"%d\n"</span>, <span class="keyword">sizeof</span>(<span class="keyword">int</span>));	<span class="comment">//OK!</span></span><br><span class="line"><span class="built_in">printf</span>(<span class="string">"%d\n"</span>, <span class="keyword">sizeof</span> <span class="keyword">int</span>);	<span class="comment">//ERROR!</span></span><br><span class="line"><span class="built_in">printf</span>(<span class="string">"%d\n"</span>, <span class="keyword">sizeof</span>(s=a+<span class="number">10</span>));	<span class="comment">// 2</span></span><br><span class="line"><span class="built_in">printf</span>(<span class="string">"%d\n"</span>, <span class="keyword">sizeof</span>(s));		<span class="comment">// 2</span></span><br></pre></td></tr></table></figure>
+<p><strong>sizeof是运算符，结果在编译时得到而非运行中获得，sizeof参数可以是任何数据的类型或者数据。</strong></p>
+</li>
+</ul>
 </li>
 <li><p>关系操作符</p>
+<blockquote>
+</blockquote>
 </li>
 <li><p>逻辑操作符</p>
 </li>
