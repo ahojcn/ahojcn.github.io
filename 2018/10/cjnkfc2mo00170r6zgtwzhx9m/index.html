@@ -15,18 +15,18 @@
 
 
 
-<meta name="description" content="目录一、操作符 C语言操作符的一些需要注意的坑。  二、表达式 问题表达式问题在哪里。">
+<meta name="description" content="目录操作符 C语言操作符的一些需要注意的坑。">
 <meta name="keywords" content="C语言,学习总结">
 <meta property="og:type" content="article">
-<meta property="og:title" content="20【C语言】操作符和表达式总结">
+<meta property="og:title" content="20【C语言】操作符">
 <meta property="og:url" content="http://ahoj.cc/2018/10/cjnkfc2mo00170r6zgtwzhx9m/index.html">
 <meta property="og:site_name" content="ahoj的博客">
-<meta property="og:description" content="目录一、操作符 C语言操作符的一些需要注意的坑。  二、表达式 问题表达式问题在哪里。">
+<meta property="og:description" content="目录操作符 C语言操作符的一些需要注意的坑。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-10-22T14:54:43.441Z">
+<meta property="og:updated_time" content="2018-10-22T15:48:03.313Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="20【C语言】操作符和表达式总结">
-<meta name="twitter:description" content="目录一、操作符 C语言操作符的一些需要注意的坑。  二、表达式 问题表达式问题在哪里。">
+<meta name="twitter:title" content="20【C语言】操作符">
+<meta name="twitter:description" content="目录操作符 C语言操作符的一些需要注意的坑。">
 
 <link rel="apple-touch-icon" href= "/apple-touch-icon.png">
 
@@ -58,7 +58,7 @@
 <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
 
 
-<title>20【C语言】操作符和表达式总结 | ahoj的博客</title>
+<title>20【C语言】操作符 | ahoj的博客</title>
 
 <script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
 <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
@@ -236,7 +236,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      20【C语言】操作符和表达式总结
+      20【C语言】操作符
     </h1>
   
 
@@ -261,15 +261,12 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <h2 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h2><h3 id="一、操作符"><a href="#一、操作符" class="headerlink" title="一、操作符"></a>一、操作符</h3><blockquote>
+        <h2 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h2><h3 id="操作符"><a href="#操作符" class="headerlink" title="操作符"></a>操作符</h3><blockquote>
 <p>C语言操作符的一些需要注意的坑。</p>
-</blockquote>
-<h3 id="二、表达式"><a href="#二、表达式" class="headerlink" title="二、表达式"></a>二、表达式</h3><blockquote>
-<p>问题表达式问题在哪里。</p>
 </blockquote>
 <a id="more"></a>
 <hr>
-<h2 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h2><h3 id="一、操作符-1"><a href="#一、操作符-1" class="headerlink" title="一、操作符"></a>一、操作符</h3><ol>
+<h2 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h2><h3 id="操作符-1"><a href="#操作符-1" class="headerlink" title="操作符"></a>操作符</h3><ol>
 <li><p>算数操作符</p>
 <blockquote>
 <p><code>+  -  *  /  %</code></p>
@@ -333,21 +330,71 @@
 <li><p>sizeof()</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> a = <span class="number">10</span>;</span><br><span class="line"><span class="keyword">short</span> s = <span class="number">1</span>;</span><br><span class="line"><span class="built_in">printf</span>(<span class="string">"%d\n"</span>, <span class="keyword">sizeof</span>(a));	<span class="comment">//OK!</span></span><br><span class="line"><span class="built_in">printf</span>(<span class="string">"%d\n"</span>, <span class="keyword">sizeof</span> a);	<span class="comment">//OK!</span></span><br><span class="line"><span class="built_in">printf</span>(<span class="string">"%d\n"</span>, <span class="keyword">sizeof</span>(<span class="keyword">int</span>));	<span class="comment">//OK!</span></span><br><span class="line"><span class="built_in">printf</span>(<span class="string">"%d\n"</span>, <span class="keyword">sizeof</span> <span class="keyword">int</span>);	<span class="comment">//ERROR!</span></span><br><span class="line"><span class="built_in">printf</span>(<span class="string">"%d\n"</span>, <span class="keyword">sizeof</span>(s=a+<span class="number">10</span>));	<span class="comment">// 2</span></span><br><span class="line"><span class="built_in">printf</span>(<span class="string">"%d\n"</span>, <span class="keyword">sizeof</span>(s));		<span class="comment">// 2</span></span><br></pre></td></tr></table></figure>
 <p><strong>sizeof是运算符，结果在编译时得到而非运行中获得，sizeof参数可以是任何数据的类型或者数据。</strong></p>
+<p>sizeof和数组：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">test1</span><span class="params">(<span class="keyword">int</span> arr1[])</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"test1():sizeof(arr1):%d\n"</span>, <span class="keyword">sizeof</span>(arr1));</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">test2</span><span class="params">(<span class="keyword">char</span> arr2[])</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"test2():sizeof(arr2):%d\n"</span>, <span class="keyword">sizeof</span>(arr2));</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> arr1[<span class="number">10</span>] = &#123;<span class="number">0</span>&#125;;</span><br><span class="line">	<span class="keyword">char</span> arr2[<span class="number">10</span>] = &#123;<span class="number">0</span>&#125;;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"sizeof(arr1):%d\n"</span>, <span class="keyword">sizeof</span>(arr1));</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"sizeof(arr2):%d\n"</span>, <span class="keyword">sizeof</span>(arr2));</span><br><span class="line">	test1(arr1);</span><br><span class="line">	test2(arr2);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>输出为：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">sizeof</span>(arr1):<span class="number">40</span></span><br><span class="line"><span class="keyword">sizeof</span>(arr2):<span class="number">10</span></span><br><span class="line">test1():<span class="keyword">sizeof</span>(arr1):<span class="number">4</span></span><br><span class="line">test2():<span class="keyword">sizeof</span>(arr2):<span class="number">4</span></span><br></pre></td></tr></table></figure>
+<p>要注意！数组作为函数参数传进去的只是数组首元素的地址，所以sizeof求出来的是首元素的大小。</p>
+</li>
+<li><p>对于前置++ – 和 后置++ –</p>
+<blockquote>
+<p>一定要注意前置和后置的区别，我一次在递归求字符串长度时候，参数为后置++，所以传进去的参数没有变，递归没办法跳出，导致栈溢出，调了半天。😂</p>
+</blockquote>
+<p>还有一些怪诞的代码：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> i = <span class="number">2</span>;</span><br><span class="line"><span class="keyword">int</span> ret = (++i) + (++i) + (++i);</span><br><span class="line"><span class="built_in">printf</span>(<span class="string">"%d\n"</span>, ret);</span><br></pre></td></tr></table></figure>
+<p>对于以上代码在Linux环境gcc编译器和vs2013环境下的执行结果是不同的。</p>
+<p><strong>这段代码的第一个<code>+</code>在执行的时候，第三个<code>++</code>是否执行是不确定的，也就是执行的顺序不确定，因为依靠操作符的优先级和结合性是无法决定这个的。这段代码并不是一个好的代码，表达式的值依赖于运算符的优先级和结合性，但这两样并不能确定唯一的计算路径。</strong></p>
 </li>
 </ul>
 </li>
 <li><p>关系操作符</p>
 <blockquote>
+<p><code>&gt;  &gt;=  &lt;  &lt;=  !=  ==</code></p>
 </blockquote>
+<p>注意：不要把<code>==</code>写成<code>=</code>。</p>
+<p>避免这种错误，可以写成如下：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(a == <span class="number">1</span>)</span><br><span class="line">    something();	<span class="comment">// 把 == 写成 = 后不容易排查错误</span></span><br><span class="line"><span class="keyword">if</span>(<span class="number">1</span> == a)		<span class="comment">// 写成这样，如果写错了编译器会帮我们找出来～</span></span><br><span class="line">    something();</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>逻辑操作符</p>
+<blockquote>
+<p><code>&amp;&amp;    ||</code></p>
+</blockquote>
+<p>区分逻辑与、按位与、逻辑或、按位或：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span>&amp;<span class="number">2</span> -&gt; <span class="number">0</span></span><br><span class="line"><span class="number">1</span>&amp;&amp;<span class="number">2</span> -&gt; <span class="number">1</span></span><br><span class="line"></span><br><span class="line"><span class="number">1</span>|<span class="number">2</span> -&gt; <span class="number">3</span></span><br><span class="line"><span class="number">1</span>||<span class="number">2</span> -&gt; <span class="number">1</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>逻辑与、逻辑或的特点：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*360笔试题*/</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> i=<span class="number">0</span>,a=<span class="number">0</span>,b=<span class="number">2</span>,c=<span class="number">3</span>,d=<span class="number">4</span>;</span><br><span class="line">    i = a++ &amp;&amp; ++b &amp;&amp; d++;</span><br><span class="line">    <span class="comment">// i = a++ || ++b || d++;</span></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"a=%d\n b=%d\n c=%d\n d=%d\n"</span>, a,b,c,d);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这段程序正确输出为：<code>1 2 3 4</code></p>
+<p>如果&amp;&amp;的左边表达式值为假(0)，就不继续算后面的了，后面的都不执行，所以这个题中只有a++了，其他的变量没有改变。</p>
+<p>如果||左边的表达式为真(1)，就不继续算后面的了。</p>
+</li>
+</ul>
+</li>
+<li><p>逗号表达式</p>
+<blockquote>
+<p>逗号表达式从左向右依次执行，整个表达式的结果是最后一个表达式的结果。</p>
+</blockquote>
+<p>如下代码：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* 1 */</span></span><br><span class="line"><span class="keyword">int</span> a = <span class="number">1</span>;</span><br><span class="line"><span class="keyword">int</span> b = <span class="number">2</span>;</span><br><span class="line"><span class="keyword">int</span> c = (a&gt;b, a=b+<span class="number">10</span>, a, b=a+<span class="number">1</span>);</span><br><span class="line"><span class="comment">// c = 13</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/* 2 */</span></span><br><span class="line"><span class="keyword">if</span>(a=b+<span class="number">1</span>, c=a/<span class="number">2</span>, d&gt;<span class="number">0</span>)</span><br><span class="line">    something();</span><br><span class="line"></span><br><span class="line"><span class="comment">/* 3 */</span></span><br><span class="line">a = get_value();</span><br><span class="line">count_value(a);</span><br><span class="line"><span class="keyword">while</span>(a&gt;<span class="number">0</span>)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">//something();</span></span><br><span class="line">    a = get_value();</span><br><span class="line">    count_value(a);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 以上3的代码可改为</span></span><br><span class="line"><span class="keyword">while</span>(a=getvalue(), count_value(a), a&gt;<span class="number">0</span>)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">//something();</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>条件操作符</p>
+<blockquote>
+<p>exp1?exp2:exp3;</p>
+</blockquote>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(a&gt;<span class="number">5</span>)</span><br><span class="line">    b=<span class="number">3</span>;</span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">    b=<span class="number">-3</span>;</span><br><span class="line"></span><br><span class="line">a&gt;<span class="number">5</span>?b=<span class="number">3</span>:b=<span class="number">-3</span>;</span><br><span class="line">b=(a&gt;<span class="number">5</span>?<span class="number">3</span>:<span class="number">-3</span>);</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>下标引用、函数调用、结构成员</p>
+<blockquote>
+<p>[]   ()   .  -&gt;</p>
+</blockquote>
+<p>[]：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> arr[<span class="number">10</span>] = &#123;<span class="number">0</span>&#125;;</span><br><span class="line">arr[<span class="number">1</span>];</span><br><span class="line"><span class="number">1</span>[arr];</span><br></pre></td></tr></table></figure>
+<p>()：</p>
+<p>函数调用操作符，接受一个或者多个操作数，第一个操作数是函数名，剩余的操作数就是传递给函数的参数。</p>
+<p>. -&gt;：这两个就不多说了。</p>
 </li>
 </ol>
-<h3 id="二、表达式求值"><a href="#二、表达式求值" class="headerlink" title="二、表达式求值"></a>二、表达式求值</h3>
+
       
     </div>
     
@@ -386,7 +433,7 @@
         </div>
         <script>
             window._bd_share_config={
-                "common":{"bdSnsKey":{},"bdText":"20【C语言】操作符和表达式总结　| ahoj的博客　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+                "common":{"bdSnsKey":{},"bdText":"20【C语言】操作符　| ahoj的博客　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
         </script>
     
 
@@ -438,7 +485,7 @@
         
     </div>
 
-    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2018/10/cjnkfc2mo00170r6zgtwzhx9m/">20【C语言】操作符和表达式总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/cjnkfc2mg000v0r6zj48bc982/">19【练习】扫雷游戏</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/cjnkfc2me000q0r6zzoy8uas2/">18【练习】三种方式模拟实现strlen</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/cjnkfc2mc000m0r6zsr3mi8v9/">17【C语言】指针和数组名</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/cjnkfc2m8000h0r6zdoe4vlq1/">16【C语言】指针类型</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/cjnkfc2m7000f0r6zbkn909a6/">15【练习】三子棋游戏</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/cjnkfc2m3000b0r6z2ji2yjm4/">14【数据结构】单链表及其基本操作</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/cjnkfc2m000090r6zc2o6ap10/">13【博客】GitHubPages+Hexo搭建个人博客的相关资料</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/cjnkfc2lx00070r6zd0p1ckmi/">12【数据结构】浅析最好、最坏、平均、均摊时间复杂度</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/cjnkfc2lr00030r6z0e22bnv2/">11【数据结构】复杂度分析</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/cjnkfc2ln00010r6zkto5obyo/">10【数据结构】自定义数组的增删改查</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/cjnkfc2mx001q0r6zuyr84vxx/">9【数据结构】深入理解数组</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/cjnkfc2mv001n0r6zhijdoehd/">8【回忆】老韩语录和我们的故事</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/cjnkfc2mu001k0r6z7e4xxrwu/">7【练习】菱形图案的两种方法对比</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/cjnkfc2mt001f0r6zyhdl7vqw/">6【练习】水仙花数代码优化</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/cjnkfc2mr001d0r6z8zqgayhk/">5【反思】不要在二三十岁就开始老去</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/cjnkfc2mp00190r6zpnmq3sfr/">4【数据结构】带密码的约瑟夫环</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/cjnkfc2mm00130r6zgw6gfbht/">3【反思】人之患在好为人师</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/cjnkfc2mk00110r6ze3xeg4n9/">2【网络安全】fluxion伪造ap获取wifi密码</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/cjnkfc2mi000x0r6zd1hqrzod/">1【离散数学】实验三</a></li></ul>
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2018/10/cjnkfc2mo00170r6zgtwzhx9m/">20【C语言】操作符</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/cjnkfc2mg000v0r6zj48bc982/">19【练习】扫雷游戏</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/cjnkfc2me000q0r6zzoy8uas2/">18【练习】三种方式模拟实现strlen</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/cjnkfc2mc000m0r6zsr3mi8v9/">17【C语言】指针和数组名</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/cjnkfc2m8000h0r6zdoe4vlq1/">16【C语言】指针类型</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/cjnkfc2m7000f0r6zbkn909a6/">15【练习】三子棋游戏</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/cjnkfc2m3000b0r6z2ji2yjm4/">14【数据结构】单链表及其基本操作</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/cjnkfc2m000090r6zc2o6ap10/">13【博客】GitHubPages+Hexo搭建个人博客的相关资料</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/cjnkfc2lx00070r6zd0p1ckmi/">12【数据结构】浅析最好、最坏、平均、均摊时间复杂度</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/cjnkfc2lr00030r6z0e22bnv2/">11【数据结构】复杂度分析</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/cjnkfc2ln00010r6zkto5obyo/">10【数据结构】自定义数组的增删改查</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/cjnkfc2mx001q0r6zuyr84vxx/">9【数据结构】深入理解数组</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/cjnkfc2mv001n0r6zhijdoehd/">8【回忆】老韩语录和我们的故事</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/cjnkfc2mu001k0r6z7e4xxrwu/">7【练习】菱形图案的两种方法对比</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/cjnkfc2mt001f0r6zyhdl7vqw/">6【练习】水仙花数代码优化</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/cjnkfc2mr001d0r6z8zqgayhk/">5【反思】不要在二三十岁就开始老去</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/cjnkfc2mp00190r6zpnmq3sfr/">4【数据结构】带密码的约瑟夫环</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/cjnkfc2mm00130r6zgw6gfbht/">3【反思】人之患在好为人师</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/cjnkfc2mk00110r6ze3xeg4n9/">2【网络安全】fluxion伪造ap获取wifi密码</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/cjnkfc2mi000x0r6zd1hqrzod/">1【离散数学】实验三</a></li></ul>
 
 
 
