@@ -15,18 +15,20 @@
 
 
 
-<meta name="description" content="Github地址 分析  需要个游戏控制函数，决定是继续游戏，还是退出程序。 人走完后，电脑走棋。 每次走完棋，需要显示当前棋盘状态。 在每次走完后，需要判断是否胜利。 当三种相同的在一条线上时，胜利。 当地图填满时，还没有胜利者，则为平局。">
+<meta name="description" content="https://github.com/ahojcn/Practice/tree/master/MySanZiChessGame/MySanZiChessGame 分析  需要个游戏控制函数，决定是继续游戏，还是退出程序。 人走完后，电脑走棋。 每次走完棋，需要显示当前棋盘状态。 在每次走完后，需要判断是否胜利。 当三种相同的在一条线上时，胜利。 当地图填满时，还没有胜利者，则为平局。">
 <meta name="keywords" content="C语言,练习">
 <meta property="og:type" content="article">
 <meta property="og:title" content="15【练习】三子棋游戏">
 <meta property="og:url" content="http://ahoj.cc/2018/10/cjnlas829000e2d6zbv1p99zr/index.html">
 <meta property="og:site_name" content="ahoj的博客">
-<meta property="og:description" content="Github地址 分析  需要个游戏控制函数，决定是继续游戏，还是退出程序。 人走完后，电脑走棋。 每次走完棋，需要显示当前棋盘状态。 在每次走完后，需要判断是否胜利。 当三种相同的在一条线上时，胜利。 当地图填满时，还没有胜利者，则为平局。">
+<meta property="og:description" content="https://github.com/ahojcn/Practice/tree/master/MySanZiChessGame/MySanZiChessGame 分析  需要个游戏控制函数，决定是继续游戏，还是退出程序。 人走完后，电脑走棋。 每次走完棋，需要显示当前棋盘状态。 在每次走完后，需要判断是否胜利。 当三种相同的在一条线上时，胜利。 当地图填满时，还没有胜利者，则为平局。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-10-19T15:21:33.725Z">
+<meta property="og:image" content="https://wx1.sinaimg.cn/mw690/006wR0dcly1fwjam76g21g308w06ojwp.gif">
+<meta property="og:updated_time" content="2018-10-24T06:28:41.497Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="15【练习】三子棋游戏">
-<meta name="twitter:description" content="Github地址 分析  需要个游戏控制函数，决定是继续游戏，还是退出程序。 人走完后，电脑走棋。 每次走完棋，需要显示当前棋盘状态。 在每次走完后，需要判断是否胜利。 当三种相同的在一条线上时，胜利。 当地图填满时，还没有胜利者，则为平局。">
+<meta name="twitter:description" content="https://github.com/ahojcn/Practice/tree/master/MySanZiChessGame/MySanZiChessGame 分析  需要个游戏控制函数，决定是继续游戏，还是退出程序。 人走完后，电脑走棋。 每次走完棋，需要显示当前棋盘状态。 在每次走完后，需要判断是否胜利。 当三种相同的在一条线上时，胜利。 当地图填满时，还没有胜利者，则为平局。">
+<meta name="twitter:image" content="https://wx1.sinaimg.cn/mw690/006wR0dcly1fwjam76g21g308w06ojwp.gif">
 
 <link rel="apple-touch-icon" href= "/apple-touch-icon.png">
 
@@ -261,7 +263,7 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <p><a href="https://github.com/ahojcn/Practice/tree/master/bit/MySanZiChessGame/MySanZiChessGame" target="_blank" rel="noopener">Github地址</a></p>
+        <p><a href="https://github.com/ahojcn/Practice/tree/master/MySanZiChessGame/MySanZiChessGame" target="_blank" rel="noopener">https://github.com/ahojcn/Practice/tree/master/MySanZiChessGame/MySanZiChessGame</a></p>
 <h3 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h3><blockquote>
 <ol>
 <li>需要个游戏控制函数，决定是继续游戏，还是退出程序。</li>
@@ -272,6 +274,7 @@
 <li>当地图填满时，还没有胜利者，则为平局。</li>
 </ol>
 </blockquote>
+<p><img src="https://wx1.sinaimg.cn/mw690/006wR0dcly1fwjam76g21g308w06ojwp.gif" alt="gif"></p>
 <a id="more"></a>
 <h3 id="0-地图大小和坐标"><a href="#0-地图大小和坐标" class="headerlink" title="0. 地图大小和坐标"></a>0. 地图大小和坐标</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">#define ROW 3</span><br><span class="line">#define COL 3</span><br><span class="line"></span><br><span class="line">typedef struct</span><br><span class="line">&#123;</span><br><span class="line">    int x;</span><br><span class="line">    int y;</span><br><span class="line">&#125;Point;</span><br></pre></td></tr></table></figure>
 <h3 id="1-菜单"><a href="#1-菜单" class="headerlink" title="1. 菜单"></a>1. 菜单</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">void game_menu()</span><br><span class="line">&#123;</span><br><span class="line">    printf(&quot;*********************\n&quot;);</span><br><span class="line">    printf(&quot;*** 1.play 0.exit ***\n&quot;);</span><br><span class="line">    printf(&quot;*********************\n&quot;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
