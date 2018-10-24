@@ -15,19 +15,19 @@
 
 
 
-<meta name="description" content="目录1. 如何理解递归2. 递归需要满足的条件3. 递归代码的实现4. 栈溢出！5. 重复计算！6. 递归代码-&amp;gt;非递归代码递归1. 如何理解递归例：领导分配给你一个任务量为n的任务，你做了一部分，然后把剩下的n-1分配给别人，别人又做了一部分，把剩下的n-2分配给了另一个人，直到最后一个人，做了一部分，然后把任务完成返回给他上一个人。 这个任务下发的过程叫递，任务返回的过程叫归。 基本上，">
+<meta name="description" content="目录1. 如何理解递归2. 递归需要满足的条件3. 递归代码的实现4. 栈溢出！5. 重复计算！6. 递归代码-&amp;gt;非递归代码">
 <meta name="keywords" content="C语言,学习总结">
 <meta property="og:type" content="article">
 <meta property="og:title" content="21【学习总结】递归">
 <meta property="og:url" content="http://ahoj.cc/2018/10/cjnlas82m000z2d6z671ys6su/index.html">
 <meta property="og:site_name" content="ahoj的博客">
-<meta property="og:description" content="目录1. 如何理解递归2. 递归需要满足的条件3. 递归代码的实现4. 栈溢出！5. 重复计算！6. 递归代码-&amp;gt;非递归代码递归1. 如何理解递归例：领导分配给你一个任务量为n的任务，你做了一部分，然后把剩下的n-1分配给别人，别人又做了一部分，把剩下的n-2分配给了另一个人，直到最后一个人，做了一部分，然后把任务完成返回给他上一个人。 这个任务下发的过程叫递，任务返回的过程叫归。 基本上，">
+<meta property="og:description" content="目录1. 如何理解递归2. 递归需要满足的条件3. 递归代码的实现4. 栈溢出！5. 重复计算！6. 递归代码-&amp;gt;非递归代码">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://static001.geekbang.org/resource/image/e7/bf/e7e778994e90265344f6ac9da39e01bf.jpg">
-<meta property="og:updated_time" content="2018-10-23T05:33:46.550Z">
+<meta property="og:updated_time" content="2018-10-23T05:40:51.255Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="21【学习总结】递归">
-<meta name="twitter:description" content="目录1. 如何理解递归2. 递归需要满足的条件3. 递归代码的实现4. 栈溢出！5. 重复计算！6. 递归代码-&amp;gt;非递归代码递归1. 如何理解递归例：领导分配给你一个任务量为n的任务，你做了一部分，然后把剩下的n-1分配给别人，别人又做了一部分，把剩下的n-2分配给了另一个人，直到最后一个人，做了一部分，然后把任务完成返回给他上一个人。 这个任务下发的过程叫递，任务返回的过程叫归。 基本上，">
+<meta name="twitter:description" content="目录1. 如何理解递归2. 递归需要满足的条件3. 递归代码的实现4. 栈溢出！5. 重复计算！6. 递归代码-&amp;gt;非递归代码">
 <meta name="twitter:image" content="https://static001.geekbang.org/resource/image/e7/bf/e7e778994e90265344f6ac9da39e01bf.jpg">
 
 <link rel="apple-touch-icon" href= "/apple-touch-icon.png">
@@ -263,7 +263,9 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <h2 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h2><h3 id="1-如何理解递归"><a href="#1-如何理解递归" class="headerlink" title="1. 如何理解递归"></a>1. 如何理解递归</h3><h3 id="2-递归需要满足的条件"><a href="#2-递归需要满足的条件" class="headerlink" title="2. 递归需要满足的条件"></a>2. 递归需要满足的条件</h3><h3 id="3-递归代码的实现"><a href="#3-递归代码的实现" class="headerlink" title="3. 递归代码的实现"></a>3. 递归代码的实现</h3><h3 id="4-栈溢出！"><a href="#4-栈溢出！" class="headerlink" title="4. 栈溢出！"></a>4. 栈溢出！</h3><h3 id="5-重复计算！"><a href="#5-重复计算！" class="headerlink" title="5. 重复计算！"></a>5. 重复计算！</h3><h3 id="6-递归代码-gt-非递归代码"><a href="#6-递归代码-gt-非递归代码" class="headerlink" title="6. 递归代码-&gt;非递归代码"></a>6. 递归代码-&gt;非递归代码</h3><h2 id="递归"><a href="#递归" class="headerlink" title="递归"></a>递归</h2><h3 id="1-如何理解递归-1"><a href="#1-如何理解递归-1" class="headerlink" title="1. 如何理解递归"></a>1. 如何理解递归</h3><p>例：领导分配给你一个任务量为n的任务，你做了一部分，然后把剩下的n-1分配给别人，别人又做了一部分，把剩下的n-2分配给了另一个人，直到最后一个人，做了一部分，然后把任务完成返回给他上一个人。</p>
+        <h2 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h2><h3 id="1-如何理解递归"><a href="#1-如何理解递归" class="headerlink" title="1. 如何理解递归"></a>1. 如何理解递归</h3><h3 id="2-递归需要满足的条件"><a href="#2-递归需要满足的条件" class="headerlink" title="2. 递归需要满足的条件"></a>2. 递归需要满足的条件</h3><h3 id="3-递归代码的实现"><a href="#3-递归代码的实现" class="headerlink" title="3. 递归代码的实现"></a>3. 递归代码的实现</h3><h3 id="4-栈溢出！"><a href="#4-栈溢出！" class="headerlink" title="4. 栈溢出！"></a>4. 栈溢出！</h3><h3 id="5-重复计算！"><a href="#5-重复计算！" class="headerlink" title="5. 重复计算！"></a>5. 重复计算！</h3><h3 id="6-递归代码-gt-非递归代码"><a href="#6-递归代码-gt-非递归代码" class="headerlink" title="6. 递归代码-&gt;非递归代码"></a>6. 递归代码-&gt;非递归代码</h3><a id="more"></a>
+<hr>
+<h2 id="递归"><a href="#递归" class="headerlink" title="递归"></a>递归</h2><h3 id="1-如何理解递归-1"><a href="#1-如何理解递归-1" class="headerlink" title="1. 如何理解递归"></a>1. 如何理解递归</h3><p>例：领导分配给你一个任务量为n的任务，你做了一部分，然后把剩下的n-1分配给别人，别人又做了一部分，把剩下的n-2分配给了另一个人，直到最后一个人，做了一部分，然后把任务完成返回给他上一个人。</p>
 <p>这个任务下发的过程叫<strong>递</strong>，任务返回的过程叫<strong>归</strong>。</p>
 <p>基本上，所有的递归问题都可以用递推公式来表示，上面这个例子，递推公式表示为：<code>f(n)=f(n-1)+1 其中，f(1)=1</code>。</p>
 <p>上述递归问题的代码表示如下：</p>
