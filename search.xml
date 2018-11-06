@@ -216,7 +216,7 @@
       
       <categories>
           
-          <category> 练习 </category>
+          <category> 总结 </category>
           
       </categories>
       
@@ -267,8 +267,6 @@
       
       
       <categories>
-          
-          <category> C语言 </category>
           
           <category> 学习总结 </category>
           
@@ -345,8 +343,6 @@
       
       <categories>
           
-          <category> C语言 </category>
-          
           <category> 学习总结 </category>
           
       </categories>
@@ -393,7 +389,7 @@
       
       <categories>
           
-          <category> 小项目 </category>
+          <category> 练习 </category>
           
       </categories>
       
@@ -418,7 +414,7 @@
       
       <categories>
           
-          <category> 数据结构 </category>
+          <category> 练习 </category>
           
       </categories>
       
@@ -460,8 +456,6 @@
       
       <categories>
           
-          <category> 数据结构 </category>
-          
           <category> 学习总结 </category>
           
       </categories>
@@ -484,8 +478,6 @@
       
       
       <categories>
-          
-          <category> 数据结构 </category>
           
           <category> 学习总结 </category>
           
@@ -512,7 +504,7 @@
       
       <categories>
           
-          <category> 数据结构 </category>
+          <category> 练习 </category>
           
       </categories>
       
@@ -536,8 +528,6 @@
       
       
       <categories>
-          
-          <category> 数据结构 </category>
           
           <category> 学习总结 </category>
           
@@ -659,6 +649,8 @@
             
             <tag> 数据结构 </tag>
             
+            <tag> C语言 </tag>
+            
         </tags>
       
     </entry>
@@ -719,12 +711,14 @@
       
       <categories>
           
-          <category> 离散数学 </category>
+          <category> 练习 </category>
           
       </categories>
       
       
         <tags>
+            
+            <tag> 练习 </tag>
             
             <tag> 离散数学 </tag>
             
