@@ -16,7 +16,7 @@
 <meta property="og:site_name" content="ahoj的博客">
 <meta property="og:description" content="Matlab基础学习使用Matlab编程解决问题～">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-11-07T03:52:06.510Z">
+<meta property="og:updated_time" content="2018-11-07T06:01:50.456Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="32【学习总结】Matlab基础">
 <meta name="twitter:description" content="Matlab基础学习使用Matlab编程解决问题～">
@@ -192,7 +192,7 @@
 <p>Command Window 用于输入命令和得到输出结果</p>
 <p>Workspace 记录Command中用到的变量</p>
 <p>Command History 记录Command输入历史</p>
-<h2 id="1-基础运算"><a href="#1-基础运算" class="headerlink" title="1. 基础运算"></a>1. 基础运算</h2><ul>
+<h1 id="一、基础命令"><a href="#一、基础命令" class="headerlink" title="一、基础命令"></a>一、基础命令</h1><h2 id="1-基础运算"><a href="#1-基础运算" class="headerlink" title="1. 基础运算"></a>1. 基础运算</h2><ul>
 <li><p>清空屏幕</p>
 <p><code>clc</code></p>
 </li>
@@ -231,15 +231,17 @@
 <p><code>x = 10</code></p>
 <p><code>y = 20</code></p>
 <p><code>x + y</code></p>
-<blockquote>
 <p>不可以这样<code>x + 1 = 2</code>，没办法直接来解方程。在Matlab中<code>=</code>是赋值符号，不是<strong>等于</strong>。这个类似于C语言。</p>
 <p>可以这样：<code>x = x + 1</code></p>
-</blockquote>
+<p>输出变量的值：<code>fprintf(&#39;%g\n&#39;, x);</code>或者<code>disp(x);</code></p>
 </li>
 <li><p>按方向键⬆️⬇️用来重复命令</p>
-<blockquote>
 <p>这个和Linux中一样。</p>
-</blockquote>
+</li>
+</ul>
+<ul>
+<li><p>$\sqrt3$</p>
+<p><code>sqrt(3)</code></p>
 </li>
 </ul>
 <h2 id="2-向量运算"><a href="#2-向量运算" class="headerlink" title="2. 向量运算"></a>2. 向量运算</h2><ul>
@@ -247,10 +249,8 @@
 <p><code>x = [1,2,3]</code>或<code>x = [1 2 3]</code></p>
 </li>
 <li><p>$\vec x*2$</p>
-<blockquote>
 <p>这个是计算$\vec x*2$的值，但是$\vec x$的值并没有改变，只是计算了这个表达式的结果。</p>
 <p><code>x = x * 2</code>，这样才会改变$\vec x$的值，这个和C语言一样～</p>
-</blockquote>
 </li>
 <li><p>当然也可以做向量和向量的基本运算（加减乘除）等。</p>
 </li>
@@ -264,9 +264,7 @@
 <p>  按上面的输入同样，矩阵B</p>
 <p>  输入：<code>B = [7,8,9;10,11,12]</code></p>
 <p>  然后就可以做矩阵的运算咯，<code>A*B,A+B,A-B,A/B</code>等。</p>
-<blockquote>
-<p>注意这里矩阵运算需要遵循矩阵运算规则。</p>
-</blockquote>
+<p>  注意这里矩阵运算需要遵循矩阵运算规则。</p>
 <ul>
 <li><p>另一种矩阵乘法</p>
 <p>在Matlab中输入<code>A*B</code>就是数学中的矩阵乘法</p>
@@ -277,14 +275,25 @@
 <li><p>New Script</p>
 <p>在脚本里写一堆命令。</p>
 <p>例如：计算$x+y$</p>
-<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">x = 10;	// 加了;后，在command window里，就不会出现x=10的结果。</span><br><span class="line">y = 20;	// 也可以不加分号。</span><br><span class="line">x + y</span><br></pre></td></tr></table></figure>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">x = <span class="number">10</span>;	<span class="comment">% 加了;后，在command window里，就不会出现x=10的结果。</span></span><br><span class="line">y = <span class="number">20</span>;	<span class="comment">% 也可以不加分号。</span></span><br><span class="line">x + y</span><br></pre></td></tr></table></figure>
 <p>保存脚本扩展名为.m -&gt; 然后在左面切换到刚才保存的文件夹 -&gt; RUN</p>
 <p>写脚本可以实现输入互动，例如：</p>
 <figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">x = input(<span class="string">'Please input x:'</span>);</span><br><span class="line">y = input(<span class="string">'Please input y:'</span>);</span><br><span class="line"></span><br><span class="line">x + y</span><br></pre></td></tr></table></figure>
 <p>然后RUN，输入x，y，就会输出结果。</p>
+<ul>
+<li><p>例子：摄氏温度转华氏温度</p>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">C = input(<span class="string">'enter a temperature in Celesius:'</span>);</span><br><span class="line">F = (C * <span class="number">1.8</span>) + <span class="number">32</span></span><br><span class="line"></span><br><span class="line">fprintf(<span class="string">'Fahrenheit = %f\n'</span>, F);</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
-
+</li>
+</ul>
+<h1 id="二、语法结构"><a href="#二、语法结构" class="headerlink" title="二、语法结构"></a>二、语法结构</h1><h2 id="1-选择结构"><a href="#1-选择结构" class="headerlink" title="1. 选择结构"></a>1. 选择结构</h2><p>栗子1：</p>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">num = input(<span class="string">'enter a number:'</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> num &gt; <span class="number">0</span></span><br><span class="line">	fprintf(<span class="string">'正数\n'</span>);</span><br><span class="line"><span class="keyword">elseif</span> num == <span class="number">0</span></span><br><span class="line">	fprintf(<span class="string">'0\n'</span>);</span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">	fprintf(<span class="string">'负数\n'</span>);</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<p>栗子2：</p>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">a = input(<span class="string">'a = '</span>);</span><br><span class="line">b = input(<span class="string">'b = '</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> a &gt; b</span><br><span class="line">	fprintf(<span class="string">'%g\n'</span>, a);</span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">	fprintf(<span class="string">'%g\n'</span>, b);</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<p>栗子3：</p>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">% 1.</span></span><br><span class="line">a = input(<span class="string">'a = '</span>);</span><br><span class="line">b = input(<span class="string">'b = '</span>);</span><br><span class="line">c = input(<span class="string">'c = '</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> a + b &lt;= c</span><br><span class="line">	fprintf(<span class="string">'NO\n'</span>);</span><br><span class="line"><span class="keyword">elseif</span> a + c &lt;= b</span><br><span class="line">	fprintf(<span class="string">'NO\n'</span>);</span><br><span class="line"><span class="keyword">elseif</span> b + c &lt;= a</span><br><span class="line">	fprintf(<span class="string">'NO\n'</span>);</span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">	fprintf(<span class="string">'YES\n'</span>);</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">% 2.</span></span><br><span class="line"><span class="keyword">if</span> (a + b &gt; c) &amp;&amp; (b + c &gt; a) &amp;&amp; (a + c &gt; b)</span><br><span class="line">	fprintf(<span class="string">'YES\n'</span>);</span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">	fprintf(<span class="string">'NO\n'</span>);</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<h2 id="2-循环"><a href="#2-循环" class="headerlink" title="2. 循环"></a>2. 循环</h2>
       
 
       
@@ -416,7 +425,7 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Matlab基础"><span class="toc-number">1.</span> <span class="toc-text">Matlab基础</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-基础运算"><span class="toc-number">1.1.</span> <span class="toc-text">1. 基础运算</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-向量运算"><span class="toc-number">1.2.</span> <span class="toc-text">2. 向量运算</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-矩阵运算"><span class="toc-number">1.3.</span> <span class="toc-text">3. 矩阵运算</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-脚本"><span class="toc-number">1.4.</span> <span class="toc-text">4. 脚本</span></a></li></ol></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Matlab基础"><span class="toc-number">1.</span> <span class="toc-text">Matlab基础</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#一、基础命令"><span class="toc-number">2.</span> <span class="toc-text">一、基础命令</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-基础运算"><span class="toc-number">2.1.</span> <span class="toc-text">1. 基础运算</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-向量运算"><span class="toc-number">2.2.</span> <span class="toc-text">2. 向量运算</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-矩阵运算"><span class="toc-number">2.3.</span> <span class="toc-text">3. 矩阵运算</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-脚本"><span class="toc-number">2.4.</span> <span class="toc-text">4. 脚本</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#二、语法结构"><span class="toc-number">3.</span> <span class="toc-text">二、语法结构</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-选择结构"><span class="toc-number">3.1.</span> <span class="toc-text">1. 选择结构</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-循环"><span class="toc-number">3.2.</span> <span class="toc-text">2. 循环</span></a></li></ol></li></ol>
                     </div>
                 </span>
             </div>
