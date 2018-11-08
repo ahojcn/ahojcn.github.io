@@ -166,6 +166,303 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-35-理解指针" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/11/cjo8lqdml00295c6z9f4lfvz7/">35|理解指针</a>
+    </h1>
+  
+
+        
+        <a href="/2018/11/cjo8lqdml00295c6z9f4lfvz7/" class="archive-article-date">
+  	<time datetime="2018-11-08T13:01:09.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-11-08</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="理解指针"><a href="#理解指针" class="headerlink" title="理解指针"></a>理解指针</h1><ol>
+<li><p>为什么要有指针？</p>
+<p>我们隔壁的隔壁宿舍最近经营起了零食店：</p>
+<p>「我：来5包卫龙大面筋，送到413！」</p>
+<p>「老板：么马达！来咧！」</p>
+<p>假设这栋宿舍楼没有门牌号：</p>
+<p>「我：来5包卫龙大面筋，送到……额……4楼一上楼从最左边往右第13个宿舍！」</p>
+<p>「老板：…… 」</p>
+<p>其实指针就像门牌号一样～便于定位查找内存中的数据。</p>
+<p>4GB的内存条有2^32个房间存数据，没有门牌号怎么找？从第一个开始数？哈哈。</p>
+<p>在C语言中可以这样理解一个变量：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> a = <span class="number">10</span>;</span><br><span class="line">    <span class="keyword">int</span> *b = &amp;a;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><code>int a = 10;</code>就是a这个人从房地产商(系统)那里买来一间房子，里面放着自己的东西<code>10</code>，此时a这个人的地址是系统知道的，然后a把这个地址(&amp;)告诉了他的好朋友b，并且给了b这间房子的钥匙(*)，这样b就可以通过地址找到这个房子地址并且在房间里取或者放自己的东西了。如果a不想让b乱动家里东西，可以和b说“不许乱动哦！”(const)。</p>
+</li>
+<li><p>指针变量</p>
+<p>这个其实挺好理解，在我们中文中，一般把强调的重点放在后面，指针变量是个<strong>变量</strong>。</p>
+<p>像这样理解的还有：数组<strong>指针</strong>、指针<strong>数组</strong>。</p>
+<p>指针变量是个变量，这个变量里面存的是地址数据。</p>
+<p>指针变量的大小：</p>
+<p>不论是什么类型（包括void *）：</p>
+<p>32位环境下，指针变量的大小是4字节。</p>
+<p>64位环境下，指针变量的大小是8字节。</p>
+<p>emmm怎么理解呢？</p>
+<p>计算机给能访问的内存地址是规范的长度，全0到全1，32位系统下可编址的范围32个比特位(4字节)，64位机器可编址的范围为64个比特位(8字节)。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">const</span> <span class="keyword">char</span> * argv[])</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"void*\t%d\n"</span>, <span class="keyword">sizeof</span>(<span class="keyword">void</span> *));</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"char*\t%d\n"</span>, <span class="keyword">sizeof</span>(<span class="keyword">char</span>*));</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"int*\t%d\n"</span>, <span class="keyword">sizeof</span>(<span class="keyword">int</span> *));</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"float*\t%d\n"</span>, <span class="keyword">sizeof</span>(<span class="keyword">float</span>*));</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"double*\t%d\n"</span>, <span class="keyword">sizeof</span>(<span class="keyword">double</span>*));</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>光说不顶用，来验证下，在64位环境下：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">void</span>*	<span class="number">8</span></span><br><span class="line"><span class="keyword">char</span>*	<span class="number">8</span></span><br><span class="line"><span class="keyword">int</span>*	<span class="number">8</span></span><br><span class="line"><span class="keyword">float</span>*	<span class="number">8</span></span><br><span class="line"><span class="keyword">double</span>*	<span class="number">8</span></span><br></pre></td></tr></table></figure>
+<p>32位机下：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">void</span>*	<span class="number">4</span></span><br><span class="line"><span class="keyword">char</span>*	<span class="number">4</span></span><br><span class="line"><span class="keyword">int</span>*	<span class="number">4</span></span><br><span class="line"><span class="keyword">float</span>*	<span class="number">4</span></span><br><span class="line"><span class="keyword">double</span>*	<span class="number">4</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>void*</p>
+<p>可以做以下这样的事：</p>
+<p><code>void *vp;</code></p>
+<p>但是void<em>类型的指针不能被解引用，因为解引用后它不知道要访问多大的空间(int </em>解引用可以访问4字节的空间，char*解引用后可以访问1字节的空间)。</p>
+<p>void*可以接收任意类型的指针，这样就可以用它来做一些接口方面的事，这就方便了许多。</p>
+</li>
+</ol>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">C语言</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">学习总结</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="//categories/学习总结//" class="article-tag-list-link color5">学习总结</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/11/cjo8lqdml00295c6z9f4lfvz7/">more >></a>
+        </p>
+      
+
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+<!---让百度主动推送代码，让搜索引擎最快发现文章--->
+
+
+<!--gitalk留言功能-->
+
+  <div id="gitalk-container" style="padding: 0px 30px 0px 30px;"></div>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+<script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+<script type="text/javascript">
+
+if(true){
+	var gitalk = new Gitalk({
+  	clientID: '069eca25fe0437ca85c8',
+  	clientSecret: 'f338a82d38ecf5e848e1459591defca47e74ff5e',
+  	repo: 'ahojcn.github.io',
+  	owner: 'ahojcn',
+  	admin: ['ahojcn'],
+  	id: '',
+  	distractionFreeMode: 'false'
+})
+gitalk.render('gitalk-container')
+}
+</script>
+
+  
+
+  
+    <article id="post-34-整型在内存中的存取" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/11/cjo8lqdmm002c5c6z5wst9gye/">34|整型在内存中的存取</a>
+    </h1>
+  
+
+        
+        <a href="/2018/11/cjo8lqdmm002c5c6z5wst9gye/" class="archive-article-date">
+  	<time datetime="2018-11-08T12:59:47.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-11-08</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="整型在内存中的存储"><a href="#整型在内存中的存储" class="headerlink" title="整型在内存中的存储"></a>整型在内存中的存储</h1><h2 id="1-存整数"><a href="#1-存整数" class="headerlink" title="1. 存整数"></a>1. 存整数</h2><ol>
+<li>无符号数：原、反、补码一样</li>
+<li>有符号数：<ol>
+<li>正数：原、反、补码一样</li>
+<li>负数：补码表示</li>
+</ol>
+</li>
+</ol>
+<p>例如：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">-10</span>:有符号-&gt;负数-&gt;存它的补码</span><br><span class="line">以<span class="number">8</span>比特位为例</span><br><span class="line">原： <span class="number">1000</span> <span class="number">1010</span></span><br><span class="line">反： <span class="number">1111</span> <span class="number">0101</span></span><br><span class="line">补： <span class="number">1111</span> <span class="number">0110</span> 	-&gt;最终存入内存中的<span class="number">-10</span></span><br></pre></td></tr></table></figure>
+<h2 id="2-取整数"><a href="#2-取整数" class="headerlink" title="2. 取整数"></a>2. 取整数</h2><p>看是什么类型(有符号整数 / 无符号整数)</p>
+<ol>
+<li>无符号整数：直接取</li>
+<li>有符号整数：<ol>
+<li>正数：直接取</li>
+<li>负数：补-&gt;原再取</li>
+</ol>
+</li>
+</ol>
+<p>例如：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">char</span> a = <span class="number">-1</span>;</span><br><span class="line">    <span class="keyword">signed</span> <span class="keyword">char</span> b = <span class="number">-1</span>;</span><br><span class="line">    <span class="keyword">unsigned</span> <span class="keyword">char</span> c = <span class="number">-1</span>;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"a=%d,b=%d,c=%d\n"</span>, a, b, c);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>输出：<code>-1,-1,255</code></p>
+<p>a和b的结果是一样的，这里就分析下a：</p>
+<p>存：a是有符号数负数</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">a = <span class="number">-1</span></span><br><span class="line">    原： <span class="number">1000</span> <span class="number">0001</span></span><br><span class="line">    反： <span class="number">1111</span> <span class="number">1110</span></span><br><span class="line">    补： <span class="number">1111</span> <span class="number">1111</span></span><br><span class="line">    <span class="number">1.</span>存的时候不考虑类型，直接存 <span class="number">-1</span> 的补码 <span class="number">1111</span> <span class="number">1111</span></span><br><span class="line">    <span class="number">2.</span>在%d输出的时候，会发生整型提升，整型提升默认的是按照变量的原始类型添加前面的比特位，这里的a是有符号的所以前面添加 <span class="number">1</span>，变为 <span class="number">11111111</span> <span class="number">11111111</span> <span class="number">11111111</span> <span class="number">11111111</span>，这样的话用%d输出，结果是 <span class="number">-1</span>。</span><br></pre></td></tr></table></figure>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">c = <span class="number">-1</span></span><br><span class="line">    还是一样的，存的时候不考虑类型，存 <span class="number">-1</span> 的补码 <span class="number">1111</span> <span class="number">1111</span></span><br><span class="line">    在%d输出的时候，整型提升，添加比特位，这里的c是<span class="keyword">unsigned</span>类型的，所以前面添加 <span class="number">0</span>，变为：</span><br><span class="line">    <span class="number">00000000</span> <span class="number">00000000</span> <span class="number">00000000</span> <span class="number">11111111</span></span><br><span class="line">    这样，以%d输出就是<span class="number">255</span>咯。</span><br></pre></td></tr></table></figure>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">学习总结</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">数据存储</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="//categories/学习总结//" class="article-tag-list-link color5">学习总结</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/11/cjo8lqdmm002c5c6z5wst9gye/">more >></a>
+        </p>
+      
+
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+<!---让百度主动推送代码，让搜索引擎最快发现文章--->
+
+
+<!--gitalk留言功能-->
+
+  <div id="gitalk-container" style="padding: 0px 30px 0px 30px;"></div>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+<script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+<script type="text/javascript">
+
+if(true){
+	var gitalk = new Gitalk({
+  	clientID: '069eca25fe0437ca85c8',
+  	clientSecret: 'f338a82d38ecf5e848e1459591defca47e74ff5e',
+  	repo: 'ahojcn.github.io',
+  	owner: 'ahojcn',
+  	admin: ['ahojcn'],
+  	id: '',
+  	distractionFreeMode: 'false'
+})
+gitalk.render('gitalk-container')
+}
+</script>
+
+  
+
+  
     <article id="post-33【练习】字符串左旋以及旋转判定问题" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -173,12 +470,12 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2018/11/cjo72pzek0024fs6zogoxux47/">33【练习】字符串左旋以及旋转判定问题</a>
+      <a class="article-title" href="/2018/11/cjo8lqdmq002j5c6zmxfpgfep/">33【练习】字符串左旋以及旋转判定问题</a>
     </h1>
   
 
         
-        <a href="/2018/11/cjo72pzek0024fs6zogoxux47/" class="archive-article-date">
+        <a href="/2018/11/cjo8lqdmq002j5c6zmxfpgfep/" class="archive-article-date">
   	<time datetime="2018-11-07T11:08:24.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-11-07</time>
 </a>
         
@@ -232,7 +529,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2018/11/cjo72pzek0024fs6zogoxux47/">more >></a>
+          <a class="article-more-a" href="/2018/11/cjo8lqdmq002j5c6zmxfpgfep/">more >></a>
         </p>
       
 
@@ -298,12 +595,12 @@ gitalk.render('gitalk-container')
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2018/11/cjo72pzeh0021fs6z1u6w6w04/">32【学习总结】Matlab基础</a>
+      <a class="article-title" href="/2018/11/cjo8lqdmo002g5c6z9asyhyyv/">32【学习总结】Matlab基础</a>
     </h1>
   
 
         
-        <a href="/2018/11/cjo72pzeh0021fs6z1u6w6w04/" class="archive-article-date">
+        <a href="/2018/11/cjo8lqdmo002g5c6z9asyhyyv/" class="archive-article-date">
   	<time datetime="2018-11-07T03:13:49.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-11-07</time>
 </a>
         
@@ -350,7 +647,7 @@ gitalk.render('gitalk-container')
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2018/11/cjo72pzeh0021fs6z1u6w6w04/">more >></a>
+          <a class="article-more-a" href="/2018/11/cjo8lqdmo002g5c6z9asyhyyv/">more >></a>
         </p>
       
 
@@ -416,12 +713,12 @@ gitalk.render('gitalk-container')
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2018/11/cjo72pzef001xfs6zd1g80xpc/">31【练习】方程求根</a>
+      <a class="article-title" href="/2018/11/cjo8lqdmj00255c6zsv4kfl6s/">31【练习】方程求根</a>
     </h1>
   
 
         
-        <a href="/2018/11/cjo72pzef001xfs6zd1g80xpc/" class="archive-article-date">
+        <a href="/2018/11/cjo8lqdmj00255c6zsv4kfl6s/" class="archive-article-date">
   	<time datetime="2018-11-06T11:01:05.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-11-06</time>
 </a>
         
@@ -468,7 +765,7 @@ gitalk.render('gitalk-container')
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2018/11/cjo72pzef001xfs6zd1g80xpc/">more >></a>
+          <a class="article-more-a" href="/2018/11/cjo8lqdmj00255c6zsv4kfl6s/">more >></a>
         </p>
       
 
@@ -534,12 +831,12 @@ gitalk.render('gitalk-container')
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2018/10/cjo72pzed001tfs6zoudf6x3z/">30【学习总结】边界计算与不对称边界</a>
+      <a class="article-title" href="/2018/10/cjo8lqdmi00215c6z9255ktug/">30【学习总结】边界计算与不对称边界</a>
     </h1>
   
 
         
-        <a href="/2018/10/cjo72pzed001tfs6zoudf6x3z/" class="archive-article-date">
+        <a href="/2018/10/cjo8lqdmi00215c6z9255ktug/" class="archive-article-date">
   	<time datetime="2018-10-31T10:03:14.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-10-31</time>
 </a>
         
@@ -586,7 +883,7 @@ gitalk.render('gitalk-container')
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2018/10/cjo72pzed001tfs6zoudf6x3z/">more >></a>
+          <a class="article-more-a" href="/2018/10/cjo8lqdmi00215c6z9255ktug/">more >></a>
         </p>
       
 
@@ -652,12 +949,12 @@ gitalk.render('gitalk-container')
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2018/10/cjo72pze9001mfs6zlcf633jf/">29【练习】第39级台阶</a>
+      <a class="article-title" href="/2018/10/cjo8lqdmf001u5c6z9fmuwnk5/">29【练习】第39级台阶</a>
     </h1>
   
 
         
-        <a href="/2018/10/cjo72pze9001mfs6zlcf633jf/" class="archive-article-date">
+        <a href="/2018/10/cjo8lqdmf001u5c6z9fmuwnk5/" class="archive-article-date">
   	<time datetime="2018-10-30T08:07:37.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-10-30</time>
 </a>
         
@@ -708,7 +1005,7 @@ gitalk.render('gitalk-container')
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2018/10/cjo72pze9001mfs6zlcf633jf/">more >></a>
+          <a class="article-more-a" href="/2018/10/cjo8lqdmf001u5c6z9fmuwnk5/">more >></a>
         </p>
       
 
@@ -774,12 +1071,12 @@ gitalk.render('gitalk-container')
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2018/10/cjo72pze5001ffs6zpw23khg1/">28【练习】北大未名湖借还溜冰鞋问题分析</a>
+      <a class="article-title" href="/2018/10/cjo8lqdmd001q5c6zg4u18001/">28【练习】北大未名湖借还溜冰鞋问题分析</a>
     </h1>
   
 
         
-        <a href="/2018/10/cjo72pze5001ffs6zpw23khg1/" class="archive-article-date">
+        <a href="/2018/10/cjo8lqdmd001q5c6zg4u18001/" class="archive-article-date">
   	<time datetime="2018-10-30T08:07:05.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-10-30</time>
 </a>
         
@@ -830,7 +1127,7 @@ gitalk.render('gitalk-container')
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2018/10/cjo72pze5001ffs6zpw23khg1/">more >></a>
+          <a class="article-more-a" href="/2018/10/cjo8lqdmd001q5c6zg4u18001/">more >></a>
         </p>
       
 
@@ -896,12 +1193,12 @@ gitalk.render('gitalk-container')
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2018/10/cjo72pze7001ifs6zkczfu8vz/">27【练习】杨氏矩阵中查找</a>
+      <a class="article-title" href="/2018/10/cjo8lqdmc001n5c6znogh64qv/">27【练习】杨氏矩阵中查找</a>
     </h1>
   
 
         
-        <a href="/2018/10/cjo72pze7001ifs6zkczfu8vz/" class="archive-article-date">
+        <a href="/2018/10/cjo8lqdmc001n5c6znogh64qv/" class="archive-article-date">
   	<time datetime="2018-10-29T08:55:47.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-10-29</time>
 </a>
         
@@ -956,7 +1253,7 @@ gitalk.render('gitalk-container')
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2018/10/cjo72pze7001ifs6zkczfu8vz/">more >></a>
+          <a class="article-more-a" href="/2018/10/cjo8lqdmc001n5c6znogh64qv/">more >></a>
         </p>
       
 
@@ -1022,12 +1319,12 @@ gitalk.render('gitalk-container')
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2018/10/cjo72pze3001cfs6ztqae2twq/">26【练习】student a Am I改为i Am a Student</a>
+      <a class="article-title" href="/2018/10/cjo8lqdmb001k5c6zoi6cjspi/">26【练习】student a Am I改为i Am a Student</a>
     </h1>
   
 
         
-        <a href="/2018/10/cjo72pze3001cfs6ztqae2twq/" class="archive-article-date">
+        <a href="/2018/10/cjo8lqdmb001k5c6zoi6cjspi/" class="archive-article-date">
   	<time datetime="2018-10-29T08:09:46.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-10-29</time>
 </a>
         
@@ -1077,244 +1374,7 @@ gitalk.render('gitalk-container')
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2018/10/cjo72pze3001cfs6ztqae2twq/">more >></a>
-        </p>
-      
-
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-<!---让百度主动推送代码，让搜索引擎最快发现文章--->
-
-
-<!--gitalk留言功能-->
-
-  <div id="gitalk-container" style="padding: 0px 30px 0px 30px;"></div>
-
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
-<script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
-<script type="text/javascript">
-
-if(true){
-	var gitalk = new Gitalk({
-  	clientID: '069eca25fe0437ca85c8',
-  	clientSecret: 'f338a82d38ecf5e848e1459591defca47e74ff5e',
-  	repo: 'ahojcn.github.io',
-  	owner: 'ahojcn',
-  	admin: ['ahojcn'],
-  	id: '',
-  	distractionFreeMode: 'false'
-})
-gitalk.render('gitalk-container')
-}
-</script>
-
-  
-
-  
-    <article id="post-25【学习总结】从模拟strcpy和strlen函数中总结的要点" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/10/cjo72pze10018fs6zp6k4klos/">25【学习总结】从模拟strcpy和strlen函数中总结的要点</a>
-    </h1>
-  
-
-        
-        <a href="/2018/10/cjo72pze10018fs6zp6k4klos/" class="archive-article-date">
-  	<time datetime="2018-10-28T13:17:06.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-10-28</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>不只能输出正确，还要通过一些细节让程序更加健壮！</p>
-<p>资料：《高质量C++/C编程》</p>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">C语言</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">学习总结</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="//categories/学习总结//" class="article-tag-list-link color5">学习总结</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/10/cjo72pze10018fs6zp6k4klos/">more >></a>
-        </p>
-      
-
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-<!---让百度主动推送代码，让搜索引擎最快发现文章--->
-
-
-<!--gitalk留言功能-->
-
-  <div id="gitalk-container" style="padding: 0px 30px 0px 30px;"></div>
-
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
-<script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
-<script type="text/javascript">
-
-if(true){
-	var gitalk = new Gitalk({
-  	clientID: '069eca25fe0437ca85c8',
-  	clientSecret: 'f338a82d38ecf5e848e1459591defca47e74ff5e',
-  	repo: 'ahojcn.github.io',
-  	owner: 'ahojcn',
-  	admin: ['ahojcn'],
-  	id: '',
-  	distractionFreeMode: 'false'
-})
-gitalk.render('gitalk-container')
-}
-</script>
-
-  
-
-  
-    <article id="post-24【学习总结】const修饰的是谁" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/10/cjo72pzdz0015fs6z7hofbzil/">24【学习总结】const修饰的是谁</a>
-    </h1>
-  
-
-        
-        <a href="/2018/10/cjo72pzdz0015fs6z7hofbzil/" class="archive-article-date">
-  	<time datetime="2018-10-28T13:12:44.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-10-28</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>const : 我是谁，我在哪，我要干甚？ </p>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">C语言</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">学习总结</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="//categories/学习总结//" class="article-tag-list-link color5">学习总结</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/10/cjo72pzdz0015fs6z7hofbzil/">more >></a>
+          <a class="article-more-a" href="/2018/10/cjo8lqdmb001k5c6zoi6cjspi/">more >></a>
         </p>
       
 
@@ -1539,6 +1599,10 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">网络安全</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">数据存储</a>
               </li>
              
               <li class="article-tag-list-item">
