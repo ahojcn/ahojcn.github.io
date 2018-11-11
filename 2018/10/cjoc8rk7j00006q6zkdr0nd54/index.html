@@ -6,18 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://ahoj.cc">
-  <title>ahoj的博客</title>
+  <title>10|二分查找 | ahoj的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="平凡有理想，想让世界不一样。">
-<meta property="og:type" content="website">
-<meta property="og:title" content="ahoj的博客">
-<meta property="og:url" content="http://ahoj.cc/page/2/index.html">
+  <meta name="description" content="前言笔记参考：极客时间|数据结构与算法之美 之前在bilibili看到一个有趣的视频，关于二分查找的。戳我看这个有趣的视频 目录1. 二分思想2. 递归和非递归实现3. 时间复杂度4. 局限性5. 变体问题">
+<meta name="keywords" content="学习总结,算法">
+<meta property="og:type" content="article">
+<meta property="og:title" content="10|二分查找">
+<meta property="og:url" content="http://ahoj.cc/2018/10/cjoc8rk7j00006q6zkdr0nd54/index.html">
 <meta property="og:site_name" content="ahoj的博客">
-<meta property="og:description" content="平凡有理想，想让世界不一样。">
+<meta property="og:description" content="前言笔记参考：极客时间|数据结构与算法之美 之前在bilibili看到一个有趣的视频，关于二分查找的。戳我看这个有趣的视频 目录1. 二分思想2. 递归和非递归实现3. 时间复杂度4. 局限性5. 变体问题">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-11-11T02:08:15.970Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="ahoj的博客">
-<meta name="twitter:description" content="平凡有理想，想让世界不一样。">
+<meta name="twitter:title" content="10|二分查找">
+<meta name="twitter:description" content="前言笔记参考：极客时间|数据结构与算法之美 之前在bilibili看到一个有趣的视频，关于二分查找的。戳我看这个有趣的视频 目录1. 二分思想2. 递归和非递归实现3. 时间复杂度4. 局限性5. 变体问题">
   
     <link rel="alternative" href="/atom.xml" title="ahoj的博客" type="application/atom+xml">
   
@@ -164,30 +166,102 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-    <article id="post-6|浅析最好、最坏、平均、均摊时间复杂度" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+            <article id="post-10|二分查找" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/10/cjoc8rk8g000w6q6z5p7hn219/">6|浅析最好、最坏、平均、均摊时间复杂度</a>
+    <h1 class="article-title" itemprop="name">
+      10|二分查找
     </h1>
   
 
         
-        <a href="/2018/10/cjoc8rk8g000w6q6z5p7hn219/" class="archive-article-date">
-  	<time datetime="2018-10-04T12:48:44.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-10-04</time>
+        <a href="/2018/10/cjoc8rk7j00006q6zkdr0nd54/" class="archive-article-date">
+  	<time datetime="2018-10-27T14:04:22.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-10-27</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h2><h3 id="1-最好、最坏情况时间复杂度"><a href="#1-最好、最坏情况时间复杂度" class="headerlink" title="1 最好、最坏情况时间复杂度"></a>1 最好、最坏情况时间复杂度</h3><h3 id="2-平均时间复杂度"><a href="#2-平均时间复杂度" class="headerlink" title="2 平均时间复杂度"></a>2 平均时间复杂度</h3><h3 id="3-均摊时间复杂度"><a href="#3-均摊时间复杂度" class="headerlink" title="3 均摊时间复杂度"></a>3 均摊时间复杂度</h3>
-        
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>笔记参考：极客时间|数据结构与算法之美</p>
+<p>之前在bilibili看到一个有趣的视频，关于二分查找的。<a href="https://www.bilibili.com/video/av15833965" target="_blank" rel="noopener">戳我看这个有趣的视频</a></p>
+<h2 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h2><h3 id="1-二分思想"><a href="#1-二分思想" class="headerlink" title="1. 二分思想"></a>1. 二分思想</h3><h3 id="2-递归和非递归实现"><a href="#2-递归和非递归实现" class="headerlink" title="2. 递归和非递归实现"></a>2. 递归和非递归实现</h3><h3 id="3-时间复杂度"><a href="#3-时间复杂度" class="headerlink" title="3. 时间复杂度"></a>3. 时间复杂度</h3><h3 id="4-局限性"><a href="#4-局限性" class="headerlink" title="4. 局限性"></a>4. 局限性</h3><h3 id="5-变体问题"><a href="#5-变体问题" class="headerlink" title="5. 变体问题"></a>5. 变体问题</h3><a id="more"></a>
+<hr>
+<h2 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h2><h3 id="1-二分思想-1"><a href="#1-二分思想-1" class="headerlink" title="1. 二分思想"></a>1. 二分思想</h3><p>就如上面视频中的栗子，猜数字游戏，如果从头开始一个一个的猜是非常低效的。</p>
+<blockquote>
+<p>在实际的开发场景中，假设有1w条订单数据，已经按照订单的金额从小到大排序，每个定干的金额不同，最小单位是元。</p>
+<p>如果从第一个订单开始，遍历这1w条订单，直到找到目标为止，这种方法在最坏情况下可能要便利完所有数据才能找到。</p>
+<p>但是用二分法，每次都通过跟区间中间元素对比，将整个带查找的区间缩小为之前的一半，直到查找的需要的数据或者区间缩小为0。</p>
+</blockquote>
+<h3 id="2-二分查找实现-递归和非递归"><a href="#2-二分查找实现-递归和非递归" class="headerlink" title="2. 二分查找实现(递归和非递归)"></a>2. 二分查找实现(递归和非递归)</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 非递归实现</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">bsearch</span><span class="params">(<span class="keyword">int</span> a[], <span class="keyword">int</span> n, <span class="keyword">int</span> value)</span> </span>&#123;</span><br><span class="line">  <span class="keyword">int</span> low = <span class="number">0</span>;</span><br><span class="line">  <span class="keyword">int</span> high = n - <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">while</span> (low &lt;= high) </span><br><span class="line">  &#123;</span><br><span class="line">    <span class="keyword">int</span> mid = (low + high) / <span class="number">2</span>;</span><br><span class="line">    <span class="keyword">if</span> (a[mid] == value) </span><br><span class="line">    &#123;</span><br><span class="line">      <span class="keyword">return</span> mid;</span><br><span class="line">    &#125; </span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span> (a[mid] &lt; value) </span><br><span class="line">    &#123;</span><br><span class="line">      low = mid + <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span> </span><br><span class="line">    &#123;</span><br><span class="line">      high = mid - <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;<span class="comment">/*while*/</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ol>
+<li>循环退出条件</li>
+</ol>
+<p><code>low&lt;=high</code></p>
+<ol start="2">
+<li>mid的取值</li>
+</ol>
+<p><code>mid=(low+high)/2</code>在low和high比较大的话两者之和容易溢出。</p>
+<p>改进：<code>low+(high-low)/2</code></p>
+<p>更高效：<code>low+((high-low)&gt;&gt;1)</code></p>
+<ol start="3">
+<li>low和high的更新</li>
+</ol>
+<p><code>low=mid+1</code>和<code>high=mid-1</code>这里的+1和-1，如果写成<code>low=mid或high=mid</code>就可能发生死循环。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 二分查找的递归实现</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">bsearch</span><span class="params">(<span class="keyword">int</span> a[], <span class="keyword">int</span> n, <span class="keyword">int</span> val)</span> </span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="keyword">return</span> b(a, <span class="number">0</span>, n - <span class="number">1</span>, val);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">b</span><span class="params">(<span class="keyword">int</span> a[], <span class="keyword">int</span> low, <span class="keyword">int</span> high, <span class="keyword">int</span> value)</span> </span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (low &gt; high) <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">int</span> mid =  low + ((high - low) &gt;&gt; <span class="number">1</span>);</span><br><span class="line">  <span class="keyword">if</span> (a[mid] == value) </span><br><span class="line">  &#123;</span><br><span class="line">    <span class="keyword">return</span> mid;</span><br><span class="line">  &#125; </span><br><span class="line">  <span class="keyword">else</span> <span class="keyword">if</span> (a[mid] &lt; value) </span><br><span class="line">  &#123;</span><br><span class="line">    <span class="keyword">return</span> bsearchInternally(a, mid+<span class="number">1</span>, high, value);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">else</span></span><br><span class="line">  &#123;</span><br><span class="line">    <span class="keyword">return</span> bsearchInternally(a, low, mid<span class="number">-1</span>, value);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="3-时间复杂度-1"><a href="#3-时间复杂度-1" class="headerlink" title="3. 时间复杂度"></a>3. 时间复杂度</h3><p>二分查找的被查找区间缩小速度是一个等比数列，公比q为1/2。</p>
+<p>假设数据规模为n，每次查找后数据规模都会缩小为原来的一半，最坏情况下，直到查找区间被缩小为空停止。</p>
+<p><code>n/2^k=1</code>时，k就是总共缩小的次数，每次缩小只涉及2个数据的比较，经过k次区间缩小操作，时间复杂度为O(k)。k等于以2为底n的对数，解得时间复杂度为<code>O(logn)</code>。</p>
+<p><code>O(logn)</code>在某些情况下比<code>O(1)</code>时间复杂度的算法高效。<code>O(1)</code>时忽略掉常熟、系数和低阶。当数据规模够大时，如<code>O(10000)</code>，此时<code>log(n)</code>的算法效率比<code>O(1)</code>的高。</p>
+<h3 id="4-局限性-1"><a href="#4-局限性-1" class="headerlink" title="4. 局限性"></a>4. 局限性</h3><ol>
+<li>二分查找依赖顺序结构</li>
+<li>二分查找针对的是有序数据</li>
+<li>数据量太小不适合二分查找</li>
+</ol>
+<blockquote>
+<p>比如在10个元素的数组中查找一个元素，遍历会来的更方便一些。而且查找速度也差不多。</p>
+</blockquote>
+<ol start="4">
+<li>数据量太大也不适合二分查找</li>
+</ol>
+<blockquote>
+<p>为了支持随机访问，内存空间需要连续。</p>
+</blockquote>
+<h3 id="5-二分查找的变体问题"><a href="#5-二分查找的变体问题" class="headerlink" title="5. 二分查找的变体问题"></a>5. 二分查找的变体问题</h3><ol>
+<li>查找第一个值等于给定值的元素</li>
+</ol>
+<blockquote>
+<p>当区间中间值不等于要查找的元素时，需要继续查找。</p>
+<p>当区间中间值等于要查找的元素时，看看中间值的前一个值是否等于要查找的元素，如果等则更新high=mid-1，否则现在这个元素就是要查找的元素。</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">bsearch</span><span class="params">(<span class="keyword">int</span>[] a, <span class="keyword">int</span> n, <span class="keyword">int</span> value)</span> </span>&#123;</span><br><span class="line">  <span class="keyword">int</span> low = <span class="number">0</span>;</span><br><span class="line">  <span class="keyword">int</span> high = n - <span class="number">1</span>;</span><br><span class="line">  <span class="keyword">while</span> (low &lt;= high) &#123;</span><br><span class="line">    <span class="keyword">int</span> mid =  low + ((high - low) &gt;&gt; <span class="number">1</span>);</span><br><span class="line">    <span class="keyword">if</span> (a[mid] &gt; value) &#123;</span><br><span class="line">      high = mid - <span class="number">1</span>;</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (a[mid] &lt; value) &#123;</span><br><span class="line">      low = mid + <span class="number">1</span>;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      <span class="keyword">if</span> ((mid == <span class="number">0</span>) || (a[mid - <span class="number">1</span>] != value)) <span class="keyword">return</span> mid;</span><br><span class="line">      <span class="keyword">else</span> high = mid - <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> -<span class="number">1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ol start="2">
+<li>查找最后一个值等于给定值的元素</li>
+</ol>
+<blockquote>
+<p>跟第一种一样，不过这次要和mid后面的一个元素进行比较。更新low=mid+1。</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">bsearch</span><span class="params">(<span class="keyword">int</span>[] a, <span class="keyword">int</span> n, <span class="keyword">int</span> value)</span> </span>&#123;</span><br><span class="line">  <span class="keyword">int</span> low = <span class="number">0</span>;</span><br><span class="line">  <span class="keyword">int</span> high = n - <span class="number">1</span>;</span><br><span class="line">  <span class="keyword">while</span> (low &lt;= high) &#123;</span><br><span class="line">    <span class="keyword">int</span> mid =  low + ((high - low) &gt;&gt; <span class="number">1</span>);</span><br><span class="line">    <span class="keyword">if</span> (a[mid] &gt; value) &#123;</span><br><span class="line">      high = mid - <span class="number">1</span>;</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (a[mid] &lt; value) &#123;</span><br><span class="line">      low = mid + <span class="number">1</span>;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      <span class="keyword">if</span> ((mid == n - <span class="number">1</span>) || (a[mid + <span class="number">1</span>] != value)) <span class="keyword">return</span> mid;</span><br><span class="line">      <span class="keyword">else</span> low = mid + <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> -<span class="number">1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ol start="3">
+<li>查找第一个大于等于给定值的元素</li>
+</ol>
+<blockquote>
+<p>如果mid的值小于要查找的值，则目标值在[mid+1,high]之间，更新low。</p>
+<p>如果mid的值大于要查找的值，目标值在[low,mid-1]之间，更新high。</p>
+</blockquote>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">bsearch</span><span class="params">(<span class="keyword">int</span>[] a, <span class="keyword">int</span> n, <span class="keyword">int</span> value)</span> </span>&#123;</span><br><span class="line">  <span class="keyword">int</span> low = <span class="number">0</span>;</span><br><span class="line">  <span class="keyword">int</span> high = n - <span class="number">1</span>;</span><br><span class="line">  <span class="keyword">while</span> (low &lt;= high) &#123;</span><br><span class="line">    <span class="keyword">int</span> mid =  low + ((high - low) &gt;&gt; <span class="number">1</span>);</span><br><span class="line">    <span class="keyword">if</span> (a[mid] &gt;= value) &#123;</span><br><span class="line">      <span class="keyword">if</span> ((mid == <span class="number">0</span>) || (a[mid - <span class="number">1</span>] &lt; value)) <span class="keyword">return</span> mid;</span><br><span class="line">      <span class="keyword">else</span> high = mid - <span class="number">1</span>;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      low = mid + <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ol start="4">
+<li>查找最后一个小于等于给定值的元素</li>
+</ol>
+<blockquote>
+<p>要查找的值大于当前mid中的值，目标值在[low,mid-1]之间，更新high=mid-1。</p>
+<p>要查找的值小于mid+1的值，则要查找的值在[mid+1,high]之间，更新low=mid+1。</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">bsearch7</span><span class="params">(<span class="keyword">int</span>[] a, <span class="keyword">int</span> n, <span class="keyword">int</span> value)</span> </span>&#123;</span><br><span class="line">  <span class="keyword">int</span> low = <span class="number">0</span>;</span><br><span class="line">  <span class="keyword">int</span> high = n - <span class="number">1</span>;</span><br><span class="line">  <span class="keyword">while</span> (low &lt;= high) &#123;</span><br><span class="line">    <span class="keyword">int</span> mid =  low + ((high - low) &gt;&gt; <span class="number">1</span>);</span><br><span class="line">    <span class="keyword">if</span> (a[mid] &gt; value) &#123;</span><br><span class="line">      high = mid - <span class="number">1</span>;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      <span class="keyword">if</span> ((mid == n - <span class="number">1</span>) || (a[mid + <span class="number">1</span>] &gt; value)) <span class="keyword">return</span> mid;</span><br><span class="line">      <span class="keyword">else</span> low = mid + <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> -<span class="number">1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
       
 
       
@@ -199,248 +273,12 @@
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">数据结构</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="//categories/学习总结//" class="article-tag-list-link color5">学习总结</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/10/cjoc8rk8g000w6q6z5p7hn219/">more >></a>
-        </p>
-      
-
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-<!---让百度主动推送代码，让搜索引擎最快发现文章--->
-
-
-<!--gitalk留言功能-->
-
-  <div id="gitalk-container" style="padding: 0px 30px 0px 30px;"></div>
-
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
-<script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
-<script type="text/javascript">
-
-if(true){
-	var gitalk = new Gitalk({
-  	clientID: '069eca25fe0437ca85c8',
-  	clientSecret: 'f338a82d38ecf5e848e1459591defca47e74ff5e',
-  	repo: 'ahojcn.github.io',
-  	owner: 'ahojcn',
-  	admin: ['ahojcn'],
-  	id: '',
-  	distractionFreeMode: 'false'
-})
-gitalk.render('gitalk-container')
-}
-</script>
-
-  
-
-  
-    <article id="post-5|复杂度分析" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/10/cjoc8rk8e000t6q6zc1pddp7k/">5|复杂度分析</a>
-    </h1>
-  
-
-        
-        <a href="/2018/10/cjoc8rk8e000t6q6zc1pddp7k/" class="archive-article-date">
-  	<time datetime="2018-10-04T05:39:44.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-10-04</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h2><h3 id="1-为什么要分析复杂度"><a href="#1-为什么要分析复杂度" class="headerlink" title="1 为什么要分析复杂度"></a>1 为什么要分析复杂度</h3><h3 id="2-大O表示法"><a href="#2-大O表示法" class="headerlink" title="2 大O表示法"></a>2 大O表示法</h3><h3 id="3-时间复杂度分析原则"><a href="#3-时间复杂度分析原则" class="headerlink" title="3 时间复杂度分析原则"></a>3 时间复杂度分析原则</h3><h3 id="4-常见的几种时间复杂度"><a href="#4-常见的几种时间复杂度" class="headerlink" title="4 常见的几种时间复杂度"></a>4 常见的几种时间复杂度</h3>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">数据结构</a>
-        		</li>
-      		 
         		<li class="article-tag-list-item">
         			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">学习总结</a>
         		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="//categories/学习总结//" class="article-tag-list-link color5">学习总结</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/10/cjoc8rk8e000t6q6zc1pddp7k/">more >></a>
-        </p>
-      
-
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-<!---让百度主动推送代码，让搜索引擎最快发现文章--->
-
-
-<!--gitalk留言功能-->
-
-  <div id="gitalk-container" style="padding: 0px 30px 0px 30px;"></div>
-
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
-<script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
-<script type="text/javascript">
-
-if(true){
-	var gitalk = new Gitalk({
-  	clientID: '069eca25fe0437ca85c8',
-  	clientSecret: 'f338a82d38ecf5e848e1459591defca47e74ff5e',
-  	repo: 'ahojcn.github.io',
-  	owner: 'ahojcn',
-  	admin: ['ahojcn'],
-  	id: '',
-  	distractionFreeMode: 'false'
-})
-gitalk.render('gitalk-container')
-}
-</script>
-
-  
-
-  
-    <article id="post-4|深入理解数组" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/10/cjoc8rk8d000q6q6zq5hah1y5/">4|深入理解数组</a>
-    </h1>
-  
-
-        
-        <a href="/2018/10/cjoc8rk8d000q6q6zq5hah1y5/" class="archive-article-date">
-  	<time datetime="2018-10-03T04:11:26.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-10-03</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h2><h3 id="1-为什么很多编程语言中数组都是从-0-开始编号"><a href="#1-为什么很多编程语言中数组都是从-0-开始编号" class="headerlink" title="1 为什么很多编程语言中数组都是从 0 开始编号"></a>1 为什么很多编程语言中数组都是从 0 开始编号</h3><h3 id="2-数组的特点"><a href="#2-数组的特点" class="headerlink" title="2 数组的特点"></a>2 数组的特点</h3><h3 id="3-数组越界问题"><a href="#3-数组越界问题" class="headerlink" title="3 数组越界问题"></a>3 数组越界问题</h3><h3 id="4-容器和数组用哪个更好"><a href="#4-容器和数组用哪个更好" class="headerlink" title="4 容器和数组用哪个更好"></a>4 容器和数组用哪个更好</h3>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">数据结构</a>
-        		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">C语言</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">学习总结</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">算法</a>
         		</li>
       		
 		</ul>
@@ -460,18 +298,89 @@ gitalk.render('gitalk-container')
 
 
       
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/10/cjoc8rk8d000q6q6zq5hah1y5/">more >></a>
-        </p>
+
       
+        
 
       
 
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
+        </div>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://ahoj.cc/2018/10/cjoc8rk7j00006q6zkdr0nd54/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
       
       <div class="clearfix"></div>
     </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
+  
+    <a href="/2018/10/cjoc8rk7q00016q6z153blgfa/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          11|const修饰的是谁
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2018/10/cjoc8rk8l00146q6zy8lne7k4/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">9|C语言操作符</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
 
 <aside class="wrap-side-operation">
     <div class="mod-side-operation">
@@ -486,13 +395,45 @@ gitalk.render('gitalk-container')
         </div>
         
         
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#前言"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#目录"><span class="toc-number">2.</span> <span class="toc-text">目录</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-二分思想"><span class="toc-number">2.1.</span> <span class="toc-text">1. 二分思想</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-递归和非递归实现"><span class="toc-number">2.2.</span> <span class="toc-text">2. 递归和非递归实现</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-时间复杂度"><span class="toc-number">2.3.</span> <span class="toc-text">3. 时间复杂度</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-局限性"><span class="toc-number">2.4.</span> <span class="toc-text">4. 局限性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-变体问题"><span class="toc-number">2.5.</span> <span class="toc-text">5. 变体问题</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#正文"><span class="toc-number">3.</span> <span class="toc-text">正文</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-二分思想-1"><span class="toc-number">3.1.</span> <span class="toc-text">1. 二分思想</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-二分查找实现-递归和非递归"><span class="toc-number">3.2.</span> <span class="toc-text">2. 二分查找实现(递归和非递归)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-时间复杂度-1"><span class="toc-number">3.3.</span> <span class="toc-text">3. 时间复杂度</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-局限性-1"><span class="toc-number">3.4.</span> <span class="toc-text">4. 局限性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-二分查找的变体问题"><span class="toc-number">3.5.</span> <span class="toc-text">5. 二分查找的变体问题</span></a></li></ol></li></ol>
+                    </div>
+                </span>
+            </div>
+        </div>
+        
     </div>
 </aside>
 
 
 
+  
+
+  
+
+  
+
+  
+
+  
+
 
 <!---让百度主动推送代码，让搜索引擎最快发现文章--->
+
+<script>
+(function(){
+    var bp = document.createElement('script');
+    bp.src = '//push.zhanzhang.baidu.com/push.js';
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
 
 
 <!--gitalk留言功能-->
@@ -510,7 +451,7 @@ if(true){
   	repo: 'ahojcn.github.io',
   	owner: 'ahojcn',
   	admin: ['ahojcn'],
-  	id: '',
+  	id: 'Sat Oct 27 2018 22:04:22 GMT+0800',
   	distractionFreeMode: 'false'
 })
 gitalk.render('gitalk-container')
@@ -518,334 +459,6 @@ gitalk.render('gitalk-container')
 </script>
 
   
-
-  
-    <article id="post-3|老韩语录和我们的故事" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/10/cjoc8rk8b000n6q6zcam7zdr9/">3|老韩语录和我们的故事</a>
-    </h1>
-  
-
-        
-        <a href="/2018/10/cjoc8rk8b000n6q6zcam7zdr9/" class="archive-article-date">
-  	<time datetime="2018-10-02T06:57:24.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-10-02</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>神中，这9班，我们的故事。</p>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/10/cjoc8rk8b000n6q6zcam7zdr9/">more >></a>
-        </p>
-      
-
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-<!---让百度主动推送代码，让搜索引擎最快发现文章--->
-
-
-<!--gitalk留言功能-->
-
-  <div id="gitalk-container" style="padding: 0px 30px 0px 30px;"></div>
-
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
-<script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
-<script type="text/javascript">
-
-if(true){
-	var gitalk = new Gitalk({
-  	clientID: '069eca25fe0437ca85c8',
-  	clientSecret: 'f338a82d38ecf5e848e1459591defca47e74ff5e',
-  	repo: 'ahojcn.github.io',
-  	owner: 'ahojcn',
-  	admin: ['ahojcn'],
-  	id: '',
-  	distractionFreeMode: 'false'
-})
-gitalk.render('gitalk-container')
-}
-</script>
-
-  
-
-  
-    <article id="post-2|不要在二三十岁就开始老去" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/09/cjoc8rk89000k6q6zm5p1tx1x/">2|不要在二三十岁就开始老去</a>
-    </h1>
-  
-
-        
-        <a href="/2018/09/cjoc8rk89000k6q6zm5p1tx1x/" class="archive-article-date">
-  	<time datetime="2018-09-30T12:37:03.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-09-30</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>特别喜欢的一篇文章，分享出来。</p>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">反思</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="//categories/反思//" class="article-tag-list-link color3">反思</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/09/cjoc8rk89000k6q6zm5p1tx1x/">more >></a>
-        </p>
-      
-
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-<!---让百度主动推送代码，让搜索引擎最快发现文章--->
-
-
-<!--gitalk留言功能-->
-
-  <div id="gitalk-container" style="padding: 0px 30px 0px 30px;"></div>
-
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
-<script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
-<script type="text/javascript">
-
-if(true){
-	var gitalk = new Gitalk({
-  	clientID: '069eca25fe0437ca85c8',
-  	clientSecret: 'f338a82d38ecf5e848e1459591defca47e74ff5e',
-  	repo: 'ahojcn.github.io',
-  	owner: 'ahojcn',
-  	admin: ['ahojcn'],
-  	id: '',
-  	distractionFreeMode: 'false'
-})
-gitalk.render('gitalk-container')
-}
-</script>
-
-  
-
-  
-    <article id="post-1|人之患在好为人师" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/09/cjoc8rk87000h6q6zmigfxe8u/">1|人之患在好为人师</a>
-    </h1>
-  
-
-        
-        <a href="/2018/09/cjoc8rk87000h6q6zmigfxe8u/" class="archive-article-date">
-  	<time datetime="2018-09-21T06:35:30.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-09-21</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="反思杂记"><a href="#反思杂记" class="headerlink" title="反思杂记"></a>反思杂记</h2><p>“人之患在好为人师。”  “学问有余，人资于己，以不得已而应之可也。若好为人师，则自足而不复有进矣，此人之大患也。”</p>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">反思</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="//categories/反思//" class="article-tag-list-link color3">反思</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/09/cjoc8rk87000h6q6zmigfxe8u/">more >></a>
-        </p>
-      
-
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-<!---让百度主动推送代码，让搜索引擎最快发现文章--->
-
-
-<!--gitalk留言功能-->
-
-  <div id="gitalk-container" style="padding: 0px 30px 0px 30px;"></div>
-
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
-<script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
-<script type="text/javascript">
-
-if(true){
-	var gitalk = new Gitalk({
-  	clientID: '069eca25fe0437ca85c8',
-  	clientSecret: 'f338a82d38ecf5e848e1459591defca47e74ff5e',
-  	repo: 'ahojcn.github.io',
-  	owner: 'ahojcn',
-  	admin: ['ahojcn'],
-  	id: '',
-  	distractionFreeMode: 'false'
-})
-gitalk.render('gitalk-container')
-}
-</script>
-
-  
-
-  
-  
-    <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span>
-    </nav>
-  
-
 
           </div>
         </div>
@@ -873,8 +486,8 @@ gitalk.render('gitalk-container')
     <script>
 	var yiliaConfig = {
 		mathjax: true,
-		isHome: true,
-		isPost: false,
+		isHome: false,
+		isPost: true,
 		isArchive: false,
 		isTag: false,
 		isCategory: false,

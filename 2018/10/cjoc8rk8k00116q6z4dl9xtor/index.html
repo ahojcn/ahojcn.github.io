@@ -6,18 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://ahoj.cc">
-  <title>ahoj的博客</title>
+  <title>8|C语言指针和数组名 | ahoj的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="平凡有理想，想让世界不一样。">
-<meta property="og:type" content="website">
-<meta property="og:title" content="ahoj的博客">
-<meta property="og:url" content="http://ahoj.cc/page/2/index.html">
+  <meta name="description" content="前言数组名、数组和指针。">
+<meta name="keywords" content="C语言,学习总结,指针">
+<meta property="og:type" content="article">
+<meta property="og:title" content="8|C语言指针和数组名">
+<meta property="og:url" content="http://ahoj.cc/2018/10/cjoc8rk8k00116q6z4dl9xtor/index.html">
 <meta property="og:site_name" content="ahoj的博客">
-<meta property="og:description" content="平凡有理想，想让世界不一样。">
+<meta property="og:description" content="前言数组名、数组和指针。">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-11-11T02:07:54.787Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="ahoj的博客">
-<meta name="twitter:description" content="平凡有理想，想让世界不一样。">
+<meta name="twitter:title" content="8|C语言指针和数组名">
+<meta name="twitter:description" content="前言数组名、数组和指针。">
   
     <link rel="alternative" href="/atom.xml" title="ahoj的博客" type="application/atom+xml">
   
@@ -164,30 +166,42 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-    <article id="post-6|浅析最好、最坏、平均、均摊时间复杂度" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+            <article id="post-8|C语言指针和数组名" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/10/cjoc8rk8g000w6q6z5p7hn219/">6|浅析最好、最坏、平均、均摊时间复杂度</a>
+    <h1 class="article-title" itemprop="name">
+      8|C语言指针和数组名
     </h1>
   
 
         
-        <a href="/2018/10/cjoc8rk8g000w6q6z5p7hn219/" class="archive-article-date">
-  	<time datetime="2018-10-04T12:48:44.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-10-04</time>
+        <a href="/2018/10/cjoc8rk8k00116q6z4dl9xtor/" class="archive-article-date">
+  	<time datetime="2018-10-20T12:03:49.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-10-20</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h2><h3 id="1-最好、最坏情况时间复杂度"><a href="#1-最好、最坏情况时间复杂度" class="headerlink" title="1 最好、最坏情况时间复杂度"></a>1 最好、最坏情况时间复杂度</h3><h3 id="2-平均时间复杂度"><a href="#2-平均时间复杂度" class="headerlink" title="2 平均时间复杂度"></a>2 平均时间复杂度</h3><h3 id="3-均摊时间复杂度"><a href="#3-均摊时间复杂度" class="headerlink" title="3 均摊时间复杂度"></a>3 均摊时间复杂度</h3>
-        
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>数组名、数组和指针。</p>
+<hr>
+<a id="more"></a>
+<hr>
+<h2 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h2><p>在学习C语言指针时候，老师告诉我们，数组名就是指针，指向数组首元素的地址。</p>
+<p>有如下代码：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">const</span> <span class="keyword">char</span> * argv[])</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> arr[<span class="number">10</span>] = &#123;<span class="number">0</span>&#125;;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"arr : %p\n"</span>, arr);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"arr+1 : %p\n"</span>, arr+<span class="number">1</span>);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%lu\n"</span>, <span class="keyword">sizeof</span>(*arr));</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"--------------------------\n"</span>);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"&amp;arr[0] : %p\n"</span>, &amp;arr[<span class="number">0</span>]);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"&amp;arr[0]+1 : %p\n"</span>, &amp;arr[<span class="number">0</span>]+<span class="number">1</span>);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%lu\n"</span>, <span class="keyword">sizeof</span>(*&amp;arr[<span class="number">0</span>]));</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"--------------------------\n"</span>);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"&amp;arr : %p\n"</span>, &amp;arr);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"&amp;arr+1 : %p\n"</span>, &amp;arr+<span class="number">1</span>);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%lu\n"</span>, <span class="keyword">sizeof</span>(*&amp;arr));</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>运行结果为：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">arr : <span class="number">0x7ffeefbff5c0</span></span><br><span class="line">arr+<span class="number">1</span> : <span class="number">0x7ffeefbff5c4</span></span><br><span class="line"><span class="number">4</span></span><br><span class="line">--------------------------</span><br><span class="line">&amp;arr[<span class="number">0</span>] : <span class="number">0x7ffeefbff5c0</span></span><br><span class="line">&amp;arr[<span class="number">0</span>]+<span class="number">1</span> : <span class="number">0x7ffeefbff5c4</span></span><br><span class="line"><span class="number">4</span></span><br><span class="line">--------------------------</span><br><span class="line">&amp;arr : <span class="number">0x7ffeefbff5c0</span></span><br><span class="line">&amp;arr+<span class="number">1</span> : <span class="number">0x7ffeefbff5e8</span></span><br><span class="line"><span class="number">40</span></span><br></pre></td></tr></table></figure>
+<p>可以看到：</p>
+<p><code>arr</code>和<code>&amp;arr[0]</code>还有<code>&amp;arr</code>是相同的地址。</p>
+<p>但是：</p>
+<p>只有<code>arr+1</code>和<code>&amp;arr[0]+1</code>后的操作结果是相同的并且<code>arr</code>和<code>&amp;arr[0]</code>的大小均为4.</p>
+<p>对于<code>&amp;arr+1</code>一步走了40个字节，并且<code>&amp;arr</code>的大小为40个字节，所以可以得知<code>&amp;arr</code>代表的是这个数组（整个数组）。</p>
+<hr>
+<h2 id="完"><a href="#完" class="headerlink" title="完"></a>完</h2>
       
 
       
@@ -199,242 +213,6 @@
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">数据结构</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="//categories/学习总结//" class="article-tag-list-link color5">学习总结</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/10/cjoc8rk8g000w6q6z5p7hn219/">more >></a>
-        </p>
-      
-
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-<!---让百度主动推送代码，让搜索引擎最快发现文章--->
-
-
-<!--gitalk留言功能-->
-
-  <div id="gitalk-container" style="padding: 0px 30px 0px 30px;"></div>
-
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
-<script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
-<script type="text/javascript">
-
-if(true){
-	var gitalk = new Gitalk({
-  	clientID: '069eca25fe0437ca85c8',
-  	clientSecret: 'f338a82d38ecf5e848e1459591defca47e74ff5e',
-  	repo: 'ahojcn.github.io',
-  	owner: 'ahojcn',
-  	admin: ['ahojcn'],
-  	id: '',
-  	distractionFreeMode: 'false'
-})
-gitalk.render('gitalk-container')
-}
-</script>
-
-  
-
-  
-    <article id="post-5|复杂度分析" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/10/cjoc8rk8e000t6q6zc1pddp7k/">5|复杂度分析</a>
-    </h1>
-  
-
-        
-        <a href="/2018/10/cjoc8rk8e000t6q6zc1pddp7k/" class="archive-article-date">
-  	<time datetime="2018-10-04T05:39:44.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-10-04</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h2><h3 id="1-为什么要分析复杂度"><a href="#1-为什么要分析复杂度" class="headerlink" title="1 为什么要分析复杂度"></a>1 为什么要分析复杂度</h3><h3 id="2-大O表示法"><a href="#2-大O表示法" class="headerlink" title="2 大O表示法"></a>2 大O表示法</h3><h3 id="3-时间复杂度分析原则"><a href="#3-时间复杂度分析原则" class="headerlink" title="3 时间复杂度分析原则"></a>3 时间复杂度分析原则</h3><h3 id="4-常见的几种时间复杂度"><a href="#4-常见的几种时间复杂度" class="headerlink" title="4 常见的几种时间复杂度"></a>4 常见的几种时间复杂度</h3>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">数据结构</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">学习总结</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="//categories/学习总结//" class="article-tag-list-link color5">学习总结</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/10/cjoc8rk8e000t6q6zc1pddp7k/">more >></a>
-        </p>
-      
-
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-<!---让百度主动推送代码，让搜索引擎最快发现文章--->
-
-
-<!--gitalk留言功能-->
-
-  <div id="gitalk-container" style="padding: 0px 30px 0px 30px;"></div>
-
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
-<script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
-<script type="text/javascript">
-
-if(true){
-	var gitalk = new Gitalk({
-  	clientID: '069eca25fe0437ca85c8',
-  	clientSecret: 'f338a82d38ecf5e848e1459591defca47e74ff5e',
-  	repo: 'ahojcn.github.io',
-  	owner: 'ahojcn',
-  	admin: ['ahojcn'],
-  	id: '',
-  	distractionFreeMode: 'false'
-})
-gitalk.render('gitalk-container')
-}
-</script>
-
-  
-
-  
-    <article id="post-4|深入理解数组" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/10/cjoc8rk8d000q6q6zq5hah1y5/">4|深入理解数组</a>
-    </h1>
-  
-
-        
-        <a href="/2018/10/cjoc8rk8d000q6q6zq5hah1y5/" class="archive-article-date">
-  	<time datetime="2018-10-03T04:11:26.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-10-03</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h2><h3 id="1-为什么很多编程语言中数组都是从-0-开始编号"><a href="#1-为什么很多编程语言中数组都是从-0-开始编号" class="headerlink" title="1 为什么很多编程语言中数组都是从 0 开始编号"></a>1 为什么很多编程语言中数组都是从 0 开始编号</h3><h3 id="2-数组的特点"><a href="#2-数组的特点" class="headerlink" title="2 数组的特点"></a>2 数组的特点</h3><h3 id="3-数组越界问题"><a href="#3-数组越界问题" class="headerlink" title="3 数组越界问题"></a>3 数组越界问题</h3><h3 id="4-容器和数组用哪个更好"><a href="#4-容器和数组用哪个更好" class="headerlink" title="4 容器和数组用哪个更好"></a>4 容器和数组用哪个更好</h3>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">数据结构</a>
-        		</li>
-      		 
         		<li class="article-tag-list-item">
         			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">C语言</a>
         		</li>
@@ -442,6 +220,10 @@ gitalk.render('gitalk-container')
         		<li class="article-tag-list-item">
         			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">学习总结</a>
         		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">指针</a>
+        		</li>
       		
 		</ul>
 	</div>
@@ -460,18 +242,89 @@ gitalk.render('gitalk-container')
 
 
       
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/10/cjoc8rk8d000q6q6zq5hah1y5/">more >></a>
-        </p>
+
       
+        
 
       
 
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
+        </div>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://ahoj.cc/2018/10/cjoc8rk8k00116q6z4dl9xtor/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
       
       <div class="clearfix"></div>
     </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
+  
+    <a href="/2018/10/cjoc8rk8l00146q6zy8lne7k4/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          9|C语言操作符
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2018/10/cjoc8rk8h000y6q6za4se5zjh/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">7|C语言指针类型</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
 
 <aside class="wrap-side-operation">
     <div class="mod-side-operation">
@@ -486,13 +339,45 @@ gitalk.render('gitalk-container')
         </div>
         
         
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#前言"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#正文"><span class="toc-number">2.</span> <span class="toc-text">正文</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#完"><span class="toc-number">3.</span> <span class="toc-text">完</span></a></li></ol>
+                    </div>
+                </span>
+            </div>
+        </div>
+        
     </div>
 </aside>
 
 
 
+  
+
+  
+
+  
+
+  
+
+  
+
 
 <!---让百度主动推送代码，让搜索引擎最快发现文章--->
+
+<script>
+(function(){
+    var bp = document.createElement('script');
+    bp.src = '//push.zhanzhang.baidu.com/push.js';
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
 
 
 <!--gitalk留言功能-->
@@ -510,7 +395,7 @@ if(true){
   	repo: 'ahojcn.github.io',
   	owner: 'ahojcn',
   	admin: ['ahojcn'],
-  	id: '',
+  	id: 'Sat Oct 20 2018 20:03:49 GMT+0800',
   	distractionFreeMode: 'false'
 })
 gitalk.render('gitalk-container')
@@ -518,334 +403,6 @@ gitalk.render('gitalk-container')
 </script>
 
   
-
-  
-    <article id="post-3|老韩语录和我们的故事" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/10/cjoc8rk8b000n6q6zcam7zdr9/">3|老韩语录和我们的故事</a>
-    </h1>
-  
-
-        
-        <a href="/2018/10/cjoc8rk8b000n6q6zcam7zdr9/" class="archive-article-date">
-  	<time datetime="2018-10-02T06:57:24.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-10-02</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>神中，这9班，我们的故事。</p>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/10/cjoc8rk8b000n6q6zcam7zdr9/">more >></a>
-        </p>
-      
-
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-<!---让百度主动推送代码，让搜索引擎最快发现文章--->
-
-
-<!--gitalk留言功能-->
-
-  <div id="gitalk-container" style="padding: 0px 30px 0px 30px;"></div>
-
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
-<script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
-<script type="text/javascript">
-
-if(true){
-	var gitalk = new Gitalk({
-  	clientID: '069eca25fe0437ca85c8',
-  	clientSecret: 'f338a82d38ecf5e848e1459591defca47e74ff5e',
-  	repo: 'ahojcn.github.io',
-  	owner: 'ahojcn',
-  	admin: ['ahojcn'],
-  	id: '',
-  	distractionFreeMode: 'false'
-})
-gitalk.render('gitalk-container')
-}
-</script>
-
-  
-
-  
-    <article id="post-2|不要在二三十岁就开始老去" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/09/cjoc8rk89000k6q6zm5p1tx1x/">2|不要在二三十岁就开始老去</a>
-    </h1>
-  
-
-        
-        <a href="/2018/09/cjoc8rk89000k6q6zm5p1tx1x/" class="archive-article-date">
-  	<time datetime="2018-09-30T12:37:03.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-09-30</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>特别喜欢的一篇文章，分享出来。</p>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">反思</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="//categories/反思//" class="article-tag-list-link color3">反思</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/09/cjoc8rk89000k6q6zm5p1tx1x/">more >></a>
-        </p>
-      
-
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-<!---让百度主动推送代码，让搜索引擎最快发现文章--->
-
-
-<!--gitalk留言功能-->
-
-  <div id="gitalk-container" style="padding: 0px 30px 0px 30px;"></div>
-
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
-<script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
-<script type="text/javascript">
-
-if(true){
-	var gitalk = new Gitalk({
-  	clientID: '069eca25fe0437ca85c8',
-  	clientSecret: 'f338a82d38ecf5e848e1459591defca47e74ff5e',
-  	repo: 'ahojcn.github.io',
-  	owner: 'ahojcn',
-  	admin: ['ahojcn'],
-  	id: '',
-  	distractionFreeMode: 'false'
-})
-gitalk.render('gitalk-container')
-}
-</script>
-
-  
-
-  
-    <article id="post-1|人之患在好为人师" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/09/cjoc8rk87000h6q6zmigfxe8u/">1|人之患在好为人师</a>
-    </h1>
-  
-
-        
-        <a href="/2018/09/cjoc8rk87000h6q6zmigfxe8u/" class="archive-article-date">
-  	<time datetime="2018-09-21T06:35:30.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-09-21</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="反思杂记"><a href="#反思杂记" class="headerlink" title="反思杂记"></a>反思杂记</h2><p>“人之患在好为人师。”  “学问有余，人资于己，以不得已而应之可也。若好为人师，则自足而不复有进矣，此人之大患也。”</p>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">反思</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="//categories/反思//" class="article-tag-list-link color3">反思</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/09/cjoc8rk87000h6q6zmigfxe8u/">more >></a>
-        </p>
-      
-
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-<!---让百度主动推送代码，让搜索引擎最快发现文章--->
-
-
-<!--gitalk留言功能-->
-
-  <div id="gitalk-container" style="padding: 0px 30px 0px 30px;"></div>
-
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
-<script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
-<script type="text/javascript">
-
-if(true){
-	var gitalk = new Gitalk({
-  	clientID: '069eca25fe0437ca85c8',
-  	clientSecret: 'f338a82d38ecf5e848e1459591defca47e74ff5e',
-  	repo: 'ahojcn.github.io',
-  	owner: 'ahojcn',
-  	admin: ['ahojcn'],
-  	id: '',
-  	distractionFreeMode: 'false'
-})
-gitalk.render('gitalk-container')
-}
-</script>
-
-  
-
-  
-  
-    <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span>
-    </nav>
-  
-
 
           </div>
         </div>
@@ -873,8 +430,8 @@ gitalk.render('gitalk-container')
     <script>
 	var yiliaConfig = {
 		mathjax: true,
-		isHome: true,
-		isPost: false,
+		isHome: false,
+		isPost: true,
 		isArchive: false,
 		isTag: false,
 		isCategory: false,

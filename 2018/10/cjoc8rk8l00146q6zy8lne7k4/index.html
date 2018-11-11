@@ -6,18 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://ahoj.cc">
-  <title>ahoj的博客</title>
+  <title>9|C语言操作符 | ahoj的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="平凡有理想，想让世界不一样。">
-<meta property="og:type" content="website">
-<meta property="og:title" content="ahoj的博客">
-<meta property="og:url" content="http://ahoj.cc/page/2/index.html">
+  <meta name="description" content="目录操作符 C语言操作符的一些需要注意的坑。">
+<meta name="keywords" content="C语言,学习总结">
+<meta property="og:type" content="article">
+<meta property="og:title" content="9|C语言操作符">
+<meta property="og:url" content="http://ahoj.cc/2018/10/cjoc8rk8l00146q6zy8lne7k4/index.html">
 <meta property="og:site_name" content="ahoj的博客">
-<meta property="og:description" content="平凡有理想，想让世界不一样。">
+<meta property="og:description" content="目录操作符 C语言操作符的一些需要注意的坑。">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-11-11T02:08:05.850Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="ahoj的博客">
-<meta name="twitter:description" content="平凡有理想，想让世界不一样。">
+<meta name="twitter:title" content="9|C语言操作符">
+<meta name="twitter:description" content="目录操作符 C语言操作符的一些需要注意的坑。">
   
     <link rel="alternative" href="/atom.xml" title="ahoj的博客" type="application/atom+xml">
   
@@ -164,30 +166,161 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-    <article id="post-6|浅析最好、最坏、平均、均摊时间复杂度" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+            <article id="post-9|C语言操作符" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/10/cjoc8rk8g000w6q6z5p7hn219/">6|浅析最好、最坏、平均、均摊时间复杂度</a>
+    <h1 class="article-title" itemprop="name">
+      9|C语言操作符
     </h1>
   
 
         
-        <a href="/2018/10/cjoc8rk8g000w6q6z5p7hn219/" class="archive-article-date">
-  	<time datetime="2018-10-04T12:48:44.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-10-04</time>
+        <a href="/2018/10/cjoc8rk8l00146q6zy8lne7k4/" class="archive-article-date">
+  	<time datetime="2018-10-22T09:40:51.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-10-22</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h2><h3 id="1-最好、最坏情况时间复杂度"><a href="#1-最好、最坏情况时间复杂度" class="headerlink" title="1 最好、最坏情况时间复杂度"></a>1 最好、最坏情况时间复杂度</h3><h3 id="2-平均时间复杂度"><a href="#2-平均时间复杂度" class="headerlink" title="2 平均时间复杂度"></a>2 平均时间复杂度</h3><h3 id="3-均摊时间复杂度"><a href="#3-均摊时间复杂度" class="headerlink" title="3 均摊时间复杂度"></a>3 均摊时间复杂度</h3>
-        
+        <h2 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h2><h3 id="操作符"><a href="#操作符" class="headerlink" title="操作符"></a>操作符</h3><blockquote>
+<p>C语言操作符的一些需要注意的坑。</p>
+</blockquote>
+<a id="more"></a>
+<hr>
+<h2 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h2><h3 id="操作符-1"><a href="#操作符-1" class="headerlink" title="操作符"></a>操作符</h3><ol>
+<li><p>算数操作符</p>
+<blockquote>
+<p><code>+  -  *  /  %</code></p>
+</blockquote>
+<p>注意点</p>
+<ul>
+<li><p>除了<code>%</code>操作符外，其他的几个算数操作符可以用于整数和浮点数，<code>%</code>的操作数只能是整数。</p>
+</li>
+<li><p>对于<code>/</code>操作符如果两个操作数都是整数，执行整数除法。只要有一个是浮点数则执行浮点数除法。</p>
+</li>
+</ul>
+</li>
+<li><p>移位操作符</p>
+<blockquote>
+<p>左移&lt;&lt;    右移&gt;&gt;</p>
+</blockquote>
+<ul>
+<li><p>左移规则：左边抛弃，右边补零。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> num = <span class="number">10</span>;</span><br><span class="line">num&lt;&lt;<span class="number">1</span>;	<span class="comment">//num本身并不发生改变</span></span><br><span class="line">num = num&lt;&lt;<span class="number">1</span>;	<span class="comment">//num发生改变</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>右移规则有两种：</p>
+<ul>
+<li>逻辑移位：左边用0填充，右边丢弃。</li>
+<li>算数移位：左边用原该值的符号位填充，右边丢弃。</li>
+</ul>
+<p>取决于编译器，常用编译器如VS等用算数右移，算数右移也是比较和逻辑的，如果一个负数按逻辑移位右移，左边用0填充，就会变为正数。</p>
+<p><strong>对于移位运算，不要移动负数位，这个标准是未定义的，如：</strong></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> num = <span class="number">10</span>;</span><br><span class="line">num &gt;&gt; <span class="number">1</span>;	<span class="comment">// error!</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>位操作符</p>
+<blockquote>
+<p>&amp;：有0为0，全1为1    </p>
+<p>|：有1为1，全0为0</p>
+<p>^：相同为0，相异为1</p>
+<p><strong>他们仨的操作数必须是整数！</strong></p>
+</blockquote>
+<p>一些题目：</p>
+<p>1）不创建临时变量(第三个变量)，实现两个数的交换。</p>
+<p>2）求一个整数存储在内存中的二进制序列（或求二进制中1的个数）。</p>
+</li>
+<li><p>赋值操作符</p>
+<blockquote>
+<p><strong>😂不要在if中用<code>=</code>，不要连续赋值，如：<code>a=x=y+1</code>，可读性下降。</strong></p>
+<p>复合赋值符号会让代码简洁一点。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&gt; <span class="keyword">int</span> a = <span class="number">10</span>;</span><br><span class="line">&gt; x = x+<span class="number">10</span>;</span><br><span class="line">&gt; x += <span class="number">10</span>;</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
+</blockquote>
+</li>
+<li><p>单目操作符</p>
+<blockquote>
+<p>！ +  -   </p>
+<p>&amp;(取地址)  </p>
+<p>sizeof(以字节为单位)   </p>
+<p>~(对于一个数的二进制按位取反)  </p>
+<p>前置和后置– ++   </p>
+<p>*(解引用)</p>
+<p>(类型)  强制类型转换</p>
+</blockquote>
+<ul>
+<li><p>sizeof()</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> a = <span class="number">10</span>;</span><br><span class="line"><span class="keyword">short</span> s = <span class="number">1</span>;</span><br><span class="line"><span class="built_in">printf</span>(<span class="string">"%d\n"</span>, <span class="keyword">sizeof</span>(a));	<span class="comment">//OK!</span></span><br><span class="line"><span class="built_in">printf</span>(<span class="string">"%d\n"</span>, <span class="keyword">sizeof</span> a);	<span class="comment">//OK!</span></span><br><span class="line"><span class="built_in">printf</span>(<span class="string">"%d\n"</span>, <span class="keyword">sizeof</span>(<span class="keyword">int</span>));	<span class="comment">//OK!</span></span><br><span class="line"><span class="built_in">printf</span>(<span class="string">"%d\n"</span>, <span class="keyword">sizeof</span> <span class="keyword">int</span>);	<span class="comment">//ERROR!</span></span><br><span class="line"><span class="built_in">printf</span>(<span class="string">"%d\n"</span>, <span class="keyword">sizeof</span>(s=a+<span class="number">10</span>));	<span class="comment">// 2</span></span><br><span class="line"><span class="built_in">printf</span>(<span class="string">"%d\n"</span>, <span class="keyword">sizeof</span>(s));		<span class="comment">// 2</span></span><br></pre></td></tr></table></figure>
+<p><strong>sizeof是运算符，结果在编译时得到而非运行中获得，sizeof参数可以是任何数据的类型或者数据。</strong></p>
+<p>sizeof和数组：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">test1</span><span class="params">(<span class="keyword">int</span> arr1[])</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"test1():sizeof(arr1):%d\n"</span>, <span class="keyword">sizeof</span>(arr1));</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">test2</span><span class="params">(<span class="keyword">char</span> arr2[])</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"test2():sizeof(arr2):%d\n"</span>, <span class="keyword">sizeof</span>(arr2));</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> arr1[<span class="number">10</span>] = &#123;<span class="number">0</span>&#125;;</span><br><span class="line">	<span class="keyword">char</span> arr2[<span class="number">10</span>] = &#123;<span class="number">0</span>&#125;;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"sizeof(arr1):%d\n"</span>, <span class="keyword">sizeof</span>(arr1));</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"sizeof(arr2):%d\n"</span>, <span class="keyword">sizeof</span>(arr2));</span><br><span class="line">	test1(arr1);</span><br><span class="line">	test2(arr2);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>输出为：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">sizeof</span>(arr1):<span class="number">40</span></span><br><span class="line"><span class="keyword">sizeof</span>(arr2):<span class="number">10</span></span><br><span class="line">test1():<span class="keyword">sizeof</span>(arr1):<span class="number">4</span></span><br><span class="line">test2():<span class="keyword">sizeof</span>(arr2):<span class="number">4</span></span><br></pre></td></tr></table></figure>
+<p>要注意！数组作为函数参数传进去的只是数组首元素的地址，所以sizeof求出来的是首元素的大小。</p>
+</li>
+<li><p>对于前置++ – 和 后置++ –</p>
+<blockquote>
+<p>一定要注意前置和后置的区别，我一次在递归求字符串长度时候，参数为后置++，所以传进去的参数没有变，递归没办法跳出，导致栈溢出，调了半天。😂</p>
+</blockquote>
+<p>还有一些怪诞的代码：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> i = <span class="number">2</span>;</span><br><span class="line"><span class="keyword">int</span> ret = (++i) + (++i) + (++i);</span><br><span class="line"><span class="built_in">printf</span>(<span class="string">"%d\n"</span>, ret);</span><br></pre></td></tr></table></figure>
+<p>对于以上代码在Linux环境gcc编译器和vs2013环境下的执行结果是不同的。</p>
+<p><strong>这段代码的第一个<code>+</code>在执行的时候，第三个<code>++</code>是否执行是不确定的，也就是执行的顺序不确定，因为依靠操作符的优先级和结合性是无法决定这个的。这段代码并不是一个好的代码，表达式的值依赖于运算符的优先级和结合性，但这两样并不能确定唯一的计算路径。</strong></p>
+</li>
+</ul>
+</li>
+<li><p>关系操作符</p>
+<blockquote>
+<p><code>&gt;  &gt;=  &lt;  &lt;=  !=  ==</code></p>
+</blockquote>
+<p>注意：不要把<code>==</code>写成<code>=</code>。</p>
+<p>避免这种错误，可以写成如下：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(a == <span class="number">1</span>)</span><br><span class="line">    something();	<span class="comment">// 把 == 写成 = 后不容易排查错误</span></span><br><span class="line"><span class="keyword">if</span>(<span class="number">1</span> == a)		<span class="comment">// 写成这样，如果写错了编译器会帮我们找出来～</span></span><br><span class="line">    something();</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>逻辑操作符</p>
+<blockquote>
+<p><code>&amp;&amp;    ||</code></p>
+</blockquote>
+<p>区分逻辑与、按位与、逻辑或、按位或：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span>&amp;<span class="number">2</span> -&gt; <span class="number">0</span></span><br><span class="line"><span class="number">1</span>&amp;&amp;<span class="number">2</span> -&gt; <span class="number">1</span></span><br><span class="line"></span><br><span class="line"><span class="number">1</span>|<span class="number">2</span> -&gt; <span class="number">3</span></span><br><span class="line"><span class="number">1</span>||<span class="number">2</span> -&gt; <span class="number">1</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>逻辑与、逻辑或的特点：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*360笔试题*/</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> i=<span class="number">0</span>,a=<span class="number">0</span>,b=<span class="number">2</span>,c=<span class="number">3</span>,d=<span class="number">4</span>;</span><br><span class="line">    i = a++ &amp;&amp; ++b &amp;&amp; d++;</span><br><span class="line">    <span class="comment">// i = a++ || ++b || d++;</span></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"a=%d\n b=%d\n c=%d\n d=%d\n"</span>, a,b,c,d);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这段程序正确输出为：<code>1 2 3 4</code></p>
+<p>如果&amp;&amp;的左边表达式值为假(0)，就不继续算后面的了，后面的都不执行，所以这个题中只有a++了，其他的变量没有改变。</p>
+<p>如果||左边的表达式为真(1)，就不继续算后面的了。</p>
+</li>
+</ul>
+</li>
+<li><p>逗号表达式</p>
+<blockquote>
+<p>逗号表达式从左向右依次执行，整个表达式的结果是最后一个表达式的结果。</p>
+</blockquote>
+<p>如下代码：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* 1 */</span></span><br><span class="line"><span class="keyword">int</span> a = <span class="number">1</span>;</span><br><span class="line"><span class="keyword">int</span> b = <span class="number">2</span>;</span><br><span class="line"><span class="keyword">int</span> c = (a&gt;b, a=b+<span class="number">10</span>, a, b=a+<span class="number">1</span>);</span><br><span class="line"><span class="comment">// c = 13</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/* 2 */</span></span><br><span class="line"><span class="keyword">if</span>(a=b+<span class="number">1</span>, c=a/<span class="number">2</span>, d&gt;<span class="number">0</span>)</span><br><span class="line">    something();</span><br><span class="line"></span><br><span class="line"><span class="comment">/* 3 */</span></span><br><span class="line">a = get_value();</span><br><span class="line">count_value(a);</span><br><span class="line"><span class="keyword">while</span>(a&gt;<span class="number">0</span>)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">//something();</span></span><br><span class="line">    a = get_value();</span><br><span class="line">    count_value(a);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 以上3的代码可改为</span></span><br><span class="line"><span class="keyword">while</span>(a=getvalue(), count_value(a), a&gt;<span class="number">0</span>)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">//something();</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>条件操作符</p>
+<blockquote>
+<p>exp1?exp2:exp3;</p>
+</blockquote>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(a&gt;<span class="number">5</span>)</span><br><span class="line">    b=<span class="number">3</span>;</span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">    b=<span class="number">-3</span>;</span><br><span class="line"></span><br><span class="line">a&gt;<span class="number">5</span>?b=<span class="number">3</span>:b=<span class="number">-3</span>;</span><br><span class="line">b=(a&gt;<span class="number">5</span>?<span class="number">3</span>:<span class="number">-3</span>);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>下标引用、函数调用、结构成员</p>
+<blockquote>
+<p>[]   ()   .  -&gt;</p>
+</blockquote>
+<p>[]：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> arr[<span class="number">10</span>] = &#123;<span class="number">0</span>&#125;;</span><br><span class="line">arr[<span class="number">1</span>];</span><br><span class="line"><span class="number">1</span>[arr];</span><br></pre></td></tr></table></figure>
+<p>()：</p>
+<p>函数调用操作符，接受一个或者多个操作数，第一个操作数是函数名，剩余的操作数就是传递给函数的参数。</p>
+<p>. -&gt;：这两个就不多说了。</p>
+</li>
+</ol>
+<hr>
+<h2 id="end"><a href="#end" class="headerlink" title="end"></a>end</h2>
       
 
       
@@ -199,242 +332,6 @@
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">数据结构</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="//categories/学习总结//" class="article-tag-list-link color5">学习总结</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/10/cjoc8rk8g000w6q6z5p7hn219/">more >></a>
-        </p>
-      
-
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-<!---让百度主动推送代码，让搜索引擎最快发现文章--->
-
-
-<!--gitalk留言功能-->
-
-  <div id="gitalk-container" style="padding: 0px 30px 0px 30px;"></div>
-
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
-<script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
-<script type="text/javascript">
-
-if(true){
-	var gitalk = new Gitalk({
-  	clientID: '069eca25fe0437ca85c8',
-  	clientSecret: 'f338a82d38ecf5e848e1459591defca47e74ff5e',
-  	repo: 'ahojcn.github.io',
-  	owner: 'ahojcn',
-  	admin: ['ahojcn'],
-  	id: '',
-  	distractionFreeMode: 'false'
-})
-gitalk.render('gitalk-container')
-}
-</script>
-
-  
-
-  
-    <article id="post-5|复杂度分析" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/10/cjoc8rk8e000t6q6zc1pddp7k/">5|复杂度分析</a>
-    </h1>
-  
-
-        
-        <a href="/2018/10/cjoc8rk8e000t6q6zc1pddp7k/" class="archive-article-date">
-  	<time datetime="2018-10-04T05:39:44.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-10-04</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h2><h3 id="1-为什么要分析复杂度"><a href="#1-为什么要分析复杂度" class="headerlink" title="1 为什么要分析复杂度"></a>1 为什么要分析复杂度</h3><h3 id="2-大O表示法"><a href="#2-大O表示法" class="headerlink" title="2 大O表示法"></a>2 大O表示法</h3><h3 id="3-时间复杂度分析原则"><a href="#3-时间复杂度分析原则" class="headerlink" title="3 时间复杂度分析原则"></a>3 时间复杂度分析原则</h3><h3 id="4-常见的几种时间复杂度"><a href="#4-常见的几种时间复杂度" class="headerlink" title="4 常见的几种时间复杂度"></a>4 常见的几种时间复杂度</h3>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">数据结构</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">学习总结</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="//categories/学习总结//" class="article-tag-list-link color5">学习总结</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/10/cjoc8rk8e000t6q6zc1pddp7k/">more >></a>
-        </p>
-      
-
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-<!---让百度主动推送代码，让搜索引擎最快发现文章--->
-
-
-<!--gitalk留言功能-->
-
-  <div id="gitalk-container" style="padding: 0px 30px 0px 30px;"></div>
-
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
-<script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
-<script type="text/javascript">
-
-if(true){
-	var gitalk = new Gitalk({
-  	clientID: '069eca25fe0437ca85c8',
-  	clientSecret: 'f338a82d38ecf5e848e1459591defca47e74ff5e',
-  	repo: 'ahojcn.github.io',
-  	owner: 'ahojcn',
-  	admin: ['ahojcn'],
-  	id: '',
-  	distractionFreeMode: 'false'
-})
-gitalk.render('gitalk-container')
-}
-</script>
-
-  
-
-  
-    <article id="post-4|深入理解数组" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/10/cjoc8rk8d000q6q6zq5hah1y5/">4|深入理解数组</a>
-    </h1>
-  
-
-        
-        <a href="/2018/10/cjoc8rk8d000q6q6zq5hah1y5/" class="archive-article-date">
-  	<time datetime="2018-10-03T04:11:26.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-10-03</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h2><h3 id="1-为什么很多编程语言中数组都是从-0-开始编号"><a href="#1-为什么很多编程语言中数组都是从-0-开始编号" class="headerlink" title="1 为什么很多编程语言中数组都是从 0 开始编号"></a>1 为什么很多编程语言中数组都是从 0 开始编号</h3><h3 id="2-数组的特点"><a href="#2-数组的特点" class="headerlink" title="2 数组的特点"></a>2 数组的特点</h3><h3 id="3-数组越界问题"><a href="#3-数组越界问题" class="headerlink" title="3 数组越界问题"></a>3 数组越界问题</h3><h3 id="4-容器和数组用哪个更好"><a href="#4-容器和数组用哪个更好" class="headerlink" title="4 容器和数组用哪个更好"></a>4 容器和数组用哪个更好</h3>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">数据结构</a>
-        		</li>
-      		 
         		<li class="article-tag-list-item">
         			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">C语言</a>
         		</li>
@@ -460,18 +357,89 @@ gitalk.render('gitalk-container')
 
 
       
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/10/cjoc8rk8d000q6q6zq5hah1y5/">more >></a>
-        </p>
+
       
+        
 
       
 
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
+        </div>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://ahoj.cc/2018/10/cjoc8rk8l00146q6zy8lne7k4/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
       
       <div class="clearfix"></div>
     </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
+  
+    <a href="/2018/10/cjoc8rk7j00006q6zkdr0nd54/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          10|二分查找
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2018/10/cjoc8rk8k00116q6z4dl9xtor/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">8|C语言指针和数组名</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
 
 <aside class="wrap-side-operation">
     <div class="mod-side-operation">
@@ -486,13 +454,45 @@ gitalk.render('gitalk-container')
         </div>
         
         
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#目录"><span class="toc-number">1.</span> <span class="toc-text">目录</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#操作符"><span class="toc-number">1.1.</span> <span class="toc-text">操作符</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#正文"><span class="toc-number">2.</span> <span class="toc-text">正文</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#操作符-1"><span class="toc-number">2.1.</span> <span class="toc-text">操作符</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#end"><span class="toc-number">3.</span> <span class="toc-text">end</span></a></li></ol>
+                    </div>
+                </span>
+            </div>
+        </div>
+        
     </div>
 </aside>
 
 
 
+  
+
+  
+
+  
+
+  
+
+  
+
 
 <!---让百度主动推送代码，让搜索引擎最快发现文章--->
+
+<script>
+(function(){
+    var bp = document.createElement('script');
+    bp.src = '//push.zhanzhang.baidu.com/push.js';
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
 
 
 <!--gitalk留言功能-->
@@ -510,7 +510,7 @@ if(true){
   	repo: 'ahojcn.github.io',
   	owner: 'ahojcn',
   	admin: ['ahojcn'],
-  	id: '',
+  	id: 'Mon Oct 22 2018 17:40:51 GMT+0800',
   	distractionFreeMode: 'false'
 })
 gitalk.render('gitalk-container')
@@ -518,334 +518,6 @@ gitalk.render('gitalk-container')
 </script>
 
   
-
-  
-    <article id="post-3|老韩语录和我们的故事" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/10/cjoc8rk8b000n6q6zcam7zdr9/">3|老韩语录和我们的故事</a>
-    </h1>
-  
-
-        
-        <a href="/2018/10/cjoc8rk8b000n6q6zcam7zdr9/" class="archive-article-date">
-  	<time datetime="2018-10-02T06:57:24.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-10-02</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>神中，这9班，我们的故事。</p>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/10/cjoc8rk8b000n6q6zcam7zdr9/">more >></a>
-        </p>
-      
-
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-<!---让百度主动推送代码，让搜索引擎最快发现文章--->
-
-
-<!--gitalk留言功能-->
-
-  <div id="gitalk-container" style="padding: 0px 30px 0px 30px;"></div>
-
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
-<script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
-<script type="text/javascript">
-
-if(true){
-	var gitalk = new Gitalk({
-  	clientID: '069eca25fe0437ca85c8',
-  	clientSecret: 'f338a82d38ecf5e848e1459591defca47e74ff5e',
-  	repo: 'ahojcn.github.io',
-  	owner: 'ahojcn',
-  	admin: ['ahojcn'],
-  	id: '',
-  	distractionFreeMode: 'false'
-})
-gitalk.render('gitalk-container')
-}
-</script>
-
-  
-
-  
-    <article id="post-2|不要在二三十岁就开始老去" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/09/cjoc8rk89000k6q6zm5p1tx1x/">2|不要在二三十岁就开始老去</a>
-    </h1>
-  
-
-        
-        <a href="/2018/09/cjoc8rk89000k6q6zm5p1tx1x/" class="archive-article-date">
-  	<time datetime="2018-09-30T12:37:03.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-09-30</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>特别喜欢的一篇文章，分享出来。</p>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">反思</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="//categories/反思//" class="article-tag-list-link color3">反思</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/09/cjoc8rk89000k6q6zm5p1tx1x/">more >></a>
-        </p>
-      
-
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-<!---让百度主动推送代码，让搜索引擎最快发现文章--->
-
-
-<!--gitalk留言功能-->
-
-  <div id="gitalk-container" style="padding: 0px 30px 0px 30px;"></div>
-
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
-<script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
-<script type="text/javascript">
-
-if(true){
-	var gitalk = new Gitalk({
-  	clientID: '069eca25fe0437ca85c8',
-  	clientSecret: 'f338a82d38ecf5e848e1459591defca47e74ff5e',
-  	repo: 'ahojcn.github.io',
-  	owner: 'ahojcn',
-  	admin: ['ahojcn'],
-  	id: '',
-  	distractionFreeMode: 'false'
-})
-gitalk.render('gitalk-container')
-}
-</script>
-
-  
-
-  
-    <article id="post-1|人之患在好为人师" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/09/cjoc8rk87000h6q6zmigfxe8u/">1|人之患在好为人师</a>
-    </h1>
-  
-
-        
-        <a href="/2018/09/cjoc8rk87000h6q6zmigfxe8u/" class="archive-article-date">
-  	<time datetime="2018-09-21T06:35:30.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-09-21</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="反思杂记"><a href="#反思杂记" class="headerlink" title="反思杂记"></a>反思杂记</h2><p>“人之患在好为人师。”  “学问有余，人资于己，以不得已而应之可也。若好为人师，则自足而不复有进矣，此人之大患也。”</p>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">反思</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="//categories/反思//" class="article-tag-list-link color3">反思</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/09/cjoc8rk87000h6q6zmigfxe8u/">more >></a>
-        </p>
-      
-
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-<!---让百度主动推送代码，让搜索引擎最快发现文章--->
-
-
-<!--gitalk留言功能-->
-
-  <div id="gitalk-container" style="padding: 0px 30px 0px 30px;"></div>
-
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
-<script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
-<script type="text/javascript">
-
-if(true){
-	var gitalk = new Gitalk({
-  	clientID: '069eca25fe0437ca85c8',
-  	clientSecret: 'f338a82d38ecf5e848e1459591defca47e74ff5e',
-  	repo: 'ahojcn.github.io',
-  	owner: 'ahojcn',
-  	admin: ['ahojcn'],
-  	id: '',
-  	distractionFreeMode: 'false'
-})
-gitalk.render('gitalk-container')
-}
-</script>
-
-  
-
-  
-  
-    <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span>
-    </nav>
-  
-
 
           </div>
         </div>
@@ -873,8 +545,8 @@ gitalk.render('gitalk-container')
     <script>
 	var yiliaConfig = {
 		mathjax: true,
-		isHome: true,
-		isPost: false,
+		isHome: false,
+		isPost: true,
 		isArchive: false,
 		isTag: false,
 		isCategory: false,

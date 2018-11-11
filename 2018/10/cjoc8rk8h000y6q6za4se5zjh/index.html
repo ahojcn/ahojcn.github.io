@@ -6,18 +6,26 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://ahoj.cc">
-  <title>ahoj的博客</title>
+  <title>7|C语言指针类型 | ahoj的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="平凡有理想，想让世界不一样。">
-<meta property="og:type" content="website">
-<meta property="og:title" content="ahoj的博客">
-<meta property="og:url" content="http://ahoj.cc/page/2/index.html">
+  <meta name="description" content="目录1 指针类型的大小2 指针类型的作用">
+<meta name="keywords" content="C语言,指针">
+<meta property="og:type" content="article">
+<meta property="og:title" content="7|C语言指针类型">
+<meta property="og:url" content="http://ahoj.cc/2018/10/cjoc8rk8h000y6q6za4se5zjh/index.html">
 <meta property="og:site_name" content="ahoj的博客">
-<meta property="og:description" content="平凡有理想，想让世界不一样。">
+<meta property="og:description" content="目录1 指针类型的大小2 指针类型的作用">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://wx1.sinaimg.cn/mw690/006wR0dcly1fwevv86xjfj30iu09074y.jpg">
+<meta property="og:image" content="https://wx3.sinaimg.cn/mw690/006wR0dcly1fwevv12pxtj31kw0jqdoo.jpg">
+<meta property="og:image" content="https://wx3.sinaimg.cn/mw690/006wR0dcly1fwewl2plwrj30l007474r.jpg">
+<meta property="og:image" content="https://wx2.sinaimg.cn/mw690/006wR0dcly1fwewllmfn3j30bo06m3yv.jpg">
+<meta property="og:image" content="https://wx4.sinaimg.cn/mw690/006wR0dcly1fwex4o70t5j30im08swfd.jpg">
+<meta property="og:updated_time" content="2018-11-11T02:07:30.067Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="ahoj的博客">
-<meta name="twitter:description" content="平凡有理想，想让世界不一样。">
+<meta name="twitter:title" content="7|C语言指针类型">
+<meta name="twitter:description" content="目录1 指针类型的大小2 指针类型的作用">
+<meta name="twitter:image" content="https://wx1.sinaimg.cn/mw690/006wR0dcly1fwevv86xjfj30iu09074y.jpg">
   
     <link rel="alternative" href="/atom.xml" title="ahoj的博客" type="application/atom+xml">
   
@@ -164,30 +172,84 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-    <article id="post-6|浅析最好、最坏、平均、均摊时间复杂度" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+            <article id="post-7|C语言指针类型" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/10/cjoc8rk8g000w6q6z5p7hn219/">6|浅析最好、最坏、平均、均摊时间复杂度</a>
+    <h1 class="article-title" itemprop="name">
+      7|C语言指针类型
     </h1>
   
 
         
-        <a href="/2018/10/cjoc8rk8g000w6q6z5p7hn219/" class="archive-article-date">
-  	<time datetime="2018-10-04T12:48:44.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-10-04</time>
+        <a href="/2018/10/cjoc8rk8h000y6q6za4se5zjh/" class="archive-article-date">
+  	<time datetime="2018-10-20T10:40:11.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-10-20</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h2><h3 id="1-最好、最坏情况时间复杂度"><a href="#1-最好、最坏情况时间复杂度" class="headerlink" title="1 最好、最坏情况时间复杂度"></a>1 最好、最坏情况时间复杂度</h3><h3 id="2-平均时间复杂度"><a href="#2-平均时间复杂度" class="headerlink" title="2 平均时间复杂度"></a>2 平均时间复杂度</h3><h3 id="3-均摊时间复杂度"><a href="#3-均摊时间复杂度" class="headerlink" title="3 均摊时间复杂度"></a>3 均摊时间复杂度</h3>
-        
+        <h2 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h2><h3 id="1-指针类型的大小"><a href="#1-指针类型的大小" class="headerlink" title="1 指针类型的大小"></a>1 指针类型的大小</h3><h3 id="2-指针类型的作用"><a href="#2-指针类型的作用" class="headerlink" title="2 指针类型的作用"></a>2 指针类型的作用</h3><hr>
+<a id="more"></a>
+<hr>
+<h2 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h2><h3 id="指针类型"><a href="#指针类型" class="headerlink" title="指针类型"></a>指针类型</h3><h3 id="1-指针类型的大小-1"><a href="#1-指针类型的大小-1" class="headerlink" title="1. 指针类型的大小"></a>1. 指针类型的大小</h3><blockquote>
+<p>在32位机器上，地址是32个0或1组成的二进制序列，如果每个比特位都给一个地址位，则32为机能编址的范围只为512MB，若以4字节编址，32位机则可以编址4GB。</p>
+<p>在64位机器上，有64根地址线，则一个指针变量的大小是8字节。</p>
+</blockquote>
+<p>对于以下代码：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">const</span> <span class="keyword">char</span> * argv[])</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"char* : %lu\n"</span>,<span class="keyword">sizeof</span>(<span class="keyword">char</span>*));</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"short* : %lu\n"</span>,<span class="keyword">sizeof</span>(<span class="keyword">short</span>*));</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"int* : %lu\n"</span>,<span class="keyword">sizeof</span>(<span class="keyword">int</span>*));</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"float* : %lu\n"</span>,<span class="keyword">sizeof</span>(<span class="keyword">float</span>*));</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"double* : %lu\n"</span>,<span class="keyword">sizeof</span>(<span class="keyword">double</span>*));</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"long double* : %lu\n"</span>,<span class="keyword">sizeof</span>(<span class="keyword">long</span> <span class="keyword">double</span>*));</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>在<strong>64位</strong>机下的输出为：</li>
+</ul>
+<p><img src="https://wx1.sinaimg.cn/mw690/006wR0dcly1fwevv86xjfj30iu09074y.jpg" alt="-64"></p>
+<ul>
+<li>在<strong>32位</strong>机下的输出为：</li>
+</ul>
+<p><img src="https://wx3.sinaimg.cn/mw690/006wR0dcly1fwevv12pxtj31kw0jqdoo.jpg" alt="gcc main.c -m32"></p>
+<p><strong>问题来了：</strong></p>
+<blockquote>
+<p>为什么不同类型的指针大小都是一样的呢？为什么要这么设计？</p>
+</blockquote>
+<h3 id="2-指针类型的作用-1"><a href="#2-指针类型的作用-1" class="headerlink" title="2. 指针类型的作用"></a>2. 指针类型的作用</h3><ul>
+<li>指针类型决定了对指针解引用的时候有多大的权限（能操作几个字节）。比如：<code>char*</code>的指针解引用只能访问一个字节，而<code>int*</code>的指针解引用就能访问四个字节。</li>
+</ul>
+<p>看下面的这段代码：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">const</span> <span class="keyword">char</span> * argv[])</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> i = <span class="number">0x11223344</span>;</span><br><span class="line">    <span class="keyword">int</span> *pi = &amp;i;</span><br><span class="line">    *pi = <span class="number">0</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">int</span> c = <span class="number">0x11223344</span>;</span><br><span class="line">    <span class="keyword">char</span> *pc = &amp;c;</span><br><span class="line">    *pc = <span class="number">0</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Debug看内存变化：</p>
+<p><img src="https://wx3.sinaimg.cn/mw690/006wR0dcly1fwewl2plwrj30l007474r.jpg" alt="p"></p>
+<p><img src="https://wx2.sinaimg.cn/mw690/006wR0dcly1fwewllmfn3j30bo06m3yv.jpg" alt=""></p>
+<p>发现：</p>
+<p><code>i=0x11223344</code>在执行<code>*pi=0;</code>后全部变为了0</p>
+<p><code>c=0x11223344</code>在执行<code>*pc=0;</code>后只有高位变成了0</p>
+<p>说明：int*类型的指针解引用后，操作权限是4个字节(int的大小)。</p>
+<p>char*解引用后，操作权限仅为一个字节。</p>
+<p>验证了：指针类型决定了对指针解引用的时候有多大的权限（能操作几个字节）。</p>
+<p><strong>问题又来了：</strong></p>
+<p>为什么高位的44变为0了呢？</p>
+<p>这和数据在内存中存储的模式有关。<a href="https://baike.baidu.com/item/%E5%A4%A7%E5%B0%8F%E7%AB%AF%E6%A8%A1%E5%BC%8F/6750542?fr=aladdin" target="_blank" rel="noopener">大小端模式</a></p>
+<blockquote>
+<p>大端模式，是指数据的高字节保存在内存的低地址中，而数据的低字节保存在内存的高地址中，这样的存储模式有点儿类似于把数据当作字符串顺序处理：地址由小向大增加，而数据从高位往低位放；这和我们的阅读习惯一致。</p>
+<p>小端模式，是指数据的高字节保存在内存的高地址中，而数据的低字节保存在内存的低地址中，这种存储模式将地址的高低和数据位权有效地结合起来，高地址部分权值高，低地址部分权值低。</p>
+</blockquote>
+<ul>
+<li>指针类型决定了指针指向前或者向后一步有多大距离。</li>
+</ul>
+<p>对于以下代码：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">const</span> <span class="keyword">char</span> * argv[])</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> n = <span class="number">10</span>;</span><br><span class="line">    <span class="keyword">int</span> *pi = &amp;n;</span><br><span class="line">    <span class="keyword">char</span> *pc = (<span class="keyword">char</span>*)&amp;n;</span><br><span class="line">    </span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"&amp;n : %p\n"</span>, &amp;n);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"pi : %p\n"</span>, pi);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"pi+1 : %p\n"</span>, pi+<span class="number">1</span>);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"-----------------------\n"</span>);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"pc : %p\n"</span>, pc);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"pc+1 : %p\n"</span>, pc+<span class="number">1</span>);</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>有在64位机下有如下输出：</p>
+<p><img src="https://wx4.sinaimg.cn/mw690/006wR0dcly1fwex4o70t5j30im08swfd.jpg" alt="pic"></p>
+<p>可以看到：</p>
+<p><code>pi=pc=&amp;n</code></p>
+<p>但是：</p>
+<p><code>pi+1</code> 和 <code>pc+1</code> 不同</p>
+<p><code>pi+1 - pi</code> = 8</p>
+<p><code>pc+1 - pc</code> = 1</p>
+<p>验证了：指针类型决定了指针指向前或者向后一步有多大距离。</p>
+<hr>
+<h2 id="完"><a href="#完" class="headerlink" title="完"></a>完</h2>
       
 
       
@@ -199,279 +261,103 @@
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">数据结构</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="//categories/学习总结//" class="article-tag-list-link color5">学习总结</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/10/cjoc8rk8g000w6q6z5p7hn219/">more >></a>
-        </p>
-      
-
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-<!---让百度主动推送代码，让搜索引擎最快发现文章--->
-
-
-<!--gitalk留言功能-->
-
-  <div id="gitalk-container" style="padding: 0px 30px 0px 30px;"></div>
-
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
-<script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
-<script type="text/javascript">
-
-if(true){
-	var gitalk = new Gitalk({
-  	clientID: '069eca25fe0437ca85c8',
-  	clientSecret: 'f338a82d38ecf5e848e1459591defca47e74ff5e',
-  	repo: 'ahojcn.github.io',
-  	owner: 'ahojcn',
-  	admin: ['ahojcn'],
-  	id: '',
-  	distractionFreeMode: 'false'
-})
-gitalk.render('gitalk-container')
-}
-</script>
-
-  
-
-  
-    <article id="post-5|复杂度分析" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/10/cjoc8rk8e000t6q6zc1pddp7k/">5|复杂度分析</a>
-    </h1>
-  
-
-        
-        <a href="/2018/10/cjoc8rk8e000t6q6zc1pddp7k/" class="archive-article-date">
-  	<time datetime="2018-10-04T05:39:44.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-10-04</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h2><h3 id="1-为什么要分析复杂度"><a href="#1-为什么要分析复杂度" class="headerlink" title="1 为什么要分析复杂度"></a>1 为什么要分析复杂度</h3><h3 id="2-大O表示法"><a href="#2-大O表示法" class="headerlink" title="2 大O表示法"></a>2 大O表示法</h3><h3 id="3-时间复杂度分析原则"><a href="#3-时间复杂度分析原则" class="headerlink" title="3 时间复杂度分析原则"></a>3 时间复杂度分析原则</h3><h3 id="4-常见的几种时间复杂度"><a href="#4-常见的几种时间复杂度" class="headerlink" title="4 常见的几种时间复杂度"></a>4 常见的几种时间复杂度</h3>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">数据结构</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">学习总结</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="//categories/学习总结//" class="article-tag-list-link color5">学习总结</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/10/cjoc8rk8e000t6q6zc1pddp7k/">more >></a>
-        </p>
-      
-
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-<!---让百度主动推送代码，让搜索引擎最快发现文章--->
-
-
-<!--gitalk留言功能-->
-
-  <div id="gitalk-container" style="padding: 0px 30px 0px 30px;"></div>
-
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
-<script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
-<script type="text/javascript">
-
-if(true){
-	var gitalk = new Gitalk({
-  	clientID: '069eca25fe0437ca85c8',
-  	clientSecret: 'f338a82d38ecf5e848e1459591defca47e74ff5e',
-  	repo: 'ahojcn.github.io',
-  	owner: 'ahojcn',
-  	admin: ['ahojcn'],
-  	id: '',
-  	distractionFreeMode: 'false'
-})
-gitalk.render('gitalk-container')
-}
-</script>
-
-  
-
-  
-    <article id="post-4|深入理解数组" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/10/cjoc8rk8d000q6q6zq5hah1y5/">4|深入理解数组</a>
-    </h1>
-  
-
-        
-        <a href="/2018/10/cjoc8rk8d000q6q6zq5hah1y5/" class="archive-article-date">
-  	<time datetime="2018-10-03T04:11:26.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-10-03</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h2><h3 id="1-为什么很多编程语言中数组都是从-0-开始编号"><a href="#1-为什么很多编程语言中数组都是从-0-开始编号" class="headerlink" title="1 为什么很多编程语言中数组都是从 0 开始编号"></a>1 为什么很多编程语言中数组都是从 0 开始编号</h3><h3 id="2-数组的特点"><a href="#2-数组的特点" class="headerlink" title="2 数组的特点"></a>2 数组的特点</h3><h3 id="3-数组越界问题"><a href="#3-数组越界问题" class="headerlink" title="3 数组越界问题"></a>3 数组越界问题</h3><h3 id="4-容器和数组用哪个更好"><a href="#4-容器和数组用哪个更好" class="headerlink" title="4 容器和数组用哪个更好"></a>4 容器和数组用哪个更好</h3>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">数据结构</a>
-        		</li>
-      		 
         		<li class="article-tag-list-item">
         			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">C语言</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">学习总结</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">指针</a>
         		</li>
       		
 		</ul>
 	</div>
 
       
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="//categories/学习总结//" class="article-tag-list-link color5">学习总结</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/10/cjoc8rk8d000q6q6zq5hah1y5/">more >></a>
-        </p>
-      
 
       
 
+      
+        
+
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
+        </div>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://ahoj.cc/2018/10/cjoc8rk8h000y6q6za4se5zjh/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
       
       <div class="clearfix"></div>
     </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
+  
+    <a href="/2018/10/cjoc8rk8k00116q6z4dl9xtor/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          8|C语言指针和数组名
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2018/10/cjoc8rk8g000w6q6z5p7hn219/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">6|浅析最好、最坏、平均、均摊时间复杂度</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
 
 <aside class="wrap-side-operation">
     <div class="mod-side-operation">
@@ -486,13 +372,45 @@ gitalk.render('gitalk-container')
         </div>
         
         
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#目录"><span class="toc-number">1.</span> <span class="toc-text">目录</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-指针类型的大小"><span class="toc-number">1.1.</span> <span class="toc-text">1 指针类型的大小</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-指针类型的作用"><span class="toc-number">1.2.</span> <span class="toc-text">2 指针类型的作用</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#正文"><span class="toc-number">2.</span> <span class="toc-text">正文</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#指针类型"><span class="toc-number">2.1.</span> <span class="toc-text">指针类型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-指针类型的大小-1"><span class="toc-number">2.2.</span> <span class="toc-text">1. 指针类型的大小</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-指针类型的作用-1"><span class="toc-number">2.3.</span> <span class="toc-text">2. 指针类型的作用</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#完"><span class="toc-number">3.</span> <span class="toc-text">完</span></a></li></ol>
+                    </div>
+                </span>
+            </div>
+        </div>
+        
     </div>
 </aside>
 
 
 
+  
+
+  
+
+  
+
+  
+
+  
+
 
 <!---让百度主动推送代码，让搜索引擎最快发现文章--->
+
+<script>
+(function(){
+    var bp = document.createElement('script');
+    bp.src = '//push.zhanzhang.baidu.com/push.js';
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
 
 
 <!--gitalk留言功能-->
@@ -510,7 +428,7 @@ if(true){
   	repo: 'ahojcn.github.io',
   	owner: 'ahojcn',
   	admin: ['ahojcn'],
-  	id: '',
+  	id: 'Sat Oct 20 2018 18:40:11 GMT+0800',
   	distractionFreeMode: 'false'
 })
 gitalk.render('gitalk-container')
@@ -518,334 +436,6 @@ gitalk.render('gitalk-container')
 </script>
 
   
-
-  
-    <article id="post-3|老韩语录和我们的故事" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/10/cjoc8rk8b000n6q6zcam7zdr9/">3|老韩语录和我们的故事</a>
-    </h1>
-  
-
-        
-        <a href="/2018/10/cjoc8rk8b000n6q6zcam7zdr9/" class="archive-article-date">
-  	<time datetime="2018-10-02T06:57:24.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-10-02</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>神中，这9班，我们的故事。</p>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/10/cjoc8rk8b000n6q6zcam7zdr9/">more >></a>
-        </p>
-      
-
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-<!---让百度主动推送代码，让搜索引擎最快发现文章--->
-
-
-<!--gitalk留言功能-->
-
-  <div id="gitalk-container" style="padding: 0px 30px 0px 30px;"></div>
-
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
-<script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
-<script type="text/javascript">
-
-if(true){
-	var gitalk = new Gitalk({
-  	clientID: '069eca25fe0437ca85c8',
-  	clientSecret: 'f338a82d38ecf5e848e1459591defca47e74ff5e',
-  	repo: 'ahojcn.github.io',
-  	owner: 'ahojcn',
-  	admin: ['ahojcn'],
-  	id: '',
-  	distractionFreeMode: 'false'
-})
-gitalk.render('gitalk-container')
-}
-</script>
-
-  
-
-  
-    <article id="post-2|不要在二三十岁就开始老去" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/09/cjoc8rk89000k6q6zm5p1tx1x/">2|不要在二三十岁就开始老去</a>
-    </h1>
-  
-
-        
-        <a href="/2018/09/cjoc8rk89000k6q6zm5p1tx1x/" class="archive-article-date">
-  	<time datetime="2018-09-30T12:37:03.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-09-30</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>特别喜欢的一篇文章，分享出来。</p>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">反思</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="//categories/反思//" class="article-tag-list-link color3">反思</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/09/cjoc8rk89000k6q6zm5p1tx1x/">more >></a>
-        </p>
-      
-
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-<!---让百度主动推送代码，让搜索引擎最快发现文章--->
-
-
-<!--gitalk留言功能-->
-
-  <div id="gitalk-container" style="padding: 0px 30px 0px 30px;"></div>
-
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
-<script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
-<script type="text/javascript">
-
-if(true){
-	var gitalk = new Gitalk({
-  	clientID: '069eca25fe0437ca85c8',
-  	clientSecret: 'f338a82d38ecf5e848e1459591defca47e74ff5e',
-  	repo: 'ahojcn.github.io',
-  	owner: 'ahojcn',
-  	admin: ['ahojcn'],
-  	id: '',
-  	distractionFreeMode: 'false'
-})
-gitalk.render('gitalk-container')
-}
-</script>
-
-  
-
-  
-    <article id="post-1|人之患在好为人师" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/09/cjoc8rk87000h6q6zmigfxe8u/">1|人之患在好为人师</a>
-    </h1>
-  
-
-        
-        <a href="/2018/09/cjoc8rk87000h6q6zmigfxe8u/" class="archive-article-date">
-  	<time datetime="2018-09-21T06:35:30.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-09-21</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="反思杂记"><a href="#反思杂记" class="headerlink" title="反思杂记"></a>反思杂记</h2><p>“人之患在好为人师。”  “学问有余，人资于己，以不得已而应之可也。若好为人师，则自足而不复有进矣，此人之大患也。”</p>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">反思</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="//categories/反思//" class="article-tag-list-link color3">反思</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/09/cjoc8rk87000h6q6zmigfxe8u/">more >></a>
-        </p>
-      
-
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-<!---让百度主动推送代码，让搜索引擎最快发现文章--->
-
-
-<!--gitalk留言功能-->
-
-  <div id="gitalk-container" style="padding: 0px 30px 0px 30px;"></div>
-
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
-<script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
-<script type="text/javascript">
-
-if(true){
-	var gitalk = new Gitalk({
-  	clientID: '069eca25fe0437ca85c8',
-  	clientSecret: 'f338a82d38ecf5e848e1459591defca47e74ff5e',
-  	repo: 'ahojcn.github.io',
-  	owner: 'ahojcn',
-  	admin: ['ahojcn'],
-  	id: '',
-  	distractionFreeMode: 'false'
-})
-gitalk.render('gitalk-container')
-}
-</script>
-
-  
-
-  
-  
-    <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span>
-    </nav>
-  
-
 
           </div>
         </div>
@@ -873,8 +463,8 @@ gitalk.render('gitalk-container')
     <script>
 	var yiliaConfig = {
 		mathjax: true,
-		isHome: true,
-		isPost: false,
+		isHome: false,
+		isPost: true,
 		isArchive: false,
 		isTag: false,
 		isCategory: false,

@@ -6,18 +6,24 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://ahoj.cc">
-  <title>ahoj的博客</title>
+  <title>12|从模拟strcpy和strlen函数中总结的要点 | ahoj的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="平凡有理想，想让世界不一样。">
-<meta property="og:type" content="website">
-<meta property="og:title" content="ahoj的博客">
-<meta property="og:url" content="http://ahoj.cc/page/2/index.html">
+  <meta name="description" content="前言不只能输出正确，还要通过一些细节让程序更加健壮！ 资料：《高质量C++/C编程》">
+<meta name="keywords" content="C语言,学习总结">
+<meta property="og:type" content="article">
+<meta property="og:title" content="12|从模拟strcpy和strlen函数中总结的要点">
+<meta property="og:url" content="http://ahoj.cc/2018/10/cjoc8rk7t00036q6z4ins4maf/index.html">
 <meta property="og:site_name" content="ahoj的博客">
-<meta property="og:description" content="平凡有理想，想让世界不一样。">
+<meta property="og:description" content="前言不只能输出正确，还要通过一些细节让程序更加健壮！ 资料：《高质量C++/C编程》">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://wx3.sinaimg.cn/mw690/006wR0dcly1fwo1u6tk8zj31by16yjyi.jpg">
+<meta property="og:image" content="https://wx1.sinaimg.cn/mw690/006wR0dcly1fwo1u6eqotj31f616ygto.jpg">
+<meta property="og:image" content="https://wx1.sinaimg.cn/mw690/006wR0dcly1fwo1u7fxktj31f616y15m.jpg">
+<meta property="og:updated_time" content="2018-11-11T02:08:38.506Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="ahoj的博客">
-<meta name="twitter:description" content="平凡有理想，想让世界不一样。">
+<meta name="twitter:title" content="12|从模拟strcpy和strlen函数中总结的要点">
+<meta name="twitter:description" content="前言不只能输出正确，还要通过一些细节让程序更加健壮！ 资料：《高质量C++/C编程》">
+<meta name="twitter:image" content="https://wx3.sinaimg.cn/mw690/006wR0dcly1fwo1u6tk8zj31by16yjyi.jpg">
   
     <link rel="alternative" href="/atom.xml" title="ahoj的博客" type="application/atom+xml">
   
@@ -164,30 +170,81 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-    <article id="post-6|浅析最好、最坏、平均、均摊时间复杂度" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+            <article id="post-12|从模拟strcpy和strlen函数中总结的要点" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/10/cjoc8rk8g000w6q6z5p7hn219/">6|浅析最好、最坏、平均、均摊时间复杂度</a>
+    <h1 class="article-title" itemprop="name">
+      12|从模拟strcpy和strlen函数中总结的要点
     </h1>
   
 
         
-        <a href="/2018/10/cjoc8rk8g000w6q6z5p7hn219/" class="archive-article-date">
-  	<time datetime="2018-10-04T12:48:44.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-10-04</time>
+        <a href="/2018/10/cjoc8rk7t00036q6z4ins4maf/" class="archive-article-date">
+  	<time datetime="2018-10-28T13:17:06.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-10-28</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h2><h3 id="1-最好、最坏情况时间复杂度"><a href="#1-最好、最坏情况时间复杂度" class="headerlink" title="1 最好、最坏情况时间复杂度"></a>1 最好、最坏情况时间复杂度</h3><h3 id="2-平均时间复杂度"><a href="#2-平均时间复杂度" class="headerlink" title="2 平均时间复杂度"></a>2 平均时间复杂度</h3><h3 id="3-均摊时间复杂度"><a href="#3-均摊时间复杂度" class="headerlink" title="3 均摊时间复杂度"></a>3 均摊时间复杂度</h3>
-        
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>不只能输出正确，还要通过一些细节让程序更加健壮！</p>
+<p>资料：《高质量C++/C编程》</p>
+<a id="more"></a>
+<hr>
+<h3 id="模拟实现strcpy和strlen函数的几个注意点"><a href="#模拟实现strcpy和strlen函数的几个注意点" class="headerlink" title="模拟实现strcpy和strlen函数的几个注意点"></a>模拟实现strcpy和strlen函数的几个注意点</h3><p>在模拟实现函数的过程中，不只要只实现个功能，还要注重如何让代码更加健壮！</p>
+<p>先来给出code，下面再详细解释：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;assert.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">char</span>* <span class="title">my_strcpy</span><span class="params">(<span class="keyword">char</span> *str_dest, <span class="keyword">const</span> <span class="keyword">char</span> *str_src)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    assert(str_dest != <span class="literal">NULL</span>);</span><br><span class="line">    assert(str_src != <span class="literal">NULL</span>);</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">char</span> *tmp = str_dest;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">while</span>((*tmp++ = *str_src++))</span><br><span class="line">    &#123;</span><br><span class="line">        ;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> str_dest;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">unsigned</span> <span class="keyword">int</span> <span class="title">my_strlen</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span> *str)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> count = <span class="number">0</span>;</span><br><span class="line">    assert(str != <span class="literal">NULL</span>);</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">while</span>(*str != <span class="string">'\0'</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        count++;</span><br><span class="line">        str++;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> count;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">char</span> *str1 = <span class="string">"abc"</span>;</span><br><span class="line">    <span class="keyword">char</span> str2[<span class="number">10</span>] = <span class="string">"1234567890"</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 将str1中的字符拷贝到str2中</span></span><br><span class="line">    my_strcpy(str2, str1);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"str2 : %s\n"</span>, str2);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"str2 : %s\n"</span>, my_strcpy(str2, str1));</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// </span></span><br><span class="line">    <span class="keyword">int</span> len = my_strlen(str2);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"str2_len : %d\n"</span>, len);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"str2_len : %d\n"</span>, my_strlen(str2));</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ol>
+<li><p><strong>assert</strong></p>
+<p>在函数中需要对指针进行解引用时，就需要用assert来断言。</p>
+<p>在没有assert的情况下，传进去一个空指针：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">my_strcpy(str2, <span class="literal">NULL</span>);</span><br><span class="line"><span class="built_in">printf</span>(<span class="string">"str2 : %s\n"</span>, str2);</span><br></pre></td></tr></table></figure>
+<p>build succeeded，但在run的时候崩了：</p>
+<p><img src="https://wx3.sinaimg.cn/mw690/006wR0dcly1fwo1u6tk8zj31by16yjyi.jpg" alt=""></p>
+<p>有assert的情况下，传进去一个空指针，同样run的时候出现错误，但提示了错误的地方，这样就有利于排查程序中的错误。</p>
+<p><img src="https://wx1.sinaimg.cn/mw690/006wR0dcly1fwo1u6eqotj31f616ygto.jpg" alt=""></p>
+<p>在看string.h中的函数源码时候会发现，strcpy中并没有assert，但是在自己写的时候加上就方便检查错误。</p>
+<p>在测试时(debug)启用断言，在部署(release)时禁用断言。</p>
+<p><img src="https://wx1.sinaimg.cn/mw690/006wR0dcly1fwo1u7fxktj31f616y15m.jpg" alt=""></p>
+<blockquote>
+<p>编写代码时，我们总是会做出一些假设，断言就是用于在代码中捕捉这些假设，可以将断言看作是<a href="https://baike.baidu.com/item/%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86/6250107" target="_blank" rel="noopener">异常处理</a>的一种高级形式。断言表示为一些<a href="https://baike.baidu.com/item/%E5%B8%83%E5%B0%94%E8%A1%A8%E8%BE%BE%E5%BC%8F/1574380" target="_blank" rel="noopener">布尔表达式</a>，程序员相信在程序中的某个特定点该表达式值为真。可以在任何时候启用和禁用断言验证，因此可以在测试时启用断言，而在部署时禁用断言。同样，程序投入运行后，最终用户在遇到问题时可以重新启用断言。</p>
+</blockquote>
+</li>
+<li><p><strong>const</strong></p>
+<p>在传递参数时候，有必要加上const来约束在函数中的权限。</p>
+<p>不加const时，若误将代码写如下：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">while</span>(*str_src++ = *tmp++)</span><br><span class="line">&#123;</span><br><span class="line">    ;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>build succeeded but run error！</p>
+<p>但如果有const：</p>
+<p><code>Read-only variable is not assignable</code></p>
+<p>build就会不通过，这样就不会导致更严重的运行时的问题，将误写错误扼杀在摇篮里～</p>
+</li>
+<li><p><strong>返回值</strong></p>
+<ul>
+<li><p>strcpy函数：</p>
+<p>这个函数为什么要返回值呢？</p>
+<p>为了实现链式表达，增加灵活性。</p>
+<p><code>printf(&quot;str2 : %s\n&quot;, my_strcpy(str2, str1));</code></p>
+</li>
+<li><p>strlen函数的返回值unsigned int：</p>
+<p>在string.h中，strlen的返回值为unsigned int。</p>
+<p>意思都明白，他的意思是长度没有负的嘛，但是</p>
+<p>有的时候这个unsigned int不是很好用，例如：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;assert.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">unsigned</span> <span class="keyword">int</span> <span class="title">my_strlen</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span> *str)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> count = <span class="number">0</span>;</span><br><span class="line">    assert(str != <span class="literal">NULL</span>);</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">while</span>(*str != <span class="string">'\0'</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        count++;</span><br><span class="line">        str++;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> count;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">char</span> *str1 = <span class="string">"abc"</span>;</span><br><span class="line">    <span class="keyword">char</span> str2[<span class="number">10</span>] = <span class="string">"1234567890"</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">if</span>(my_strlen(str1) - my_strlen(str2) &gt; <span class="number">0</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"length: str1 &gt; str2\n"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"length: str1 &lt;= str2\n"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>运行结果如下：</p>
+<p><code>length: str1 &gt; str2</code></p>
+<p>这是为什么呢？str1的长度不是比str2小吗？</p>
+<p>这就是unsigned int惹的祸。</p>
+<p><code>my_strlen(str1) - my_strlen(str2)</code>前面小的无符号整型减去后面大一点的无符号整型得到的结果还是一个无符号整型(而且是一个很大的数)，所以这个条件成立，继续下面的。</p>
+<p>这个就要注意咯～</p>
+</li>
+</ul>
+</li>
+</ol>
+
       
 
       
@@ -199,242 +256,6 @@
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">数据结构</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="//categories/学习总结//" class="article-tag-list-link color5">学习总结</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/10/cjoc8rk8g000w6q6z5p7hn219/">more >></a>
-        </p>
-      
-
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-<!---让百度主动推送代码，让搜索引擎最快发现文章--->
-
-
-<!--gitalk留言功能-->
-
-  <div id="gitalk-container" style="padding: 0px 30px 0px 30px;"></div>
-
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
-<script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
-<script type="text/javascript">
-
-if(true){
-	var gitalk = new Gitalk({
-  	clientID: '069eca25fe0437ca85c8',
-  	clientSecret: 'f338a82d38ecf5e848e1459591defca47e74ff5e',
-  	repo: 'ahojcn.github.io',
-  	owner: 'ahojcn',
-  	admin: ['ahojcn'],
-  	id: '',
-  	distractionFreeMode: 'false'
-})
-gitalk.render('gitalk-container')
-}
-</script>
-
-  
-
-  
-    <article id="post-5|复杂度分析" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/10/cjoc8rk8e000t6q6zc1pddp7k/">5|复杂度分析</a>
-    </h1>
-  
-
-        
-        <a href="/2018/10/cjoc8rk8e000t6q6zc1pddp7k/" class="archive-article-date">
-  	<time datetime="2018-10-04T05:39:44.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-10-04</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h2><h3 id="1-为什么要分析复杂度"><a href="#1-为什么要分析复杂度" class="headerlink" title="1 为什么要分析复杂度"></a>1 为什么要分析复杂度</h3><h3 id="2-大O表示法"><a href="#2-大O表示法" class="headerlink" title="2 大O表示法"></a>2 大O表示法</h3><h3 id="3-时间复杂度分析原则"><a href="#3-时间复杂度分析原则" class="headerlink" title="3 时间复杂度分析原则"></a>3 时间复杂度分析原则</h3><h3 id="4-常见的几种时间复杂度"><a href="#4-常见的几种时间复杂度" class="headerlink" title="4 常见的几种时间复杂度"></a>4 常见的几种时间复杂度</h3>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">数据结构</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">学习总结</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="//categories/学习总结//" class="article-tag-list-link color5">学习总结</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/10/cjoc8rk8e000t6q6zc1pddp7k/">more >></a>
-        </p>
-      
-
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-<!---让百度主动推送代码，让搜索引擎最快发现文章--->
-
-
-<!--gitalk留言功能-->
-
-  <div id="gitalk-container" style="padding: 0px 30px 0px 30px;"></div>
-
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
-<script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
-<script type="text/javascript">
-
-if(true){
-	var gitalk = new Gitalk({
-  	clientID: '069eca25fe0437ca85c8',
-  	clientSecret: 'f338a82d38ecf5e848e1459591defca47e74ff5e',
-  	repo: 'ahojcn.github.io',
-  	owner: 'ahojcn',
-  	admin: ['ahojcn'],
-  	id: '',
-  	distractionFreeMode: 'false'
-})
-gitalk.render('gitalk-container')
-}
-</script>
-
-  
-
-  
-    <article id="post-4|深入理解数组" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/10/cjoc8rk8d000q6q6zq5hah1y5/">4|深入理解数组</a>
-    </h1>
-  
-
-        
-        <a href="/2018/10/cjoc8rk8d000q6q6zq5hah1y5/" class="archive-article-date">
-  	<time datetime="2018-10-03T04:11:26.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-10-03</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h2><h3 id="1-为什么很多编程语言中数组都是从-0-开始编号"><a href="#1-为什么很多编程语言中数组都是从-0-开始编号" class="headerlink" title="1 为什么很多编程语言中数组都是从 0 开始编号"></a>1 为什么很多编程语言中数组都是从 0 开始编号</h3><h3 id="2-数组的特点"><a href="#2-数组的特点" class="headerlink" title="2 数组的特点"></a>2 数组的特点</h3><h3 id="3-数组越界问题"><a href="#3-数组越界问题" class="headerlink" title="3 数组越界问题"></a>3 数组越界问题</h3><h3 id="4-容器和数组用哪个更好"><a href="#4-容器和数组用哪个更好" class="headerlink" title="4 容器和数组用哪个更好"></a>4 容器和数组用哪个更好</h3>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">数据结构</a>
-        		</li>
-      		 
         		<li class="article-tag-list-item">
         			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">C语言</a>
         		</li>
@@ -460,18 +281,89 @@ gitalk.render('gitalk-container')
 
 
       
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/10/cjoc8rk8d000q6q6zq5hah1y5/">more >></a>
-        </p>
+
       
+        
 
       
 
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
+        </div>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://ahoj.cc/2018/10/cjoc8rk7t00036q6z4ins4maf/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
       
       <div class="clearfix"></div>
     </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
+  
+    <a href="/2018/10/cjoc8rk7x00056q6zitcownb9/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          13|边界计算与不对称边界
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2018/10/cjoc8rk7q00016q6z153blgfa/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">11|const修饰的是谁</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
 
 <aside class="wrap-side-operation">
     <div class="mod-side-operation">
@@ -486,13 +378,45 @@ gitalk.render('gitalk-container')
         </div>
         
         
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#前言"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#模拟实现strcpy和strlen函数的几个注意点"><span class="toc-number">1.1.</span> <span class="toc-text">模拟实现strcpy和strlen函数的几个注意点</span></a></li></ol></li></ol>
+                    </div>
+                </span>
+            </div>
+        </div>
+        
     </div>
 </aside>
 
 
 
+  
+
+  
+
+  
+
+  
+
+  
+
 
 <!---让百度主动推送代码，让搜索引擎最快发现文章--->
+
+<script>
+(function(){
+    var bp = document.createElement('script');
+    bp.src = '//push.zhanzhang.baidu.com/push.js';
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
 
 
 <!--gitalk留言功能-->
@@ -510,7 +434,7 @@ if(true){
   	repo: 'ahojcn.github.io',
   	owner: 'ahojcn',
   	admin: ['ahojcn'],
-  	id: '',
+  	id: 'Sun Oct 28 2018 21:17:06 GMT+0800',
   	distractionFreeMode: 'false'
 })
 gitalk.render('gitalk-container')
@@ -518,334 +442,6 @@ gitalk.render('gitalk-container')
 </script>
 
   
-
-  
-    <article id="post-3|老韩语录和我们的故事" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/10/cjoc8rk8b000n6q6zcam7zdr9/">3|老韩语录和我们的故事</a>
-    </h1>
-  
-
-        
-        <a href="/2018/10/cjoc8rk8b000n6q6zcam7zdr9/" class="archive-article-date">
-  	<time datetime="2018-10-02T06:57:24.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-10-02</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>神中，这9班，我们的故事。</p>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/10/cjoc8rk8b000n6q6zcam7zdr9/">more >></a>
-        </p>
-      
-
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-<!---让百度主动推送代码，让搜索引擎最快发现文章--->
-
-
-<!--gitalk留言功能-->
-
-  <div id="gitalk-container" style="padding: 0px 30px 0px 30px;"></div>
-
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
-<script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
-<script type="text/javascript">
-
-if(true){
-	var gitalk = new Gitalk({
-  	clientID: '069eca25fe0437ca85c8',
-  	clientSecret: 'f338a82d38ecf5e848e1459591defca47e74ff5e',
-  	repo: 'ahojcn.github.io',
-  	owner: 'ahojcn',
-  	admin: ['ahojcn'],
-  	id: '',
-  	distractionFreeMode: 'false'
-})
-gitalk.render('gitalk-container')
-}
-</script>
-
-  
-
-  
-    <article id="post-2|不要在二三十岁就开始老去" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/09/cjoc8rk89000k6q6zm5p1tx1x/">2|不要在二三十岁就开始老去</a>
-    </h1>
-  
-
-        
-        <a href="/2018/09/cjoc8rk89000k6q6zm5p1tx1x/" class="archive-article-date">
-  	<time datetime="2018-09-30T12:37:03.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-09-30</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>特别喜欢的一篇文章，分享出来。</p>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">反思</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="//categories/反思//" class="article-tag-list-link color3">反思</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/09/cjoc8rk89000k6q6zm5p1tx1x/">more >></a>
-        </p>
-      
-
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-<!---让百度主动推送代码，让搜索引擎最快发现文章--->
-
-
-<!--gitalk留言功能-->
-
-  <div id="gitalk-container" style="padding: 0px 30px 0px 30px;"></div>
-
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
-<script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
-<script type="text/javascript">
-
-if(true){
-	var gitalk = new Gitalk({
-  	clientID: '069eca25fe0437ca85c8',
-  	clientSecret: 'f338a82d38ecf5e848e1459591defca47e74ff5e',
-  	repo: 'ahojcn.github.io',
-  	owner: 'ahojcn',
-  	admin: ['ahojcn'],
-  	id: '',
-  	distractionFreeMode: 'false'
-})
-gitalk.render('gitalk-container')
-}
-</script>
-
-  
-
-  
-    <article id="post-1|人之患在好为人师" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/09/cjoc8rk87000h6q6zmigfxe8u/">1|人之患在好为人师</a>
-    </h1>
-  
-
-        
-        <a href="/2018/09/cjoc8rk87000h6q6zmigfxe8u/" class="archive-article-date">
-  	<time datetime="2018-09-21T06:35:30.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-09-21</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="反思杂记"><a href="#反思杂记" class="headerlink" title="反思杂记"></a>反思杂记</h2><p>“人之患在好为人师。”  “学问有余，人资于己，以不得已而应之可也。若好为人师，则自足而不复有进矣，此人之大患也。”</p>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">反思</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="//categories/反思//" class="article-tag-list-link color3">反思</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/09/cjoc8rk87000h6q6zmigfxe8u/">more >></a>
-        </p>
-      
-
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-<!---让百度主动推送代码，让搜索引擎最快发现文章--->
-
-
-<!--gitalk留言功能-->
-
-  <div id="gitalk-container" style="padding: 0px 30px 0px 30px;"></div>
-
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
-<script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
-<script type="text/javascript">
-
-if(true){
-	var gitalk = new Gitalk({
-  	clientID: '069eca25fe0437ca85c8',
-  	clientSecret: 'f338a82d38ecf5e848e1459591defca47e74ff5e',
-  	repo: 'ahojcn.github.io',
-  	owner: 'ahojcn',
-  	admin: ['ahojcn'],
-  	id: '',
-  	distractionFreeMode: 'false'
-})
-gitalk.render('gitalk-container')
-}
-</script>
-
-  
-
-  
-  
-    <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span>
-    </nav>
-  
-
 
           </div>
         </div>
@@ -873,8 +469,8 @@ gitalk.render('gitalk-container')
     <script>
 	var yiliaConfig = {
 		mathjax: true,
-		isHome: true,
-		isPost: false,
+		isHome: false,
+		isPost: true,
 		isArchive: false,
 		isTag: false,
 		isCategory: false,

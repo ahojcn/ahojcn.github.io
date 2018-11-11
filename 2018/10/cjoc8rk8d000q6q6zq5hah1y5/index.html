@@ -6,18 +6,23 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://ahoj.cc">
-  <title>ahoj的博客</title>
+  <title>4|深入理解数组 | ahoj的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="平凡有理想，想让世界不一样。">
-<meta property="og:type" content="website">
-<meta property="og:title" content="ahoj的博客">
-<meta property="og:url" content="http://ahoj.cc/page/2/index.html">
+  <meta name="description" content="目录1 为什么很多编程语言中数组都是从 0 开始编号2 数组的特点3 数组越界问题4 容器和数组用哪个更好">
+<meta name="keywords" content="数据结构,C语言,学习总结">
+<meta property="og:type" content="article">
+<meta property="og:title" content="4|深入理解数组">
+<meta property="og:url" content="http://ahoj.cc/2018/10/cjoc8rk8d000q6q6zq5hah1y5/index.html">
 <meta property="og:site_name" content="ahoj的博客">
-<meta property="og:description" content="平凡有理想，想让世界不一样。">
+<meta property="og:description" content="目录1 为什么很多编程语言中数组都是从 0 开始编号2 数组的特点3 数组越界问题4 容器和数组用哪个更好">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://wx4.sinaimg.cn/mw690/006wR0dcly1fvuyi439iqj31kw11he4q.jpg">
+<meta property="og:image" content="https://wx4.sinaimg.cn/mw690/006wR0dcly1fvuyi3tjgkj31740b079s.jpg">
+<meta property="og:updated_time" content="2018-11-11T02:06:57.044Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="ahoj的博客">
-<meta name="twitter:description" content="平凡有理想，想让世界不一样。">
+<meta name="twitter:title" content="4|深入理解数组">
+<meta name="twitter:description" content="目录1 为什么很多编程语言中数组都是从 0 开始编号2 数组的特点3 数组越界问题4 容器和数组用哪个更好">
+<meta name="twitter:image" content="https://wx4.sinaimg.cn/mw690/006wR0dcly1fvuyi439iqj31kw11he4q.jpg">
   
     <link rel="alternative" href="/atom.xml" title="ahoj的博客" type="application/atom+xml">
   
@@ -164,248 +169,14 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-    <article id="post-6|浅析最好、最坏、平均、均摊时间复杂度" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+            <article id="post-4|深入理解数组" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/10/cjoc8rk8g000w6q6z5p7hn219/">6|浅析最好、最坏、平均、均摊时间复杂度</a>
-    </h1>
-  
-
-        
-        <a href="/2018/10/cjoc8rk8g000w6q6z5p7hn219/" class="archive-article-date">
-  	<time datetime="2018-10-04T12:48:44.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-10-04</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h2><h3 id="1-最好、最坏情况时间复杂度"><a href="#1-最好、最坏情况时间复杂度" class="headerlink" title="1 最好、最坏情况时间复杂度"></a>1 最好、最坏情况时间复杂度</h3><h3 id="2-平均时间复杂度"><a href="#2-平均时间复杂度" class="headerlink" title="2 平均时间复杂度"></a>2 平均时间复杂度</h3><h3 id="3-均摊时间复杂度"><a href="#3-均摊时间复杂度" class="headerlink" title="3 均摊时间复杂度"></a>3 均摊时间复杂度</h3>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">数据结构</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="//categories/学习总结//" class="article-tag-list-link color5">学习总结</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/10/cjoc8rk8g000w6q6z5p7hn219/">more >></a>
-        </p>
-      
-
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-<!---让百度主动推送代码，让搜索引擎最快发现文章--->
-
-
-<!--gitalk留言功能-->
-
-  <div id="gitalk-container" style="padding: 0px 30px 0px 30px;"></div>
-
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
-<script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
-<script type="text/javascript">
-
-if(true){
-	var gitalk = new Gitalk({
-  	clientID: '069eca25fe0437ca85c8',
-  	clientSecret: 'f338a82d38ecf5e848e1459591defca47e74ff5e',
-  	repo: 'ahojcn.github.io',
-  	owner: 'ahojcn',
-  	admin: ['ahojcn'],
-  	id: '',
-  	distractionFreeMode: 'false'
-})
-gitalk.render('gitalk-container')
-}
-</script>
-
-  
-
-  
-    <article id="post-5|复杂度分析" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/10/cjoc8rk8e000t6q6zc1pddp7k/">5|复杂度分析</a>
-    </h1>
-  
-
-        
-        <a href="/2018/10/cjoc8rk8e000t6q6zc1pddp7k/" class="archive-article-date">
-  	<time datetime="2018-10-04T05:39:44.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-10-04</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h2><h3 id="1-为什么要分析复杂度"><a href="#1-为什么要分析复杂度" class="headerlink" title="1 为什么要分析复杂度"></a>1 为什么要分析复杂度</h3><h3 id="2-大O表示法"><a href="#2-大O表示法" class="headerlink" title="2 大O表示法"></a>2 大O表示法</h3><h3 id="3-时间复杂度分析原则"><a href="#3-时间复杂度分析原则" class="headerlink" title="3 时间复杂度分析原则"></a>3 时间复杂度分析原则</h3><h3 id="4-常见的几种时间复杂度"><a href="#4-常见的几种时间复杂度" class="headerlink" title="4 常见的几种时间复杂度"></a>4 常见的几种时间复杂度</h3>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">数据结构</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">学习总结</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="//categories/学习总结//" class="article-tag-list-link color5">学习总结</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/10/cjoc8rk8e000t6q6zc1pddp7k/">more >></a>
-        </p>
-      
-
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-<!---让百度主动推送代码，让搜索引擎最快发现文章--->
-
-
-<!--gitalk留言功能-->
-
-  <div id="gitalk-container" style="padding: 0px 30px 0px 30px;"></div>
-
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
-<script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
-<script type="text/javascript">
-
-if(true){
-	var gitalk = new Gitalk({
-  	clientID: '069eca25fe0437ca85c8',
-  	clientSecret: 'f338a82d38ecf5e848e1459591defca47e74ff5e',
-  	repo: 'ahojcn.github.io',
-  	owner: 'ahojcn',
-  	admin: ['ahojcn'],
-  	id: '',
-  	distractionFreeMode: 'false'
-})
-gitalk.render('gitalk-container')
-}
-</script>
-
-  
-
-  
-    <article id="post-4|深入理解数组" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/10/cjoc8rk8d000q6q6zq5hah1y5/">4|深入理解数组</a>
+    <h1 class="article-title" itemprop="name">
+      4|深入理解数组
     </h1>
   
 
@@ -418,8 +189,89 @@ gitalk.render('gitalk-container')
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h2><h3 id="1-为什么很多编程语言中数组都是从-0-开始编号"><a href="#1-为什么很多编程语言中数组都是从-0-开始编号" class="headerlink" title="1 为什么很多编程语言中数组都是从 0 开始编号"></a>1 为什么很多编程语言中数组都是从 0 开始编号</h3><h3 id="2-数组的特点"><a href="#2-数组的特点" class="headerlink" title="2 数组的特点"></a>2 数组的特点</h3><h3 id="3-数组越界问题"><a href="#3-数组越界问题" class="headerlink" title="3 数组越界问题"></a>3 数组越界问题</h3><h3 id="4-容器和数组用哪个更好"><a href="#4-容器和数组用哪个更好" class="headerlink" title="4 容器和数组用哪个更好"></a>4 容器和数组用哪个更好</h3>
-        
+        <h2 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h2><h3 id="1-为什么很多编程语言中数组都是从-0-开始编号"><a href="#1-为什么很多编程语言中数组都是从-0-开始编号" class="headerlink" title="1 为什么很多编程语言中数组都是从 0 开始编号"></a>1 为什么很多编程语言中数组都是从 0 开始编号</h3><h3 id="2-数组的特点"><a href="#2-数组的特点" class="headerlink" title="2 数组的特点"></a>2 数组的特点</h3><h3 id="3-数组越界问题"><a href="#3-数组越界问题" class="headerlink" title="3 数组越界问题"></a>3 数组越界问题</h3><h3 id="4-容器和数组用哪个更好"><a href="#4-容器和数组用哪个更好" class="headerlink" title="4 容器和数组用哪个更好"></a>4 容器和数组用哪个更好</h3><a id="more"></a>
+<hr>
+<h2 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h2><h3 id="1-为什么很多编程语言中数组都是从-0-开始编号-1"><a href="#1-为什么很多编程语言中数组都是从-0-开始编号-1" class="headerlink" title="1 为什么很多编程语言中数组都是从 0 开始编号"></a>1 为什么很多编程语言中数组都是从 0 开始编号</h3><h4 id="1-1-效率原因"><a href="#1-1-效率原因" class="headerlink" title="1.1 效率原因"></a>1.1 效率原因</h4><blockquote>
+<p>从内存模型来看，“下标”也称为“偏移”。</p>
+<p>我们知道在C语言中数组名代表首地址(第一个元素的地址)，a[0]就是偏移为 0 的位置。a[k]就表示偏移 k 个元素类型大小的位置。得出计算公式：</p>
+<p><code>a[k]_address = base_address + k * type_size</code></p>
+<p>但是钥匙从 1 开始计数，那这个公式就会变为：</p>
+<p><code>a[k]_address = base_address + (k-1) * type_size</code></p>
+<p>对比两个公式，如果从 1 开始编号，每次随机访问数组元素就多了一次减法运算，对于CPU来说就是多了一次减法指令。</p>
+<p>数组作为非常基础的数据结构，通过下标访问数组元素又是数组上的基础操作，效率优化应做的很好，所以为了减少一次减法操作，数组选择了从 0 开始编号。</p>
+</blockquote>
+<h4 id="1-2-历史原因"><a href="#1-2-历史原因" class="headerlink" title="1.2 历史原因"></a>1.2 历史原因</h4><blockquote>
+<p>C语言的设计者用 <strong>0</strong> 开始计数下标，之后的Java、C++等高级语言都效仿C语言，沿用了从0开始计数的习惯。</p>
+<p>还有一些语言并不是从0开始计数的，如：Matlab。</p>
+<p>据我所知：python还支持负数下标。</p>
+</blockquote>
+<h3 id="2-数组的特点-1"><a href="#2-数组的特点-1" class="headerlink" title="2 数组的特点"></a>2 数组的特点</h3><h4 id="2-1-随机访问"><a href="#2-1-随机访问" class="headerlink" title="2.1 随机访问"></a>2.1 随机访问</h4><blockquote>
+<p>数组是一种线性数据结构，占用一段连续的内存，存储相同类型的数据。</p>
+<p>例如：这样一段代码</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&gt; <span class="keyword">int</span> arr[<span class="number">10</span>] = &#123;<span class="number">0</span>&#125;;</span><br><span class="line">&gt; <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;<span class="number">10</span>;i++)</span><br><span class="line">&gt; &#123;</span><br><span class="line">&gt;     arr[i] = i;</span><br><span class="line">&gt; &#125;</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
+</blockquote>
+<blockquote>
+<p>查看数组信息：(addr=0x7ffeefbff530, size=40, variable expression=’arr’).</p>
+<p>我们再来打断点看看内存情况：</p>
+<p><img src="https://wx4.sinaimg.cn/mw690/006wR0dcly1fvuyi439iqj31kw11he4q.jpg" alt="arr[9]"></p>
+<p><img src="https://wx4.sinaimg.cn/mw690/006wR0dcly1fvuyi3tjgkj31740b079s.jpg" alt=""></p>
+<blockquote>
+<p>看内存情况我们得到：</p>
+<p>arr共使用40字节内存，首地址为0x7ffeefbff530</p>
+<p>arr[0]地址为：0x7ffeefbff530</p>
+<p>arr[9]地址为：0x7ffeefbff554</p>
+<p>每个int有4个字节，故arr[9]结尾为0x7ffeefbff558</p>
+<p>0x7ffeefbff558-0x7ffeefbff530 = 24       16进制</p>
+<p>(28)16-&gt;(40)10</p>
+</blockquote>
+<p>数组随机访问时：通过计算元素存储位置的内存地址来访问相应的元素</p>
+<p><code>a[i]_address = base+address + i*adta_type_size</code></p>
+<p>数组支持随机访问，根据下标随机访问的时间复杂度为O(1)。</p>
+</blockquote>
+<h4 id="2-2-低效的“插入”和“删除”"><a href="#2-2-低效的“插入”和“删除”" class="headerlink" title="2.2 低效的“插入”和“删除”"></a>2.2 低效的“插入”和“删除”</h4><h5 id="2-2-1-低效原因"><a href="#2-2-1-低效原因" class="headerlink" title="2.2.1 低效原因"></a>2.2.1 低效原因</h5><blockquote>
+<p>数组为了保持内存数据的连续性，会导致插入、删除这两个操作比较低效。</p>
+<p><strong>插入：</strong></p>
+<p>假设数组长度为n，要将一个数据插入到第 k 个位置，为了把第 k 个位置腾出来，我们需要将k～n这部分元素顺序的向后移动一位。</p>
+<p>插入的时间复杂度：</p>
+<p>最好情况：在数组的末尾插入元素，不需要移动数据了，时间复杂度为O(1)。</p>
+<p>最坏情况：在开头插入元素，那就需要把所有的数据向后移动一位，时间复杂度为O(n)。</p>
+<p>平均时间复杂度：(1+2+…+n)/n = O(n)。</p>
+</blockquote>
+<blockquote>
+<p><strong>删除：</strong></p>
+<p>删除操作和插入操作类似，删除了某一元素后，需要搬移数据。</p>
+<p>和插入类似，如果删除数组末尾的数据，则最好情况时间复杂度为O(1)，如果要删除开头数据，则最坏情况时间复杂度为O(n)，平均时间复杂度为O(n)。</p>
+</blockquote>
+<h5 id="2-2-2-改进方法"><a href="#2-2-2-改进方法" class="headerlink" title="2.2.2 改进方法"></a>2.2.2 改进方法</h5><blockquote>
+<p><strong>插入</strong>：</p>
+<p>如果数组中的元素没有任何规律，数组只是被当作一个数据集合，在这种情况下，如果要将某个数据插入到第k个位置，为了避免大规模的数据迁移，一个简单的办法就是直接将现在第k个元素放到最后，把新元素放进来。</p>
+<p>例如：<code>arr[10] = {a,b,c,d,e}</code>要将x插入第三个位置<code>arr[10]={a,b,x,d,e,c}</code></p>
+<p>这样插入的时间复杂度为O(1)，这种方法在快速排序中也会用到。</p>
+</blockquote>
+<blockquote>
+<p><strong>删除</strong>：</p>
+<p>在某些特殊情况下，我们并不一定非得追求数组中数据的连续性，如果我们将多次删除操作放在一起执行，效率会高很多。</p>
+<p>举个例子：<code>a[10]={a,b,c,d,e,f,g,h}</code> 如果我们要依次删除abc三个元素，需要搬移三次后面的数据，为了避免这个重复的搬移工作，可以先记录下来已经删除的数据，每次的删除操作并不是真正的搬移数据，只是记录数据已经被删除，当数组中没有更多的空间存储数据时，我们再触发执行一次真正的删除操作，这样就大大减少了搬移工作，这也是<strong>标记清除垃圾回收算法</strong>的核心思想。</p>
+</blockquote>
+<h3 id="3-数组越界问题-1"><a href="#3-数组越界问题-1" class="headerlink" title="3 数组越界问题"></a>3 数组越界问题</h3><blockquote>
+<p>有如下代码：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&gt; <span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line">&gt; &#123;</span><br><span class="line">&gt;     <span class="keyword">int</span> i = <span class="number">0</span>;</span><br><span class="line">&gt;     <span class="keyword">int</span> arr[<span class="number">3</span>] = &#123;<span class="number">0</span>&#125;;</span><br><span class="line">&gt;     <span class="keyword">for</span>(; i&lt;=<span class="number">3</span>; i++)</span><br><span class="line">&gt;     &#123;</span><br><span class="line">&gt;         arr[i] = <span class="number">0</span>;</span><br><span class="line">&gt;         <span class="built_in">printf</span>(<span class="string">"Hello world\n"</span>);</span><br><span class="line">&gt;     &#125;</span><br><span class="line">&gt;     <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&gt; &#125;</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
+</blockquote>
+<blockquote>
+<p>这段代码的结果并不是打印三行hello world，而是无限打印hello world。</p>
+<p>为啥呢？</p>
+<p>因为在C语言中，除了受限制的内存，其他所有内存空间都是可以自由访问的。</p>
+<p>那为什么会无限打印呢？</p>
+<p>根据我所学和百度的知识解释下：函数体内的局部变量存在栈区，在Linux内存布局中，栈区在高地址空间，从高到低增长，先<code>int i = 0;</code>再<code>int arr[3]={0};</code>变量i和arr地址相邻，并且i地址比arr地址大，首先压栈的i，a[2]，a[1]，a[0]，循环中arr访问越界正好到i，而此时i变量的地址是数组当前进程的，所以进行修改的时候，操作系统并不会终止进程。当然这只是32位操作系统下，64位操作系统下 默认会进行8字节对齐 变量i的地址就不紧跟着数组后面了。另外这个还和编译环境有关，对于不同的编译器，在内存分配时，会按照内存地址递增或递减的方式进行分配。如果是内存地址递减的方式，就会造成无限循环。</p>
+</blockquote>
+<h3 id="4-容器和数组用哪个更好-1"><a href="#4-容器和数组用哪个更好-1" class="headerlink" title="4 容器和数组用哪个更好"></a>4 容器和数组用哪个更好</h3><blockquote>
+<p>对于数组类型，很多语言提供了容器类，例如我正在学的C++中的Vector。</p>
+<p>那什么时候用数组，什么适合用容器呢？</p>
+<p>容器的优势就是可以将很多数组操作的细节封装起来，有的还支持动态扩容。</p>
+<p>王争老师：如果特别关注性能，或者数据大小已知，且对数据操作非常简单，用不到容器提供的大部分方法，可以是用数组。</p>
+</blockquote>
+<hr>
+<h2 id="完"><a href="#完" class="headerlink" title="完"></a>完</h2>
       
 
       
@@ -460,18 +312,89 @@ gitalk.render('gitalk-container')
 
 
       
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/10/cjoc8rk8d000q6q6zq5hah1y5/">more >></a>
-        </p>
+
       
+        
 
       
 
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
+        </div>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://ahoj.cc/2018/10/cjoc8rk8d000q6q6zq5hah1y5/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
       
       <div class="clearfix"></div>
     </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
+  
+    <a href="/2018/10/cjoc8rk8e000t6q6zc1pddp7k/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          5|复杂度分析
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2018/10/cjoc8rk8b000n6q6zcam7zdr9/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">3|老韩语录和我们的故事</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
 
 <aside class="wrap-side-operation">
     <div class="mod-side-operation">
@@ -486,13 +409,45 @@ gitalk.render('gitalk-container')
         </div>
         
         
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#目录"><span class="toc-number">1.</span> <span class="toc-text">目录</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-为什么很多编程语言中数组都是从-0-开始编号"><span class="toc-number">1.1.</span> <span class="toc-text">1 为什么很多编程语言中数组都是从 0 开始编号</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-数组的特点"><span class="toc-number">1.2.</span> <span class="toc-text">2 数组的特点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-数组越界问题"><span class="toc-number">1.3.</span> <span class="toc-text">3 数组越界问题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-容器和数组用哪个更好"><span class="toc-number">1.4.</span> <span class="toc-text">4 容器和数组用哪个更好</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#正文"><span class="toc-number">2.</span> <span class="toc-text">正文</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-为什么很多编程语言中数组都是从-0-开始编号-1"><span class="toc-number">2.1.</span> <span class="toc-text">1 为什么很多编程语言中数组都是从 0 开始编号</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-1-效率原因"><span class="toc-number">2.1.1.</span> <span class="toc-text">1.1 效率原因</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-2-历史原因"><span class="toc-number">2.1.2.</span> <span class="toc-text">1.2 历史原因</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-数组的特点-1"><span class="toc-number">2.2.</span> <span class="toc-text">2 数组的特点</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#2-1-随机访问"><span class="toc-number">2.2.1.</span> <span class="toc-text">2.1 随机访问</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-2-低效的“插入”和“删除”"><span class="toc-number">2.2.2.</span> <span class="toc-text">2.2 低效的“插入”和“删除”</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#2-2-1-低效原因"><span class="toc-number">2.2.2.1.</span> <span class="toc-text">2.2.1 低效原因</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-2-2-改进方法"><span class="toc-number">2.2.2.2.</span> <span class="toc-text">2.2.2 改进方法</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-数组越界问题-1"><span class="toc-number">2.3.</span> <span class="toc-text">3 数组越界问题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-容器和数组用哪个更好-1"><span class="toc-number">2.4.</span> <span class="toc-text">4 容器和数组用哪个更好</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#完"><span class="toc-number">3.</span> <span class="toc-text">完</span></a></li></ol>
+                    </div>
+                </span>
+            </div>
+        </div>
+        
     </div>
 </aside>
 
 
 
+  
+
+  
+
+  
+
+  
+
+  
+
 
 <!---让百度主动推送代码，让搜索引擎最快发现文章--->
+
+<script>
+(function(){
+    var bp = document.createElement('script');
+    bp.src = '//push.zhanzhang.baidu.com/push.js';
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
 
 
 <!--gitalk留言功能-->
@@ -510,7 +465,7 @@ if(true){
   	repo: 'ahojcn.github.io',
   	owner: 'ahojcn',
   	admin: ['ahojcn'],
-  	id: '',
+  	id: 'Wed Oct 03 2018 12:11:26 GMT+0800',
   	distractionFreeMode: 'false'
 })
 gitalk.render('gitalk-container')
@@ -518,334 +473,6 @@ gitalk.render('gitalk-container')
 </script>
 
   
-
-  
-    <article id="post-3|老韩语录和我们的故事" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/10/cjoc8rk8b000n6q6zcam7zdr9/">3|老韩语录和我们的故事</a>
-    </h1>
-  
-
-        
-        <a href="/2018/10/cjoc8rk8b000n6q6zcam7zdr9/" class="archive-article-date">
-  	<time datetime="2018-10-02T06:57:24.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-10-02</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>神中，这9班，我们的故事。</p>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/10/cjoc8rk8b000n6q6zcam7zdr9/">more >></a>
-        </p>
-      
-
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-<!---让百度主动推送代码，让搜索引擎最快发现文章--->
-
-
-<!--gitalk留言功能-->
-
-  <div id="gitalk-container" style="padding: 0px 30px 0px 30px;"></div>
-
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
-<script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
-<script type="text/javascript">
-
-if(true){
-	var gitalk = new Gitalk({
-  	clientID: '069eca25fe0437ca85c8',
-  	clientSecret: 'f338a82d38ecf5e848e1459591defca47e74ff5e',
-  	repo: 'ahojcn.github.io',
-  	owner: 'ahojcn',
-  	admin: ['ahojcn'],
-  	id: '',
-  	distractionFreeMode: 'false'
-})
-gitalk.render('gitalk-container')
-}
-</script>
-
-  
-
-  
-    <article id="post-2|不要在二三十岁就开始老去" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/09/cjoc8rk89000k6q6zm5p1tx1x/">2|不要在二三十岁就开始老去</a>
-    </h1>
-  
-
-        
-        <a href="/2018/09/cjoc8rk89000k6q6zm5p1tx1x/" class="archive-article-date">
-  	<time datetime="2018-09-30T12:37:03.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-09-30</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>特别喜欢的一篇文章，分享出来。</p>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">反思</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="//categories/反思//" class="article-tag-list-link color3">反思</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/09/cjoc8rk89000k6q6zm5p1tx1x/">more >></a>
-        </p>
-      
-
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-<!---让百度主动推送代码，让搜索引擎最快发现文章--->
-
-
-<!--gitalk留言功能-->
-
-  <div id="gitalk-container" style="padding: 0px 30px 0px 30px;"></div>
-
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
-<script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
-<script type="text/javascript">
-
-if(true){
-	var gitalk = new Gitalk({
-  	clientID: '069eca25fe0437ca85c8',
-  	clientSecret: 'f338a82d38ecf5e848e1459591defca47e74ff5e',
-  	repo: 'ahojcn.github.io',
-  	owner: 'ahojcn',
-  	admin: ['ahojcn'],
-  	id: '',
-  	distractionFreeMode: 'false'
-})
-gitalk.render('gitalk-container')
-}
-</script>
-
-  
-
-  
-    <article id="post-1|人之患在好为人师" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/09/cjoc8rk87000h6q6zmigfxe8u/">1|人之患在好为人师</a>
-    </h1>
-  
-
-        
-        <a href="/2018/09/cjoc8rk87000h6q6zmigfxe8u/" class="archive-article-date">
-  	<time datetime="2018-09-21T06:35:30.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-09-21</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="反思杂记"><a href="#反思杂记" class="headerlink" title="反思杂记"></a>反思杂记</h2><p>“人之患在好为人师。”  “学问有余，人资于己，以不得已而应之可也。若好为人师，则自足而不复有进矣，此人之大患也。”</p>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">反思</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="//categories/反思//" class="article-tag-list-link color3">反思</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/09/cjoc8rk87000h6q6zmigfxe8u/">more >></a>
-        </p>
-      
-
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-<!---让百度主动推送代码，让搜索引擎最快发现文章--->
-
-
-<!--gitalk留言功能-->
-
-  <div id="gitalk-container" style="padding: 0px 30px 0px 30px;"></div>
-
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
-<script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
-<script type="text/javascript">
-
-if(true){
-	var gitalk = new Gitalk({
-  	clientID: '069eca25fe0437ca85c8',
-  	clientSecret: 'f338a82d38ecf5e848e1459591defca47e74ff5e',
-  	repo: 'ahojcn.github.io',
-  	owner: 'ahojcn',
-  	admin: ['ahojcn'],
-  	id: '',
-  	distractionFreeMode: 'false'
-})
-gitalk.render('gitalk-container')
-}
-</script>
-
-  
-
-  
-  
-    <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span>
-    </nav>
-  
-
 
           </div>
         </div>
@@ -873,8 +500,8 @@ gitalk.render('gitalk-container')
     <script>
 	var yiliaConfig = {
 		mathjax: true,
-		isHome: true,
-		isPost: false,
+		isHome: false,
+		isPost: true,
 		isArchive: false,
 		isTag: false,
 		isCategory: false,

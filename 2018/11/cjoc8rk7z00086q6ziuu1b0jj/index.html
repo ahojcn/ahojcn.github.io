@@ -6,18 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://ahoj.cc">
-  <title>ahoj的博客</title>
+  <title>14|Matlab基础 | ahoj的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="平凡有理想，想让世界不一样。">
-<meta property="og:type" content="website">
-<meta property="og:title" content="ahoj的博客">
-<meta property="og:url" content="http://ahoj.cc/page/2/index.html">
+  <meta name="description" content="学习使用Matlab编程解决问题～">
+<meta name="keywords" content="学习总结,Matlab">
+<meta property="og:type" content="article">
+<meta property="og:title" content="14|Matlab基础">
+<meta property="og:url" content="http://ahoj.cc/2018/11/cjoc8rk7z00086q6ziuu1b0jj/index.html">
 <meta property="og:site_name" content="ahoj的博客">
-<meta property="og:description" content="平凡有理想，想让世界不一样。">
+<meta property="og:description" content="学习使用Matlab编程解决问题～">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-11-11T02:09:18.905Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="ahoj的博客">
-<meta name="twitter:description" content="平凡有理想，想让世界不一样。">
+<meta name="twitter:title" content="14|Matlab基础">
+<meta name="twitter:description" content="学习使用Matlab编程解决问题～">
   
     <link rel="alternative" href="/atom.xml" title="ahoj的博客" type="application/atom+xml">
   
@@ -164,30 +166,174 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-    <article id="post-6|浅析最好、最坏、平均、均摊时间复杂度" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+            <article id="post-14|Matlab基础" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/10/cjoc8rk8g000w6q6z5p7hn219/">6|浅析最好、最坏、平均、均摊时间复杂度</a>
+    <h1 class="article-title" itemprop="name">
+      14|Matlab基础
     </h1>
   
 
         
-        <a href="/2018/10/cjoc8rk8g000w6q6z5p7hn219/" class="archive-article-date">
-  	<time datetime="2018-10-04T12:48:44.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-10-04</time>
+        <a href="/2018/11/cjoc8rk7z00086q6ziuu1b0jj/" class="archive-article-date">
+  	<time datetime="2018-11-07T03:13:49.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-11-07</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h2><h3 id="1-最好、最坏情况时间复杂度"><a href="#1-最好、最坏情况时间复杂度" class="headerlink" title="1 最好、最坏情况时间复杂度"></a>1 最好、最坏情况时间复杂度</h3><h3 id="2-平均时间复杂度"><a href="#2-平均时间复杂度" class="headerlink" title="2 平均时间复杂度"></a>2 平均时间复杂度</h3><h3 id="3-均摊时间复杂度"><a href="#3-均摊时间复杂度" class="headerlink" title="3 均摊时间复杂度"></a>3 均摊时间复杂度</h3>
-        
+        <p>学习使用Matlab编程解决问题～</p>
+<a id="more"></a>
+<p>三个区域：</p>
+<p>Command Window 用于输入命令和得到输出结果</p>
+<p>Workspace 记录Command中用到的变量</p>
+<p>Command History 记录Command输入历史</p>
+<h1 id="一、基础命令"><a href="#一、基础命令" class="headerlink" title="一、基础命令"></a>一、基础命令</h1><h2 id="1-基础运算"><a href="#1-基础运算" class="headerlink" title="1. 基础运算"></a>1. 基础运算</h2><ul>
+<li><p>清空屏幕</p>
+<p><code>clc</code></p>
+</li>
+<li><p>注释</p>
+<p><code>%</code></p>
+</li>
+<li><p>加减乘除</p>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span> + <span class="number">2</span></span><br><span class="line"><span class="number">1</span> - <span class="number">2</span></span><br><span class="line"><span class="number">1</span> * <span class="number">2</span></span><br><span class="line"><span class="number">1</span> / <span class="number">2</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>指数</p>
+<ul>
+<li><p>例如$5^2$</p>
+<p><code>5^2</code></p>
+</li>
+</ul>
+</li>
+<li><p>对数</p>
+<ul>
+<li><p>例如：$\ln32$</p>
+<p><code>log(32)</code></p>
+</li>
+<li><p>$\lg32$</p>
+<p><code>log10(32)</code></p>
+</li>
+<li><p>$\log_232$</p>
+<p><code>log2(32)</code></p>
+</li>
+<li><p>$\log_87 = \frac{\log_e7}{\log_e8}$</p>
+<p><code>log(7)/log(8)</code></p>
+</li>
+</ul>
+</li>
+<li><p>三角函数</p>
+<p><code>sin(x)</code></p>
+<p><code>cos(x)</code></p>
+<p>还有一些其他的三角函数，动手试一试。</p>
+</li>
+<li><p>变量</p>
+<p><code>x = 10</code></p>
+<p><code>y = 20</code></p>
+<p><code>x + y</code></p>
+<p>不可以这样<code>x + 1 = 2</code>，没办法直接来解方程。在Matlab中<code>=</code>是赋值符号，不是<strong>等于</strong>。这个类似于C语言。</p>
+<p>可以这样：<code>x = x + 1</code></p>
+<p>输出变量的值：<code>fprintf(&#39;%g\n&#39;, x);</code>或者<code>disp(x);</code></p>
+</li>
+<li><p>按方向键⬆️⬇️用来重复命令</p>
+<p>这个和Linux中一样。</p>
+</li>
+</ul>
+<ul>
+<li><p>$\sqrt3$</p>
+<p><code>sqrt(3)</code></p>
+</li>
+</ul>
+<h2 id="2-向量运算"><a href="#2-向量运算" class="headerlink" title="2. 向量运算"></a>2. 向量运算</h2><ul>
+<li><p>$\vec x = (1,2,3)$</p>
+<p><code>x = [1,2,3]</code>或<code>x = [1 2 3]</code></p>
+</li>
+<li><p>$\vec x*2$</p>
+<p>这个是计算$\vec x*2$的值，但是$\vec x$的值并没有改变，只是计算了这个表达式的结果。</p>
+<p><code>x = x * 2</code>，这样才会改变$\vec x$的值，这个和C语言一样～</p>
+</li>
+<li><p>当然也可以做向量和向量的基本运算（加减乘除）等。</p>
+</li>
+<li><p><code>sum(x)</code></p>
+<p>这个命令是用来求和的，例如：</p>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">v = [<span class="number">1</span> <span class="number">2</span> <span class="number">3</span>];</span><br><span class="line"><span class="built_in">disp</span>(sum(v));	<span class="comment">% 输出 6</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="3-矩阵运算"><a href="#3-矩阵运算" class="headerlink" title="3. 矩阵运算"></a>3. 矩阵运算</h2><ul>
+<li><p>矩阵<br>$$<br>A =<br>\begin{Bmatrix}<br>\mathbf{1} &amp; \mathbf{2} &amp; \mathbf{3} \\<br>\mathbf{4} &amp; \mathbf{5} &amp; \mathbf{6}<br>\end{Bmatrix}<br>$$</p>
+<p>$$<br>B =<br>\begin{Bmatrix}<br>\mathbf{7} &amp; \mathbf{8} &amp; \mathbf{9} \\<br>\mathbf{10} &amp; \mathbf{11} &amp; \mathbf{12}<br>\end{Bmatrix}<br>$$</p>
+</li>
+</ul>
+<p>  输入：<code>A = [1 2 3;4 5 6]</code></p>
+<p>  按上面的输入同样，矩阵B</p>
+<p>  输入：<code>B = [7,8,9;10,11,12]</code></p>
+<p>  然后就可以做矩阵的运算咯，<code>A*B,A+B,A-B,A/B</code>等。</p>
+<p>  注意这里矩阵运算需要遵循矩阵运算规则。</p>
+<ul>
+<li><p>另一种矩阵乘法</p>
+<p>在Matlab中输入<code>A*B</code>就是数学中的矩阵乘法</p>
+<p>还有一种是输入<code>A.*B</code>，这样就是矩阵每个位置($A_{i,j}*B_{i,j}$)对应相乘。</p>
+</li>
+</ul>
+<h2 id="4-Script"><a href="#4-Script" class="headerlink" title="4. Script"></a>4. Script</h2><ul>
+<li><p>New Script</p>
+<p>在脚本里写一堆命令。</p>
+<p>例如：计算$x+y$</p>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">x = <span class="number">10</span>;	<span class="comment">% 加了;后，在command window里，就不会出现x=10的结果。</span></span><br><span class="line">y = <span class="number">20</span>;	<span class="comment">% 也可以不加分号。</span></span><br><span class="line">x + y</span><br></pre></td></tr></table></figure>
+<p>保存脚本扩展名为.m -&gt; 然后在左面切换到刚才保存的文件夹 -&gt; RUN</p>
+<p>写脚本可以实现输入互动，例如：</p>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">x = input(<span class="string">'Please input x:'</span>);</span><br><span class="line">y = input(<span class="string">'Please input y:'</span>);</span><br><span class="line"></span><br><span class="line">x + y</span><br></pre></td></tr></table></figure>
+<p>然后RUN，输入x，y，就会输出结果。</p>
+<ul>
+<li><p>例子：摄氏温度转华氏温度</p>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">C = input(<span class="string">'enter a temperature in Celesius:'</span>);</span><br><span class="line">F = (C * <span class="number">1.8</span>) + <span class="number">32</span></span><br><span class="line"></span><br><span class="line">fprintf(<span class="string">'Fahrenheit = %f\n'</span>, F);</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ul>
+<h1 id="二、语法"><a href="#二、语法" class="headerlink" title="二、语法"></a>二、语法</h1><h2 id="1-选择"><a href="#1-选择" class="headerlink" title="1. 选择"></a>1. 选择</h2><p>栗子1：</p>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">num = input(<span class="string">'enter a number:'</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> num &gt; <span class="number">0</span></span><br><span class="line">	fprintf(<span class="string">'正数\n'</span>);</span><br><span class="line"><span class="keyword">elseif</span> num == <span class="number">0</span></span><br><span class="line">	fprintf(<span class="string">'0\n'</span>);</span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">	fprintf(<span class="string">'负数\n'</span>);</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<p>栗子2：</p>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">a = input(<span class="string">'a = '</span>);</span><br><span class="line">b = input(<span class="string">'b = '</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> a &gt; b</span><br><span class="line">	fprintf(<span class="string">'%g\n'</span>, a);</span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">	fprintf(<span class="string">'%g\n'</span>, b);</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<p>栗子3：</p>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">% 1.</span></span><br><span class="line">a = input(<span class="string">'a = '</span>);</span><br><span class="line">b = input(<span class="string">'b = '</span>);</span><br><span class="line">c = input(<span class="string">'c = '</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> a + b &lt;= c</span><br><span class="line">	fprintf(<span class="string">'NO\n'</span>);</span><br><span class="line"><span class="keyword">elseif</span> a + c &lt;= b</span><br><span class="line">	fprintf(<span class="string">'NO\n'</span>);</span><br><span class="line"><span class="keyword">elseif</span> b + c &lt;= a</span><br><span class="line">	fprintf(<span class="string">'NO\n'</span>);</span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">	fprintf(<span class="string">'YES\n'</span>);</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">% 2.</span></span><br><span class="line"><span class="keyword">if</span> (a + b &gt; c) &amp;&amp; (b + c &gt; a) &amp;&amp; (a + c &gt; b)</span><br><span class="line">	fprintf(<span class="string">'YES\n'</span>);</span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">	fprintf(<span class="string">'NO\n'</span>);</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<h2 id="2-循环"><a href="#2-循环" class="headerlink" title="2. 循环"></a>2. 循环</h2><h3 id="2-1-while"><a href="#2-1-while" class="headerlink" title="2.1 while"></a>2.1 while</h3><p>栗子1：</p>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">t = <span class="number">1</span>;</span><br><span class="line"><span class="keyword">while</span> t &lt;= <span class="number">5</span></span><br><span class="line">	<span class="built_in">disp</span>(t);</span><br><span class="line">	t = t + <span class="number">1</span>;</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<p>栗子2：</p>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">a = input(<span class="string">'a = '</span>);</span><br><span class="line">b = input(<span class="string">'b = '</span>);</span><br><span class="line">r = <span class="built_in">mod</span>(a, b);</span><br><span class="line"></span><br><span class="line"><span class="keyword">while</span> r ~= <span class="number">0</span></span><br><span class="line">	a = b;</span><br><span class="line">	b = r;</span><br><span class="line">	r = <span class="built_in">mod</span>(a, b);</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">disp</span>(b);</span><br></pre></td></tr></table></figure>
+<h3 id="2-2-for"><a href="#2-2-for" class="headerlink" title="2.2 for"></a>2.2 for</h3><p>栗子1：</p>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">% 输出 1 ～ 5</span></span><br><span class="line"><span class="keyword">for</span> <span class="built_in">i</span> = <span class="number">1</span> : <span class="number">5</span></span><br><span class="line">	<span class="built_in">disp</span>(<span class="built_in">i</span>);</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="comment">% 输出 5 ～ -5</span></span><br><span class="line"><span class="keyword">for</span> <span class="built_in">i</span> = <span class="number">5</span> : <span class="number">-1</span> : <span class="number">-5</span>	 <span class="comment">% 这的-1表示步长，步长默认为 1，步长可以为小数。</span></span><br><span class="line">	<span class="built_in">disp</span>(<span class="built_in">i</span>);</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<p>栗子2：</p>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">s = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">for</span> <span class="built_in">i</span> = <span class="number">1</span> : <span class="number">100</span></span><br><span class="line">	s = s + <span class="built_in">i</span>;</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">disp</span>(s);</span><br></pre></td></tr></table></figure>
+<p>栗子3：计算</p>
+<p>$\frac{1}{1}+\frac{1}{2}+\frac{1}{3}+…+\frac{1}{100} = ?$</p>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">s = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> <span class="built_in">i</span> = <span class="number">1</span> : <span class="number">100</span></span><br><span class="line">	s = s + (<span class="number">1</span> / <span class="built_in">i</span>);</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">disp</span>(s);</span><br></pre></td></tr></table></figure>
+<p>栗子4：</p>
+<p>$$\frac{1}{1}-\frac{1}{2}+\frac{1}{3}-…-\frac{1}{100} =?$$</p>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">sum = <span class="number">0</span>;</span><br><span class="line">flag = <span class="number">-1</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> <span class="built_in">i</span> = <span class="number">1</span> : <span class="number">100</span></span><br><span class="line">	sum = sum + (<span class="number">1</span> / <span class="built_in">i</span>)*flag;</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<p>栗子5：for loop和向量</p>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">v = [<span class="number">1</span> <span class="number">2</span> <span class="number">3</span> <span class="number">4</span> <span class="number">5</span> <span class="number">6</span> <span class="number">7</span> <span class="number">8</span> <span class="number">9</span> <span class="number">100</span>];</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> <span class="built_in">i</span> = v</span><br><span class="line">	<span class="built_in">disp</span>(<span class="built_in">i</span>);</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<h1 id="三、Function"><a href="#三、Function" class="headerlink" title="三、Function"></a>三、Function</h1><h2 id="3-1无返回值"><a href="#3-1无返回值" class="headerlink" title="3.1无返回值"></a>3.1<strong>无</strong>返回值</h2><p>新建一个function。</p>
+<p>栗子1：计算$1+2+3+…+100 = ?$</p>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">mysum1</span><span class="params">( )</span></span></span><br><span class="line">	s = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> <span class="built_in">i</span> = <span class="number">1</span> : <span class="number">100</span></span><br><span class="line">        s = s + <span class="built_in">i</span>;</span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line">	<span class="built_in">disp</span>(s);</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<p>运行：<code>mysum1()</code></p>
+<p>栗子2：计算$1+2+3+…+n = ?$</p>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">mysum2</span><span class="params">( n )</span></span></span><br><span class="line">	s = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> <span class="built_in">i</span> = <span class="number">1</span> : n</span><br><span class="line">        s = s + <span class="built_in">i</span>;</span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line">	<span class="built_in">disp</span>(s);</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<p>运行：<code>mysum2(100)</code></p>
+<p>栗子3：计算$n+(n+1)+(n+2)+…+m = ?$</p>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">mysum3</span><span class="params">( n, m )</span></span></span><br><span class="line">	s = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> <span class="built_in">i</span> = n : m</span><br><span class="line">        s = s + <span class="built_in">i</span>;</span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line">	<span class="built_in">disp</span>(s);</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<p>运行：<code>mysum(4, 10)</code></p>
+<blockquote>
+<p>上面这个例子，在command window调用时，我们需要把他的结果保存在一个变量中，如：<code>s1 = mysum(4,10)</code>。就会出错，这个就是没有返回值。</p>
+</blockquote>
+<h2 id="3-2-带返回值function"><a href="#3-2-带返回值function" class="headerlink" title="3.2 带返回值function"></a>3.2 带返回值function</h2><figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">ret</span> = <span class="title">mysum3</span><span class="params">( n, m )</span></span></span><br><span class="line">	s = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> <span class="built_in">i</span> = n : m</span><br><span class="line">        s = s + <span class="built_in">i</span>;</span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line">    ret = s;	<span class="comment">% return</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<p>此时：<code>s1 = mysum(4, 10)</code></p>
+<p>这样就完成了一个具有返回值的function。</p>
+<hr>
+<h1 id="EOF"><a href="#EOF" class="headerlink" title="EOF"></a>EOF</h1>
       
 
       
@@ -199,248 +345,12 @@
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">数据结构</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="//categories/学习总结//" class="article-tag-list-link color5">学习总结</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/10/cjoc8rk8g000w6q6z5p7hn219/">more >></a>
-        </p>
-      
-
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-<!---让百度主动推送代码，让搜索引擎最快发现文章--->
-
-
-<!--gitalk留言功能-->
-
-  <div id="gitalk-container" style="padding: 0px 30px 0px 30px;"></div>
-
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
-<script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
-<script type="text/javascript">
-
-if(true){
-	var gitalk = new Gitalk({
-  	clientID: '069eca25fe0437ca85c8',
-  	clientSecret: 'f338a82d38ecf5e848e1459591defca47e74ff5e',
-  	repo: 'ahojcn.github.io',
-  	owner: 'ahojcn',
-  	admin: ['ahojcn'],
-  	id: '',
-  	distractionFreeMode: 'false'
-})
-gitalk.render('gitalk-container')
-}
-</script>
-
-  
-
-  
-    <article id="post-5|复杂度分析" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/10/cjoc8rk8e000t6q6zc1pddp7k/">5|复杂度分析</a>
-    </h1>
-  
-
-        
-        <a href="/2018/10/cjoc8rk8e000t6q6zc1pddp7k/" class="archive-article-date">
-  	<time datetime="2018-10-04T05:39:44.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-10-04</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h2><h3 id="1-为什么要分析复杂度"><a href="#1-为什么要分析复杂度" class="headerlink" title="1 为什么要分析复杂度"></a>1 为什么要分析复杂度</h3><h3 id="2-大O表示法"><a href="#2-大O表示法" class="headerlink" title="2 大O表示法"></a>2 大O表示法</h3><h3 id="3-时间复杂度分析原则"><a href="#3-时间复杂度分析原则" class="headerlink" title="3 时间复杂度分析原则"></a>3 时间复杂度分析原则</h3><h3 id="4-常见的几种时间复杂度"><a href="#4-常见的几种时间复杂度" class="headerlink" title="4 常见的几种时间复杂度"></a>4 常见的几种时间复杂度</h3>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">数据结构</a>
-        		</li>
-      		 
         		<li class="article-tag-list-item">
         			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">学习总结</a>
         		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="//categories/学习总结//" class="article-tag-list-link color5">学习总结</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/10/cjoc8rk8e000t6q6zc1pddp7k/">more >></a>
-        </p>
-      
-
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-<!---让百度主动推送代码，让搜索引擎最快发现文章--->
-
-
-<!--gitalk留言功能-->
-
-  <div id="gitalk-container" style="padding: 0px 30px 0px 30px;"></div>
-
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
-<script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
-<script type="text/javascript">
-
-if(true){
-	var gitalk = new Gitalk({
-  	clientID: '069eca25fe0437ca85c8',
-  	clientSecret: 'f338a82d38ecf5e848e1459591defca47e74ff5e',
-  	repo: 'ahojcn.github.io',
-  	owner: 'ahojcn',
-  	admin: ['ahojcn'],
-  	id: '',
-  	distractionFreeMode: 'false'
-})
-gitalk.render('gitalk-container')
-}
-</script>
-
-  
-
-  
-    <article id="post-4|深入理解数组" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/10/cjoc8rk8d000q6q6zq5hah1y5/">4|深入理解数组</a>
-    </h1>
-  
-
-        
-        <a href="/2018/10/cjoc8rk8d000q6q6zq5hah1y5/" class="archive-article-date">
-  	<time datetime="2018-10-03T04:11:26.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-10-03</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h2><h3 id="1-为什么很多编程语言中数组都是从-0-开始编号"><a href="#1-为什么很多编程语言中数组都是从-0-开始编号" class="headerlink" title="1 为什么很多编程语言中数组都是从 0 开始编号"></a>1 为什么很多编程语言中数组都是从 0 开始编号</h3><h3 id="2-数组的特点"><a href="#2-数组的特点" class="headerlink" title="2 数组的特点"></a>2 数组的特点</h3><h3 id="3-数组越界问题"><a href="#3-数组越界问题" class="headerlink" title="3 数组越界问题"></a>3 数组越界问题</h3><h3 id="4-容器和数组用哪个更好"><a href="#4-容器和数组用哪个更好" class="headerlink" title="4 容器和数组用哪个更好"></a>4 容器和数组用哪个更好</h3>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">数据结构</a>
-        		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">C语言</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">学习总结</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Matlab</a>
         		</li>
       		
 		</ul>
@@ -460,18 +370,89 @@ gitalk.render('gitalk-container')
 
 
       
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/10/cjoc8rk8d000q6q6zq5hah1y5/">more >></a>
-        </p>
+
       
+        
 
       
 
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
+        </div>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://ahoj.cc/2018/11/cjoc8rk7z00086q6ziuu1b0jj/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
       
       <div class="clearfix"></div>
     </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
+  
+    <a href="/2018/11/cjoc8rk81000b6q6z94xdirzh/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          15|整型在内存中的存取
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2018/10/cjoc8rk7x00056q6zitcownb9/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">13|边界计算与不对称边界</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
 
 <aside class="wrap-side-operation">
     <div class="mod-side-operation">
@@ -486,13 +467,45 @@ gitalk.render('gitalk-container')
         </div>
         
         
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#一、基础命令"><span class="toc-number">1.</span> <span class="toc-text">一、基础命令</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-基础运算"><span class="toc-number">1.1.</span> <span class="toc-text">1. 基础运算</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-向量运算"><span class="toc-number">1.2.</span> <span class="toc-text">2. 向量运算</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-矩阵运算"><span class="toc-number">1.3.</span> <span class="toc-text">3. 矩阵运算</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-Script"><span class="toc-number">1.4.</span> <span class="toc-text">4. Script</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#二、语法"><span class="toc-number">2.</span> <span class="toc-text">二、语法</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-选择"><span class="toc-number">2.1.</span> <span class="toc-text">1. 选择</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-循环"><span class="toc-number">2.2.</span> <span class="toc-text">2. 循环</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-while"><span class="toc-number">2.2.1.</span> <span class="toc-text">2.1 while</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-for"><span class="toc-number">2.2.2.</span> <span class="toc-text">2.2 for</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#三、Function"><span class="toc-number">3.</span> <span class="toc-text">三、Function</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#3-1无返回值"><span class="toc-number">3.1.</span> <span class="toc-text">3.1无返回值</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-2-带返回值function"><span class="toc-number">3.2.</span> <span class="toc-text">3.2 带返回值function</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#EOF"><span class="toc-number">4.</span> <span class="toc-text">EOF</span></a></li></ol>
+                    </div>
+                </span>
+            </div>
+        </div>
+        
     </div>
 </aside>
 
 
 
+  
+
+  
+
+  
+
+  
+
+  
+
 
 <!---让百度主动推送代码，让搜索引擎最快发现文章--->
+
+<script>
+(function(){
+    var bp = document.createElement('script');
+    bp.src = '//push.zhanzhang.baidu.com/push.js';
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
 
 
 <!--gitalk留言功能-->
@@ -510,7 +523,7 @@ if(true){
   	repo: 'ahojcn.github.io',
   	owner: 'ahojcn',
   	admin: ['ahojcn'],
-  	id: '',
+  	id: 'Wed Nov 07 2018 11:13:49 GMT+0800',
   	distractionFreeMode: 'false'
 })
 gitalk.render('gitalk-container')
@@ -518,334 +531,6 @@ gitalk.render('gitalk-container')
 </script>
 
   
-
-  
-    <article id="post-3|老韩语录和我们的故事" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/10/cjoc8rk8b000n6q6zcam7zdr9/">3|老韩语录和我们的故事</a>
-    </h1>
-  
-
-        
-        <a href="/2018/10/cjoc8rk8b000n6q6zcam7zdr9/" class="archive-article-date">
-  	<time datetime="2018-10-02T06:57:24.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-10-02</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>神中，这9班，我们的故事。</p>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/10/cjoc8rk8b000n6q6zcam7zdr9/">more >></a>
-        </p>
-      
-
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-<!---让百度主动推送代码，让搜索引擎最快发现文章--->
-
-
-<!--gitalk留言功能-->
-
-  <div id="gitalk-container" style="padding: 0px 30px 0px 30px;"></div>
-
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
-<script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
-<script type="text/javascript">
-
-if(true){
-	var gitalk = new Gitalk({
-  	clientID: '069eca25fe0437ca85c8',
-  	clientSecret: 'f338a82d38ecf5e848e1459591defca47e74ff5e',
-  	repo: 'ahojcn.github.io',
-  	owner: 'ahojcn',
-  	admin: ['ahojcn'],
-  	id: '',
-  	distractionFreeMode: 'false'
-})
-gitalk.render('gitalk-container')
-}
-</script>
-
-  
-
-  
-    <article id="post-2|不要在二三十岁就开始老去" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/09/cjoc8rk89000k6q6zm5p1tx1x/">2|不要在二三十岁就开始老去</a>
-    </h1>
-  
-
-        
-        <a href="/2018/09/cjoc8rk89000k6q6zm5p1tx1x/" class="archive-article-date">
-  	<time datetime="2018-09-30T12:37:03.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-09-30</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>特别喜欢的一篇文章，分享出来。</p>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">反思</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="//categories/反思//" class="article-tag-list-link color3">反思</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/09/cjoc8rk89000k6q6zm5p1tx1x/">more >></a>
-        </p>
-      
-
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-<!---让百度主动推送代码，让搜索引擎最快发现文章--->
-
-
-<!--gitalk留言功能-->
-
-  <div id="gitalk-container" style="padding: 0px 30px 0px 30px;"></div>
-
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
-<script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
-<script type="text/javascript">
-
-if(true){
-	var gitalk = new Gitalk({
-  	clientID: '069eca25fe0437ca85c8',
-  	clientSecret: 'f338a82d38ecf5e848e1459591defca47e74ff5e',
-  	repo: 'ahojcn.github.io',
-  	owner: 'ahojcn',
-  	admin: ['ahojcn'],
-  	id: '',
-  	distractionFreeMode: 'false'
-})
-gitalk.render('gitalk-container')
-}
-</script>
-
-  
-
-  
-    <article id="post-1|人之患在好为人师" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/09/cjoc8rk87000h6q6zmigfxe8u/">1|人之患在好为人师</a>
-    </h1>
-  
-
-        
-        <a href="/2018/09/cjoc8rk87000h6q6zmigfxe8u/" class="archive-article-date">
-  	<time datetime="2018-09-21T06:35:30.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-09-21</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="反思杂记"><a href="#反思杂记" class="headerlink" title="反思杂记"></a>反思杂记</h2><p>“人之患在好为人师。”  “学问有余，人资于己，以不得已而应之可也。若好为人师，则自足而不复有进矣，此人之大患也。”</p>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">反思</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="//categories/反思//" class="article-tag-list-link color3">反思</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/09/cjoc8rk87000h6q6zmigfxe8u/">more >></a>
-        </p>
-      
-
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-<!---让百度主动推送代码，让搜索引擎最快发现文章--->
-
-
-<!--gitalk留言功能-->
-
-  <div id="gitalk-container" style="padding: 0px 30px 0px 30px;"></div>
-
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
-<script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
-<script type="text/javascript">
-
-if(true){
-	var gitalk = new Gitalk({
-  	clientID: '069eca25fe0437ca85c8',
-  	clientSecret: 'f338a82d38ecf5e848e1459591defca47e74ff5e',
-  	repo: 'ahojcn.github.io',
-  	owner: 'ahojcn',
-  	admin: ['ahojcn'],
-  	id: '',
-  	distractionFreeMode: 'false'
-})
-gitalk.render('gitalk-container')
-}
-</script>
-
-  
-
-  
-  
-    <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span>
-    </nav>
-  
-
 
           </div>
         </div>
@@ -873,8 +558,8 @@ gitalk.render('gitalk-container')
     <script>
 	var yiliaConfig = {
 		mathjax: true,
-		isHome: true,
-		isPost: false,
+		isHome: false,
+		isPost: true,
 		isArchive: false,
 		isTag: false,
 		isCategory: false,
