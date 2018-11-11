@@ -16,7 +16,7 @@
 <meta property="og:site_name" content="ahoj的博客">
 <meta property="og:description" content="理解数据在计算机中的存储。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-11-11T08:44:52.504Z">
+<meta property="og:updated_time" content="2018-11-11T10:42:49.947Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="15|数据在内存中的存储">
 <meta name="twitter:description" content="理解数据在计算机中的存储。">
@@ -245,10 +245,14 @@
 <p>比如：$2^{10}$的E是10，保存为32位浮点数时，必须保存成$10+127=137$，即$10001001$。</p>
 <ul>
 <li><p>E不全为0或不全为1</p>
+<p>此时指数E的计算值减去127(或1023)，得到真实值，再在有效数字M前加上第一位的1。</p>
+<p>比如：$0.5$的二进制形式为$0.1$，由于规定M的正数部分必须为1，即小数点右移1位，为$1.0*2^{-1}$，其阶码为$-1+127=126$，表示为$01111110$，而尾数$1.0$去掉整数部分为0，补齐0到23位，最终$0.5$的二进制表示为：<code>0 01111110 00000000000000000000000</code>。</p>
 </li>
-<li><p>E全为0</p>
+<li><p>E全为0(浮点数0)</p>
+<p>这时，浮点数的指数E等于$1-127(或1-1023)$即为真实值，有效数字M不再加上第一位的1，而是还原为$0.$xxxxxx的小数。这样做是为了表示$+0 ~ -0$，以及接近于0的很小的数字。</p>
 </li>
-<li><p>E全为1</p>
+<li><p>E全为1(最小、最大浮点数)</p>
+<p>这时，如果有效数字M全为0，表示$+\infty$和$-\infty$(正负取决于符号位S)。</p>
 </li>
 </ul>
 </li>
