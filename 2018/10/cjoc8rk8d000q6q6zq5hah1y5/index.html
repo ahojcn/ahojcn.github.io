@@ -8,20 +8,20 @@
   <link rel="dns-prefetch" href="http://ahoj.cc">
   <title>4|深入理解数组 | ahoj的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="1 为什么很多编程语言中数组都是从 0 开始编号2 数组的特点3 数组越界问题4 容器和数组用哪个更好">
+  <meta name="description" content="为什么很多编程语言中数组都是从 0 开始编号？ 数组的特点、数组越界问题、容器和数组用哪个更好">
 <meta name="keywords" content="数据结构,C语言,学习总结">
 <meta property="og:type" content="article">
 <meta property="og:title" content="4|深入理解数组">
 <meta property="og:url" content="http://ahoj.cc/2018/10/cjoc8rk8d000q6q6zq5hah1y5/index.html">
 <meta property="og:site_name" content="ahoj的博客">
-<meta property="og:description" content="1 为什么很多编程语言中数组都是从 0 开始编号2 数组的特点3 数组越界问题4 容器和数组用哪个更好">
+<meta property="og:description" content="为什么很多编程语言中数组都是从 0 开始编号？ 数组的特点、数组越界问题、容器和数组用哪个更好">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://wx4.sinaimg.cn/mw690/006wR0dcly1fvuyi439iqj31kw11he4q.jpg">
 <meta property="og:image" content="https://wx4.sinaimg.cn/mw690/006wR0dcly1fvuyi3tjgkj31740b079s.jpg">
-<meta property="og:updated_time" content="2018-11-11T14:42:08.042Z">
+<meta property="og:updated_time" content="2018-11-11T14:56:39.890Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="4|深入理解数组">
-<meta name="twitter:description" content="1 为什么很多编程语言中数组都是从 0 开始编号2 数组的特点3 数组越界问题4 容器和数组用哪个更好">
+<meta name="twitter:description" content="为什么很多编程语言中数组都是从 0 开始编号？ 数组的特点、数组越界问题、容器和数组用哪个更好">
 <meta name="twitter:image" content="https://wx4.sinaimg.cn/mw690/006wR0dcly1fvuyi439iqj31kw11he4q.jpg">
   
     <link rel="alternative" href="/atom.xml" title="ahoj的博客" type="application/atom+xml">
@@ -189,9 +189,11 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="1-为什么很多编程语言中数组都是从-0-开始编号"><a href="#1-为什么很多编程语言中数组都是从-0-开始编号" class="headerlink" title="1 为什么很多编程语言中数组都是从 0 开始编号"></a>1 为什么很多编程语言中数组都是从 0 开始编号</h3><h3 id="2-数组的特点"><a href="#2-数组的特点" class="headerlink" title="2 数组的特点"></a>2 数组的特点</h3><h3 id="3-数组越界问题"><a href="#3-数组越界问题" class="headerlink" title="3 数组越界问题"></a>3 数组越界问题</h3><h3 id="4-容器和数组用哪个更好"><a href="#4-容器和数组用哪个更好" class="headerlink" title="4 容器和数组用哪个更好"></a>4 容器和数组用哪个更好</h3><a id="more"></a>
+        <p>为什么很多编程语言中数组都是从 0 开始编号？</p>
+<p>数组的特点、数组越界问题、容器和数组用哪个更好</p>
+<a id="more"></a>
 <hr>
-<h2 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h2><h3 id="1-为什么很多编程语言中数组都是从-0-开始编号-1"><a href="#1-为什么很多编程语言中数组都是从-0-开始编号-1" class="headerlink" title="1 为什么很多编程语言中数组都是从 0 开始编号"></a>1 为什么很多编程语言中数组都是从 0 开始编号</h3><h4 id="1-1-效率原因"><a href="#1-1-效率原因" class="headerlink" title="1.1 效率原因"></a>1.1 效率原因</h4><blockquote>
+<h2 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h2><h3 id="1-为什么很多编程语言中数组都是从-0-开始编号"><a href="#1-为什么很多编程语言中数组都是从-0-开始编号" class="headerlink" title="1 为什么很多编程语言中数组都是从 0 开始编号"></a>1 为什么很多编程语言中数组都是从 0 开始编号</h3><h4 id="1-1-效率原因"><a href="#1-1-效率原因" class="headerlink" title="1.1 效率原因"></a>1.1 效率原因</h4><blockquote>
 <p>从内存模型来看，“下标”也称为“偏移”。</p>
 <p>我们知道在C语言中数组名代表首地址(第一个元素的地址)，a[0]就是偏移为 0 的位置。a[k]就表示偏移 k 个元素类型大小的位置。得出计算公式：</p>
 <p><code>a[k]_address = base_address + k * type_size</code></p>
@@ -205,7 +207,7 @@
 <p>还有一些语言并不是从0开始计数的，如：Matlab。</p>
 <p>据我所知：python还支持负数下标。</p>
 </blockquote>
-<h3 id="2-数组的特点-1"><a href="#2-数组的特点-1" class="headerlink" title="2 数组的特点"></a>2 数组的特点</h3><h4 id="2-1-随机访问"><a href="#2-1-随机访问" class="headerlink" title="2.1 随机访问"></a>2.1 随机访问</h4><blockquote>
+<h3 id="2-数组的特点"><a href="#2-数组的特点" class="headerlink" title="2 数组的特点"></a>2 数组的特点</h3><h4 id="2-1-随机访问"><a href="#2-1-随机访问" class="headerlink" title="2.1 随机访问"></a>2.1 随机访问</h4><blockquote>
 <p>数组是一种线性数据结构，占用一段连续的内存，存储相同类型的数据。</p>
 <p>例如：这样一段代码</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&gt; <span class="keyword">int</span> arr[<span class="number">10</span>] = &#123;<span class="number">0</span>&#125;;</span><br><span class="line">&gt; <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;<span class="number">10</span>;i++)</span><br><span class="line">&gt; &#123;</span><br><span class="line">&gt;     arr[i] = i;</span><br><span class="line">&gt; &#125;</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
@@ -253,7 +255,7 @@
 <p>在某些特殊情况下，我们并不一定非得追求数组中数据的连续性，如果我们将多次删除操作放在一起执行，效率会高很多。</p>
 <p>举个例子：<code>a[10]={a,b,c,d,e,f,g,h}</code> 如果我们要依次删除abc三个元素，需要搬移三次后面的数据，为了避免这个重复的搬移工作，可以先记录下来已经删除的数据，每次的删除操作并不是真正的搬移数据，只是记录数据已经被删除，当数组中没有更多的空间存储数据时，我们再触发执行一次真正的删除操作，这样就大大减少了搬移工作，这也是<strong>标记清除垃圾回收算法</strong>的核心思想。</p>
 </blockquote>
-<h3 id="3-数组越界问题-1"><a href="#3-数组越界问题-1" class="headerlink" title="3 数组越界问题"></a>3 数组越界问题</h3><blockquote>
+<h3 id="3-数组越界问题"><a href="#3-数组越界问题" class="headerlink" title="3 数组越界问题"></a>3 数组越界问题</h3><blockquote>
 <p>有如下代码：</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&gt; <span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line">&gt; &#123;</span><br><span class="line">&gt;     <span class="keyword">int</span> i = <span class="number">0</span>;</span><br><span class="line">&gt;     <span class="keyword">int</span> arr[<span class="number">3</span>] = &#123;<span class="number">0</span>&#125;;</span><br><span class="line">&gt;     <span class="keyword">for</span>(; i&lt;=<span class="number">3</span>; i++)</span><br><span class="line">&gt;     &#123;</span><br><span class="line">&gt;         arr[i] = <span class="number">0</span>;</span><br><span class="line">&gt;         <span class="built_in">printf</span>(<span class="string">"Hello world\n"</span>);</span><br><span class="line">&gt;     &#125;</span><br><span class="line">&gt;     <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&gt; &#125;</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
 </blockquote>
@@ -264,7 +266,7 @@
 <p>那为什么会无限打印呢？</p>
 <p>根据我所学和百度的知识解释下：函数体内的局部变量存在栈区，在Linux内存布局中，栈区在高地址空间，从高到低增长，先<code>int i = 0;</code>再<code>int arr[3]={0};</code>变量i和arr地址相邻，并且i地址比arr地址大，首先压栈的i，a[2]，a[1]，a[0]，循环中arr访问越界正好到i，而此时i变量的地址是数组当前进程的，所以进行修改的时候，操作系统并不会终止进程。当然这只是32位操作系统下，64位操作系统下 默认会进行8字节对齐 变量i的地址就不紧跟着数组后面了。另外这个还和编译环境有关，对于不同的编译器，在内存分配时，会按照内存地址递增或递减的方式进行分配。如果是内存地址递减的方式，就会造成无限循环。</p>
 </blockquote>
-<h3 id="4-容器和数组用哪个更好-1"><a href="#4-容器和数组用哪个更好-1" class="headerlink" title="4 容器和数组用哪个更好"></a>4 容器和数组用哪个更好</h3><blockquote>
+<h3 id="4-容器和数组用哪个更好"><a href="#4-容器和数组用哪个更好" class="headerlink" title="4 容器和数组用哪个更好"></a>4 容器和数组用哪个更好</h3><blockquote>
 <p>对于数组类型，很多语言提供了容器类，例如我正在学的C++中的Vector。</p>
 <p>那什么时候用数组，什么适合用容器呢？</p>
 <p>容器的优势就是可以将很多数组操作的细节封装起来，有的还支持动态扩容。</p>
@@ -416,7 +418,7 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-为什么很多编程语言中数组都是从-0-开始编号"><span class="toc-number">1.</span> <span class="toc-text">1 为什么很多编程语言中数组都是从 0 开始编号</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-数组的特点"><span class="toc-number">2.</span> <span class="toc-text">2 数组的特点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-数组越界问题"><span class="toc-number">3.</span> <span class="toc-text">3 数组越界问题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-容器和数组用哪个更好"><span class="toc-number">4.</span> <span class="toc-text">4 容器和数组用哪个更好</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#正文"><span class="toc-number"></span> <span class="toc-text">正文</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-为什么很多编程语言中数组都是从-0-开始编号-1"><span class="toc-number">1.</span> <span class="toc-text">1 为什么很多编程语言中数组都是从 0 开始编号</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-1-效率原因"><span class="toc-number">1.1.</span> <span class="toc-text">1.1 效率原因</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-2-历史原因"><span class="toc-number">1.2.</span> <span class="toc-text">1.2 历史原因</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-数组的特点-1"><span class="toc-number">2.</span> <span class="toc-text">2 数组的特点</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#2-1-随机访问"><span class="toc-number">2.1.</span> <span class="toc-text">2.1 随机访问</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-2-低效的“插入”和“删除”"><span class="toc-number">2.2.</span> <span class="toc-text">2.2 低效的“插入”和“删除”</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#2-2-1-低效原因"><span class="toc-number">2.2.1.</span> <span class="toc-text">2.2.1 低效原因</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-2-2-改进方法"><span class="toc-number">2.2.2.</span> <span class="toc-text">2.2.2 改进方法</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-数组越界问题-1"><span class="toc-number">3.</span> <span class="toc-text">3 数组越界问题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-容器和数组用哪个更好-1"><span class="toc-number">4.</span> <span class="toc-text">4 容器和数组用哪个更好</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#完"><span class="toc-number"></span> <span class="toc-text">完</span></a>
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#正文"><span class="toc-number">1.</span> <span class="toc-text">正文</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-为什么很多编程语言中数组都是从-0-开始编号"><span class="toc-number">1.1.</span> <span class="toc-text">1 为什么很多编程语言中数组都是从 0 开始编号</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-1-效率原因"><span class="toc-number">1.1.1.</span> <span class="toc-text">1.1 效率原因</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-2-历史原因"><span class="toc-number">1.1.2.</span> <span class="toc-text">1.2 历史原因</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-数组的特点"><span class="toc-number">1.2.</span> <span class="toc-text">2 数组的特点</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#2-1-随机访问"><span class="toc-number">1.2.1.</span> <span class="toc-text">2.1 随机访问</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-2-低效的“插入”和“删除”"><span class="toc-number">1.2.2.</span> <span class="toc-text">2.2 低效的“插入”和“删除”</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#2-2-1-低效原因"><span class="toc-number">1.2.2.1.</span> <span class="toc-text">2.2.1 低效原因</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-2-2-改进方法"><span class="toc-number">1.2.2.2.</span> <span class="toc-text">2.2.2 改进方法</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-数组越界问题"><span class="toc-number">1.3.</span> <span class="toc-text">3 数组越界问题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-容器和数组用哪个更好"><span class="toc-number">1.4.</span> <span class="toc-text">4 容器和数组用哪个更好</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#完"><span class="toc-number">2.</span> <span class="toc-text">完</span></a></li></ol>
                     </div>
                 </span>
             </div>
