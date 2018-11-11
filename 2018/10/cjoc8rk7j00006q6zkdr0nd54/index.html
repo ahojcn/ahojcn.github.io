@@ -8,18 +8,18 @@
   <link rel="dns-prefetch" href="http://ahoj.cc">
   <title>10|二分查找 | ahoj的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="数据结构与算法之美 之前在bilibili看到一个有趣的视频，关于二分查找的。戳我看这个有趣的视频 1. 二分思想2. 递归和非递归实现3. 时间复杂度4. 局限性5. 变体问题">
+  <meta name="description" content="数据结构与算法之美：二分思想、递归和非递归实现、时间复杂度、局限性、变体问题 之前在bilibili看到一个有趣的视频，关于二分查找的。戳我看这个有趣的视频">
 <meta name="keywords" content="学习总结,算法">
 <meta property="og:type" content="article">
 <meta property="og:title" content="10|二分查找">
 <meta property="og:url" content="http://ahoj.cc/2018/10/cjoc8rk7j00006q6zkdr0nd54/index.html">
 <meta property="og:site_name" content="ahoj的博客">
-<meta property="og:description" content="数据结构与算法之美 之前在bilibili看到一个有趣的视频，关于二分查找的。戳我看这个有趣的视频 1. 二分思想2. 递归和非递归实现3. 时间复杂度4. 局限性5. 变体问题">
+<meta property="og:description" content="数据结构与算法之美：二分思想、递归和非递归实现、时间复杂度、局限性、变体问题 之前在bilibili看到一个有趣的视频，关于二分查找的。戳我看这个有趣的视频">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-11-11T14:43:30.144Z">
+<meta property="og:updated_time" content="2018-11-11T14:49:37.522Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="10|二分查找">
-<meta name="twitter:description" content="数据结构与算法之美 之前在bilibili看到一个有趣的视频，关于二分查找的。戳我看这个有趣的视频 1. 二分思想2. 递归和非递归实现3. 时间复杂度4. 局限性5. 变体问题">
+<meta name="twitter:description" content="数据结构与算法之美：二分思想、递归和非递归实现、时间复杂度、局限性、变体问题 之前在bilibili看到一个有趣的视频，关于二分查找的。戳我看这个有趣的视频">
   
     <link rel="alternative" href="/atom.xml" title="ahoj的博客" type="application/atom+xml">
   
@@ -186,11 +186,11 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>数据结构与算法之美</p>
+        <p>数据结构与算法之美：二分思想、递归和非递归实现、时间复杂度、局限性、变体问题</p>
 <p>之前在bilibili看到一个有趣的视频，关于二分查找的。<a href="https://www.bilibili.com/video/av15833965" target="_blank" rel="noopener">戳我看这个有趣的视频</a></p>
-<h3 id="1-二分思想"><a href="#1-二分思想" class="headerlink" title="1. 二分思想"></a>1. 二分思想</h3><h3 id="2-递归和非递归实现"><a href="#2-递归和非递归实现" class="headerlink" title="2. 递归和非递归实现"></a>2. 递归和非递归实现</h3><h3 id="3-时间复杂度"><a href="#3-时间复杂度" class="headerlink" title="3. 时间复杂度"></a>3. 时间复杂度</h3><h3 id="4-局限性"><a href="#4-局限性" class="headerlink" title="4. 局限性"></a>4. 局限性</h3><h3 id="5-变体问题"><a href="#5-变体问题" class="headerlink" title="5. 变体问题"></a>5. 变体问题</h3><a id="more"></a>
+<a id="more"></a>
 <hr>
-<h2 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h2><h3 id="1-二分思想-1"><a href="#1-二分思想-1" class="headerlink" title="1. 二分思想"></a>1. 二分思想</h3><p>就如上面视频中的栗子，猜数字游戏，如果从头开始一个一个的猜是非常低效的。</p>
+<h2 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h2><h3 id="1-二分思想"><a href="#1-二分思想" class="headerlink" title="1. 二分思想"></a>1. 二分思想</h3><p>就如上面视频中的栗子，猜数字游戏，如果从头开始一个一个的猜是非常低效的。</p>
 <blockquote>
 <p>在实际的开发场景中，假设有1w条订单数据，已经按照订单的金额从小到大排序，每个定干的金额不同，最小单位是元。</p>
 <p>如果从第一个订单开始，遍历这1w条订单，直到找到目标为止，这种方法在最坏情况下可能要便利完所有数据才能找到。</p>
@@ -212,11 +212,11 @@
 </ol>
 <p><code>low=mid+1</code>和<code>high=mid-1</code>这里的+1和-1，如果写成<code>low=mid或high=mid</code>就可能发生死循环。</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 二分查找的递归实现</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">bsearch</span><span class="params">(<span class="keyword">int</span> a[], <span class="keyword">int</span> n, <span class="keyword">int</span> val)</span> </span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="keyword">return</span> b(a, <span class="number">0</span>, n - <span class="number">1</span>, val);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">b</span><span class="params">(<span class="keyword">int</span> a[], <span class="keyword">int</span> low, <span class="keyword">int</span> high, <span class="keyword">int</span> value)</span> </span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (low &gt; high) <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">int</span> mid =  low + ((high - low) &gt;&gt; <span class="number">1</span>);</span><br><span class="line">  <span class="keyword">if</span> (a[mid] == value) </span><br><span class="line">  &#123;</span><br><span class="line">    <span class="keyword">return</span> mid;</span><br><span class="line">  &#125; </span><br><span class="line">  <span class="keyword">else</span> <span class="keyword">if</span> (a[mid] &lt; value) </span><br><span class="line">  &#123;</span><br><span class="line">    <span class="keyword">return</span> bsearchInternally(a, mid+<span class="number">1</span>, high, value);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">else</span></span><br><span class="line">  &#123;</span><br><span class="line">    <span class="keyword">return</span> bsearchInternally(a, low, mid<span class="number">-1</span>, value);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="3-时间复杂度-1"><a href="#3-时间复杂度-1" class="headerlink" title="3. 时间复杂度"></a>3. 时间复杂度</h3><p>二分查找的被查找区间缩小速度是一个等比数列，公比q为1/2。</p>
+<h3 id="3-时间复杂度"><a href="#3-时间复杂度" class="headerlink" title="3. 时间复杂度"></a>3. 时间复杂度</h3><p>二分查找的被查找区间缩小速度是一个等比数列，公比q为1/2。</p>
 <p>假设数据规模为n，每次查找后数据规模都会缩小为原来的一半，最坏情况下，直到查找区间被缩小为空停止。</p>
 <p><code>n/2^k=1</code>时，k就是总共缩小的次数，每次缩小只涉及2个数据的比较，经过k次区间缩小操作，时间复杂度为O(k)。k等于以2为底n的对数，解得时间复杂度为<code>O(logn)</code>。</p>
 <p><code>O(logn)</code>在某些情况下比<code>O(1)</code>时间复杂度的算法高效。<code>O(1)</code>时忽略掉常熟、系数和低阶。当数据规模够大时，如<code>O(10000)</code>，此时<code>log(n)</code>的算法效率比<code>O(1)</code>的高。</p>
-<h3 id="4-局限性-1"><a href="#4-局限性-1" class="headerlink" title="4. 局限性"></a>4. 局限性</h3><ol>
+<h3 id="4-局限性"><a href="#4-局限性" class="headerlink" title="4. 局限性"></a>4. 局限性</h3><ol>
 <li>二分查找依赖顺序结构</li>
 <li>二分查找针对的是有序数据</li>
 <li>数据量太小不适合二分查找</li>
@@ -402,7 +402,7 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-二分思想"><span class="toc-number">1.</span> <span class="toc-text">1. 二分思想</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-递归和非递归实现"><span class="toc-number">2.</span> <span class="toc-text">2. 递归和非递归实现</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-时间复杂度"><span class="toc-number">3.</span> <span class="toc-text">3. 时间复杂度</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-局限性"><span class="toc-number">4.</span> <span class="toc-text">4. 局限性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-变体问题"><span class="toc-number">5.</span> <span class="toc-text">5. 变体问题</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#正文"><span class="toc-number"></span> <span class="toc-text">正文</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-二分思想-1"><span class="toc-number">1.</span> <span class="toc-text">1. 二分思想</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-二分查找实现-递归和非递归"><span class="toc-number">2.</span> <span class="toc-text">2. 二分查找实现(递归和非递归)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-时间复杂度-1"><span class="toc-number">3.</span> <span class="toc-text">3. 时间复杂度</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-局限性-1"><span class="toc-number">4.</span> <span class="toc-text">4. 局限性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-二分查找的变体问题"><span class="toc-number">5.</span> <span class="toc-text">5. 二分查找的变体问题</span></a></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#正文"><span class="toc-number">1.</span> <span class="toc-text">正文</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-二分思想"><span class="toc-number">1.1.</span> <span class="toc-text">1. 二分思想</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-二分查找实现-递归和非递归"><span class="toc-number">1.2.</span> <span class="toc-text">2. 二分查找实现(递归和非递归)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-时间复杂度"><span class="toc-number">1.3.</span> <span class="toc-text">3. 时间复杂度</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-局限性"><span class="toc-number">1.4.</span> <span class="toc-text">4. 局限性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-二分查找的变体问题"><span class="toc-number">1.5.</span> <span class="toc-text">5. 二分查找的变体问题</span></a></li></ol></li></ol>
                     </div>
                 </span>
             </div>
