@@ -16,10 +16,12 @@
 <meta property="og:site_name" content="ahoj的博客">
 <meta property="og:description" content="理解数据在计算机中的存储。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-11-11T10:42:49.947Z">
+<meta property="og:image" content="https://wx2.sinaimg.cn/mw690/006wR0dcly1fx4bfr4hy3j30ew066t94.jpg">
+<meta property="og:updated_time" content="2018-11-11T11:11:23.261Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="15|数据在内存中的存储">
 <meta name="twitter:description" content="理解数据在计算机中的存储。">
+<meta name="twitter:image" content="https://wx2.sinaimg.cn/mw690/006wR0dcly1fx4bfr4hy3j30ew066t94.jpg">
   
     <link rel="alternative" href="/atom.xml" title="ahoj的博客" type="application/atom+xml">
   
@@ -221,7 +223,7 @@
 <h1 id="2-浮点型"><a href="#2-浮点型" class="headerlink" title="2. 浮点型"></a>2. 浮点型</h1><blockquote>
 <p>float、double、long double，浮点数的表示范围在float.h中定义</p>
 </blockquote>
-<h2 id="浮点数在计算机内部的表示方法："><a href="#浮点数在计算机内部的表示方法：" class="headerlink" title="浮点数在计算机内部的表示方法："></a>浮点数在计算机内部的表示方法：</h2><h3 id="浮点数的表示"><a href="#浮点数的表示" class="headerlink" title="浮点数的表示"></a>浮点数的表示</h3><p>根据国际标准IEEE 754，任意一个二进制浮点数可以表示为：$(-1)^S <em> M </em> 2^E$</p>
+<h2 id="2-1-浮点数在计算机内部的表示方法："><a href="#2-1-浮点数在计算机内部的表示方法：" class="headerlink" title="2.1 浮点数在计算机内部的表示方法："></a>2.1 浮点数在计算机内部的表示方法：</h2><h3 id="浮点数的表示"><a href="#浮点数的表示" class="headerlink" title="浮点数的表示"></a>浮点数的表示</h3><p>根据国际标准IEEE 754，任意一个二进制浮点数可以表示为：$(-1)^S <em> M </em> 2^E$</p>
 <ul>
 <li><p>$(-1)^S$表示符号位，$S=0$时，为正，$S=1$时，为负。</p>
 </li>
@@ -257,7 +259,23 @@
 </ul>
 </li>
 </ul>
-
+<hr>
+<h2 id="2-2-关于浮点数的栗子"><a href="#2-2-关于浮点数的栗子" class="headerlink" title="2.2 关于浮点数的栗子"></a>2.2 关于浮点数的栗子</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> n = <span class="number">9</span>;</span><br><span class="line">    <span class="comment">// 第一部分</span></span><br><span class="line">    <span class="keyword">float</span> *pFloat = (<span class="keyword">float</span>*)&amp;n;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"n:%d\n"</span>, n);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"*pFloat:%f\n"</span>, *pFloat);</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 第二部分</span></span><br><span class="line">    *pFloat = <span class="number">9.0</span>;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"n:%d\n"</span>, n);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"*pFloat:%f\n"</span>, *pFloat);</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="https://wx2.sinaimg.cn/mw690/006wR0dcly1fx4bfr4hy3j30ew066t94.jpg" alt="pic"></p>
+<ul>
+<li><p>第一部分：</p>
+<p>首先把<code>0x00000009</code>(16进制)拆分：符号位S=0，后面8位E=00000000，最后23位M=000 0000 0000 0000 0000 1001。</p>
+<p>9最终表示为浮点数为：<code>0000 0000 0000 0000 0000 0000 0000 1001</code>。指数位E全为0，改写成浮点数为：$(-1)^0 <em> 0.000 0000 0000 0000 0000 0000 0000 1001</em>2^{-126}=1.001*2^{-146}$。</p>
+<p>显然，这是一个很小的接近于0的正数，所以用十进制小数表示为$0.000000$。</p>
+</li>
+<li><p>第二部分：</p>
+<p>浮点数9.0表示为二进制：$1001.0$，即$1.001*2^3$。</p>
+<p>M=1.001，E=3+127=130。</p>
+<p>写成二进制：<code>0 10000010 001 0000 0000 0000 0000 0000</code>，这个32位的二进制数，表示成十进制正是，1091567616。</p>
+</li>
+</ul>
+<hr>
+<h1 id="EOF"><a href="#EOF" class="headerlink" title="EOF"></a>EOF</h1>
       
 
       
@@ -398,7 +416,7 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-整型"><span class="toc-number">1.</span> <span class="toc-text">1. 整型</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-1-存整数"><span class="toc-number">1.1.</span> <span class="toc-text">1.1 存整数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-2-取整数"><span class="toc-number">1.2.</span> <span class="toc-text">1.2 取整数</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-浮点型"><span class="toc-number">2.</span> <span class="toc-text">2. 浮点型</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#浮点数在计算机内部的表示方法："><span class="toc-number">2.1.</span> <span class="toc-text">浮点数在计算机内部的表示方法：</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#浮点数的表示"><span class="toc-number">2.1.1.</span> <span class="toc-text">浮点数的表示</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#浮点数的存储"><span class="toc-number">2.1.2.</span> <span class="toc-text">浮点数的存储</span></a></li></ol></li></ol></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-整型"><span class="toc-number">1.</span> <span class="toc-text">1. 整型</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-1-存整数"><span class="toc-number">1.1.</span> <span class="toc-text">1.1 存整数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-2-取整数"><span class="toc-number">1.2.</span> <span class="toc-text">1.2 取整数</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-浮点型"><span class="toc-number">2.</span> <span class="toc-text">2. 浮点型</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#2-1-浮点数在计算机内部的表示方法："><span class="toc-number">2.1.</span> <span class="toc-text">2.1 浮点数在计算机内部的表示方法：</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#浮点数的表示"><span class="toc-number">2.1.1.</span> <span class="toc-text">浮点数的表示</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#浮点数的存储"><span class="toc-number">2.1.2.</span> <span class="toc-text">浮点数的存储</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-2-关于浮点数的栗子"><span class="toc-number">2.2.</span> <span class="toc-text">2.2 关于浮点数的栗子</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#EOF"><span class="toc-number">3.</span> <span class="toc-text">EOF</span></a></li></ol>
                     </div>
                 </span>
             </div>
