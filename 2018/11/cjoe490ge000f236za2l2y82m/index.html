@@ -19,7 +19,7 @@
 <meta property="og:image" content="https://wx2.sinaimg.cn/mw690/006wR0dcly1fx5b2h8043j30lr0f0n2v.jpg">
 <meta property="og:image" content="https://wx3.sinaimg.cn/mw690/006wR0dcly1fx5b2h6inwj30es0km7ag.jpg">
 <meta property="og:image" content="https://wx3.sinaimg.cn/mw690/006wR0dcly1fx5b8gga6bj30pk0eyn52.jpg">
-<meta property="og:updated_time" content="2018-11-12T09:39:09.029Z">
+<meta property="og:updated_time" content="2018-11-12T13:38:33.232Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="17-汇编语言程序设计语法">
 <meta name="twitter:description" content="微机原理笔记之汇编语言程序设计语法。">
@@ -209,7 +209,7 @@
 </blockquote>
 <p><strong>汇编程序举例</strong>：将数据段内存单元DATA中的数据12H与立即数16H相加，结果保存在SUM中。完整的源程序如下：</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">DESG	SEGMENT		;定义数据段</span><br><span class="line">DATA	DB	<span class="number">12</span>H</span><br><span class="line">SUM		DB	<span class="number">0</span></span><br><span class="line">DESG	ENDS		;定义数据段结束</span><br><span class="line"></span><br><span class="line">SSEG	SEGMENT STACK	;定义堆栈段</span><br><span class="line">		DB	<span class="number">512</span>	DUP(<span class="number">0</span>)</span><br><span class="line">SSEG	ENDS			;定义堆栈段结束</span><br><span class="line"></span><br><span class="line">CSEG	SEGMENT		;定义代码段开始</span><br><span class="line">		ASSUME	DS:DSEG,SS:SSEG,CS:CSEG</span><br><span class="line">START:	MOV	AX,DSEG</span><br><span class="line">		MOV DS,AX</span><br><span class="line">		MOV AL,DATA</span><br><span class="line">		ADD AL,<span class="number">16</span>H</span><br><span class="line">		MOV	SUM,AL</span><br><span class="line">		MOV AH,<span class="number">4</span>CH</span><br><span class="line">		INT <span class="number">21</span>H</span><br><span class="line">CSEG	ENDS		;定义代码段结束</span><br><span class="line">		END START	;整个汇编程序结束，规定入口地址</span><br></pre></td></tr></table></figure>
-<p>1）汇编语言程序一般由若干段组成，每个段都有一个名字(段名)，以<code>SWGMENT</code>作为段的开始，<code>ENDS</code>作为段的结束。</p>
+<p>1）汇编语言程序一般由若干段组成，每个段都有一个名字(段名)，以<code>SEGMENT</code>作为段的开始，<code>ENDS</code>作为段的结束。</p>
 <p>汇编语言程序段有4种：</p>
 <p>代码段、堆栈段、数据段、附加段。</p>
 <p>其中代码段和堆栈段不可少，数据段和附加段根据需要设置。</p>
