@@ -23,7 +23,7 @@
 <meta property="og:image" content="https://wx4.sinaimg.cn/mw690/006wR0dcly1fwrjr2o5x8j31eq0ei0xq.jpg">
 <meta property="og:image" content="https://wx2.sinaimg.cn/mw690/006wR0dcly1fwrjnfxuk8j31080fw417.jpg">
 <meta property="og:image" content="https://wx2.sinaimg.cn/mw690/006wR0dcly1fwrk6oymgvj31kw0wxgsx.jpg">
-<meta property="og:updated_time" content="2018-11-11T14:40:42.810Z">
+<meta property="og:updated_time" content="2018-11-14T02:29:59.609Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="13|边界计算与不对称边界">
 <meta name="twitter:description" content="为什么C语言从0开始编号">
@@ -200,12 +200,11 @@
 <h2 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h2><blockquote>
 <p>如果一个数组有10个元素，那么这个数组下表的允许取值范围是什么呢？</p>
 </blockquote>
-<p>下面代码1，这段代码的运行结果是什么？为什么？</p>
+<p>下面代码1，这段代码。</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="comment">// 代码1</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> i = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">int</span> arr[<span class="number">10</span>] = &#123;<span class="number">0</span>&#125;;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">for</span>(i=<span class="number">0</span>; i&lt;<span class="number">12</span>; i++)	<span class="comment">// 注意这里是 i&lt;12</span></span><br><span class="line">    &#123;</span><br><span class="line">        arr[i] = <span class="number">0</span>;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"hey, girl!\n"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>结果出人意料。</p>
 <p>这段代码在Windows下DevC++下运行结果是：死循环。。。</p>
 <p><img src="https://wx4.sinaimg.cn/mw690/006wR0dcly1fwrgx9ulprj30mz0juabe.jpg" width="50%" height="50%"></p>
-<p>来看看why：</p>
+<p>why：</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> i = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">int</span> arr[<span class="number">10</span>] = &#123;<span class="number">0</span>&#125;;</span><br><span class="line">	</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"&amp;i = %p\n"</span>, &amp;i);</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"&amp;arr[0] = %p\n"</span>, &amp;arr[<span class="number">0</span>]);</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"&amp;arr[10] = %p\n"</span>, &amp;arr[<span class="number">10</span>]);</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"&amp;arr[11] = %p\n"</span>, &amp;arr[<span class="number">11</span>]);</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
 <p><img src="https://wx4.sinaimg.cn/mw690/006wR0dcly1fwrh7mtbwmj30k40f6gmp.jpg" width="50%" height="50%"></p>
 <p>从输出的结果可以得到<code>i</code>和<code>arr[]</code>在内存中的样子：</p>
@@ -608,6 +607,10 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">指针</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">学习笔记</a>
               </li>
             
             <div class="clearfix"></div>
