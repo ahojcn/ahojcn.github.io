@@ -50,7 +50,7 @@
 		  <h1 class="header-author"><a href="/">ahoj</a></h1>
 		</hgroup>
 		
-		<p class="header-subtitle">make progress every day!</p>
+		<p class="header-subtitle">nice to meet u!</p>
 		
 
 		<nav class="header-menu">
@@ -117,7 +117,7 @@
 			  <h1 class="header-author js-header-author">ahoj</h1>
 			</hgroup>
 			
-			<p class="header-subtitle"><i class="icon icon-quo-left"></i>make progress every day!<i class="icon icon-quo-right"></i></p>
+			<p class="header-subtitle"><i class="icon icon-quo-left"></i>nice to meet u!<i class="icon icon-quo-right"></i></p>
 			
 			
 			
@@ -390,6 +390,17 @@ gitalk.render('gitalk-container')
 <!--页面点击小红心-->
 <script type="text/javascript" src="/love.js"></script>
 
+<!-- 访问量统计 -->
+{% if theme.footer.counter %}
+    <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+    <span id="busuanzi_container_site_pv">总访问量<span id="busuanzi_value_site_pv"></span>次</span>
+    <span class="post-meta-divider">|</span>
+    <span id="busuanzi_container_site_uv">总访客<span id="busuanzi_value_site_uv"></span>人</span>
+    <span class="post-meta-divider">|</span>
+
+{% endif %}
+
     </div>
     <script>
 	var yiliaConfig = {
@@ -631,6 +642,6 @@ MathJax.Hub.Queue(function() {
 
 </div>
   </div>
-  <script type="text/javascript">var OriginTitile=document.title,st;document.addEventListener("visibilitychange",function(){document.hidden?(document.title="ahoj的博客|看不见我🙈~",clearTimeout(st)):(document.title="ahoj的博客|(๑•̀ㅂ•́) ✧被发现了",st=setTimeout(function(){document.title=OriginTitile},3e3))})</script>
+  <script type="text/javascript">var OriginTitile=document.title,st;document.addEventListener("visibilitychange",function(){document.hidden?(document.title="I'm ahoj|看不见我🙈~",clearTimeout(st)):(document.title="I'm ahoj|(๑•̀ㅂ•́) ✧被发现了",st=setTimeout(function(){document.title=OriginTitile},3e3))})</script>
 <script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","model":{"jsonPath":"/live2dw/assets/wanko.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true},"log":false,"tagMode":false});</script></body>
 </html>
