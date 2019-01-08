@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://ahoj.cc/about/index.html</loc>
+    
+    <lastmod>2019-01-08T11:30:49.074Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://ahoj.cc/2019/01/cjqmi1m1m0003td09e812j5rm/</loc>
     
     <lastmod>2019-01-07T15:49:52.786Z</lastmod>
@@ -26,13 +33,6 @@
     <loc>http://ahoj.cc//404.html</loc>
     
     <lastmod>2019-01-03T14:15:19.443Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://ahoj.cc/about/index.html</loc>
-    
-    <lastmod>2019-01-03T14:13:03.605Z</lastmod>
     
   </url>
   
