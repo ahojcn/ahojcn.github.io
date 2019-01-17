@@ -6,19 +6,34 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://ahoj.cc">
-  <title>I&#39;m ahoj</title>
+  <title>指针 | I&#39;m ahoj</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="持之以恒">
-<meta name="keywords" content="ahoj的博客">
-<meta property="og:type" content="website">
-<meta property="og:title" content="I&#39;m ahoj">
-<meta property="og:url" content="http://ahoj.cc/index.html">
+  <meta name="description" content="本文的主要内容：为啥要有指针？用两个栗子理解指针的概念。指针类型的作用、以及一些指针的练习题。 文中不足或错误之处，欢迎留言或者Email指正。">
+<meta name="keywords" content="C语言,指针">
+<meta property="og:type" content="article">
+<meta property="og:title" content="指针">
+<meta property="og:url" content="http://ahoj.cc/2019/01/cjr0qoq5c0007sj09ff4v7j2y/index.html">
 <meta property="og:site_name" content="I&#39;m ahoj">
-<meta property="og:description" content="持之以恒">
+<meta property="og:description" content="本文的主要内容：为啥要有指针？用两个栗子理解指针的概念。指针类型的作用、以及一些指针的练习题。 文中不足或错误之处，欢迎留言或者Email指正。">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://camo.githubusercontent.com/98b19b496e93806971e221b986c1327fd609b9cc/68747470733a2f2f7778312e73696e61696d672e636e2f6d773639302f30303677523064636c793166776576763836786a666a333069753039303734792e6a7067">
+<meta property="og:image" content="https://camo.githubusercontent.com/9196131c1403410461d37d3836786465697e69ca/68747470733a2f2f7778332e73696e61696d672e636e2f6d773639302f30303677523064636c7931667765767631327078746a33316b77306a71646f6f2e6a7067">
+<meta property="og:image" content="https://camo.githubusercontent.com/fa302cfc6e28d6ee72a86a23d8f8e9cbd10d451e/68747470733a2f2f7778332e73696e61696d672e636e2f6d773639302f30303677523064636c7931667765776c32706c77726a33306c303037343734722e6a7067">
+<meta property="og:image" content="https://camo.githubusercontent.com/57a12eddf6d4ca658d9fd2bc6ede68ce474a3b0d/68747470733a2f2f7778322e73696e61696d672e636e2f6d773639302f30303677523064636c7931667765776c6c6d666e336a3330626f30366d3379762e6a7067">
+<meta property="og:image" content="https://camo.githubusercontent.com/a923b880ac9b3ed9eba1143f3e79703fe214c301/68747470733a2f2f7778342e73696e61696d672e636e2f6d773639302f30303677523064636c793166776578346f373074356a3330696d3038737766642e6a7067">
+<meta property="og:image" content="https://wx4.sinaimg.cn/mw690/006wR0dcly1fxnh37huqmj31o60u0abh.jpg">
+<meta property="og:image" content="https://wx3.sinaimg.cn/mw690/006wR0dcly1fxnhbmau9fj30fi0fuq3k.jpg">
+<meta property="og:image" content="https://wx1.sinaimg.cn/mw690/006wR0dcly1fxnhvji5v2j31nw0poq6g.jpg">
+<meta property="og:image" content="https://wx3.sinaimg.cn/mw690/006wR0dcly1fxnigcsmz0j30oy0fiaaw.jpg">
+<meta property="og:image" content="https://wx4.sinaimg.cn/mw690/006wR0dcly1fxnipjqiicj31460c475c.jpg">
+<meta property="og:image" content="https://wx2.sinaimg.cn/mw690/006wR0dcly1fxnj61eghkj31fy0l0q5n.jpg">
+<meta property="og:image" content="https://wx2.sinaimg.cn/mw690/006wR0dcly1fxnjdh5q1zj31fq0k00ve.jpg">
+<meta property="og:image" content="https://wx2.sinaimg.cn/mw690/006wR0dcly1fxnjlyh6yzj31jm0hy0vf.jpg">
+<meta property="og:updated_time" content="2019-01-12T12:10:15.149Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="I&#39;m ahoj">
-<meta name="twitter:description" content="持之以恒">
+<meta name="twitter:title" content="指针">
+<meta name="twitter:description" content="本文的主要内容：为啥要有指针？用两个栗子理解指针的概念。指针类型的作用、以及一些指针的练习题。 文中不足或错误之处，欢迎留言或者Email指正。">
+<meta name="twitter:image" content="https://camo.githubusercontent.com/98b19b496e93806971e221b986c1327fd609b9cc/68747470733a2f2f7778312e73696e61696d672e636e2f6d773639302f30303677523064636c793166776576763836786a666a333069753039303734792e6a7067">
   
     <link rel="alternative" href="/atom.xml" title="I&#39;m ahoj" type="application/atom+xml">
   
@@ -165,133 +180,14 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-    <article id="post-错题整理" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+            <article id="post-指针" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/01/cjr0qoq5h000bsj09j4misr6y/">错题整理</a>
-    </h1>
-  
-
-        
-        
-        <a href="/2019/01/cjr0qoq5h000bsj09j4misr6y/" class="archive-article-date">
-  	<time datetime="2019-01-12T09:18:21.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-01-12</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>这篇文章主要整理了下这次考试的错题和牛客网刷题时的错题。</p>
-<p>TODO_20190112：结构体内存对齐、指针再复习！</p>
-<p>文中不足或错误之处，欢迎<a href="#END">留言</a>或者<a href="mailto:hanoi_ahoj@icloud.com" target="_blank" rel="noopener">Email</a>指正。</p>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">C语言</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="//categories/C语言//" class="article-tag-list-link color4">C语言</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/01/cjr0qoq5h000bsj09j4misr6y/">more >></a>
-        </p>
-      
-
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-<!---让百度主动推送代码，让搜索引擎最快发现文章--->
-
-
-<!--gitalk留言功能-->
-
-  <div id="gitalk-container" style="padding: 0px 30px 0px 30px;"></div>
-
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
-<script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
-<script type="text/javascript">
-
-if(true){
-	var gitalk = new Gitalk({
-  	clientID: '069eca25fe0437ca85c8',
-  	clientSecret: 'f338a82d38ecf5e848e1459591defca47e74ff5e',
-  	repo: 'ahojcn.github.io',
-  	owner: 'ahojcn',
-  	admin: ['ahojcn'],
-  	id: '',
-  	distractionFreeMode: 'false'
-})
-gitalk.render('gitalk-container')
-}
-</script>
-
-  
-
-  
-    <article id="post-指针" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/01/cjr0qoq5c0007sj09ff4v7j2y/">指针</a>
+    <h1 class="article-title" itemprop="name">
+      指针
     </h1>
   
 
@@ -307,9 +203,157 @@ gitalk.render('gitalk-container')
       
         <p>本文的主要内容：为啥要有指针？用两个栗子理解指针的概念。指针类型的作用、以及一些指针的练习题。</p>
 <p>文中不足或错误之处，欢迎<a href="#END">留言</a>或者<a href="mailto:hanoi_ahoj@icloud.com" target="_blank" rel="noopener">Email</a>指正。</p>
-        
+<a id="more"></a>
+<h1 id="1-理解指针"><a href="#1-理解指针" class="headerlink" title="1. 理解指针"></a>1. 理解指针</h1><h2 id="指针是什么，举个栗子"><a href="#指针是什么，举个栗子" class="headerlink" title="指针是什么，举个栗子"></a>指针是什么，举个栗子</h2><p>我们隔壁的隔壁宿舍最近经营起了零食店。</p>
+<p>我：来5包卫龙大面筋，送到413！</p>
+<p>老板：么马达！来咧！</p>
+<p>现在，假设这栋宿舍楼没有门牌号。</p>
+<p>我：来5包卫龙大面筋，送到……额……4楼一上楼从最左边往右第13个宿舍！</p>
+<p>老板：…… !!!???</p>
+<p>其实指针就像门牌号一样，便于定位查找内存中的数据。</p>
+<p>4GB的内存条有$2^{32}$个房间存数据，没有门牌号怎么找？从第一个开始数？哈哈。</p>
+<p>在C语言中可以这样理解一个变量：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> a = <span class="number">10</span>;</span><br><span class="line">    <span class="keyword">int</span> *b = &amp;a;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><code>int a = 10;</code>就是<strong>a</strong>这个人从房地产商(系统)那里买来一间房子，里面放着自己的东西<strong>10</strong>，此时<strong>a</strong>这个人的地址是系统知道的，然后<strong>a</strong>把这个地址(&amp;)告诉了他的好朋友<strong>b</strong>，并且给了<strong>b</strong>这间房子的钥匙(*)，这样<strong>b</strong>就可以通过地址找到这个房子地址并且在房间里取或者放自己的东西了。如果<strong>a</strong>不想让<strong>b</strong>乱动家里东西，可以和<strong>b</strong>说“不许乱动哦！”(加上const，嘿嘿)。</p>
+<h2 id="指针变量"><a href="#指针变量" class="headerlink" title="指针变量"></a>指针变量</h2><p>这个其实挺好理解，在中文中，一般把强调的重点放在后面，指针变量是个<strong>变量</strong>。像这样理解的还有：数组<strong>指针</strong>、指针<strong>数组</strong>。</p>
+<p>指针变量是个变量，这个变量里面存的是地址数据。</p>
+<p>指针变量的大小：</p>
+<p>不论是什么类型（包括void *，这个下面细说～）：</p>
+<ul>
+<li><p>32位环境下，指针变量的大小是4字节。</p>
+</li>
+<li><p>64位环境下，指针变量的大小是8字节。</p>
+</li>
+</ul>
+<p>emmm，怎么理解呢？</p>
+<p>计算机给能访问的内存地址是规范的长度，全0到全1，32位系统下可编址的范围32个比特位(4字节)，64位机器可编址的范围为64个比特位(8字节)。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">const</span> <span class="keyword">char</span> * argv[])</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"void*\t%d\n"</span>, <span class="keyword">sizeof</span>(<span class="keyword">void</span> *));</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"char*\t%d\n"</span>, <span class="keyword">sizeof</span>(<span class="keyword">char</span>*));</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"int*\t%d\n"</span>, <span class="keyword">sizeof</span>(<span class="keyword">int</span> *));</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"float*\t%d\n"</span>, <span class="keyword">sizeof</span>(<span class="keyword">float</span>*));</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"double*\t%d\n"</span>, <span class="keyword">sizeof</span>(<span class="keyword">double</span>*));</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>光说不顶用，来验证下，在64位环境下：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">void</span>*	<span class="number">8</span></span><br><span class="line"><span class="keyword">char</span>*	<span class="number">8</span></span><br><span class="line"><span class="keyword">int</span>*	<span class="number">8</span></span><br><span class="line"><span class="keyword">float</span>*	<span class="number">8</span></span><br><span class="line"><span class="keyword">double</span>*	<span class="number">8</span></span><br></pre></td></tr></table></figure>
+<p>32位机下：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">void</span>*	<span class="number">4</span></span><br><span class="line"><span class="keyword">char</span>*	<span class="number">4</span></span><br><span class="line"><span class="keyword">int</span>*	<span class="number">4</span></span><br><span class="line"><span class="keyword">float</span>*	<span class="number">4</span></span><br><span class="line"><span class="keyword">double</span>*	<span class="number">4</span></span><br></pre></td></tr></table></figure>
+<h2 id="void-是个什么鬼"><a href="#void-是个什么鬼" class="headerlink" title="void *是个什么鬼"></a>void *是个什么鬼</h2><p>可以做这样的事：<code>void *vp;</code></p>
+<p>但是void*类型的指针不能被解引用，因为解引用后它不知道要访问多大的空间(int*解引用可以访问4字节的空间，char*解引用后可以访问1字节的空间)。</p>
+<p>void*可以接收任意类型的指针，这样就可以用它来做一些接口方面的事，这就方便了许多。</p>
+<h1 id="2-指针类型"><a href="#2-指针类型" class="headerlink" title="2. 指针类型"></a>2. 指针类型</h1><p>对于以下代码：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">const</span> <span class="keyword">char</span> * argv[])</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"char* : %lu\n"</span>,<span class="keyword">sizeof</span>(<span class="keyword">char</span>*));</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"short* : %lu\n"</span>,<span class="keyword">sizeof</span>(<span class="keyword">short</span>*));</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"int* : %lu\n"</span>,<span class="keyword">sizeof</span>(<span class="keyword">int</span>*));</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"float* : %lu\n"</span>,<span class="keyword">sizeof</span>(<span class="keyword">float</span>*));</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"double* : %lu\n"</span>,<span class="keyword">sizeof</span>(<span class="keyword">double</span>*));</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"long double* : %lu\n"</span>,<span class="keyword">sizeof</span>(<span class="keyword">long</span> <span class="keyword">double</span>*));</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>在64位机器下运行结果为：</p>
+<p><img src="https://camo.githubusercontent.com/98b19b496e93806971e221b986c1327fd609b9cc/68747470733a2f2f7778312e73696e61696d672e636e2f6d773639302f30303677523064636c793166776576763836786a666a333069753039303734792e6a7067" alt="-64"></p>
+<p>在32位机器下运行结果为：</p>
+<p><img src="https://camo.githubusercontent.com/9196131c1403410461d37d3836786465697e69ca/68747470733a2f2f7778332e73696e61696d672e636e2f6d773639302f30303677523064636c7931667765767631327078746a33316b77306a71646f6f2e6a7067" alt="gcc main.c -m32"></p>
+<p><strong><em>那么问题来了，既然占用大小都是一样的，为什么还要有这么多类型呢？</em></strong></p>
+<h2 id="指针类型的作用"><a href="#指针类型的作用" class="headerlink" title="指针类型的作用"></a>指针类型的作用</h2><ul>
+<li>指针类型决定了对指针解引用的时候有多大的权限（能操作几个字节）。比如：<code>char*</code>的指针解引用只能访问一个字节，而<code>int*</code>的指针解引用就能访问四个字节。</li>
+<li>指针类型决定了指针指向前或者向后一步有多大距离。</li>
+</ul>
+<p>看下面的这段代码：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">const</span> <span class="keyword">char</span> * argv[])</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> i = <span class="number">0x11223344</span>;</span><br><span class="line">    <span class="keyword">int</span> *pi = &amp;i;</span><br><span class="line">    *pi = <span class="number">0</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">int</span> c = <span class="number">0x11223344</span>;</span><br><span class="line">    <span class="keyword">char</span> *pc = &amp;c;</span><br><span class="line">    *pc = <span class="number">0</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Debug看内存变化：</p>
+<p><a href="https://camo.githubusercontent.com/fa302cfc6e28d6ee72a86a23d8f8e9cbd10d451e/68747470733a2f2f7778332e73696e61696d672e636e2f6d773639302f30303677523064636c7931667765776c32706c77726a33306c303037343734722e6a7067" target="_blank" rel="noopener"><img src="https://camo.githubusercontent.com/fa302cfc6e28d6ee72a86a23d8f8e9cbd10d451e/68747470733a2f2f7778332e73696e61696d672e636e2f6d773639302f30303677523064636c7931667765776c32706c77726a33306c303037343734722e6a7067" alt="p"></a></p>
+<p><a href="https://camo.githubusercontent.com/57a12eddf6d4ca658d9fd2bc6ede68ce474a3b0d/68747470733a2f2f7778322e73696e61696d672e636e2f6d773639302f30303677523064636c7931667765776c6c6d666e336a3330626f30366d3379762e6a7067" target="_blank" rel="noopener"><img src="https://camo.githubusercontent.com/57a12eddf6d4ca658d9fd2bc6ede68ce474a3b0d/68747470733a2f2f7778322e73696e61696d672e636e2f6d773639302f30303677523064636c7931667765776c6c6d666e336a3330626f30366d3379762e6a7067" alt="img"></a></p>
+<p>发现：<code>i=0x11223344</code>在执行<code>*pi=0;</code>后全部变为了0，<code>c=0x11223344</code>在执行<code>*pc=0;</code>后只有高位变成了0</p>
+<p>说明：int*类型的指针解引用后，操作权限是4个字节(int的大小)。char*解引用后，操作权限仅为一个字节。</p>
+<p>指针类型决定了对指针解引用的时候有多大的权限（能操作几个字节）。</p>
+<p>再来看看第二个小点，对于以下代码：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">const</span> <span class="keyword">char</span> * argv[])</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> n = <span class="number">10</span>;</span><br><span class="line">    <span class="keyword">int</span> *pi = &amp;n;</span><br><span class="line">    <span class="keyword">char</span> *pc = (<span class="keyword">char</span>*)&amp;n;</span><br><span class="line">    </span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"&amp;n : %p\n"</span>, &amp;n);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"pi : %p\n"</span>, pi);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"pi+1 : %p\n"</span>, pi+<span class="number">1</span>);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"-----------------------\n"</span>);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"pc : %p\n"</span>, pc);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"pc+1 : %p\n"</span>, pc+<span class="number">1</span>);</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>有在64位机下有如下输出：</p>
+<p><a href="https://camo.githubusercontent.com/a923b880ac9b3ed9eba1143f3e79703fe214c301/68747470733a2f2f7778342e73696e61696d672e636e2f6d773639302f30303677523064636c793166776578346f373074356a3330696d3038737766642e6a7067" target="_blank" rel="noopener"><img src="https://camo.githubusercontent.com/a923b880ac9b3ed9eba1143f3e79703fe214c301/68747470733a2f2f7778342e73696e61696d672e636e2f6d773639302f30303677523064636c793166776578346f373074356a3330696d3038737766642e6a7067" alt="pic"></a></p>
+<p>可以看到：<code>pi=pc=&amp;n</code></p>
+<p>但是：<code>pi+1</code> 和 <code>pc+1</code> 不同，<code>pi+1 - pi</code> = 8，<code>pc+1 - pc</code> = 1</p>
+<p>指针类型决定了指针指向前或者向后一步有多大距离。</p>
+<h1 id="3-指针的题目"><a href="#3-指针的题目" class="headerlink" title="3. 指针的题目"></a>3. 指针的题目</h1><ul>
+<li>题1</li>
+</ul>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">const</span> <span class="keyword">char</span> * argv[])</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> a[<span class="number">5</span>] = &#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>&#125;;</span><br><span class="line">    <span class="keyword">int</span> *p = (<span class="keyword">int</span> *)(&amp;a+<span class="number">1</span>); <span class="comment">// p指向5后面的那个地址</span></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%d,%d\n"</span>, *(a+<span class="number">1</span>), *(p<span class="number">-1</span>));  <span class="comment">//2,5</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>题2</li>
+</ul>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">test</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="keyword">int</span> Num;</span><br><span class="line">    <span class="keyword">char</span> *pcName;</span><br><span class="line">    shortsDate;</span><br><span class="line">    <span class="keyword">char</span> cha[<span class="number">2</span>];</span><br><span class="line">    shortsBa[<span class="number">4</span>];</span><br><span class="line">&#125;*p;</span><br><span class="line">假设结构体test的大小为<span class="number">20</span>个字节，p的地址为<span class="number">0x100000</span>。</span><br><span class="line">p + <span class="number">0x1</span> = ?	<span class="comment">// p+1 =&gt; +20</span></span><br><span class="line">(<span class="keyword">unsigned</span> <span class="keyword">long</span>)p + <span class="number">0x1</span> = ?	<span class="comment">// 0x100001 (eg: int a = 0, a + 1 = 1)</span></span><br><span class="line">(<span class="keyword">unsigned</span> <span class="keyword">int</span> *)p + <span class="number">0x1</span> = ?	<span class="comment">// 0x100004 (加一个指针的大小，32位平台下4)</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>题3</li>
+</ul>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> a[<span class="number">4</span>] = &#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>&#125;;</span><br><span class="line">    <span class="keyword">int</span> *p1 = (<span class="keyword">int</span> *)(&amp;a+<span class="number">1</span>);</span><br><span class="line">    <span class="keyword">int</span> *p2 = (<span class="keyword">int</span> *)((<span class="keyword">int</span>)a+<span class="number">1</span>);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%x,%x\n"</span>, p1[<span class="number">-1</span>], *p2);</span><br><span class="line">    <span class="comment">// p1[-1] 输出 4</span></span><br><span class="line">    <span class="comment">// *p2 这个编译可以通过，但是运行错误</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>在内存中：</p>
+<p><img src="https://wx4.sinaimg.cn/mw690/006wR0dcly1fxnh37huqmj31o60u0abh.jpg" alt="指针笔试题3"></p>
+<ul>
+<li>题4</li>
+</ul>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> a[<span class="number">3</span>][<span class="number">2</span>] = &#123; (<span class="number">0</span>,<span class="number">1</span>), (<span class="number">2</span>,<span class="number">3</span>), (<span class="number">4</span>,<span class="number">5</span>) &#125;;</span><br><span class="line">    <span class="keyword">int</span> *p = a[<span class="number">0</span>];</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%d\n"</span>, p[<span class="number">0</span>]); <span class="comment">// 输出1</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>注意逗号表达式：运算结果为后面的值</p>
+<p>所以：</p>
+<p><img src="https://wx3.sinaimg.cn/mw690/006wR0dcly1fxnhbmau9fj30fi0fuq3k.jpg" alt="4"></p>
+<ul>
+<li>题5</li>
+</ul>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> a[<span class="number">5</span>][<span class="number">5</span>];</span><br><span class="line">    <span class="keyword">int</span> (*p)[<span class="number">4</span>];<span class="comment">//注意这里！</span></span><br><span class="line">    p = a;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%p,%d\n"</span>, &amp;p[<span class="number">4</span>][<span class="number">2</span>]-&amp;a[<span class="number">4</span>][<span class="number">2</span>], &amp;p[<span class="number">4</span>][<span class="number">2</span>]-&amp;a[<span class="number">4</span>][<span class="number">2</span>]); <span class="comment">//输出： -4的补码，-4</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="https://wx1.sinaimg.cn/mw690/006wR0dcly1fxnhvji5v2j31nw0poq6g.jpg" alt="5"></p>
+<p>输出他们之间元素的个数。</p>
+<p>因为<code>p[4][2]</code>的地址小于<code>a[4][2]</code>的地址，所以为<code>-4</code>，但是由于输出的时候，<code>%p</code>输出的是地址，也就是一个无符号的数，所以将<code>-4</code>的补码输出，<code>%d</code>正常输出。</p>
+<ul>
+<li>题6</li>
+</ul>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> aa[<span class="number">2</span>][<span class="number">5</span>] = &#123; <span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>,<span class="number">7</span>,<span class="number">8</span>,<span class="number">9</span>,<span class="number">10</span> &#125;;</span><br><span class="line">    <span class="keyword">int</span> *p1 = (<span class="keyword">int</span> *)(&amp;aa + <span class="number">1</span>);</span><br><span class="line">    <span class="keyword">int</span> *p2 = (<span class="keyword">int</span> *)(*(aa + <span class="number">1</span>));</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%d,%d\n"</span>, *(p1<span class="number">-1</span>), *(p2<span class="number">-1</span>));	<span class="comment">// 输出10，5</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><code>&amp;aa+1</code>跨过了整个数组<code>aa</code>的长度，指向元素10后的地址。</p>
+<p><code>aa+1</code>代表的跨过了一个<code>aa</code>的元素，而<code>aa</code>是一个二维数组，它的元素是一个一维数组。如下图：</p>
+<p><img src="https://wx3.sinaimg.cn/mw690/006wR0dcly1fxnigcsmz0j30oy0fiaaw.jpg" alt="6"></p>
+<ul>
+<li>题7</li>
+</ul>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">char</span> *a[] = &#123;<span class="string">"work"</span>, <span class="string">"at"</span>, <span class="string">"360"</span>&#125;;</span><br><span class="line">    <span class="keyword">char</span> **pa = a;</span><br><span class="line">    pa++;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%s\n"</span>, *pa);	<span class="comment">// 输出at</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="https://wx4.sinaimg.cn/mw690/006wR0dcly1fxnipjqiicj31460c475c.jpg" alt="7"></p>
+<ul>
+<li>题8</li>
+</ul>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">char</span> *c[] = &#123; <span class="string">"ENTER"</span>, <span class="string">"NEW"</span>, <span class="string">"POINT"</span>, <span class="string">"FIRST"</span> &#125;;</span><br><span class="line">    <span class="keyword">int</span> **cp[] = &#123; c+<span class="number">3</span>, c+<span class="number">2</span>, c+<span class="number">1</span>, c &#125;;</span><br><span class="line">    <span class="keyword">char</span> ***cpp = cp;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%s\n"</span>, **++cpp);		<span class="comment">// POINT</span></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%s\n"</span>, *--*++cpp+<span class="number">3</span>);	<span class="comment">// ER</span></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%s\n"</span>, *cpp[<span class="number">-2</span>]+<span class="number">3</span>);		<span class="comment">// ST</span></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%s\n"</span>, cpp[<span class="number">-1</span>][<span class="number">-1</span>]+<span class="number">1</span>);	<span class="comment">// EW</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><code>++、—</code>的优先级高于<code>*</code>，<code>*</code>的优先级高于<code>+</code>。<code>++cpp</code>会影响<code>cpp</code>的值，但<code>cpp+1</code>不会影响。<code>[]</code>的优先级大于<code>*</code>。</p>
+<p><img src="https://wx2.sinaimg.cn/mw690/006wR0dcly1fxnj61eghkj31fy0l0q5n.jpg" alt="8.1"></p>
+<p><code>**++cpp</code>：先<code>++</code>，此时的<code>cpp</code>指向<code>cp[1]</code>，解引用为<code>c[2]</code>，再解引用即为<code>POINT</code>。</p>
+<p><img src="https://wx2.sinaimg.cn/mw690/006wR0dcly1fxnjdh5q1zj31fq0k00ve.jpg" alt="8.2"></p>
+<p><code>*--*++cpp+3</code>：经过上一步，<code>cpp</code>现在的指向如上图。</p>
+<p>先<code>++</code>，此时<code>cpp</code>指向<code>cp[2]</code>，解引用即为<code>cp[2]</code>，再<code>--</code>，此时改变了<code>cp[2]</code>的指向，他指向<code>c[0]</code>，再解引用即为<code>c[0]</code>，给<code>c[0]+3</code>，输出的结果为<code>ER</code>。</p>
+<p><img src="https://wx2.sinaimg.cn/mw690/006wR0dcly1fxnjlyh6yzj31jm0hy0vf.jpg" alt="8.3"></p>
+<p><code>*cpp[-2]+3</code>：经过上一步，现在的指向如上图所示。</p>
+<p><code>cpp[-2]</code>指向了<code>cp[0]</code>，解引用指向<code>c[3]</code>，<code>c[3]+3</code>输出<code>ST</code>。</p>
+<p><code>cpp[-1][-1]+1</code>：经过上一步并没有改变指针的指向。</p>
+<p><code>cpp[-1][-1]</code>代表<code>c[1]</code>，再<code>+1</code>输出<code>EW</code>。</p>
+<hr>
+<blockquote>
+<p>参考：《C和指针》、《剑指offer》</p>
+</blockquote>
+<h1 id="END"><a href="#END" class="headerlink" title="END"></a>END</h1>
       
 
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>所有捐助将用来买流浪猫咪和狗狗的午饭<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/img/alipay.png">
+                      <span class="reward-type">支付宝</span>
+                    </div>
+                    
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/img/wepay.png">
+                      <span class="reward-type">微信</span>
+                    </div>
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
       
     </div>
     <div class="article-info article-info-index">
@@ -344,18 +388,89 @@ gitalk.render('gitalk-container')
 
 
       
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/01/cjr0qoq5c0007sj09ff4v7j2y/">more >></a>
-        </p>
+
       
+        
 
       
 
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
+        </div>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://ahoj.cc/2019/01/cjr0qoq5c0007sj09ff4v7j2y/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
       
       <div class="clearfix"></div>
     </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
+  
+    <a href="/2019/01/cjr0qoq5h000bsj09j4misr6y/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          错题整理
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2019/01/cjr0qoq5f0009sj09jyvequdx/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">递归问题</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
 
 <aside class="wrap-side-operation">
     <div class="mod-side-operation">
@@ -370,13 +485,45 @@ gitalk.render('gitalk-container')
         </div>
         
         
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-理解指针"><span class="toc-number">1.</span> <span class="toc-text">1. 理解指针</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#指针是什么，举个栗子"><span class="toc-number">1.1.</span> <span class="toc-text">指针是什么，举个栗子</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#指针变量"><span class="toc-number">1.2.</span> <span class="toc-text">指针变量</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#void-是个什么鬼"><span class="toc-number">1.3.</span> <span class="toc-text">void *是个什么鬼</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-指针类型"><span class="toc-number">2.</span> <span class="toc-text">2. 指针类型</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#指针类型的作用"><span class="toc-number">2.1.</span> <span class="toc-text">指针类型的作用</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3-指针的题目"><span class="toc-number">3.</span> <span class="toc-text">3. 指针的题目</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#END"><span class="toc-number">4.</span> <span class="toc-text">END</span></a></li></ol>
+                    </div>
+                </span>
+            </div>
+        </div>
+        
     </div>
 </aside>
 
 
 
+  
+
+  
+
+  
+
+  
+
+  
+
 
 <!---让百度主动推送代码，让搜索引擎最快发现文章--->
+
+<script>
+(function(){
+    var bp = document.createElement('script');
+    bp.src = '//push.zhanzhang.baidu.com/push.js';
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
 
 
 <!--gitalk留言功能-->
@@ -394,7 +541,7 @@ if(true){
   	repo: 'ahojcn.github.io',
   	owner: 'ahojcn',
   	admin: ['ahojcn'],
-  	id: '',
+  	id: 'Mon Jan 07 2019 23:24:02 GMT+0800',
   	distractionFreeMode: 'false'
 })
 gitalk.render('gitalk-container')
@@ -402,345 +549,6 @@ gitalk.render('gitalk-container')
 </script>
 
   
-
-  
-    <article id="post-递归问题" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/01/cjr0qoq5f0009sj09jyvequdx/">递归问题</a>
-    </h1>
-  
-
-        
-        
-        <a href="/2019/01/cjr0qoq5f0009sj09jyvequdx/" class="archive-article-date">
-  	<time datetime="2019-01-07T14:59:17.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-01-07</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>本文主要内容：如何理解递归、递归需要满足的条件、递归代码的实现、递归要注意的问题（栈溢出、重复计算）、递归改写为非递归、经典的几个递归问题。</p>
-<p>文中不足或错误之处，欢迎<a href="#END">留言</a>或者<a href="mailto:hanoi_ahoj@icloud.com" target="_blank" rel="noopener">Email</a>指正。</p>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">数据结构与算法</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">递归问题</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="//categories/数据结构与算法//" class="article-tag-list-link color3">数据结构与算法</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/01/cjr0qoq5f0009sj09jyvequdx/">more >></a>
-        </p>
-      
-
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-<!---让百度主动推送代码，让搜索引擎最快发现文章--->
-
-
-<!--gitalk留言功能-->
-
-  <div id="gitalk-container" style="padding: 0px 30px 0px 30px;"></div>
-
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
-<script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
-<script type="text/javascript">
-
-if(true){
-	var gitalk = new Gitalk({
-  	clientID: '069eca25fe0437ca85c8',
-  	clientSecret: 'f338a82d38ecf5e848e1459591defca47e74ff5e',
-  	repo: 'ahojcn.github.io',
-  	owner: 'ahojcn',
-  	admin: ['ahojcn'],
-  	id: '',
-  	distractionFreeMode: 'false'
-})
-gitalk.render('gitalk-container')
-}
-</script>
-
-  
-
-  
-    <article id="post-复杂度分析" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/01/cjr0qoq510001sj09kcn220lx/">时间复杂度分析</a>
-    </h1>
-  
-
-        
-        
-        <a href="/2019/01/cjr0qoq510001sj09kcn220lx/" class="archive-article-date">
-  	<time datetime="2019-01-03T00:31:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-01-03</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>本文的主要内容：为什么要用复杂度来分析，跑一遍不行吗？时间复杂度的分析原则、常见的几种时间复杂度。</p>
-<p>文中不足或错误之处，欢迎<a href="#END">留言</a>或者<a href="mailto:hanoi_ahoj@icloud.com" target="_blank" rel="noopener">Email</a>指正。</p>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">数据结构与算法</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">时间复杂度</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="//categories/数据结构与算法//" class="article-tag-list-link color3">数据结构与算法</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/01/cjr0qoq510001sj09kcn220lx/">more >></a>
-        </p>
-      
-
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-<!---让百度主动推送代码，让搜索引擎最快发现文章--->
-
-
-<!--gitalk留言功能-->
-
-  <div id="gitalk-container" style="padding: 0px 30px 0px 30px;"></div>
-
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
-<script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
-<script type="text/javascript">
-
-if(true){
-	var gitalk = new Gitalk({
-  	clientID: '069eca25fe0437ca85c8',
-  	clientSecret: 'f338a82d38ecf5e848e1459591defca47e74ff5e',
-  	repo: 'ahojcn.github.io',
-  	owner: 'ahojcn',
-  	admin: ['ahojcn'],
-  	id: '',
-  	distractionFreeMode: 'false'
-})
-gitalk.render('gitalk-container')
-}
-</script>
-
-  
-
-  
-    <article id="post-你好，2019" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/01/cjr0qoq560003sj09b4dgrk1s/">你好，2019</a>
-    </h1>
-  
-
-        
-        
-        <a href="/2019/01/cjr0qoq560003sj09b4dgrk1s/" class="archive-article-date">
-  	<time datetime="2018-12-31T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-01-01</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>2018虽然有收获，但还不够，继续加油！</p>
-<p>记住！持之以恒！</p>
-<p>骐骥一跃，不能十步，驽马十驾，功在不舍。</p>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/01/cjr0qoq560003sj09b4dgrk1s/">more >></a>
-        </p>
-      
-
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-<!---让百度主动推送代码，让搜索引擎最快发现文章--->
-
-
-<!--gitalk留言功能-->
-
-  <div id="gitalk-container" style="padding: 0px 30px 0px 30px;"></div>
-
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
-<script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
-<script type="text/javascript">
-
-if(true){
-	var gitalk = new Gitalk({
-  	clientID: '069eca25fe0437ca85c8',
-  	clientSecret: 'f338a82d38ecf5e848e1459591defca47e74ff5e',
-  	repo: 'ahojcn.github.io',
-  	owner: 'ahojcn',
-  	admin: ['ahojcn'],
-  	id: '',
-  	distractionFreeMode: 'false'
-})
-gitalk.render('gitalk-container')
-}
-</script>
-
-  
-
-  
-  
-
 
           </div>
         </div>
@@ -777,8 +585,8 @@ gitalk.render('gitalk-container')
     <script>
 	var yiliaConfig = {
 		mathjax: true,
-		isHome: true,
-		isPost: false,
+		isHome: false,
+		isPost: true,
 		isArchive: false,
 		isTag: false,
 		isCategory: false,
