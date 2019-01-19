@@ -8,19 +8,19 @@
   <link rel="dns-prefetch" href="http://ahoj.cc">
   <title>递归问题 | I&#39;m ahoj</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="本文主要内容：如何理解递归、递归需要满足的条件、递归代码的实现、递归要注意的问题（栈溢出、重复计算）、递归改写为非递归、经典的几个递归问题。 文中不足或错误之处，欢迎留言或者Email指正。">
+  <meta name="description" content="本文主要内容：如何理解递归、递归需要满足的条件、递归代码的实现、递归要注意的问题（栈溢出、重复计算）、递归改写为非递归、经典的几个递归问题。">
 <meta name="keywords" content="数据结构与算法,递归问题">
 <meta property="og:type" content="article">
 <meta property="og:title" content="递归问题">
 <meta property="og:url" content="http://ahoj.cc/2019/01/cjr0qoq5f0009sj09jyvequdx/index.html">
 <meta property="og:site_name" content="I&#39;m ahoj">
-<meta property="og:description" content="本文主要内容：如何理解递归、递归需要满足的条件、递归代码的实现、递归要注意的问题（栈溢出、重复计算）、递归改写为非递归、经典的几个递归问题。 文中不足或错误之处，欢迎留言或者Email指正。">
+<meta property="og:description" content="本文主要内容：如何理解递归、递归需要满足的条件、递归代码的实现、递归要注意的问题（栈溢出、重复计算）、递归改写为非递归、经典的几个递归问题。">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://static001.geekbang.org/resource/image/e7/bf/e7e778994e90265344f6ac9da39e01bf.jpg">
-<meta property="og:updated_time" content="2019-01-12T12:10:00.183Z">
+<meta property="og:updated_time" content="2019-01-19T04:58:27.100Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="递归问题">
-<meta name="twitter:description" content="本文主要内容：如何理解递归、递归需要满足的条件、递归代码的实现、递归要注意的问题（栈溢出、重复计算）、递归改写为非递归、经典的几个递归问题。 文中不足或错误之处，欢迎留言或者Email指正。">
+<meta name="twitter:description" content="本文主要内容：如何理解递归、递归需要满足的条件、递归代码的实现、递归要注意的问题（栈溢出、重复计算）、递归改写为非递归、经典的几个递归问题。">
 <meta name="twitter:image" content="https://static001.geekbang.org/resource/image/e7/bf/e7e778994e90265344f6ac9da39e01bf.jpg">
   
     <link rel="alternative" href="/atom.xml" title="I&#39;m ahoj" type="application/atom+xml">
@@ -190,8 +190,8 @@
     <div class="article-entry" itemprop="articleBody">
       
         <p>本文主要内容：如何理解递归、递归需要满足的条件、递归代码的实现、递归要注意的问题（栈溢出、重复计算）、递归改写为非递归、经典的几个递归问题。</p>
-<p>文中不足或错误之处，欢迎<a href="#END">留言</a>或者<a href="mailto:hanoi_ahoj@icloud.com" target="_blank" rel="noopener">Email</a>指正。</p>
 <a id="more"></a>
+<p>文中不足或错误之处，欢迎<a href="#END">留言</a>或者<a href="mailto:hanoi_ahoj@icloud.com" target="_blank" rel="noopener">Email</a>指正。</p>
 <h1 id="1-如何理解递归"><a href="#1-如何理解递归" class="headerlink" title="1. 如何理解递归"></a>1. 如何理解递归</h1><p>例：领导分配给你一个任务量为n的任务，你做了一部分，然后把剩下的n-1分配给别人，别人又做了一部分，把剩下的n-2分配给了另一个人，直到最后一个人，做了一部分，然后把任务完成返回给他上一个人。</p>
 <p>这个任务下发的过程叫<strong>递</strong>，任务返回的过程叫<strong>归</strong>。</p>
 <p>基本上，所有的递归问题都可以用递推公式来表示，上面这个例子，递推公式表示为：<code>f(n)=f(n-1)+1 其中，f(1)=1</code>。</p>
