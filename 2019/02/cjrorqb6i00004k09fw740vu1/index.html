@@ -6,19 +6,22 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://ahoj.cc">
-  <title>Tag: C语言 | I&#39;m ahoj</title>
+  <title>C中结构体的学习总结 | I&#39;m ahoj</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="持之以恒">
-<meta name="keywords" content="ahoj的博客">
-<meta property="og:type" content="website">
-<meta property="og:title" content="I&#39;m ahoj">
-<meta property="og:url" content="http://ahoj.cc/tags/C语言/index.html">
+  <meta name="description" content="本文主要内容：结构体内存对齐、位段。">
+<meta name="keywords" content="结构体,位段">
+<meta property="og:type" content="article">
+<meta property="og:title" content="C中结构体的学习总结">
+<meta property="og:url" content="http://ahoj.cc/2019/02/cjrorqb6i00004k09fw740vu1/index.html">
 <meta property="og:site_name" content="I&#39;m ahoj">
-<meta property="og:description" content="持之以恒">
+<meta property="og:description" content="本文主要内容：结构体内存对齐、位段。">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1549199987764&di=44d99729d3a4ff041fcc15287de8c4f0&imgtype=0&src=http%3A%2F%2Fs16.sinaimg.cn%2Fmw690%2F006VAGvMzy7dvQMDJVR3f%26690">
+<meta property="og:updated_time" content="2019-02-03T10:32:52.081Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="I&#39;m ahoj">
-<meta name="twitter:description" content="持之以恒">
+<meta name="twitter:title" content="C中结构体的学习总结">
+<meta name="twitter:description" content="本文主要内容：结构体内存对齐、位段。">
+<meta name="twitter:image" content="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1549199987764&di=44d99729d3a4ff041fcc15287de8c4f0&imgtype=0&src=http%3A%2F%2Fs16.sinaimg.cn%2Fmw690%2F006VAGvMzy7dvQMDJVR3f%26690">
   
     <link rel="alternative" href="/atom.xml" title="I&#39;m ahoj" type="application/atom+xml">
   
@@ -165,101 +168,124 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-C中结构体的学习总结" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2019" class="archive-year">2019</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/01/cjrorqb70000e4k09kmenhu4v/" class="archive-article-date">
-  	<time datetime="2019-01-12T09:18:21.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-01-12</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/01/cjrorqb70000e4k09kmenhu4v/">错题整理</a>
+    <h1 class="article-title" itemprop="name">
+      C中结构体的学习总结
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
+        
+        
+        <a href="/2019/02/cjrorqb6i00004k09fw740vu1/" class="archive-article-date">
+  	<time datetime="2019-02-03T08:06:47.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-02-03</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>本文主要内容：结构体内存对齐、位段。</p>
+<a id="more"></a>
+<h2 id="1-结构体"><a href="#1-结构体" class="headerlink" title="1. 结构体"></a>1. 结构体</h2><h3 id="1-1-结构体内存对齐"><a href="#1-1-结构体内存对齐" class="headerlink" title="1.1 结构体内存对齐"></a>1.1 结构体内存对齐</h3><h4 id="什么是内存对齐"><a href="#什么是内存对齐" class="headerlink" title="什么是内存对齐"></a>什么是内存对齐</h4><p>现代计算机中内存空间都是按照 byte 划分的，从理论上讲似乎对任何类型的变量的访问可以从任何地址开始，但实际情况是在访问特定类型变量的时候经常在特 定的内存地址访问，这就需要各种类型数据按照一定的规则在空间上排列，而不是顺序的一个接一个的排放，这就是对齐。</p>
+<h4 id="为什么要有内存对齐？"><a href="#为什么要有内存对齐？" class="headerlink" title="为什么要有内存对齐？"></a>为什么要有内存对齐？</h4><p>对齐的作用和原因：各个硬件平台对存储空间的处理上有很大的不同。一些平台对某些特定类型的数据只能从某些特定地址开始存取。比如有些架构的 CPU 在访问 一个没有进行对齐的变量的时候会发生错误,那么在这种架构下编程必须保证字节对齐.其他平台可能没有这种情况，但是最常见的是如果不按照适合其平台要求对 数据存放进行对齐，会在存取效率上带来损失。比如有些平台每次读都是从偶地址开始，如果一个int型（假设为 32 位系统）如果存放在偶地址开始的地方，那 么一个读周期就可以读出这 32bit ，而如果存放在奇地址开始的地方，就需要 2 个读周期，并对两次读出的结果的高低字节进行拼凑才能得到该 32bit 数 据。显然在读取效率上下降很多。</p>
+<p>总的来说，结构体的内存对齐是拿空间来换取时间。</p>
+<h4 id="计算"><a href="#计算" class="headerlink" title="计算"></a>计算</h4><p>计算结构体的大小是一个特别热门的考点，要计算结构体的大小，首先要知道结构体内存对齐规则。</p>
+<ol>
+<li><p>第一个成员在于结构体变量偏移量为 0 的地址处；</p>
+</li>
+<li><p>其他成员变量要对齐到 <strong><em>对齐数</em></strong> 的整数倍的地址处；</p>
+<p>对齐数 = 编译器默认的一个对齐数 与 该成员大小的较小值。</p>
+<blockquote>
+<p>对齐数在 Windows 中 VS 下默认是 8，Linux 中默认是 4（Centos 7 下默认是8）。</p>
+</blockquote>
+</li>
+<li><p>机构体总大小为最大对齐数（每个成员变量都有一个对齐数）的整数倍。</p>
+</li>
+<li><p>如果嵌套了结构体的情况，嵌套的结构体对齐到自己的最大对齐数的整数倍处，结构体的整体大小就是所有最大对齐数（含嵌套结构体的对齐数）的整数倍。</p>
+</li>
+</ol>
+<h4 id="一些栗子"><a href="#一些栗子" class="headerlink" title="一些栗子"></a>一些栗子</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">s1</span> &#123;</span></span><br><span class="line">    <span class="keyword">char</span> c1;</span><br><span class="line">    <span class="keyword">int</span> i;</span><br><span class="line">    <span class="keyword">char</span> c2;</span><br><span class="line">&#125;;	<span class="comment">// 12</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">s2</span> &#123;</span></span><br><span class="line">    <span class="keyword">char</span> c1;</span><br><span class="line">    <span class="keyword">char</span> c2;</span><br><span class="line">    <span class="keyword">int</span> i;</span><br><span class="line">&#125;;	<span class="comment">// 8</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">s3</span> &#123;</span></span><br><span class="line">    <span class="keyword">double</span> d;</span><br><span class="line">    <span class="keyword">char</span> c;</span><br><span class="line">    <span class="keyword">int</span> i;</span><br><span class="line">&#125;;	<span class="comment">// 16</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">s4</span> &#123;</span></span><br><span class="line">    <span class="keyword">char</span> c1;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">s3</span> <span class="title">s</span>;</span></span><br><span class="line">    <span class="keyword">double</span> d;</span><br><span class="line">&#125;;	<span class="comment">// 32</span></span><br></pre></td></tr></table></figure>
+<h4 id="修改默认对齐数"><a href="#修改默认对齐数" class="headerlink" title="修改默认对齐数"></a>修改默认对齐数</h4><p><code>#pragma pack(n)</code></p>
+<h3 id="1-2-结构体传参"><a href="#1-2-结构体传参" class="headerlink" title="1.2 结构体传参"></a>1.2 结构体传参</h3><p>函数传参的时候，参数是需要压栈的。如果传递一个结构体对象的时候，结构体过大，参数压栈的系统开销比较大，性能下降。</p>
+<p>结构体传参的时候，要传结构体的地址进去。</p>
+<h2 id="2-位段"><a href="#2-位段" class="headerlink" title="2. 位段"></a>2. 位段</h2><h3 id="2-1-什么是位段"><a href="#2-1-什么是位段" class="headerlink" title="2.1 什么是位段"></a>2.1 什么是位段</h3><p>举个栗子，下面的 A 就是一个位段：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">A</span> &#123;</span></span><br><span class="line">    <span class="keyword">int</span> _a : <span class="number">2</span>;	<span class="comment">// 2 代表这个 _a 占用 2 个比特位，int 占 32 个比特位</span></span><br><span class="line">    <span class="keyword">int</span> _b : <span class="number">5</span>;</span><br><span class="line">    <span class="keyword">int</span> _c : <span class="number">10</span>;</span><br><span class="line">    <span class="keyword">int</span> _d : <span class="number">30</span>;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p><code>sizeof(struct A)   -&gt;   8</code></p>
+<h3 id="2-2-定义一个位段要注意"><a href="#2-2-定义一个位段要注意" class="headerlink" title="2.2 定义一个位段要注意"></a>2.2 定义一个位段要注意</h3><p>位段的成员必须是 <code>int、unsigned int、signed int、char</code>，位段中所有成员类型必须一致。</p>
+<p>位段的定义和使用特别依赖于平台问题（可移植性差）。</p>
+<h3 id="2-3-位段的内存分配"><a href="#2-3-位段的内存分配" class="headerlink" title="2.3 位段的内存分配"></a>2.3 位段的内存分配</h3><ul>
+<li>位段的成员可以是 int、unsigned int、signed int、char；</li>
+<li>位段的空间上是按照需要以 4 个字节（int）或者 1 个字节（char）的方式来开辟的；</li>
+<li>位段涉及很多不确定因素，位段是不跨平台的，注重可移植的程序应该避免使用位段。</li>
+</ul>
+<h3 id="2-4-位段的跨平台问题"><a href="#2-4-位段的跨平台问题" class="headerlink" title="2.4 位段的跨平台问题"></a>2.4 位段的跨平台问题</h3><ul>
+<li>int 位段被方程有符号数还是无符号数是不确定的；</li>
+<li>位段中最大位的数目不能确定（16 位机器最大 16，32 位机器最大 32，写成 27，在 16 位机器会出问题）；</li>
+<li>位段中的成员在内存中从左向右分配，还是从右向左分配尚未定义；</li>
+<li>当一个结构包含两个位段，第二个位段成员比较大，无法容纳第一个位段剩余的位时，时舍弃剩余的位还是利用，这是不确定的。</li>
+</ul>
+<h3 id="2-5-位段的应用"><a href="#2-5-位段的应用" class="headerlink" title="2.5 位段的应用"></a>2.5 位段的应用</h3><p>定制协议报头。</p>
+<p><img src="https://timgsa.baidu.com/timg?image&amp;quality=80&amp;size=b9999_10000&amp;sec=1549199987764&amp;di=44d99729d3a4ff041fcc15287de8c4f0&amp;imgtype=0&amp;src=http%3A%2F%2Fs16.sinaimg.cn%2Fmw690%2F006VAGvMzy7dvQMDJVR3f%26690" alt="ip"></p>
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>所有捐助将用来买流浪猫咪和狗狗的午饭<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/img/alipay.png">
+                      <span class="reward-type">支付宝</span>
+                    </div>
+                    
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/img/wepay.png">
+                      <span class="reward-type">微信</span>
+                    </div>
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">C语言</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="//categories/C语言//" class="article-tag-list-link color4">C语言</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/01/cjrorqb6s00064k09vm711ct5/" class="archive-article-date">
-  	<time datetime="2019-01-07T15:24:02.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-01-07</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/01/cjrorqb6s00064k09vm711ct5/">指针</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">C语言</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">结构体</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">指针</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">位段</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
+      
 	<div class="article-category tagcloud">
 		<i class="icon-book icon"></i>
 		<ul class="article-tag-list">
@@ -272,18 +298,159 @@
 	</div>
 
 
+      
+
+      
+        
+
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://ahoj.cc/2019/02/cjrorqb6i00004k09fw740vu1/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
   
   
-    </div></section>
+    <a href="/2019/01/cjrorqb70000e4k09kmenhu4v/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">错题整理</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-结构体"><span class="toc-number">1.</span> <span class="toc-text">1. 结构体</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1-结构体内存对齐"><span class="toc-number">1.1.</span> <span class="toc-text">1.1 结构体内存对齐</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#什么是内存对齐"><span class="toc-number">1.1.1.</span> <span class="toc-text">什么是内存对齐</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#为什么要有内存对齐？"><span class="toc-number">1.1.2.</span> <span class="toc-text">为什么要有内存对齐？</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#计算"><span class="toc-number">1.1.3.</span> <span class="toc-text">计算</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#一些栗子"><span class="toc-number">1.1.4.</span> <span class="toc-text">一些栗子</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#修改默认对齐数"><span class="toc-number">1.1.5.</span> <span class="toc-text">修改默认对齐数</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-结构体传参"><span class="toc-number">1.2.</span> <span class="toc-text">1.2 结构体传参</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-位段"><span class="toc-number">2.</span> <span class="toc-text">2. 位段</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-什么是位段"><span class="toc-number">2.1.</span> <span class="toc-text">2.1 什么是位段</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-定义一个位段要注意"><span class="toc-number">2.2.</span> <span class="toc-text">2.2 定义一个位段要注意</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-3-位段的内存分配"><span class="toc-number">2.3.</span> <span class="toc-text">2.3 位段的内存分配</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-4-位段的跨平台问题"><span class="toc-number">2.4.</span> <span class="toc-text">2.4 位段的跨平台问题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-5-位段的应用"><span class="toc-number">2.5.</span> <span class="toc-text">2.5 位段的应用</span></a></li></ol></li></ol>
+                    </div>
+                </span>
+            </div>
+        </div>
+        
+    </div>
+</aside>
+
+
+
   
 
-    
+  
 
+  
+
+  
+
+  
+
+
+<!---让百度主动推送代码，让搜索引擎最快发现文章--->
+
+<script>
+(function(){
+    var bp = document.createElement('script');
+    bp.src = '//push.zhanzhang.baidu.com/push.js';
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+<!--gitalk留言功能-->
+
+  <div id="gitalk-container" style="padding: 0px 30px 0px 30px;"></div>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+<script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+<script type="text/javascript">
+
+if(true){
+	var gitalk = new Gitalk({
+  	clientID: '069eca25fe0437ca85c8',
+  	clientSecret: 'f338a82d38ecf5e848e1459591defca47e74ff5e',
+  	repo: 'ahojcn.github.io',
+  	owner: 'ahojcn',
+  	admin: ['ahojcn'],
+  	id: 'Sun Feb 03 2019 16:06:47 GMT+0800',
+  	distractionFreeMode: 'false'
+})
+gitalk.render('gitalk-container')
+}
+</script>
+
+  
 
           </div>
         </div>
@@ -321,9 +488,9 @@
 	var yiliaConfig = {
 		mathjax: true,
 		isHome: false,
-		isPost: false,
+		isPost: true,
 		isArchive: false,
-		isTag: true,
+		isTag: false,
 		isCategory: false,
 		open_in_new: false,
 		toc_hide_index: true,

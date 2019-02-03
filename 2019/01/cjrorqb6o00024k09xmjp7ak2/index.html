@@ -6,19 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://ahoj.cc">
-  <title>Tag: C语言 | I&#39;m ahoj</title>
+  <title>时间复杂度分析 | I&#39;m ahoj</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="持之以恒">
-<meta name="keywords" content="ahoj的博客">
-<meta property="og:type" content="website">
-<meta property="og:title" content="I&#39;m ahoj">
-<meta property="og:url" content="http://ahoj.cc/tags/C语言/index.html">
+  <meta name="description" content="本文的主要内容：为什么要用复杂度来分析，跑一遍不行吗？时间复杂度的分析原则、常见的几种时间复杂度。">
+<meta name="keywords" content="数据结构与算法,时间复杂度">
+<meta property="og:type" content="article">
+<meta property="og:title" content="时间复杂度分析">
+<meta property="og:url" content="http://ahoj.cc/2019/01/cjrorqb6o00024k09xmjp7ak2/index.html">
 <meta property="og:site_name" content="I&#39;m ahoj">
-<meta property="og:description" content="持之以恒">
+<meta property="og:description" content="本文的主要内容：为什么要用复杂度来分析，跑一遍不行吗？时间复杂度的分析原则、常见的几种时间复杂度。">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-01-19T04:58:31.428Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="I&#39;m ahoj">
-<meta name="twitter:description" content="持之以恒">
+<meta name="twitter:title" content="时间复杂度分析">
+<meta name="twitter:description" content="本文的主要内容：为什么要用复杂度来分析，跑一遍不行吗？时间复杂度的分析原则、常见的几种时间复杂度。">
   
     <link rel="alternative" href="/atom.xml" title="I&#39;m ahoj" type="application/atom+xml">
   
@@ -165,125 +166,305 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-复杂度分析" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2019" class="archive-year">2019</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/01/cjrorqb70000e4k09kmenhu4v/" class="archive-article-date">
-  	<time datetime="2019-01-12T09:18:21.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-01-12</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/01/cjrorqb70000e4k09kmenhu4v/">错题整理</a>
+    <h1 class="article-title" itemprop="name">
+      时间复杂度分析
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
+        
+        
+        <a href="/2019/01/cjrorqb6o00024k09xmjp7ak2/" class="archive-article-date">
+  	<time datetime="2019-01-03T00:31:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-01-03</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>本文的主要内容：为什么要用复杂度来分析，跑一遍不行吗？时间复杂度的分析原则、常见的几种时间复杂度。</p>
+<a id="more"></a>
+<p>文中不足或错误之处，欢迎<a href="#END">留言</a>或者<a href="mailto:hanoi_ahoj@icloud.com" target="_blank" rel="noopener">Email</a>指正。</p>
+<h1 id="为什么要分析复杂度"><a href="#为什么要分析复杂度" class="headerlink" title="为什么要分析复杂度"></a>为什么要分析复杂度</h1><p>事后统计法</p>
+<p>将代码跑一遍，通过统计、监控得到执行时间和占用空间，这种方法有很大的局限性。</p>
+<p>1.1 测试结果非常依赖测试环境</p>
+<p>最近有很多同学问我怎么选一款电脑，我首先会问什么需求(电脑用来干什么?是编程开发、还是后期制作、还是游戏或者是追剧？)。对于后期制作方面，选i7当然比i5好，i7的渲染能力是实测强于i5的。对于游戏，i7和i5性能发挥差不多，所以买i5处理器划算。当然还需要考虑散热以及预算等问题。。等等。对于编程测试环境的硬件不同会对测试结果有很大影响。</p>
+<p>1.2 测试结果受数据规模的影响很大</p>
+<p>对于同一种排序算法，待排序数据的有序度不一样，排序的执行时间就会有很大的差别。如果测试数据很小，测试结果可能无法真实的反应算法的性能。</p>
+<h1 id="大O复杂度表示法"><a href="#大O复杂度表示法" class="headerlink" title="大O复杂度表示法"></a>大O复杂度表示法</h1><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*求1，2，3，……，n的累加和*/</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">add</span><span class="params">(<span class="keyword">int</span> n)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> sum = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">int</span> i = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span>(; i&lt;=n; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        sum = sum + i;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> sum;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>假设每行代码执行时间一样为unit_time，T(n)为这段代码的执行时间。</p>
+<p><code>T(n) = (2n+2)*unit_time</code></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">fun</span><span class="params">(<span class="keyword">int</span> n)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> sum = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">int</span> i = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">int</span> j = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span>(; i&lt;=n; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">for</span>(; j&lt;=n; j++)</span><br><span class="line">        &#123;</span><br><span class="line">            sum = sum + i*j;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> sum;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>上面这段代码的执行时间为：<code>T(n) = (2n^2 + 2n +3)*unit_time</code></p>
+<p>所有代码的执行时间T(n)与每行代码的执行次数n成正比</p>
+<p>所有就有：<code>T(n) = O(f(n))</code></p>
+<p>大O时间复杂度实际上并不表示具体代码真正的执行时间，而是表示代码执行时间随数据规模增长的变化趋势，也称为<strong>渐进时间复杂度</strong>。当n很大时，公式中的低阶、常量、系数并不左右增长趋势，所以可以忽略。</p>
+<p>故，以上两个例子的时间复杂度记为：<code>T(n)=O(n)    T(n) = O(n^2)</code></p>
+<h1 id="时间复杂度分析原则"><a href="#时间复杂度分析原则" class="headerlink" title="时间复杂度分析原则"></a>时间复杂度分析原则</h1><h2 id="3-1-只关注循环次数最多的一段代码"><a href="#3-1-只关注循环次数最多的一段代码" class="headerlink" title="3.1 只关注循环次数最多的一段代码"></a>3.1 只关注循环次数最多的一段代码</h2><p>大O只表示一种变化趋势，所以在分析一个算法、一段代码的时候，只关注循环执行次数最多的那一段就可以了。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">fun1</span><span class="params">(<span class="keyword">int</span> n)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> sum = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">int</span> i = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span>( ; i&lt;=n; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        sum = sum + i;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> sum;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>fun1的总时间复杂度为<code>O(n)</code></p>
+<h2 id="3-2-加法原则"><a href="#3-2-加法原则" class="headerlink" title="3.2 加法原则"></a>3.2 加法原则</h2><p>总复杂度等于量级最大的那段代码的时间复杂度。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">fun2</span><span class="params">(<span class="keyword">int</span> n)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> sum1 = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">int</span> p = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span>( ; p&lt;<span class="number">100</span>; p++)</span><br><span class="line">    &#123;</span><br><span class="line">        sum1 = sum1 + p;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">int</span> sum2 = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">int</span> q = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span>( ; q&lt;n; q++)</span><br><span class="line">    &#123;</span><br><span class="line">        sum2 = sum2 + q;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">int</span> sum3 = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">int</span> i = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">int</span> j = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span>( ; i&lt;=n; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        j = <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">for</span>( ; j&lt;=n; j++)</span><br><span class="line">        &#123;</span><br><span class="line">            sum3 = sum3 + i*j;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> sum1+sum2+sum3;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>第一段执行了100次，和n的规模无关。</p>
+<p>第二段代码时间复杂度为O(n)。</p>
+<p>第三段代码时间复杂度为O(n^2)。</p>
+<p><strong>综合这三段代码的时间复杂度，取最大量级，所以这段代码的时间复杂度为O(n^2)。</strong></p>
+<h2 id="3-3-乘法原则"><a href="#3-3-乘法原则" class="headerlink" title="3.3 乘法原则"></a>3.3 乘法原则</h2><p>嵌套代码的复杂度等于嵌套内外代码复杂度的乘积。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">fun1</span><span class="params">(<span class="keyword">int</span> n)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> ret = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">int</span> i = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span>( ; i&lt;n; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        ret = ret + fun2(i);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> ret;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">fun2</span><span class="params">(<span class="keyword">int</span> n)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> sum = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">int</span> i = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span>( ; i&lt;n; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        sum = sum + i;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> sum;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这段代码的时间复杂度为：<code>O(n^2)</code></p>
+<h1 id="常见的几种时间复杂度"><a href="#常见的几种时间复杂度" class="headerlink" title="常见的几种时间复杂度"></a>常见的几种时间复杂度</h1><p>指数阶：O(2^n) 和 阶乘阶：O(n!)成为非多项式量级。</p>
+<blockquote>
+<p>通常把时间复杂度为非多项式量级的算法问题成为NP问题(Non-Deterministic Polynomial，非确定多项式)。当数据规模n越来越大时，NP问题算法的执行时间会几句增加，非常低效。</p>
+</blockquote>
+<h2 id="4-1-O-1"><a href="#4-1-O-1" class="headerlink" title="4.1 O(1)"></a>4.1 O(1)</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> i = <span class="number">1</span>;</span><br><span class="line"><span class="keyword">int</span> j = <span class="number">2</span>;</span><br><span class="line"><span class="keyword">int</span> sum = i + j;</span><br></pre></td></tr></table></figure>
+<h2 id="4-2-O-logn-、O-nlogn"><a href="#4-2-O-logn-、O-nlogn" class="headerlink" title="4.2 O(logn)、O(nlogn)"></a>4.2 O(logn)、O(nlogn)</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* 1 */</span></span><br><span class="line"><span class="keyword">int</span> i = <span class="number">1</span>;</span><br><span class="line"><span class="keyword">while</span>( i&lt;=n )</span><br><span class="line">&#123;</span><br><span class="line">    i = i*<span class="number">2</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* 2 */</span></span><br><span class="line"><span class="keyword">int</span> i = <span class="number">1</span>;</span><br><span class="line"><span class="keyword">while</span>( i&lt;=n )</span><br><span class="line">&#123;</span><br><span class="line">    i = i*<span class="number">3</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>1 代码的复杂度为<code>log2(n)</code></p>
+<p>2 代码的复杂度为<code>log3(n)</code></p>
+<p>对数是可以相互转换的:<code>log3(n) = log3(2) * log2(n)</code>所以:<code>O(log3(n)) = O(C * log2(n))</code>，其中C是一个常量，我们忽略系数C。</p>
+<p>故将对数阶时间复杂度均表示为:<code>log(n)</code></p>
+<p><strong>如果一段代码的时间复杂度为<code>log(n)</code>，执行了n遍，时间复杂度就为<code>nlogn(n)</code>。</strong></p>
+<h2 id="4-3-O-m-n-、O-m-n"><a href="#4-3-O-m-n-、O-m-n" class="headerlink" title="4.3 O(m+n)、O(m*n)"></a>4.3 O(m+n)、O(m*n)</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">fun1</span><span class="params">(<span class="keyword">int</span> m, <span class="keyword">int</span> n)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> sum1 = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">int</span> i = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span>( ; i&lt;m; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        sum1 = sum1 + i;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">int</span> sum2 = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">int</span> j = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span>( ; j&lt;n; j++)</span><br><span class="line">    &#123;</span><br><span class="line">        sum2 = sum2 + j</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> sum1+sum2;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这段代码的时间复杂度为：<code>O(m+n)</code>。</p>
+<p>针对这种情况，时间复杂度和m、n均有关，加法原则就不正确了，乘法原则依然正确。</p>
+<hr>
+<blockquote>
+<p>参考文章：《数据结构与算法之美》</p>
+</blockquote>
+<h1 id="END"><a href="#END" class="headerlink" title="END"></a>END</h1>
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>所有捐助将用来买流浪猫咪和狗狗的午饭<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/img/alipay.png">
+                      <span class="reward-type">支付宝</span>
+                    </div>
+                    
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/img/wepay.png">
+                      <span class="reward-type">微信</span>
+                    </div>
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">C语言</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="//categories/C语言//" class="article-tag-list-link color4">C语言</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/01/cjrorqb6s00064k09vm711ct5/" class="archive-article-date">
-  	<time datetime="2019-01-07T15:24:02.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-01-07</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/01/cjrorqb6s00064k09vm711ct5/">指针</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">C语言</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">数据结构与算法</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">指针</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">时间复杂度</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
+      
 	<div class="article-category tagcloud">
 		<i class="icon-book icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="//categories/C语言//" class="article-tag-list-link color4">C语言</a>
+        			<a href="//categories/数据结构与算法//" class="article-tag-list-link color3">数据结构与算法</a>
         		</li>
       		
 		</ul>
 	</div>
 
 
+      
+
+      
+        
+
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://ahoj.cc/2019/01/cjrorqb6o00024k09xmjp7ak2/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
+  
+    <a href="/2019/01/cjrorqb6u00084k095pnafvgv/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          递归问题
+        
+      </div>
+    </a>
   
   
-    </div></section>
+    <a href="/2019/01/cjrorqb6w000a4k09h6kwxyle/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">你好，2019</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#为什么要分析复杂度"><span class="toc-number">1.</span> <span class="toc-text">为什么要分析复杂度</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#大O复杂度表示法"><span class="toc-number">2.</span> <span class="toc-text">大O复杂度表示法</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#时间复杂度分析原则"><span class="toc-number">3.</span> <span class="toc-text">时间复杂度分析原则</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#3-1-只关注循环次数最多的一段代码"><span class="toc-number">3.1.</span> <span class="toc-text">3.1 只关注循环次数最多的一段代码</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-2-加法原则"><span class="toc-number">3.2.</span> <span class="toc-text">3.2 加法原则</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-3-乘法原则"><span class="toc-number">3.3.</span> <span class="toc-text">3.3 乘法原则</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#常见的几种时间复杂度"><span class="toc-number">4.</span> <span class="toc-text">常见的几种时间复杂度</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#4-1-O-1"><span class="toc-number">4.1.</span> <span class="toc-text">4.1 O(1)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-2-O-logn-、O-nlogn"><span class="toc-number">4.2.</span> <span class="toc-text">4.2 O(logn)、O(nlogn)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-3-O-m-n-、O-m-n"><span class="toc-number">4.3.</span> <span class="toc-text">4.3 O(m+n)、O(m*n)</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#END"><span class="toc-number">5.</span> <span class="toc-text">END</span></a></li></ol>
+                    </div>
+                </span>
+            </div>
+        </div>
+        
+    </div>
+</aside>
+
+
+
   
 
-    
+  
 
+  
+
+  
+
+  
+
+
+<!---让百度主动推送代码，让搜索引擎最快发现文章--->
+
+<script>
+(function(){
+    var bp = document.createElement('script');
+    bp.src = '//push.zhanzhang.baidu.com/push.js';
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+<!--gitalk留言功能-->
+
+  <div id="gitalk-container" style="padding: 0px 30px 0px 30px;"></div>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+<script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+<script type="text/javascript">
+
+if(true){
+	var gitalk = new Gitalk({
+  	clientID: '069eca25fe0437ca85c8',
+  	clientSecret: 'f338a82d38ecf5e848e1459591defca47e74ff5e',
+  	repo: 'ahojcn.github.io',
+  	owner: 'ahojcn',
+  	admin: ['ahojcn'],
+  	id: 'Thu Jan 03 2019 08:31:25 GMT+0800',
+  	distractionFreeMode: 'false'
+})
+gitalk.render('gitalk-container')
+}
+</script>
+
+  
 
           </div>
         </div>
@@ -321,9 +502,9 @@
 	var yiliaConfig = {
 		mathjax: true,
 		isHome: false,
-		isPost: false,
+		isPost: true,
 		isArchive: false,
-		isTag: true,
+		isTag: false,
 		isCategory: false,
 		open_in_new: false,
 		toc_hide_index: true,
