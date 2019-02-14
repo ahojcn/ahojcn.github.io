@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/><meta name="exporter-version" content="Evernote Mac 9.0.0 (457591)"/><meta name="author" content="你好"/><meta name="created" content="2019-02-13 10:42:38 +0000"/><meta name="source" content="desktop.mac"/><meta name="updated" content="2019-02-14 11:36:57 +0000"/><meta name="content-class" content="yinxiang.markdown"/><title>day15 集合框架</title></head><body><div style="font-size: 14px; margin: 0; padding: 0; width: 100%;"><h3 style="line-height: 160%; box-sizing: content-box; font-weight: 700; font-size: 27px; color: #333;">对象数组</h3>
+<p style="line-height: 160%; box-sizing: content-box; margin: 10px 0; color: #333;">对象数组的内存图解<br/>
+<img src="day15%20%E9%9B%86%E5%90%88%E6%A1%86%E6%9E%B6.resources/A3437AAD-2168-4906-BC30-7DAB87C0E4D7.png" height="180" width="288"/></p>
+<h3 style="line-height: 160%; box-sizing: content-box; font-weight: 700; font-size: 27px; color: #333;">集合类</h3>
+<p style="line-height: 160%; box-sizing: content-box; margin: 10px 0; color: #333;">为什么出现集合类？</p>
+<blockquote style="line-height: 160%; box-sizing: content-box; margin: 15px 0; border-left: 4px solid #ddd; padding: 0 15px; color: #777;">
+<p style="line-height: 160%; box-sizing: content-box; margin: 10px 0; color: #333; margin-top: 0; margin-bottom: 0;">面向对象语言对事物的体现都是以对象的形式，所以为了方便对多个对象的操作，Java就提供了集合类。</p>
+</blockquote>
+<p style="line-height: 160%; box-sizing: content-box; margin: 10px 0; color: #333;">数组和集合类同是容器，有何不同？</p>
+<blockquote style="line-height: 160%; box-sizing: content-box; margin: 15px 0; border-left: 4px solid #ddd; padding: 0 15px; color: #777;">
+<p style="line-height: 160%; box-sizing: content-box; margin: 10px 0; color: #333; margin-top: 0; margin-bottom: 0;">数组虽然也可以存储对象，但长度是固定的；集合长度是可变的。数组中可以存储基本数据类型，集合只能存储对象(引用类型)。</p>
+</blockquote>
+<p style="line-height: 160%; box-sizing: content-box; margin: 10px 0; color: #333;">集合类的特点</p>
+<blockquote style="line-height: 160%; box-sizing: content-box; margin: 15px 0; border-left: 4px solid #ddd; padding: 0 15px; color: #777;">
+<p style="line-height: 160%; box-sizing: content-box; margin: 10px 0; color: #333; margin-top: 0; margin-bottom: 0;">集合只用于存储对象，集合长度是可变的，集合可以存储不同类型的对象。</p>
+</blockquote>
+<p style="line-height: 160%; box-sizing: content-box; margin: 10px 0; color: #333;">集合的集成体系图解<br/>
+<img src="day15%20%E9%9B%86%E5%90%88%E6%A1%86%E6%9E%B6.resources/8493CC7A-9970-4EAA-9350-5C3BF455FDE6.png" height="111" width="243"/></p>
+<h4 style="line-height: 160%; box-sizing: content-box; font-size: 20px; color: #333;">Collection接口</h4>
+<p style="line-height: 160%; box-sizing: content-box; margin: 10px 0; color: #333;">Collection接口的成员方法：</p>
+<pre style="line-height: 160%; box-sizing: content-box; border: 0; border-radius: 0; margin: 2px 0 8px; background-color: #f5f7f8;"><code style="display: block; overflow-x: auto; background: #1e1e1e; line-height: 160%; box-sizing: content-box; border: 0; border-radius: 0; letter-spacing: -.3px; padding: 18px; color: #f4f4f4; white-space: pre-wrap;"><span style="color: #57a64a; font-style: italic; line-height: 160%; box-sizing: content-box;">/*
+ * Collection的功能概述：
+ * 1：添加功能
+ * 		boolean add(Object obj):添加一个元素
+ * 		boolean addAll(Collection c):添加一个集合的元素
+ * 2:删除功能
+ * 		void clear():移除所有元素
+ * 		boolean remove(Object o):移除一个元素
+ * 		boolean removeAll(Collection c):移除一个集合的元素，只要有一个元素相同，就移除，返回true
+ * 3:判断功能
+ * 		boolean contains(Object o)：判断集合中是否包含指定的元素
+ * 		boolean containsAll(Collection c)：判断集合中是否包含指定的集合元素，只有包含所有的元素，返回true
+ * 		boolean isEmpty()：判断集合是否为空
+ * 4:获取功能
+ * 		Iterator&lt;E&gt; iterator()(重点)
+ * 5:长度功能
+ * 		int size():元素的个数
+ * 		面试题：数组有没有length()方法呢?字符串有没有length()方法呢?集合有没有length()方法呢?
+ * 6:交集功能
+ * 		boolean retainAll(Collection c):假设有两个集合A,B；A对B做交集，最终的结果保存在A中，B不变；返回值表示的是A是否发生过改变。
+ * 7：把集合转换为数组
+ * 		Object[] toArray()
+ */</span>
+</code></pre>
+<p style="line-height: 160%; box-sizing: content-box; margin: 10px 0; color: #333;">遍历集合使用的方法：</p>
+<pre style="line-height: 160%; box-sizing: content-box; border: 0; border-radius: 0; margin: 2px 0 8px; background-color: #f5f7f8;"><code style="display: block; overflow-x: auto; background: #1e1e1e; line-height: 160%; box-sizing: content-box; border: 0; border-radius: 0; letter-spacing: -.3px; padding: 18px; color: #f4f4f4; white-space: pre-wrap;">Object[] toArray(); <span style="color: #57a64a; font-style: italic; line-height: 160%; box-sizing: content-box;">// 把集合转成数组，可以实现集合的遍历</span>
+
+<span style="color: #dcdcdc; line-height: 160%; box-sizing: content-box;">Iterator <span style="color: #dcdcdc; line-height: 160%; box-sizing: content-box;">iterator</span><span style="color: #dcdcdc; line-height: 160%; box-sizing: content-box;">()</span></span>; <span style="color: #57a64a; font-style: italic; line-height: 160%; box-sizing: content-box;">// 迭代器，集合的专用遍历方式</span>
+</code></pre>
+<h4 style="line-height: 160%; box-sizing: content-box; font-size: 20px; color: #333;">Iterator（迭代器）接口</h4>
+<p style="line-height: 160%; box-sizing: content-box; margin: 10px 0; color: #333;">概述：对 collection 进行迭代的迭代器，依赖于集合而存在。</p>
+<p style="line-height: 160%; box-sizing: content-box; margin: 10px 0; color: #333;">迭代器使用图解和原理：<br/>
+<img src="day15%20%E9%9B%86%E5%90%88%E6%A1%86%E6%9E%B6.resources/A4B2643C-9F25-48CA-8215-852DA040CBC2.png" height="111" width="243"/></p>
+<h4 style="line-height: 160%; box-sizing: content-box; font-size: 20px; color: #333;">List</h4>
+<p style="line-height: 160%; box-sizing: content-box; margin: 10px 0; color: #333;">List接口概述：</p>
+<blockquote style="line-height: 160%; box-sizing: content-box; margin: 15px 0; border-left: 4px solid #ddd; padding: 0 15px; color: #777;">
+<p style="line-height: 160%; box-sizing: content-box; margin: 10px 0; color: #333; margin-top: 0; margin-bottom: 0;">有序的 collection（也称为序列）。此接口的用户可以对列表中每个元素的插入位置进行精确地控制。用户可以根据元素的整数索引（在列表中的位置）访问元素，并搜索列表中的元素。与 set 不同，列表通常允许重复的元素。</p>
+</blockquote>
+<p style="line-height: 160%; box-sizing: content-box; margin: 10px 0; color: #333;">List的特点：<br/>
+有序是指进来的顺序和出去的顺序是一致的<br/>
+可重复</p>
+<h5 style="line-height: 160%; box-sizing: content-box; font-weight: 700; font-size: 16px; color: #333;">List的特有功能</h5>
+<pre style="line-height: 160%; box-sizing: content-box; border: 0; border-radius: 0; margin: 2px 0 8px; background-color: #f5f7f8;"><code style="display: block; overflow-x: auto; background: #1e1e1e; line-height: 160%; box-sizing: content-box; border: 0; border-radius: 0; letter-spacing: -.3px; padding: 18px; color: #f4f4f4; white-space: pre-wrap;"><span style="color: #57a64a; font-style: italic; line-height: 160%; box-sizing: content-box;">/*
+ * List集合的特有功能：
+ * A:添加功能
+ * 		void add(int index,Object element):在指定位置添加元素
+ * B:获取功能
+ * 		Object get(int index):获取指定位置的元素
+ * C:列表迭代器
+ * 		ListIterator listIterator()：List集合特有的迭代器
+ * D:删除功能
+ * 		Object remove(int index)：根据索引删除元素,返回被删除的元素
+ * E:修改功能
+ * 		Object set(int index,Object element):根据索引修改元素，返回被修饰的元素
+ */</span>
+</code></pre>
+<p style="line-height: 160%; box-sizing: content-box; margin: 10px 0; color: #333;">List集合的特有遍历功能：<br/>
+ListIterator接口的成员方法<br/>
+ListIterator可以逆向遍历，但是必须得正向遍历完（😃），一般意义不大。</p>
+<pre style="line-height: 160%; box-sizing: content-box; border: 0; border-radius: 0; margin: 2px 0 8px; background-color: #f5f7f8;"><code style="display: block; overflow-x: auto; background: #1e1e1e; line-height: 160%; box-sizing: content-box; border: 0; border-radius: 0; letter-spacing: -.3px; padding: 18px; color: #f4f4f4; white-space: pre-wrap;"><span style="color: #dcdcdc; line-height: 160%; box-sizing: content-box;"><span style="color: #569cd6; line-height: 160%; box-sizing: content-box;">boolean</span> <span style="color: #dcdcdc; line-height: 160%; box-sizing: content-box;">hasPrevious</span><span style="color: #dcdcdc; line-height: 160%; box-sizing: content-box;">()</span></span>;
+<span style="color: #dcdcdc; line-height: 160%; box-sizing: content-box;">E <span style="color: #dcdcdc; line-height: 160%; box-sizing: content-box;">previous</span><span style="color: #dcdcdc; line-height: 160%; box-sizing: content-box;">()</span></span>;
+</code></pre>
+<pre style="line-height: 160%; box-sizing: content-box; border: 0; border-radius: 0; margin: 2px 0 8px; background-color: #f5f7f8;"><code style="display: block; overflow-x: auto; background: #1e1e1e; line-height: 160%; box-sizing: content-box; border: 0; border-radius: 0; letter-spacing: -.3px; padding: 18px; color: #f4f4f4; white-space: pre-wrap;"><span style="color: #569cd6; line-height: 160%; box-sizing: content-box;">package</span> cn.itcast_02;
+
+<span style="color: #569cd6; line-height: 160%; box-sizing: content-box;">import</span> java.util.ArrayList;
+<span style="color: #569cd6; line-height: 160%; box-sizing: content-box;">import</span> java.util.List;
+<span style="color: #569cd6; line-height: 160%; box-sizing: content-box;">import</span> java.util.ListIterator;
+
+<span style="color: #569cd6; line-height: 160%; box-sizing: content-box;">public</span> <span style="color: #b8d7a3; line-height: 160%; box-sizing: content-box;"><span style="color: #569cd6; line-height: 160%; box-sizing: content-box;">class</span> <span style="color: #dcdcdc; line-height: 160%; box-sizing: content-box;">ListDemo</span> </span>{
+	<span style="color: #dcdcdc; line-height: 160%; box-sizing: content-box;"><span style="color: #569cd6; line-height: 160%; box-sizing: content-box;">public</span> <span style="color: #569cd6; line-height: 160%; box-sizing: content-box;">static</span> <span style="color: #569cd6; line-height: 160%; box-sizing: content-box;">void</span> <span style="color: #dcdcdc; line-height: 160%; box-sizing: content-box;">main</span><span style="color: #dcdcdc; line-height: 160%; box-sizing: content-box;">(String[] args)</span> </span>{
+		List list = <span style="color: #569cd6; line-height: 160%; box-sizing: content-box;">new</span> ArrayList();
+		list.add(<span style="color: #d69d85; line-height: 160%; box-sizing: content-box;">"hello"</span>);
+		list.add(<span style="color: #d69d85; line-height: 160%; box-sizing: content-box;">"world"</span>);
+		list.add(<span style="color: #d69d85; line-height: 160%; box-sizing: content-box;">"java"</span>);
+
+		ListIterator lit = list.listIterator();
+
+		<span style="color: #569cd6; line-height: 160%; box-sizing: content-box;">while</span> (lit.hasNext()) {
+			System.out.println(lit.next());
+		}
+
+		System.out.println(<span style="color: #d69d85; line-height: 160%; box-sizing: content-box;">"-----------"</span>);
+
+		<span style="color: #569cd6; line-height: 160%; box-sizing: content-box;">while</span> (lit.hasPrevious()) {
+			System.out.println(lit.previous());
+		}
+	}
+}
+</code></pre>
+<h5 style="line-height: 160%; box-sizing: content-box; font-weight: 700; font-size: 16px; color: #333;">并发修改异常的产生原因以及解决方法</h5>
+<pre style="line-height: 160%; box-sizing: content-box; border: 0; border-radius: 0; margin: 2px 0 8px; background-color: #f5f7f8;"><code style="display: block; overflow-x: auto; background: #1e1e1e; line-height: 160%; box-sizing: content-box; border: 0; border-radius: 0; letter-spacing: -.3px; padding: 18px; color: #f4f4f4; white-space: pre-wrap;"><span style="color: #569cd6; line-height: 160%; box-sizing: content-box;">public</span> <span style="color: #b8d7a3; line-height: 160%; box-sizing: content-box;"><span style="color: #569cd6; line-height: 160%; box-sizing: content-box;">class</span> <span style="color: #dcdcdc; line-height: 160%; box-sizing: content-box;">ListIteratorDemo2</span> </span>{
+	<span style="color: #dcdcdc; line-height: 160%; box-sizing: content-box;"><span style="color: #569cd6; line-height: 160%; box-sizing: content-box;">public</span> <span style="color: #569cd6; line-height: 160%; box-sizing: content-box;">static</span> <span style="color: #569cd6; line-height: 160%; box-sizing: content-box;">void</span> <span style="color: #dcdcdc; line-height: 160%; box-sizing: content-box;">main</span><span style="color: #dcdcdc; line-height: 160%; box-sizing: content-box;">(String[] args)</span> </span>{
+		<span style="color: #57a64a; font-style: italic; line-height: 160%; box-sizing: content-box;">// 创建List集合对象</span>
+		List list = <span style="color: #569cd6; line-height: 160%; box-sizing: content-box;">new</span> ArrayList();
+		<span style="color: #57a64a; font-style: italic; line-height: 160%; box-sizing: content-box;">// 添加元素</span>
+		list.add(<span style="color: #d69d85; line-height: 160%; box-sizing: content-box;">"hello"</span>);
+		list.add(<span style="color: #d69d85; line-height: 160%; box-sizing: content-box;">"world"</span>);
+		list.add(<span style="color: #d69d85; line-height: 160%; box-sizing: content-box;">"java"</span>);
+
+		<span style="color: #57a64a; font-style: italic; line-height: 160%; box-sizing: content-box;">// 迭代器遍历</span>
+		<span style="color: #57a64a; font-style: italic; line-height: 160%; box-sizing: content-box;">// Iterator it = list.iterator();</span>
+		<span style="color: #57a64a; font-style: italic; line-height: 160%; box-sizing: content-box;">// while (it.hasNext()) {</span>
+		<span style="color: #57a64a; font-style: italic; line-height: 160%; box-sizing: content-box;">// String s = (String) it.next();</span>
+		<span style="color: #57a64a; font-style: italic; line-height: 160%; box-sizing: content-box;">// if ("world".equals(s)) {</span>
+		<span style="color: #57a64a; font-style: italic; line-height: 160%; box-sizing: content-box;">// list.add("javaee");</span>
+		<span style="color: #57a64a; font-style: italic; line-height: 160%; box-sizing: content-box;">// }</span>
+		<span style="color: #57a64a; font-style: italic; line-height: 160%; box-sizing: content-box;">// }</span>
+
+		<span style="color: #57a64a; font-style: italic; line-height: 160%; box-sizing: content-box;">// 方式1：迭代器迭代元素，迭代器修改元素</span>
+		<span style="color: #57a64a; font-style: italic; line-height: 160%; box-sizing: content-box;">// 而Iterator迭代器却没有添加功能，所以我们使用其子接口ListIterator</span>
+		<span style="color: #57a64a; font-style: italic; line-height: 160%; box-sizing: content-box;">// ListIterator lit = list.listIterator();</span>
+		<span style="color: #57a64a; font-style: italic; line-height: 160%; box-sizing: content-box;">// while (lit.hasNext()) {</span>
+		<span style="color: #57a64a; font-style: italic; line-height: 160%; box-sizing: content-box;">// String s = (String) lit.next();</span>
+		<span style="color: #57a64a; font-style: italic; line-height: 160%; box-sizing: content-box;">// if ("world".equals(s)) {</span>
+		<span style="color: #57a64a; font-style: italic; line-height: 160%; box-sizing: content-box;">// lit.add("javaee");</span>
+		<span style="color: #57a64a; font-style: italic; line-height: 160%; box-sizing: content-box;">// }</span>
+		<span style="color: #57a64a; font-style: italic; line-height: 160%; box-sizing: content-box;">// }</span>
+
+		<span style="color: #57a64a; font-style: italic; line-height: 160%; box-sizing: content-box;">// 方式2：集合遍历元素，集合修改元素(普通for)</span>
+		<span style="color: #569cd6; line-height: 160%; box-sizing: content-box;">for</span> (<span style="color: #569cd6; line-height: 160%; box-sizing: content-box;">int</span> x = <span style="color: #b8d7a3; line-height: 160%; box-sizing: content-box;">0</span>; x &lt; list.size(); x++) {
+			String s = (String) list.get(x);
+			<span style="color: #569cd6; line-height: 160%; box-sizing: content-box;">if</span> (<span style="color: #d69d85; line-height: 160%; box-sizing: content-box;">"world"</span>.equals(s)) {
+				list.add(<span style="color: #d69d85; line-height: 160%; box-sizing: content-box;">"javaee"</span>);
+			}
+		}
+
+		System.out.println(<span style="color: #d69d85; line-height: 160%; box-sizing: content-box;">"list:"</span> + list);
+	}
+}
+</code></pre>
+<p style="line-height: 160%; box-sizing: content-box; margin: 10px 0; color: #333;">ConcurrentModificationException:当方法检测到对象的并发修改，但不允许这种修改时，抛出此异常。<br/>
+原因:</p>
+<blockquote style="line-height: 160%; box-sizing: content-box; margin: 15px 0; border-left: 4px solid #ddd; padding: 0 15px; color: #777;">
+<p style="line-height: 160%; box-sizing: content-box; margin: 10px 0; color: #333; margin-top: 0; margin-bottom: 0;">迭代器是依赖于集合而存在的，在判断成功后，集合的中新添加了元素，而迭代器却不知道，所以就报错了，这个错叫并发修改异常。<br/>
+其实这个问题描述的是：迭代器遍历元素的时候，通过集合是不能修改元素的。</p>
+</blockquote>
+<p style="line-height: 160%; box-sizing: content-box; margin: 10px 0; color: #333;">解决方案<br/>
+A:迭代器迭代元素，迭代器修改元素<br/>
+<em style="line-height: 160%; box-sizing: content-box; font-style: italic;">元素是跟在刚才迭代的元素后面的。</em><br/>
+注意Iterator接口没有添加元素的方法，所以使用其子接口ListIterator<br/>
+B:集合遍历元素，集合修改元素(普通for)<br/>
+<em style="line-height: 160%; box-sizing: content-box; font-style: italic;">元素在最后添加的。</em></p>
+<h5 style="line-height: 160%; box-sizing: content-box; font-weight: 700; font-size: 16px; color: #333;">List的子类特点</h5>
+<p style="line-height: 160%; box-sizing: content-box; margin: 10px 0; color: #333;">List:(面试题List的子类特点)<br/>
+ArrayList:<br/>
+底层数据结构是数组，查询快，增删慢。<br/>
+线程不安全，效率高。<br/>
+Vector:<br/>
+底层数据结构是数组，查询快，增删慢。<br/>
+线程安全，效率低。<br/>
+LinkedList:<br/>
+底层数据结构是链表，查询慢，增删快。<br/>
+线程不安全，效率高。</p>
+<pre style="line-height: 160%; box-sizing: content-box; border: 0; border-radius: 0; margin: 2px 0 8px; background-color: #f5f7f8;"><code style="display: block; overflow-x: auto; background: #1e1e1e; line-height: 160%; box-sizing: content-box; border: 0; border-radius: 0; letter-spacing: -.3px; padding: 18px; color: #f4f4f4; white-space: pre-wrap;">List有三个儿子，我们到底使用谁呢?
+	看需求(情况)。
+	
+要安全吗?
+	要：Vector(即使要安全，也不用这个了，后面有替代的)
+	不要：ArrayList或者LinkedList
+		查询多：ArrayList
+		增删多：LinkedList
+		
+如果你什么都不懂，就用ArrayList。
+</code></pre>
+</div><center style="display:none !important;visibility:collapse !important;height:0 !important;white-space:nowrap;width:100%;overflow:hidden">%23%23%23%20%E5%AF%B9%E8%B1%A1%E6%95%B0%E7%BB%84%0A%0A%E5%AF%B9%E8%B1%A1%E6%95%B0%E7%BB%84%E7%9A%84%E5%86%85%E5%AD%98%E5%9B%BE%E8%A7%A3%0A!%5Bd197b0aef56f7a2558e995b80befac8a.png%5D(evernotecid%3A%2F%2FF977A2E0-F206-44F2-9D06-144E2EB36BFB%2Fappyinxiangcom%2F21709237%2FENResource%2Fp51)%0A%0A%23%23%23%20%E9%9B%86%E5%90%88%E7%B1%BB%0A%0A%E4%B8%BA%E4%BB%80%E4%B9%88%E5%87%BA%E7%8E%B0%E9%9B%86%E5%90%88%E7%B1%BB%EF%BC%9F%0A%3E%20%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E8%AF%AD%E8%A8%80%E5%AF%B9%E4%BA%8B%E7%89%A9%E7%9A%84%E4%BD%93%E7%8E%B0%E9%83%BD%E6%98%AF%E4%BB%A5%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%BD%A2%E5%BC%8F%EF%BC%8C%E6%89%80%E4%BB%A5%E4%B8%BA%E4%BA%86%E6%96%B9%E4%BE%BF%E5%AF%B9%E5%A4%9A%E4%B8%AA%E5%AF%B9%E8%B1%A1%E7%9A%84%E6%93%8D%E4%BD%9C%EF%BC%8CJava%E5%B0%B1%E6%8F%90%E4%BE%9B%E4%BA%86%E9%9B%86%E5%90%88%E7%B1%BB%E3%80%82%0A%0A%E6%95%B0%E7%BB%84%E5%92%8C%E9%9B%86%E5%90%88%E7%B1%BB%E5%90%8C%E6%98%AF%E5%AE%B9%E5%99%A8%EF%BC%8C%E6%9C%89%E4%BD%95%E4%B8%8D%E5%90%8C%EF%BC%9F%0A%3E%20%E6%95%B0%E7%BB%84%E8%99%BD%E7%84%B6%E4%B9%9F%E5%8F%AF%E4%BB%A5%E5%AD%98%E5%82%A8%E5%AF%B9%E8%B1%A1%EF%BC%8C%E4%BD%86%E9%95%BF%E5%BA%A6%E6%98%AF%E5%9B%BA%E5%AE%9A%E7%9A%84%EF%BC%9B%E9%9B%86%E5%90%88%E9%95%BF%E5%BA%A6%E6%98%AF%E5%8F%AF%E5%8F%98%E7%9A%84%E3%80%82%E6%95%B0%E7%BB%84%E4%B8%AD%E5%8F%AF%E4%BB%A5%E5%AD%98%E5%82%A8%E5%9F%BA%E6%9C%AC%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%EF%BC%8C%E9%9B%86%E5%90%88%E5%8F%AA%E8%83%BD%E5%AD%98%E5%82%A8%E5%AF%B9%E8%B1%A1(%E5%BC%95%E7%94%A8%E7%B1%BB%E5%9E%8B)%E3%80%82%0A%0A%E9%9B%86%E5%90%88%E7%B1%BB%E7%9A%84%E7%89%B9%E7%82%B9%0A%3E%20%E9%9B%86%E5%90%88%E5%8F%AA%E7%94%A8%E4%BA%8E%E5%AD%98%E5%82%A8%E5%AF%B9%E8%B1%A1%EF%BC%8C%E9%9B%86%E5%90%88%E9%95%BF%E5%BA%A6%E6%98%AF%E5%8F%AF%E5%8F%98%E7%9A%84%EF%BC%8C%E9%9B%86%E5%90%88%E5%8F%AF%E4%BB%A5%E5%AD%98%E5%82%A8%E4%B8%8D%E5%90%8C%E7%B1%BB%E5%9E%8B%E7%9A%84%E5%AF%B9%E8%B1%A1%E3%80%82%0A%0A%E9%9B%86%E5%90%88%E7%9A%84%E9%9B%86%E6%88%90%E4%BD%93%E7%B3%BB%E5%9B%BE%E8%A7%A3%0A!%5B599d742a7f2d9252121b8f307f3ef2ec.png%5D(evernotecid%3A%2F%2FF977A2E0-F206-44F2-9D06-144E2EB36BFB%2Fappyinxiangcom%2F21709237%2FENResource%2Fp52)%0A%0A%23%23%23%23%20Collection%E6%8E%A5%E5%8F%A3%0A%0ACollection%E6%8E%A5%E5%8F%A3%E7%9A%84%E6%88%90%E5%91%98%E6%96%B9%E6%B3%95%EF%BC%9A%0A%60%60%60java%0A%2F*%0A%20*%20Collection%E7%9A%84%E5%8A%9F%E8%83%BD%E6%A6%82%E8%BF%B0%EF%BC%9A%0A%20*%201%EF%BC%9A%E6%B7%BB%E5%8A%A0%E5%8A%9F%E8%83%BD%0A%20*%20%09%09boolean%20add(Object%20obj)%3A%E6%B7%BB%E5%8A%A0%E4%B8%80%E4%B8%AA%E5%85%83%E7%B4%A0%0A%20*%20%09%09boolean%20addAll(Collection%20c)%3A%E6%B7%BB%E5%8A%A0%E4%B8%80%E4%B8%AA%E9%9B%86%E5%90%88%E7%9A%84%E5%85%83%E7%B4%A0%0A%20*%202%3A%E5%88%A0%E9%99%A4%E5%8A%9F%E8%83%BD%0A%20*%20%09%09void%20clear()%3A%E7%A7%BB%E9%99%A4%E6%89%80%E6%9C%89%E5%85%83%E7%B4%A0%0A%20*%20%09%09boolean%20remove(Object%20o)%3A%E7%A7%BB%E9%99%A4%E4%B8%80%E4%B8%AA%E5%85%83%E7%B4%A0%0A%20*%20%09%09boolean%20removeAll(Collection%20c)%3A%E7%A7%BB%E9%99%A4%E4%B8%80%E4%B8%AA%E9%9B%86%E5%90%88%E7%9A%84%E5%85%83%E7%B4%A0%EF%BC%8C%E5%8F%AA%E8%A6%81%E6%9C%89%E4%B8%80%E4%B8%AA%E5%85%83%E7%B4%A0%E7%9B%B8%E5%90%8C%EF%BC%8C%E5%B0%B1%E7%A7%BB%E9%99%A4%EF%BC%8C%E8%BF%94%E5%9B%9Etrue%0A%20*%203%3A%E5%88%A4%E6%96%AD%E5%8A%9F%E8%83%BD%0A%20*%20%09%09boolean%20contains(Object%20o)%EF%BC%9A%E5%88%A4%E6%96%AD%E9%9B%86%E5%90%88%E4%B8%AD%E6%98%AF%E5%90%A6%E5%8C%85%E5%90%AB%E6%8C%87%E5%AE%9A%E7%9A%84%E5%85%83%E7%B4%A0%0A%20*%20%09%09boolean%20containsAll(Collection%20c)%EF%BC%9A%E5%88%A4%E6%96%AD%E9%9B%86%E5%90%88%E4%B8%AD%E6%98%AF%E5%90%A6%E5%8C%85%E5%90%AB%E6%8C%87%E5%AE%9A%E7%9A%84%E9%9B%86%E5%90%88%E5%85%83%E7%B4%A0%EF%BC%8C%E5%8F%AA%E6%9C%89%E5%8C%85%E5%90%AB%E6%89%80%E6%9C%89%E7%9A%84%E5%85%83%E7%B4%A0%EF%BC%8C%E8%BF%94%E5%9B%9Etrue%0A%20*%20%09%09boolean%20isEmpty()%EF%BC%9A%E5%88%A4%E6%96%AD%E9%9B%86%E5%90%88%E6%98%AF%E5%90%A6%E4%B8%BA%E7%A9%BA%0A%20*%204%3A%E8%8E%B7%E5%8F%96%E5%8A%9F%E8%83%BD%0A%20*%20%09%09Iterator%3CE%3E%20iterator()(%E9%87%8D%E7%82%B9)%0A%20*%205%3A%E9%95%BF%E5%BA%A6%E5%8A%9F%E8%83%BD%0A%20*%20%09%09int%20size()%3A%E5%85%83%E7%B4%A0%E7%9A%84%E4%B8%AA%E6%95%B0%0A%20*%20%09%09%E9%9D%A2%E8%AF%95%E9%A2%98%EF%BC%9A%E6%95%B0%E7%BB%84%E6%9C%89%E6%B2%A1%E6%9C%89length()%E6%96%B9%E6%B3%95%E5%91%A2%3F%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%9C%89%E6%B2%A1%E6%9C%89length()%E6%96%B9%E6%B3%95%E5%91%A2%3F%E9%9B%86%E5%90%88%E6%9C%89%E6%B2%A1%E6%9C%89length()%E6%96%B9%E6%B3%95%E5%91%A2%3F%0A%20*%206%3A%E4%BA%A4%E9%9B%86%E5%8A%9F%E8%83%BD%0A%20*%20%09%09boolean%20retainAll(Collection%20c)%3A%E5%81%87%E8%AE%BE%E6%9C%89%E4%B8%A4%E4%B8%AA%E9%9B%86%E5%90%88A%2CB%EF%BC%9BA%E5%AF%B9B%E5%81%9A%E4%BA%A4%E9%9B%86%EF%BC%8C%E6%9C%80%E7%BB%88%E7%9A%84%E7%BB%93%E6%9E%9C%E4%BF%9D%E5%AD%98%E5%9C%A8A%E4%B8%AD%EF%BC%8CB%E4%B8%8D%E5%8F%98%EF%BC%9B%E8%BF%94%E5%9B%9E%E5%80%BC%E8%A1%A8%E7%A4%BA%E7%9A%84%E6%98%AFA%E6%98%AF%E5%90%A6%E5%8F%91%E7%94%9F%E8%BF%87%E6%94%B9%E5%8F%98%E3%80%82%0A%20*%207%EF%BC%9A%E6%8A%8A%E9%9B%86%E5%90%88%E8%BD%AC%E6%8D%A2%E4%B8%BA%E6%95%B0%E7%BB%84%0A%20*%20%09%09Object%5B%5D%20toArray()%0A%20*%2F%0A%60%60%60%0A%0A%E9%81%8D%E5%8E%86%E9%9B%86%E5%90%88%E4%BD%BF%E7%94%A8%E7%9A%84%E6%96%B9%E6%B3%95%EF%BC%9A%0A%60%60%60java%0AObject%5B%5D%20toArray()%3B%20%2F%2F%20%E6%8A%8A%E9%9B%86%E5%90%88%E8%BD%AC%E6%88%90%E6%95%B0%E7%BB%84%EF%BC%8C%E5%8F%AF%E4%BB%A5%E5%AE%9E%E7%8E%B0%E9%9B%86%E5%90%88%E7%9A%84%E9%81%8D%E5%8E%86%0A%0AIterator%20iterator()%3B%20%2F%2F%20%E8%BF%AD%E4%BB%A3%E5%99%A8%EF%BC%8C%E9%9B%86%E5%90%88%E7%9A%84%E4%B8%93%E7%94%A8%E9%81%8D%E5%8E%86%E6%96%B9%E5%BC%8F%0A%60%60%60%0A%0A%23%23%23%23%20Iterator%EF%BC%88%E8%BF%AD%E4%BB%A3%E5%99%A8%EF%BC%89%E6%8E%A5%E5%8F%A3%0A%0A%E6%A6%82%E8%BF%B0%EF%BC%9A%E5%AF%B9%20collection%20%E8%BF%9B%E8%A1%8C%E8%BF%AD%E4%BB%A3%E7%9A%84%E8%BF%AD%E4%BB%A3%E5%99%A8%EF%BC%8C%E4%BE%9D%E8%B5%96%E4%BA%8E%E9%9B%86%E5%90%88%E8%80%8C%E5%AD%98%E5%9C%A8%E3%80%82%0A%0A%E8%BF%AD%E4%BB%A3%E5%99%A8%E4%BD%BF%E7%94%A8%E5%9B%BE%E8%A7%A3%E5%92%8C%E5%8E%9F%E7%90%86%EF%BC%9A%0A!%5Bfd1daaaa8d7f9f1c790f29ec2bbad545.png%5D(evernotecid%3A%2F%2FF977A2E0-F206-44F2-9D06-144E2EB36BFB%2Fappyinxiangcom%2F21709237%2FENResource%2Fp53)%0A%0A%23%23%23%23%20List%0A%0AList%E6%8E%A5%E5%8F%A3%E6%A6%82%E8%BF%B0%EF%BC%9A%0A%3E%20%E6%9C%89%E5%BA%8F%E7%9A%84%20collection%EF%BC%88%E4%B9%9F%E7%A7%B0%E4%B8%BA%E5%BA%8F%E5%88%97%EF%BC%89%E3%80%82%E6%AD%A4%E6%8E%A5%E5%8F%A3%E7%9A%84%E7%94%A8%E6%88%B7%E5%8F%AF%E4%BB%A5%E5%AF%B9%E5%88%97%E8%A1%A8%E4%B8%AD%E6%AF%8F%E4%B8%AA%E5%85%83%E7%B4%A0%E7%9A%84%E6%8F%92%E5%85%A5%E4%BD%8D%E7%BD%AE%E8%BF%9B%E8%A1%8C%E7%B2%BE%E7%A1%AE%E5%9C%B0%E6%8E%A7%E5%88%B6%E3%80%82%E7%94%A8%E6%88%B7%E5%8F%AF%E4%BB%A5%E6%A0%B9%E6%8D%AE%E5%85%83%E7%B4%A0%E7%9A%84%E6%95%B4%E6%95%B0%E7%B4%A2%E5%BC%95%EF%BC%88%E5%9C%A8%E5%88%97%E8%A1%A8%E4%B8%AD%E7%9A%84%E4%BD%8D%E7%BD%AE%EF%BC%89%E8%AE%BF%E9%97%AE%E5%85%83%E7%B4%A0%EF%BC%8C%E5%B9%B6%E6%90%9C%E7%B4%A2%E5%88%97%E8%A1%A8%E4%B8%AD%E7%9A%84%E5%85%83%E7%B4%A0%E3%80%82%E4%B8%8E%20set%20%E4%B8%8D%E5%90%8C%EF%BC%8C%E5%88%97%E8%A1%A8%E9%80%9A%E5%B8%B8%E5%85%81%E8%AE%B8%E9%87%8D%E5%A4%8D%E7%9A%84%E5%85%83%E7%B4%A0%E3%80%82%0A%0AList%E7%9A%84%E7%89%B9%E7%82%B9%EF%BC%9A%0A%E6%9C%89%E5%BA%8F%E6%98%AF%E6%8C%87%E8%BF%9B%E6%9D%A5%E7%9A%84%E9%A1%BA%E5%BA%8F%E5%92%8C%E5%87%BA%E5%8E%BB%E7%9A%84%E9%A1%BA%E5%BA%8F%E6%98%AF%E4%B8%80%E8%87%B4%E7%9A%84%0A%E5%8F%AF%E9%87%8D%E5%A4%8D%0A%0A%23%23%23%23%23%20List%E7%9A%84%E7%89%B9%E6%9C%89%E5%8A%9F%E8%83%BD%0A%0A%60%60%60java%0A%2F*%0A%20*%20List%E9%9B%86%E5%90%88%E7%9A%84%E7%89%B9%E6%9C%89%E5%8A%9F%E8%83%BD%EF%BC%9A%0A%20*%20A%3A%E6%B7%BB%E5%8A%A0%E5%8A%9F%E8%83%BD%0A%20*%20%09%09void%20add(int%20index%2CObject%20element)%3A%E5%9C%A8%E6%8C%87%E5%AE%9A%E4%BD%8D%E7%BD%AE%E6%B7%BB%E5%8A%A0%E5%85%83%E7%B4%A0%0A%20*%20B%3A%E8%8E%B7%E5%8F%96%E5%8A%9F%E8%83%BD%0A%20*%20%09%09Object%20get(int%20index)%3A%E8%8E%B7%E5%8F%96%E6%8C%87%E5%AE%9A%E4%BD%8D%E7%BD%AE%E7%9A%84%E5%85%83%E7%B4%A0%0A%20*%20C%3A%E5%88%97%E8%A1%A8%E8%BF%AD%E4%BB%A3%E5%99%A8%0A%20*%20%09%09ListIterator%20listIterator()%EF%BC%9AList%E9%9B%86%E5%90%88%E7%89%B9%E6%9C%89%E7%9A%84%E8%BF%AD%E4%BB%A3%E5%99%A8%0A%20*%20D%3A%E5%88%A0%E9%99%A4%E5%8A%9F%E8%83%BD%0A%20*%20%09%09Object%20remove(int%20index)%EF%BC%9A%E6%A0%B9%E6%8D%AE%E7%B4%A2%E5%BC%95%E5%88%A0%E9%99%A4%E5%85%83%E7%B4%A0%2C%E8%BF%94%E5%9B%9E%E8%A2%AB%E5%88%A0%E9%99%A4%E7%9A%84%E5%85%83%E7%B4%A0%0A%20*%20E%3A%E4%BF%AE%E6%94%B9%E5%8A%9F%E8%83%BD%0A%20*%20%09%09Object%20set(int%20index%2CObject%20element)%3A%E6%A0%B9%E6%8D%AE%E7%B4%A2%E5%BC%95%E4%BF%AE%E6%94%B9%E5%85%83%E7%B4%A0%EF%BC%8C%E8%BF%94%E5%9B%9E%E8%A2%AB%E4%BF%AE%E9%A5%B0%E7%9A%84%E5%85%83%E7%B4%A0%0A%20*%2F%0A%60%60%60%0A%0AList%E9%9B%86%E5%90%88%E7%9A%84%E7%89%B9%E6%9C%89%E9%81%8D%E5%8E%86%E5%8A%9F%E8%83%BD%EF%BC%9A%0AListIterator%E6%8E%A5%E5%8F%A3%E7%9A%84%E6%88%90%E5%91%98%E6%96%B9%E6%B3%95%0AListIterator%E5%8F%AF%E4%BB%A5%E9%80%86%E5%90%91%E9%81%8D%E5%8E%86%EF%BC%8C%E4%BD%86%E6%98%AF%E5%BF%85%E9%A1%BB%E5%BE%97%E6%AD%A3%E5%90%91%E9%81%8D%E5%8E%86%E5%AE%8C%EF%BC%88%F0%9F%98%83%EF%BC%89%EF%BC%8C%E4%B8%80%E8%88%AC%E6%84%8F%E4%B9%89%E4%B8%8D%E5%A4%A7%E3%80%82%0A%60%60%60java%0Aboolean%20hasPrevious()%3B%0AE%20previous()%3B%0A%60%60%60%0A%0A%60%60%60java%0Apackage%20cn.itcast_02%3B%0A%0Aimport%20java.util.ArrayList%3B%0Aimport%20java.util.List%3B%0Aimport%20java.util.ListIterator%3B%0A%0Apublic%20class%20ListDemo%20%7B%0A%09public%20static%20void%20main(String%5B%5D%20args)%20%7B%0A%09%09List%20list%20%3D%20new%20ArrayList()%3B%0A%09%09list.add(%22hello%22)%3B%0A%09%09list.add(%22world%22)%3B%0A%09%09list.add(%22java%22)%3B%0A%0A%09%09ListIterator%20lit%20%3D%20list.listIterator()%3B%0A%0A%09%09while%20(lit.hasNext())%20%7B%0A%09%09%09System.out.println(lit.next())%3B%0A%09%09%7D%0A%0A%09%09System.out.println(%22-----------%22)%3B%0A%0A%09%09while%20(lit.hasPrevious())%20%7B%0A%09%09%09System.out.println(lit.previous())%3B%0A%09%09%7D%0A%09%7D%0A%7D%0A%60%60%60%0A%0A%23%23%23%23%23%20%E5%B9%B6%E5%8F%91%E4%BF%AE%E6%94%B9%E5%BC%82%E5%B8%B8%E7%9A%84%E4%BA%A7%E7%94%9F%E5%8E%9F%E5%9B%A0%E4%BB%A5%E5%8F%8A%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95%0A%0A%60%60%60java%0Apublic%20class%20ListIteratorDemo2%20%7B%0A%09public%20static%20void%20main(String%5B%5D%20args)%20%7B%0A%09%09%2F%2F%20%E5%88%9B%E5%BB%BAList%E9%9B%86%E5%90%88%E5%AF%B9%E8%B1%A1%0A%09%09List%20list%20%3D%20new%20ArrayList()%3B%0A%09%09%2F%2F%20%E6%B7%BB%E5%8A%A0%E5%85%83%E7%B4%A0%0A%09%09list.add(%22hello%22)%3B%0A%09%09list.add(%22world%22)%3B%0A%09%09list.add(%22java%22)%3B%0A%0A%09%09%2F%2F%20%E8%BF%AD%E4%BB%A3%E5%99%A8%E9%81%8D%E5%8E%86%0A%09%09%2F%2F%20Iterator%20it%20%3D%20list.iterator()%3B%0A%09%09%2F%2F%20while%20(it.hasNext())%20%7B%0A%09%09%2F%2F%20String%20s%20%3D%20(String)%20it.next()%3B%0A%09%09%2F%2F%20if%20(%22world%22.equals(s))%20%7B%0A%09%09%2F%2F%20list.add(%22javaee%22)%3B%0A%09%09%2F%2F%20%7D%0A%09%09%2F%2F%20%7D%0A%0A%09%09%2F%2F%20%E6%96%B9%E5%BC%8F1%EF%BC%9A%E8%BF%AD%E4%BB%A3%E5%99%A8%E8%BF%AD%E4%BB%A3%E5%85%83%E7%B4%A0%EF%BC%8C%E8%BF%AD%E4%BB%A3%E5%99%A8%E4%BF%AE%E6%94%B9%E5%85%83%E7%B4%A0%0A%09%09%2F%2F%20%E8%80%8CIterator%E8%BF%AD%E4%BB%A3%E5%99%A8%E5%8D%B4%E6%B2%A1%E6%9C%89%E6%B7%BB%E5%8A%A0%E5%8A%9F%E8%83%BD%EF%BC%8C%E6%89%80%E4%BB%A5%E6%88%91%E4%BB%AC%E4%BD%BF%E7%94%A8%E5%85%B6%E5%AD%90%E6%8E%A5%E5%8F%A3ListIterator%0A%09%09%2F%2F%20ListIterator%20lit%20%3D%20list.listIterator()%3B%0A%09%09%2F%2F%20while%20(lit.hasNext())%20%7B%0A%09%09%2F%2F%20String%20s%20%3D%20(String)%20lit.next()%3B%0A%09%09%2F%2F%20if%20(%22world%22.equals(s))%20%7B%0A%09%09%2F%2F%20lit.add(%22javaee%22)%3B%0A%09%09%2F%2F%20%7D%0A%09%09%2F%2F%20%7D%0A%0A%09%09%2F%2F%20%E6%96%B9%E5%BC%8F2%EF%BC%9A%E9%9B%86%E5%90%88%E9%81%8D%E5%8E%86%E5%85%83%E7%B4%A0%EF%BC%8C%E9%9B%86%E5%90%88%E4%BF%AE%E6%94%B9%E5%85%83%E7%B4%A0(%E6%99%AE%E9%80%9Afor)%0A%09%09for%20(int%20x%20%3D%200%3B%20x%20%3C%20list.size()%3B%20x%2B%2B)%20%7B%0A%09%09%09String%20s%20%3D%20(String)%20list.get(x)%3B%0A%09%09%09if%20(%22world%22.equals(s))%20%7B%0A%09%09%09%09list.add(%22javaee%22)%3B%0A%09%09%09%7D%0A%09%09%7D%0A%0A%09%09System.out.println(%22list%3A%22%20%2B%20list)%3B%0A%09%7D%0A%7D%0A%60%60%60%0A%0AConcurrentModificationException%3A%E5%BD%93%E6%96%B9%E6%B3%95%E6%A3%80%E6%B5%8B%E5%88%B0%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%B9%B6%E5%8F%91%E4%BF%AE%E6%94%B9%EF%BC%8C%E4%BD%86%E4%B8%8D%E5%85%81%E8%AE%B8%E8%BF%99%E7%A7%8D%E4%BF%AE%E6%94%B9%E6%97%B6%EF%BC%8C%E6%8A%9B%E5%87%BA%E6%AD%A4%E5%BC%82%E5%B8%B8%E3%80%82%20%0A%E5%8E%9F%E5%9B%A0%3A%0A%3E%20%E8%BF%AD%E4%BB%A3%E5%99%A8%E6%98%AF%E4%BE%9D%E8%B5%96%E4%BA%8E%E9%9B%86%E5%90%88%E8%80%8C%E5%AD%98%E5%9C%A8%E7%9A%84%EF%BC%8C%E5%9C%A8%E5%88%A4%E6%96%AD%E6%88%90%E5%8A%9F%E5%90%8E%EF%BC%8C%E9%9B%86%E5%90%88%E7%9A%84%E4%B8%AD%E6%96%B0%E6%B7%BB%E5%8A%A0%E4%BA%86%E5%85%83%E7%B4%A0%EF%BC%8C%E8%80%8C%E8%BF%AD%E4%BB%A3%E5%99%A8%E5%8D%B4%E4%B8%8D%E7%9F%A5%E9%81%93%EF%BC%8C%E6%89%80%E4%BB%A5%E5%B0%B1%E6%8A%A5%E9%94%99%E4%BA%86%EF%BC%8C%E8%BF%99%E4%B8%AA%E9%94%99%E5%8F%AB%E5%B9%B6%E5%8F%91%E4%BF%AE%E6%94%B9%E5%BC%82%E5%B8%B8%E3%80%82%0A%3E%20%E5%85%B6%E5%AE%9E%E8%BF%99%E4%B8%AA%E9%97%AE%E9%A2%98%E6%8F%8F%E8%BF%B0%E7%9A%84%E6%98%AF%EF%BC%9A%E8%BF%AD%E4%BB%A3%E5%99%A8%E9%81%8D%E5%8E%86%E5%85%83%E7%B4%A0%E7%9A%84%E6%97%B6%E5%80%99%EF%BC%8C%E9%80%9A%E8%BF%87%E9%9B%86%E5%90%88%E6%98%AF%E4%B8%8D%E8%83%BD%E4%BF%AE%E6%94%B9%E5%85%83%E7%B4%A0%E7%9A%84%E3%80%82%0A%0A%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88%0A%20%20%20%20A%3A%E8%BF%AD%E4%BB%A3%E5%99%A8%E8%BF%AD%E4%BB%A3%E5%85%83%E7%B4%A0%EF%BC%8C%E8%BF%AD%E4%BB%A3%E5%99%A8%E4%BF%AE%E6%94%B9%E5%85%83%E7%B4%A0%0A%20%20%20%20*%E5%85%83%E7%B4%A0%E6%98%AF%E8%B7%9F%E5%9C%A8%E5%88%9A%E6%89%8D%E8%BF%AD%E4%BB%A3%E7%9A%84%E5%85%83%E7%B4%A0%E5%90%8E%E9%9D%A2%E7%9A%84%E3%80%82*%0A%20%20%20%20%E6%B3%A8%E6%84%8FIterator%E6%8E%A5%E5%8F%A3%E6%B2%A1%E6%9C%89%E6%B7%BB%E5%8A%A0%E5%85%83%E7%B4%A0%E7%9A%84%E6%96%B9%E6%B3%95%EF%BC%8C%E6%89%80%E4%BB%A5%E4%BD%BF%E7%94%A8%E5%85%B6%E5%AD%90%E6%8E%A5%E5%8F%A3ListIterator%0A%20%20%20%20B%3A%E9%9B%86%E5%90%88%E9%81%8D%E5%8E%86%E5%85%83%E7%B4%A0%EF%BC%8C%E9%9B%86%E5%90%88%E4%BF%AE%E6%94%B9%E5%85%83%E7%B4%A0(%E6%99%AE%E9%80%9Afor)%0A%20%20%20%20*%E5%85%83%E7%B4%A0%E5%9C%A8%E6%9C%80%E5%90%8E%E6%B7%BB%E5%8A%A0%E7%9A%84%E3%80%82*%0A%20%20%20%20%0A%23%23%23%23%23%20List%E7%9A%84%E5%AD%90%E7%B1%BB%E7%89%B9%E7%82%B9%0A%0AList%3A(%E9%9D%A2%E8%AF%95%E9%A2%98List%E7%9A%84%E5%AD%90%E7%B1%BB%E7%89%B9%E7%82%B9)%0A%09ArrayList%3A%0A%09%09%E5%BA%95%E5%B1%82%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E6%98%AF%E6%95%B0%E7%BB%84%EF%BC%8C%E6%9F%A5%E8%AF%A2%E5%BF%AB%EF%BC%8C%E5%A2%9E%E5%88%A0%E6%85%A2%E3%80%82%0A%09%09%E7%BA%BF%E7%A8%8B%E4%B8%8D%E5%AE%89%E5%85%A8%EF%BC%8C%E6%95%88%E7%8E%87%E9%AB%98%E3%80%82%0A%09Vector%3A%0A%09%09%E5%BA%95%E5%B1%82%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E6%98%AF%E6%95%B0%E7%BB%84%EF%BC%8C%E6%9F%A5%E8%AF%A2%E5%BF%AB%EF%BC%8C%E5%A2%9E%E5%88%A0%E6%85%A2%E3%80%82%0A%09%09%E7%BA%BF%E7%A8%8B%E5%AE%89%E5%85%A8%EF%BC%8C%E6%95%88%E7%8E%87%E4%BD%8E%E3%80%82%0A%09LinkedList%3A%0A%09%09%E5%BA%95%E5%B1%82%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E6%98%AF%E9%93%BE%E8%A1%A8%EF%BC%8C%E6%9F%A5%E8%AF%A2%E6%85%A2%EF%BC%8C%E5%A2%9E%E5%88%A0%E5%BF%AB%E3%80%82%0A%09%09%E7%BA%BF%E7%A8%8B%E4%B8%8D%E5%AE%89%E5%85%A8%EF%BC%8C%E6%95%88%E7%8E%87%E9%AB%98%E3%80%82%0A%09%09%0A%09List%E6%9C%89%E4%B8%89%E4%B8%AA%E5%84%BF%E5%AD%90%EF%BC%8C%E6%88%91%E4%BB%AC%E5%88%B0%E5%BA%95%E4%BD%BF%E7%94%A8%E8%B0%81%E5%91%A2%3F%0A%09%09%E7%9C%8B%E9%9C%80%E6%B1%82(%E6%83%85%E5%86%B5)%E3%80%82%0A%09%09%0A%09%E8%A6%81%E5%AE%89%E5%85%A8%E5%90%97%3F%0A%09%09%E8%A6%81%EF%BC%9AVector(%E5%8D%B3%E4%BD%BF%E8%A6%81%E5%AE%89%E5%85%A8%EF%BC%8C%E4%B9%9F%E4%B8%8D%E7%94%A8%E8%BF%99%E4%B8%AA%E4%BA%86%EF%BC%8C%E5%90%8E%E9%9D%A2%E6%9C%89%E6%9B%BF%E4%BB%A3%E7%9A%84)%0A%09%09%E4%B8%8D%E8%A6%81%EF%BC%9AArrayList%E6%88%96%E8%80%85LinkedList%0A%09%09%09%E6%9F%A5%E8%AF%A2%E5%A4%9A%EF%BC%9AArrayList%0A%09%09%09%E5%A2%9E%E5%88%A0%E5%A4%9A%EF%BC%9ALinkedList%0A%09%09%09%0A%09%E5%A6%82%E6%9E%9C%E4%BD%A0%E4%BB%80%E4%B9%88%E9%83%BD%E4%B8%8D%E6%87%82%EF%BC%8C%E5%B0%B1%E7%94%A8ArrayList%E3%80%82%0A%20%20%20%20%0A</center></body></html>
