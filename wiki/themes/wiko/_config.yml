@@ -1,7 +1,0 @@
-rss: atom.xml
-fancybox: true
-favicon: https://avatars1.githubusercontent.com/u/43307215?s=460&v=4
-inverse_sort: false  # Whether to sort all notes inversely
-fold: false  # Whether to fold all the notebooks initially
-scratch_name: Scratch  # Notebook name of posts without categories variables
-google_analytics:
