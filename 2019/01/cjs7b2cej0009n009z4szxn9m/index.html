@@ -1,0 +1,463 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html lang="zh-Hans">
+<head>
+  <meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+  <meta name="author" content="ahoj">
+  
+  
+  <meta name="keywords" content="ahoj的博客">
+  
+  
+  
+    <meta name="description" content="理解指针指针是什么，举个栗子我们隔壁的隔壁宿舍最近经营起了零食店。
+我：来5包卫龙大面筋，送到413！
+老板：么马达！来咧！
+现在，假设这栋宿舍楼没有门牌号。
+我：来5包卫龙大面筋，送到……额……4楼一上楼从最左边往右第13个宿舍！
+老板：…… !!!???
+其实指针就像门牌号一样，便于定位查找内存中的数据。
+4GB的内存条有$2^{32}$个房间存数据，没有门牌号怎么找？从第一个开始数？哈...">
+  
+  <title>指针 [ I'm ahoj ]</title>
+  
+  
+    <link rel="shortcut icon" href="https://avatars1.githubusercontent.com/u/43307215?s=460&v=4">
+  
+  
+  <link rel="stylesheet" href="/css/random.css">
+<link rel="stylesheet" href="/css/vegas.min.css">
+<link rel="stylesheet" href="/css/highlight-railscasts.css">
+<link rel="stylesheet" href="/css/jquery.fancybox.css">
+<link rel="stylesheet" href="/css/iconfont/iconfont.css">
+<link rel="stylesheet" href="/css/jquery.fancybox-thumbs.css">
+<link rel="stylesheet" href="/css/plyr.css">
+  
+</head>
+
+<body>
+<div class="side-navigate hide-area">
+  
+    <div class="item prev">
+      <a href="/2019/01/cjs7b2cep000fn009c2oczh44/">
+        <div class="item-icon"></div>
+      </a>
+      <div class="item-title">
+        错题整理
+      </div>
+    </div>
+  
+  
+    <div class="item next">
+      <a href="/2019/01/cjs7b2cec0003n009razbaq5c/">
+        <div class="item-icon"></div>
+      </a>
+      <div class="item-title">
+        你好，2019
+      </div>
+    </div>
+  
+</div>
+<div id="outer-container" class="hide-area">
+<div id="container">
+  <div id="menu-outer" class="slide-down">
+    <div id="menu-inner">
+      <div id="brand">
+        
+        <a onClick="openUserCard()">
+          <img id="avatar" src="https://avatars1.githubusercontent.com/u/43307215?s=460&v=4"/>
+          <div id="homelink">I'm ahoj</div>
+        </a>
+      </div>
+      <div id="menu-list">
+        <ul>
+        
+        
+          
+            <li>
+          
+            <a href="/index.html">主页</a>
+            
+          </li>
+        
+          
+            <li>
+          
+            <a href="/archives">文章</a>
+            
+          </li>
+        
+          
+            <li>
+          
+            <a href="/tags">标签</a>
+            
+          </li>
+        
+          
+            <li>
+          
+            <a href="/categories">分类</a>
+            
+          </li>
+        
+          
+            <li>
+          
+            <a href="/about">关于</a>
+            
+          </li>
+        
+        </ul>
+      </div>
+      <div id="show-menu">
+        <button>Menu</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="content-outer">
+    <div id="content-inner">
+      
+      
+  
+
+  <article id="post">
+    <h1>指针</h1>
+    <p class="page-title-sub">
+      <span id = "post-title-date">Created at 2019-01-07</span>
+      
+        <span id = "post-title-updated">Updated at 2019-02-16</span>
+      
+      
+      <span id = "post-title-categories">Category
+      
+      
+        
+        
+        <a href="/categories/C语言/">C语言</a>
+      
+      </span>
+      
+      
+      <span id = "post-title-tags">
+      Tag
+      
+      
+        
+        
+        <a href="/tags/C语言/">C语言</a>
+      
+        
+          /
+        
+        
+        <a href="/tags/指针/">指针</a>
+      
+      </span>
+      
+    </p>
+    
+    <h1 id="理解指针"><a href="#理解指针" class="headerlink" title="理解指针"></a>理解指针</h1><h2 id="指针是什么，举个栗子"><a href="#指针是什么，举个栗子" class="headerlink" title="指针是什么，举个栗子"></a>指针是什么，举个栗子</h2><p>我们隔壁的隔壁宿舍最近经营起了零食店。</p>
+<p>我：来5包卫龙大面筋，送到413！</p>
+<p>老板：么马达！来咧！</p>
+<p>现在，假设这栋宿舍楼没有门牌号。</p>
+<p>我：来5包卫龙大面筋，送到……额……4楼一上楼从最左边往右第13个宿舍！</p>
+<p>老板：…… !!!???</p>
+<p>其实指针就像门牌号一样，便于定位查找内存中的数据。</p>
+<p>4GB的内存条有$2^{32}$个房间存数据，没有门牌号怎么找？从第一个开始数？哈哈。</p>
+<p>在C语言中可以这样理解一个变量：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> a = <span class="number">10</span>;</span><br><span class="line">    <span class="keyword">int</span> *b = &amp;a;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><code>int a = 10;</code>就是<strong>a</strong>这个人从房地产商(系统)那里买来一间房子，里面放着自己的东西<strong>10</strong>，此时<strong>a</strong>这个人的地址是系统知道的，然后<strong>a</strong>把这个地址(&amp;)告诉了他的好朋友<strong>b</strong>，并且给了<strong>b</strong>这间房子的钥匙(*)，这样<strong>b</strong>就可以通过地址找到这个房子地址并且在房间里取或者放自己的东西了。如果<strong>a</strong>不想让<strong>b</strong>乱动家里东西，可以和<strong>b</strong>说“不许乱动哦！”(加上const，嘿嘿)。</p>
+<h2 id="指针变量"><a href="#指针变量" class="headerlink" title="指针变量"></a>指针变量</h2><p>这个其实挺好理解，在中文中，一般把强调的重点放在后面，指针变量是个<strong>变量</strong>。像这样理解的还有：数组<strong>指针</strong>、指针<strong>数组</strong>。</p>
+<p>指针变量是个变量，这个变量里面存的是地址数据。</p>
+<p>指针变量的大小：</p>
+<p>不论是什么类型（包括void *，这个下面细说～）：</p>
+<ul>
+<li><p>32位环境下，指针变量的大小是4字节。</p>
+</li>
+<li><p>64位环境下，指针变量的大小是8字节。</p>
+</li>
+</ul>
+<p>emmm，怎么理解呢？</p>
+<p>计算机给能访问的内存地址是规范的长度，全0到全1，32位系统下可编址的范围32个比特位(4字节)，64位机器可编址的范围为64个比特位(8字节)。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">const</span> <span class="keyword">char</span> * argv[])</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"void*\t%d\n"</span>, <span class="keyword">sizeof</span>(<span class="keyword">void</span> *));</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"char*\t%d\n"</span>, <span class="keyword">sizeof</span>(<span class="keyword">char</span>*));</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"int*\t%d\n"</span>, <span class="keyword">sizeof</span>(<span class="keyword">int</span> *));</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"float*\t%d\n"</span>, <span class="keyword">sizeof</span>(<span class="keyword">float</span>*));</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"double*\t%d\n"</span>, <span class="keyword">sizeof</span>(<span class="keyword">double</span>*));</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>光说不顶用，来验证下，在64位环境下：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">void</span>*	<span class="number">8</span></span><br><span class="line"><span class="keyword">char</span>*	<span class="number">8</span></span><br><span class="line"><span class="keyword">int</span>*	<span class="number">8</span></span><br><span class="line"><span class="keyword">float</span>*	<span class="number">8</span></span><br><span class="line"><span class="keyword">double</span>*	<span class="number">8</span></span><br></pre></td></tr></table></figure>
+<p>32位机下：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">void</span>*	<span class="number">4</span></span><br><span class="line"><span class="keyword">char</span>*	<span class="number">4</span></span><br><span class="line"><span class="keyword">int</span>*	<span class="number">4</span></span><br><span class="line"><span class="keyword">float</span>*	<span class="number">4</span></span><br><span class="line"><span class="keyword">double</span>*	<span class="number">4</span></span><br></pre></td></tr></table></figure>
+<h2 id="void-是个什么鬼"><a href="#void-是个什么鬼" class="headerlink" title="void *是个什么鬼"></a>void *是个什么鬼</h2><p>可以做这样的事：<code>void *vp;</code></p>
+<p>但是void*类型的指针不能被解引用，因为解引用后它不知道要访问多大的空间(int*解引用可以访问4字节的空间，char*解引用后可以访问1字节的空间)。</p>
+<p>void*可以接收任意类型的指针，这样就可以用它来做一些接口方面的事，这就方便了许多。</p>
+<h1 id="指针类型"><a href="#指针类型" class="headerlink" title="指针类型"></a>指针类型</h1><p>对于以下代码：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">const</span> <span class="keyword">char</span> * argv[])</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"char* : %lu\n"</span>,<span class="keyword">sizeof</span>(<span class="keyword">char</span>*));</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"short* : %lu\n"</span>,<span class="keyword">sizeof</span>(<span class="keyword">short</span>*));</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"int* : %lu\n"</span>,<span class="keyword">sizeof</span>(<span class="keyword">int</span>*));</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"float* : %lu\n"</span>,<span class="keyword">sizeof</span>(<span class="keyword">float</span>*));</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"double* : %lu\n"</span>,<span class="keyword">sizeof</span>(<span class="keyword">double</span>*));</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"long double* : %lu\n"</span>,<span class="keyword">sizeof</span>(<span class="keyword">long</span> <span class="keyword">double</span>*));</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>在64位机器下运行结果为：</p>
+<p><img src="https://camo.githubusercontent.com/98b19b496e93806971e221b986c1327fd609b9cc/68747470733a2f2f7778312e73696e61696d672e636e2f6d773639302f30303677523064636c793166776576763836786a666a333069753039303734792e6a7067" alt="-64"></p>
+<p>在32位机器下运行结果为：</p>
+<p><img src="https://camo.githubusercontent.com/9196131c1403410461d37d3836786465697e69ca/68747470733a2f2f7778332e73696e61696d672e636e2f6d773639302f30303677523064636c7931667765767631327078746a33316b77306a71646f6f2e6a7067" alt="gcc main.c -m32"></p>
+<p><strong><em>那么问题来了，既然占用大小都是一样的，为什么还要有这么多类型呢？</em></strong></p>
+<h2 id="指针类型的作用"><a href="#指针类型的作用" class="headerlink" title="指针类型的作用"></a>指针类型的作用</h2><ul>
+<li>指针类型决定了对指针解引用的时候有多大的权限（能操作几个字节）。比如：<code>char*</code>的指针解引用只能访问一个字节，而<code>int*</code>的指针解引用就能访问四个字节。</li>
+<li>指针类型决定了指针指向前或者向后一步有多大距离。</li>
+</ul>
+<p>看下面的这段代码：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">const</span> <span class="keyword">char</span> * argv[])</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> i = <span class="number">0x11223344</span>;</span><br><span class="line">    <span class="keyword">int</span> *pi = &amp;i;</span><br><span class="line">    *pi = <span class="number">0</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">int</span> c = <span class="number">0x11223344</span>;</span><br><span class="line">    <span class="keyword">char</span> *pc = &amp;c;</span><br><span class="line">    *pc = <span class="number">0</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Debug看内存变化：</p>
+<p><a href="https://camo.githubusercontent.com/fa302cfc6e28d6ee72a86a23d8f8e9cbd10d451e/68747470733a2f2f7778332e73696e61696d672e636e2f6d773639302f30303677523064636c7931667765776c32706c77726a33306c303037343734722e6a7067" target="_blank" rel="noopener"><img src="https://camo.githubusercontent.com/fa302cfc6e28d6ee72a86a23d8f8e9cbd10d451e/68747470733a2f2f7778332e73696e61696d672e636e2f6d773639302f30303677523064636c7931667765776c32706c77726a33306c303037343734722e6a7067" alt="p"></a></p>
+<p><a href="https://camo.githubusercontent.com/57a12eddf6d4ca658d9fd2bc6ede68ce474a3b0d/68747470733a2f2f7778322e73696e61696d672e636e2f6d773639302f30303677523064636c7931667765776c6c6d666e336a3330626f30366d3379762e6a7067" target="_blank" rel="noopener"><img src="https://camo.githubusercontent.com/57a12eddf6d4ca658d9fd2bc6ede68ce474a3b0d/68747470733a2f2f7778322e73696e61696d672e636e2f6d773639302f30303677523064636c7931667765776c6c6d666e336a3330626f30366d3379762e6a7067" alt="img"></a></p>
+<p>发现：<code>i=0x11223344</code>在执行<code>*pi=0;</code>后全部变为了0，<code>c=0x11223344</code>在执行<code>*pc=0;</code>后只有高位变成了0</p>
+<p>说明：int*类型的指针解引用后，操作权限是4个字节(int的大小)。char*解引用后，操作权限仅为一个字节。</p>
+<p>指针类型决定了对指针解引用的时候有多大的权限（能操作几个字节）。</p>
+<p>再来看看第二个小点，对于以下代码：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">const</span> <span class="keyword">char</span> * argv[])</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> n = <span class="number">10</span>;</span><br><span class="line">    <span class="keyword">int</span> *pi = &amp;n;</span><br><span class="line">    <span class="keyword">char</span> *pc = (<span class="keyword">char</span>*)&amp;n;</span><br><span class="line">    </span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"&amp;n : %p\n"</span>, &amp;n);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"pi : %p\n"</span>, pi);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"pi+1 : %p\n"</span>, pi+<span class="number">1</span>);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"-----------------------\n"</span>);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"pc : %p\n"</span>, pc);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"pc+1 : %p\n"</span>, pc+<span class="number">1</span>);</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>有在64位机下有如下输出：</p>
+<p><a href="https://camo.githubusercontent.com/a923b880ac9b3ed9eba1143f3e79703fe214c301/68747470733a2f2f7778342e73696e61696d672e636e2f6d773639302f30303677523064636c793166776578346f373074356a3330696d3038737766642e6a7067" target="_blank" rel="noopener"><img src="https://camo.githubusercontent.com/a923b880ac9b3ed9eba1143f3e79703fe214c301/68747470733a2f2f7778342e73696e61696d672e636e2f6d773639302f30303677523064636c793166776578346f373074356a3330696d3038737766642e6a7067" alt="pic"></a></p>
+<p>可以看到：<code>pi=pc=&amp;n</code></p>
+<p>但是：<code>pi+1</code> 和 <code>pc+1</code> 不同，<code>pi+1 - pi</code> = 8，<code>pc+1 - pc</code> = 1</p>
+<p>指针类型决定了指针指向前或者向后一步有多大距离。</p>
+<h1 id="指针的题目"><a href="#指针的题目" class="headerlink" title="指针的题目"></a>指针的题目</h1><ul>
+<li>题1</li>
+</ul>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">const</span> <span class="keyword">char</span> * argv[])</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> a[<span class="number">5</span>] = &#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>&#125;;</span><br><span class="line">    <span class="keyword">int</span> *p = (<span class="keyword">int</span> *)(&amp;a+<span class="number">1</span>); <span class="comment">// p指向5后面的那个地址</span></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%d,%d\n"</span>, *(a+<span class="number">1</span>), *(p<span class="number">-1</span>));  <span class="comment">//2,5</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>题2</li>
+</ul>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">test</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="keyword">int</span> Num;</span><br><span class="line">    <span class="keyword">char</span> *pcName;</span><br><span class="line">    shortsDate;</span><br><span class="line">    <span class="keyword">char</span> cha[<span class="number">2</span>];</span><br><span class="line">    shortsBa[<span class="number">4</span>];</span><br><span class="line">&#125;*p;</span><br><span class="line">假设结构体test的大小为<span class="number">20</span>个字节，p的地址为<span class="number">0x100000</span>。</span><br><span class="line">p + <span class="number">0x1</span> = ?	<span class="comment">// p+1 =&gt; +20</span></span><br><span class="line">(<span class="keyword">unsigned</span> <span class="keyword">long</span>)p + <span class="number">0x1</span> = ?	<span class="comment">// 0x100001 (eg: int a = 0, a + 1 = 1)</span></span><br><span class="line">(<span class="keyword">unsigned</span> <span class="keyword">int</span> *)p + <span class="number">0x1</span> = ?	<span class="comment">// 0x100004 (加一个指针的大小，32位平台下4)</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>题3</li>
+</ul>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> a[<span class="number">4</span>] = &#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>&#125;;</span><br><span class="line">    <span class="keyword">int</span> *p1 = (<span class="keyword">int</span> *)(&amp;a+<span class="number">1</span>);</span><br><span class="line">    <span class="keyword">int</span> *p2 = (<span class="keyword">int</span> *)((<span class="keyword">int</span>)a+<span class="number">1</span>);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%x,%x\n"</span>, p1[<span class="number">-1</span>], *p2);</span><br><span class="line">    <span class="comment">// p1[-1] 输出 4</span></span><br><span class="line">    <span class="comment">// *p2 这个编译可以通过，但是运行错误</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>在内存中：</p>
+<p><img src="https://wx4.sinaimg.cn/mw690/006wR0dcly1fxnh37huqmj31o60u0abh.jpg" alt="指针笔试题3"></p>
+<ul>
+<li>题4</li>
+</ul>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> a[<span class="number">3</span>][<span class="number">2</span>] = &#123; (<span class="number">0</span>,<span class="number">1</span>), (<span class="number">2</span>,<span class="number">3</span>), (<span class="number">4</span>,<span class="number">5</span>) &#125;;</span><br><span class="line">    <span class="keyword">int</span> *p = a[<span class="number">0</span>];</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%d\n"</span>, p[<span class="number">0</span>]); <span class="comment">// 输出1</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>注意逗号表达式：运算结果为后面的值</p>
+<p>所以：</p>
+<p><img src="https://wx3.sinaimg.cn/mw690/006wR0dcly1fxnhbmau9fj30fi0fuq3k.jpg" alt="4"></p>
+<ul>
+<li>题5</li>
+</ul>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> a[<span class="number">5</span>][<span class="number">5</span>];</span><br><span class="line">    <span class="keyword">int</span> (*p)[<span class="number">4</span>];<span class="comment">//注意这里！</span></span><br><span class="line">    p = a;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%p,%d\n"</span>, &amp;p[<span class="number">4</span>][<span class="number">2</span>]-&amp;a[<span class="number">4</span>][<span class="number">2</span>], &amp;p[<span class="number">4</span>][<span class="number">2</span>]-&amp;a[<span class="number">4</span>][<span class="number">2</span>]); <span class="comment">//输出： -4的补码，-4</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="https://wx1.sinaimg.cn/mw690/006wR0dcly1fxnhvji5v2j31nw0poq6g.jpg" alt="5"></p>
+<p>输出他们之间元素的个数。</p>
+<p>因为<code>p[4][2]</code>的地址小于<code>a[4][2]</code>的地址，所以为<code>-4</code>，但是由于输出的时候，<code>%p</code>输出的是地址，也就是一个无符号的数，所以将<code>-4</code>的补码输出，<code>%d</code>正常输出。</p>
+<ul>
+<li>题6</li>
+</ul>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> aa[<span class="number">2</span>][<span class="number">5</span>] = &#123; <span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>,<span class="number">7</span>,<span class="number">8</span>,<span class="number">9</span>,<span class="number">10</span> &#125;;</span><br><span class="line">    <span class="keyword">int</span> *p1 = (<span class="keyword">int</span> *)(&amp;aa + <span class="number">1</span>);</span><br><span class="line">    <span class="keyword">int</span> *p2 = (<span class="keyword">int</span> *)(*(aa + <span class="number">1</span>));</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%d,%d\n"</span>, *(p1<span class="number">-1</span>), *(p2<span class="number">-1</span>));	<span class="comment">// 输出10，5</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><code>&amp;aa+1</code>跨过了整个数组<code>aa</code>的长度，指向元素10后的地址。</p>
+<p><code>aa+1</code>代表的跨过了一个<code>aa</code>的元素，而<code>aa</code>是一个二维数组，它的元素是一个一维数组。如下图：</p>
+<p><img src="https://wx3.sinaimg.cn/mw690/006wR0dcly1fxnigcsmz0j30oy0fiaaw.jpg" alt="6"></p>
+<ul>
+<li>题7</li>
+</ul>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">char</span> *a[] = &#123;<span class="string">"work"</span>, <span class="string">"at"</span>, <span class="string">"360"</span>&#125;;</span><br><span class="line">    <span class="keyword">char</span> **pa = a;</span><br><span class="line">    pa++;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%s\n"</span>, *pa);	<span class="comment">// 输出at</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="https://wx4.sinaimg.cn/mw690/006wR0dcly1fxnipjqiicj31460c475c.jpg" alt="7"></p>
+<ul>
+<li>题8</li>
+</ul>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">char</span> *c[] = &#123; <span class="string">"ENTER"</span>, <span class="string">"NEW"</span>, <span class="string">"POINT"</span>, <span class="string">"FIRST"</span> &#125;;</span><br><span class="line">    <span class="keyword">int</span> **cp[] = &#123; c+<span class="number">3</span>, c+<span class="number">2</span>, c+<span class="number">1</span>, c &#125;;</span><br><span class="line">    <span class="keyword">char</span> ***cpp = cp;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%s\n"</span>, **++cpp);		<span class="comment">// POINT</span></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%s\n"</span>, *--*++cpp+<span class="number">3</span>);	<span class="comment">// ER</span></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%s\n"</span>, *cpp[<span class="number">-2</span>]+<span class="number">3</span>);		<span class="comment">// ST</span></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%s\n"</span>, cpp[<span class="number">-1</span>][<span class="number">-1</span>]+<span class="number">1</span>);	<span class="comment">// EW</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><code>++、—</code>的优先级高于<code>*</code>，<code>*</code>的优先级高于<code>+</code>。<code>++cpp</code>会影响<code>cpp</code>的值，但<code>cpp+1</code>不会影响。<code>[]</code>的优先级大于<code>*</code>。</p>
+<p><img src="https://wx2.sinaimg.cn/mw690/006wR0dcly1fxnj61eghkj31fy0l0q5n.jpg" alt="8.1"></p>
+<p><code>**++cpp</code>：先<code>++</code>，此时的<code>cpp</code>指向<code>cp[1]</code>，解引用为<code>c[2]</code>，再解引用即为<code>POINT</code>。</p>
+<p><img src="https://wx2.sinaimg.cn/mw690/006wR0dcly1fxnjdh5q1zj31fq0k00ve.jpg" alt="8.2"></p>
+<p><code>*--*++cpp+3</code>：经过上一步，<code>cpp</code>现在的指向如上图。</p>
+<p>先<code>++</code>，此时<code>cpp</code>指向<code>cp[2]</code>，解引用即为<code>cp[2]</code>，再<code>--</code>，此时改变了<code>cp[2]</code>的指向，他指向<code>c[0]</code>，再解引用即为<code>c[0]</code>，给<code>c[0]+3</code>，输出的结果为<code>ER</code>。</p>
+<p><img src="https://wx2.sinaimg.cn/mw690/006wR0dcly1fxnjlyh6yzj31jm0hy0vf.jpg" alt="8.3"></p>
+<p><code>*cpp[-2]+3</code>：经过上一步，现在的指向如上图所示。</p>
+<p><code>cpp[-2]</code>指向了<code>cp[0]</code>，解引用指向<code>c[3]</code>，<code>c[3]+3</code>输出<code>ST</code>。</p>
+<p><code>cpp[-1][-1]+1</code>：经过上一步并没有改变指针的指向。</p>
+<p><code>cpp[-1][-1]</code>代表<code>c[1]</code>，再<code>+1</code>输出<code>EW</code>。</p>
+<hr>
+<blockquote>
+<p>参考：《C和指针》、《剑指offer》</p>
+</blockquote>
+
+  </article>
+  <div class="random-toc-area">
+  <button class="btn-hide-toc btn-hide-toc-show" style="display: none" onclick="TOCToggle()">Show TOC</button>
+  <button class="btn-hide-toc btn-hide-toc-hide" onclick="TOCToggle()">Hide TOC</button>
+  <div class="random-toc">
+    <h2>Table of Content</h2>
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#理解指针"><span class="toc-text">理解指针</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#指针是什么，举个栗子"><span class="toc-text">指针是什么，举个栗子</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#指针变量"><span class="toc-text">指针变量</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#void-是个什么鬼"><span class="toc-text">void *是个什么鬼</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#指针类型"><span class="toc-text">指针类型</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#指针类型的作用"><span class="toc-text">指针类型的作用</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#指针的题目"><span class="toc-text">指针的题目</span></a></li></ol>
+  </div>
+</div>
+
+  
+<nav id="pagination">
+  
+    <a href="/2019/01/cjs7b2cep000fn009c2oczh44/" class="prev">&larr; Prev post 错题整理</a>
+  
+
+  
+
+  
+    <a href="/2019/01/cjs7b2cec0003n009razbaq5c/" class="next">Next post 你好，2019 &rarr;</a>
+  
+</nav>
+
+  <!-- JiaThis Button BEGIN -->
+
+<!-- JiaThis Button END -->
+
+
+      
+      
+    </div>
+  </div>
+
+  <div id="bottom-outer">
+    <div id="bottom-inner">
+      Site by ahoj using
+      <a href="http://hexo.io">Hexo</a> & <a href="https://github.com/stiekel/hexo-theme-random">Random</a>
+      <br>
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+
+<div id="user-card">
+  <div class="center-field">
+    <img class="avatar" src="https://avatars1.githubusercontent.com/u/43307215?s=460&v=4">
+    <p id="description">持之以恒</p>
+    <ul class="social-icon">
+  
+  
+    <li>
+      <a href="https://github.com/ahojcn">
+        
+          <i class="icon iconfont github">&#xe606;</i>
+        
+      </a>
+    </li>
+  
+    <li>
+      <a href="mailto:2076430492@qq.com">
+        
+          E-mail
+        
+      </a>
+    </li>
+  
+</ul>
+  </div>
+</div>
+
+
+<script>
+// is trigger analytics / tongji script
+var isIgnoreHost = false;
+
+if(window && window.location && window.location.host) {
+  isIgnoreHost = ["localhost","127.0.0.1"].some(function(address){
+    return 0 === window.location.host.indexOf(address);
+  });
+}
+
+var isTriggerAnalytics = !( true && isIgnoreHost );
+
+</script>
+
+
+
+
+  
+  
+    <script src="/js/jquery-2.2.3.min.js"></script>
+  
+    <script src="/js/vegas.min.js"></script>
+  
+    <script src="/js/random.js"></script>
+  
+    <script src="/js/highlight.pack.js"></script>
+  
+    <script src="/js/jquery.mousewheel.pack.js"></script>
+  
+    <script src="/js/jquery.fancybox.pack.js"></script>
+  
+    <script src="/js/jquery.fancybox-thumbs.js"></script>
+  
+    <script src="/js/plyr.js"></script>
+  
+
+<script>
+
+  // fancybox
+  var backgroundImages = [];
+  
+  $('#post').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox') || $(this).parent().hasClass('fancybox-thumb')) return;
+      var alt = this.alt || this.title;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'post' + i);
+    });
+  });
+  $(".fancybox").fancybox();
+
+var vegasConfig = {"preload­Image":true,"transition":["flash"],"timer":true,"delay":1500000,"shuffle":true,"count":12};
+var unsplashConfig = {"gravity":"center"};
+// is show background images
+var turnoffBackgroundImage = false;
+
+
+
+
+var backgroundColor = "34495E";
+
+$(".fancybox-thumb").fancybox({
+  prevEffect: 'none',
+  nextEffect: 'none',
+  helpers: {
+    title: {
+      type: 'outside'
+    },
+    thumbs: {
+      width: 50,
+      height: 50
+    }
+  }
+});
+
+// show video with plyr
+$(".video-container iframe").each(function(i){
+  var url = $(this).attr('src');
+  var id = url.split('/').pop();
+  var plyrContainer = document.createElement('div');
+  plyrContainer.className = 'plyr';
+  var plyrElement = document.createElement('div');
+  plyrElement.dataset.videoId = id;
+  switch(true) {
+    case url.search('youtube.com') >= 0:
+      plyrElement.dataset.type = 'youtube';
+      break;
+    case url.search('vimeo.com') >= 0:
+      plyrElement.dataset.type = 'vimeo';
+      break;
+    default:
+      return;
+  };
+  plyrContainer.appendChild(plyrElement);
+  $(this).parent().html(plyrContainer);
+});
+plyr.setup('.plyr', {iconUrl: '/css/sprite.svg'});
+</script>
+<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","model":{"jsonPath":"/live2dw/assets/wanko.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true},"log":false,"tagMode":false});</script></body>
+</html>
+
