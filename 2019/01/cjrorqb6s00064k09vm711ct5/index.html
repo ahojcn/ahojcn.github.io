@@ -18,7 +18,14 @@
   
   
   
-    <meta name="description" content="本文的主要内容：为啥要有指针？用两个栗子理解指针的概念。指针类型的作用、以及一些指针的练习题。">
+    <meta name="description" content="理解指针指针是什么，举个栗子我们隔壁的隔壁宿舍最近经营起了零食店。
+我：来5包卫龙大面筋，送到413！
+老板：么马达！来咧！
+现在，假设这栋宿舍楼没有门牌号。
+我：来5包卫龙大面筋，送到……额……4楼一上楼从最左边往右第13个宿舍！
+老板：…… !!!???
+其实指针就像门牌号一样，便于定位查找内存中的数据。
+4GB的内存条有$2^{32}$个房间存数据，没有门牌号怎么找？从第一个开始数？哈...">
   
   <title>指针 [ I'm ahoj ]</title>
   
@@ -128,7 +135,7 @@
     <p class="page-title-sub">
       <span id = "post-title-date">Created at 2019-01-07</span>
       
-        <span id = "post-title-updated">Updated at 2019-01-19</span>
+        <span id = "post-title-updated">Updated at 2019-02-16</span>
       
       
       <span id = "post-title-categories">Category
@@ -159,10 +166,7 @@
       
     </p>
     
-    <p>本文的主要内容：为啥要有指针？用两个栗子理解指针的概念。指针类型的作用、以及一些指针的练习题。</p>
-<a id="more"></a>
-<p>文中不足或错误之处，欢迎<a href="#END">留言</a>或者<a href="mailto:hanoi_ahoj@icloud.com" target="_blank" rel="noopener">Email</a>指正。</p>
-<h1 id="1-理解指针"><a href="#1-理解指针" class="headerlink" title="1. 理解指针"></a>1. 理解指针</h1><h2 id="指针是什么，举个栗子"><a href="#指针是什么，举个栗子" class="headerlink" title="指针是什么，举个栗子"></a>指针是什么，举个栗子</h2><p>我们隔壁的隔壁宿舍最近经营起了零食店。</p>
+    <h1 id="理解指针"><a href="#理解指针" class="headerlink" title="理解指针"></a>理解指针</h1><h2 id="指针是什么，举个栗子"><a href="#指针是什么，举个栗子" class="headerlink" title="指针是什么，举个栗子"></a>指针是什么，举个栗子</h2><p>我们隔壁的隔壁宿舍最近经营起了零食店。</p>
 <p>我：来5包卫龙大面筋，送到413！</p>
 <p>老板：么马达！来咧！</p>
 <p>现在，假设这栋宿舍楼没有门牌号。</p>
@@ -193,7 +197,7 @@
 <h2 id="void-是个什么鬼"><a href="#void-是个什么鬼" class="headerlink" title="void *是个什么鬼"></a>void *是个什么鬼</h2><p>可以做这样的事：<code>void *vp;</code></p>
 <p>但是void*类型的指针不能被解引用，因为解引用后它不知道要访问多大的空间(int*解引用可以访问4字节的空间，char*解引用后可以访问1字节的空间)。</p>
 <p>void*可以接收任意类型的指针，这样就可以用它来做一些接口方面的事，这就方便了许多。</p>
-<h1 id="2-指针类型"><a href="#2-指针类型" class="headerlink" title="2. 指针类型"></a>2. 指针类型</h1><p>对于以下代码：</p>
+<h1 id="指针类型"><a href="#指针类型" class="headerlink" title="指针类型"></a>指针类型</h1><p>对于以下代码：</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">const</span> <span class="keyword">char</span> * argv[])</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"char* : %lu\n"</span>,<span class="keyword">sizeof</span>(<span class="keyword">char</span>*));</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"short* : %lu\n"</span>,<span class="keyword">sizeof</span>(<span class="keyword">short</span>*));</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"int* : %lu\n"</span>,<span class="keyword">sizeof</span>(<span class="keyword">int</span>*));</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"float* : %lu\n"</span>,<span class="keyword">sizeof</span>(<span class="keyword">float</span>*));</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"double* : %lu\n"</span>,<span class="keyword">sizeof</span>(<span class="keyword">double</span>*));</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"long double* : %lu\n"</span>,<span class="keyword">sizeof</span>(<span class="keyword">long</span> <span class="keyword">double</span>*));</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>在64位机器下运行结果为：</p>
 <p><img src="https://camo.githubusercontent.com/98b19b496e93806971e221b986c1327fd609b9cc/68747470733a2f2f7778312e73696e61696d672e636e2f6d773639302f30303677523064636c793166776576763836786a666a333069753039303734792e6a7067" alt="-64"></p>
@@ -219,7 +223,7 @@
 <p>可以看到：<code>pi=pc=&amp;n</code></p>
 <p>但是：<code>pi+1</code> 和 <code>pc+1</code> 不同，<code>pi+1 - pi</code> = 8，<code>pc+1 - pc</code> = 1</p>
 <p>指针类型决定了指针指向前或者向后一步有多大距离。</p>
-<h1 id="3-指针的题目"><a href="#3-指针的题目" class="headerlink" title="3. 指针的题目"></a>3. 指针的题目</h1><ul>
+<h1 id="指针的题目"><a href="#指针的题目" class="headerlink" title="指针的题目"></a>指针的题目</h1><ul>
 <li>题1</li>
 </ul>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">const</span> <span class="keyword">char</span> * argv[])</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> a[<span class="number">5</span>] = &#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>&#125;;</span><br><span class="line">    <span class="keyword">int</span> *p = (<span class="keyword">int</span> *)(&amp;a+<span class="number">1</span>); <span class="comment">// p指向5后面的那个地址</span></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%d,%d\n"</span>, *(a+<span class="number">1</span>), *(p<span class="number">-1</span>));  <span class="comment">//2,5</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -278,14 +282,14 @@
 <blockquote>
 <p>参考：《C和指针》、《剑指offer》</p>
 </blockquote>
-<h1 id="END"><a href="#END" class="headerlink" title="END"></a>END</h1>
+
   </article>
   <div class="random-toc-area">
   <button class="btn-hide-toc btn-hide-toc-show" style="display: none" onclick="TOCToggle()">Show TOC</button>
   <button class="btn-hide-toc btn-hide-toc-hide" onclick="TOCToggle()">Hide TOC</button>
   <div class="random-toc">
     <h2>Table of Content</h2>
-    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-理解指针"><span class="toc-text">1. 理解指针</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#指针是什么，举个栗子"><span class="toc-text">指针是什么，举个栗子</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#指针变量"><span class="toc-text">指针变量</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#void-是个什么鬼"><span class="toc-text">void *是个什么鬼</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-指针类型"><span class="toc-text">2. 指针类型</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#指针类型的作用"><span class="toc-text">指针类型的作用</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3-指针的题目"><span class="toc-text">3. 指针的题目</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#END"><span class="toc-text">END</span></a></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#理解指针"><span class="toc-text">理解指针</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#指针是什么，举个栗子"><span class="toc-text">指针是什么，举个栗子</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#指针变量"><span class="toc-text">指针变量</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#void-是个什么鬼"><span class="toc-text">void *是个什么鬼</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#指针类型"><span class="toc-text">指针类型</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#指针类型的作用"><span class="toc-text">指针类型的作用</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#指针的题目"><span class="toc-text">指针的题目</span></a></li></ol>
   </div>
 </div>
 
