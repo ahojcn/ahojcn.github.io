@@ -1,0 +1,274 @@
+<!DOCTYPE HTML>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  <title>数据在内存中存储 | ahoj的小本本</title>
+  <meta name="author" content="ahoj">
+  
+  <meta name="description" content="ahoj的小本本">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="数据在内存中存储">
+  <meta property="og:site_name" content="ahoj的小本本">
+
+  
+    <meta property="og:image" content>
+  
+
+  
+    <link rel="alternative" href="/wiki/atom.xml" title="ahoj的小本本" type="application/atom+xml">
+  
+  
+    <link href="/wiki/https://avatars1.githubusercontent.com/u/43307215?s=460&v=4" rel="icon">
+  
+  
+  <link rel="stylesheet" href="/wiki/css/bootstrap.min.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/wiki/css/font-awesome.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/wiki/css/style.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/wiki/css/highlight.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/wiki/css/google-fonts.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/wiki/css/responsive.css" media="screen" type="text/css">  
+  <link rel="stylesheet" href="/wiki/css/sidenav.css" media="screen" type="text/css">  
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+
+  <script src="/wiki/js/jquery-2.0.3.min.js"></script>
+
+  <!---------------------- 关于小本本 ---------------------->
+
+<center>
+<div class="accordion-group">
+      <div class="accordion-heading">
+          <a class="accordion-toggle" data-toggle="collapse" href="#about">
+            <i class="fa fa-bookmark"></i> 关于小本本
+          </a>
+      </div> <!-- accordion-heading -->
+
+  <div id="about" class="accordion-body collapse in">
+    <div class="accordion-inner" style="background-color:#FFFFFF">
+      <br>
+      <p>用这个小本本的原因是在找GitHub主题时候偶然看见一个前辈的
+        <b><a href="https://www.hahack.com" target="_blank">blog</a></b>，他有下面的一段话：</p>
+      <p>"将零散的知识点放在一个集中的地方，不断递归重构，形成一套知识系统。"</p>
+      <p>这很有帮助，所以我将之前写在GitHub仓库里的笔记转移了过来，以后的学习笔记也在此更新。</p>
+    </div>
+  </div>
+</div>
+</center>
+
+  <!---------------------- 关于小本本 ---------------------->
+
+
+  <!-- analytics -->
+  
+
+</head>
+</html>
+<body id="body" data-spy="scroll" data-target=".toc">
+  <div class="container" id="container">
+	<div class="content">
+	  <div class="page-header">		
+  <h1><a class="brand" href="/wiki/">ahoj的小本本</a><span class="split"></span><span class="title">数据在内存中存储</span><span class="date" id="title-date"><i class="fa fa-clock-o"></i> 2019-02-17</span></h1>
+</div>		
+
+<div class="row page">
+  <!-- cols -->	
+  
+  <div class="col-xs-12 col-sm-3 col-md-3 toc"> 
+	<!-- toc -->
+<script type="text/javascript">
+		jQuery(document).ready(function() {
+ 		   generateWikiTOC('.note', '.toc',  2 , 2 );
+		});
+</script>
+  </div><!-- col-md-3 -->
+  
+  
+
+  
+  <div class="col-xs-12 col-sm-9 col-md-9 note">
+	
+
+	  <!-- content -->
+	  <h2 id="整型"><a href="#整型" class="headerlink" title="整型"></a>整型</h2><p>char、short、int、long</p>
+<h3 id="存整数"><a href="#存整数" class="headerlink" title="存整数"></a>存整数</h3><ol>
+<li><p>无符号数：原、反、补码一样</p>
+</li>
+<li><p>有符号数：</p>
+<ul>
+<li><p>正数：原、反、补码一样</p>
+</li>
+<li><p>负数：补码表示</p>
+</li>
+</ul>
+</li>
+</ol>
+<p>举个栗子：</p>
+<p>-10 : 有符号 =&gt; 负数 =&gt; 存它的补码<br>原： 1000 1010<br>反： 1111 0101<br>补： 1111 0110     (最终存入内存中的-10)</p>
+<h3 id="取整数"><a href="#取整数" class="headerlink" title="取整数"></a>取整数</h3><p>看是什么类型(有符号整数 / 无符号整数)</p>
+<ol>
+<li><p>无符号整数：直接取</p>
+</li>
+<li><p>有符号整数：</p>
+<ul>
+<li><p>正数：直接取</p>
+</li>
+<li><p>负数：补 =&gt; 原再取</p>
+</li>
+</ul>
+</li>
+</ol>
+<p>例如：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">char</span> a = <span class="number">-1</span>;</span><br><span class="line">    <span class="keyword">signed</span> <span class="keyword">char</span> b = <span class="number">-1</span>;</span><br><span class="line">    <span class="keyword">unsigned</span> <span class="keyword">char</span> c = <span class="number">-1</span>;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"a=%d,b=%d,c=%d\n"</span>, a, b, c);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>输出：<code>-1,-1,255</code></p>
+<p>a和b的结果是一样的，这里就分析下a：</p>
+<p>存：a是有符号数负数</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">a = <span class="number">-1</span></span><br><span class="line">    原： <span class="number">1000</span> <span class="number">0001</span></span><br><span class="line">    反： <span class="number">1111</span> <span class="number">1110</span></span><br><span class="line">    补： <span class="number">1111</span> <span class="number">1111</span></span><br><span class="line">    <span class="number">1.</span>存的时候不考虑类型，直接存 <span class="number">-1</span> 的补码 <span class="number">1111</span> <span class="number">1111</span></span><br><span class="line">    <span class="number">2.</span>在%d输出的时候，会发生整型提升，整型提升默认的是按照变量的原始类型添加前面的比特位，这里的a是有符号的所以前面添加 <span class="number">1</span>，变为 <span class="number">11111111</span> <span class="number">11111111</span> <span class="number">11111111</span> <span class="number">11111111</span>，这样的话用%d输出，结果是 <span class="number">-1</span>。</span><br></pre></td></tr></table></figure>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">c = <span class="number">-1</span></span><br><span class="line">    还是一样的，存的时候不考虑类型，存 <span class="number">-1</span> 的补码 <span class="number">1111</span> <span class="number">1111</span></span><br><span class="line">    在%d输出的时候，整型提升，添加比特位，这里的c是<span class="keyword">unsigned</span>类型的，所以前面添加 <span class="number">0</span>，变为：</span><br><span class="line">    <span class="number">00000000</span> <span class="number">00000000</span> <span class="number">00000000</span> <span class="number">11111111</span></span><br><span class="line">    这样，以%d输出就是<span class="number">255</span>咯。</span><br></pre></td></tr></table></figure>
+<h2 id="浮点型"><a href="#浮点型" class="headerlink" title="浮点型"></a>浮点型</h2><p>float、double、long double，浮点数的表示范围在float.h中定义</p>
+<h3 id="浮点数的表示"><a href="#浮点数的表示" class="headerlink" title="浮点数的表示"></a>浮点数的表示</h3><p>根据国际标准IEEE 754，任意一个二进制浮点数可以表示为：(-1) ^ S * M * 2^E</p>
+<ul>
+<li>(-1)^S表示符号位，S=0时，为正，S=1时，为负。</li>
+<li>M表示有效数字，大于等于1，小于2。</li>
+<li>2^E表示指数位。</li>
+</ul>
+<p>栗子：</p>
+<p>十进制5.0，写成二进制101.0，相当于1.01 * 2^2，其中S=0，M=1.01，E=2。</p>
+<p>十进制-5.0，二进制为-101.0，相当于-1.01 * 2^2，其中S=1，M=1.01，E=2。</p>
+<h3 id="浮点数的存储"><a href="#浮点数的存储" class="headerlink" title="浮点数的存储"></a>浮点数的存储</h3><p>对于32位的浮点数(单精度)，最高的1位是符号位S，接着的8位是指数E，剩下的23位为有效数字M。</p>
+<p>对于64位的浮点数(双精度)，最高的1位是符号位S，接着的11位是指数E，剩下的52位为有效数字M。</p>
+<p>对于有效数字M和指数E，还有一些特别的规定：</p>
+<ol>
+<li><p>有效数字M</p>
+<p>在计算机内部存储M时，默认这个数的第一位总是1，因此可以被舍去，只保存小数点后面的部分。比如在保存1.01的时候，只保存01，等到读取的时候，再讲第一位的1加上去。这样，就节省出了1位有效数字。以32位浮点数为例，留给M的只有23位，舍去第一位后，就可以保存24位有效数字。</p>
+</li>
+<li><p>指数E</p>
+<p>由内存分配可以看出，E没有符号位，E是一个无符号整数。这意味着，如果E为8位，它的取值范围位0-255。如果E位11位，它的取值范围为0-2047。但是，在科学计数法中E是可以出现负数的，所以IEEE规定，存入内存时E的真实值必须再加上一个中间数，对于8位的E，中间数位127；对于11位的E，中间数是1023。</p>
+</li>
+</ol>
+<p>比如：2^{10}的E是10，保存为32位浮点数时，必须保存成10+127=137，即10001001。</p>
+<ul>
+<li><p>E不全为0或不全为1</p>
+<p>此时指数E的计算值减去127(或1023)，得到真实值，再在有效数字M前加上第一位的1。</p>
+<p>比如：0.5的二进制形式为0.1，由于规定M的正数部分必须为1，即小数点右移1位，为1.0 * 2 ^ {-1}，其阶码为-1+127=126，表示为01111110，而尾数1.0去掉整数部分为0，补齐0到23位，最终0.5的二进制表示为：<code>0 01111110 00000000000000000000000</code>。</p>
+</li>
+<li><p>E全为0(浮点数0)</p>
+<p>这时，浮点数的指数 E 等于1-127(或1-1023)即为真实值，有效数字M不再加上第一位的1，而是还原为0.xxxxxx的小数。这样做是为了表示+0 ~ -0，以及接近于0的很小的数字。</p>
+</li>
+<li><p>E全为1(最小、最大浮点数)</p>
+<p>这时，如果有效数字M全为 0 ，表示 +∞ 和 -∞ (正负取决于符号位S)。</p>
+</li>
+</ul>
+<h3 id="关于浮点数的栗子"><a href="#关于浮点数的栗子" class="headerlink" title="关于浮点数的栗子"></a>关于浮点数的栗子</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> n = <span class="number">9</span>;</span><br><span class="line">    <span class="comment">// 第一部分</span></span><br><span class="line">    <span class="keyword">float</span> *pFloat = (<span class="keyword">float</span>*)&amp;n;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"n:%d\n"</span>, n);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"*pFloat:%f\n"</span>, *pFloat);</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 第二部分</span></span><br><span class="line">    *pFloat = <span class="number">9.0</span>;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"n:%d\n"</span>, n);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"*pFloat:%f\n"</span>, *pFloat);</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="https://wx2.sinaimg.cn/mw690/006wR0dcly1fx4bfr4hy3j30ew066t94.jpg" alt="pic"></p>
+<p>第一部分：</p>
+<p>首先把<code>0x00000009</code>(16进制)拆分：符号位S=0，后面8位E=00000000，最后23位M=000 0000 0000 0000 0000 1001。</p>
+<p>9最终表示为浮点数为：<code>0000 0000 0000 0000 0000 0000 0000 1001</code>。指数位E全为0，改写成浮点数为：(-1) ^ 0 * 0.000 0000 0000 0000 0000 0000 0000 1001 * 2 ^ {-126} = 1.001 * 2 ^ {-146}​。</p>
+<p>显然，这是一个很小的接近于0的正数，所以用十进制小数表示为0.000000。</p>
+<p>第二部分：</p>
+<p>浮点数9.0表示为二进制：1001.0，即1.001 * 2 ^ 3。</p>
+<p>M=1.001，E=3+127=130。</p>
+<p>写成二进制：<code>0 10000010 001 0000 0000 0000 0000 0000</code>，这个32位的二进制数，表示成十进制正是，1091567616。</p>
+<hr>
+	  
+
+	  <div>
+  		<center>
+		  <div class="pagination">
+<ul class="pagination">
+	
+	
+	
+	
+	
+	
+		
+	
+		
+	
+		
+	
+		
+			
+		
+	
+		
+			
+			
+		
+	
+		
+			
+			
+			
+		
+	
+		
+	
+	
+	
+		<li class="prev"><a href="/wiki/2019/02/cjsdbwhss000ga609vi3yjxre/" class="alignleft prev"><i class="fa fa-arrow-circle-o-left"></i>prev</a></li>
+	
+	<li><a href="/wiki/"><i class="fa fa-archive"></i>Home</a></li>
+	
+		<li class="next"><a href="/wiki/2019/02/cjsdbwhsc0004a60931s47zji/" class="alignright next">next<i class="fa fa-arrow-circle-o-right"></i></a></li>
+	
+</ul>
+</div>
+
+		</center>
+	  </div>
+	  
+	</div> <!-- col-md-9/col-md-12 -->
+	
+  </div><!-- row -->
+
+	</div>
+  </div>
+  <div class="container-narrow">
+	<footer> <p>
+  &copy; 2019 ahoj
+  
+      with help from <a href="http://zespia.tw/hexo/" target="_blank">Hexo</a> and <a href="http://getbootstrap.com/" target="_blank">Twitter Bootstrap</a>. Theme by <a href="http://github.com/wzpan/hexo-theme-wixo/">Wixo</a>.    
+</p> </footer>
+  </div> <!-- container-narrow -->
+  
+<a id="gotop" href="#">   
+  <span>▲</span> 
+</a>
+
+<script src="/wiki/js/jquery.imagesloaded.min.js"></script>
+<script src="/wiki/js/gallery.js"></script>
+<script src="/wiki/js/bootstrap.min.js"></script>
+<script src="/wiki/js/jquery.tableofcontents.min.js"></script>
+<script src="/wiki/js/tocgenerator.min.js"></script>
+<script src="/wiki/js/main.js"></script>
+<script src="/wiki/js/search.js"></script> 
+
+
+
+
+<link rel="stylesheet" href="/wiki/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/wiki/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+
+
+   <script type="text/javascript">      
+     var search_path = "search.xml";
+	 if (search_path.length == 0) {
+	 	search_path = "search.xml";
+	 }
+	 var path = "/wiki/" + search_path;
+     searchFunc(path, 'local-search-input', 'local-search-result');
+   </script>
+
+
+</body>
+</html>
