@@ -1,0 +1,420 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+  <meta name="author" content="ahoj">
+  
+  
+  <meta name="keywords" content="ahoj的博客">
+  
+  
+  
+    <meta name="description" content="考试错题
+编程实现一个对8bit数据(unsigned char)的指定位(比如第n位)的置0或者置1操作，其他位保持不变。
+函数原型：void bit_set(unsigned char *p_data, unsigned char pos, int flag)
+这道题考试的时候我是这么写的：将这个p_data左移、右移。刚才在写关于位段的错题时，想起来还可以这么搞，但是还是移位操作比较方...">
+  
+  <title>错题整理 [ ahoj's blog ]</title>
+  
+  
+    <link rel="shortcut icon" href="https://avatars1.githubusercontent.com/u/43307215?s=460&v=4">
+  
+  
+  <link rel="stylesheet" href="/css/random.css">
+<link rel="stylesheet" href="/css/vegas.min.css">
+<link rel="stylesheet" href="/css/highlight-railscasts.css">
+<link rel="stylesheet" href="/css/jquery.fancybox.css">
+<link rel="stylesheet" href="/css/iconfont/iconfont.css">
+<link rel="stylesheet" href="/css/jquery.fancybox-thumbs.css">
+<link rel="stylesheet" href="/css/plyr.css">
+  
+</head>
+
+<body>
+<div class="side-navigate hide-area">
+  
+  
+    <div class="item next">
+      <a href="/2019/01/cjsde1x7500000c09shzlu3fl/">
+        <div class="item-icon"></div>
+      </a>
+      <div class="item-title">
+        你好，2019
+      </div>
+    </div>
+  
+</div>
+<div id="outer-container" class="hide-area">
+<div id="container">
+  <div id="menu-outer" class="slide-down">
+    <div id="menu-inner">
+      <div id="brand">
+        
+        <a onclick="openUserCard()">
+          <img id="avatar" src="https://avatars1.githubusercontent.com/u/43307215?s=460&v=4">
+          <div id="homelink">ahoj's blog</div>
+        </a>
+      </div>
+      <div id="menu-list">
+        <ul>
+        
+        
+          
+            <li>
+          
+            <a href="/index.html">主页</a>
+            
+          </li>
+        
+          
+            <li>
+          
+            <a href="/archives">文章</a>
+            
+          </li>
+        
+          
+            <li>
+          
+            <a href="/about">关于</a>
+            
+          </li>
+        
+          
+            <li>
+          
+            <a href="/wiki">小本本</a>
+            
+          </li>
+        
+        </ul>
+      </div>
+      <div id="show-menu">
+        <button>Menu</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="content-outer">
+    <div id="content-inner">
+      
+      
+  
+
+  <article id="post">
+    <h1>错题整理</h1>
+    <p class="page-title-sub">
+      <span id="post-title-date">Created at 2019-01-12</span>
+      
+        <span id="post-title-updated">Updated at 2019-02-16</span>
+      
+      
+      <span id="post-title-categories">Category
+      
+      
+        
+        
+        <a href="/categories/C语言/">C语言</a>
+      
+      </span>
+      
+      
+      <span id="post-title-tags">
+      Tag
+      
+      
+        
+        
+        <a href="/tags/C语言/">C语言</a>
+      
+      </span>
+      
+    </p>
+    
+    <h1 id="考试错题"><a href="#考试错题" class="headerlink" title="考试错题"></a>考试错题</h1><ol>
+<li><p>编程实现一个对8bit数据(unsigned char)的指定位(比如第n位)的置0或者置1操作，其他位保持不变。</p>
+<p>函数原型：<code>void bit_set(unsigned char *p_data, unsigned char pos, int flag)</code></p>
+<p>这道题考试的时候我是这么写的：将这个p_data左移、右移。刚才在写关于位段的错题时，想起来还可以这么搞，但是还是移位操作比较方便，嘿嘿，我就试试。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> A(uc, x) uc##x</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">pragma</span> pack(1)</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">sup</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="keyword">unsigned</span> <span class="keyword">char</span> uc1 : <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">unsigned</span> <span class="keyword">char</span> uc2 : <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">unsigned</span> <span class="keyword">char</span> uc3 : <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">unsigned</span> <span class="keyword">char</span> uc4 : <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">unsigned</span> <span class="keyword">char</span> uc5 : <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">unsigned</span> <span class="keyword">char</span> uc6 : <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">unsigned</span> <span class="keyword">char</span> uc7 : <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">unsigned</span> <span class="keyword">char</span> uc8 : <span class="number">1</span>;</span><br><span class="line">&#125; *pSUP_S;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">pragma</span> pack()</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">bit_set</span><span class="params">(<span class="keyword">unsigned</span> <span class="keyword">char</span> *p_data, <span class="keyword">unsigned</span> <span class="keyword">char</span> pos, <span class="keyword">int</span> flag)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    pSUP_S ps = (pSUP_S)p_data;</span><br><span class="line">    <span class="keyword">switch</span>(pos)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">case</span> <span class="number">1</span>:</span><br><span class="line">            ps-&gt;A(uc, <span class="number">1</span>) = flag;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        <span class="keyword">case</span> <span class="number">2</span>:</span><br><span class="line">            ps-&gt;A(uc, <span class="number">2</span>) = flag;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        <span class="keyword">case</span> <span class="number">3</span>:</span><br><span class="line">            ps-&gt;A(uc, <span class="number">3</span>) = flag;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        <span class="keyword">case</span> <span class="number">4</span>:</span><br><span class="line">            ps-&gt;A(uc, <span class="number">4</span>) = flag;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        <span class="keyword">case</span> <span class="number">5</span>:</span><br><span class="line">            ps-&gt;A(uc, <span class="number">5</span>) = flag;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        <span class="keyword">case</span> <span class="number">6</span>:</span><br><span class="line">            ps-&gt;A(uc, <span class="number">6</span>) = flag;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        <span class="keyword">case</span> <span class="number">7</span>:</span><br><span class="line">            ps-&gt;A(uc, <span class="number">7</span>) = flag;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        <span class="keyword">case</span> <span class="number">8</span>:</span><br><span class="line">            ps-&gt;A(uc, <span class="number">8</span>) = flag;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        <span class="keyword">default</span>:</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">print</span><span class="params">(<span class="keyword">unsigned</span> <span class="keyword">char</span> a)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">while</span>(a)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"%d"</span>, a%<span class="number">2</span>);</span><br><span class="line">        a /= <span class="number">2</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"\n"</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">unsigned</span> <span class="keyword">char</span> a = <span class="number">1</span>;</span><br><span class="line">    bit_set(&amp;a, <span class="number">5</span>, <span class="number">1</span>);</span><br><span class="line">    print(a);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<hr>
+</li>
+<li><p>给出以下定义：</p>
+<p><code>char x[] = &quot;abcdefg&quot;;</code></p>
+<p><code>char y[] = {&#39;a&#39;,&#39;b&#39;,&#39;c&#39;,&#39;d&#39;,&#39;e&#39;,&#39;f&#39;,&#39;g&#39;};</code></p>
+<p>则正确的叙述为（C）</p>
+<p>A）数组x和数组y等价    B）数组x和数组y的长度相同</p>
+<p>C）数组x的长度大于数组y的长度    D）数组x的长度小于y的长度</p>
+<p><strong><em>分析：粗心大意！选项都不看清就选答案？</em></strong></p>
+<hr>
+</li>
+<li><p>设有如下定义：</p>
+<p><code>unsigned long arr[] = {6,7,8,9,10};</code></p>
+<p><code>unsigned long *p;</code></p>
+<p>则下列程序段的输出结果为（6,12）</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">p = arr;</span><br><span class="line">*(p + <span class="number">3</span>) += <span class="number">3</span>;</span><br><span class="line"><span class="built_in">printf</span>(<span class="string">"%d,%d\n"</span>, *p, *(p + <span class="number">3</span>));</span><br></pre></td></tr></table></figure>
+<p><strong><em>分析：粗心大意！慌什么慌，稳住啊。给数组解引用又不是给你解引用，题看完再写啊。</em></strong></p>
+<hr>
+</li>
+<li><p>全局变量可以定义在被多个.c文件包含着的头文件中（❌）</p>
+<p><strong><em>分析：注意区分定义和声明的概念，definition、declaration！</em></strong></p>
+<hr>
+</li>
+<li><p>下面这道题虽然没错，但是还是想写出来，自己以后看到也注意点，别忘了。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">unsigned</span> <span class="keyword">char</span> a = <span class="number">200</span>;</span><br><span class="line"><span class="keyword">unsigned</span> <span class="keyword">char</span> b = <span class="number">100</span>;</span><br><span class="line"><span class="keyword">unsigned</span> <span class="keyword">char</span> c = <span class="number">0</span>;</span><br><span class="line">c = a + b;</span><br><span class="line"><span class="built_in">printf</span>(<span class="string">"%d %d "</span>,a+b,c);</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>C的整型算数运算总是至少以缺省整型类型的精度来进行的，为了获得这个精度，表达式中的字符型和短整型操作数在使用之前被转换为普通整型。《C和指针》</p>
+</blockquote>
+<p><strong><em>分析：输出结果为<code>300,44</code>，注意整形提升问题，<a href="https://github.com/ahojcn/Practice/blob/master/Notes/C/%E6%95%B0%E6%8D%AE%E5%9C%A8%E5%86%85%E5%AD%98%E4%B8%AD%E7%9A%84%E5%AD%98%E5%82%A8.md" target="_blank" rel="noopener">整形提升笔记</a></em></strong></p>
+<hr>
+</li>
+<li><p>下面这个题也是粗心大意造成的，但是还是有一点就是没有区分清楚指针数组和数组指针等概念。<a href="http://ahoj.cc/2019/01/cjqmi1m1m0003td09e812j5rm/">关于指针的笔记</a></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">unsigned</span> <span class="keyword">short</span> *pcArr[<span class="number">10</span>][<span class="number">10</span>];</span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">union</span> unRec</span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">unsigned</span> <span class="keyword">long</span> a;</span><br><span class="line">	<span class="keyword">unsigned</span> <span class="keyword">short</span> b[<span class="number">7</span>];</span><br><span class="line">	<span class="keyword">unsigned</span> <span class="keyword">short</span> c;</span><br><span class="line">&#125;REC_S;</span><br><span class="line">REC_S stMax, *pstMax;</span><br></pre></td></tr></table></figure>
+<p>当四字节对齐方式时：</p>
+<p><code>sizeof(pcArr) = 400</code>，<strong><em>是一个10•10的指针数组，数组里存放的是指针。</em></strong></p>
+<p><code>sizeof(stMax) = 16</code>，<strong><em>注意这里是union，慌什么！？</em></strong></p>
+<p><code>sizeof(pstMax) = 4</code>，<strong><em>指针的大小</em></strong></p>
+<p><code>sizeof(*pstMax) = 16</code>，<strong><em>钥匙(&amp;)重4kg，拿着钥匙进了你家门。</em></strong></p>
+<hr>
+</li>
+<li><p>结构体定义如下：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">B</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="keyword">long</span> l1;</span><br><span class="line">    <span class="keyword">char</span> c2;</span><br><span class="line">    <span class="keyword">char</span> c3;</span><br><span class="line">    <span class="keyword">long</span> l4;</span><br><span class="line">    <span class="keyword">long</span> l5;</span><br><span class="line">&#125; *p;</span><br><span class="line">p = (struct B*)<span class="number">0x100</span>;</span><br></pre></td></tr></table></figure>
+<p><code>p + 0x1 = 0x110</code><strong><em>，结构体大小是16，指针p的一步长为16，向前走一步加16(10H)。</em></strong></p>
+<p><code>(unsigned long)p + 0x1 = 101</code><strong><em>，注意是强转成了一个数。</em></strong></p>
+<p><code>(unsigned long *)p + 0x1 = 0x104</code>，<strong><em>强转成了指针。</em></strong></p>
+<hr>
+</li>
+<li><p>有如下定义：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">A</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="keyword">unsigned</span> <span class="keyword">char</span> uc1 : <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">unsigned</span> <span class="keyword">char</span> uc2 : <span class="number">2</span>;</span><br><span class="line">    <span class="keyword">unsigned</span> <span class="keyword">char</span> uc2 : <span class="number">6</span>;</span><br><span class="line">    <span class="keyword">unsigned</span> <span class="keyword">char</span> uc3 : <span class="number">4</span>;</span><br><span class="line">    <span class="keyword">unsigned</span> <span class="keyword">char</span> uc4;</span><br><span class="line">    <span class="keyword">unsigned</span> <span class="keyword">char</span> uc5 : <span class="number">4</span>;</span><br><span class="line">    <span class="keyword">unsigned</span> <span class="keyword">char</span> uc6;</span><br><span class="line">&#125; AAA_S;</span><br></pre></td></tr></table></figure>
+<p>问：AAA_S在1字节对齐和4字节对齐的情况下，占用的空间大小是：6字节、12字节</p>
+<p><strong><em>分析：对于结构体内存对齐这块掌握的还是不好，也没有整理过笔记什么的，考完试整理一篇笔记，复习复习(预习)。</em></strong></p>
+<hr>
+</li>
+<li><p>以下程序的执行结果为：2 29 0 0</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">pragma</span> pack(4)</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span> <span class="keyword">const</span> *argv[])</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">unsigned</span> <span class="keyword">char</span> puc[<span class="number">4</span>];</span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">tagPIM</span></span></span><br><span class="line"><span class="class">	&#123;</span></span><br><span class="line">		<span class="keyword">unsigned</span> <span class="keyword">char</span> ucPiml;</span><br><span class="line">		<span class="keyword">unsigned</span> <span class="keyword">char</span> ucData0 : <span class="number">1</span>;</span><br><span class="line">		<span class="keyword">unsigned</span> <span class="keyword">char</span> ucData1 : <span class="number">2</span>;</span><br><span class="line">		<span class="keyword">unsigned</span> <span class="keyword">char</span> ucData2 : <span class="number">3</span>;</span><br><span class="line">	&#125; *pstPimData;</span><br><span class="line">	pstPimData = (struct tagPIM *)puc;</span><br><span class="line">	<span class="built_in">memset</span>(puc, <span class="number">0</span>, <span class="number">4</span>);</span><br><span class="line">	pstPimData-&gt;ucPiml = <span class="number">2</span>;	<span class="comment">// 2-&gt; 10b</span></span><br><span class="line">	pstPimData-&gt;ucData0 = <span class="number">3</span>;<span class="comment">// 3-&gt; 11b</span></span><br><span class="line">	pstPimData-&gt;ucData1 = <span class="number">4</span>;<span class="comment">// 4-&gt; 100b</span></span><br><span class="line">	pstPimData-&gt;ucData2 = <span class="number">5</span>;<span class="comment">// 5-&gt; 101b</span></span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"%02x %02x %02x %02x\n"</span>, puc[<span class="number">0</span>], puc[<span class="number">1</span>], puc[<span class="number">2</span>], puc[<span class="number">3</span>]);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">pragma</span> pack()</span></span><br></pre></td></tr></table></figure>
+<p><strong><em>分析：首先，结构体tagPIM占4个字节，puc[0]-puc[3]分别指向这4个字节，并初始化为了0，但是tagPIM只用了前两个字节，所以puc[2]和puc[3]的输出结果为0，其余的如下图分析：</em></strong></p>
+<p><strong><em>要注意的几点：第一、ucData0放3(11b)的时候，从低地址开始放，放不下的扔掉，对于ucData1也是。第二、要注意是小端，输出结果的时候是从右往左看的二进制数，还要注意输出的是以16进制的形式输出。</em></strong></p>
+<p><img src="https://wx4.sinaimg.cn/mw690/006wR0dcly1fz40lpyceqj31400u0kjl.jpg" alt="如图"></p>
+<hr>
+</li>
+<li><p><strong><em>注意函数传递的时候，形参的问题。</em></strong></p>
+</li>
+<li><p>添加下面分割线内的代码的初衷是为了给<code>gui_show_image</code>这句代码的执行加上限制条件，请问这样修改有没有隐患，若有，该如何修改？</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// ......</span></span><br><span class="line">gui_push_clip();</span><br><span class="line"><span class="comment">/*我是分割线*/</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> AAA</span></span><br><span class="line">	<span class="keyword">if</span> (show_status == MMI_TRUE)</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br><span class="line"><span class="comment">/*我是分割线*/</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> BBB</span></span><br><span class="line">    gui_show_image(x, y, image_id);</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br><span class="line">gui_pop_clip();</span><br><span class="line">update_dt_display();</span><br><span class="line"><span class="comment">// ......</span></span><br></pre></td></tr></table></figure>
+<p><strong><em>分析：这句话我第一眼看没啥啊，仔细看🧐下：如果宏BBB没有被定义，程序的逻辑就变成了下面这样：</em></strong></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (show_status == MMI_TRUE)</span><br><span class="line">    gui_pop_clip();</span><br></pre></td></tr></table></figure>
+<p><strong><em>修改的方法：加大括号，要养成良好的编码习惯。</em></strong></p>
+</li>
+</ol>
+<h1 id="牛客的错题整理"><a href="#牛客的错题整理" class="headerlink" title="牛客的错题整理"></a>牛客的错题整理</h1><ol>
+<li><p>双链表中至多只有一个节点的后继指针为空（🙆‍♂️）</p>
+<p><strong><em>非循环双链表最后一个节点的后继指针为空；循环双链表没有一个节点的后继指针为空。</em></strong></p>
+</li>
+<li><p>一个长度为99的循环链表，指针A和指针B都指向了链表中的同一个节点，A以步长为1向前移动，B以步长为3向前移动，一共需要同时移动多少步A和B才能再次指向同一个节点？（99）</p>
+<p><strong><em>我选的50，但并不是50，首先是个循环链表，再来就是只有99个元素，设A走x步，那么B走3x步，两个碰到需要$(3x-x) MOD 99 = 0$，x取99才满足。</em></strong></p>
+</li>
+<li><p>在有n个结点的二叉链表中，值为非空的链域的个数为（n-1）</p>
+<p><strong><em>值为空的链域个数为n+1个，为非空的个数为n-1个。</em></strong></p>
+</li>
+<li><p>向一个有127个元素的顺序表中插入一个新元素并保持原来顺序不变，平均要移动（63.5）个元素。</p>
+<p><strong><em>插入：$\frac {n}{2}$，删除：$\frac {n-1}{2}$，查找：$\frac {n+1}{2}$</em></strong></p>
+</li>
+<li><p><strong><em>广义表第一个元素是表头，其余元素是表尾，如果只有一个元素，那么表尾为空即<code>()</code>，在广义表中注意区分空表和有一个为空表的元素的情况。</em></strong></p>
+</li>
+<li><p><strong><em>广义表有如下三个特性：1.层次性：广义表的元素可以是子表，而子表的元素还可以是子表，由此，广义表是一个多层次的结构。2.共享性：广义表可为其他表所共享。3.递归表：广义表可以是其自身的一个子表。</em></strong></p>
+</li>
+<li><p>十字链表是无向图的一种存储结构（🙅‍♂️）。</p>
+<p><strong><em>无向图存储：邻接矩阵、邻接表、多重邻接表。有向图存储：邻接矩阵、邻接表、十字链表</em></strong></p>
+</li>
+</ol>
+<hr>
+<blockquote>
+<p>荐读：《C++/C高质量编程指南》、《C语言深度剖析》</p>
+</blockquote>
+
+  </article>
+  <div class="random-toc-area">
+  <button class="btn-hide-toc btn-hide-toc-show" style="display: none" onclick="TOCToggle()">Show TOC</button>
+  <button class="btn-hide-toc btn-hide-toc-hide" onclick="TOCToggle()">Hide TOC</button>
+  <div class="random-toc">
+    <h2>Table of Content</h2>
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#考试错题"><span class="toc-text">考试错题</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#牛客的错题整理"><span class="toc-text">牛客的错题整理</span></a></li></ol>
+  </div>
+</div>
+
+  
+<nav id="pagination">
+  
+
+  
+
+  
+    <a href="/2019/01/cjsde1x7500000c09shzlu3fl/" class="next">Next post 你好，2019 &rarr;</a>
+  
+</nav>
+
+  <!-- JiaThis Button BEGIN -->
+
+<!-- JiaThis Button END -->
+
+
+      
+      
+    </div>
+  </div>
+
+  <div id="bottom-outer">
+    <div id="bottom-inner">
+      Site by ahoj using
+      <a href="http://hexo.io">Hexo</a> & <a href="https://github.com/stiekel/hexo-theme-random">Random</a>
+      <br>
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+
+<div id="user-card">
+  <div class="center-field">
+    <img class="avatar" src="https://avatars1.githubusercontent.com/u/43307215?s=460&v=4">
+    <p id="description">思想的本质就是不安</p>
+    <ul class="social-icon">
+  
+  
+    <li>
+      <a href="https://github.com/ahojcn">
+        
+          <i class="icon iconfont github">&#xe606;</i>
+        
+      </a>
+    </li>
+  
+    <li>
+      <a href="mailto:2076430492@qq.com">
+        
+          E-mail
+        
+      </a>
+    </li>
+  
+</ul>
+  </div>
+</div>
+
+
+<script>
+// is trigger analytics / tongji script
+var isIgnoreHost = false;
+
+if(window && window.location && window.location.host) {
+  isIgnoreHost = ["localhost","127.0.0.1"].some(function(address){
+    return 0 === window.location.host.indexOf(address);
+  });
+}
+
+var isTriggerAnalytics = !( true && isIgnoreHost );
+
+</script>
+
+
+
+
+  
+  
+    <script src="/js/jquery-2.2.3.min.js"></script>
+  
+    <script src="/js/vegas.min.js"></script>
+  
+    <script src="/js/random.js"></script>
+  
+    <script src="/js/highlight.pack.js"></script>
+  
+    <script src="/js/jquery.mousewheel.pack.js"></script>
+  
+    <script src="/js/jquery.fancybox.pack.js"></script>
+  
+    <script src="/js/jquery.fancybox-thumbs.js"></script>
+  
+    <script src="/js/plyr.js"></script>
+  
+
+<script>
+
+  // fancybox
+  var backgroundImages = [];
+  
+  $('#post').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox') || $(this).parent().hasClass('fancybox-thumb')) return;
+      var alt = this.alt || this.title;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'post' + i);
+    });
+  });
+  $(".fancybox").fancybox();
+
+var vegasConfig = {"preload­Image":true,"transition":["flash"],"timer":true,"delay":1500000,"shuffle":true,"count":12};
+var unsplashConfig = {"gravity":"center"};
+// is show background images
+var turnoffBackgroundImage = false;
+
+
+
+  turnoffBackgroundImage = true;
+
+
+var backgroundColor = 0;
+
+$(".fancybox-thumb").fancybox({
+  prevEffect: 'none',
+  nextEffect: 'none',
+  helpers: {
+    title: {
+      type: 'outside'
+    },
+    thumbs: {
+      width: 50,
+      height: 50
+    }
+  }
+});
+
+// show video with plyr
+$(".video-container iframe").each(function(i){
+  var url = $(this).attr('src');
+  var id = url.split('/').pop();
+  var plyrContainer = document.createElement('div');
+  plyrContainer.className = 'plyr';
+  var plyrElement = document.createElement('div');
+  plyrElement.dataset.videoId = id;
+  switch(true) {
+    case url.search('youtube.com') >= 0:
+      plyrElement.dataset.type = 'youtube';
+      break;
+    case url.search('vimeo.com') >= 0:
+      plyrElement.dataset.type = 'vimeo';
+      break;
+    default:
+      return;
+  };
+  plyrContainer.appendChild(plyrElement);
+  $(this).parent().html(plyrContainer);
+});
+plyr.setup('.plyr', {iconUrl: '/css/sprite.svg'});
+</script>
+</body>
+</html>
+

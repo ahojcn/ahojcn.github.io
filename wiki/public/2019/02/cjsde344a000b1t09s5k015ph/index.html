@@ -1,0 +1,239 @@
+<!DOCTYPE HTML>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  <title>结构体 | ahoj的小本本</title>
+  <meta name="author" content="ahoj">
+  
+  <meta name="description" content="ahoj的小本本">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="结构体">
+  <meta property="og:site_name" content="ahoj的小本本">
+
+  
+    <meta property="og:image" content>
+  
+
+  
+    <link rel="alternative" href="/wiki/atom.xml" title="ahoj的小本本" type="application/atom+xml">
+  
+  
+    <link href="/wiki/https://avatars1.githubusercontent.com/u/43307215?s=460&v=4" rel="icon">
+  
+  
+  <link rel="stylesheet" href="/wiki/css/bootstrap.min.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/wiki/css/font-awesome.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/wiki/css/style.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/wiki/css/highlight.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/wiki/css/google-fonts.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/wiki/css/responsive.css" media="screen" type="text/css">  
+  <link rel="stylesheet" href="/wiki/css/sidenav.css" media="screen" type="text/css">  
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+
+  <script src="/wiki/js/jquery-2.0.3.min.js"></script>
+
+  <!---------------------- 关于小本本 ---------------------->
+
+<center>
+<div class="accordion-group">
+      <div class="accordion-heading">
+          <a class="accordion-toggle" data-toggle="collapse" href="#about">
+            <i class="fa fa-bookmark"></i> 关于小本本
+          </a>
+      </div> <!-- accordion-heading -->
+
+  <div id="about" class="accordion-body collapse in">
+    <div class="accordion-inner" style="background-color:#FFFFFF">
+      <br>
+      <p>用这个小本本的原因是在找GitHub主题时候偶然看见一个前辈的
+        <b><a href="https://www.hahack.com" target="_blank">blog</a></b>，他有下面的一段话：</p>
+      <p>"将零散的知识点放在一个集中的地方，不断递归重构，形成一套知识系统。"</p>
+      <p>这很有帮助，所以我将之前写在GitHub仓库里的笔记转移了过来，以后的学习笔记也在此更新。</p>
+    </div>
+  </div>
+</div>
+</center>
+
+  <!---------------------- 关于小本本 ---------------------->
+
+
+  <!-- analytics -->
+  
+
+</head>
+</html>
+<body id="body" data-spy="scroll" data-target=".toc">
+  <div class="container" id="container">
+	<div class="content">
+	  <div class="page-header">		
+  <h1><a class="brand" href="/wiki/">ahoj的小本本</a><span class="split"></span><span class="title">结构体</span><span class="date" id="title-date"><i class="fa fa-clock-o"></i> 2019-02-20</span></h1>
+</div>		
+
+<div class="row page">
+  <!-- cols -->	
+  
+  <div class="col-xs-12 col-sm-3 col-md-3 toc"> 
+	<!-- toc -->
+<script type="text/javascript">
+		jQuery(document).ready(function() {
+ 		   generateWikiTOC('.note', '.toc',  2 , 2 );
+		});
+</script>
+  </div><!-- col-md-3 -->
+  
+  
+
+  
+  <div class="col-xs-12 col-sm-9 col-md-9 note">
+	
+
+	  <!-- content -->
+	  <h2 id="结构体"><a href="#结构体" class="headerlink" title="结构体"></a>结构体</h2><h3 id="结构体内存对齐"><a href="#结构体内存对齐" class="headerlink" title="结构体内存对齐"></a>结构体内存对齐</h3><h4 id="什么是内存对齐"><a href="#什么是内存对齐" class="headerlink" title="什么是内存对齐"></a>什么是内存对齐</h4><p>现代计算机中内存空间都是按照 byte 划分的，从理论上讲似乎对任何类型的变量的访问可以从任何地址开始，但实际情况是在访问特定类型变量的时候经常在特 定的内存地址访问，这就需要各种类型数据按照一定的规则在空间上排列，而不是顺序的一个接一个的排放，这就是对齐。</p>
+<h4 id="为什么要有内存对齐？"><a href="#为什么要有内存对齐？" class="headerlink" title="为什么要有内存对齐？"></a>为什么要有内存对齐？</h4><p>对齐的作用和原因：各个硬件平台对存储空间的处理上有很大的不同。一些平台对某些特定类型的数据只能从某些特定地址开始存取。比如有些架构的 CPU 在访问 一个没有进行对齐的变量的时候会发生错误,那么在这种架构下编程必须保证字节对齐.其他平台可能没有这种情况，但是最常见的是如果不按照适合其平台要求对 数据存放进行对齐，会在存取效率上带来损失。比如有些平台每次读都是从偶地址开始，如果一个int型（假设为 32 位系统）如果存放在偶地址开始的地方，那 么一个读周期就可以读出这 32bit ，而如果存放在奇地址开始的地方，就需要 2 个读周期，并对两次读出的结果的高低字节进行拼凑才能得到该 32bit 数 据。显然在读取效率上下降很多。</p>
+<p>总的来说，结构体的内存对齐是拿空间来换取时间。</p>
+<h4 id="计算"><a href="#计算" class="headerlink" title="计算"></a>计算</h4><p>计算结构体的大小是一个特别热门的考点，要计算结构体的大小，首先要知道结构体内存对齐规则。</p>
+<ol>
+<li><p>第一个成员在于结构体变量偏移量为 0 的地址处；</p>
+</li>
+<li><p>其他成员变量要对齐到 <strong><em>对齐数</em></strong> 的整数倍的地址处；</p>
+<p>对齐数 = 编译器默认的一个对齐数 与 该成员大小的较小值。</p>
+<blockquote>
+<p>对齐数在 Windows 中 VS 下默认是 8，Linux 中默认是 4（Centos 7 下默认是8）。</p>
+</blockquote>
+</li>
+<li><p>机构体总大小为最大对齐数（每个成员变量都有一个对齐数）的整数倍。</p>
+</li>
+<li><p>如果嵌套了结构体的情况，嵌套的结构体对齐到自己的最大对齐数的整数倍处，结构体的整体大小就是所有最大对齐数（含嵌套结构体的对齐数）的整数倍。</p>
+</li>
+</ol>
+<h4 id="一些栗子"><a href="#一些栗子" class="headerlink" title="一些栗子"></a>一些栗子</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">s1</span> &#123;</span></span><br><span class="line">    <span class="keyword">char</span> c1;</span><br><span class="line">    <span class="keyword">int</span> i;</span><br><span class="line">    <span class="keyword">char</span> c2;</span><br><span class="line">&#125;;	<span class="comment">// 12</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">s2</span> &#123;</span></span><br><span class="line">    <span class="keyword">char</span> c1;</span><br><span class="line">    <span class="keyword">char</span> c2;</span><br><span class="line">    <span class="keyword">int</span> i;</span><br><span class="line">&#125;;	<span class="comment">// 8</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">s3</span> &#123;</span></span><br><span class="line">    <span class="keyword">double</span> d;</span><br><span class="line">    <span class="keyword">char</span> c;</span><br><span class="line">    <span class="keyword">int</span> i;</span><br><span class="line">&#125;;	<span class="comment">// 16</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">s4</span> &#123;</span></span><br><span class="line">    <span class="keyword">char</span> c1;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">s3</span> <span class="title">s</span>;</span></span><br><span class="line">    <span class="keyword">double</span> d;</span><br><span class="line">&#125;;	<span class="comment">// 32</span></span><br></pre></td></tr></table></figure>
+<h4 id="修改默认对齐数"><a href="#修改默认对齐数" class="headerlink" title="修改默认对齐数"></a>修改默认对齐数</h4><p><code>#pragma pack(n)</code></p>
+<h3 id="结构体传参"><a href="#结构体传参" class="headerlink" title="结构体传参"></a>结构体传参</h3><p>函数传参的时候，参数是需要压栈的。如果传递一个结构体对象的时候，结构体过大，参数压栈的系统开销比较大，性能下降。</p>
+<p>结构体传参的时候，要传结构体的地址进去。</p>
+<h2 id="位段"><a href="#位段" class="headerlink" title="位段"></a>位段</h2><h3 id="什么是位段"><a href="#什么是位段" class="headerlink" title="什么是位段"></a>什么是位段</h3><p>举个栗子，下面的 A 就是一个位段：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">A</span> &#123;</span></span><br><span class="line">    <span class="keyword">int</span> _a : <span class="number">2</span>;	<span class="comment">// 2 代表这个 _a 占用 2 个比特位，int 占 32 个比特位</span></span><br><span class="line">    <span class="keyword">int</span> _b : <span class="number">5</span>;</span><br><span class="line">    <span class="keyword">int</span> _c : <span class="number">10</span>;</span><br><span class="line">    <span class="keyword">int</span> _d : <span class="number">30</span>;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p><code>sizeof(struct A)   -&gt;   8</code></p>
+<h3 id="定义一个位段要注意"><a href="#定义一个位段要注意" class="headerlink" title="定义一个位段要注意"></a>定义一个位段要注意</h3><p>位段的成员必须是 <code>int、unsigned int、signed int、char</code>，位段中所有成员类型必须一致。</p>
+<p>位段的定义和使用特别依赖于平台问题（可移植性差）。</p>
+<h3 id="位段的内存分配"><a href="#位段的内存分配" class="headerlink" title="位段的内存分配"></a>位段的内存分配</h3><ul>
+<li>位段的成员可以是 int、unsigned int、signed int、char；</li>
+<li>位段的空间上是按照需要以 4 个字节（int）或者 1 个字节（char）的方式来开辟的；</li>
+<li>位段涉及很多不确定因素，位段是不跨平台的，注重可移植的程序应该避免使用位段。</li>
+</ul>
+<h3 id="位段的跨平台问题"><a href="#位段的跨平台问题" class="headerlink" title="位段的跨平台问题"></a>位段的跨平台问题</h3><ul>
+<li>int 位段被方程有符号数还是无符号数是不确定的；</li>
+<li>位段中最大位的数目不能确定（16 位机器最大 16，32 位机器最大 32，写成 27，在 16 位机器会出问题）；</li>
+<li>位段中的成员在内存中从左向右分配，还是从右向左分配尚未定义；</li>
+<li>当一个结构包含两个位段，第二个位段成员比较大，无法容纳第一个位段剩余的位时，时舍弃剩余的位还是利用，这是不确定的。</li>
+</ul>
+<h3 id="位段的应用"><a href="#位段的应用" class="headerlink" title="位段的应用"></a>位段的应用</h3><p>定制协议报头。</p>
+<p><img src="https://timgsa.baidu.com/timg?image&amp;quality=80&amp;size=b9999_10000&amp;sec=1549199987764&amp;di=44d99729d3a4ff041fcc15287de8c4f0&amp;imgtype=0&amp;src=http%3A%2F%2Fs16.sinaimg.cn%2Fmw690%2F006VAGvMzy7dvQMDJVR3f%26690" alt="ip"></p>
+<hr>
+	  
+
+	  <div>
+  		<center>
+		  <div class="pagination">
+<ul class="pagination">
+	
+	
+	
+	
+	
+	
+		
+			
+			
+		
+	
+		
+	
+		
+	
+		
+	
+		
+			
+			
+			
+		
+			
+		
+	
+		
+			
+		
+	
+		
+	
+		
+	
+	
+	
+		<li class="prev disabled"><a><i class="fa fa-arrow-circle-o-left"></i>prev</a></li>
+	
+	<li><a href="/wiki/"><i class="fa fa-archive"></i>Home</a></li>
+	
+		<li class="next"><a href="/wiki/2019/02/cjsde344400051t09o56iuugd/" class="alignright next">next<i class="fa fa-arrow-circle-o-right"></i></a></li>
+	
+</ul>
+</div>
+
+		</center>
+	  </div>
+	  
+	</div> <!-- col-md-9/col-md-12 -->
+	
+  </div><!-- row -->
+
+	</div>
+  </div>
+  <div class="container-narrow">
+	<footer> <p>
+  &copy; 2019 ahoj
+  
+      with help from <a href="http://zespia.tw/hexo/" target="_blank">Hexo</a> and <a href="http://getbootstrap.com/" target="_blank">Twitter Bootstrap</a>. Theme by <a href="http://github.com/wzpan/hexo-theme-wixo/">Wixo</a>.    
+</p> </footer>
+  </div> <!-- container-narrow -->
+  
+<a id="gotop" href="#">   
+  <span>▲</span> 
+</a>
+
+<script src="/wiki/js/jquery.imagesloaded.min.js"></script>
+<script src="/wiki/js/gallery.js"></script>
+<script src="/wiki/js/bootstrap.min.js"></script>
+<script src="/wiki/js/jquery.tableofcontents.min.js"></script>
+<script src="/wiki/js/tocgenerator.min.js"></script>
+<script src="/wiki/js/main.js"></script>
+<script src="/wiki/js/search.js"></script> 
+
+
+
+
+<link rel="stylesheet" href="/wiki/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/wiki/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+
+
+   <script type="text/javascript">      
+     var search_path = "search.xml";
+	 if (search_path.length == 0) {
+	 	search_path = "search.xml";
+	 }
+	 var path = "/wiki/" + search_path;
+     searchFunc(path, 'local-search-input', 'local-search-result');
+   </script>
+
+
+</body>
+</html>
