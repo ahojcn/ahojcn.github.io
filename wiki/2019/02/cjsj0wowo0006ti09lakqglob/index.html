@@ -1,0 +1,214 @@
+<!DOCTYPE HTML>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  <title>异常 | ahoj的小本本</title>
+  <meta name="author" content="ahoj">
+  
+  <meta name="description" content="ahoj的小本本">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="异常">
+  <meta property="og:site_name" content="ahoj的小本本">
+
+  
+    <meta property="og:image" content>
+  
+
+  
+    <link rel="alternative" href="/wiki/atom.xml" title="ahoj的小本本" type="application/atom+xml">
+  
+  
+    <link href="/wiki/https://avatars1.githubusercontent.com/u/43307215?s=460&v=4" rel="icon">
+  
+  
+  <link rel="stylesheet" href="/wiki/css/bootstrap.min.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/wiki/css/font-awesome.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/wiki/css/style.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/wiki/css/highlight.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/wiki/css/google-fonts.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/wiki/css/responsive.css" media="screen" type="text/css">  
+  <link rel="stylesheet" href="/wiki/css/sidenav.css" media="screen" type="text/css">  
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+
+  <script src="/wiki/js/jquery-2.0.3.min.js"></script>
+
+  <!---------------------- 关于小本本 ---------------------->
+
+<center>
+<div class="accordion-group">
+      <div class="accordion-heading">
+          <a class="accordion-toggle" data-toggle="collapse" href="#about">
+            <i class="fa fa-bookmark"></i> 关于小本本
+          </a>
+      </div> <!-- accordion-heading -->
+
+  <div id="about" class="accordion-body collapse in">
+    <div class="accordion-inner" style="background-color:#FFFFFF">
+      <br>
+      <p>"将零散的知识点放在一个集中的地方，不断递归重构，形成一套知识系统。"</p>
+      <p>这很有帮助，我将之前写在GitHub仓库里的笔记转移了过来，以后的学习笔记也在此更新。</p>
+    </div>
+  </div>
+</div>
+</center>
+
+  <!---------------------- 关于小本本 ---------------------->
+
+
+  <!-- analytics -->
+  
+
+</head>
+</html>
+<body id="body" data-spy="scroll" data-target=".toc">
+  <div class="container" id="container">
+	<div class="content">
+	  <div class="page-header">		
+  <h1><a class="brand" href="/wiki/">ahoj的小本本</a><span class="split"></span><span class="title">异常</span><span class="date" id="title-date"><i class="fa fa-clock-o"></i> 2019-02-24</span></h1>
+</div>		
+
+<div class="row page">
+  <!-- cols -->	
+  
+  <div class="col-xs-12 col-sm-3 col-md-3 toc"> 
+	<!-- toc -->
+<script type="text/javascript">
+		jQuery(document).ready(function() {
+ 		   generateWikiTOC('.note', '.toc',  2 , 2 );
+		});
+</script>
+  </div><!-- col-md-3 -->
+  
+  
+
+  
+  <div class="col-xs-12 col-sm-9 col-md-9 note">
+	
+
+	  <!-- content -->
+	  <h2 id="异常概述"><a href="#异常概述" class="headerlink" title="异常概述"></a>异常概述</h2><p>异常：异常就是Java程序在运行过程中出现的错误。</p>
+<p>异常由来：问题也是现实生活中一个具体事务，也可以通过 Java 的类的形式进行描述，并封装成对象。其实就是Java 对不正常情况进行描述后的对象体现。</p>
+<h2 id="异常分类"><a href="#异常分类" class="headerlink" title="异常分类"></a>异常分类</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Throwable</span><br><span class="line">|---Error	严重问题，我们不处理。</span><br><span class="line">|---Exception</span><br><span class="line">	|---RuntimeException	运行期异常，我们需要修正代码</span><br><span class="line">	|---非RuntimeException 编译期异常，必须处理的，否则程序编译不通过</span><br></pre></td></tr></table></figure>
+<h2 id="异常处理"><a href="#异常处理" class="headerlink" title="异常处理"></a>异常处理</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">A:JVM的默认处理</span><br><span class="line">    把异常的名称,原因,位置等信息输出在控制台，但是程序不能继续执行了。</span><br><span class="line">B:自己处理</span><br><span class="line">    a:<span class="keyword">try</span>...<span class="keyword">catch</span>...<span class="keyword">finally</span></span><br><span class="line">        自己编写处理代码,后面的程序可以继续执行</span><br><span class="line">    b:<span class="keyword">throws</span></span><br><span class="line">        把自己处理不了的，在方法上声明，告诉调用者，这里有问题</span><br></pre></td></tr></table></figure>
+<h2 id="一些知识"><a href="#一些知识" class="headerlink" title="一些知识"></a>一些知识</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">A:编译期异常和运行期异常的区别?</span><br><span class="line">    编译期异常 必须要处理的，否则编译不通过</span><br><span class="line">    运行期异常 可以不处理，也可以处理</span><br><span class="line">B:<span class="keyword">throw</span>和<span class="keyword">throws</span>是的区别</span><br><span class="line">    <span class="keyword">throw</span>:</span><br><span class="line">        在方法体中,后面跟的是异常对象名,并且只能是一个</span><br><span class="line">        <span class="keyword">throw</span>抛出的是一个异常对象，说明这里肯定有一个异常产生了</span><br><span class="line">    <span class="keyword">throws</span>:</span><br><span class="line">        在方法声明上,后面跟的是异常的类名,可以是多个</span><br><span class="line">        <span class="keyword">throws</span>是声明方法有异常，是一种可能性，这个异常并不一定会产生</span><br><span class="line">        </span><br><span class="line">C:<span class="keyword">finally</span>关键字及其面试题</span><br><span class="line">    A:<span class="keyword">finally</span>用于释放资源，它的代码永远会执行。特殊情况：在执行到<span class="keyword">finally</span>之前jvm退出了</span><br><span class="line">    B:面试题</span><br><span class="line">        a:<span class="keyword">final</span>,<span class="keyword">finally</span>,finalize的区别?</span><br><span class="line">        b:如果在<span class="keyword">catch</span>里面有<span class="keyword">return</span>,请问<span class="keyword">finally</span>还执行吗?如果执行,在<span class="keyword">return</span>前还是后</span><br><span class="line">            会，前。</span><br><span class="line"></span><br><span class="line">            实际上在中间。这个上课我们讲过</span><br><span class="line">    C:异常处理的变形</span><br><span class="line">        <span class="keyword">try</span>...<span class="keyword">catch</span>...<span class="keyword">finally</span></span><br><span class="line">        <span class="keyword">try</span>...<span class="keyword">catch</span>...</span><br><span class="line">        <span class="keyword">try</span>...<span class="keyword">catch</span>...<span class="keyword">catch</span>...</span><br><span class="line">        <span class="keyword">try</span>...<span class="keyword">catch</span>...<span class="keyword">catch</span>...fianlly</span><br><span class="line">        <span class="keyword">try</span>...<span class="keyword">finally</span></span><br></pre></td></tr></table></figure>
+<h2 id="自定义异常"><a href="#自定义异常" class="headerlink" title="自定义异常"></a>自定义异常</h2><p>继承自Exception或者RuntimeException,只需要提供无参构造和一个带参构造即可。</p>
+<h2 id="异常的注意事项"><a href="#异常的注意事项" class="headerlink" title="异常的注意事项"></a>异常的注意事项</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">A:父的方法有异常抛出,子的重写方法在抛出异常的时候必须要小于等于父的异常 </span><br><span class="line">B:父的方法没有异常抛出,子的重写方法不能有异常抛出</span><br><span class="line">C:父的方法抛出多个异常,子的重写方法必须比父少或者小</span><br></pre></td></tr></table></figure>
+<hr>
+	  
+
+	  <div>
+  		<center>
+		  <div class="pagination">
+<ul class="pagination">
+	
+	
+	
+	
+	
+	
+		
+			
+		
+	
+		
+			
+			
+		
+	
+		
+			
+			
+			
+		
+			
+		
+	
+		
+	
+		
+			
+		
+	
+		
+	
+		
+	
+		
+	
+		
+	
+		
+	
+		
+	
+		
+	
+	
+	
+		<li class="prev"><a href="/wiki/2019/02/cjsj0xmdq0000u00932ktm5em/" class="alignleft prev"><i class="fa fa-arrow-circle-o-left"></i>prev</a></li>
+	
+	<li><a href="/wiki/"><i class="fa fa-archive"></i>Home</a></li>
+	
+		<li class="next"><a href="/wiki/2019/02/cjsj0wox8000sti093q3lpa34/" class="alignright next">next<i class="fa fa-arrow-circle-o-right"></i></a></li>
+	
+</ul>
+</div>
+
+		</center>
+	  </div>
+	  
+	</div> <!-- col-md-9/col-md-12 -->
+	
+  </div><!-- row -->
+
+	</div>
+  </div>
+  <div class="container-narrow">
+	<footer> <p>
+  &copy; 2019 ahoj
+  
+      with help from <a href="http://zespia.tw/hexo/" target="_blank">Hexo</a> and <a href="http://getbootstrap.com/" target="_blank">Twitter Bootstrap</a>. Theme by <a href="http://github.com/wzpan/hexo-theme-wixo/">Wixo</a>.    
+</p> </footer>
+  </div> <!-- container-narrow -->
+  
+<a id="gotop" href="#">   
+  <span>▲</span> 
+</a>
+
+<script src="/wiki/js/jquery.imagesloaded.min.js"></script>
+<script src="/wiki/js/gallery.js"></script>
+<script src="/wiki/js/bootstrap.min.js"></script>
+<script src="/wiki/js/jquery.tableofcontents.min.js"></script>
+<script src="/wiki/js/tocgenerator.min.js"></script>
+<script src="/wiki/js/main.js"></script>
+<script src="/wiki/js/search.js"></script> 
+
+
+
+
+<link rel="stylesheet" href="/wiki/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/wiki/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+
+
+   <script type="text/javascript">      
+     var search_path = "search.xml";
+	 if (search_path.length == 0) {
+	 	search_path = "search.xml";
+	 }
+	 var path = "/wiki/" + search_path;
+     searchFunc(path, 'local-search-input', 'local-search-result');
+   </script>
+
+
+</body>
+</html>
