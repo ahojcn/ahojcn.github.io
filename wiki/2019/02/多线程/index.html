@@ -1,0 +1,255 @@
+<!DOCTYPE HTML>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  <title>多线程 | ahoj的小本本</title>
+  <meta name="author" content="ahoj">
+  
+  <meta name="description" content="ahoj的小本本">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="多线程">
+  <meta property="og:site_name" content="ahoj的小本本">
+
+  
+    <meta property="og:image" content>
+  
+
+  
+    <link rel="alternative" href="/wiki/atom.xml" title="ahoj的小本本" type="application/atom+xml">
+  
+  
+    <link href="/wiki/https://avatars1.githubusercontent.com/u/43307215?s=460&v=4" rel="icon">
+  
+  
+  <link rel="stylesheet" href="/wiki/css/bootstrap.min.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/wiki/css/font-awesome.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/wiki/css/style.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/wiki/css/highlight.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/wiki/css/google-fonts.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/wiki/css/responsive.css" media="screen" type="text/css">  
+  <link rel="stylesheet" href="/wiki/css/sidenav.css" media="screen" type="text/css">  
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+
+  <script src="/wiki/js/jquery-2.0.3.min.js"></script>
+
+  <!---------------------- 关于小本本 ---------------------->
+
+<center>
+<div class="accordion-group">
+      <div class="accordion-heading">
+          <a class="accordion-toggle" data-toggle="collapse" href="#about">
+            <i class="fa fa-bookmark"></i> 关于小本本
+          </a>
+      </div> <!-- accordion-heading -->
+
+  <div id="about" class="accordion-body collapse in">
+    <div class="accordion-inner" style="background-color:#FFFFFF">
+      <br>
+      <p>"将零散的知识点放在一个集中的地方，不断递归重构，形成一套知识系统。"</p>
+      <p>这很有帮助，我将之前写在GitHub仓库里的笔记转移了过来，以后的学习笔记也在此更新。</p>
+    </div>
+  </div>
+</div>
+</center>
+
+  <!---------------------- 关于小本本 ---------------------->
+
+
+  <!-- analytics -->
+  
+
+</head>
+</html>
+<body id="body" data-spy="scroll" data-target=".toc">
+  <div class="container" id="container">
+	<div class="content">
+	  <div class="page-header">		
+  <h1><a class="brand" href="/wiki/">ahoj的小本本</a><span class="split"></span><span class="title">多线程</span><span class="date" id="title-date"><i class="fa fa-clock-o"></i> 2019-02-25</span></h1>
+</div>		
+
+<div class="row page">
+  <!-- cols -->	
+  
+  <div class="col-xs-12 col-sm-3 col-md-3 toc"> 
+	<!-- toc -->
+<script type="text/javascript">
+		jQuery(document).ready(function() {
+ 		   generateWikiTOC('.note', '.toc',  2 , 2 );
+		});
+</script>
+  </div><!-- col-md-3 -->
+  
+  
+
+  
+  <div class="col-xs-12 col-sm-9 col-md-9 note">
+	
+
+	  <!-- content -->
+	  <h2 id="多线程概述"><a href="#多线程概述" class="headerlink" title="多线程概述"></a>多线程概述</h2><h3 id="进程"><a href="#进程" class="headerlink" title="进程"></a>进程</h3><p>正在运行的程序，是系统进行资源分配和调用的独立单位。 </p>
+<p>每一个进程都有它自己的内存空间和系统资源。 </p>
+<h4 id="多进程的意义"><a href="#多进程的意义" class="headerlink" title="多进程的意义"></a>多进程的意义</h4><p>单进程计算机只能做一件事情。而现在的计算机都可以一边玩游戏(游戏进程),一边听音乐(音乐进程)，所以常见的操作系统都是多进程操作系统。比如：Windows，Mac和Linux等，能在同一个时间段内执行多个任务。</p>
+<p>对于单核计算机来讲，游戏进程和音乐进程是同时运行的吗?不是。</p>
+<p>因为CPU在某个时间点上只能做一件事情，计算机是在游戏进程和音乐进程间做着频繁切换，且切换速度很快，所以，我们感觉游戏和音乐在同时进行，其实并不是同时执行的。</p>
+<p>多进程的作用不是提高执行速度，而是提高CPU的使用率。</p>
+<h3 id="线程"><a href="#线程" class="headerlink" title="线程"></a>线程</h3><p>是进程中的单个顺序控制流，是一条执行路径。</p>
+<p>一个进程如果只有一条执行路径，则称为单线程程序。 </p>
+<p>一个进程如果有多条执行路径，则称为多线程程序。 </p>
+<h4 id="多线程的意义"><a href="#多线程的意义" class="headerlink" title="多线程的意义"></a>多线程的意义</h4><p>多线程的作用不是提高执行速度，而是为了提高应用程序的使用率。</p>
+<p>而多线程却给了我们一个错觉：让我们认为多个线程是并发执行的。其实不是。</p>
+<p>因为多个线程共享同一个进程的资源(堆内存和方法区)，但是栈内存是独立的，一个线程一个栈。所以他们仍然是在抢CPU的资源执行。一个时间点上只有能有一个线程执行。而且谁抢到，这个不一定，所以，造成了线程运行的随机性。</p>
+<h3 id="并行和并发"><a href="#并行和并发" class="headerlink" title="并行和并发"></a>并行和并发</h3><p>并行：前者是逻辑上同时发生，指在某一个时间内同时运行多个程序。</p>
+<p>并发：后者是物理上同时发生，指在某一个时间点同时运行多个程序。</p>
+<p>那么，我们能不能实现真正意义上的并发呢，是可以的，多个CPU就可以实现，不过得知道如何调度和控制它们。</p>
+<h3 id="Q-amp-A"><a href="#Q-amp-A" class="headerlink" title="Q &amp; A"></a>Q &amp; A</h3><p><code>Q</code>：Java 程序的运行原理及 JVM 的启动是多线程的吗?</p>
+<blockquote>
+<p>Java 命令去启动 JVM，JVM会启动一个进程，该进程会启动一个主线程。<br>JVM 的启动是多线程的，因为它最低有两个线程启动了，主线程和垃圾回收线程。</p>
+</blockquote>
+<h2 id="多线程实现"><a href="#多线程实现" class="headerlink" title="多线程实现"></a>多线程实现</h2><h3 id="继承Thread类"><a href="#继承Thread类" class="headerlink" title="继承Thread类"></a>继承Thread类</h3><ul>
+<li>自定义类 MyThread 继承 Thread 类。</li>
+<li>MyThread 类里面重写 run()</li>
+<li>创建对象</li>
+<li>启动线程</li>
+</ul>
+<h4 id="CODE"><a href="#CODE" class="headerlink" title="CODE"></a>CODE</h4><ul>
+<li><p>MyThread.java</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyThread</span> <span class="keyword">extends</span> <span class="title">Thread</span> </span>&#123;</span><br><span class="line">	<span class="meta">@Override</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">100</span>; i++) &#123;</span><br><span class="line">			System.out.println(getName() + <span class="string">"---"</span> + i);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>MyThreadTest.java</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyThreadTest</span> </span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">		MyThread my1 = <span class="keyword">new</span> MyThread();</span><br><span class="line">		MyThread my2 = <span class="keyword">new</span> MyThread();</span><br><span class="line">		</span><br><span class="line">		my1.setName(<span class="string">"ahoj"</span>);</span><br><span class="line">		my2.setName(<span class="string">"baozi"</span>);</span><br><span class="line">		</span><br><span class="line">		my1.start();</span><br><span class="line">		my2.start();</span><br><span class="line">		</span><br><span class="line">		System.out.println(Thread.currentThread().getName());</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h4 id="Q-amp-A-1"><a href="#Q-amp-A-1" class="headerlink" title="Q &amp; A"></a>Q &amp; A</h4><p><code>Q1</code>：为什么是 run() 方法呢？</p>
+<blockquote>
+<p>不是类中的所有代码都需要被线程执行的。这个时候，为了区分哪些代码能够被线程执行，java提供了Thread类中的run()用来包含那些被线程执行的代码。</p>
+</blockquote>
+<p><code>Q2</code>：线程能不能多次启动(start)？</p>
+<blockquote>
+<p><strong>不可以</strong><br>通过Thread实例的start()，一个Thread的实例只能产生一个线程。一个Thread的实例一旦调用start()方法，这个实例的started标记就标记为true，事实中不管这个线程后来有没有执行到底，只要调用了一次start()就再也没有机会运行了。<br>一个线程对象只能调用一次start方法.从new到等待运行是单行道,所以如果你对一个已经启动的线程对象再调用一次start方法的话,会产生:IllegalThreadStateException异常. 可以被重复调用的是run()方法。</p>
+</blockquote>
+<p><code>Q3</code>：run()和start()方法的区别</p>
+<blockquote>
+<p>run()方法: 在本线程内调用该Runnable对象的run()方法，可以重复多次调用；<br>start()方法: 启动一个线程，调用该Runnable对象的run()方法，不能多次启动一个线程</p>
+</blockquote>
+<h3 id="实现Runnable接口"><a href="#实现Runnable接口" class="headerlink" title="实现Runnable接口"></a>实现Runnable接口</h3>	  
+
+	  <div>
+  		<center>
+		  <div class="pagination">
+<ul class="pagination">
+	
+	
+	
+	
+	
+	
+		
+			
+			
+		
+	
+		
+			
+			
+			
+		
+			
+		
+	
+		
+			
+		
+	
+		
+			
+		
+	
+		
+	
+		
+			
+		
+	
+		
+	
+		
+	
+		
+	
+		
+	
+		
+	
+		
+	
+		
+	
+	
+	
+		<li class="prev disabled"><a><i class="fa fa-arrow-circle-o-left"></i>prev</a></li>
+	
+	<li><a href="/wiki/"><i class="fa fa-archive"></i>Home</a></li>
+	
+		<li class="next"><a href="/wiki/2019/02/IO/" class="alignright next">next<i class="fa fa-arrow-circle-o-right"></i></a></li>
+	
+</ul>
+</div>
+
+		</center>
+	  </div>
+	  
+	</div> <!-- col-md-9/col-md-12 -->
+	
+  </div><!-- row -->
+
+	</div>
+  </div>
+  <div class="container-narrow">
+	<footer> <p>
+  &copy; 2019 ahoj
+  
+      with help from <a href="http://zespia.tw/hexo/" target="_blank">Hexo</a> and <a href="http://getbootstrap.com/" target="_blank">Twitter Bootstrap</a>. Theme by <a href="http://github.com/wzpan/hexo-theme-wixo/">Wixo</a>.    
+</p> </footer>
+  </div> <!-- container-narrow -->
+  
+<a id="gotop" href="#">   
+  <span>▲</span> 
+</a>
+
+<script src="/wiki/js/jquery.imagesloaded.min.js"></script>
+<script src="/wiki/js/gallery.js"></script>
+<script src="/wiki/js/bootstrap.min.js"></script>
+<script src="/wiki/js/jquery.tableofcontents.min.js"></script>
+<script src="/wiki/js/tocgenerator.min.js"></script>
+<script src="/wiki/js/main.js"></script>
+<script src="/wiki/js/search.js"></script> 
+
+
+
+
+<link rel="stylesheet" href="/wiki/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/wiki/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+
+
+   <script type="text/javascript">      
+     var search_path = "search.xml";
+	 if (search_path.length == 0) {
+	 	search_path = "search.xml";
+	 }
+	 var path = "/wiki/" + search_path;
+     searchFunc(path, 'local-search-input', 'local-search-result');
+   </script>
+
+
+</body>
+</html>
