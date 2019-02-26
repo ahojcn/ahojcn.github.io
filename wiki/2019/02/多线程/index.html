@@ -3,7 +3,7 @@
 <head><meta name="generator" content="Hexo 3.8.0">
   <meta charset="utf-8">
   
-  <title>ahoj的小本本</title>
+  <title>多线程 | ahoj的小本本</title>
   <meta name="author" content="ahoj">
   
   <meta name="description" content="ahoj的小本本">
@@ -11,7 +11,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-  
+  <meta property="og:title" content="多线程">
   <meta property="og:site_name" content="ahoj的小本本">
 
   
@@ -70,25 +70,29 @@
   <div class="container" id="container">
 	<div class="content">
 	  <div class="page-header">		
-  <h1><a class="brand" href="/wiki/">ahoj的小本本</a><span class="split"></span><span class="title"></span><span class="date" id="title-date"><i class="fa fa-clock-o"></i> 2019-02-25</span></h1>
+  <h1><a class="brand" href="/wiki/">ahoj的小本本</a><span class="split"></span><span class="title">多线程</span><span class="date" id="title-date"><i class="fa fa-clock-o"></i> 2019-02-26</span></h1>
 </div>		
 
 <div class="row page">
   <!-- cols -->	
   
+  <div class="col-xs-12 col-sm-3 col-md-3 toc"> 
+	<!-- toc -->
+<script type="text/javascript">
+		jQuery(document).ready(function() {
+ 		   generateWikiTOC('.note', '.toc',  2 , 2 );
+		});
+</script>
+  </div><!-- col-md-3 -->
+  
   
 
   
-	<div class="col-md-12">
-	  
+  <div class="col-xs-12 col-sm-9 col-md-9 note">
+	
 
 	  <!-- content -->
-	  <p>title: 多线程<br>date: 2019-02-25 06:58:28<br>tags:</p>
-<pre><code>- Java
-</code></pre><p>categories:</p>
-<pre><code>- Java
-</code></pre><p>toc: true</p>
-<h2 id="多线程概述"><a href="#多线程概述" class="headerlink" title="多线程概述"></a>多线程概述</h2><h3 id="进程"><a href="#进程" class="headerlink" title="进程"></a>进程</h3><p>正在运行的程序，是系统进行资源分配和调用的独立单位。 </p>
+	  <h2 id="多线程概述"><a href="#多线程概述" class="headerlink" title="多线程概述"></a>多线程概述</h2><h3 id="进程"><a href="#进程" class="headerlink" title="进程"></a>进程</h3><p>正在运行的程序，是系统进行资源分配和调用的独立单位。 </p>
 <p>每一个进程都有它自己的内存空间和系统资源。 </p>
 <h4 id="多进程的意义"><a href="#多进程的意义" class="headerlink" title="多进程的意义"></a>多进程的意义</h4><p>单进程计算机只能做一件事情。而现在的计算机都可以一边玩游戏(游戏进程),一边听音乐(音乐进程)，所以常见的操作系统都是多进程操作系统。比如：Windows，Mac和Linux等，能在同一个时间段内执行多个任务。</p>
 <p>对于单核计算机来讲，游戏进程和音乐进程是同时运行的吗?不是。</p>
@@ -175,12 +179,9 @@
 <p>问题2：还出现了负数的票</p>
 <p>随机性和延迟导致的</p>
 <h3 id="多线程安全问题的原因"><a href="#多线程安全问题的原因" class="headerlink" title="多线程安全问题的原因"></a>多线程安全问题的原因</h3><ol>
-<li><p>是否有多线程环境</p>
-</li>
-<li><p>是否有共享数据</p>
-</li>
-<li><p>是否有多条语句操作共享数据</p>
-</li>
+<li>是否有多线程环境</li>
+<li>是否有共享数据</li>
+<li>是否有多条语句操作共享数据</li>
 </ol>
 <h3 id="解决多线程安全问题"><a href="#解决多线程安全问题" class="headerlink" title="解决多线程安全问题"></a>解决多线程安全问题</h3><p>基本思想：让程序没有安全问题的环境。</p>
 <p>把多个语句操作共享数据的代码给锁起来，让任意时刻只能有一个线程执行即可。</p>
@@ -212,10 +213,8 @@
 </blockquote>
 <h2 id="死锁问题"><a href="#死锁问题" class="headerlink" title="死锁问题"></a>死锁问题</h2><p>同步弊端 </p>
 <ul>
-<li><p>效率低 </p>
-</li>
-<li><p>如果出现了同步嵌套，就容易产生死锁问题 </p>
-</li>
+<li>效率低 </li>
+<li>如果出现了同步嵌套，就容易产生死锁问题 </li>
 </ul>
 <p>死锁问题及其代码 </p>
 <ul>
@@ -279,15 +278,25 @@
 		
 	
 		
+			
+			
+			
+		
+			
+		
 	
+		
+			
+		
+	
+		
+			
 		
 	
 		
 	
 		
-	
-		
-	
+			
 		
 	
 		
@@ -310,7 +319,7 @@
 	
 	<li><a href="/wiki/"><i class="fa fa-archive"></i>Home</a></li>
 	
-		<li class="next disabled"><a>next<i class="fa fa-arrow-circle-o-right"></i></a></li>
+		<li class="next"><a href="/wiki/2019/02/IO/" class="alignright next">next<i class="fa fa-arrow-circle-o-right"></i></a></li>
 	
 </ul>
 </div>
