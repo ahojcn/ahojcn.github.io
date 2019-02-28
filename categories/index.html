@@ -393,7 +393,9 @@
           
 
   
- <div id="gitalk-container"></div>
+    <div class="comments" id="comments">
+      <div id="lv-container" data-id="city" data-uid="MTAyMC80MDExOS8xNjY0Ng"></div>
+    </div>
 
   
 
@@ -724,21 +726,19 @@
 
 
   
-    
-  <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
-  <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
-   <script type="text/javascript">
-        var gitalk = new Gitalk({
-          clientID: 'c39d5478f28f3371264e',
-          clientSecret: 'af76488cd40ae5974d41284bf9173ce4a7cfcded',
-          repo: 'ahojcn.github.io',
-          owner: 'ahojcn',
-          admin: ['ahojcn'],
-          id: location.pathname,
-          distractionFreeMode: 'true'
-        })
-        gitalk.render('gitalk-container')           
-       </script>
+    <script>
+  window.livereOptions = {
+    refer: 'categories/index.html'
+  };
+  (function(d, s) {
+    var j, e = d.getElementsByTagName(s)[0];
+    if (typeof LivereTower === 'function') { return; }
+    j = d.createElement(s);
+    j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+    j.async = true;
+    e.parentNode.insertBefore(j, e);
+  })(document, 'script');
+</script>
 
   
 
