@@ -2,9 +2,37 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://ahoj.cc/about/index.html</loc>
+    
+    <lastmod>2019-03-01T06:08:33.410Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://ahoj.cc/categories/index.html</loc>
+    
+    <lastmod>2019-03-01T06:08:26.376Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://ahoj.cc/photos/index.html</loc>
     
-    <lastmod>2019-03-01T05:46:00.266Z</lastmod>
+    <lastmod>2019-03-01T06:08:01.717Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://ahoj.cc/tags/index.html</loc>
+    
+    <lastmod>2019-03-01T06:07:54.684Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://ahoj.cc/404.html</loc>
+    
+    <lastmod>2019-03-01T06:06:22.923Z</lastmod>
     
   </url>
   
@@ -12,27 +40,6 @@
     <loc>http://ahoj.cc/2019/01/%E9%94%99%E9%A2%98%E6%95%B4%E7%90%86/</loc>
     
     <lastmod>2019-03-01T05:45:26.979Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://ahoj.cc/categories/index.html</loc>
-    
-    <lastmod>2019-02-25T14:37:31.794Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://ahoj.cc/about/index.html</loc>
-    
-    <lastmod>2019-02-25T14:36:56.362Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://ahoj.cc/tags/index.html</loc>
-    
-    <lastmod>2018-09-18T14:23:51.370Z</lastmod>
     
   </url>
   
