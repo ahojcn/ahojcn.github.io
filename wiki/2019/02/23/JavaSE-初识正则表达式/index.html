@@ -1,0 +1,184 @@
+<!DOCTYPE HTML>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  <title>初识正则表达式 | 小本本</title>
+  <meta name="author" content="ahoj">
+  
+  <meta name="description" content="ahoj的小本本">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="初识正则表达式">
+  <meta property="og:site_name" content="小本本">
+
+  
+    <meta property="og:image" content>
+  
+
+  
+    <link rel="alternative" href="/wiki/atom.xml" title="小本本" type="application/atom+xml">
+  
+  
+    <link href="/wiki/favicon.png" rel="icon">
+  
+  
+  <link rel="stylesheet" href="/wiki/css/bootstrap.min.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/wiki/css/font-awesome.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/wiki/css/style.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/wiki/css/highlight.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/wiki/css/google-fonts.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/wiki/css/responsive.css" media="screen" type="text/css">  
+  <link rel="stylesheet" href="/wiki/css/sidenav.css" media="screen" type="text/css">  
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+
+  <script src="/wiki/js/jquery-2.0.3.min.js"></script>
+
+  <!-- analytics -->
+  
+
+</head>
+</html>
+<body id="body" data-spy="scroll" data-target=".toc">
+  <div class="container" id="container">
+	<div class="content">
+	  <div class="page-header">		
+  <h1><a class="brand" href="/wiki/">小本本</a><span class="split"></span><span class="title">初识正则表达式</span><span class="date" id="title-date"><i class="fa fa-clock-o"></i> 2019-02-23</span></h1>
+</div>		
+
+<div class="row page">
+  <!-- cols -->	
+  
+  
+
+  
+	<div class="col-md-12">
+	  
+
+	  <!-- content -->
+	  <h2 id="正则表达式概述及基本使用"><a href="#正则表达式概述及基本使用" class="headerlink" title="正则表达式概述及基本使用"></a>正则表达式概述及基本使用</h2><p>指一个用来描述或者匹配一系列符合某个句法规则的字符串的单个字符串。其实就是一种规则。有自己特殊的应用。</p>
+<h3 id="常见规则"><a href="#常见规则" class="headerlink" title="常见规则"></a>常见规则</h3><p>规则字符在<code>java.util.regex</code>包下的<code>Pattern</code>类中。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">A:字符</span><br><span class="line">    x 字符 x。举例：'a'表示字符a</span><br><span class="line">    \\ 反斜线字符。</span><br><span class="line">    \n 新行（换行）符 ('\u000A') </span><br><span class="line">    \r 回车符 ('\u000D')</span><br><span class="line"></span><br><span class="line">B:字符类</span><br><span class="line">    [abc] a、b 或 c（简单类） </span><br><span class="line">    [^abc] 任何字符，除了 a、b 或 c（否定） </span><br><span class="line">    [a-zA-Z] a到 z 或 A到 Z，两头的字母包括在内（范围） </span><br><span class="line">    [0-9] 0到9的字符都包括</span><br><span class="line"></span><br><span class="line">C:预定义字符类</span><br><span class="line">    . 任何字符。我的就是.字符本身，怎么表示呢? \.</span><br><span class="line">    \d 数字：[0-9]</span><br><span class="line">    \w 单词字符：[a-zA-Z_0-9]</span><br><span class="line">        在正则表达式里面组成单词的东西必须有这些东西组成</span><br><span class="line"></span><br><span class="line">D:边界匹配器</span><br><span class="line">    ^ 行的开头 </span><br><span class="line">    $ 行的结尾 </span><br><span class="line">    \b 单词边界</span><br><span class="line">        就是不是单词字符的地方。</span><br><span class="line">        举例：hello world?haha;xixi</span><br><span class="line"></span><br><span class="line">E:Greedy 数量词 </span><br><span class="line">    X? X，一次或一次也没有</span><br><span class="line">    X* X，零次或多次</span><br><span class="line">    X+ X，一次或多次</span><br><span class="line">    X&#123;n&#125; X，恰好 n 次 </span><br><span class="line">    X&#123;n,&#125; X，至少 n 次 </span><br><span class="line">    X&#123;n,m&#125; X，至少 n 次，但是不超过 m 次</span><br></pre></td></tr></table></figure>
+<h3 id="常用功能"><a href="#常用功能" class="headerlink" title="常用功能"></a>常用功能</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">A:判断功能</span><br><span class="line">    String类的public boolean matches(String regex):判断此字符串是否匹配给定的正则表达式</span><br><span class="line">    </span><br><span class="line">B:分割功能</span><br><span class="line">    String类的public String[] split(String regex):根据给定正则表达式的匹配拆分此字符串。</span><br><span class="line">    </span><br><span class="line">C:替换功能</span><br><span class="line">    String类的public String replaceAll(String regex,String replacement):使用给定的 replacement 替换此字符串所有匹配给定的正则表达式的子字符串。</span><br><span class="line">    </span><br><span class="line">D:获取功能</span><br><span class="line">    Pattern和Matcher</span><br><span class="line">        Pattern p = Pattern.compile("a*b");</span><br><span class="line">        Matcher m = p.matcher("aaaaab");</span><br><span class="line"></span><br><span class="line">        find():查找存不存在</span><br><span class="line">        group():获取刚才查找过的数据</span><br></pre></td></tr></table></figure>
+<p>获取功能的典型调用如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 典型的调用如下</span></span><br><span class="line"><span class="comment">// 模式和匹配器的典型调用顺序</span></span><br><span class="line"><span class="comment">// 把正则表达式编译成模式对象</span></span><br><span class="line">Pattern p = Pattern.compile(<span class="string">"a*b"</span>);</span><br><span class="line"><span class="comment">// 通过模式对象得到匹配器对象，这个时候需要的是被匹配的字符串</span></span><br><span class="line">Matcher m = p.matcher(<span class="string">"aaaaab"</span>);</span><br><span class="line"><span class="comment">// 调用匹配器对象的功能</span></span><br><span class="line"><span class="keyword">boolean</span> b = m.matches();</span><br><span class="line">System.out.println(b);</span><br></pre></td></tr></table></figure>
+<p>举个栗子：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> * 获取功能：</span></span><br><span class="line"><span class="comment"> * 获取下面这个字符串中由三个字符组成的单词</span></span><br><span class="line"><span class="comment"> * da jia ting wo shuo,jin tian yao xia yu,bu shang wan zi xi,gao xing bu?</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">RegexDemo2</span> </span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">		<span class="comment">// 定义字符串</span></span><br><span class="line">		String s = <span class="string">"da jia ting wo shuo,jin tian yao xia yu,bu shang wan zi xi,gao xing bu?"</span>;</span><br><span class="line">		<span class="comment">// 规则</span></span><br><span class="line">		String regex = <span class="string">"\\b\\w&#123;3&#125;\\b"</span>;</span><br><span class="line"></span><br><span class="line">		<span class="comment">// 把规则编译成模式对象</span></span><br><span class="line">		Pattern p = Pattern.compile(regex);</span><br><span class="line">		<span class="comment">// 通过模式对象得到匹配器对象</span></span><br><span class="line">		Matcher m = p.matcher(s);</span><br><span class="line"></span><br><span class="line">		<span class="keyword">while</span> (m.find()) &#123;</span><br><span class="line">			System.out.println(m.group());</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<hr>
+	  
+
+	  <div>
+  		<center>
+		  <div class="pagination">
+<ul class="pagination">
+	
+	
+	
+	
+	
+	
+		
+	
+		
+			
+		
+	
+		
+			
+		
+	
+		
+			
+		
+	
+		
+			
+		
+	
+		
+			
+		
+	
+		
+			
+			
+		
+	
+		
+	
+		
+			
+			
+			
+		
+	
+		
+	
+		
+	
+		
+	
+		
+	
+		
+	
+		
+	
+	
+	
+		<li class="prev"><a href="/wiki/2019/02/23/JavaSE-集合框架/" class="alignleft prev"><i class="fa fa-arrow-circle-o-left"></i>prev</a></li>
+	
+	<li><a href="/wiki/"><i class="fa fa-archive"></i>Home</a></li>
+	
+		<li class="next"><a href="/wiki/2019/02/20/JavaSE-基础/" class="alignright next">next<i class="fa fa-arrow-circle-o-right"></i></a></li>
+	
+</ul>
+</div>
+
+		</center>
+	  </div>
+	  
+	</div> <!-- col-md-9/col-md-12 -->
+	
+  </div><!-- row -->
+
+	</div>
+  </div>
+  <div class="container-narrow">
+	<footer> <p>
+  &copy; 2019 ahoj
+  
+      with help from <a href="http://zespia.tw/hexo/" target="_blank">Hexo</a> and <a href="http://getbootstrap.com/" target="_blank">Twitter Bootstrap</a>. Theme by <a href="http://github.com/wzpan/hexo-theme-wixo/">Wixo</a>.    
+</p> </footer>
+  </div> <!-- container-narrow -->
+  
+<a id="gotop" href="#">   
+  <span>▲</span> 
+</a>
+
+<script src="/wiki/js/jquery.imagesloaded.min.js"></script>
+<script src="/wiki/js/gallery.js"></script>
+<script src="/wiki/js/bootstrap.min.js"></script>
+<script src="/wiki/js/jquery.tableofcontents.min.js"></script>
+<script src="/wiki/js/tocgenerator.min.js"></script>
+<script src="/wiki/js/main.js"></script>
+<script src="/wiki/js/search.js"></script> 
+
+
+
+
+<link rel="stylesheet" href="/wiki/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/wiki/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+
+
+
+</body>
+</html>
