@@ -111,29 +111,25 @@
 
 
 
-  <meta name="description" content="「微型计算机原理」汇编语言程序设计基础知识。">
-<meta name="keywords" content="微机原理">
+  <meta name="description" content="「Matlab 基础」整理了下 MATLAB 的基础知识，在《计算方法》实验中会用到。">
+<meta name="keywords" content="Matlab">
 <meta property="og:type" content="article">
-<meta property="og:title" content="汇编语言程序设计基础">
-<meta property="og:url" content="http://ahoj.cc/2019/03/汇编语言程序设计基础/index.html">
+<meta property="og:title" content="Matlab基础">
+<meta property="og:url" content="http://ahoj.cc/2019/03/Matlab基础/index.html">
 <meta property="og:site_name" content="ahoj&#39;s blog">
-<meta property="og:description" content="「微型计算机原理」汇编语言程序设计基础知识。">
+<meta property="og:description" content="「Matlab 基础」整理了下 MATLAB 的基础知识，在《计算方法》实验中会用到。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="https://wx2.sinaimg.cn/mw690/006wR0dcly1fx5b2h8043j30lr0f0n2v.jpg">
-<meta property="og:image" content="https://wx3.sinaimg.cn/mw690/006wR0dcly1fx5b2h6inwj30es0km7ag.jpg">
-<meta property="og:image" content="https://wx3.sinaimg.cn/mw690/006wR0dcly1fx5b8gga6bj30pk0eyn52.jpg">
-<meta property="og:updated_time" content="2019-03-03T14:47:51.511Z">
+<meta property="og:updated_time" content="2019-03-11T06:16:33.206Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="汇编语言程序设计基础">
-<meta name="twitter:description" content="「微型计算机原理」汇编语言程序设计基础知识。">
-<meta name="twitter:image" content="https://wx2.sinaimg.cn/mw690/006wR0dcly1fx5b2h8043j30lr0f0n2v.jpg">
+<meta name="twitter:title" content="Matlab基础">
+<meta name="twitter:description" content="「Matlab 基础」整理了下 MATLAB 的基础知识，在《计算方法》实验中会用到。">
 
 
 
 
 
 
-  <link rel="canonical" href="http://ahoj.cc/2019/03/汇编语言程序设计基础/">
+  <link rel="canonical" href="http://ahoj.cc/2019/03/Matlab基础/">
 
 
 
@@ -143,7 +139,7 @@
   };
 </script>
 
-  <title>汇编语言程序设计基础 | ahoj's blog</title>
+  <title>Matlab基础 | ahoj's blog</title>
   
 
 
@@ -356,7 +352,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://ahoj.cc/2019/03/汇编语言程序设计基础/">
+    <link itemprop="mainEntityOfPage" href="http://ahoj.cc/2019/03/Matlab基础/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="ahoj">
@@ -373,7 +369,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">汇编语言程序设计基础
+          <h1 class="post-title" itemprop="name headline">Matlab基础
 
               
             
@@ -399,7 +395,7 @@
                 
               
 
-              <time title="创建时间：2019-03-03 22:44:46 / 修改时间：22:47:51" itemprop="dateCreated datePublished" datetime="2019-03-03T22:44:46+08:00">2019-03-03</time>
+              <time title="创建时间：2019-03-11 14:11:07 / 修改时间：14:16:33" itemprop="dateCreated datePublished" datetime="2019-03-11T14:11:07+08:00">2019-03-11</time>
             
 
             
@@ -421,7 +417,7 @@
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/微机原理/" itemprop="url" rel="index"><span itemprop="name">微机原理</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Matlab/" itemprop="url" rel="index"><span itemprop="name">Matlab</span></a></span>
 
                 
                 
@@ -463,190 +459,150 @@
       
 
       
-        <p>「微型计算机原理」汇编语言程序设计基础知识。</p>
+        <p>「Matlab 基础」整理了下 MATLAB 的基础知识，在《计算方法》实验中会用到。</p>
 <a id="more"></a>
-<p><strong>翻译</strong>：源程序 ==&gt; 二进制代码</p>
-<blockquote>
-<p>翻译过程中，伪指令起协助作用，而且当翻译结束时，伪指令消失，只剩下源程序中指令所转换的二进制代码。</p>
-</blockquote>
-<p><strong>伪指令</strong></p>
-<blockquote>
-<p>指导汇编程序将源程序汇编(翻译)成二进制代码，只构成汇编语句语法。</p>
-</blockquote>
-<p><strong>宏指令</strong></p>
-<blockquote>
-<p>简化程序，以一代多。(和C语言宏一样的道理～)</p>
-<p>宏指令语句和子程序的区别：</p>
-<p>宏指令语句：速度快、占用空间大。</p>
-<p>子程序：速度慢(调用时需要保存临时数据，函数地址等)、占用空间小。</p>
-</blockquote>
-<p><strong>汇编程序举例</strong>：将数据段内存单元DATA中的数据12H与立即数16H相加，结果保存在SUM中。完整的源程序如下：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">DESG	SEGMENT		;定义数据段</span><br><span class="line">DATA	DB	<span class="number">12</span>H</span><br><span class="line">SUM		DB	<span class="number">0</span></span><br><span class="line">DESG	ENDS		;定义数据段结束</span><br><span class="line"></span><br><span class="line">SSEG	SEGMENT STACK	;定义堆栈段</span><br><span class="line">		DB	<span class="number">512</span>	DUP(<span class="number">0</span>)</span><br><span class="line">SSEG	ENDS			;定义堆栈段结束</span><br><span class="line"></span><br><span class="line">CSEG	SEGMENT		;定义代码段开始</span><br><span class="line">		ASSUME	DS:DSEG,SS:SSEG,CS:CSEG</span><br><span class="line">START:	MOV	AX,DSEG</span><br><span class="line">		MOV DS,AX</span><br><span class="line">		MOV AL,DATA</span><br><span class="line">		ADD AL,<span class="number">16</span>H</span><br><span class="line">		MOV	SUM,AL</span><br><span class="line">		MOV AH,<span class="number">4</span>CH</span><br><span class="line">		INT <span class="number">21</span>H</span><br><span class="line">CSEG	ENDS		;定义代码段结束</span><br><span class="line">		END START	;整个汇编程序结束，规定入口地址</span><br></pre></td></tr></table></figure>
-<p>1）汇编语言程序一般由若干段组成，每个段都有一个名字(段名)，以<code>SEGMENT</code>作为段的开始，<code>ENDS</code>作为段的结束。</p>
-<p>汇编语言程序段有4种：</p>
-<p>代码段、堆栈段、数据段、附加段。</p>
-<p>其中代码段和堆栈段不可少，数据段和附加段根据需要设置。</p>
-<p>2）汇编语言一行不能超过128个字符，但一条语句允许有后续行，最后均已回车结束。整个程序必须以<code>END</code>作为结束，它通知汇编程序停止汇编。<code>END</code>后的<code>START</code>表示该程序执行时的起始地址。</p>
-<p>3）每一条汇编语句最多由4个字段组成，按照语法规则写在一个语句的4个区域内。各区域之间用空格或TAB隔开。</p>
-<p>汇编语句的4个字段：</p>
-<p>名字或标号、操作码(指令助记符)或伪操作指令、操作数(操作数或地址)、注释。</p>
-<h2 id="1-数据项"><a href="#1-数据项" class="headerlink" title="1. 数据项"></a>1. 数据项</h2><h3 id="1-1-常量"><a href="#1-1-常量" class="headerlink" title="1.1 常量"></a>1.1 常量</h3><ul>
-<li>数字</li>
-</ul>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">0100B</span> 	二进制</span><br><span class="line"><span class="number">75</span>Q		八进制</span><br><span class="line"><span class="number">295</span>D	十进制(D可省略)</span><br><span class="line"><span class="number">3</span>AFH	十六进制</span><br></pre></td></tr></table></figure>
-<p>所有的数必须以0~9输值开头，例如：<code>FA3BH</code>需写成<code>0FA3BH</code></p>
+<p>三个区域：</p>
+<p>Command Window 用于输入命令和得到输出结果</p>
+<p>Workspace 记录Command中用到的变量</p>
+<p>Command History 记录Command输入历史</p>
+<h1 id="基础命令"><a href="#基础命令" class="headerlink" title="基础命令"></a>基础命令</h1><h2 id="基础运算"><a href="#基础运算" class="headerlink" title="基础运算"></a>基础运算</h2><ul>
+<li><p>清空屏幕</p>
+<p><code>clc</code></p>
+</li>
+<li><p>注释</p>
+<p><code>%</code></p>
+</li>
+<li><p>加减乘除</p>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span> + <span class="number">2</span></span><br><span class="line"><span class="number">1</span> - <span class="number">2</span></span><br><span class="line"><span class="number">1</span> * <span class="number">2</span></span><br><span class="line"><span class="number">1</span> / <span class="number">2</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>指数</p>
 <ul>
-<li><p>字符、字符串</p>
-<p><code>&#39;a&#39;    &#39;Hello&#39;</code>。</p>
-</li>
-<li><p>用标识符表示常量</p>
-<p>嘿嘿，类似于C语言中<code>#define PI 3.14</code>。</p>
-<p>在汇编中：<code>AL EQU 0FA3BH</code>，这个<code>EQU</code>是关键字，这样定义后<code>AL</code>就代表这个数。</p>
+<li><p>例如$5^2$</p>
+<p><code>5^2</code></p>
 </li>
 </ul>
-<h3 id="1-2-变量"><a href="#1-2-变量" class="headerlink" title="1.2 变量"></a>1.2 变量</h3><ul>
-<li><p>变量名：一个存储单元的地址</p>
 </li>
-<li><p>变量属性</p>
-<p>段属性：变量所在段的段地址</p>
-<p>用<code>SEG  变量名</code>得到变量的段地址。</p>
-<p>偏移属性：变量与起始位置之间相距的字节数</p>
-<p><code>OFFSET  变量名</code>得到变量的偏移地址。</p>
-<p>类型：存取长度单位</p>
-<p><code>TYPE  变量名</code>得到变量的类型。</p>
-</li>
-<li><p>变量定义</p>
-<p><strong>变量  类型  表达式</strong></p>
-</li>
-<li><p>变量类型</p>
-<p>DB：1个字节</p>
-<p>DW：2个字节</p>
-<p>DD：4个字节</p>
-<p>DQ：8个字节</p>
-<p>DT：10个字节</p>
-</li>
-<li><p>变量定义中的表达式</p>
-<p>常量1,常量2,…</p>
-<p>‘一串字符’</p>
-<p>重复因子DUP( )</p>
-</li>
-</ul>
-<p>变量定义举例：</p>
-<p><img src="https://wx2.sinaimg.cn/mw690/006wR0dcly1fx5b2h8043j30lr0f0n2v.jpg" alt="变量定义举例1"></p>
-<p><img src="https://wx3.sinaimg.cn/mw690/006wR0dcly1fx5b2h6inwj30es0km7ag.jpg" alt="变量定义举例2"></p>
-<p><img src="https://wx3.sinaimg.cn/mw690/006wR0dcly1fx5b8gga6bj30pk0eyn52.jpg" alt="变量定义3"></p>
-<h3 id="1-3-标号"><a href="#1-3-标号" class="headerlink" title="1.3 标号"></a>1.3 标号</h3><ul>
-<li><p>标号名：不能以0开头(常量是必须以0开头)，标号名代表标号那行指令所在内存单元的地址。</p>
-</li>
-<li><p>标号属性</p>
-<p>段属性：<code>SEG  标号</code>取段地址。</p>
-<p>偏移属性：<code>OFFSET  标号</code>取偏移地址。</p>
-<p>类型属性：<code>TYPE  标号</code>取类型。</p>
-</li>
-<li><p>标号类型</p>
-<p>near(近类型)：段内</p>
-<p>far(远类型)：段间</p>
-</li>
-</ul>
-<h2 id="2-运算符和表达式"><a href="#2-运算符和表达式" class="headerlink" title="2. 运算符和表达式"></a>2. 运算符和表达式</h2><blockquote>
-<p>表达式并不是指令，所以它本身并不能执行，只能在汇编时由汇编程序预先对其进行运算，然后再将所得的值作为操作数参加指令规定的操作。</p>
-<p>即：<strong>表达式求值是由汇编程序来完成的</strong>。</p>
-</blockquote>
+<li><p>对数</p>
 <ul>
-<li><p>算数运算符(7种)</p>
-<p>加(+)、减(-)、乘(*)、除(/)、模除(MOD)、算数左移(SHL)、算数右移(SHR)。</p>
-<p>注意：除了加、减运算符可以使用变量和标号外，其他算数运算符只适用于常量的数值运算。</p>
-<p>例如：设<code>NUMB=01010101B</code> ，则<code>NUMB SHL 1 = 10101010B</code>。</p>
+<li><p>例如：$\ln32$</p>
+<p><code>log(32)</code></p>
 </li>
-<li><p>逻辑运算符(4种)</p>
-<p>与(AND)、或(OR)、非(NOT)、异或(XOR)。</p>
-<p>注意：逻辑运算符只能用于表达式求值，用来对数值进行按位逻辑运算，并得到一个数值。对地址进行逻辑运算则无意义。</p>
-<p>例如：<code>MOV AL,0ADH AND 0EAH</code>&lt;=&gt;<code>MOV AL,0A8H</code>。</p>
+<li><p>$\lg32$</p>
+<p><code>log10(32)</code></p>
 </li>
-<li><p>关系运算符(6个)</p>
-<p>=(EQ)、$\ne$(NE)、$\lt$(LT)、$\gt$(GT)、$\le$(LE)、$\ge$(GE)。</p>
-<p>注意：在数值表达式中参与关系运算的必须是两个数值或同一段中的两个存储单元的地址。关系运算符的结果是一个逻辑值(常数)，其值在汇编(翻译)时获得。当关系成立(TRUE)时，结果为$0FFFFH$，当关系不成立(FALSE)时，结果为$0$。</p>
+<li><p>$\log_232$</p>
+<p><code>log2(32)</code></p>
 </li>
-<li><p>数值返回操作符</p>
-<p>数值返回操作符用来分析一个存储器操作数(即变量或标号)的属性，即将它分解为其组成部分(段地址、偏移值、类型、数据字节数、数据项总数等)，并在汇编时以数值形式返回给存储器操作数。运算符总是加在运算对象之前，返回的结果是一个数值。</p>
-<p><strong>SEG</strong>：返回其后变量或标号的段地址，例：<code>MOV AX,SEG DATA1</code>将变量DATA1的段地址送到AX中。</p>
-<p><strong>OFFSET</strong>：返回其后变量或标号的偏移值，例：<code>MOV SI,OFFSET DATA2</code>。</p>
-<p><strong>TYPE</strong>：返回的数值是反应该变量或标号类型的一个数值。</p>
-<p>如果是变量，则返回数值为字节数：DB为1，DW为2，DD为4，DQ为8，DT为10。</p>
-<p>如果是标号，返回数值为该标号的类型值：NEAR为-1(FFH)，FAR为-2(FEH)。</p>
-<p><strong>SIZE</strong>：返回变量所占数据区的字节总数。</p>
-<p><strong>LENGTH</strong>：返回数据单元个数。</p>
-<p>如果变量是DUP说明的，返回外层DUP前面的数值。</p>
-<p>其他，返回的总是1。</p>
+<li><p>$\log_87 = \frac{\log_e7}{\log_e8}$</p>
+<p><code>log(7)/log(8)</code></p>
 </li>
-<li><p>属性运算符(4个)</p>
-<p><strong>PTR</strong>：用来说明或修改位于其后的存储器操作数的类型。</p>
-<p>如果一个变量已经定义为字变量，利用PTR运算符可以修改它的属性。例如：变量VAR已经定义为字类型，若要将VAR当作字节操作数写成<code>MOV AL,VAR</code>则会出错，因为两个操作数的字长类型不同；如果将指令写成<code>MOV AL,BYTE PTR VAR</code>是合法的。</p>
-<p>注意！PTR运算符只对当前指令有效。</p>
-<p><strong>THIS</strong>：(类似于C语言中的union？)，THIS用来把它后面指定的类型和距离属性赋给当前变量、标号或地址表达式，但不分配新的存储单元。</p>
-<p>例如：<code>DATAB EQU THIS BYTE</code>  <code>DATAW DW ?</code></p>
-<p>这里的DATAB与DATAW的段地址和偏移量相同(公用一块空间)，但变量DATAB的类型是字节，而变量DATAW的类型是字。</p>
+</ul>
+</li>
+<li><p>三角函数</p>
+<p><code>sin(x)</code></p>
+<p><code>cos(x)</code></p>
+<p>还有一些其他的三角函数，动手试一试。</p>
+</li>
+<li><p>变量</p>
+<p><code>x = 10</code></p>
+<p><code>y = 20</code></p>
+<p><code>x + y</code></p>
+<p>不可以这样<code>x + 1 = 2</code>，没办法直接来解方程。在Matlab中<code>=</code>是赋值符号，不是<strong>等于</strong>。这个类似于C语言。</p>
+<p>可以这样：<code>x = x + 1</code></p>
+<p>输出变量的值：<code>fprintf(&#39;%g\n&#39;, x);</code>或者<code>disp(x);</code></p>
+</li>
+<li><p>按方向键⬆️⬇️用来重复命令</p>
+<p>这个和Linux中一样。</p>
+</li>
+<li><p>$\sqrt3$</p>
+<p><code>sqrt(3)</code></p>
+</li>
+</ul>
+<h2 id="向量运算"><a href="#向量运算" class="headerlink" title="向量运算"></a>向量运算</h2><ul>
+<li><p>$\vec x = (1,2,3)$</p>
+<p><code>x = [1,2,3]</code>或<code>x = [1 2 3]</code></p>
+</li>
+<li><p>$\vec x*2$</p>
+<p>这个是计算$\vec x*2$的值，但是$\vec x$的值并没有改变，只是计算了这个表达式的结果。</p>
+<p><code>x = x * 2</code>，这样才会改变$\vec x$的值，这个和C语言一样～</p>
+</li>
+<li><p>当然也可以做向量和向量的基本运算（加减乘除）等。</p>
+</li>
+<li><p><code>sum(x)</code></p>
+<p>这个命令是用来求和的，例如：</p>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">v = [<span class="number">1</span> <span class="number">2</span> <span class="number">3</span>];</span><br><span class="line"><span class="built_in">disp</span>(sum(v));	<span class="comment">% 输出 6</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="矩阵运算"><a href="#矩阵运算" class="headerlink" title="矩阵运算"></a>矩阵运算</h2><ul>
+<li><p>矩阵<br>$$<br>A =<br>\begin{Bmatrix}<br>\mathbf{1} &amp; \mathbf{2} &amp; \mathbf{3} \\<br>\mathbf{4} &amp; \mathbf{5} &amp; \mathbf{6}<br>\end{Bmatrix}<br>$$</p>
+<p>$$<br>B =<br>\begin{Bmatrix}<br>\mathbf{7} &amp; \mathbf{8} &amp; \mathbf{9} \\<br>\mathbf{10} &amp; \mathbf{11} &amp; \mathbf{12}<br>\end{Bmatrix}<br>$$</p>
+</li>
+</ul>
+<p>  输入：<code>A = [1 2 3;4 5 6]</code></p>
+<p>  按上面的输入同样，矩阵B</p>
+<p>  输入：<code>B = [7,8,9;10,11,12]</code></p>
+<p>  然后就可以做矩阵的运算咯，<code>A*B,A+B,A-B,A/B</code>等。</p>
+<p>  注意这里矩阵运算需要遵循矩阵运算规则。</p>
+<ul>
+<li><p>另一种矩阵乘法</p>
+<p>在Matlab中输入<code>A*B</code>就是数学中的矩阵乘法</p>
+<p>还有一种是输入<code>A.*B</code>，这样就是矩阵每个位置($A_{i,j}*B_{i,j}$)对应相乘。</p>
+</li>
+</ul>
+<h2 id="Script"><a href="#Script" class="headerlink" title="Script"></a>Script</h2><ul>
+<li><p>New Script</p>
+<p>在脚本里写一堆命令。</p>
+<p>例如：计算$x+y$</p>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">x = <span class="number">10</span>;	<span class="comment">% 加了;后，在command window里，就不会出现x=10的结果。</span></span><br><span class="line">y = <span class="number">20</span>;	<span class="comment">% 也可以不加分号。</span></span><br><span class="line">x + y</span><br></pre></td></tr></table></figure>
+<p>保存脚本扩展名为.m -&gt; 然后在左面切换到刚才保存的文件夹 -&gt; RUN</p>
+<p>写脚本可以实现输入互动，例如：</p>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">x = input(<span class="string">'Please input x:'</span>);</span><br><span class="line">y = input(<span class="string">'Please input y:'</span>);</span><br><span class="line"></span><br><span class="line">x + y</span><br></pre></td></tr></table></figure>
+<p>然后RUN，输入x，y，就会输出结果。</p>
+<ul>
+<li><p>例子：摄氏温度转华氏温度</p>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">C = input(<span class="string">'enter a temperature in Celesius:'</span>);</span><br><span class="line">F = (C * <span class="number">1.8</span>) + <span class="number">32</span></span><br><span class="line"></span><br><span class="line">fprintf(<span class="string">'Fahrenheit = %f\n'</span>, F);</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ul>
+<h1 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h1><h2 id="选择"><a href="#选择" class="headerlink" title="选择"></a>选择</h2><p>栗子1：</p>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">num = input(<span class="string">'enter a number:'</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> num &gt; <span class="number">0</span></span><br><span class="line">	fprintf(<span class="string">'正数\n'</span>);</span><br><span class="line"><span class="keyword">elseif</span> num == <span class="number">0</span></span><br><span class="line">	fprintf(<span class="string">'0\n'</span>);</span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">	fprintf(<span class="string">'负数\n'</span>);</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<p>栗子2：</p>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">a = input(<span class="string">'a = '</span>);</span><br><span class="line">b = input(<span class="string">'b = '</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> a &gt; b</span><br><span class="line">	fprintf(<span class="string">'%g\n'</span>, a);</span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">	fprintf(<span class="string">'%g\n'</span>, b);</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<p>栗子3：</p>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">% 1.</span></span><br><span class="line">a = input(<span class="string">'a = '</span>);</span><br><span class="line">b = input(<span class="string">'b = '</span>);</span><br><span class="line">c = input(<span class="string">'c = '</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> a + b &lt;= c</span><br><span class="line">	fprintf(<span class="string">'NO\n'</span>);</span><br><span class="line"><span class="keyword">elseif</span> a + c &lt;= b</span><br><span class="line">	fprintf(<span class="string">'NO\n'</span>);</span><br><span class="line"><span class="keyword">elseif</span> b + c &lt;= a</span><br><span class="line">	fprintf(<span class="string">'NO\n'</span>);</span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">	fprintf(<span class="string">'YES\n'</span>);</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">% 2.</span></span><br><span class="line"><span class="keyword">if</span> (a + b &gt; c) &amp;&amp; (b + c &gt; a) &amp;&amp; (a + c &gt; b)</span><br><span class="line">	fprintf(<span class="string">'YES\n'</span>);</span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">	fprintf(<span class="string">'NO\n'</span>);</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<h2 id="循环"><a href="#循环" class="headerlink" title="循环"></a>循环</h2><h3 id="while"><a href="#while" class="headerlink" title="while"></a>while</h3><p>栗子1：</p>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">t = <span class="number">1</span>;</span><br><span class="line"><span class="keyword">while</span> t &lt;= <span class="number">5</span></span><br><span class="line">	<span class="built_in">disp</span>(t);</span><br><span class="line">	t = t + <span class="number">1</span>;</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<p>栗子2：</p>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">a = input(<span class="string">'a = '</span>);</span><br><span class="line">b = input(<span class="string">'b = '</span>);</span><br><span class="line">r = <span class="built_in">mod</span>(a, b);</span><br><span class="line"></span><br><span class="line"><span class="keyword">while</span> r ~= <span class="number">0</span></span><br><span class="line">	a = b;</span><br><span class="line">	b = r;</span><br><span class="line">	r = <span class="built_in">mod</span>(a, b);</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">disp</span>(b);</span><br></pre></td></tr></table></figure>
+<h3 id="for"><a href="#for" class="headerlink" title="for"></a>for</h3><p>栗子1：</p>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">% 输出 1 ～ 5</span></span><br><span class="line"><span class="keyword">for</span> <span class="built_in">i</span> = <span class="number">1</span> : <span class="number">5</span></span><br><span class="line">	<span class="built_in">disp</span>(<span class="built_in">i</span>);</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="comment">% 输出 5 ～ -5</span></span><br><span class="line"><span class="keyword">for</span> <span class="built_in">i</span> = <span class="number">5</span> : <span class="number">-1</span> : <span class="number">-5</span>	 <span class="comment">% 这的-1表示步长，步长默认为 1，步长可以为小数。</span></span><br><span class="line">	<span class="built_in">disp</span>(<span class="built_in">i</span>);</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<p>栗子2：</p>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">s = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">for</span> <span class="built_in">i</span> = <span class="number">1</span> : <span class="number">100</span></span><br><span class="line">	s = s + <span class="built_in">i</span>;</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">disp</span>(s);</span><br></pre></td></tr></table></figure>
+<p>栗子3：计算</p>
+<p>$\frac{1}{1}+\frac{1}{2}+\frac{1}{3}+…+\frac{1}{100} = ?$</p>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">s = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> <span class="built_in">i</span> = <span class="number">1</span> : <span class="number">100</span></span><br><span class="line">	s = s + (<span class="number">1</span> / <span class="built_in">i</span>);</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">disp</span>(s);</span><br></pre></td></tr></table></figure>
+<p>栗子4：</p>
+<p>$$\frac{1}{1}-\frac{1}{2}+\frac{1}{3}-…-\frac{1}{100} =?$$</p>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">sum = <span class="number">0</span>;</span><br><span class="line">flag = <span class="number">-1</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> <span class="built_in">i</span> = <span class="number">1</span> : <span class="number">100</span></span><br><span class="line">	sum = sum + (<span class="number">1</span> / <span class="built_in">i</span>)*flag;</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<p>栗子5：for loop和向量</p>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">v = [<span class="number">1</span> <span class="number">2</span> <span class="number">3</span> <span class="number">4</span> <span class="number">5</span> <span class="number">6</span> <span class="number">7</span> <span class="number">8</span> <span class="number">9</span> <span class="number">100</span>];</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> <span class="built_in">i</span> = v</span><br><span class="line">	<span class="built_in">disp</span>(<span class="built_in">i</span>);</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<h1 id="Function"><a href="#Function" class="headerlink" title="Function"></a>Function</h1><h2 id="无返回值"><a href="#无返回值" class="headerlink" title="无返回值"></a>无返回值</h2><p>新建一个function。</p>
+<p>栗子1：计算$1+2+3+…+100 = ?$</p>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">mysum1</span><span class="params">( )</span></span></span><br><span class="line">	s = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> <span class="built_in">i</span> = <span class="number">1</span> : <span class="number">100</span></span><br><span class="line">        s = s + <span class="built_in">i</span>;</span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line">	<span class="built_in">disp</span>(s);</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<p>运行：<code>mysum1()</code></p>
+<p>栗子2：计算$1+2+3+…+n = ?$</p>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">mysum2</span><span class="params">( n )</span></span></span><br><span class="line">	s = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> <span class="built_in">i</span> = <span class="number">1</span> : n</span><br><span class="line">        s = s + <span class="built_in">i</span>;</span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line">	<span class="built_in">disp</span>(s);</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<p>运行：<code>mysum2(100)</code></p>
+<p>栗子3：计算$n+(n+1)+(n+2)+…+m = ?$</p>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">mysum3</span><span class="params">( n, m )</span></span></span><br><span class="line">	s = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> <span class="built_in">i</span> = n : m</span><br><span class="line">        s = s + <span class="built_in">i</span>;</span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line">	<span class="built_in">disp</span>(s);</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<p>运行：<code>mysum(4, 10)</code></p>
 <blockquote>
-<p>注意！运算符THIS和PTR有类似的功能，但具体用法有所不同。</p>
-<p>其中，THIS是为当前存储单元定义一个指定类型的变量或标号，也就是说为下一个能分配存储单元的变量或标号定义新的类型，因此它必须放在被修改的变量之前。例如上个栗子中的THIS就是放在DATAW之前，以便将DATAW定义为字节类型变量DATAB。而运算符PTR则是对已经定义的变量或标号修改其属性，它可以放在被修改的变量之前，也可以放在后面。</p>
+<p>上面这个例子，在command window调用时，我们需要把他的结果保存在一个变量中，如：<code>s1 = mysum(4,10)</code>。就会出错，这个就是没有返回值。</p>
 </blockquote>
-<p><strong>HIGH</strong>：取高8位</p>
-<p><strong>LOW</strong>：取低8位</p>
-<p><strong>：段超越</strong>：eg：<code>MOV AX,ES:[BS]</code></p>
-</li>
-</ul>
-<h2 id="3-伪指令"><a href="#3-伪指令" class="headerlink" title="3. 伪指令"></a>3. 伪指令</h2><h3 id="3-1-数据定义伪指令"><a href="#3-1-数据定义伪指令" class="headerlink" title="3.1 数据定义伪指令"></a>3.1 数据定义伪指令</h3><p><strong>DB</strong>：1个字节，BYTE，也常常用来定义字符串。</p>
-<p><strong>DW</strong>：2个字节，WORD。</p>
-<p><strong>DD</strong>：4个字节，DWORD。</p>
-<p><strong>DQ</strong>：8个字节，QBYTE。</p>
-<p><strong>DT</strong>：10个字节，TBYTE，DT后面的每个操作数都为10个字节的压缩BCD数。</p>
-<h3 id="3-2-符号定义伪指令"><a href="#3-2-符号定义伪指令" class="headerlink" title="3.2 符号定义伪指令"></a>3.2 符号定义伪指令</h3><ul>
-<li><p>EQU(赋值伪指令)</p>
-<p>格式：名字 EQU 表达式</p>
-<p>EQU不能重复定义已使用过的符号名。</p>
-<p><code>CONST EQU 256</code></p>
-<p><code>N_CONST EQU 256+10</code></p>
-<p><code>ADDR EQU [BP+8]</code></p>
-<p><code>CB EQU DAA</code></p>
-</li>
-<li><p>LABEL(数据定义伪指令)</p>
-<p>格式：名字 类型 表达式</p>
-</li>
-</ul>
-<h3 id="3-3-段定义伪指令"><a href="#3-3-段定义伪指令" class="headerlink" title="3.3 段定义伪指令"></a>3.3 段定义伪指令</h3><p>格式：段名 SEGMENT [定位][组合][类别名]     // []中的一般不写</p>
-<p>SEGMENT和ENDS伪指令：</p>
-<p>SEGMENT和ENDS必须成对出现，他们之间为段体，给其赋予一个名字(不可省略)。</p>
-<ul>
-<li><p>定位类型(4种)</p>
-<p>BYTE，字节型</p>
-<p>WORD，字型</p>
-<p>PARA，节型，默认为这个。</p>
-<p>PAGE，页型</p>
-</li>
-<li><p>组合类型(连接类型)</p>
-<p>即多个模块的程序中，指示连接程序如何将某个逻辑段在装入内存时与其他段进行组合。</p>
-<p>NONE，默认不组合</p>
-<p>PUBLIC，同类型之和、一个整的内存段</p>
-<p>STACK</p>
-<p>COMMON，重叠，值分配最大的那个段的存储长度</p>
-<p>MEMORY</p>
-<p>AT表达式</p>
-</li>
-<li><p>类别名(在组合中使用)</p>
-<p>用来说明程序在运行期间CS、DS、SS、ES所放的段基址。</p>
-</li>
-</ul>
-<p>ASSUME伪指令：</p>
-<p>一般出现在代码段，且放在代码段首句。</p>
-<p>格式：段寄存器:段名</p>
-<p>例如笔记最开始的代码：<code>ASSUME    DS:DSEG,SS:SSEG,CS:CSEG</code></p>
-<h3 id="3-4-过程定义伪指令"><a href="#3-4-过程定义伪指令" class="headerlink" title="3.4 过程定义伪指令"></a>3.4 过程定义伪指令</h3><p>“过程”也称为“子程序”，在主程序中任何需要的地方都可以调用。</p>
-<p>例如：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">名字 PROC FAR/NEAR</span><br><span class="line">...</span><br><span class="line">ret</span><br><span class="line">名字 ENDP</span><br></pre></td></tr></table></figure>
-<h3 id="3-5-程序结束伪指令"><a href="#3-5-程序结束伪指令" class="headerlink" title="3.5 程序结束伪指令"></a>3.5 程序结束伪指令</h3><p>格式：END 标号</p>
-<p>告诉汇编程序到这里就结束咯。</p>
-<p>例如笔记最开始时的那段代码：</p>
-<p><code>END START</code></p>
+<h2 id="带返回值function"><a href="#带返回值function" class="headerlink" title="带返回值function"></a>带返回值function</h2><figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">ret</span> = <span class="title">mysum3</span><span class="params">( n, m )</span></span></span><br><span class="line">	s = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> <span class="built_in">i</span> = n : m</span><br><span class="line">        s = s + <span class="built_in">i</span>;</span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line">    ret = s;	<span class="comment">% return</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<p>此时：<code>s1 = mysum(4, 10)</code></p>
+<p>这样就完成了一个具有返回值的function。</p>
 <hr>
 
       
@@ -671,7 +627,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/微机原理/" rel="tag"># 微机原理</a>
+            <a href="/tags/Matlab/" rel="tag"># Matlab</a>
           
         </div>
       
@@ -704,8 +660,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/03/MASM的使用/" rel="next" title="MASM的使用">
-                <i class="fa fa-chevron-left"></i> MASM的使用
+              <a href="/2019/03/汇编语言程序设计基础/" rel="next" title="汇编语言程序设计基础">
+                <i class="fa fa-chevron-left"></i> 汇编语言程序设计基础
               </a>
             
           </div>
@@ -714,8 +670,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2019/03/Matlab基础/" rel="prev" title="Matlab基础">
-                Matlab基础 <i class="fa fa-chevron-right"></i>
+              <a href="/2019/03/C中字符串相关的函数/" rel="prev" title="C中字符串相关的库函数">
+                C中字符串相关的库函数 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -922,7 +878,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-数据项"><span class="nav-number">1.</span> <span class="nav-text">1. 数据项</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-常量"><span class="nav-number">1.1.</span> <span class="nav-text">1.1 常量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-变量"><span class="nav-number">1.2.</span> <span class="nav-text">1.2 变量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-3-标号"><span class="nav-number">1.3.</span> <span class="nav-text">1.3 标号</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-运算符和表达式"><span class="nav-number">2.</span> <span class="nav-text">2. 运算符和表达式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-伪指令"><span class="nav-number">3.</span> <span class="nav-text">3. 伪指令</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-数据定义伪指令"><span class="nav-number">3.1.</span> <span class="nav-text">3.1 数据定义伪指令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-符号定义伪指令"><span class="nav-number">3.2.</span> <span class="nav-text">3.2 符号定义伪指令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-3-段定义伪指令"><span class="nav-number">3.3.</span> <span class="nav-text">3.3 段定义伪指令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-4-过程定义伪指令"><span class="nav-number">3.4.</span> <span class="nav-text">3.4 过程定义伪指令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-5-程序结束伪指令"><span class="nav-number">3.5.</span> <span class="nav-text">3.5 程序结束伪指令</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#基础命令"><span class="nav-number">1.</span> <span class="nav-text">基础命令</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#基础运算"><span class="nav-number">1.1.</span> <span class="nav-text">基础运算</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#向量运算"><span class="nav-number">1.2.</span> <span class="nav-text">向量运算</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#矩阵运算"><span class="nav-number">1.3.</span> <span class="nav-text">矩阵运算</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Script"><span class="nav-number">1.4.</span> <span class="nav-text">Script</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#语法"><span class="nav-number">2.</span> <span class="nav-text">语法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#选择"><span class="nav-number">2.1.</span> <span class="nav-text">选择</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#循环"><span class="nav-number">2.2.</span> <span class="nav-text">循环</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#while"><span class="nav-number">2.2.1.</span> <span class="nav-text">while</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#for"><span class="nav-number">2.2.2.</span> <span class="nav-text">for</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Function"><span class="nav-number">3.</span> <span class="nav-text">Function</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#无返回值"><span class="nav-number">3.1.</span> <span class="nav-text">无返回值</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#带返回值function"><span class="nav-number">3.2.</span> <span class="nav-text">带返回值function</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -1119,7 +1075,7 @@
   
     <script>
   window.livereOptions = {
-    refer: '2019/03/汇编语言程序设计基础/'
+    refer: '2019/03/Matlab基础/'
   };
   (function(d, s) {
     var j, e = d.getElementsByTagName(s)[0];
