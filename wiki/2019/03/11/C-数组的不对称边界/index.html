@@ -1,0 +1,246 @@
+<!DOCTYPE HTML>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  <title>数组的不对称边界 | 小本本</title>
+  <meta name="author" content="ahoj">
+  
+  <meta name="description" content="ahoj的小本本">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="数组的不对称边界">
+  <meta property="og:site_name" content="小本本">
+
+  
+    <meta property="og:image" content>
+  
+
+  
+    <link rel="alternative" href="/wiki/atom.xml" title="小本本" type="application/atom+xml">
+  
+  
+    <link href="/wiki/favicon.png" rel="icon">
+  
+  
+  <link rel="stylesheet" href="/wiki/css/bootstrap.min.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/wiki/css/font-awesome.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/wiki/css/style.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/wiki/css/highlight.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/wiki/css/google-fonts.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/wiki/css/responsive.css" media="screen" type="text/css">  
+  <link rel="stylesheet" href="/wiki/css/sidenav.css" media="screen" type="text/css">  
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+
+  <script src="/wiki/js/jquery-2.0.3.min.js"></script>
+
+  <!-- analytics -->
+  
+
+</head>
+</html>
+<body id="body" data-spy="scroll" data-target=".toc">
+  <div class="container" id="container">
+	<div class="content">
+	  <div class="page-header">		
+  <h1><a class="brand" href="/wiki/">小本本</a><span class="split"></span><span class="title">数组的不对称边界</span><span class="date" id="title-date"><i class="fa fa-clock-o"></i> 2019-03-11</span></h1>
+</div>		
+
+<div class="row page">
+  <!-- cols -->	
+  
+  <div class="col-xs-12 col-sm-3 col-md-3 toc"> 
+	<!-- toc -->
+<script type="text/javascript">
+		jQuery(document).ready(function() {
+ 		   generateWikiTOC('.note', '.toc',  2 , 2 );
+		});
+</script>
+  </div><!-- col-md-3 -->
+  
+  
+
+  
+  <div class="col-xs-12 col-sm-9 col-md-9 note">
+	
+
+	  <!-- content -->
+	  <p>数组的不对称边界。</p>
+<a id="more"></a>
+<h2 id="一个小问题"><a href="#一个小问题" class="headerlink" title="一个小问题"></a>一个小问题</h2><p>如果一个数组有10个元素，那么这个数组下表的允许取值范围是什么呢？</p>
+<p>下面代码1，这段代码的运行结果是什么？为什么？</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="comment">// 代码1</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> i = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">int</span> arr[<span class="number">10</span>] = &#123;<span class="number">0</span>&#125;;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">for</span>(i=<span class="number">0</span>; i&lt;<span class="number">12</span>; i++)	<span class="comment">// 注意这里是 i&lt;12</span></span><br><span class="line">    &#123;</span><br><span class="line">        arr[i] = <span class="number">0</span>;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"hey, girl!\n"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>结果出人意料。</p>
+<p>这段代码在Windows下DevC++下运行结果是：死循环。。。</p>
+<p><img src="https://wx4.sinaimg.cn/mw690/006wR0dcly1fwrgx9ulprj30mz0juabe.jpg" width="50%" height="50%"></p>
+<p>来看看why：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> i = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">int</span> arr[<span class="number">10</span>] = &#123;<span class="number">0</span>&#125;;</span><br><span class="line">	</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"&amp;i = %p\n"</span>, &amp;i);</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"&amp;arr[0] = %p\n"</span>, &amp;arr[<span class="number">0</span>]);</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"&amp;arr[10] = %p\n"</span>, &amp;arr[<span class="number">10</span>]);</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"&amp;arr[11] = %p\n"</span>, &amp;arr[<span class="number">11</span>]);</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+<p><img src="https://wx4.sinaimg.cn/mw690/006wR0dcly1fwrh7mtbwmj30k40f6gmp.jpg" width="50%" height="50%"></p>
+<p>从输出的结果可以得到<code>i</code>和<code>arr[]</code>在内存中的样子：</p>
+<p><img src="https://wx3.sinaimg.cn/mw690/006wR0dcly1fwrhofc35gj30kq132abj.jpg" width="30%" height="30%"></p>
+<p><code>&amp;arr[11] == &amp;i</code>，当循环中做<code>arr[11] = 0;</code>这步操作时，也把循环变量i的值改为了0，这样就陷入了一个死循环。</p>
+<p>我们把<code>int i = 0;</code>这句话写在数组<code>int arr[10] = {0};</code>这句的后面再试试：</p>
+<p><img src="https://wx4.sinaimg.cn/mw690/006wR0dcly1fwrhvflpi6j30le0em0tu.jpg" width="40%" height="40%"></p>
+<p>可以看到，这次 i 的地址就在数组arr地址的下面了，这下就不是死循环的情况咯。</p>
+<p>另外！对于不同平台下代码1的运行结果是不同的：</p>
+<ol>
+<li><p>Microsoft Visual Studio在debug下是死循环，但是在release下编译运行程序就不是死循环，debug模式下没有进行任何优化，在release模式下将变量在内存中进行了优化，不会出现死循环。</p>
+</li>
+<li><p>在MAC OS gcc下编译执行代码1，不会死循环，而且不论i是定义在数组上面还是数组下面，i的地址都是在数组首元素地址的前面，数组向后访问，不会访问到i。</p>
+<p><img src="https://wx4.sinaimg.cn/mw690/006wR0dcly1fwrjr2o5x8j31eq0ei0xq.jpg" alt="pic1"></p>
+<p><img src="https://wx2.sinaimg.cn/mw690/006wR0dcly1fwrjnfxuk8j31080fw417.jpg" alt="pic2"></p>
+<p>嘿嘿，如果i是负数的话，还是会改变到循环变量i的地址滴，下面这样：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> i = <span class="number">1234</span>;</span><br><span class="line">    <span class="keyword">int</span> arr[<span class="number">10</span>] = &#123;<span class="number">0</span>&#125;;</span><br><span class="line">    </span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"&amp;i = %p\n"</span>, &amp;i);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"&amp;arr[0] = %p\n"</span>, &amp;arr[<span class="number">0</span>]);</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">for</span>(i=<span class="number">0</span>; i&lt;<span class="number">12</span>; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        arr[-i] = <span class="number">1</span>;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"nice to meet you!\n"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h2 id="不对称边界"><a href="#不对称边界" class="headerlink" title="不对称边界"></a>不对称边界</h2><blockquote>
+<p>C语言中数组的这种特别的设计正是其最大优势所在。    ——《C陷阱与缺陷》</p>
+<p>在编码过程中，for语句循环控制变量采用半开半闭区间的写法。    ——《高质量C++/C编程指南》的建议【4-5-1】</p>
+</blockquote>
+<p>why？</p>
+<p>这个其实是为了增加代码的可读性，看下面这段代码：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">// 1</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">16</span>; i&lt;=<span class="number">37</span>; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        something1();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 2</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">16</span>; j&lt;<span class="number">38</span>; j++)</span><br><span class="line">    &#123;</span><br><span class="line">        something2();</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>问题：在第一个循环中<code>something1()</code>被调用了多少次，在第二个循环中<code>something2()</code>被调用多少次。</p>
+<p>答案：37-16+1 = 22次，38-16 = 22。</p>
+<p>显然半开半闭区间比较直观。</p>
+<p><img src="https://wx2.sinaimg.cn/mw690/006wR0dcly1fwrk6oymgvj31kw0wxgsx.jpg" width="50%" height="50%"></p>
+<blockquote>
+<p>这种不对称也许从数学上而言并不优美，但是它对于程序设计的简化效果却足以令人吃惊：</p>
+<ol>
+<li>取值范围的大小就是上界与下界的差。38-16的值是22，恰是不对称边界16和38之间所包括的元素数目。</li>
+<li>如果取值范围为空，那么上界等于下界。</li>
+<li>即使取值范围为空，上界也永远不可能小于下界。</li>
+</ol>
+<p>像C语言这样的数组下标从0开始的语言，不对称边界给程序设计带来的便利尤为明显：这种数组的上界(即第一个“出界点”)恰是循环执行的次数。</p>
+</blockquote>
+<p>按照这种不对称边界的惯例，有如下语句：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">char</span>* <span class="title">my_strcpy</span><span class="params">(<span class="keyword">char</span> *str_dest, <span class="keyword">const</span> <span class="keyword">char</span> *str_src)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    assert(str_dest != <span class="literal">NULL</span>);</span><br><span class="line">    assert(str_src != <span class="literal">NULL</span>);</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">char</span> *tmp = str_dest;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">while</span>((*tmp++ = *str_src++))	<span class="comment">// 这里是重点</span></span><br><span class="line">    &#123;</span><br><span class="line">        ;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> str_dest;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>另外：在计算字符串长度时候，我们可以用这样的上界指针减去字符串首元素地址的指针然后除每个元素大小。</p>
+<p><code>string_length = (upp - downp)/sizeof(downp[0]);</code></p>
+<hr>
+<p>参考书籍：</p>
+<blockquote>
+<p>《高质量C++/C编程指南》、《C陷阱与缺陷》</p>
+<p><a href="https://blog.csdn.net/Hanoi_ahoj/article/details/82931630" target="_blank" rel="noopener">为什么C语言从0开始编号</a></p>
+</blockquote>
+	  
+
+	  <div>
+  		<center>
+		  <div class="pagination">
+<ul class="pagination">
+	
+	
+	
+	
+	
+	
+		
+	
+		
+			
+			
+		
+	
+		
+			
+			
+			
+		
+	
+		
+	
+		
+	
+		
+	
+		
+	
+		
+	
+		
+	
+		
+			
+		
+	
+		
+	
+		
+	
+		
+	
+		
+			
+		
+	
+		
+			
+		
+	
+		
+			
+		
+	
+		
+	
+		
+	
+	
+	
+		<li class="prev disabled"><a><i class="fa fa-arrow-circle-o-left"></i>prev</a></li>
+	
+	<li><a href="/wiki/"><i class="fa fa-archive"></i>Home</a></li>
+	
+		<li class="next"><a href="/wiki/2019/03/11/C-字符串相关的函数/" class="alignright next">next<i class="fa fa-arrow-circle-o-right"></i></a></li>
+	
+</ul>
+</div>
+
+		</center>
+	  </div>
+	  
+	</div> <!-- col-md-9/col-md-12 -->
+	
+  </div><!-- row -->
+
+	</div>
+  </div>
+  <div class="container-narrow">
+	<footer> <p>
+  &copy; 2019 ahoj
+  
+      with help from <a href="http://zespia.tw/hexo/" target="_blank">Hexo</a> and <a href="http://getbootstrap.com/" target="_blank">Twitter Bootstrap</a>. Theme by <a href="http://github.com/wzpan/hexo-theme-wixo/">Wixo</a>.    
+</p> </footer>
+  </div> <!-- container-narrow -->
+  
+<a id="gotop" href="#">   
+  <span>▲</span> 
+</a>
+
+<script src="/wiki/js/jquery.imagesloaded.min.js"></script>
+<script src="/wiki/js/gallery.js"></script>
+<script src="/wiki/js/bootstrap.min.js"></script>
+<script src="/wiki/js/jquery.tableofcontents.min.js"></script>
+<script src="/wiki/js/tocgenerator.min.js"></script>
+<script src="/wiki/js/main.js"></script>
+<script src="/wiki/js/search.js"></script> 
+
+
+
+
+<link rel="stylesheet" href="/wiki/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/wiki/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+
+
+
+</body>
+</html>
