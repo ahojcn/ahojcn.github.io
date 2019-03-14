@@ -1,0 +1,415 @@
+<!DOCTYPE HTML>
+<html>
+
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  <title>入门 | 小本本</title>
+  
+  <meta name="author" content="ahoj">
+  
+  <meta name="description" content="ahoj的小本本">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+  <meta property="og:title" content="入门">
+  <meta property="og:site_name" content="小本本">
+
+  
+  <meta property="og:image" content>
+  
+
+  
+  <link rel="alternative" href="/wiki/atom.xml" title="小本本" type="application/atom+xml">
+  
+  
+  <link href="/wiki/favicon.png" rel="icon">
+  
+
+  <link rel="stylesheet" href="/wiki/css/bootstrap.min.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/wiki/css/font-awesome.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/wiki/css/style.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/wiki/css/highlight.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/wiki/css/google-fonts.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/wiki/css/responsive.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/wiki/css/sidenav.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+
+  <script src="/wiki/js/jquery-2.0.3.min.js"></script>
+
+  <center>
+    <div class="accordion-group">
+      <div class="accordion-heading">
+        <a class="accordion-toggle" data-toggle="collapse" href="#about">
+          <i class="fa fa-bookmark"></i> 
+        </a>
+      </div> <!-- accordion-heading -->
+      <div id="about" class="accordion-body collapse in">
+        <div class="accordion-inner" style="background-color:#FFFFFF">
+
+          <p>把知识记在小本本上</p>
+          <p>将零散的知识点放在一个集中的地方，不断递归重构，形成一套为己所用的知识系统。</p>
+          <a href="http://ahoj.cc/">博客首页</a> | 
+          <a href="http://ahoj.cc/wiki/">小本本首页</a>
+
+        </div>
+      </div>
+    </div>
+  </center>
+
+  <!-- analytics -->
+  
+
+</head></html>
+<body id="body" data-spy="scroll" data-target=".toc">
+  <div class="container" id="container">
+	<div class="content">
+	  <div class="page-header">		
+  <h1><a class="brand" href="/wiki/">小本本</a><span class="split"></span><span class="title">入门</span><span class="date" id="title-date"><i class="fa fa-clock-o"></i> 2019-03-13</span></h1>
+</div>		
+
+<div class="row page">
+  <!-- cols -->	
+  
+  <div class="col-xs-12 col-sm-3 col-md-3 toc"> 
+	<!-- toc -->
+<script type="text/javascript">
+		jQuery(document).ready(function() {
+ 		   generateWikiTOC('.note', '.toc',  2 , 2 );
+		});
+</script>
+  </div><!-- col-md-3 -->
+  
+  
+
+  
+  <div class="col-xs-12 col-sm-9 col-md-9 note">
+	
+
+	  <!-- content -->
+	  <h2 id="从-C-到-C"><a href="#从-C-到-C" class="headerlink" title="从 C 到 C++"></a>从 C 到 C++</h2><ol>
+<li><p><code>cout</code>中的 c 指的是 console。</p>
+</li>
+<li><p><code>endl</code> =&gt; end line。</p>
+</li>
+<li><p>作用域限定符<code>::</code>相当于中文<code>的</code>，表示作用域或所属关系。</p>
+</li>
+<li><p><code>extern &quot;C&quot;</code></p>
+<p>有时候在 C++ 工程中可能需要将某些函数按照 C 的风格来编译，在代码前加 extern “C” ，意思是告诉编译器，将该函数按照C语言规则来编译。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">extern</span> “C”</span><br><span class="line">&#123;</span><br><span class="line">	something();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><code>typeid(变量名).name</code>输出变量的类型。</p>
+</li>
+</ol>
+<h2 id="命名空间（namespace）"><a href="#命名空间（namespace）" class="headerlink" title="命名空间（namespace）"></a>命名空间（namespace）</h2><blockquote>
+<p>在 C/C++ 中，变量、函数和后面要学到的类都是大量存在的，这些变量、函数和类的名称将都存在于全局作用域中，可能会导致很多冲突。使用命名空间的目的是对标识符的名称进行本地化，以避免命名冲突或名字污染，namespace 关键字的出现就是针对这种问题的。</p>
+</blockquote>
+<ol>
+<li><p>相同名字的 namespace 作用域相同，同一个工程中允许存在多个相同名称的命名空间，编译器最后会合成同一个命名空间中。</p>
+</li>
+<li><p>命名空间的作用：避免名字冲突、划分逻辑单元，名字空间中的声明和定义可以分开。</p>
+</li>
+<li><p>名字空间可以嵌套，使用时候得一层一层的扒皮。</p>
+</li>
+<li><p>名字空间也可以赋值取别名，🌰 栗子：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">namespace</span> A1</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">namespace</span> A11</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">namespace</span> A12</span><br><span class="line">        &#123;</span><br><span class="line">            something();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">namespace</span> A = A1::A11::A12;</span><br><span class="line"><span class="comment">// A1::A11::A12::something(); 等价于 A::something();</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p><code>using namespace A1;</code>就相当于”裸奔“ ，把 A1 中的东西暴露在当前作用域下。</p>
+<p><code>using namespace std;</code>也是一样，把 cout 暴露在全局下。</p>
+<p>风险：可能会出现命名冲突，一般还是带上<code>::</code>。</p>
+</li>
+</ol>
+<h2 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h2><h3 id="缺省参数"><a href="#缺省参数" class="headerlink" title="缺省参数"></a>缺省参数</h3><blockquote>
+<p>缺省参数是声明或定义函数时为函数的参数指定一个默认值。在调用该函数时，如果没有指定实参则采用该默认值，否则使用指定的实参。</p>
+</blockquote>
+<p>全缺省参数</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">TestFunc</span><span class="params">(<span class="keyword">int</span> a = <span class="number">10</span>, <span class="keyword">int</span> b = <span class="number">20</span>, <span class="keyword">int</span> c = <span class="number">30</span>)</span></span>;</span><br></pre></td></tr></table></figure>
+<p>半缺省参数</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">TestFunc</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> b = <span class="number">10</span>, <span class="keyword">int</span> c = <span class="number">20</span>)</span></span>;</span><br></pre></td></tr></table></figure>
+<ol>
+<li><p>缺省参数必须从右开始设置。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*ERROR*/</span> <span class="function"><span class="keyword">void</span> <span class="title">fun</span><span class="params">(<span class="keyword">int</span> a = <span class="number">3</span>,<span class="keyword">char</span> b,<span class="keyword">char</span> *c = <span class="string">"ahoj"</span>)</span></span>;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>缺省参数不能在函数声明和定义中同时出现，建议声明时指定。如果生命与定义位置同时出现，恰巧两个位置提供的值不同，那编译器就无法确定到底该用那个缺省值。</p>
+</li>
+<li><p>缺省值必须是常量或者全局变量。</p>
+</li>
+<li><p>C语言不支持(编译器不支持)。</p>
+</li>
+</ol>
+<h3 id="哑元"><a href="#哑元" class="headerlink" title="哑元"></a>哑元</h3><blockquote>
+<p>只指定类型而不指定名称的函数，占着茅坑不拉屎。</p>
+</blockquote>
+<p>🌰 栗子：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">ya</span><span class="params">(<span class="keyword">int</span>,<span class="keyword">int</span> b)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; b &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;   </span><br><span class="line">    ya(<span class="number">10</span>,<span class="number">100</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ol>
+<li>兼容老版本。</li>
+<li>支持函数重载。</li>
+</ol>
+<h3 id="重载"><a href="#重载" class="headerlink" title="重载"></a>重载</h3><blockquote>
+<p>自然语言中，一个词可以有多重含义，人们可以通过上下文来判断该词真实的含义，即该词被重载了。<br>比如：以前有一个笑话，国有两个体育项目大家根本不用看，也不用担心。一个是乒乓球，一个是男足。前者是“谁也赢不了”，后者是“谁也赢不了” 。</p>
+<p>函数重载：是函数的一种特殊情况，C++ 允许在同一作用域中声明几个功能类似的同名函数，这些同名函数的形参列表(参数个数 / 类型 / 顺序)必须不同，常用来处理实现功能类似数据类型不同的问题。</p>
+</blockquote>
+<p>🌰 栗子：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">foo</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"void foo();"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">foo</span><span class="params">(<span class="keyword">int</span> a)</span></span>&#123;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"void foo(int a);"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">foo</span><span class="params">(<span class="keyword">int</span> a,<span class="keyword">int</span> b)</span></span>&#123;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"void foo(int a,int b);"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">foo</span><span class="params">(<span class="keyword">int</span> a,<span class="keyword">double</span> b)</span></span>&#123;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"void foo(int a,double b);"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">foo</span><span class="params">(<span class="keyword">double</span> a,<span class="keyword">int</span> b)</span></span>&#123;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"void foo(double a,int b);"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    foo();</span><br><span class="line">    foo(<span class="number">1</span>);</span><br><span class="line">    foo(<span class="number">1</span> , <span class="number">2</span>);</span><br><span class="line">    foo(<span class="number">1</span> , <span class="number">3.14</span>);</span><br><span class="line">    foo(<span class="number">3.14</span> , <span class="number">1</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ol>
+<li>同一作用域，函数名相同，参数表不同的函数。</li>
+<li>参数表不同：<ul>
+<li>参数类型不同</li>
+<li>参数个数不同</li>
+<li>参数顺序不同</li>
+</ul>
+</li>
+<li>重载和形参名无关。</li>
+<li>重载和返回类型无关。</li>
+<li>不同作用域同名函数遵循就近原则。</li>
+</ol>
+<h4 id="重载的原理"><a href="#重载的原理" class="headerlink" title="重载的原理"></a>重载的原理</h4><p><code>nm a.out</code>，查看 C++ 编译器给看书取得名字：</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">00000001000010</span>a0 T __Z3Maxii</span><br><span class="line"><span class="number">0000000100000</span>de0 T __Z3foodi</span><br><span class="line"><span class="number">0000000100000</span>cf0 T __Z3fooi</span><br><span class="line"><span class="number">0000000100000</span>d90 T __Z3fooid</span><br><span class="line"><span class="number">0000000100000</span>d40 T __Z3fooii</span><br><span class="line"><span class="number">0000000100000</span>b50 T __Z3foov</span><br></pre></td></tr></table></figure>
+<p>C++ 函数重载通过编译器改名实现。</p>
+<h4 id="名字修饰（Name-Mangling）"><a href="#名字修饰（Name-Mangling）" class="headerlink" title="名字修饰（Name Mangling）"></a>名字修饰（Name Mangling）</h4><p>在 C/C++ 中，一个程序要运行起来，需要经历：预处理、编译、汇编、链接。</p>
+<p>Name Mangling 是一种在编译过程中，将函数、变量的名称重新改编的机制，简单来说就是编译器为了区分各个函数，将函数通过某种算法，重新修饰为一个全局唯一的名称。</p>
+<p>C语言的名字修饰规则非常简单，只是在函数名字前面添加了下划线。</p>
+<p>C++ 要支持函数重载、命名空间等，使得其修饰规则比较复杂，不同编译器在底层的实现方式可能都有差<br>异。</p>
+<p>被重新修饰后的名字中包含了：函数的名字以及参数类型。这就是为什么函数重载中几个同名函数要求其参数<br>列表不同的原因。只要参数列表不同，编译器在编译时通过对函数名字进行重新修饰，将参数类型包含在最终<br>的名字中，就可保证名字在底层的全局唯一性。</p>
+<p>📒 文章：</p>
+<p><a href="http://www.cnblogs.com/skynet/archive/2010/09/05/1818636.html" target="_blank" rel="noopener">C++的函数重载</a></p>
+<h2 id="引用（-amp-）"><a href="#引用（-amp-）" class="headerlink" title="引用（&amp;）"></a>引用（&amp;）</h2><blockquote>
+<p>引用不是新定义一个变量，而是给已存在变量取了一个别名，编译器不会为引用变量开辟内存空间，它和它引用的变量共用同一块内存空间。</p>
+<p>李白 &lt;=&gt; 李太白 青莲居士 诗仙 ……</p>
+</blockquote>
+<p>🌰 栗子：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">foo</span><span class="params">(<span class="keyword">int</span>&amp; a)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    a++;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> a = <span class="number">20</span>;</span><br><span class="line">    <span class="keyword">int</span>&amp; b = a;</span><br><span class="line">    <span class="keyword">int</span>&amp; c = b;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; a &lt;&lt; b &lt;&lt; c &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    c = <span class="number">10</span>;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; a &lt;&lt; b &lt;&lt; c &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; &amp;a &lt;&lt; <span class="string">" "</span> &lt;&lt; &amp;b &lt;&lt; <span class="string">" "</span> &lt;&lt; &amp;c &lt;&lt; <span class="string">" "</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"=========="</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    foo(a);</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; a &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ol>
+<li>引用必须初始化且不能为空。</li>
+<li>引用不能更换目标。</li>
+<li>一个变量可以有多个引用。</li>
+<li>引用不占用额外的内存。</li>
+<li>引用类型必须和引用实体是同种类型的。</li>
+</ol>
+<h3 id="常引用"><a href="#常引用" class="headerlink" title="常引用"></a>常引用</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">TestConstRef</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">const</span> <span class="keyword">int</span> a = <span class="number">10</span>;</span><br><span class="line">    <span class="comment">// int&amp; ra = a; // 该语句编译时会出错，a为常量 const int&amp; ra = a;</span></span><br><span class="line">    <span class="comment">// int&amp; b = 10; // 该语句编译时会出错，b为常量 const int&amp; b = 10;</span></span><br><span class="line">    <span class="keyword">double</span> d = <span class="number">12.34</span>;</span><br><span class="line">    <span class="comment">// int&amp; rd = d; // 该语句编译时会出错，类型不同 const int&amp; rd = d;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="使用场景"><a href="#使用场景" class="headerlink" title="使用场景"></a>使用场景</h3><ol>
+<li><p>做参数</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Swap</span><span class="params">(<span class="keyword">int</span>&amp; left, <span class="keyword">int</span>&amp; right)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> temp = left;</span><br><span class="line">    left = right;</span><br><span class="line">    right = temp;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>做返回值</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span>&amp; <span class="title">TestRefReturn</span><span class="params">(<span class="keyword">int</span>&amp; a)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    a += <span class="number">10</span>;</span><br><span class="line">    <span class="keyword">return</span> a; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>⚠️ 注意：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span>&amp; <span class="title">Add</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> b)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> c = a + b;</span><br><span class="line">    <span class="keyword">return</span> c;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span>&amp; ret = Add(<span class="number">1</span>, <span class="number">2</span>);</span><br><span class="line">    Add(<span class="number">3</span>, <span class="number">4</span>);</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"Add(1, 2) is :"</span>&lt;&lt; ret &lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 这段代码输出结果为一个随机值</span></span><br></pre></td></tr></table></figure>
+<p><em>如果函数返回时，离开函数作用域后，其栈上空间已经还给系统，因此不能用栈上的空间作为引用类型<br>返回。如果以引用类型返回，返回值的生命周期必须不受函数的限制(即比函数生命周期长)。</em></p>
+<p><em>传值和传引用（作为参数 / 作为返回值）在效率上的差距！</em></p>
+<h3 id="引用和指针的区别"><a href="#引用和指针的区别" class="headerlink" title="引用和指针的区别"></a>引用和指针的区别</h3><ol>
+<li><p>在语法概念上引用就是一个别名，没有独立空间，和其引用实体共用同一块空间。</p>
+</li>
+<li><p>在底层实现上实际是有空间的，因为引用是按照指针方式来实现的。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// a.cpp</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> a = <span class="number">10</span>;</span><br><span class="line">    <span class="keyword">int</span>&amp; ra = a;</span><br><span class="line">    ra = <span class="number">20</span>;</span><br><span class="line">    <span class="keyword">int</span>* pa = &amp;a;</span><br><span class="line">    *pa = <span class="number">20</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>查看汇编代码：</p>
+<p>保留编译过程中生成的临时文件：<code>g++ a.cpp -save-temps</code></p>
+<p>其中<code>a.s</code>就是汇编文件，在 VS 里面可以 DEBUG 起来，直接看汇编代码，比较方便。</p>
+<p><img src="https://gitee.com/ahojcn/ahojcn/raw/master/Cpp-%E5%85%A5%E9%97%A8-pic-1.png" alt="Cpp-入门-pic-1.png"></p>
+</li>
+<li><p>引用在定义时必须初始化，指针没有要求。</p>
+</li>
+<li><p>没有NULL引用，但有NULL指针。</p>
+</li>
+<li><p>在 sizeof 中含义不同:引用结果为引用类型的大小，但指针始终是地址空间所占字节个数( 32 位平台下占 4 </p>
+<p>个字节) 。</p>
+</li>
+<li><p>引用自加即引用的实体增加 1 ，指针自加即指针向后偏移一个类型的大小。</p>
+</li>
+<li><p>有多级指针，没有多级引用。</p>
+</li>
+<li><p>访问实体方式不同，指针需要显式解引用，引用编译器自己处理。</p>
+</li>
+<li><p>引用比指针使用起来相对更安全。</p>
+</li>
+</ol>
+<h2 id="内联函数（inline）"><a href="#内联函数（inline）" class="headerlink" title="内联函数（inline）"></a>内联函数（inline）</h2><blockquote>
+<p>以 inline 修饰的函数叫做内联函数，编译时 C++ 编译器会在调用内联函数的地方展开，没有函数压栈的开销，内联函数提升程序运行的效率。</p>
+</blockquote>
+<p>以下是没有加 inline 的汇编代码。</p>
+<p><img src="https://ahojcn.gitee.io/Cpp-入门-pic-2.png" alt="Cpp-入门-pic-2.png"></p>
+<p>在 Add 前加了 inline 后，在编译期间编译器会用函数体替换函数的调用。</p>
+<p><img src="https://ahojcn.gitee.io/Cpp-入门-pic-3.png" alt="Cpp-入门-pic-3"></p>
+<ol>
+<li><p>inline 是一种以空间换时间的做法，省去调用函数额开销。所以代码很长或者有循环 / 递归的函数不适宜使<br>用作为内联函数。</p>
+</li>
+<li><p>inline 对于编译器而言只是一个建议，编译器会自动优化，如果定义为inline的函数体内有循环/递归等等，编译器优化时会忽略掉内联。</p>
+</li>
+<li><p>inline 不建议声明和定义分离，分离会导致链接错误。因为 inline 被展开，就没有函数地址了，链接就会找不到。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// F.h</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">f</span><span class="params">(<span class="keyword">int</span> i)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// F.cpp</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"F.h"</span></span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">f</span><span class="params">(<span class="keyword">int</span> i)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; i &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// main.cpp</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"F.h"</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    f(<span class="number">10</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 链接错误:main.obj : error LNK2019: 无法解析的外部符号 "void __cdecl f(int)" (?f@@YAXH@Z)，该符号在函数 _main 中被引用</span></span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h2 id="auto（C-11）"><a href="#auto（C-11）" class="headerlink" title="auto（C++11）"></a>auto（C++11）</h2><blockquote>
+<p>在早期 C/C++ 中 auto 的含义是：使用 auto 修饰的变量，是具有自动存储器的局部变量，但遗憾的是一直没有人去使用它。</p>
+<p>C++11 中，标准委员会赋予了 auto 全新的含义即：auto 不再是一个存储类型指示符，而是作为一个新的类型指示符来指示编译器，auto 声明的变量必须由编译器在编译时期推导而得。</p>
+</blockquote>
+<p>🌰 栗子：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">TestAuto</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">20</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">auto</span> b = <span class="number">10</span>;</span><br><span class="line"><span class="keyword">auto</span> c = <span class="string">'a'</span>;</span><br><span class="line"><span class="keyword">auto</span> d = TestAuto();</span><br><span class="line"><span class="comment">//auto e; 无法通过编译，使用auto定义变量时必须对其进行初始化</span></span><br></pre></td></tr></table></figure>
+<p>⚠️ 注意：</p>
+<ol>
+<li><p>使用 auto 定义变量时必须对其进行初始化，在编译阶段编译器需要根据初始化表达式来推导 auto 的实际类<br>型。因此 auto 并非是一种“类型”的声明，而是一个类型声明时的“占位符”，编译器在编译期会将 auto 替换为变量实际的类型。</p>
+</li>
+<li><p>用 auto 声明指针类型时，用 auto 和 auto* 没有任何区别，但用 auto 声明引用类型时则必须加 &amp;。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> x = <span class="number">10</span>;</span><br><span class="line">    <span class="keyword">auto</span> a = &amp;x;</span><br><span class="line">    <span class="keyword">auto</span>* b = &amp;x;</span><br><span class="line">    <span class="keyword">auto</span>&amp; c = x;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="keyword">typeid</span>(a).name() &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="keyword">typeid</span>(b).name() &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="keyword">typeid</span>(c).name() &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    *a = <span class="number">20</span>;</span><br><span class="line">    *b = <span class="number">30</span>;</span><br><span class="line">     c = <span class="number">40</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>当在同一行声明多个变量时，这些变量必须是相同的类型，否则编译器将会报错，因为编译器实际只对第一个类型进行推导，然后用推导出来的类型定义其他变量。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">auto</span> c = <span class="number">3</span>, d = <span class="number">4.0</span>; <span class="comment">// 该行代码会编译失败，因为c和d的初始化表达式类型不同</span></span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h3 id="auto-不能推导的场景"><a href="#auto-不能推导的场景" class="headerlink" title="auto 不能推导的场景"></a>auto 不能推导的场景</h3><ol>
+<li><p>auto 不能作为函数的参数。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">fun</span><span class="params">(<span class="keyword">auto</span> a)</span> </span>&#123;&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>auto 不能直接用来声明数组。</p>
+</li>
+<li><p>为了避免与 C++98 中的 auto 发生混淆，C++11 只保留了 auto 作为类型指示符的用法。</p>
+</li>
+<li><p>auto 在实际中最常见的优势用法就是跟以后会讲到的 C++11 提供的新式 for 循环，还有 lambda 表达式等进 </p>
+<p>行配合使用。</p>
+</li>
+<li><p>auto 不能定义类的非静态成员变量。</p>
+</li>
+<li><p>实例化模板时不能使用 auto 作为模板参数。</p>
+</li>
+</ol>
+<h2 id="基于范围的-for-循环（C-11）"><a href="#基于范围的-for-循环（C-11）" class="headerlink" title="基于范围的 for 循环（C++11）"></a>基于范围的 for 循环（C++11）</h2><p>🌰 栗子：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">TestFor</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> <span class="built_in">array</span>[] = &#123; <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span> &#125;;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">auto</span>&amp; e : <span class="built_in">array</span>)</span><br><span class="line">    &#123;</span><br><span class="line">         e *= <span class="number">2</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">auto</span> e : <span class="built_in">array</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; e &lt;&lt; <span class="string">" "</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>⚠️ 注意：</p>
+<ol>
+<li><p>与普通循环类似，可以用 continue 来结束本次循环，也可以用 break 来跳出整个循环。</p>
+</li>
+<li><p>for 循环迭代的范围必须是确定的，对于数组而言，就是数组中第一个元素和最后一个元素的范围;对于类而言，应该提供 begin 和 end 的方法，begin 和 end 就是 for 循环迭代的范围。 </p>
+</li>
+<li><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 下面这段代码就有问题</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">TestFor</span><span class="params">(<span class="keyword">int</span> <span class="built_in">array</span>[])</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">auto</span>&amp; e : <span class="built_in">array</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">cout</span>&lt;&lt; e &lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h2 id="nullptr（C-11）"><a href="#nullptr（C-11）" class="headerlink" title="nullptr（C++11）"></a>nullptr（C++11）</h2><p>NULL 实际是一个宏，在传统的 C 头文件<code>stddef.h</code>中：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">ifndef</span> NULL</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> __cplusplus</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> NULL    0</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">else</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> NULL    ((void *)0)</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br></pre></td></tr></table></figure>
+<p>NULL 可能被定义为字面常量 0，或者被定义为无类型指针 (void*) 的常量。不论采取何种定义，在<br>使用空值的指针时，都不可避免的会遇到一些麻烦，如下：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">f</span><span class="params">(<span class="keyword">int</span>)</span> </span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">cout</span>&lt;&lt;<span class="string">"f(int)"</span>&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">f</span><span class="params">(<span class="keyword">int</span>*)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">cout</span>&lt;&lt;<span class="string">"f(int*)"</span>&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    f(<span class="number">0</span>);</span><br><span class="line">    f(<span class="literal">NULL</span>);</span><br><span class="line">    f((<span class="keyword">int</span>*)<span class="literal">NULL</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>程序本意是想通过 f(NULL) 调用指针版本的 f(int*) 函数，但是由于 NULL 被定义成 0，因此与程序的初衷相悖。 在C++98 中，字面常量 0 既可以是一个整形数字，也可以是无类型的指针 (void*) 常量，但是编译器默认情况下将其看成是一个整形常量，如果要将其按照指针方式来使用，必须对其进行强转 (void *)0。 </p>
+<p>为了避免混淆，C++11 提供了 nullptr ，即：nullptr 代表一个指针空值常量。nullptr 是有类型的，其类型为nullptr_t ，仅仅可以被隐式转化为指针类型，nullptr_t 被定义在头文件中：</p>
+<p><code>typedef decltype(nullptr) nullptr_t;</code></p>
+<p>⚠️ 注意：</p>
+<ol>
+<li>在使用 nullptr 表示指针空值时，不需要包含头文件，因为 nullptr 是 C++11 作为新关键字引入的。</li>
+<li>在 C++11 中，sizeof(nullptr) 与 sizeof((void*)0) 所占的字节数相同。</li>
+<li>为了提高代码的健壮性，在后续表示指针空值时建议最好使用nullptr。</li>
+</ol>
+<hr>
+	  
+
+	  <div>
+  		<center>
+		  <div class="pagination">
+<ul class="pagination">
+	
+	
+	
+	
+	
+	
+		
+			
+			
+		
+	
+		
+	
+		
+	
+		
+	
+		
+	
+		
+	
+		
+	
+		
+	
+		
+	
+		
+	
+		
+	
+		
+	
+		
+	
+		
+	
+		
+	
+		
+	
+		
+	
+		
+	
+		
+	
+		
+	
+	
+	
+		<li class="prev disabled"><a><i class="fa fa-arrow-circle-o-left"></i>prev</a></li>
+	
+	<li><a href="/wiki/"><i class="fa fa-archive"></i>Home</a></li>
+	
+		<li class="next disabled"><a>next<i class="fa fa-arrow-circle-o-right"></i></a></li>
+	
+</ul>
+</div>
+
+		</center>
+	  </div>
+	  
+	</div> <!-- col-md-9/col-md-12 -->
+	
+  </div><!-- row -->
+
+	</div>
+  </div>
+  <div class="container-narrow">
+	<footer> <p>
+  &copy; 2019 ahoj
+  
+      with help from <a href="http://zespia.tw/hexo/" target="_blank">Hexo</a> and <a href="http://getbootstrap.com/" target="_blank">Twitter Bootstrap</a>. Theme by <a href="http://github.com/wzpan/hexo-theme-wixo/">Wixo</a>.    
+</p> </footer>
+  </div> <!-- container-narrow -->
+  
+<a id="gotop" href="#">   
+  <span>▲</span> 
+</a>
+
+<script src="/wiki/js/jquery.imagesloaded.min.js"></script>
+<script src="/wiki/js/gallery.js"></script>
+<script src="/wiki/js/bootstrap.min.js"></script>
+<script src="/wiki/js/jquery.tableofcontents.min.js"></script>
+<script src="/wiki/js/tocgenerator.min.js"></script>
+<script src="/wiki/js/main.js"></script>
+<script src="/wiki/js/search.js"></script> 
+
+
+
+
+<link rel="stylesheet" href="/wiki/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/wiki/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+
+
+
+</body>
+</html>
