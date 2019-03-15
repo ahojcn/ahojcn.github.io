@@ -90,7 +90,7 @@
 
 	  <!-- content -->
 	  <h2 id="类的引入"><a href="#类的引入" class="headerlink" title="类的引入"></a>类的引入</h2><blockquote>
-<p>万物就对象。😂</p>
+<p>万物就对象。</p>
 <p>类是一种用户自定义的数据类型,包括表示属性的成员变量和表示行为的成员函数，类是现实世界对象的抽象,对象是类虚拟世界的实例。</p>
 </blockquote>
 <ol>
@@ -141,10 +141,10 @@
 </ol>
 <p>结构体的内存对齐规则适用于类。</p>
 <span class="label label-warning">注意</span> 类中嵌套的类是不占用空间的，只有当有了类的对象后，才会占用空间。<br><br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">A1</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">  <span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">f1</span><span class="params">()</span> </span>&#123;&#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">private</span>:</span><br><span class="line">    <span class="keyword">int</span> _a;</span><br><span class="line"></span><br><span class="line">    <span class="class"><span class="keyword">class</span> <span class="title">A2</span></span></span><br><span class="line"><span class="class">    &#123;</span></span><br><span class="line">    &#125;;</span><br><span class="line">&#125;;	<span class="comment">// sizeof(A1) = 4</span></span><br></pre></td></tr></table></figure>
-<p><span class="label label-warning">Q</span> 为什么要进行内存对齐？</p>
-<p><span class="label label-warning">Q</span> 如何让结构体按照指定的对齐参数进行对齐？</p>
-<p><span class="label label-warning">Q</span> 如何知道结构体中某个成员相对于结构体起始位置的偏移量？</p>
-<p><span class="label label-warning">Q</span> 什么是大小端？如何测试某台机器是大端还是小端？有没有遇到过要考虑大小端的场景？</p>
+<p><span class="label label-danger">Q</span> 为什么要进行内存对齐？</p>
+<p><span class="label label-danger">Q</span> 如何让结构体按照指定的对齐参数进行对齐？</p>
+<p><span class="label label-danger">Q</span> 如何知道结构体中某个成员相对于结构体起始位置的偏移量？</p>
+<p><span class="label label-danger">Q</span> 什么是大小端？如何测试某台机器是大端还是小端？有没有遇到过要考虑大小端的场景？</p>
 <h2 id="this-指针"><a href="#this-指针" class="headerlink" title="this 指针"></a>this 指针</h2><blockquote>
 <p>成员函数最终会被编译成与对象无关的普通函数。除了成员变量，丢失所有信息。</p>
 <p>C++ 编译器给每个“成员函数“增加了一个隐藏的指针参数，让该指针指向当前对象(函数运行时调用该函数的对象)，在函数体中所有成员变量的操作，都是通过该指针去访问。只不过所有的操作对用户是透明的，即用户不需要来传递，编译器自动完成。</p>

@@ -202,7 +202,7 @@
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span>&amp; <span class="title">TestRefReturn</span><span class="params">(<span class="keyword">int</span>&amp; a)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    a += <span class="number">10</span>;</span><br><span class="line">    <span class="keyword">return</span> a; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
 </ol>
-<p>⚠️ 注意：</p>
+<span class="label label-warning">注意</span>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span>&amp; <span class="title">Add</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> b)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> c = a + b;</span><br><span class="line">    <span class="keyword">return</span> c;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span>&amp; ret = Add(<span class="number">1</span>, <span class="number">2</span>);</span><br><span class="line">    Add(<span class="number">3</span>, <span class="number">4</span>);</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"Add(1, 2) is :"</span>&lt;&lt; ret &lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 这段代码输出结果为一个随机值</span></span><br></pre></td></tr></table></figure>
 <p><em>如果函数返回时，离开函数作用域后，其栈上空间已经还给系统，因此不能用栈上的空间作为引用类型<br>返回。如果以引用类型返回，返回值的生命周期必须不受函数的限制(即比函数生命周期长)。</em></p>
 <p><em>传值和传引用（作为参数 / 作为返回值）在效率上的差距！</em></p>
@@ -254,7 +254,7 @@
 </blockquote>
 <p>🌰 栗子：</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">TestAuto</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">20</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">auto</span> b = <span class="number">10</span>;</span><br><span class="line"><span class="keyword">auto</span> c = <span class="string">'a'</span>;</span><br><span class="line"><span class="keyword">auto</span> d = TestAuto();</span><br><span class="line"><span class="comment">//auto e; 无法通过编译，使用auto定义变量时必须对其进行初始化</span></span><br></pre></td></tr></table></figure>
-<p>⚠️ 注意：</p>
+<span class="label label-warning">注意</span>
 <ol>
 <li><p>使用 auto 定义变量时必须对其进行初始化，在编译阶段编译器需要根据初始化表达式来推导 auto 的实际类<br>型。因此 auto 并非是一种“类型”的声明，而是一个类型声明时的“占位符”，编译器在编译期会将 auto 替换为变量实际的类型。</p>
 </li>
@@ -283,7 +283,7 @@
 </ol>
 <h2 id="基于范围的-for-循环（C-11）"><a href="#基于范围的-for-循环（C-11）" class="headerlink" title="基于范围的 for 循环（C++11）"></a>基于范围的 for 循环（C++11）</h2><p>🌰 栗子：</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">TestFor</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> <span class="built_in">array</span>[] = &#123; <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span> &#125;;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">auto</span>&amp; e : <span class="built_in">array</span>)</span><br><span class="line">    &#123;</span><br><span class="line">         e *= <span class="number">2</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">auto</span> e : <span class="built_in">array</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; e &lt;&lt; <span class="string">" "</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>⚠️ 注意：</p>
+<span class="label label-warning">注意</span>
 <ol>
 <li><p>与普通循环类似，可以用 continue 来结束本次循环，也可以用 break 来跳出整个循环。</p>
 </li>
@@ -299,7 +299,7 @@
 <p>程序本意是想通过 f(NULL) 调用指针版本的 f(int*) 函数，但是由于 NULL 被定义成 0，因此与程序的初衷相悖。 在C++98 中，字面常量 0 既可以是一个整形数字，也可以是无类型的指针 (void*) 常量，但是编译器默认情况下将其看成是一个整形常量，如果要将其按照指针方式来使用，必须对其进行强转 (void *)0。 </p>
 <p>为了避免混淆，C++11 提供了 nullptr ，即：nullptr 代表一个指针空值常量。nullptr 是有类型的，其类型为nullptr_t ，仅仅可以被隐式转化为指针类型，nullptr_t 被定义在头文件中：</p>
 <p><code>typedef decltype(nullptr) nullptr_t;</code></p>
-<p>⚠️ 注意：</p>
+<span class="label label-warning">注意</span>
 <ol>
 <li>在使用 nullptr 表示指针空值时，不需要包含头文件，因为 nullptr 是 C++11 作为新关键字引入的。</li>
 <li>在 C++11 中，sizeof(nullptr) 与 sizeof((void*)0) 所占的字节数相同。</li>
