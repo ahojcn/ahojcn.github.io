@@ -89,67 +89,70 @@
 	
 
 	  <!-- content -->
-	  <h2 id="类的引入"><a href="#类的引入" class="headerlink" title="类的引入"></a>类的引入</h2><blockquote>
-<p>万物就对象。</p>
-<p>类是一种用户自定义的数据类型,包括表示属性的成员变量和表示行为的成员函数，类是现实世界对象的抽象,对象是类虚拟世界的实例。</p>
-</blockquote>
-<ol>
-<li>C++ 中 struct 中不仅可以有变量，还可以有函数。</li>
-<li>类定义结束时后面分号。</li>
-<li>成员函数声明和定义可以全部放在类体中，需要注意：成员函数如果在类中定义，编译器可能会将其当成内联函数处理。</li>
-<li>一般定义在 .h 文件中，定义放在 .cpp 文件中。</li>
-<li>面向对象三大特性：封装、继承、多态。</li>
-</ol>
-<h2 id="访问限定符及封装"><a href="#访问限定符及封装" class="headerlink" title="访问限定符及封装"></a>访问限定符及封装</h2><h3 id="访问限定符"><a href="#访问限定符" class="headerlink" title="访问限定符"></a>访问限定符</h3><blockquote>
-<p>C++ 实现封装的方式：用类将对象的属性与方法结合在一块，让对象更加完善，通过访问权限选择性的将其<br>接口提供给外部的用户使用。</p>
-</blockquote>
+	  <h2 id="类的引入"><a href="#类的引入" class="headerlink" title="类的引入"></a>类的引入</h2><p>万物皆对象。类是一种用户自定义的数据类型,包括表示属性的成员变量和表示行为的成员函数，类是现实世界对象的抽象,对象是类虚拟世界的实例。</p>
 <ul>
-<li>public 公有的</li>
-<li>protected 保护的</li>
-<li>private 私有的</li>
+<li><p>C++ 中 struct 中不仅可以有变量，还可以有函数。</p>
+</li>
+<li><p>类定义结束时后面分号。</p>
+</li>
+<li><p>成员函数声明和定义可以全部放在类体中，需要注意：成员函数如果在类中定义，编译器可能会将其当成内联函数处理。</p>
+</li>
+<li><p>一般定义在 .h 文件中，定义放在 .cpp 文件中。</p>
+</li>
+<li><p>面向对象三大特性：封装、继承、多态。</p>
+</li>
 </ul>
-<span class="label label-warning">注意</span>
-<ol>
-<li>public 修饰的成员在类外可以直接被访问。</li>
-<li>protected 和 private 修饰的成员在类外不能直接被访问。</li>
-<li>访问权限作用域从该访问限定符出现的位置开始直到下一个访问限定符出现时为止。</li>
-<li>class 的默认访问权限为 private ，struct 默认为 public (因为struct要兼容C)。</li>
-<li>访问限定符只在编译时有用，当数据映射到内存后，没有任何访问限定符上的区别。</li>
-</ol>
-<h3 id="封装"><a href="#封装" class="headerlink" title="封装"></a>封装</h3><blockquote>
-<p>封装：将数据和操作数据的方法进行有机结合，隐藏对象的属性和实现细节，仅对外公开接口来和对象进行交互。</p>
-<p>封装本质上是一种管理:我们如何管理兵马俑呢？比如如果什么都不管，兵马俑就被随意破坏了。那么我们<br>首先建了一座房子把兵马俑给封装起来。但是我们目的全封装起来，不让别人看。所以我们开放了售票通<br>道，可以买票突破封装在合理的监管机制下进去参观。类也是一样，我们使用类数据和方法都封装到一下。<br>不想给别人看到的，我们使用 protected/private 把成员封装起来。开放一些共有的成员函数对成员合理的访<br>问。所以封装本质是一种管理。</p>
-</blockquote>
-<h2 id="类的实例化"><a href="#类的实例化" class="headerlink" title="类的实例化"></a>类的实例化</h2><blockquote>
-<p>用类类型创建对象的过程，称为类的实例化。</p>
-</blockquote>
+<h2 id="访问限定符及封装"><a href="#访问限定符及封装" class="headerlink" title="访问限定符及封装"></a>访问限定符及封装</h2><h3 id="访问限定符"><a href="#访问限定符" class="headerlink" title="访问限定符"></a>访问限定符</h3><p>C++ 实现封装的方式：用类将对象的属性与方法结合在一块，让对象更加完善，通过访问权限选择性的将其接口提供给外部的用户使用。</p>
+<p>public 公有的、protected 保护的、private 私有的。</p>
+<ul>
+<li><p>public 修饰的成员在类外可以直接被访问。</p>
+</li>
+<li><p>protected 和 private 修饰的成员在类外不能直接被访问。</p>
+</li>
+<li><p>访问权限作用域从该访问限定符出现的位置开始直到下一个访问限定符出现时为止。</p>
+</li>
+<li><p>class 的默认访问权限为 private ，struct 默认为 public (因为struct要兼容C)。</p>
+</li>
+<li><p>访问限定符只在编译时有用，当数据映射到内存后，没有任何访问限定符上的区别。</p>
+</li>
+</ul>
+<h3 id="封装"><a href="#封装" class="headerlink" title="封装"></a>封装</h3><p>封装：将数据和操作数据的方法进行有机结合，隐藏对象的属性和实现细节，仅对外公开接口来和对象进行交互。</p>
+<p>封装本质上是一种管理：我们如何管理兵马俑呢？比如如果什么都不管，兵马俑就被随意破坏了。那么我们<br>首先建了一座房子把兵马俑给封装起来。但是我们目的全封装起来，不让别人看。所以我们开放了售票通<br>道，可以买票突破封装在合理的监管机制下进去参观。类也是一样，我们使用类数据和方法都封装到一下。<br>不想给别人看到的，我们使用 protected/private 把成员封装起来。开放一些共有的成员函数对成员合理的访<br>问。所以封装本质是一种管理。</p>
+<h2 id="类的实例化"><a href="#类的实例化" class="headerlink" title="类的实例化"></a>类的实例化</h2><p>用类类型创建对象的过程，称为类的实例化。</p>
 <p>类好比是一个房子的设计图纸，类的实例化就是按照图纸建造一个房子。一个设计图可以建好几套房子。</p>
 <p>造对象~~~。</p>
-<h2 id="类随想模型"><a href="#类随想模型" class="headerlink" title="类随想模型"></a>类随想模型</h2><h3 id="计算类对象的大小"><a href="#计算类对象的大小" class="headerlink" title="计算类对象的大小"></a>计算类对象的大小</h3><span class="label label-danger">Q</span> 类中既可以有成员变量，又可以有成员函数，那么一个类的对象中包含了什么？如何计算一个类的大小？<br><br><span class="label label-success">A</span> 只保存成员变量，成员函数存放在公共的代码段。一个类的大小，实际就是该类中”成员变量”之和，当然也要进行内存对齐，注意空类的大小，空类比较特殊，编译器给了空类一个字节来唯一标识这个类。<br><br>🌰 栗子：<br><br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">A1</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">  <span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">f1</span><span class="params">()</span> </span>&#123;&#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">private</span>:</span><br><span class="line">    <span class="keyword">int</span> _a;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="comment">// 类中仅有成员函数</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">A2</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">  <span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">f2</span><span class="params">()</span> </span>&#123;&#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="comment">// 类中什么都没有---空类</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">A3</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"sizeof(A1) : "</span> &lt;&lt; <span class="keyword">sizeof</span>(A1) &lt;&lt; <span class="built_in">endl</span>;	<span class="comment">// 4</span></span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"sizeof(A2) : "</span> &lt;&lt; <span class="keyword">sizeof</span>(A2) &lt;&lt; <span class="built_in">endl</span>;	<span class="comment">// 1</span></span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"sizeof(A3) : "</span> &lt;&lt; <span class="keyword">sizeof</span>(A3) &lt;&lt; <span class="built_in">endl</span>;	<span class="comment">// 1</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="类的对象模型"><a href="#类的对象模型" class="headerlink" title="类的对象模型"></a>类的对象模型</h2><h3 id="计算类对象的大小"><a href="#计算类对象的大小" class="headerlink" title="计算类对象的大小"></a>计算类对象的大小</h3><span class="label label-danger">Q</span> 类中既可以有成员变量，又可以有成员函数，那么一个类的对象中包含了什么？如何计算一个类的大小？<br><br><span class="label label-success">A</span> 只保存成员变量，成员函数存放在公共的代码段。一个类的大小，实际就是该类中”成员变量”之和，当然也要进行内存对齐，注意空类的大小，空类比较特殊，编译器给了空类一个字节来唯一标识这个类。<br><br>🌰 栗子：<br><br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">A1</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">  <span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">f1</span><span class="params">()</span> </span>&#123;&#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">private</span>:</span><br><span class="line">    <span class="keyword">int</span> _a;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="comment">// 类中仅有成员函数</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">A2</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">  <span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">f2</span><span class="params">()</span> </span>&#123;&#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="comment">// 类中什么都没有---空类</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">A3</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"sizeof(A1) : "</span> &lt;&lt; <span class="keyword">sizeof</span>(A1) &lt;&lt; <span class="built_in">endl</span>;	<span class="comment">// 4</span></span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"sizeof(A2) : "</span> &lt;&lt; <span class="keyword">sizeof</span>(A2) &lt;&lt; <span class="built_in">endl</span>;	<span class="comment">// 1</span></span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"sizeof(A3) : "</span> &lt;&lt; <span class="keyword">sizeof</span>(A3) &lt;&lt; <span class="built_in">endl</span>;	<span class="comment">// 1</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h3 id="内存对齐规则"><a href="#内存对齐规则" class="headerlink" title="内存对齐规则"></a>内存对齐规则</h3><p>结构体内存对齐规则：</p>
-<ol>
+<ul>
 <li><p>第一个成员在与结构体偏移量为 0 的地址处。</p>
 </li>
 <li><p>其他成员变量要对齐到某个数字(对齐数)的整数倍的地址处。</p>
-<p>对齐数 = 编译器默认的一个对齐数与该成员大小的较小值。</p>
-<p>VS 中默认的对齐数为 8，gcc 中的对齐数为 4 。</p>
+<ul>
+<li><p>对齐数 = 编译器默认的一个对齐数与该成员大小的较小值。</p>
+</li>
+<li><p>VS 中默认的对齐数为 8，gcc 中的对齐数为 4 。</p>
+</li>
+</ul>
 </li>
 <li><p>结构体总大小为：最大对齐数(所有变量类型最大者与默认对齐参数取最小)的整数倍。</p>
 </li>
 <li><p>如果嵌套了结构体的情况，嵌套的结构体对齐到自己的最大对齐数的整数倍处，结构体的整体大小就是所有最大对齐数(含嵌套结构体的对齐数)的整数倍。</p>
 </li>
-</ol>
+</ul>
 <p>结构体的内存对齐规则适用于类。</p>
 <span class="label label-warning">注意</span> 类中嵌套的类是不占用空间的，只有当有了类的对象后，才会占用空间。<br><br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">A1</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">  <span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">f1</span><span class="params">()</span> </span>&#123;&#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">private</span>:</span><br><span class="line">    <span class="keyword">int</span> _a;</span><br><span class="line"></span><br><span class="line">    <span class="class"><span class="keyword">class</span> <span class="title">A2</span></span></span><br><span class="line"><span class="class">    &#123;</span></span><br><span class="line">    &#125;;</span><br><span class="line">&#125;;	<span class="comment">// sizeof(A1) = 4</span></span><br></pre></td></tr></table></figure>
 <p><span class="label label-danger">Q</span> 为什么要进行内存对齐？</p>
+<p><span class="label label-success">A</span> <a href="https://www.cnblogs.com/jijiji/p/4854581.html" target="_blank" rel="noopener">https://www.cnblogs.com/jijiji/p/4854581.html</a></p>
 <p><span class="label label-danger">Q</span> 如何让结构体按照指定的对齐参数进行对齐？</p>
+<p><span class="label label-success">A</span> <code>#pragma pack(4)</code></p>
 <p><span class="label label-danger">Q</span> 如何知道结构体中某个成员相对于结构体起始位置的偏移量？</p>
+<p><span class="label label-success">A1</span> 造个对象，地址相减。</p>
+<p><span class="label label-success">A2</span> <code>&amp;(((type*)0)-&gt;m)</code>。</p>
 <p><span class="label label-danger">Q</span> 什么是大小端？如何测试某台机器是大端还是小端？有没有遇到过要考虑大小端的场景？</p>
-<h2 id="this-指针"><a href="#this-指针" class="headerlink" title="this 指针"></a>this 指针</h2><blockquote>
-<p>成员函数最终会被编译成与对象无关的普通函数。除了成员变量，丢失所有信息。</p>
+<p><span class="label label-success">A</span> 在网络通信中会涉及到。</p>
+<h2 id="this-指针"><a href="#this-指针" class="headerlink" title="this 指针"></a>this 指针</h2><p>成员函数最终会被编译成与对象无关的普通函数。除了成员变量，丢失所有信息。</p>
 <p>C++ 编译器给每个“成员函数“增加了一个隐藏的指针参数，让该指针指向当前对象(函数运行时调用该函数的对象)，在函数体中所有成员变量的操作，都是通过该指针去访问。只不过所有的操作对用户是透明的，即用户不需要来传递，编译器自动完成。</p>
-</blockquote>
-<ol>
+<ul>
 <li><p>this 指针是 const 的，类型为对象的类型。</p>
 </li>
 <li><p>只能在“成员函数”的内部使用。</p>
@@ -157,10 +160,71 @@
 <li><p>this 指针本质上其实是一个成员函数的形参，是对象调用成员函数时，将对象地址作为实参传递给 this 形参。所以对象中不存储 this 指针。</p>
 </li>
 <li><p>this 指针是成员函数第一个隐含的指针形参，一般情况由编译器通过 ecx 寄存器自动传递，不需要用户传递。</p>
-<p><img src="https://ahojcn.gitee.io/Cpp-类和对象-pic-1.png" alt="Cpp-类和对象-pic-1.png"></p>
 </li>
+</ul>
+<p><img src="https://ahojcn.gitee.io/Cpp-类和对象-pic-1.png" alt="Cpp-类和对象-pic-1.png"></p>
+<h2 id="6-个默认成员函数"><a href="#6-个默认成员函数" class="headerlink" title="6 个默认成员函数"></a>6 个默认成员函数</h2><p>任何一个类在我们不写的情况下，都会自动生成下面6个默认成员函数。</p>
+<p><code>class Date {};</code></p>
+<ul>
+<li>初始化和清理<ul>
+<li>构造函数：完成初始化工作</li>
+<li>析构函数：完成清理工作</li>
+</ul>
+</li>
+<li>拷贝复制<ul>
+<li>拷贝构造：使用同类对象初始化创建对象</li>
+<li>赋值重载：把一个对象赋值给另一个对象</li>
+</ul>
+</li>
+<li>取地址重载<ul>
+<li>主要是普通对象和 const 对象取地址，这两个很少会自己实现</li>
+</ul>
+</li>
+</ul>
+<h3 id="构造函数"><a href="#构造函数" class="headerlink" title="构造函数"></a>构造函数</h3><p>构造函数是一个特殊的成员函数，名字与类名相同，创建类类型对象时由编译器<strong>自动调用</strong>，保证每个数据成员都有一个合适的初始值，并且在对象的<strong>生命周期内只调用一次</strong>。</p>
+<ul>
+<li><p>构造函数可以重载。</p>
+</li>
+<li><p>为成员变量赋初始值，分配资源（是给对象的成员变量分配资源），设置对象的初始状态。</p>
+</li>
+<li><p>函数名与类名相同，没有返回类型。</p>
+</li>
+<li><p>对象创建时自动调用且只调用一次。</p>
+<ul>
+<li>栈区创建对象：对象定义语句。</li>
+<li>堆区创建对象：new 操作符。</li>
+</ul>
+</li>
+<li><p>自定义成员类型要调用自己的构造函数，编译器自动生成的构造函数会自己调用它。</p>
+</li>
+<li><p>对象创建过程：</p>
+<ol>
+<li>为整个对象分配内存；</li>
+<li>构造基类部分（如果存在基类）；</li>
+<li>构造成员变量；</li>
+<li>执行构造函数代码。</li>
 </ol>
-<hr>
+</li>
+<li><p>一般访问属性为 public，除非我们不允许外部创建对象。</p>
+</li>
+</ul>
+<p><span class="label label-warning">注意</span> 构造函数的虽然名称叫构造，但是需要注意的是构造函数的主要任务<strong>并不是给对象开空间创建对象，而是初始化对象，给对象里的成员变量开空间、赋值</strong>。 </p>
+<p><span class="label label-warning">注意</span> 如果通过无参构造函数创建对象时，对象后面不用跟括号，否则就成了函数声明。如<code>Date d3();</code>，声明了d3函数，该函数无参，返回一个日期类型的对象。</p>
+<p><span class="label label-warning">注意</span> 如果类中没有显式定义构造函数，则编译器会自动生成一个无参的默认构造函数，一旦用户显式定义编译器将不再生成。</p>
+<p><span class="label label-warning">注意</span> 无参的构造函数和全缺省的构造函数都称为默认构造函数，并且默认构造函数只能有一个。</p>
+<p><span class="label label-warning">注意</span> 无参构造和全缺省构造都称为默认构造函数，并且默认只能有一个。</p>
+<h4 id="成员变量命名风格"><a href="#成员变量命名风格" class="headerlink" title="成员变量命名风格"></a>成员变量命名风格</h4><p><code>m_name</code>、<code>_age</code>，具体看要求~，主要是和参数做区分。</p>
+<h3 id="析构函数"><a href="#析构函数" class="headerlink" title="析构函数"></a>析构函数</h3><p>与构造函数功能相反，析构函数不是完成对象的销毁，局部对象销毁工作是由编译器完成的。而对象在销毁时会自动调用析构函数，完成类的一些资源清理工作。</p>
+<ul>
+<li>无参数无返回值。</li>
+<li>只有一个析构函数，不能重载。</li>
+<li>负责对象销毁时回收对象占用资源。</li>
+<li>自定义成员类型要调用自己的析构，编译器自动生成的析构函数会自己调用它。</li>
+<li>在析构函数中 delete / free 构造函数中 new / malloc 的东西。</li>
+<li>在用完对象后 delete 对象，调用析构函数，当对象的生命周期后，自动调用析构函数。</li>
+</ul>
+<p><span class="label label-warning">注意</span> 析构函数中，释放空间前要判断要释放的空间是否为 NULL / nullptr，释放完后要指向空，避免野指针。</p>
+<h3 id="拷贝构造"><a href="#拷贝构造" class="headerlink" title="拷贝构造"></a>拷贝构造</h3><p>用已存在的类类型对象创建新对象时由编译器自动调用。</p>
 	  
 
 	  <div>
