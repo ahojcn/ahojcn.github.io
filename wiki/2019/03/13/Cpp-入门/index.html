@@ -102,6 +102,10 @@
 </li>
 <li><p><code>typeid(变量名).name</code>输出变量的类型。</p>
 </li>
+<li><p><code>bool</code>类型，true 为真，false 为假。</p>
+<p>任何基本类型都可以隐士转换为 bool 类型，非 0 即真，0 即假。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* </span></span><br><span class="line"><span class="comment">	boolalpha -&gt; 相当于一个开关，表示开，打印 true / false</span></span><br><span class="line"><span class="comment">	noboolalpha -&gt; 表示关，关闭后打印 0 / 1</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="keyword">bool</span> a = <span class="literal">false</span>;</span><br><span class="line"><span class="built_in">cout</span> &lt;&lt; a &lt;&lt; <span class="string">" "</span> &lt;&lt; boolalpha &lt;&lt; a &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">a = <span class="number">20</span>;</span><br><span class="line"><span class="built_in">cout</span> &lt;&lt; noboolalpha &lt;&lt; a &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">a = *(<span class="string">"abc"</span>+<span class="number">3</span>); <span class="comment">// 0-&gt;a 1-&gt;b 2-&gt;c 3-&gt;\0</span></span><br><span class="line"><span class="built_in">cout</span> &lt;&lt; boolalpha &lt;&lt; a &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">    这三种意思相同</span></span><br><span class="line"><span class="comment">    a = *("abc"+3);</span></span><br><span class="line"><span class="comment">    a = "abc"[3];</span></span><br><span class="line"><span class="comment">    a = 3["abc"];</span></span><br><span class="line"><span class="comment"> */</span></span><br></pre></td></tr></table></figure>
+</li>
 </ol>
 <h2 id="命名空间（namespace）"><a href="#命名空间（namespace）" class="headerlink" title="命名空间（namespace）"></a>命名空间（namespace）</h2><blockquote>
 <p>在 C/C++ 中，变量、函数和后面要学到的类都是大量存在的，这些变量、函数和类的名称将都存在于全局作用域中，可能会导致很多冲突。使用命名空间的目的是对标识符的名称进行本地化，以避免命名冲突或名字污染，namespace 关键字的出现就是针对这种问题的。</p>
@@ -316,6 +320,10 @@
 	
 		
 			
+		
+	
+		
+			
 			
 		
 	
@@ -359,7 +367,7 @@
 	
 	
 	
-		<li class="prev disabled"><a><i class="fa fa-arrow-circle-o-left"></i>prev</a></li>
+		<li class="prev"><a href="/wiki/2019/03/15/Cpp-类和对象/" class="alignleft prev"><i class="fa fa-arrow-circle-o-left"></i>prev</a></li>
 	
 	<li><a href="/wiki/"><i class="fa fa-archive"></i>Home</a></li>
 	

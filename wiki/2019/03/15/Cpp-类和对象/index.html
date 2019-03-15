@@ -1,0 +1,278 @@
+<!DOCTYPE HTML>
+<html>
+
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  <title>类和对象 | 小本本</title>
+  
+  <meta name="author" content="ahoj">
+  
+  <meta name="description" content="ahoj的小本本">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+  <meta property="og:title" content="类和对象">
+  <meta property="og:site_name" content="小本本">
+
+  
+  <meta property="og:image" content>
+  
+
+  
+  <link rel="alternative" href="/wiki/atom.xml" title="小本本" type="application/atom+xml">
+  
+  
+  <link href="/wiki/favicon.png" rel="icon">
+  
+
+  <link rel="stylesheet" href="/wiki/css/bootstrap.min.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/wiki/css/font-awesome.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/wiki/css/style.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/wiki/css/highlight.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/wiki/css/google-fonts.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/wiki/css/responsive.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/wiki/css/sidenav.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+
+  <script src="/wiki/js/jquery-2.0.3.min.js"></script>
+
+  <center>
+    <div class="accordion-group">
+      <div class="accordion-heading">
+        <a class="accordion-toggle" data-toggle="collapse" href="#about">
+          <i class="fa fa-bookmark"></i> 
+        </a>
+      </div> <!-- accordion-heading -->
+      <div id="about" class="accordion-body collapse in">
+        <div class="accordion-inner" style="background-color:#FFFFFF">
+
+          <p>把知识记在小本本上</p>
+          <p>将零散的知识点放在一个集中的地方，不断递归重构，形成一套为己所用的知识系统。</p>
+          <a href="http://ahoj.cc/">博客首页</a> | 
+          <a href="http://ahoj.cc/wiki/">小本本首页</a>
+
+        </div>
+      </div>
+    </div>
+  </center>
+
+  <!-- analytics -->
+  
+
+</head></html>
+<body id="body" data-spy="scroll" data-target=".toc">
+  <div class="container" id="container">
+	<div class="content">
+	  <div class="page-header">		
+  <h1><a class="brand" href="/wiki/">小本本</a><span class="split"></span><span class="title">类和对象</span><span class="date" id="title-date"><i class="fa fa-clock-o"></i> 2019-03-15</span></h1>
+</div>		
+
+<div class="row page">
+  <!-- cols -->	
+  
+  <div class="col-xs-12 col-sm-3 col-md-3 toc"> 
+	<!-- toc -->
+<script type="text/javascript">
+		jQuery(document).ready(function() {
+ 		   generateWikiTOC('.note', '.toc',  2 , 2 );
+		});
+</script>
+  </div><!-- col-md-3 -->
+  
+  
+
+  
+  <div class="col-xs-12 col-sm-9 col-md-9 note">
+	
+
+	  <!-- content -->
+	  <h2 id="类的引入"><a href="#类的引入" class="headerlink" title="类的引入"></a>类的引入</h2><blockquote>
+<p>万物就对象。😂</p>
+<p>类是一种用户自定义的数据类型,包括表示属性的成员变量和表示行为的成员函数，类是现实世界对象的抽象,对象是类虚拟世界的实例。</p>
+</blockquote>
+<ol>
+<li>C++ 中 struct 中不仅可以有变量，还可以有函数。</li>
+<li>类定义结束时后面分号。</li>
+<li>成员函数声明和定义可以全部放在类体中，需要注意：成员函数如果在类中定义，编译器可能会将其当成内联函数处理。</li>
+<li>一般定义在 .h 文件中，定义放在 .cpp 文件中。</li>
+<li>面向对象三大特性：封装、继承、多态。</li>
+</ol>
+<h2 id="访问限定符及封装"><a href="#访问限定符及封装" class="headerlink" title="访问限定符及封装"></a>访问限定符及封装</h2><h3 id="访问限定符"><a href="#访问限定符" class="headerlink" title="访问限定符"></a>访问限定符</h3><blockquote>
+<p>C++ 实现封装的方式：用类将对象的属性与方法结合在一块，让对象更加完善，通过访问权限选择性的将其<br>接口提供给外部的用户使用。</p>
+</blockquote>
+<ul>
+<li>public 公有的</li>
+<li>protected 保护的</li>
+<li>private 私有的</li>
+</ul>
+<span class="label label-warning">注意</span>
+<ol>
+<li>public 修饰的成员在类外可以直接被访问。</li>
+<li>protected 和 private 修饰的成员在类外不能直接被访问。</li>
+<li>访问权限作用域从该访问限定符出现的位置开始直到下一个访问限定符出现时为止。</li>
+<li>class 的默认访问权限为 private ，struct 默认为 public (因为struct要兼容C)。</li>
+<li>访问限定符只在编译时有用，当数据映射到内存后，没有任何访问限定符上的区别。</li>
+</ol>
+<h3 id="封装"><a href="#封装" class="headerlink" title="封装"></a>封装</h3><blockquote>
+<p>封装：将数据和操作数据的方法进行有机结合，隐藏对象的属性和实现细节，仅对外公开接口来和对象进行交互。</p>
+<p>封装本质上是一种管理:我们如何管理兵马俑呢？比如如果什么都不管，兵马俑就被随意破坏了。那么我们<br>首先建了一座房子把兵马俑给封装起来。但是我们目的全封装起来，不让别人看。所以我们开放了售票通<br>道，可以买票突破封装在合理的监管机制下进去参观。类也是一样，我们使用类数据和方法都封装到一下。<br>不想给别人看到的，我们使用 protected/private 把成员封装起来。开放一些共有的成员函数对成员合理的访<br>问。所以封装本质是一种管理。</p>
+</blockquote>
+<h2 id="类的实例化"><a href="#类的实例化" class="headerlink" title="类的实例化"></a>类的实例化</h2><blockquote>
+<p>用类类型创建对象的过程，称为类的实例化。</p>
+</blockquote>
+<p>类好比是一个房子的设计图纸，类的实例化就是按照图纸建造一个房子。一个设计图可以建好几套房子。</p>
+<p>造对象~~~。</p>
+<h2 id="类随想模型"><a href="#类随想模型" class="headerlink" title="类随想模型"></a>类随想模型</h2><h3 id="计算类对象的大小"><a href="#计算类对象的大小" class="headerlink" title="计算类对象的大小"></a>计算类对象的大小</h3><span class="label label-danger">Q</span> 类中既可以有成员变量，又可以有成员函数，那么一个类的对象中包含了什么？如何计算一个类的大小？<br><br><span class="label label-success">A</span> 只保存成员变量，成员函数存放在公共的代码段。一个类的大小，实际就是该类中”成员变量”之和，当然也要进行内存对齐，注意空类的大小，空类比较特殊，编译器给了空类一个字节来唯一标识这个类。<br><br>🌰 栗子：<br><br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">A1</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">  <span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">f1</span><span class="params">()</span> </span>&#123;&#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">private</span>:</span><br><span class="line">    <span class="keyword">int</span> _a;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="comment">// 类中仅有成员函数</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">A2</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">  <span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">f2</span><span class="params">()</span> </span>&#123;&#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="comment">// 类中什么都没有---空类</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">A3</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"sizeof(A1) : "</span> &lt;&lt; <span class="keyword">sizeof</span>(A1) &lt;&lt; <span class="built_in">endl</span>;	<span class="comment">// 4</span></span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"sizeof(A2) : "</span> &lt;&lt; <span class="keyword">sizeof</span>(A2) &lt;&lt; <span class="built_in">endl</span>;	<span class="comment">// 1</span></span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"sizeof(A3) : "</span> &lt;&lt; <span class="keyword">sizeof</span>(A3) &lt;&lt; <span class="built_in">endl</span>;	<span class="comment">// 1</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="内存对齐规则"><a href="#内存对齐规则" class="headerlink" title="内存对齐规则"></a>内存对齐规则</h3><p>结构体内存对齐规则：</p>
+<ol>
+<li><p>第一个成员在与结构体偏移量为 0 的地址处。</p>
+</li>
+<li><p>其他成员变量要对齐到某个数字(对齐数)的整数倍的地址处。</p>
+<p>对齐数 = 编译器默认的一个对齐数与该成员大小的较小值。</p>
+<p>VS 中默认的对齐数为 8，gcc 中的对齐数为 4 。</p>
+</li>
+<li><p>结构体总大小为：最大对齐数(所有变量类型最大者与默认对齐参数取最小)的整数倍。</p>
+</li>
+<li><p>如果嵌套了结构体的情况，嵌套的结构体对齐到自己的最大对齐数的整数倍处，结构体的整体大小就是所有最大对齐数(含嵌套结构体的对齐数)的整数倍。</p>
+</li>
+</ol>
+<p>结构体的内存对齐规则适用于类。</p>
+<span class="label label-warning">注意</span> 类中嵌套的类是不占用空间的，只有当有了类的对象后，才会占用空间。<br><br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">A1</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">  <span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">f1</span><span class="params">()</span> </span>&#123;&#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">private</span>:</span><br><span class="line">    <span class="keyword">int</span> _a;</span><br><span class="line"></span><br><span class="line">    <span class="class"><span class="keyword">class</span> <span class="title">A2</span></span></span><br><span class="line"><span class="class">    &#123;</span></span><br><span class="line">    &#125;;</span><br><span class="line">&#125;;	<span class="comment">// sizeof(A1) = 4</span></span><br></pre></td></tr></table></figure>
+<p><span class="label label-warning">Q</span> 为什么要进行内存对齐？</p>
+<p><span class="label label-warning">Q</span> 如何让结构体按照指定的对齐参数进行对齐？</p>
+<p><span class="label label-warning">Q</span> 如何知道结构体中某个成员相对于结构体起始位置的偏移量？</p>
+<p><span class="label label-warning">Q</span> 什么是大小端？如何测试某台机器是大端还是小端？有没有遇到过要考虑大小端的场景？</p>
+<h2 id="this-指针"><a href="#this-指针" class="headerlink" title="this 指针"></a>this 指针</h2><blockquote>
+<p>成员函数最终会被编译成与对象无关的普通函数。除了成员变量，丢失所有信息。</p>
+<p>C++ 编译器给每个“成员函数“增加了一个隐藏的指针参数，让该指针指向当前对象(函数运行时调用该函数的对象)，在函数体中所有成员变量的操作，都是通过该指针去访问。只不过所有的操作对用户是透明的，即用户不需要来传递，编译器自动完成。</p>
+</blockquote>
+<ol>
+<li><p>this 指针是 const 的，类型为对象的类型。</p>
+</li>
+<li><p>只能在“成员函数”的内部使用。</p>
+</li>
+<li><p>this 指针本质上其实是一个成员函数的形参，是对象调用成员函数时，将对象地址作为实参传递给 this 形参。所以对象中不存储 this 指针。</p>
+</li>
+<li><p>this 指针是成员函数第一个隐含的指针形参，一般情况由编译器通过 ecx 寄存器自动传递，不需要用户传递。</p>
+<p><img src="https://ahojcn.gitee.io/Cpp-类和对象-pic-1.png" alt="Cpp-类和对象-pic-1.png"></p>
+</li>
+</ol>
+<hr>
+	  
+
+	  <div>
+  		<center>
+		  <div class="pagination">
+<ul class="pagination">
+	
+	
+	
+	
+	
+	
+		
+			
+			
+		
+	
+		
+			
+			
+			
+		
+	
+		
+	
+		
+	
+		
+	
+		
+	
+		
+	
+		
+	
+		
+	
+		
+	
+		
+	
+		
+	
+		
+	
+		
+	
+		
+	
+		
+	
+		
+	
+		
+	
+		
+	
+		
+	
+	
+	
+		<li class="prev disabled"><a><i class="fa fa-arrow-circle-o-left"></i>prev</a></li>
+	
+	<li><a href="/wiki/"><i class="fa fa-archive"></i>Home</a></li>
+	
+		<li class="next"><a href="/wiki/2019/03/13/Cpp-入门/" class="alignright next">next<i class="fa fa-arrow-circle-o-right"></i></a></li>
+	
+</ul>
+</div>
+
+		</center>
+	  </div>
+	  
+	</div> <!-- col-md-9/col-md-12 -->
+	
+  </div><!-- row -->
+
+	</div>
+  </div>
+  <div class="container-narrow">
+	<footer> <p>
+  &copy; 2019 ahoj
+  
+      with help from <a href="http://zespia.tw/hexo/" target="_blank">Hexo</a> and <a href="http://getbootstrap.com/" target="_blank">Twitter Bootstrap</a>. Theme by <a href="http://github.com/wzpan/hexo-theme-wixo/">Wixo</a>.    
+</p> </footer>
+  </div> <!-- container-narrow -->
+  
+<a id="gotop" href="#">   
+  <span>▲</span> 
+</a>
+
+<script src="/wiki/js/jquery.imagesloaded.min.js"></script>
+<script src="/wiki/js/gallery.js"></script>
+<script src="/wiki/js/bootstrap.min.js"></script>
+<script src="/wiki/js/jquery.tableofcontents.min.js"></script>
+<script src="/wiki/js/tocgenerator.min.js"></script>
+<script src="/wiki/js/main.js"></script>
+<script src="/wiki/js/search.js"></script> 
+
+
+
+
+<link rel="stylesheet" href="/wiki/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/wiki/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+
+
+
+</body>
+</html>
