@@ -1,0 +1,246 @@
+<!DOCTYPE HTML>
+<html>
+
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  <title>迭代器 | 小本本</title>
+  
+  <meta name="author" content="ahoj">
+  
+  <meta name="description" content="ahoj的小本本">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+  <meta property="og:title" content="迭代器">
+  <meta property="og:site_name" content="小本本">
+
+  
+  <meta property="og:image" content>
+  
+
+  
+  <link rel="alternative" href="/wiki/atom.xml" title="小本本" type="application/atom+xml">
+  
+  
+  <link href="/wiki/favicon.png" rel="icon">
+  
+
+  <link rel="stylesheet" href="/wiki/css/bootstrap.min.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/wiki/css/font-awesome.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/wiki/css/style.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/wiki/css/highlight.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/wiki/css/google-fonts.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/wiki/css/responsive.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/wiki/css/sidenav.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+
+  <script src="/wiki/js/jquery-2.0.3.min.js"></script>
+
+  <center>
+    <div class="accordion-group">
+      <div class="accordion-heading">
+        <a class="accordion-toggle" data-toggle="collapse" href="#about">
+          <i class="fa fa-bookmark"></i> 
+        </a>
+      </div> <!-- accordion-heading -->
+      <div id="about" class="accordion-body collapse in">
+        <div class="accordion-inner" style="background-color:#FFFFFF">
+
+          <p>把知识记在小本本上</p>
+          <p>将零散的知识点放在一个集中的地方，不断递归重构，形成一套为己所用的知识系统。</p>
+          <a href="http://ahoj.cc/">博客首页</a> | 
+          <a href="http://ahoj.cc/wiki/">小本本首页</a>
+
+        </div>
+      </div>
+    </div>
+  </center>
+
+  <!-- analytics -->
+  
+
+</head></html>
+<body id="body" data-spy="scroll" data-target=".toc">
+  <div class="container" id="container">
+	<div class="content">
+	  <div class="page-header">		
+  <h1><a class="brand" href="/wiki/">小本本</a><span class="split"></span><span class="title">迭代器</span><span class="date" id="title-date"><i class="fa fa-clock-o"></i> 2019-03-19</span></h1>
+</div>		
+
+<div class="row page">
+  <!-- cols -->	
+  
+  <div class="col-xs-12 col-sm-3 col-md-3 toc"> 
+	<!-- toc -->
+<script type="text/javascript">
+		jQuery(document).ready(function() {
+ 		   generateWikiTOC('.note', '.toc',  2 , 2 );
+		});
+</script>
+  </div><!-- col-md-3 -->
+  
+  
+
+  
+  <div class="col-xs-12 col-sm-9 col-md-9 note">
+	
+
+	  <!-- content -->
+	  <p>对于一个容器的遍历，可以用 for 循环，如下：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">vector</span>&lt;<span class="built_in">string</span>&gt; v;</span><br><span class="line">v.push_back(<span class="string">"hello"</span>);</span><br><span class="line">v.push_back(<span class="string">" world"</span>);</span><br><span class="line">v.emplace_back(<span class="string">", Cpp"</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; v.size(); i++)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; v[i];</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">cout</span> &lt;&lt; <span class="built_in">endl</span>;</span><br></pre></td></tr></table></figure>
+<p>也可以用迭代器。</p>
+<p>迭代器：是一种对容器的遍历工具。</p>
+<p>迭代器用起来是指针使用，在内部，不同的容器有不同的实现方式，不一定是原生指针。</p>
+<p>迭代器：正向迭代器、反向迭代器、const迭代器。</p>
+<p>迭代器的函数：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">begin()</span><br><span class="line">  end()</span><br><span class="line">rbegin()</span><br><span class="line">  rend()</span><br></pre></td></tr></table></figure>
+<p><img src="https://ahojcn.gitee.io/Cpp-迭代器-pic-2.png" alt="Cpp-迭代器-pic-2.png"></p>
+<p>C++11 正向、反向有了一些新功能。</p>
+<p><img src="https://ahojcn.gitee.io/Cpp-迭代器-pic-1.png" alt="Cpp-迭代器-pic-1.png"></p>
+<h2 id="正向迭代器"><a href="#正向迭代器" class="headerlink" title="正向迭代器"></a>正向迭代器</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">vector</span>&lt;<span class="built_in">string</span>&gt;::iterator vit = v.begin();</span><br><span class="line"><span class="keyword">while</span> (vit != v.end())</span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; *vit;</span><br><span class="line">    vit++;</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">cout</span> &lt;&lt; <span class="built_in">endl</span>;</span><br></pre></td></tr></table></figure>
+<h2 id="反向迭代器"><a href="#反向迭代器" class="headerlink" title="反向迭代器"></a>反向迭代器</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">vector</span>&lt;<span class="built_in">string</span>&gt;::reverse_iterator rit = v.rbegin();</span><br><span class="line"><span class="keyword">while</span> (rit != v.rend())</span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; *rit;</span><br><span class="line">    ++rit;</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">cout</span> &lt;&lt; <span class="built_in">endl</span>;</span><br></pre></td></tr></table></figure>
+<h2 id="const-迭代器"><a href="#const-迭代器" class="headerlink" title="const 迭代器"></a>const 迭代器</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">vector</span>&lt;<span class="built_in">string</span>&gt;::const_iterator cvit = v.begin();</span><br><span class="line"><span class="keyword">while</span> (cvit != v.end())</span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; *cvit;</span><br><span class="line">    cvit++;</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">cout</span> &lt;&lt; <span class="built_in">endl</span>;</span><br></pre></td></tr></table></figure>
+<h2 id="C-11-语法糖-auto"><a href="#C-11-语法糖-auto" class="headerlink" title="C++11 语法糖 auto"></a>C++11 语法糖 auto</h2><p>在写代码的时候编译器智能提示，让把迭代器改成 auto：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">auto</span> avit = v.begin();</span><br><span class="line"><span class="keyword">while</span> (avit != v.end())</span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; *avit;</span><br><span class="line">    avit++;</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">cout</span> &lt;&lt; <span class="built_in">endl</span>;</span><br></pre></td></tr></table></figure>
+<h3 id="语法糖-auto-用于-for-循环"><a href="#语法糖-auto-用于-for-循环" class="headerlink" title="语法糖 auto 用于 for 循环"></a>语法糖 auto 用于 for 循环</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">string</span> str = <span class="string">"abcd"</span>;</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">auto</span> e : str)</span><br><span class="line">&#123;</span><br><span class="line">  	<span class="built_in">cout</span> &lt;&lt; e &lt;&lt; <span class="built_in">endl</span>;	<span class="comment">// 输出 : abcd</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>感觉尝不到甜头，来一个🌰，感受下：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">std</span>::<span class="built_in">map</span>&lt;<span class="built_in">std</span>::<span class="built_in">string</span>, <span class="built_in">std</span>::<span class="built_in">vector</span>&lt;<span class="built_in">std</span>::<span class="built_in">string</span>&gt;&gt; strVMap;</span><br><span class="line"><span class="built_in">std</span>::<span class="built_in">map</span>&lt;<span class="built_in">std</span>::<span class="built_in">string</span>, <span class="built_in">std</span>::<span class="built_in">vector</span>&lt;<span class="built_in">std</span>::<span class="built_in">string</span>&gt;&gt;::const_reverse_iterator msvit = strVMap.crbegin();</span><br><span class="line"><span class="keyword">while</span> (msvit != strVMap.crend)</span><br><span class="line">&#123;</span><br><span class="line">  	++msvit;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">auto</span> e : strVMap)</span><br><span class="line">&#123;</span><br><span class="line">  	...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="https://ss0.bdstatic.com/94oJfD_bAAcT8t7mm9GUKT-xh_/timg?image&amp;quality=100&amp;size=b4000_4000&amp;sec=1553089425&amp;di=e0639ca58c0bdfd2905e045f6e77c69f&amp;src=http://f.hiphotos.baidu.com/image/pic/item/d1160924ab18972b016d358bedcd7b899e510a1f.jpg" alt="我靠"></p>
+<blockquote>
+<p>好吧，其实用了 auto 编译器编译后也会成迭代器的形式，这个 Java 里的增强 for 也是。</p>
+</blockquote>
+<h2 id="为什么要出现迭代器"><a href="#为什么要出现迭代器" class="headerlink" title="为什么要出现迭代器"></a>为什么要出现迭代器</h2><p>在 STL 中有很多容器，容器实现的方式是一些不同的数据结构，如果我们要遍历这些容器中的内容，就需要注意一些细节问题(比如单链表的遍历，从后往前遍历，等等的细节问题)。</p>
+<p>迭代器用一种统一的方式来访问容器，不用关心具体的访问细节(屏蔽掉了底层复杂的结构细节)。</p>
+<hr>
+	  
+
+	  <div>
+  		<center>
+		  <div class="pagination">
+<ul class="pagination">
+	
+	
+	
+	
+	
+	
+		
+			
+			
+		
+	
+		
+			
+			
+			
+		
+			
+		
+	
+		
+	
+		
+			
+		
+	
+		
+			
+		
+	
+		
+	
+		
+	
+		
+	
+		
+	
+		
+	
+		
+	
+		
+	
+		
+	
+		
+	
+		
+	
+		
+	
+		
+	
+		
+	
+		
+	
+		
+	
+		
+	
+		
+	
+		
+	
+		
+	
+	
+	
+		<li class="prev disabled"><a><i class="fa fa-arrow-circle-o-left"></i>prev</a></li>
+	
+	<li><a href="/wiki/"><i class="fa fa-archive"></i>Home</a></li>
+	
+		<li class="next"><a href="/wiki/2019/03/18/Cpp-模板初阶/" class="alignright next">next<i class="fa fa-arrow-circle-o-right"></i></a></li>
+	
+</ul>
+</div>
+
+		</center>
+	  </div>
+	  
+	</div> <!-- col-md-9/col-md-12 -->
+	
+  </div><!-- row -->
+
+	</div>
+  </div>
+  <div class="container-narrow">
+	<footer> <p>
+  &copy; 2019 ahoj
+  
+      with help from <a href="http://zespia.tw/hexo/" target="_blank">Hexo</a> and <a href="http://getbootstrap.com/" target="_blank">Twitter Bootstrap</a>. Theme by <a href="http://github.com/wzpan/hexo-theme-wixo/">Wixo</a>.    
+</p> </footer>
+  </div> <!-- container-narrow -->
+  
+<a id="gotop" href="#">   
+  <span>▲</span> 
+</a>
+
+<script src="/wiki/js/jquery.imagesloaded.min.js"></script>
+<script src="/wiki/js/gallery.js"></script>
+<script src="/wiki/js/bootstrap.min.js"></script>
+<script src="/wiki/js/jquery.tableofcontents.min.js"></script>
+<script src="/wiki/js/tocgenerator.min.js"></script>
+<script src="/wiki/js/main.js"></script>
+<script src="/wiki/js/search.js"></script> 
+
+
+
+
+<link rel="stylesheet" href="/wiki/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/wiki/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+
+
+
+</body>
+</html>
