@@ -166,7 +166,7 @@
 <li><p>this 指针是成员函数第一个隐含的指针形参，一般情况由编译器通过 ecx 寄存器自动传递，不需要用户传递。</p>
 </li>
 </ul>
-<p><img src="https://ahojcn.gitee.io/Cpp-类和对象-pic-1.png" alt="Cpp-类和对象-pic-1.png"></p>
+<p><img src="https://ws1.sinaimg.cn/large/006wR0dcly1g1d5shp7ywj315m0ggmzu.jpg" alt></p>
 <h2 id="6-个默认成员函数"><a href="#6-个默认成员函数" class="headerlink" title="6 个默认成员函数"></a>6 个默认成员函数</h2><p>任何一个类在我们不写的情况下，都会自动生成下面6个默认成员函数。</p>
 <p><code>class Date {};</code></p>
 <ul>
@@ -236,7 +236,7 @@
 <li><p>拷贝构造函数是构造函数的一个重载形式。</p>
 </li>
 <li><p>参数只有一个且必须使用引用传参（并且加 const 修饰），使用传值方式会引发无穷递归调用。</p>
-<p><img src="https://ahojcn.gitee.io/Cpp-类和对象-pic-2.png" alt="Cpp-类和对象-pic-2.png"></p>
+<p><img src="https://ws1.sinaimg.cn/large/006wR0dcly1g1d5ssmkd1j31ck0okdj7.jpg" alt></p>
 </li>
 <li><p>如果一个类没有定义拷贝构造函数，那么编译器提供一个默认拷贝构造函数（public）。</p>
 </li>
@@ -258,9 +258,9 @@
 <p>⚠️  <code>.</code>、<code>.*</code>运算符不能重载是为了保证访问成员的功能不能被改变，域运算符合<code>sizeof</code>运算符的运算对象是类型而不是变量或一般表达式，不具备重载的特征。</p>
 <p>❓ 运算符重载成全局的就需要成员变量是共有的，封装性如何保证？</p>
 <p>✔️ 友元或者直接重载成成员函数。</p>
-<p>⚠️ <img src="https://ahojcn.gitee.io/Cpp-类和对象-pic-3.png" alt="Cpp-类和对象-pic-3.png"></p>
+<p>⚠️ <img src="https://ws1.sinaimg.cn/large/006wR0dcly1g1d5t2d0lkj319k0lygr0.jpg" alt></p>
 <p>⚠️ 重载前置++（<code>Complex&amp; operator++()</code>）和后置++（<code>Complex operator++(int)</code>，哑元占位，用来区分）这种的运算符应注意！</p>
-<p><img src="https://ahojcn.gitee.io/Cpp-类和对象-pic-4.png" alt="Cpp-类和对象-pic-4.png"></p>
+<p><img src="https://ws1.sinaimg.cn/large/006wR0dcly1g1d5tfcs8jj317c0rm77z.jpg" alt></p>
 <h2 id="const"><a href="#const" class="headerlink" title="const"></a>const</h2><h3 id="const-修饰类的成员变量"><a href="#const-修饰类的成员变量" class="headerlink" title="const 修饰类的成员变量"></a>const 修饰类的成员变量</h3><p>必须使用初始化参数列表初始化，初始化之后不能修改。</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    A():m_a(<span class="number">10</span>)&#123;&#125;   <span class="comment">//常成员变量必须用这种方式赋初始值</span></span><br><span class="line">    ~A()&#123;&#125;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="keyword">const</span> <span class="keyword">int</span> m_a;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 <h3 id="const-修饰类的成员函数"><a href="#const-修饰类的成员函数" class="headerlink" title="const 修饰类的成员函数"></a>const 修饰类的成员函数</h3><p>将 const 修饰的类成员函数称之为 const 成员函数，const 修饰类成员函数，实际修饰该成员函数隐含的 this 指针，表明在该成员函数中不能对类的任何成员进行修改，也叫常函数。</p>

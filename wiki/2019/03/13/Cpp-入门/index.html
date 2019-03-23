@@ -214,7 +214,7 @@
 <p>查看汇编代码：</p>
 <p>保留编译过程中生成的临时文件：<code>g++ a.cpp -save-temps</code></p>
 <p>其中<code>a.s</code>就是汇编文件，在 VS 里面可以 DEBUG 起来，直接看汇编代码，比较方便。</p>
-<p><img src="https://gitee.com/ahojcn/ahojcn/raw/master/Cpp-%E5%85%A5%E9%97%A8-pic-1.png" alt="Cpp-入门-pic-1.png"></p>
+<p><img src="https://ws1.sinaimg.cn/large/006wR0dcly1g1d5ubiv1sj311c0dcabr.jpg" alt></p>
 </li>
 <li><p>引用在定义时必须初始化，指针没有要求。</p>
 </li>
@@ -236,9 +236,9 @@
 <p>以 inline 修饰的函数叫做内联函数，编译时 C++ 编译器会在调用内联函数的地方展开，没有函数压栈的开销，内联函数提升程序运行的效率。</p>
 </blockquote>
 <p>以下是没有加 inline 的汇编代码。</p>
-<p><img src="https://ahojcn.gitee.io/Cpp-入门-pic-2.png" alt="Cpp-入门-pic-2.png"></p>
+<p><img src="https://ws1.sinaimg.cn/large/006wR0dcly1g1d5ulq49ej31140eamz0.jpg" alt></p>
 <p>在 Add 前加了 inline 后，在编译期间编译器会用函数体替换函数的调用。</p>
-<p><img src="https://ahojcn.gitee.io/Cpp-入门-pic-3.png" alt="Cpp-入门-pic-3"></p>
+<p><img src="https://ws1.sinaimg.cn/large/006wR0dcly1g1d5uunx5yj310c0e0jtd.jpg" alt></p>
 <ol>
 <li><p>inline 是一种以空间换时间的做法，省去调用函数额开销。所以代码很长或者有循环 / 递归的函数不适宜使<br>用作为内联函数。</p>
 </li>
