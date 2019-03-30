@@ -432,6 +432,19 @@
           
             
             
+              
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+            
+                <span class="post-meta-item-text">评论数：</span>
+                <a href="/2019/03/汇编语言程序设计基础/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2019/03/汇编语言程序设计基础/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
           
 
           
@@ -720,10 +733,9 @@
 
   
     <div class="comments" id="comments">
-      <div id="lv-container" data-id="city" data-uid="MTAyMC80MDExOS8xNjY0Ng"></div>
     </div>
 
-  
+    
 
 
 
@@ -1094,22 +1106,36 @@
 
   
   
-
-
   
-    <script>
-  window.livereOptions = {
-    refer: '2019/03/汇编语言程序设计基础/'
-  };
-  (function(d, s) {
-    var j, e = d.getElementsByTagName(s)[0];
-    if (typeof LivereTower === 'function') { return; }
-    j = d.createElement(s);
-    j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
-    j.async = true;
-    e.parentNode.insertBefore(j, e);
-  })(document, 'script');
+
+<script src="//cdn1.lncld.net/static/js/3.11.1/av-min.js"></script>
+
+
+
+<script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+
+<script>
+  var GUEST = ['nick', 'mail', 'link'];
+  var guest = 'nick,mail,link';
+  guest = guest.split(',').filter(function(item) {
+    return GUEST.indexOf(item) > -1;
+  });
+  new Valine({
+    el: '#comments',
+    verify: true,
+    notify: true,
+    appId: 'yy9oH4ap0AOjoGWG7vbV9w2v-gzGzoHsz',
+    appKey: '27EcRosAo5WUi5KH16i9nAq1',
+    placeholder: '说点什么吧',
+    avatar: 'mm',
+    meta: guest,
+    pageSize: '10' || 10,
+    visitor: false
+  });
 </script>
+
+
+
 
   
 
