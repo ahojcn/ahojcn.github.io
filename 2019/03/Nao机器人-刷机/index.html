@@ -110,15 +110,15 @@
   <meta name="description" content="给 Nao (小宝贝) 部署 Naoqi 系统和 BHuman 系统。">
 <meta name="keywords" content="Nao机器人,BHuman">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Nao机器人-刷机">
+<meta property="og:title" content="【Nao机器人】刷机">
 <meta property="og:url" content="http://ahoj.cc/2019/03/Nao机器人-刷机/index.html">
 <meta property="og:site_name" content="ahoj">
 <meta property="og:description" content="给 Nao (小宝贝) 部署 Naoqi 系统和 BHuman 系统。">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://ws1.sinaimg.cn/large/006wR0dcly1g1l8kwg4i9j30hs0hs16e.jpg">
-<meta property="og:updated_time" content="2019-03-30T15:29:07.600Z">
+<meta property="og:updated_time" content="2019-03-30T16:10:21.687Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Nao机器人-刷机">
+<meta name="twitter:title" content="【Nao机器人】刷机">
 <meta name="twitter:description" content="给 Nao (小宝贝) 部署 Naoqi 系统和 BHuman 系统。">
 <meta name="twitter:image" content="https://ws1.sinaimg.cn/large/006wR0dcly1g1l8kwg4i9j30hs0hs16e.jpg">
 
@@ -137,7 +137,7 @@
   };
 </script>
 
-  <title>Nao机器人-刷机 | ahoj</title>
+  <title>【Nao机器人】刷机 | ahoj</title>
   
 
 
@@ -371,7 +371,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Nao机器人-刷机
+          <h1 class="post-title" itemprop="name headline">【Nao机器人】刷机
 
               
             
@@ -397,12 +397,24 @@
                 
               
 
-              <time title="创建时间：2019-03-30 23:03:33 / 修改时间：23:29:07" itemprop="dateCreated datePublished" datetime="2019-03-30T23:03:33+08:00">2019-03-30</time>
+              <time title="创建时间：2019-03-30 23:03:33" itemprop="dateCreated datePublished" datetime="2019-03-30T23:03:33+08:00">2019-03-30</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-03-31 00:10:21" itemprop="dateModified" datetime="2019-03-31T00:10:21+08:00">2019-03-31</time>
               
             
           </span>
@@ -500,16 +512,11 @@
 <li>naoqi-sdk-2.1.4.13-linux32.tar.gz</li>
 </ul>
 <h3 id="步骤-1"><a href="#步骤-1" class="headerlink" title="步骤"></a>步骤</h3><h4 id="编译项目"><a href="#编译项目" class="headerlink" title="编译项目"></a>编译项目</h4><ol>
-<li><p>新建一个文件夹<code>robotcup</code>，将上面三个压缩包放到这个新建的目录下。</p>
-</li>
-<li><p>BHumanCodeRelease-master.zip解压，提取出来。把naoqi-sdk-2.1.4.13-linux32.tar.gz复制到robotcup/BHumanCodeRelease-master/Install路径下。</p>
-</li>
-<li><p>进入<code>/robotcup/BHumanCodeRelease-master/Install</code>执行<code>./installAlcommon naoqi-sdk-2.1.4.13-linux32.tar.gz</code></p>
-</li>
-<li><p>进入<code>/robotcup/BHumanCodeRelease-master/Make/LinuxCodeLite</code>执行<code>./generate</code></p>
-</li>
-<li><p>然后执行<code>codelite</code>，选中B-Human,右键选中Build-&gt;ReBuild Workspace</p>
-</li>
+<li>新建一个文件夹<code>robotcup</code>，将上面三个压缩包放到这个新建的目录下。</li>
+<li>BHumanCodeRelease-master.zip解压，提取出来。把naoqi-sdk-2.1.4.13-linux32.tar.gz复制到robotcup/BHumanCodeRelease-master/Install路径下。</li>
+<li>进入<code>/robotcup/BHumanCodeRelease-master/Install</code>执行<code>./installAlcommon naoqi-sdk-2.1.4.13-linux32.tar.gz</code></li>
+<li>进入<code>/robotcup/BHumanCodeRelease-master/Make/LinuxCodeLite</code>执行<code>./generate</code></li>
+<li>然后执行<code>codelite</code>，选中B-Human,右键选中Build-&gt;ReBuild Workspace</li>
 </ol>
 <h4 id="配置网络"><a href="#配置网络" class="headerlink" title="配置网络"></a>配置网络</h4><p>进入<code>/robotcup/BHumanCodeRelease-master/Install/Network/Profiles</code>编辑<code>default</code>文件，配置Wi-Fi信息。</p>
 <h4 id="拷贝编译好的文件到Nao"><a href="#拷贝编译好的文件到Nao" class="headerlink" title="拷贝编译好的文件到Nao"></a>拷贝编译好的文件到Nao</h4><ol>
@@ -566,8 +573,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/03/Nao机器人-BHuman中的Config/" rel="next" title="Nao机器人-BHuman中的Config">
-                <i class="fa fa-chevron-left"></i> Nao机器人-BHuman中的Config
+              <a href="/2019/03/Nao机器人-BHuman中的Config/" rel="next" title="【Nao机器人】BHuman中的Config">
+                <i class="fa fa-chevron-left"></i> 【Nao机器人】BHuman中的Config
               </a>
             
           </div>
@@ -575,6 +582,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/03/Nao机器人-BHuman的组件和配置/" rel="prev" title="【Nao机器人】BHuman的组件和配置">
+                【Nao机器人】BHuman的组件和配置 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -649,7 +660,7 @@
                 
                   <a href="/archives">
                 
-                    <span class="site-state-item-count">6</span>
+                    <span class="site-state-item-count">7</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -743,7 +754,7 @@
               <ul class="links-of-blogroll-list">
                 
                   <li class="links-of-blogroll-item">
-                    <a href="https://blog.csdn.net/m0_38032942" title="https://blog.csdn.net/m0_38032942" rel="noopener" target="_blank">Tim</a>
+                    <a href="https://zouchanglin.github.io/" title="https://zouchanglin.github.io/" rel="noopener" target="_blank">Tim</a>
                   </li>
                 
                   <li class="links-of-blogroll-item">
@@ -756,10 +767,6 @@
                 
                   <li class="links-of-blogroll-item">
                     <a href="https://blog.csdn.net/weixin_43232955" title="https://blog.csdn.net/weixin_43232955" rel="noopener" target="_blank">Mr.Q_</a>
-                  </li>
-                
-                  <li class="links-of-blogroll-item">
-                    <a href="https://www.sofency.top/" title="https://www.sofency.top/" rel="noopener" target="_blank">sofency</a>
                   </li>
                 
               </ul>
