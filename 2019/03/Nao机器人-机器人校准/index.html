@@ -117,7 +117,8 @@
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://ws1.sinaimg.cn/large/006wR0dcly1g1lxci0ou4j31fg0nihdt.jpg">
 <meta property="og:image" content="https://ws1.sinaimg.cn/large/006wR0dcly1g1lxz0nn55j31aa0d8tzx.jpg">
-<meta property="og:updated_time" content="2019-03-31T06:15:24.489Z">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/006wR0dcly1g1lydfjatyj31720gae81.jpg">
+<meta property="og:updated_time" content="2019-03-31T06:19:46.323Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="【Nao机器人】机器人校准">
 <meta name="twitter:description" content="正确校准的机器人非常重要，因为软件要求NAO的所有部件都在预期的位置。否则，NAO将无法稳定行走，从图像坐标投影到世界坐标(反之亦然)将是错误的。一般来说，很多计算都是不可靠的。NAO的两个物理组件可以通过SimRobot进行校准，关节和摄像机。经常检查这些校准是很重要的，特别是对关节来说。随着时间的推移和使用，关节会磨损。尤其是髋关节。除此之外，B-Human软件还使用四种颜色类(官方文档4.1">
@@ -398,7 +399,7 @@
                 
               
 
-              <time title="创建时间：2019-03-31 13:12:14 / 修改时间：14:15:24" itemprop="dateCreated datePublished" datetime="2019-03-31T13:12:14+08:00">2019-03-31</time>
+              <time title="创建时间：2019-03-31 13:12:14 / 修改时间：14:19:46" itemprop="dateCreated datePublished" datetime="2019-03-31T13:12:14+08:00">2019-03-31</time>
             
 
             
@@ -521,6 +522,8 @@
 <p>相机驱动程序可以做一次自动白平衡。该功能可以通过以下命令触发：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">dr module:CameraProvider:doWhiteBalanceUpper </span><br><span class="line">dr module:CameraProvider:doWhiteBalanceLower</span><br></pre></td></tr></table></figure>
 <p>在设置好相机驱动程序的参数后，必须更新color类的参数(cf. section . 4.1.4)。为此，需要使用分割的上下摄像头图像和颜色校准视图打开视图，(参看第10.1.4.1节和第10.1.4.1节)。完成color类校准并保存当前参数后，可以使用copyfiles/bush来部署当前设置。确保文件cameraSettingsV5.cfg(或cameraSettingsV4.cfg，如果NAO是V4模型)和fieldColorsCalibrationV5.cfg(或fieldColorsCalibrationV4.cfg)更新了并存储在正确的位置。</p>
+<p><img src="https://ws1.sinaimg.cn/large/006wR0dcly1g1lydfjatyj31720gae81.jpg" alt></p>
+<p>The left figure shows an image with improper white balance. The right figure shows the same image with better settings for white balance.</p>
 <hr>
 
       
