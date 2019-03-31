@@ -1,0 +1,253 @@
+<!DOCTYPE HTML>
+<html>
+
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  <title>JavaScript-Nodejs-ajax跨域 | 小本本</title>
+  
+  <meta name="author" content="ahoj">
+  
+  <meta name="description" content="ahoj的小本本">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+  <meta property="og:title" content="JavaScript-Nodejs-ajax跨域">
+  <meta property="og:site_name" content="小本本">
+
+  
+  <meta property="og:image" content>
+  
+
+  
+  <link rel="alternative" href="/wiki/atom.xml" title="小本本" type="application/atom+xml">
+  
+  
+  <link href="/wiki/https://avatars1.githubusercontent.com/u/43307215?s=460&v=4" rel="icon">
+  
+
+  <link rel="stylesheet" href="/wiki/css/bootstrap.min.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/wiki/css/font-awesome.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/wiki/css/style.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/wiki/css/highlight.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/wiki/css/google-fonts.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/wiki/css/responsive.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/wiki/css/sidenav.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+
+  <script src="/wiki/js/jquery-2.0.3.min.js"></script>
+
+  <center>
+    <div class="accordion-group">
+      <div class="accordion-heading">
+        <a class="accordion-toggle" data-toggle="collapse" href="#about">
+          <i class="fa fa-bookmark"></i> 
+        </a>
+      </div> <!-- accordion-heading -->
+      <div id="about" class="accordion-body collapse in">
+        <div class="accordion-inner" style="background-color:#FFFFFF">
+
+          <p>把知识记在小本本上</p>
+          <p>将零散的知识点放在一个集中的地方，不断递归重构，形成一套为己所用的知识系统。</p>
+          <a href="http://ahoj.cc/">博客首页</a> | 
+          <a href="http://ahoj.cc/wiki/">小本本首页</a>
+
+        </div>
+      </div>
+    </div>
+  </center>
+
+  <!-- analytics -->
+  
+
+</head></html>
+<body id="body" data-spy="scroll" data-target=".toc">
+  <div class="container" id="container">
+	<div class="content">
+	  <div class="page-header">		
+  <h1><a class="brand" href="/wiki/">小本本</a><span class="split"></span><span class="title">JavaScript-Nodejs-ajax跨域</span><span class="date" id="title-date"><i class="fa fa-clock-o"></i> 2019-03-31</span></h1>
+</div>		
+
+<div class="row page">
+  <!-- cols -->	
+  
+  <div class="col-xs-12 col-sm-3 col-md-3 toc"> 
+	<!-- toc -->
+<script type="text/javascript">
+		jQuery(document).ready(function() {
+ 		   generateWikiTOC('.note', '.toc',  2 , 2 );
+		});
+</script>
+  </div><!-- col-md-3 -->
+  
+  
+
+  
+  <div class="col-xs-12 col-sm-9 col-md-9 note">
+	
+
+	  <!-- content -->
+	  <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> http=<span class="built_in">require</span>(<span class="string">'http'</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> allowOrigin=&#123;</span><br><span class="line">  <span class="string">'http://localhost'</span>: <span class="literal">true</span>,</span><br><span class="line">  <span class="string">'http://aaa.com'</span>: <span class="literal">true</span>,</span><br><span class="line">  <span class="string">'https://aaa.com'</span>: <span class="literal">true</span>,</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">http.createServer(<span class="function">(<span class="params">req, res</span>)=&gt;</span>&#123;</span><br><span class="line">  <span class="keyword">let</span> &#123;origin&#125;=req.headers;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span>(allowOrigin[origin])&#123;</span><br><span class="line">    res.setHeader(<span class="string">'access-control-allow-origin'</span>, <span class="string">'*'</span>);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  res.write(<span class="string">'&#123;"a": 12, "b": "Blue"&#125;'</span>);</span><br><span class="line">  res.end();</span><br><span class="line">&#125;).listen(<span class="number">8080</span>);</span><br></pre></td></tr></table></figure>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">"en"</span> <span class="attr">dir</span>=<span class="string">"ltr"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"utf-8"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span><span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="undefined"></span></span><br><span class="line"><span class="javascript">    <span class="built_in">window</span>.onload=<span class="function"><span class="keyword">function</span> (<span class="params"></span>)</span>&#123;</span></span><br><span class="line"><span class="javascript">      <span class="keyword">let</span> oBtn=<span class="built_in">document</span>.getElementById(<span class="string">'btn1'</span>);</span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="javascript">      oBtn.onclick=<span class="function"><span class="keyword">function</span> (<span class="params"></span>)</span>&#123;</span></span><br><span class="line"><span class="javascript">        <span class="keyword">let</span> ajax=<span class="keyword">new</span> XMLHttpRequest();</span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="javascript">        ajax.open(<span class="string">'GET'</span>, <span class="string">'http://localhost:8080/a'</span>, <span class="literal">true</span>);</span></span><br><span class="line"><span class="undefined">        ajax.send();</span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="javascript">        ajax.onreadystatechange=<span class="function"><span class="keyword">function</span> (<span class="params"></span>)</span>&#123;</span></span><br><span class="line"><span class="javascript">          <span class="comment">// readyState 0~4</span></span></span><br><span class="line"><span class="javascript">          <span class="comment">// 0：初始化	1：已连接 2：已发送 3：响应头已经接收到 4：相应体已经接受</span></span></span><br><span class="line"><span class="javascript">          <span class="keyword">if</span>(ajax.readyState==<span class="number">4</span>)&#123;</span></span><br><span class="line"><span class="javascript">            <span class="keyword">if</span>(ajax.status&gt;=<span class="number">200</span> &amp;&amp; ajax.status&lt;<span class="number">300</span> || ajax.status==<span class="number">304</span>)&#123;</span></span><br><span class="line"><span class="javascript">              alert(<span class="string">'成功'</span>);</span></span><br><span class="line"><span class="javascript">              <span class="keyword">let</span> json=<span class="built_in">JSON</span>.parse(ajax.responseText);</span></span><br><span class="line"><span class="javascript">              <span class="built_in">console</span>.log(json);</span></span><br><span class="line"><span class="javascript">            &#125;<span class="keyword">else</span>&#123;</span></span><br><span class="line"><span class="javascript">              alert(<span class="string">'失败'</span>);</span></span><br><span class="line"><span class="undefined">            &#125;</span></span><br><span class="line"><span class="undefined">          &#125;</span></span><br><span class="line"><span class="undefined">        &#125;;</span></span><br><span class="line"><span class="undefined">      &#125;;</span></span><br><span class="line"><span class="undefined">    &#125;;</span></span><br><span class="line"><span class="undefined">    </span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"button"</span> <span class="attr">value</span>=<span class="string">"请求"</span> <span class="attr">id</span>=<span class="string">"btn1"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<hr>
+<p>ajax为什么不能跨域？</p>
+<p>SOP：同源策略，你代码请求的资源应该和你在一个域名下，如果不是，浏览器会禁止这个请求。</p>
+<p>ajax是被谁阻止住的？</p>
+<p>不是服务器，是浏览器阻止的，这是浏览器的一种”自律”的行为。</p>
+<p><img src="https://ws1.sinaimg.cn/large/006wR0dcly1g1mbdhmy8kj318c0l877m.jpg" alt></p>
+<p>服务器是一定会响应的，响应后如果不是同源，浏览器会把这个东西扔掉。</p>
+<p>所以这个时候需要服务器返回数据的时候需要声明一下，声明我们是一家子(就是声明哪些人可以从我这里获取数据)，如上代码。</p>
+<hr>
+	  
+
+	  <div>
+  		<center>
+		  <div class="pagination">
+<ul class="pagination">
+	
+	
+	
+	
+	
+	
+		
+			
+			
+		
+	
+		
+			
+			
+			
+		
+			
+		
+	
+		
+			
+		
+	
+		
+			
+		
+	
+		
+			
+		
+	
+		
+			
+		
+	
+		
+			
+		
+	
+		
+	
+		
+	
+		
+	
+		
+	
+		
+	
+		
+	
+		
+	
+		
+	
+		
+	
+		
+	
+		
+	
+		
+	
+		
+	
+		
+	
+		
+	
+		
+	
+		
+	
+		
+	
+		
+	
+		
+	
+		
+	
+		
+	
+		
+	
+		
+	
+		
+	
+	
+	
+		<li class="prev disabled"><a><i class="fa fa-arrow-circle-o-left"></i>prev</a></li>
+	
+	<li><a href="/wiki/"><i class="fa fa-archive"></i>Home</a></li>
+	
+		<li class="next"><a href="/wiki/2019/03/31/JavaScript-Nodejs-几个系统包/" class="alignright next">next<i class="fa fa-arrow-circle-o-right"></i></a></li>
+	
+</ul>
+</div>
+
+		</center>
+	  </div>
+	  
+	</div> <!-- col-md-9/col-md-12 -->
+	
+  </div><!-- row -->
+
+	</div>
+  </div>
+  <div class="container-narrow">
+	<footer> <p>
+  &copy; 2019 ahoj
+  
+      with help from <a href="http://zespia.tw/hexo/" target="_blank">Hexo</a> and <a href="http://getbootstrap.com/" target="_blank">Twitter Bootstrap</a>. Theme by <a href="http://github.com/wzpan/hexo-theme-wixo/">Wixo</a>.    
+</p> </footer>
+  </div> <!-- container-narrow -->
+  
+<a id="gotop" href="#">   
+  <span>▲</span> 
+</a>
+
+<script src="/wiki/js/jquery.imagesloaded.min.js"></script>
+<script src="/wiki/js/gallery.js"></script>
+<script src="/wiki/js/bootstrap.min.js"></script>
+<script src="/wiki/js/jquery.tableofcontents.min.js"></script>
+<script src="/wiki/js/tocgenerator.min.js"></script>
+<script src="/wiki/js/main.js"></script>
+<script src="/wiki/js/search.js"></script> 
+
+
+
+
+<link rel="stylesheet" href="/wiki/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/wiki/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+
+
+
+</body>
+</html>
