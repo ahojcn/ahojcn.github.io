@@ -107,27 +107,28 @@
 
 
 
-  <meta name="description" content="给 Nao (小宝贝) 部署 Naoqi 系统和 BHuman 系统。">
+  <meta name="description" content="正确校准的机器人非常重要，因为软件要求NAO的所有部件都在预期的位置。否则，NAO将无法稳定行走，从图像坐标投影到世界坐标(反之亦然)将是错误的。一般来说，很多计算都是不可靠的。NAO的两个物理组件可以通过SimRobot进行校准，关节和摄像机。经常检查这些校准是很重要的，特别是对关节来说。随着时间的推移和使用，关节会磨损。尤其是髋关节。除此之外，B-Human软件还使用四种颜色类(官方文档4.1">
 <meta name="keywords" content="Nao机器人,BHuman">
 <meta property="og:type" content="article">
-<meta property="og:title" content="【Nao机器人】刷机">
-<meta property="og:url" content="http://ahoj.cc/2019/03/Nao机器人-刷机/index.html">
+<meta property="og:title" content="【Nao机器人】机器人校准">
+<meta property="og:url" content="http://ahoj.cc/2019/03/Nao机器人-机器人校准/index.html">
 <meta property="og:site_name" content="ahoj">
-<meta property="og:description" content="给 Nao (小宝贝) 部署 Naoqi 系统和 BHuman 系统。">
+<meta property="og:description" content="正确校准的机器人非常重要，因为软件要求NAO的所有部件都在预期的位置。否则，NAO将无法稳定行走，从图像坐标投影到世界坐标(反之亦然)将是错误的。一般来说，很多计算都是不可靠的。NAO的两个物理组件可以通过SimRobot进行校准，关节和摄像机。经常检查这些校准是很重要的，特别是对关节来说。随着时间的推移和使用，关节会磨损。尤其是髋关节。除此之外，B-Human软件还使用四种颜色类(官方文档4.1">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="https://ws1.sinaimg.cn/large/006wR0dcly1g1l8kwg4i9j30hs0hs16e.jpg">
-<meta property="og:updated_time" content="2019-03-30T16:10:21.687Z">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/006wR0dcly1g1lxci0ou4j31fg0nihdt.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/006wR0dcly1g1lxz0nn55j31aa0d8tzx.jpg">
+<meta property="og:updated_time" content="2019-03-31T06:15:24.489Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="【Nao机器人】刷机">
-<meta name="twitter:description" content="给 Nao (小宝贝) 部署 Naoqi 系统和 BHuman 系统。">
-<meta name="twitter:image" content="https://ws1.sinaimg.cn/large/006wR0dcly1g1l8kwg4i9j30hs0hs16e.jpg">
+<meta name="twitter:title" content="【Nao机器人】机器人校准">
+<meta name="twitter:description" content="正确校准的机器人非常重要，因为软件要求NAO的所有部件都在预期的位置。否则，NAO将无法稳定行走，从图像坐标投影到世界坐标(反之亦然)将是错误的。一般来说，很多计算都是不可靠的。NAO的两个物理组件可以通过SimRobot进行校准，关节和摄像机。经常检查这些校准是很重要的，特别是对关节来说。随着时间的推移和使用，关节会磨损。尤其是髋关节。除此之外，B-Human软件还使用四种颜色类(官方文档4.1">
+<meta name="twitter:image" content="https://ws1.sinaimg.cn/large/006wR0dcly1g1lxci0ou4j31fg0nihdt.jpg">
 
 
 
 
 
 
-  <link rel="canonical" href="http://ahoj.cc/2019/03/Nao机器人-刷机/">
+  <link rel="canonical" href="http://ahoj.cc/2019/03/Nao机器人-机器人校准/">
 
 
 
@@ -137,7 +138,7 @@
   };
 </script>
 
-  <title>【Nao机器人】刷机 | ahoj</title>
+  <title>【Nao机器人】机器人校准 | ahoj</title>
   
 
 
@@ -354,7 +355,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://ahoj.cc/2019/03/Nao机器人-刷机/">
+    <link itemprop="mainEntityOfPage" href="http://ahoj.cc/2019/03/Nao机器人-机器人校准/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="ahoj">
@@ -371,7 +372,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">【Nao机器人】刷机
+          <h1 class="post-title" itemprop="name headline">【Nao机器人】机器人校准
 
               
             
@@ -397,24 +398,12 @@
                 
               
 
-              <time title="创建时间：2019-03-30 23:03:33" itemprop="dateCreated datePublished" datetime="2019-03-30T23:03:33+08:00">2019-03-30</time>
+              <time title="创建时间：2019-03-31 13:12:14 / 修改时间：14:15:24" itemprop="dateCreated datePublished" datetime="2019-03-31T13:12:14+08:00">2019-03-31</time>
             
 
             
               
 
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2019-03-31 00:10:21" itemprop="dateModified" datetime="2019-03-31T00:10:21+08:00">2019-03-31</time>
               
             
           </span>
@@ -450,8 +439,8 @@
                 </span>
             
                 <span class="post-meta-item-text">评论数：</span>
-                <a href="/2019/03/Nao机器人-刷机/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/2019/03/Nao机器人-刷机/" itemprop="commentCount"></span>
+                <a href="/2019/03/Nao机器人-机器人校准/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2019/03/Nao机器人-机器人校准/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -486,54 +475,52 @@
       
 
       
-        <p>给 Nao (小宝贝) 部署 Naoqi 系统和 BHuman 系统。</p>
-<p><img src="https://ws1.sinaimg.cn/large/006wR0dcly1g1l8kwg4i9j30hs0hs16e.jpg" alt="Nao"></p>
+        <p>正确校准的机器人非常重要，因为软件要求NAO的所有部件都在预期的位置。否则，NAO将无法稳定行走，从图像坐标投影到世界坐标(反之亦然)将是错误的。<br>一般来说，很多计算都是不可靠的。NAO的两个物理组件可以通过SimRobot进行校准，关节和摄像机。经常检查这些校准是很重要的，特别是对关节来说。<br>随着时间的推移和使用，关节会磨损。尤其是髋关节。除此之外，B-Human软件还使用四种颜色类(官方文档4.1.4节)，这些颜色类也需要校准。改变位置或光照条件可能需要对其进行调整。</p>
 <a id="more"></a>
-<p>机器人相关软件的下载地址：<a href="https://community.ald.softbankrobotics.com/en/resources/software/language/en-gb" target="_blank" rel="noopener">https://community.ald.softbankrobotics.com/en/resources/software/language/en-gb</a></p>
-<h2 id="BHuman-to-Naoqi"><a href="#BHuman-to-Naoqi" class="headerlink" title="BHuman to Naoqi"></a>BHuman to Naoqi</h2><h3 id="准备"><a href="#准备" class="headerlink" title="准备"></a>准备</h3><ul>
-<li>U盘</li>
-<li>flasher-2.1.0.19-linux64</li>
-<li>opennao-atom-system-image-2.1.4.13_2015-08-27.opn</li>
+<h2 id="整体物理校准"><a href="#整体物理校准" class="headerlink" title="整体物理校准"></a>整体物理校准</h2><p>物理校准过程可以分为三个步骤，总体目标是一个直立的机器人，以及一个正确校准的相机。</p>
+<p>第一步：让双脚处于一个平面的位置。这并不意味着机器人必须站直。这是通过把机器人抬起来，这样就可以看到脚的底部。然后改变脚和腿的关节偏移量，直到两脚都是平面的，两腿平行。两条腿之间的距离可以在腿的灰色部分测量。它们之间的距离应该是10厘米。</p>
+<p>第二步：<a href="#相机校准">相机校准</a>。这个步骤还可以测量身体相对于脚的倾斜程度。该测量可用于第三步。</p>
+<p>第三步：使用第二步的测量量以改进关节的校准和机器人的扶正。在某些情况下，可能需要重复这些步骤，因为联合校准中的大变化可能使相机校准无效。</p>
+<h2 id="关节校准"><a href="#关节校准" class="headerlink" title="关节校准"></a>关节校准</h2><p>BHuman 支持两种关节校准方法。一是通过手动调整每个关节的偏移量；二是使用使用逆运动学的关节校准模块来校准。<br>整个校准过程的第三步(整体物理校准的第三步)只能通过关节校准器完成。在这两种方法之间切换时，需要<strong>保存关节校准，重新部署NAO，重启bhuman</strong>。否则，前面做的更改将不会生效。</p>
+<p>在改变关节偏移量之前，机器人必须处于固定关节角度的站立位置。否则，运动引擎的平衡机构可能会移动腿，打乱关节的校准。<br>使用：<code>get representation:MotionRequest</code>，在返回的语句中设置<code>motion = stand</code>，校准完成后记得保存，<code>save representation:JointCalibration</code>。</p>
+<h3 id="手动调整关节偏差"><a href="#手动调整关节偏差" class="headerlink" title="手动调整关节偏差"></a>手动调整关节偏差</h3><p>首先，机器人必须切换到一个固定的支架上，否则运动引擎的平衡机械手可能会移动机器人的腿，打乱关节的校准：<code>mr StandArmRequest CalibrationStand</code>，<code>mr StandLegRequest CalibrationStand</code>。</p>
+<p>有两种方法可以调整关节偏移。<br>要么使用 get 来请求 JointCalibration 表示形式：<code>get representation:JointCalibration</code>修改返回的校准，然后设置它。<br>要么通过使用数据视图，更加方便：<code>vd representation:JointCalibration</code>。</p>
+<p>⚠️ 注意：JointCalibration 还包含每个关节的其他信息，不应该改变！</p>
+<h3 id="使用关节校准器-JointCalibrator"><a href="#使用关节校准器-JointCalibrator" class="headerlink" title="使用关节校准器(JointCalibrator)"></a>使用关节校准器(JointCalibrator)</h3><p>首先设置关节校准器，提供关节校准器并切换到校准台：<code>call Calibrators/Joint</code><br>当需要全新校准时，可对关节校准进行复位：<code>dr module:JointCalibrator:reset</code><br>然后，可以修改脚的平移和旋转。再次使用：<code>get module:JointCalibrator:offsets</code>或：<code>vd module:JointCalibrator:offsets</code></p>
+<p>⚠️ 注意：调整的单位是毫米，旋转是度数为基准的。</p>
+<h3 id="让-Nao-直立"><a href="#让-Nao-直立" class="headerlink" title="让 Nao 直立"></a>让 Nao 直立</h3><p>相机校准还计算身体旋转的旋转。这些值可以传递给关节校准器，然后将NAO设置在垂直位置。命令：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">get representation:CameraCalibration </span><br><span class="line">call Calibrators/Joint</span><br></pre></td></tr></table></figure>
+<p>将 bodyRotationCorrection(CameraCalibration 表示)的值复制到 bodyRotation (JointCalibration 表示)中。之后，设置 bodyRotationCorrection(CameraCalibration 表示) 为零。通过使用具有自动化标志的自动相机校准器，可以自动或多或少地使这些动作成为可能。</p>
+<p>最后一步是在同一时间调整双脚的移动(大部分时间是在同一方向)，使它们垂直于躯干下方。直线激光对这项任务非常有用。当全部操作完成时，通过执行下面的命令来保存校准：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">save representation:JointCalibration </span><br><span class="line">save representation:CameraCalibration</span><br></pre></td></tr></table></figure>
+<p>然后重新部署NAO并重新启动bhuman。</p>
+<p><img src="https://ws1.sinaimg.cn/large/006wR0dcly1g1lxci0ou4j31fg0nihdt.jpg" alt="机器人校准2.1"></p>
+<p>图：校准程序之前(a)和之后(b)的投影线</p>
+<h2 id="相机校准"><a href="#相机校准" class="headerlink" title="相机校准"></a>相机校准</h2><p>使用 AutomaticCameraCalibrator 模块校准相机(参考4.1.2.1节)，请遵循以下步骤：</p>
+<ol>
+<li>将模拟器连接到现场的机器人，并将其放置在确定的位置上(例如，罚球线)。 </li>
+<li>运行SimRobot配置文件Calibrators/Camera.con(在控制台输入 <code>call Calibrators/Camera</code>)。这将初始化校准过程，并进一步将命令或帮助打印到稍后将需要的模拟器控制台。</li>
+<li>使用AutomaticCameraCalibrator模块(自动相机校准模块)，例如将机器人放在罚球线，控制台输入<code>set module:AutomaticCameraCalibrator:robotPose rotation = 0;translation= {x = -3200;y = 0;}</code>，来宣告机器人在球场上的位置。</li>
+<li>若要自动生成以下关节校准的命令以纠正身体旋转，可通过：<code>set module:AutomaticCame raCalibrator:setJointOffsets true</code>，优化完成后，只需输入生成的命令，从而纠正旋转。</li>
+<li>启动点收集：<code>dr module:AutomaticCameraCalibrator:start</code>，然后等待输出”Accumulation finished. Waiting to optimize. . . “。这个过程包括：两个摄像头采集样本进行校准，头部运动覆盖整个场地。<strong>上面相机的样本是蓝色的，下面相机的样本是红色的。</strong>图像上方的图形表示样本数量是否足以优化，可以(绿色)不可以(红色)。</li>
+<li>如果对某些特定示例的集合不满意，可以通过左击找到示例的图像中的示例来删除示例。如果缺少一些示例，可以通过<code>Ctrl+左键单击</code>将它们手动添加到相应的图像中。</li>
+<li>使用自动校准程序：<code>dr module:AutomaticCameraCalibrator:optimize</code>，然后等待优化收敛。</li>
+</ol>
+<p><img src="https://ws1.sinaimg.cn/large/006wR0dcly1g1lxz0nn55j31aa0d8tzx.jpg" alt></p>
+<p>图：三个有趣的相机校准阶段。a)为校准器的起点。b)为控件从采集的样本开始后的视图。c)为优化后的阶段。</p>
+<h2 id="颜色校准"><a href="#颜色校准" class="headerlink" title="颜色校准"></a>颜色校准</h2><p>校准颜色类分为两个步骤。</p>
+<p>首先：相机驱动程序的参数必须根据环境的需要进行更新。使用<code>get representation:CameraSettings</code>返回当前摄像机的参数。</p>
+<p>此外：将生成必要的set命令。一些比较重要的参数：</p>
+<ul>
+<li><strong>whiteBalanceTemperature：</strong> 白平衡。可用区间为[2700,6500]。</li>
+<li><strong>exposure：</strong> 曝光，可用区间为[0,1000]。通常，使用140的曝光，等于14毫秒。数值越大，图像越模糊。</li>
+<li><strong>gain：</strong> 增益，可用区间为[0,255]。通常，增益设置为50 - 70。高增益值会导致图像嘈杂。</li>
+<li><strong>autoWhiteBalance：</strong> 启用(1)/禁用(0)自动白平衡。此参数应<strong>始终禁用</strong>，因为白平衡中的更改可能会更改颜色并打乱颜色校准。另一方面，环境色温的真实变化也会产生同样的结果。</li>
+<li><strong>autoExposure：</strong> 启用(1)/禁用(0)自动曝光。在标准室内锦标赛等静态灯光条件下进行比赛时，应始终禁用此参数，因为自动化往往会选择高于需要的值，从而导致图像模糊。然而，对于2016年机器人世界杯户外比赛中出现的动态光环境，使用相机驱动程序的自动化可能是必要的。在这种情况下，可以使用参数autoExposureAlgorithm和亮度来改变其行为。</li>
 </ul>
-<h3 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h3><ol>
-<li>在Ubuntu下，将U盘格式化。</li>
-<li>解压flasher-2.1.0.19-linux64，<code>cd</code>到这个解压好的目录下，<code>l</code>查看当前目录下的文件（ps：如果文件名右上角有*，说明权限不够，<code>sudo</code>即可）。</li>
-<li><code>cd bin/</code>然后执行<code>sudo ./flasher</code></li>
-<li>输入nao的密码(一般是<code>0</code>)</li>
-<li>把 u盘插入 Nao 的脑壳，按住胸前按钮直到次按钮不停的高频闪烁，释放按钮，Nao 进入自动刷机状态，等待十几分钟，听到 OGNAK 后说明刷机完成，拔出U盘。</li>
-<li>在 linux 下关闭 Wi-Fi 连接，用网线连接机器人和电脑,编辑一个新网络,断开并重新连接,此时按机器人胸前按钮，会得到一个 ip。(如果是虚拟机要更改成桥连模式,关闭外网)，有时会听到“I cannot connect to the network”，多按几次（一般是3次）可以成功报出 IP，如果还是不行，先将NAO随意连接到其他任意设置的网络，之后断开，再连接回预设网络，方可成功。（由于刷好机后的NAO的有线IP都是以169.254开头，所以可以将Ethernet网的IPv4设置成：Address: 169.254.xxx.xxx; Netmask: 255.255.0.0; Gateway: 169.254.xxx.xxx）。</li>
-</ol>
-<h2 id="Naoqi-to-BHuman"><a href="#Naoqi-to-BHuman" class="headerlink" title="Naoqi to BHuman"></a>Naoqi to BHuman</h2><p>BHuman项目：<a href="https://github.com/bhuman/BHumanCodeRelease" target="_blank" rel="noopener">https://github.com/bhuman/BHumanCodeRelease</a></p>
-<p>注意：在部署bhuman之前，确保机器人的系统为naoqi，版本号为2.1.4.13，如若不是，请<a href="#BHuman to Naoqi">给机器人部署naoqi系统</a>。</p>
-<h3 id="准备-1"><a href="#准备-1" class="headerlink" title="准备"></a>准备</h3><ul>
-<li>电脑、网线、安装 CodeLite</li>
-<li>BHumanCodeRelease-master.zip</li>
-<li>GameController-master.zip</li>
-<li>naoqi-sdk-2.1.4.13-linux32.tar.gz</li>
-</ul>
-<h3 id="步骤-1"><a href="#步骤-1" class="headerlink" title="步骤"></a>步骤</h3><h4 id="编译项目"><a href="#编译项目" class="headerlink" title="编译项目"></a>编译项目</h4><ol>
-<li>新建一个文件夹<code>robotcup</code>，将上面三个压缩包放到这个新建的目录下。</li>
-<li>BHumanCodeRelease-master.zip解压，提取出来。把naoqi-sdk-2.1.4.13-linux32.tar.gz复制到robotcup/BHumanCodeRelease-master/Install路径下。</li>
-<li>进入<code>/robotcup/BHumanCodeRelease-master/Install</code>执行<code>./installAlcommon naoqi-sdk-2.1.4.13-linux32.tar.gz</code></li>
-<li>进入<code>/robotcup/BHumanCodeRelease-master/Make/LinuxCodeLite</code>执行<code>./generate</code></li>
-<li>然后执行<code>codelite</code>，选中B-Human,右键选中Build-&gt;ReBuild Workspace</li>
-</ol>
-<h4 id="配置网络"><a href="#配置网络" class="headerlink" title="配置网络"></a>配置网络</h4><p>进入<code>/robotcup/BHumanCodeRelease-master/Install/Network/Profiles</code>编辑<code>default</code>文件，配置Wi-Fi信息。</p>
-<h4 id="拷贝编译好的文件到Nao"><a href="#拷贝编译好的文件到Nao" class="headerlink" title="拷贝编译好的文件到Nao"></a>拷贝编译好的文件到Nao</h4><ol>
-<li><p>进入<code>/robotcup/BHumanCodeRelease-master/Install</code>执行<code>./createRobot -d -t 17 -r 2 roboname</code>（参数：-d为清空之前的，-t后跟team number，-r后跟机器人序号，roboname是设定机器人名字）</p>
-</li>
-<li><p>执行<code>./addRobotIds -ip 192.168.66.4 roboname</code>（192.168.66.4是让机器人自己报的现在的ip，roboname是设定的名字）</p>
-</li>
-<li><p>执行<code>./installRobot 192.168.66.4</code>（192.168.66.4同上）</p>
-</li>
-<li><p>执行完上述操作后，就成功将机器人的IP设置为：192.168.teamNumber.robotNumber（上述步骤会分别在代码的Config/Robots/下创建相应的内容，./createRobot -d -t 20 -r 10 dashu 会在Config/Robots/下穿件名为dashu的文件夹；./addRobotIds<br>-ip 169.254.210.108 dashu会在Config/Robots/robots.cfg中增加机器人的配置信息）</p>
-</li>
-<li><p>然后将电脑端连接的网络配置更改为192.168.xxx.xxx就可以了，或者在做完前面操作后，将机器人和电脑用网线连起来。</p>
-</li>
-<li><p>然后执行：<code>./copyfiles Release 192.168.17.2</code>。</p>
-</li>
-</ol>
-<p>欧阔~</p>
+<p>相机驱动程序可以做一次自动白平衡。该功能可以通过以下命令触发：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">dr module:CameraProvider:doWhiteBalanceUpper </span><br><span class="line">dr module:CameraProvider:doWhiteBalanceLower</span><br></pre></td></tr></table></figure>
+<p>在设置好相机驱动程序的参数后，必须更新color类的参数(cf. section . 4.1.4)。为此，需要使用分割的上下摄像头图像和颜色校准视图打开视图，(参看第10.1.4.1节和第10.1.4.1节)。完成color类校准并保存当前参数后，可以使用copyfiles/bush来部署当前设置。确保文件cameraSettingsV5.cfg(或cameraSettingsV4.cfg，如果NAO是V4模型)和fieldColorsCalibrationV5.cfg(或fieldColorsCalibrationV4.cfg)更新了并存储在正确的位置。</p>
 <hr>
 
       
@@ -573,8 +560,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/03/Nao机器人-BHuman中的Config/" rel="next" title="【Nao机器人】BHuman中的Config">
-                <i class="fa fa-chevron-left"></i> 【Nao机器人】BHuman中的Config
+              <a href="/2019/03/Nao机器人-ssh使用Nao/" rel="next" title="【Nao机器人】ssh使用Nao">
+                <i class="fa fa-chevron-left"></i> 【Nao机器人】ssh使用Nao
               </a>
             
           </div>
@@ -582,10 +569,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/03/Nao机器人-BHuman的组件和配置/" rel="prev" title="【Nao机器人】BHuman的组件和配置">
-                【Nao机器人】BHuman的组件和配置 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -792,7 +775,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#BHuman-to-Naoqi"><span class="nav-number">1.</span> <span class="nav-text">BHuman to Naoqi</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#准备"><span class="nav-number">1.1.</span> <span class="nav-text">准备</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#步骤"><span class="nav-number">1.2.</span> <span class="nav-text">步骤</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Naoqi-to-BHuman"><span class="nav-number">2.</span> <span class="nav-text">Naoqi to BHuman</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#准备-1"><span class="nav-number">2.1.</span> <span class="nav-text">准备</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#步骤-1"><span class="nav-number">2.2.</span> <span class="nav-text">步骤</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#编译项目"><span class="nav-number">2.2.1.</span> <span class="nav-text">编译项目</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#配置网络"><span class="nav-number">2.2.2.</span> <span class="nav-text">配置网络</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#拷贝编译好的文件到Nao"><span class="nav-number">2.2.3.</span> <span class="nav-text">拷贝编译好的文件到Nao</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#整体物理校准"><span class="nav-number">1.</span> <span class="nav-text">整体物理校准</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#关节校准"><span class="nav-number">2.</span> <span class="nav-text">关节校准</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#手动调整关节偏差"><span class="nav-number">2.1.</span> <span class="nav-text">手动调整关节偏差</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用关节校准器-JointCalibrator"><span class="nav-number">2.2.</span> <span class="nav-text">使用关节校准器(JointCalibrator)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#让-Nao-直立"><span class="nav-number">2.3.</span> <span class="nav-text">让 Nao 直立</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#相机校准"><span class="nav-number">3.</span> <span class="nav-text">相机校准</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#颜色校准"><span class="nav-number">4.</span> <span class="nav-text">颜色校准</span></a></li></ol></div>
             
 
           </div>
