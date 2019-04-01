@@ -1,0 +1,260 @@
+<!DOCTYPE HTML>
+<html>
+
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  <title>Nodejs-数据通信 | 小本本</title>
+  
+  <meta name="author" content="ahoj">
+  
+  <meta name="description" content="ahoj的小本本">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+  <meta property="og:title" content="Nodejs-数据通信">
+  <meta property="og:site_name" content="小本本">
+
+  
+  <meta property="og:image" content>
+  
+
+  
+  <link rel="alternative" href="/wiki/atom.xml" title="小本本" type="application/atom+xml">
+  
+  
+  <link href="/wiki/https://avatars1.githubusercontent.com/u/43307215?s=460&v=4" rel="icon">
+  
+
+  <link rel="stylesheet" href="/wiki/css/bootstrap.min.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/wiki/css/font-awesome.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/wiki/css/style.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/wiki/css/highlight.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/wiki/css/google-fonts.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/wiki/css/responsive.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/wiki/css/sidenav.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+
+  <script src="/wiki/js/jquery-2.0.3.min.js"></script>
+
+  <center>
+    <div class="accordion-group">
+      <div class="accordion-heading">
+        <a class="accordion-toggle" data-toggle="collapse" href="#about">
+          <i class="fa fa-bookmark"></i> 
+        </a>
+      </div> <!-- accordion-heading -->
+      <div id="about" class="accordion-body collapse in">
+        <div class="accordion-inner" style="background-color:#FFFFFF">
+
+          <p>把知识记在小本本上</p>
+          <p>将零散的知识点放在一个集中的地方，不断递归重构，形成一套为己所用的知识系统。</p>
+          <a href="http://ahoj.cc/">博客首页</a> | 
+          <a href="http://ahoj.cc/wiki/">小本本首页</a>
+
+        </div>
+      </div>
+    </div>
+  </center>
+
+  <!-- analytics -->
+  
+
+</head></html>
+<body id="body" data-spy="scroll" data-target=".toc">
+  <div class="container" id="container">
+	<div class="content">
+	  <div class="page-header">		
+  <h1><a class="brand" href="/wiki/">小本本</a><span class="split"></span><span class="title">Nodejs-数据通信</span><span class="date" id="title-date"><i class="fa fa-clock-o"></i> 2019-04-01</span></h1>
+</div>		
+
+<div class="row page">
+  <!-- cols -->	
+  
+  <div class="col-xs-12 col-sm-3 col-md-3 toc"> 
+	<!-- toc -->
+<script type="text/javascript">
+		jQuery(document).ready(function() {
+ 		   generateWikiTOC('.note', '.toc',  2 , 2 );
+		});
+</script>
+  </div><!-- col-md-3 -->
+  
+  
+
+  
+  <div class="col-xs-12 col-sm-9 col-md-9 note">
+	
+
+	  <!-- content -->
+	  <h2 id="fetch"><a href="#fetch" class="headerlink" title="fetch"></a>fetch</h2><p>fetch 是原生的用来替代 ajax 进行数据交互的。</p>
+<h3 id="解析text"><a href="#解析text" class="headerlink" title="解析text"></a>解析text</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html lang=<span class="string">"en"</span> dir=<span class="string">"ltr"</span>&gt;</span><br><span class="line">  &lt;head&gt;</span><br><span class="line">    &lt;meta charset=<span class="string">"utf-8"</span>&gt;</span><br><span class="line">    &lt;title&gt;<span class="xml"><span class="tag">&lt;/<span class="name">title</span>&gt;</span></span></span><br><span class="line">    &lt;script&gt;</span><br><span class="line">    <span class="built_in">window</span>.onload=<span class="function"><span class="keyword">function</span> (<span class="params"></span>)</span>&#123;</span><br><span class="line">      <span class="keyword">let</span> oBtn=<span class="built_in">document</span>.getElementById(<span class="string">'btn1'</span>);</span><br><span class="line">      oBtn.onclick=<span class="keyword">async</span> <span class="function"><span class="keyword">function</span> (<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="comment">//1.请求数据</span></span><br><span class="line">        <span class="keyword">let</span> res=<span class="keyword">await</span> fetch(<span class="string">'data/1.txt'</span>);</span><br><span class="line">        <span class="comment">//2.解析</span></span><br><span class="line">        <span class="keyword">let</span> str=<span class="keyword">await</span> res.text();</span><br><span class="line"></span><br><span class="line">        alert(str);</span><br><span class="line">      &#125;;</span><br><span class="line">    &#125;;</span><br><span class="line">    &lt;<span class="regexp">/script&gt;</span></span><br><span class="line"><span class="regexp">  &lt;/</span>head&gt;</span><br><span class="line">  &lt;body&gt;</span><br><span class="line">    &lt;input type=<span class="string">"button"</span> value=<span class="string">"读取"</span> id=<span class="string">"btn1"</span>&gt;</span><br><span class="line">  &lt;<span class="regexp">/body&gt;</span></span><br><span class="line"><span class="regexp">&lt;/</span>html&gt;</span><br></pre></td></tr></table></figure>
+<h3 id="解析JSON"><a href="#解析JSON" class="headerlink" title="解析JSON"></a>解析JSON</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html lang=<span class="string">"en"</span> dir=<span class="string">"ltr"</span>&gt;</span><br><span class="line">  &lt;head&gt;</span><br><span class="line">    &lt;meta charset=<span class="string">"utf-8"</span>&gt;</span><br><span class="line">    &lt;title&gt;<span class="xml"><span class="tag">&lt;/<span class="name">title</span>&gt;</span></span></span><br><span class="line">    &lt;script&gt;</span><br><span class="line">    <span class="built_in">window</span>.onload=<span class="function"><span class="keyword">function</span> (<span class="params"></span>)</span>&#123;</span><br><span class="line">      <span class="keyword">let</span> oBtn=<span class="built_in">document</span>.getElementById(<span class="string">'btn1'</span>);</span><br><span class="line">      oBtn.onclick=<span class="keyword">async</span> <span class="function"><span class="keyword">function</span> (<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="comment">//1.请求</span></span><br><span class="line">        <span class="keyword">let</span> res=<span class="keyword">await</span> fetch(<span class="string">'data/1.json'</span>);</span><br><span class="line">        <span class="comment">//2.解析</span></span><br><span class="line">        <span class="keyword">let</span> json=<span class="keyword">await</span> res.json();</span><br><span class="line"></span><br><span class="line">        <span class="built_in">console</span>.log(json);</span><br><span class="line">      &#125;;</span><br><span class="line">    &#125;;</span><br><span class="line">    &lt;<span class="regexp">/script&gt;</span></span><br><span class="line"><span class="regexp">  &lt;/</span>head&gt;</span><br><span class="line">  &lt;body&gt;</span><br><span class="line">    &lt;input type=<span class="string">"button"</span> value=<span class="string">"读取"</span> id=<span class="string">"btn1"</span>&gt;</span><br><span class="line">  &lt;<span class="regexp">/body&gt;</span></span><br><span class="line"><span class="regexp">&lt;/</span>html&gt;</span><br></pre></td></tr></table></figure>
+<h3 id="解析二进制数据blob"><a href="#解析二进制数据blob" class="headerlink" title="解析二进制数据blob"></a>解析二进制数据blob</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html lang=<span class="string">"en"</span> dir=<span class="string">"ltr"</span>&gt;</span><br><span class="line">  &lt;head&gt;</span><br><span class="line">    &lt;meta charset=<span class="string">"utf-8"</span>&gt;</span><br><span class="line">    &lt;title&gt;<span class="xml"><span class="tag">&lt;/<span class="name">title</span>&gt;</span></span></span><br><span class="line">    &lt;script&gt;</span><br><span class="line">    <span class="built_in">window</span>.onload=<span class="function"><span class="keyword">function</span> (<span class="params"></span>)</span>&#123;</span><br><span class="line">      <span class="keyword">let</span> oImg=<span class="built_in">document</span>.getElementById(<span class="string">'img1'</span>);</span><br><span class="line">      <span class="keyword">let</span> oBtn=<span class="built_in">document</span>.getElementById(<span class="string">'btn1'</span>);</span><br><span class="line">      oBtn.onclick=<span class="keyword">async</span> <span class="function"><span class="keyword">function</span> (<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="comment">//1.请求</span></span><br><span class="line">        <span class="keyword">let</span> res=<span class="keyword">await</span> fetch(<span class="string">'data/1.png'</span>);</span><br><span class="line">        <span class="comment">//2.解析</span></span><br><span class="line">        <span class="keyword">let</span> data=<span class="keyword">await</span> res.blob();</span><br><span class="line">        <span class="keyword">let</span> url=URL.createObjectURL(data);	<span class="comment">// 其实这个 url 是把这个图片的二进制数据写到Chrome的临时文件去(小的内存里，大的放文件，后面删)</span></span><br><span class="line"></span><br><span class="line">        oImg.src=url;</span><br><span class="line">      &#125;;</span><br><span class="line">    &#125;;</span><br><span class="line">    &lt;<span class="regexp">/script&gt;</span></span><br><span class="line"><span class="regexp">  &lt;/</span>head&gt;</span><br><span class="line">  &lt;body&gt;</span><br><span class="line">    &lt;input type=<span class="string">"button"</span> value=<span class="string">"读取"</span> id=<span class="string">"btn1"</span>&gt;</span><br><span class="line">    &lt;img id=<span class="string">"img1"</span> /&gt;</span><br><span class="line">  &lt;<span class="regexp">/body&gt;</span></span><br><span class="line"><span class="regexp">&lt;/</span>html&gt;</span><br></pre></td></tr></table></figure>
+<hr>
+<h2 id="ajax-2-0"><a href="#ajax-2-0" class="headerlink" title="ajax 2.0"></a>ajax 2.0</h2><p>主要是 FormData 对象。(其实就是一个表单数据)</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html lang=<span class="string">"en"</span> dir=<span class="string">"ltr"</span>&gt;</span><br><span class="line">  &lt;head&gt;</span><br><span class="line">    &lt;meta charset=<span class="string">"utf-8"</span>&gt;</span><br><span class="line">    &lt;title&gt;<span class="xml"><span class="tag">&lt;/<span class="name">title</span>&gt;</span></span></span><br><span class="line">  &lt;<span class="regexp">/head&gt;</span></span><br><span class="line"><span class="regexp">  &lt;body&gt;</span></span><br><span class="line"><span class="regexp">    &lt;form id="form1" action="http:/</span><span class="regexp">/localhost:8080/</span><span class="string">" method="</span>post<span class="string">"&gt;</span></span><br><span class="line"><span class="string">      用户：&lt;input type="</span>text<span class="string">" name="</span>user<span class="string">" /&gt;&lt;br&gt;</span></span><br><span class="line"><span class="string">      密码：&lt;input type="</span>password<span class="string">" name="</span>pass<span class="string">" /&gt;&lt;br&gt;</span></span><br><span class="line"><span class="string">      文件：&lt;input type="</span>file<span class="string">" name="</span>f1<span class="string">" /&gt;&lt;br&gt;</span></span><br><span class="line"><span class="string">      &lt;input type="</span>submit<span class="string">" value="</span>提交<span class="string">"&gt;</span></span><br><span class="line"><span class="string">    &lt;/form&gt;</span></span><br><span class="line"><span class="string">  &lt;/body&gt;</span></span><br><span class="line"><span class="string">  &lt;script&gt;</span></span><br><span class="line"><span class="string">  let oForm=document.querySelector('#form1');</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">  oForm.onsubmit=function ()&#123;</span></span><br><span class="line"><span class="string">    let formdata=new FormData(oForm);</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    let xhr=new XMLHttpRequest();</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    xhr.open(oForm.method, oForm.action, true);</span></span><br><span class="line"><span class="string">    xhr.send(formdata);</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    xhr.onreadystatechange=function ()&#123;</span></span><br><span class="line"><span class="string">      if(xhr.readyState==4)&#123;</span></span><br><span class="line"><span class="string">        if(xhr.status==200)&#123;</span></span><br><span class="line"><span class="string">          alert('成功');</span></span><br><span class="line"><span class="string">        &#125;else&#123;</span></span><br><span class="line"><span class="string">          alert('失败');</span></span><br><span class="line"><span class="string">        &#125;</span></span><br><span class="line"><span class="string">      &#125;</span></span><br><span class="line"><span class="string">    &#125;;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    return false; // 阻止表单自己的提交事件</span></span><br><span class="line"><span class="string">  &#125;;</span></span><br><span class="line"><span class="string">  &lt;/script&gt;</span></span><br><span class="line"><span class="string">&lt;/html&gt;</span></span><br></pre></td></tr></table></figure>
+<h3 id="使用-jQuery-来处理-FormData"><a href="#使用-jQuery-来处理-FormData" class="headerlink" title="使用 jQuery 来处理 FormData"></a>使用 jQuery 来处理 FormData</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html lang=<span class="string">"en"</span> dir=<span class="string">"ltr"</span>&gt;</span><br><span class="line">  &lt;head&gt;</span><br><span class="line">    &lt;meta charset=<span class="string">"utf-8"</span>&gt;</span><br><span class="line">    &lt;title&gt;<span class="xml"><span class="tag">&lt;/<span class="name">title</span>&gt;</span></span></span><br><span class="line">  &lt;<span class="regexp">/head&gt;</span></span><br><span class="line"><span class="regexp">  &lt;body&gt;</span></span><br><span class="line"><span class="regexp">    &lt;form id="form1" action="http:/</span><span class="regexp">/localhost:8080/</span><span class="string">" method="</span>post<span class="string">"&gt;</span></span><br><span class="line"><span class="string">      用户：&lt;input type="</span>text<span class="string">" name="</span>user<span class="string">" /&gt;&lt;br&gt;</span></span><br><span class="line"><span class="string">      密码：&lt;input type="</span>password<span class="string">" name="</span>pass<span class="string">" /&gt;&lt;br&gt;</span></span><br><span class="line"><span class="string">      文件：&lt;input type="</span>file<span class="string">" name="</span>f1<span class="string">" /&gt;&lt;br&gt;</span></span><br><span class="line"><span class="string">      &lt;input type="</span>submit<span class="string">" value="</span>提交<span class="string">"&gt;</span></span><br><span class="line"><span class="string">    &lt;/form&gt;</span></span><br><span class="line"><span class="string">  &lt;/body&gt;</span></span><br><span class="line"><span class="string">  &lt;script src="</span>jquery.js<span class="string">" charset="</span>utf<span class="number">-8</span><span class="string">"&gt;&lt;/script&gt;</span></span><br><span class="line"><span class="string">  &lt;script&gt;</span></span><br><span class="line"><span class="string">  $('#form1').on('submit', function ()&#123;</span></span><br><span class="line"><span class="string">    let formdata=new FormData(this);</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    $.ajax(&#123;</span></span><br><span class="line"><span class="string">      url: this.action,</span></span><br><span class="line"><span class="string">      type: this.method,</span></span><br><span class="line"><span class="string">      data: formdata,</span></span><br><span class="line"><span class="string">      processData: false,	// 告诉 jQuery 不要瞎处理我的数据</span></span><br><span class="line"><span class="string">      contentType: false	// 不要随便改 contentType，我传什么是什么</span></span><br><span class="line"><span class="string">    &#125;).then(res=&gt;&#123;</span></span><br><span class="line"><span class="string">      alert('成功');</span></span><br><span class="line"><span class="string">    &#125;, res=&gt;&#123;</span></span><br><span class="line"><span class="string">      alert('失败');</span></span><br><span class="line"><span class="string">    &#125;);</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    return false; // 阻止表单自己的提交事件</span></span><br><span class="line"><span class="string">  &#125;);</span></span><br><span class="line"><span class="string">  &lt;/script&gt;</span></span><br><span class="line"><span class="string">&lt;/html&gt;</span></span><br></pre></td></tr></table></figure>
+<hr>
+<h2 id="webSocket"><a href="#webSocket" class="headerlink" title="webSocket"></a>webSocket</h2><p>性能高、双向。</p>
+<p>包：<code>socket.io</code>，简单、方便、兼容 IE5、自动解析数据。</p>
+<h3 id="服务器端"><a href="#服务器端" class="headerlink" title="服务器端"></a>服务器端</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> http=<span class="built_in">require</span>(<span class="string">'http'</span>);</span><br><span class="line"><span class="keyword">const</span> io=<span class="built_in">require</span>(<span class="string">'socket.io'</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">//1.建立普通http</span></span><br><span class="line"><span class="keyword">let</span> server=http.createServer(<span class="function">(<span class="params">req, res</span>)=&gt;</span>&#123;&#125;);</span><br><span class="line">server.listen(<span class="number">8080</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">//2.建立ws</span></span><br><span class="line"><span class="keyword">let</span> wsServer=io.listen(server);</span><br><span class="line">wsServer.on(<span class="string">'connection'</span>, sock=&gt;&#123;</span><br><span class="line">  <span class="comment">//sock.emit('name', 数据)</span></span><br><span class="line">  <span class="comment">//sock.on('name', function (数据)&#123;&#125;);</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">// 接收前端发过来的数据</span></span><br><span class="line">  sock.on(<span class="string">'aaa'</span>, <span class="function"><span class="keyword">function</span> (<span class="params">a, b</span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(a, b, a+b);</span><br><span class="line">  &#125;);</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 向前端发数据</span></span><br><span class="line">  setInterval(<span class="function"><span class="keyword">function</span> (<span class="params"></span>)</span>&#123;</span><br><span class="line">    sock.emit(<span class="string">'timer'</span>, <span class="keyword">new</span> <span class="built_in">Date</span>().getTime());</span><br><span class="line">  &#125;, <span class="number">1000</span>);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<h3 id="前端"><a href="#前端" class="headerlink" title="前端"></a>前端</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html lang=<span class="string">"en"</span> dir=<span class="string">"ltr"</span>&gt;</span><br><span class="line">  &lt;head&gt;</span><br><span class="line">    &lt;meta charset=<span class="string">"utf-8"</span>&gt;</span><br><span class="line">    &lt;title&gt;<span class="xml"><span class="tag">&lt;/<span class="name">title</span>&gt;</span></span></span><br><span class="line">    &lt;script src=<span class="string">"http://localhost:8080/socket.io/socket.io.js"</span> charset=<span class="string">"utf-8"</span>&gt;<span class="xml"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span></span><br><span class="line">    &lt;script&gt;</span><br><span class="line">    <span class="keyword">let</span> sock=io.connect(<span class="string">'ws://localhost:8080/'</span>);</span><br><span class="line"></span><br><span class="line">    sock.emit(<span class="string">'aaa'</span>, <span class="number">12</span>, <span class="number">5</span>);  <span class="comment">// 向服务器发数据</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">let</span> on = sock.on(<span class="string">'timer'</span>, time=&gt;&#123;  <span class="comment">// 接收服务器发的数据</span></span><br><span class="line">      <span class="built_in">console</span>.log(time);</span><br><span class="line">    &#125;);</span><br><span class="line"></span><br><span class="line">    &lt;<span class="regexp">/script&gt;</span></span><br><span class="line"><span class="regexp">  &lt;/</span>head&gt;</span><br><span class="line">  &lt;body&gt;</span><br><span class="line"></span><br><span class="line">  &lt;<span class="regexp">/body&gt;</span></span><br><span class="line"><span class="regexp">&lt;/</span>html&gt;</span><br></pre></td></tr></table></figure>
+<hr>
+	  
+
+	  <div>
+  		<center>
+		  <div class="pagination">
+<ul class="pagination">
+	
+	
+	
+	
+	
+	
+		
+			
+			
+		
+	
+		
+			
+			
+			
+		
+			
+		
+	
+		
+			
+		
+	
+		
+			
+		
+	
+		
+			
+		
+	
+		
+			
+		
+	
+		
+			
+		
+	
+		
+			
+		
+	
+		
+	
+		
+	
+		
+	
+		
+	
+		
+	
+		
+	
+		
+	
+		
+	
+		
+	
+		
+	
+		
+	
+		
+	
+		
+	
+		
+	
+		
+	
+		
+	
+		
+	
+		
+	
+		
+	
+		
+	
+		
+	
+		
+	
+		
+	
+		
+	
+		
+	
+	
+	
+		<li class="prev disabled"><a><i class="fa fa-arrow-circle-o-left"></i>prev</a></li>
+	
+	<li><a href="/wiki/"><i class="fa fa-archive"></i>Home</a></li>
+	
+		<li class="next"><a href="/wiki/2019/03/31/JavaScript-Nodejs-ajax跨域/" class="alignright next">next<i class="fa fa-arrow-circle-o-right"></i></a></li>
+	
+</ul>
+</div>
+
+		</center>
+	  </div>
+	  
+	</div> <!-- col-md-9/col-md-12 -->
+	
+  </div><!-- row -->
+
+	</div>
+  </div>
+  <div class="container-narrow">
+	<footer> <p>
+  &copy; 2019 ahoj
+  
+      with help from <a href="http://zespia.tw/hexo/" target="_blank">Hexo</a> and <a href="http://getbootstrap.com/" target="_blank">Twitter Bootstrap</a>. Theme by <a href="http://github.com/wzpan/hexo-theme-wixo/">Wixo</a>.    
+</p> </footer>
+  </div> <!-- container-narrow -->
+  
+<a id="gotop" href="#">   
+  <span>▲</span> 
+</a>
+
+<script src="/wiki/js/jquery.imagesloaded.min.js"></script>
+<script src="/wiki/js/gallery.js"></script>
+<script src="/wiki/js/bootstrap.min.js"></script>
+<script src="/wiki/js/jquery.tableofcontents.min.js"></script>
+<script src="/wiki/js/tocgenerator.min.js"></script>
+<script src="/wiki/js/main.js"></script>
+<script src="/wiki/js/search.js"></script> 
+
+
+
+
+<link rel="stylesheet" href="/wiki/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/wiki/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+
+
+
+</body>
+</html>
