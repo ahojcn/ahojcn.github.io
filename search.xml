@@ -1,6 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[【Nao机器人】CABSL有限状态机]]></title>
+    <url>%2F2019%2F04%2FNao%E6%9C%BA%E5%99%A8%E4%BA%BA-CABSL%2F</url>
+    <content type="text"><![CDATA[这里主要总结下最近看的关于 CABSL 的代码和资料。 行为规范语言 CABSL （有限状态机）控制机器人在比赛中的行为。B-Human 系统中执行动作选择的部分称为行为控制。 😁 下面这个图放大其实还清楚，在官方文档的 6.1 节。 【译 6.1】在 CABSL 中，使用了以下的基本元素：options(选项), states(状态), transitions(转换), actions(动作)。一个行为由一组在选项图中排列的选项组成。有一个单一的启动选项，所有其他选项都被调用;这是选项图的root。每个选项都是有限状态机，它􏰉述了一个特定的行为部分，比如机器人的技能或头部运动，或者它结合了这样的基本特征。每个选项都以它的 intital_state 开始。在一个状态中，可以执行的动作可以调用另一个选项，并执行任何 c++代码，例如修改行为控制􏰈供的 representations。此外，在每个状态内都有一项关于转换到另一个状态(在选项内)的决定。像动作一样，转换能够执行 c++代码。 执行顺序机器人比赛执行的策略文件都在Modules/BehaviorControl/BehaviorControl/Options下，Roles 中包含了Bhuman 源码中自带的一个Striker Demo。 Soccer.h 是 Bhuman 代码执行的根目录，Nao开机后就会执行 Soccer.h 中的代码。 在注释中触发实际足球行为的主要状态，这里调用的是Modules/BehaviorControl/BehaviorControl/Options/GameControl/HandlePenaltyState.h，对应的状态为：按一次胸口 Nao 站起来(upright)，两次进入惩罚模式(penalized)，三个非惩罚(notPenalized)，开始执行 Striker 的代码。 在HandlePenaltyState.h的最后，我们可以看到： 12345678/** Play soccer! */state(playing)&#123; action &#123; PlayingState(); &#125;&#125; 跟进到 PlayingState.h 中： 好吧，终于进来了，如上面所说，最终调用到Striker()这个前锋Demo： CABSL]]></content>
+      <categories>
+        <category>Nao机器人</category>
+      </categories>
+      <tags>
+        <tag>Nao机器人</tag>
+        <tag>BHuman</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[【Nao机器人】BHuman项目结构]]></title>
     <url>%2F2019%2F04%2FNao%E6%9C%BA%E5%99%A8%E4%BA%BA-BHuman%E9%A1%B9%E7%9B%AE%E7%BB%93%E6%9E%84%2F</url>
     <content type="text"><![CDATA[Build、Config、Src。 Build是编译好的可执行文件，其中包括 Nao 的可执行文件和两个以来的库，分为三个版本(debug、develop、release)。 ConfigConfig 中是一些配置文件(场地大小了、机器人走路姿态等等)。 具体的在http://ahoj.cc/2019/03/Nao%E6%9C%BA%E5%99%A8%E4%BA%BA-BHuman%E4%B8%AD%E7%9A%84Config/ Src 在 Src 中包含了整个项目的源码，其中比较重要的就是 Representations 和 Modules 两个目录。 Representations 和 ModulesRepresentations 是可调用的部分，通过其中提供的一些接口来完成机器人的一些动作。 Modules 是 Representations 的实现部分。 Representations Representations 中包含 8 个模块，具体待我再研究研究。 Modules在 Modules 下的这个目录(如图)，存放我们踢球的角色文件，BHuman官方给出一个 striker 作为 Demo。 Options.h 包含所有Options中的文件的路径，通过一个c++头文件将其关联在一起。 All option files that belong to the current behavior have to be included by this file. BehaviorControl.h 包含options文件中所调用的函数，关联调用的Representations中的文件 Declaration of the C-based state machine behavior control module. 继续看~]]></content>
