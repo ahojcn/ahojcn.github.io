@@ -123,7 +123,7 @@
 <meta property="og:image" content="https://ws1.sinaimg.cn/large/006wR0dcly1g1s7vs9tnaj31g40retgw.jpg">
 <meta property="og:image" content="https://ws1.sinaimg.cn/large/006wR0dcly1g1s83yxataj30xc0hi42s.jpg">
 <meta property="og:image" content="https://ws1.sinaimg.cn/large/006wR0dcly1g1s8au5aawj30gu0cgmz6.jpg">
-<meta property="og:updated_time" content="2019-04-05T16:43:59.939Z">
+<meta property="og:updated_time" content="2019-04-05T16:47:15.320Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="【Nao机器人】机器人行为之getUp">
 <meta name="twitter:description" content="在赛场上机器人是很难避免跌倒的（守门员经常会扑倒挡球），在 BHuman 中带了跌倒后站起的行为，这篇文章是记录下最近对此行为运行过程的分析。">
@@ -421,7 +421,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2019-04-06 00:43:59" itemprop="dateModified" datetime="2019-04-06T00:43:59+08:00">2019-04-06</time>
+                <time title="修改时间：2019-04-06 00:47:15" itemprop="dateModified" datetime="2019-04-06T00:47:15+08:00">2019-04-06</time>
               
             
           </span>
@@ -509,8 +509,7 @@
 <p>上图指的地方又用到了几个 Representation，下面逐一进去看看：</p>
 <h3 id="Activity-h"><a href="#Activity-h" class="headerlink" title="Activity.h"></a>Activity.h</h3><p><code>Bhuman/BHumanCodeRelease-coderelease2017/Src/Modules/BehaviorControl/BehaviorControl/Options/Output/Activity.h</code>，看到如图的东西，那这个 BehaviorStatus 又有些什么功能呢？</p>
 <p><img src="https://ws1.sinaimg.cn/large/006wR0dcly1g1s7vs9tnaj31g40retgw.jpg" alt="Activity.h"></p>
-<p>###BehaviorStatus.h</p>
-<p><code>Bhuman/BHumanCodeRelease-coderelease2017/Src/Representations/BehaviorControl/BehaviorStatus.h</code>。</p>
+<h3 id="BehaviorStatus-h"><a href="#BehaviorStatus-h" class="headerlink" title="BehaviorStatus.h"></a>BehaviorStatus.h</h3><p><code>Bhuman/BHumanCodeRelease-coderelease2017/Src/Representations/BehaviorControl/BehaviorStatus.h</code>。</p>
 <p>这个文件声明了一个结构体，其中包含关于当前行为状态的数据。</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">ENUM(Activity,</span><br><span class="line">&#123;,</span><br><span class="line">  unknown,</span><br><span class="line">  blocking,   <span class="comment">// 阻塞</span></span><br><span class="line">  duel,       <span class="comment">// 决斗</span></span><br><span class="line">  dribble,    <span class="comment">// 运球</span></span><br><span class="line">  dribbleDuel,<span class="comment">// </span></span><br><span class="line">  searchForBall,  <span class="comment">// 找球</span></span><br><span class="line">  searchForBallAtRecentPosition,  <span class="comment">// 在附近的位置找球</span></span><br><span class="line">  goToBall,   <span class="comment">// 走向球</span></span><br><span class="line">  takingPosition, <span class="comment">// 取得位置</span></span><br><span class="line">  kick,   <span class="comment">// 踢球</span></span><br><span class="line">  guardGoal,  <span class="comment">// 保护目标</span></span><br><span class="line">  catchBall,  <span class="comment">// 控制住球</span></span><br><span class="line">  standAndWait,   <span class="comment">// 站住 等待</span></span><br><span class="line">  passing,    <span class="comment">// 带球？</span></span><br><span class="line">  gettingUp,  <span class="comment">// 站起来</span></span><br><span class="line">  turn,   </span><br><span class="line">  walkNextToKeeper,</span><br><span class="line">  kickoff,    <span class="comment">// 开球</span></span><br><span class="line"></span><br><span class="line">  waving,</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
 <hr>
@@ -780,7 +779,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#HandleGameState-h"><span class="nav-number">1.</span> <span class="nav-text">HandleGameState.h</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#FallDownState"><span class="nav-number">1.1.</span> <span class="nav-text">FallDownState</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#GetUp-h"><span class="nav-number">2.</span> <span class="nav-text">GetUp.h</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Activity-h"><span class="nav-number">2.1.</span> <span class="nav-text">Activity.h</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#HeadControlMode-h"><span class="nav-number">2.2.</span> <span class="nav-text">HeadControlMode.h</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#LookForward-h"><span class="nav-number">2.3.</span> <span class="nav-text">LookForward.h</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结一下"><span class="nav-number">3.</span> <span class="nav-text">总结一下</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#HandleGameState-h"><span class="nav-number">1.</span> <span class="nav-text">HandleGameState.h</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#FallDownState"><span class="nav-number">1.1.</span> <span class="nav-text">FallDownState</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#GetUp-h"><span class="nav-number">2.</span> <span class="nav-text">GetUp.h</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Activity-h"><span class="nav-number">2.1.</span> <span class="nav-text">Activity.h</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#BehaviorStatus-h"><span class="nav-number">2.2.</span> <span class="nav-text">BehaviorStatus.h</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#HeadControlMode-h"><span class="nav-number">2.3.</span> <span class="nav-text">HeadControlMode.h</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#LookForward-h"><span class="nav-number">2.4.</span> <span class="nav-text">LookForward.h</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结一下"><span class="nav-number">3.</span> <span class="nav-text">总结一下</span></a></li></ol></div>
             
 
           </div>
