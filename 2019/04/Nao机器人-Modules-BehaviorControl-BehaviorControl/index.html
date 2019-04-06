@@ -115,7 +115,7 @@
 <meta property="og:site_name" content="ahoj">
 <meta property="og:description" content="记录下。。。 pwd 1BHumanCodeRelease-coderelease2017/Src/Modules/BehaviorControl/BehaviorControl/ tree 12345678910111213141516171819202122232425262728293031323334353637.├── BehaviorControl.cpp├── BehaviorCon">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-04-06T15:17:51.664Z">
+<meta property="og:updated_time" content="2019-04-06T15:56:28.500Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="【Nao机器人】Modules&#x2F;BehaviorControl&#x2F;BehaviorControl">
 <meta name="twitter:description" content="记录下。。。 pwd 1BHumanCodeRelease-coderelease2017/Src/Modules/BehaviorControl/BehaviorControl/ tree 12345678910111213141516171819202122232425262728293031323334353637.├── BehaviorControl.cpp├── BehaviorCon">
@@ -404,7 +404,7 @@
                 
               
 
-              <time title="创建时间：2019-04-06 22:25:30 / 修改时间：23:17:51" itemprop="dateCreated datePublished" datetime="2019-04-06T22:25:30+08:00">2019-04-06</time>
+              <time title="创建时间：2019-04-06 22:25:30 / 修改时间：23:56:28" itemprop="dateCreated datePublished" datetime="2019-04-06T22:25:30+08:00">2019-04-06</time>
             
 
             
@@ -498,20 +498,68 @@
 <p>所有属于当前行为的 option 文件都必须包含在这个文件中。</p>
 </blockquote>
 <p>在 Options 文件夹中写的东西需要在此头文件中包含。</p>
+<hr>
 <h2 id="Options"><a href="#Options" class="headerlink" title="Options"></a>Options</h2><p><strong>tree</strong></p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">.</span><br><span class="line">├── DemoOptions</span><br><span class="line">│   ├── Demo.h</span><br><span class="line">│   └── Waving.h</span><br><span class="line">├── GameControl</span><br><span class="line">│   ├── HandleGameState.h</span><br><span class="line">│   ├── HandlePenaltyState.h</span><br><span class="line">│   ├── PlayingState.h</span><br><span class="line">│   └── ReadyState.h</span><br><span class="line">├── HeadControl</span><br><span class="line">│   ├── HeadControl.h</span><br><span class="line">│   └── LookForward.h</span><br><span class="line">├── Output</span><br><span class="line">│   ├── Activity.h</span><br><span class="line">│   ├── Annotation.h</span><br><span class="line">│   ├── HeadMotionRequest</span><br><span class="line">│   │   └── SetHeadPanTilt.h</span><br><span class="line">│   ├── MotionRequest</span><br><span class="line">│   │   ├── GetUpEngine.h</span><br><span class="line">│   │   ├── InWalkKick.h</span><br><span class="line">│   │   ├── SpecialAction.h</span><br><span class="line">│   │   ├── Stand.h</span><br><span class="line">│   │   ├── WalkAtAbsoluteSpeed.h</span><br><span class="line">│   │   ├── WalkAtRelativeSpeed.h</span><br><span class="line">│   │   └── WalkToTarget.h</span><br><span class="line">│   └── PlaySound.h</span><br><span class="line">├── Roles</span><br><span class="line">│   └── Striker.h</span><br><span class="line">├── Skills</span><br><span class="line">│   └── GetUp.h</span><br><span class="line">├── Soccer.h</span><br><span class="line">└── Tools</span><br><span class="line">    └── ButtonPressedAndReleased.h</span><br></pre></td></tr></table></figure>
-<h3 id="Soccer-h"><a href="#Soccer-h" class="headerlink" title="Soccer.h"></a>Soccer.h</h3><h3 id="DemoOptions"><a href="#DemoOptions" class="headerlink" title="DemoOptions"></a>DemoOptions</h3><p>提供了两个 Demo。</p>
+<hr>
+<h3 id="Soccer-h"><a href="#Soccer-h" class="headerlink" title="Soccer.h"></a>Soccer.h</h3><blockquote>
+<p>root option，在机器人真正开始游戏之前控制行为。</p>
+</blockquote>
+<p>主函数？所有的操作从这里开始执行。</p>
+<p>第一次按下胸口按钮：站起来。<br>第二次：惩罚状态。<br>第三次：非惩罚状态，开始踢球。<br>连续按 3 次，机器人关闭所有关节，蹲下。</p>
+<hr>
+<h3 id="DemoOptions"><a href="#DemoOptions" class="headerlink" title="DemoOptions"></a>DemoOptions</h3><p>提供了两个 Demo，调用 Striker() 踢球。</p>
 <p><strong>tree</strong></p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">.</span><br><span class="line">├── Demo.h</span><br><span class="line">└── Waving.h</span><br></pre></td></tr></table></figure>
-<h3 id="GameControl"><a href="#GameControl" class="headerlink" title="GameControl"></a>GameControl</h3><p>游戏控制。</p>
-<p><strong>tree</strong></p>
+<hr>
+<h3 id="GameControl"><a href="#GameControl" class="headerlink" title="GameControl"></a>GameControl</h3><p><strong>tree</strong></p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">.</span><br><span class="line">├── HandleGameState.h</span><br><span class="line">├── HandlePenaltyState.h</span><br><span class="line">├── PlayingState.h</span><br><span class="line">└── ReadyState.h</span><br></pre></td></tr></table></figure>
-<h4 id="HandleGameState-h"><a href="#HandleGameState-h" class="headerlink" title="HandleGameState.h"></a>HandleGameState.h</h4><h4 id="HandlePenaltyState-h"><a href="#HandlePenaltyState-h" class="headerlink" title="HandlePenaltyState.h"></a>HandlePenaltyState.h</h4><h4 id="PlayingState-h"><a href="#PlayingState-h" class="headerlink" title="PlayingState.h"></a>PlayingState.h</h4><h4 id="ReadyState-h"><a href="#ReadyState-h" class="headerlink" title="ReadyState.h"></a>ReadyState.h</h4><h3 id="HeadControl"><a href="#HeadControl" class="headerlink" title="HeadControl"></a>HeadControl</h3><p>头部控制。</p>
+<h4 id="HandleGameState-h"><a href="#HandleGameState-h" class="headerlink" title="HandleGameState.h"></a>HandleGameState.h</h4><blockquote>
+<p>触发不同游戏状态的选项。<br>该选项还会调用跌倒后的getup行为，这在大多数游戏状态中都是需要的。</p>
+</blockquote>
+<p>从 Soccer.h 进入这里后，执行对应的 state。</p>
+<h4 id="HandlePenaltyState-h"><a href="#HandlePenaltyState-h" class="headerlink" title="HandlePenaltyState.h"></a>HandlePenaltyState.h</h4><blockquote>
+<p>处理惩罚状态(以及离开惩罚状态后要执行的操作)。<br>此选项比主游戏状态处理高一级，因为在大多数游戏状态中可能会出现惩罚。<br>默认情况下，机器人不受惩罚，并根据当前比赛状态踢足球。要想手动惩罚机器人，必须按下和松开胸前的按钮。</p>
+</blockquote>
+<h4 id="PlayingState-h"><a href="#PlayingState-h" class="headerlink" title="PlayingState.h"></a>PlayingState.h</h4><p>在这里调用了 Demo()。</p>
+<h4 id="ReadyState-h"><a href="#ReadyState-h" class="headerlink" title="ReadyState.h"></a>ReadyState.h</h4><p>机器人准备就绪的状态，头 lookforward，并且站立。</p>
+<hr>
+<h3 id="HeadControl"><a href="#HeadControl" class="headerlink" title="HeadControl"></a>HeadControl</h3><p>头部控制。</p>
 <p><strong>tree</strong></p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">.</span><br><span class="line">├── HeadControl.h</span><br><span class="line">└── LookForward.h</span><br></pre></td></tr></table></figure>
-<h4 id="HeadControl-h"><a href="#HeadControl-h" class="headerlink" title="HeadControl.h"></a>HeadControl.h</h4><h4 id="LookForward-h"><a href="#LookForward-h" class="headerlink" title="LookForward.h"></a>LookForward.h</h4><h3 id="Output"><a href="#Output" class="headerlink" title="Output"></a>Output</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">.</span><br><span class="line">├── Activity.h</span><br><span class="line">├── Annotation.h</span><br><span class="line">├── HeadMotionRequest</span><br><span class="line">│   └── SetHeadPanTilt.h</span><br><span class="line">├── MotionRequest</span><br><span class="line">│   ├── GetUpEngine.h</span><br><span class="line">│   ├── InWalkKick.h</span><br><span class="line">│   ├── SpecialAction.h</span><br><span class="line">│   ├── Stand.h</span><br><span class="line">│   ├── WalkAtAbsoluteSpeed.h</span><br><span class="line">│   ├── WalkAtRelativeSpeed.h</span><br><span class="line">│   └── WalkToTarget.h</span><br><span class="line">└── PlaySound.h</span><br></pre></td></tr></table></figure>
-<h4 id="Activity-h"><a href="#Activity-h" class="headerlink" title="Activity.h"></a>Activity.h</h4><h4 id="Annotation-h"><a href="#Annotation-h" class="headerlink" title="Annotation.h"></a>Annotation.h</h4><h4 id="PlaySound-h"><a href="#PlaySound-h" class="headerlink" title="PlaySound.h"></a>PlaySound.h</h4><h4 id="HeadMotionRequest"><a href="#HeadMotionRequest" class="headerlink" title="HeadMotionRequest"></a>HeadMotionRequest</h4><h5 id="SetHeadPanTilt-h"><a href="#SetHeadPanTilt-h" class="headerlink" title="SetHeadPanTilt.h"></a>SetHeadPanTilt.h</h5><h4 id="MotionRequest"><a href="#MotionRequest" class="headerlink" title="MotionRequest"></a>MotionRequest</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">.</span><br><span class="line">├── GetUpEngine.h</span><br><span class="line">├── InWalkKick.h</span><br><span class="line">├── SpecialAction.h</span><br><span class="line">├── Stand.h</span><br><span class="line">├── WalkAtAbsoluteSpeed.h</span><br><span class="line">├── WalkAtRelativeSpeed.h</span><br><span class="line">└── WalkToTarget.h</span><br></pre></td></tr></table></figure>
-<h5 id="GetUpEngine-h"><a href="#GetUpEngine-h" class="headerlink" title="GetUpEngine.h"></a>GetUpEngine.h</h5><h5 id="InWalkKick-h"><a href="#InWalkKick-h" class="headerlink" title="InWalkKick.h"></a>InWalkKick.h</h5><h5 id="SpecialAction-h"><a href="#SpecialAction-h" class="headerlink" title="SpecialAction.h"></a>SpecialAction.h</h5><h5 id="Stand-h"><a href="#Stand-h" class="headerlink" title="Stand.h"></a>Stand.h</h5><h5 id="WalkAtAbsoluteSpeed-h"><a href="#WalkAtAbsoluteSpeed-h" class="headerlink" title="WalkAtAbsoluteSpeed.h"></a>WalkAtAbsoluteSpeed.h</h5><h5 id="WalkAtRelativeSpeed-h"><a href="#WalkAtRelativeSpeed-h" class="headerlink" title="WalkAtRelativeSpeed.h"></a>WalkAtRelativeSpeed.h</h5><h5 id="WalkToTarget-h"><a href="#WalkToTarget-h" class="headerlink" title="WalkToTarget.h"></a>WalkToTarget.h</h5><h3 id="Roles"><a href="#Roles" class="headerlink" title="Roles"></a>Roles</h3><h4 id="Striker-h"><a href="#Striker-h" class="headerlink" title="Striker.h"></a>Striker.h</h4><h3 id="Skills"><a href="#Skills" class="headerlink" title="Skills"></a>Skills</h3><h4 id="GetUp-h"><a href="#GetUp-h" class="headerlink" title="GetUp.h"></a>GetUp.h</h4><h3 id="Tools"><a href="#Tools" class="headerlink" title="Tools"></a>Tools</h3><h4 id="ButtonPressedAndReleased-h"><a href="#ButtonPressedAndReleased-h" class="headerlink" title="ButtonPressedAndReleased.h"></a>ButtonPressedAndReleased.h</h4>
+<h4 id="HeadControl-h"><a href="#HeadControl-h" class="headerlink" title="HeadControl.h"></a>HeadControl.h</h4><blockquote>
+<p>由 option HeadControl 执行的 head 控制模式。</p>
+</blockquote>
+<p>默认只有 none、off、lookforward 三种头部状态。</p>
+<h4 id="LookForward-h"><a href="#LookForward-h" class="headerlink" title="LookForward.h"></a>LookForward.h</h4><p>头部 lookforward，调用 SetHeadPanTilt 模块。</p>
+<hr>
+<h3 id="Output"><a href="#Output" class="headerlink" title="Output"></a>Output</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">.</span><br><span class="line">├── Activity.h</span><br><span class="line">├── Annotation.h</span><br><span class="line">├── HeadMotionRequest</span><br><span class="line">│   └── SetHeadPanTilt.h</span><br><span class="line">├── MotionRequest</span><br><span class="line">│   ├── GetUpEngine.h</span><br><span class="line">│   ├── InWalkKick.h</span><br><span class="line">│   ├── SpecialAction.h</span><br><span class="line">│   ├── Stand.h</span><br><span class="line">│   ├── WalkAtAbsoluteSpeed.h</span><br><span class="line">│   ├── WalkAtRelativeSpeed.h</span><br><span class="line">│   └── WalkToTarget.h</span><br><span class="line">└── PlaySound.h</span><br></pre></td></tr></table></figure>
+<h4 id="Activity-h"><a href="#Activity-h" class="headerlink" title="Activity.h"></a>Activity.h</h4><blockquote>
+<p>通过这个开设置机器人的当前状态。</p>
+</blockquote>
+<p>传入一个参数，调用 BehaviorStatus 模块。</p>
+<h4 id="Annotation-h"><a href="#Annotation-h" class="headerlink" title="Annotation.h"></a>Annotation.h</h4><p>通过这个开注释，需要一个 string 类型的参数。</p>
+<h4 id="PlaySound-h"><a href="#PlaySound-h" class="headerlink" title="PlaySound.h"></a>PlaySound.h</h4><blockquote>
+<p>如果在前一个循环中未调用此选项，则播放声音。</p>
+</blockquote>
+<p>播放音频，传入一个 string 类型的参数（音频名）。</p>
+<h4 id="HeadMotionRequest"><a href="#HeadMotionRequest" class="headerlink" title="HeadMotionRequest"></a>HeadMotionRequest</h4><h5 id="SetHeadPanTilt-h"><a href="#SetHeadPanTilt-h" class="headerlink" title="SetHeadPanTilt.h"></a>SetHeadPanTilt.h</h5><p>用这个模块来控制机器人的头部。</p>
+<h4 id="MotionRequest"><a href="#MotionRequest" class="headerlink" title="MotionRequest"></a>MotionRequest</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">.</span><br><span class="line">├── GetUpEngine.h</span><br><span class="line">├── InWalkKick.h</span><br><span class="line">├── SpecialAction.h</span><br><span class="line">├── Stand.h</span><br><span class="line">├── WalkAtAbsoluteSpeed.h</span><br><span class="line">├── WalkAtRelativeSpeed.h</span><br><span class="line">└── WalkToTarget.h</span><br></pre></td></tr></table></figure>
+<h5 id="GetUpEngine-h"><a href="#GetUpEngine-h" class="headerlink" title="GetUpEngine.h"></a>GetUpEngine.h</h5><h5 id="InWalkKick-h"><a href="#InWalkKick-h" class="headerlink" title="InWalkKick.h"></a>InWalkKick.h</h5><h5 id="SpecialAction-h"><a href="#SpecialAction-h" class="headerlink" title="SpecialAction.h"></a>SpecialAction.h</h5><h5 id="Stand-h"><a href="#Stand-h" class="headerlink" title="Stand.h"></a>Stand.h</h5><h5 id="WalkAtAbsoluteSpeed-h"><a href="#WalkAtAbsoluteSpeed-h" class="headerlink" title="WalkAtAbsoluteSpeed.h"></a>WalkAtAbsoluteSpeed.h</h5><h5 id="WalkAtRelativeSpeed-h"><a href="#WalkAtRelativeSpeed-h" class="headerlink" title="WalkAtRelativeSpeed.h"></a>WalkAtRelativeSpeed.h</h5><h5 id="WalkToTarget-h"><a href="#WalkToTarget-h" class="headerlink" title="WalkToTarget.h"></a>WalkToTarget.h</h5><hr>
+<h3 id="Roles"><a href="#Roles" class="headerlink" title="Roles"></a>Roles</h3><p>放角色文件的地方。</p>
+<h4 id="Striker-h"><a href="#Striker-h" class="headerlink" title="Striker.h"></a>Striker.h</h4><p>默认的前锋 Demo。</p>
+<hr>
+<h3 id="Skills"><a href="#Skills" class="headerlink" title="Skills"></a>Skills</h3><p>机器人的一些技能，比如站起来。</p>
+<h4 id="GetUp-h"><a href="#GetUp-h" class="headerlink" title="GetUp.h"></a>GetUp.h</h4><p>调用 GetUpEngine() 模块。</p>
+<hr>
+<h3 id="Tools"><a href="#Tools" class="headerlink" title="Tools"></a>Tools</h3><p>工具~~~。</p>
+<h4 id="ButtonPressedAndReleased-h"><a href="#ButtonPressedAndReleased-h" class="headerlink" title="ButtonPressedAndReleased.h"></a>ButtonPressedAndReleased.h</h4><p>按钮按下和释放。</p>
+<blockquote>
+<p>该选项观察某个按钮的状态，如果按下并释放该按钮，则报告成功。<br>如果指定超时，如果状态更改耗时太长，也可以中止该 option。</p>
+</blockquote>
+<hr>
+<p>OK，到这里这块就完啦。</p>
+
       
     </div>
 
