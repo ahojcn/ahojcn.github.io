@@ -107,19 +107,19 @@
 
 
 
-  <meta name="description" content="Pose2f 应该是 BHuman 中的一个比较重要的工具类吧，在代码中经常用到，以前不知道是干啥的，刚才看了下，记录下来。  Src/Tools/Math/Pose2f.h TODO： 学习类 Angle、Pose3f、Vector2f(我猜是个类似于vector的容器，不过里面存的东西要仔细研究下)等。">
+  <meta name="description" content="Pose2f 应该是 BHuman 中的一个比较重要的工具类吧，在代码中经常用到，以前不知道是干啥的，刚才看了下，记录下来。  Src/Tools/Math/Pose2f.h TODO： 学习类 Angle、Pose3f、Vector2f(我猜是个类似于vector的容器，不过里面存的东西要仔细研究下)等。ADD： Pose3f 与 Pose2f 大致相同，不过使用了 Vector3f，多了一个">
 <meta name="keywords" content="Nao机器人,BHuman">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Nao机器人-BHuman中的类-Pose2f">
 <meta property="og:url" content="http://ahoj.cc/2019/04/Nao机器人-BHuman中的类-Pose2f/index.html">
 <meta property="og:site_name" content="ahoj">
-<meta property="og:description" content="Pose2f 应该是 BHuman 中的一个比较重要的工具类吧，在代码中经常用到，以前不知道是干啥的，刚才看了下，记录下来。  Src/Tools/Math/Pose2f.h TODO： 学习类 Angle、Pose3f、Vector2f(我猜是个类似于vector的容器，不过里面存的东西要仔细研究下)等。">
+<meta property="og:description" content="Pose2f 应该是 BHuman 中的一个比较重要的工具类吧，在代码中经常用到，以前不知道是干啥的，刚才看了下，记录下来。  Src/Tools/Math/Pose2f.h TODO： 学习类 Angle、Pose3f、Vector2f(我猜是个类似于vector的容器，不过里面存的东西要仔细研究下)等。ADD： Pose3f 与 Pose2f 大致相同，不过使用了 Vector3f，多了一个">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://wx1.sinaimg.cn/mw690/006wR0dcly1g28dqlqoqij31hc0dago6.jpg">
-<meta property="og:updated_time" content="2019-04-19T15:53:28.375Z">
+<meta property="og:updated_time" content="2019-04-20T00:31:41.079Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Nao机器人-BHuman中的类-Pose2f">
-<meta name="twitter:description" content="Pose2f 应该是 BHuman 中的一个比较重要的工具类吧，在代码中经常用到，以前不知道是干啥的，刚才看了下，记录下来。  Src/Tools/Math/Pose2f.h TODO： 学习类 Angle、Pose3f、Vector2f(我猜是个类似于vector的容器，不过里面存的东西要仔细研究下)等。">
+<meta name="twitter:description" content="Pose2f 应该是 BHuman 中的一个比较重要的工具类吧，在代码中经常用到，以前不知道是干啥的，刚才看了下，记录下来。  Src/Tools/Math/Pose2f.h TODO： 学习类 Angle、Pose3f、Vector2f(我猜是个类似于vector的容器，不过里面存的东西要仔细研究下)等。ADD： Pose3f 与 Pose2f 大致相同，不过使用了 Vector3f，多了一个">
 <meta name="twitter:image" content="https://wx1.sinaimg.cn/mw690/006wR0dcly1g28dqlqoqij31hc0dago6.jpg">
 
 
@@ -423,12 +423,24 @@
                 
               
 
-              <time title="创建时间：2019-04-19 22:54:52 / 修改时间：23:53:28" itemprop="dateCreated datePublished" datetime="2019-04-19T22:54:52+08:00">2019-04-19</time>
+              <time title="创建时间：2019-04-19 22:54:52" itemprop="dateCreated datePublished" datetime="2019-04-19T22:54:52+08:00">2019-04-19</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-04-20 08:31:41" itemprop="dateModified" datetime="2019-04-20T08:31:41+08:00">2019-04-20</time>
               
             
           </span>
@@ -503,7 +515,7 @@
         <p>Pose2f 应该是 BHuman 中的一个比较重要的工具类吧，在代码中经常用到，以前不知道是干啥的，刚才看了下，记录下来。</p>
 <p><img src="https://wx1.sinaimg.cn/mw690/006wR0dcly1g28dqlqoqij31hc0dago6.jpg" alt></p>
 <p><code>Src/Tools/Math/Pose2f.h</code></p>
-<p><strong>TODO：</strong> 学习类 Angle、Pose3f、Vector2f(我猜是个类似于vector的容器，不过里面存的东西要仔细研究下)等。</p>
+<p><strong>TODO：</strong> 学习类 Angle、Pose3f、Vector2f(我猜是个类似于vector的容器，不过里面存的东西要仔细研究下)等。<br><strong>ADD：</strong> Pose3f 与 Pose2f 大致相同，不过使用了 Vector3f，多了一个 z 作为参数。。。<br>在 Vector2f 的变量中还可以调用 <code>angle()</code> 函数，猜想：应该这两个类中有这个方法。<br>在 Egien.h 中只看到了一些容器的声明，引入了头文件 <code>Egien/Dense</code>，看了下，应该是 naoqi 的库中带的。</p>
 <a id="more"></a>
 <h2 id="成员变量"><a href="#成员变量" class="headerlink" title="成员变量"></a>成员变量</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Angle是类型，0是默认值，rotation是变量名。</span></span><br><span class="line">(Angle)(<span class="number">0</span>) rotation,		<span class="comment">/** rotation 旋转/转动 */</span></span><br><span class="line"><span class="comment">// 同上，还有就是在BHuman中的流式结构体中经常看到这种的变量声明，包括以后自己添加也是要按照这样的规范来写。</span></span><br><span class="line">(Vector2f)(Vector2f::Zero()) translation,	<span class="comment">/** translation 转化 */</span></span><br></pre></td></tr></table></figure>
 <hr>
