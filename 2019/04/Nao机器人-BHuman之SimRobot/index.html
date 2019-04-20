@@ -110,15 +110,19 @@
   <meta name="description" content="SimRobot 用来校准和模拟机器人在比赛中的行为。但是需要注意的一点是，SimRobot 中模拟的场景是不真实的。更具体的我再去看看官方文档。BHumanCodeRelease-coderelease2017/Build/Linux/SimRobot/Release。">
 <meta name="keywords" content="Nao机器人,BHuman">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Nao机器人-BHuman之SimRobot">
+<meta property="og:title" content="【Nao机器人】BHuman之SimRobot">
 <meta property="og:url" content="http://ahoj.cc/2019/04/Nao机器人-BHuman之SimRobot/index.html">
 <meta property="og:site_name" content="ahoj">
 <meta property="og:description" content="SimRobot 用来校准和模拟机器人在比赛中的行为。但是需要注意的一点是，SimRobot 中模拟的场景是不真实的。更具体的我再去看看官方文档。BHumanCodeRelease-coderelease2017/Build/Linux/SimRobot/Release。">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://i.loli.net/2019/04/21/5cbb47064276f.png">
-<meta property="og:updated_time" content="2019-04-20T16:27:20.684Z">
+<meta property="og:image" content="https://i.loli.net/2019/04/21/5cbb548e481cc.png">
+<meta property="og:image" content="https://i.loli.net/2019/04/21/5cbb51be0eed3.png">
+<meta property="og:image" content="https://i.loli.net/2019/04/21/5cbb529223b0e.png">
+<meta property="og:image" content="https://i.loli.net/2019/04/21/5cbb53874aed3.png">
+<meta property="og:updated_time" content="2019-04-20T17:20:33.838Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Nao机器人-BHuman之SimRobot">
+<meta name="twitter:title" content="【Nao机器人】BHuman之SimRobot">
 <meta name="twitter:description" content="SimRobot 用来校准和模拟机器人在比赛中的行为。但是需要注意的一点是，SimRobot 中模拟的场景是不真实的。更具体的我再去看看官方文档。BHumanCodeRelease-coderelease2017/Build/Linux/SimRobot/Release。">
 <meta name="twitter:image" content="https://i.loli.net/2019/04/21/5cbb47064276f.png">
 
@@ -137,7 +141,7 @@
   };
 </script>
 
-  <title>Nao机器人-BHuman之SimRobot | ahoj</title>
+  <title>【Nao机器人】BHuman之SimRobot | ahoj</title>
   
 
 
@@ -397,7 +401,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Nao机器人-BHuman之SimRobot
+          <h1 class="post-title" itemprop="name headline">【Nao机器人】BHuman之SimRobot
 
               
             
@@ -423,7 +427,7 @@
                 
               
 
-              <time title="创建时间：2019-04-21 00:15:18 / 修改时间：00:27:20" itemprop="dateCreated datePublished" datetime="2019-04-21T00:15:18+08:00">2019-04-21</time>
+              <time title="创建时间：2019-04-21 00:15:18 / 修改时间：01:20:33" itemprop="dateCreated datePublished" datetime="2019-04-21T00:15:18+08:00">2019-04-21</time>
             
 
             
@@ -502,8 +506,20 @@
       
         <p>SimRobot 用来校准和模拟机器人在比赛中的行为。但是需要注意的一点是，SimRobot 中模拟的场景是不真实的。更具体的我再去看看官方文档。<br><code>BHumanCodeRelease-coderelease2017/Build/Linux/SimRobot/Release</code>。</p>
 <p><img src="https://i.loli.net/2019/04/21/5cbb47064276f.png" alt="SimRobot-1"></p>
+<p><img src="https://i.loli.net/2019/04/21/5cbb548e481cc.png" alt></p>
 <a id="more"></a>
-<p>该软件的环境在bhuman的Config/Scenes目录下，后缀为ros2的文件。</p>
+<h2 id="基本的东西"><a href="#基本的东西" class="headerlink" title="基本的东西"></a>基本的东西</h2><p>该软件的环境在bhuman的Config/Scenes目录下，后缀为ros2的文件。其中 RemoteRobot.ros2 是远程调试机器人时使用的环境配置，BH2016 为模拟比赛用的环境配置。</p>
+<p><img src="https://i.loli.net/2019/04/21/5cbb51be0eed3.png" alt></p>
+<p>点击菜单栏的Scene Graph按钮，可调出各种子模块。</p>
+<p><img src="https://i.loli.net/2019/04/21/5cbb529223b0e.png" alt="SimRobot-3"></p>
+<h2 id="ros-文件"><a href="#ros-文件" class="headerlink" title=".ros 文件"></a>.ros 文件</h2><p>.ros 文件使用 XML 语言来描述场地信息，可以对场地信息进行修改，包括增加和删除场地中的机器人，增加场地中的球的个数等等。</p>
+<p><img src="https://i.loli.net/2019/04/21/5cbb53874aed3.png" alt="SimRobot-4"></p>
+<h2 id="控制台命令"><a href="#控制台命令" class="headerlink" title="控制台命令"></a>控制台命令</h2><p>双击Scene Graph的Console即可调出控制台，可以查看机器人的传感器参数及各种状态。</p>
+<p>两个常用命令：</p>
+<h3 id="gc"><a href="#gc" class="headerlink" title="gc"></a>gc</h3><p>该指令控制仿真的游戏状态。例如输入<code>gc playing</code>后回车，可以开始比赛，双击Robocup即可看到比赛状态。</p>
+<h3 id="vd"><a href="#vd" class="headerlink" title="vd"></a>vd</h3><p>该指令用于查看各机器人的representation等其他参数。<br>例如输入<code>vd representation:BallModel</code>可以查看机器人自己认为的球模型的各种参数。</p>
+<p>可以调用<code>theBallModel.estimate.position.x()</code>来获得球相对于机器人的位置，可以在角文件中作为条件判断让机器人作出下一行动。</p>
+<hr>
 
       
     </div>
@@ -598,8 +614,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <div class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <div class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -745,6 +770,23 @@
         </div>
       </div>
 
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#基本的东西"><span class="nav-number">1.</span> <span class="nav-text">基本的东西</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ros-文件"><span class="nav-number">2.</span> <span class="nav-text">.ros 文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#控制台命令"><span class="nav-number">3.</span> <span class="nav-text">控制台命令</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#gc"><span class="nav-number">3.1.</span> <span class="nav-text">gc</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#vd"><span class="nav-number">3.2.</span> <span class="nav-text">vd</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
       
 
       
