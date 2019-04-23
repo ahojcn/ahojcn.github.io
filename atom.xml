@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://ahoj.cc/"/>
-  <updated>2019-04-20T17:20:33.838Z</updated>
+  <updated>2019-04-23T12:36:03.038Z</updated>
   <id>http://ahoj.cc/</id>
   
   <author>
@@ -15,6 +15,28 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Nao机器人-学习资料</title>
+    <link href="http://ahoj.cc/2019/04/Nao%E6%9C%BA%E5%99%A8%E4%BA%BA-%E5%AD%A6%E4%B9%A0%E8%B5%84%E6%96%99/"/>
+    <id>http://ahoj.cc/2019/04/Nao机器人-学习资料/</id>
+    <published>2019-04-23T11:53:57.000Z</published>
+    <updated>2019-04-23T12:36:03.038Z</updated>
+    
+    <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><p>在这里整理了一些关于Nao机器人的学习资料。</p><a id="more"></a><p><a href="http://www.naoqi.net/" target="_blank" rel="noopener">Naoqi之家<a href="http://www.naoqi.net/" target="_blank" rel="noopener">http://www.naoqi.net/</a></a></p><p><a href="http://doc.aldebaran.com/2-5/naoqi/index.html" target="_blank" rel="noopener">NaoAPIs<a href="http://doc.aldebaran.com/2-5/naoqi/index.html" target="_blank" rel="noopener">http://doc.aldebaran.com/2-5/naoqi/index.html</a></a></p><p><a href="https://cxx0822.github.io/" target="_blank" rel="noopener">cxx的博客<a href="https://cxx0822.github.io" target="_blank" rel="noopener">https://cxx0822.github.io</a></a></p><p><a href="https://github.com/ZhouJiaHuan" target="_blank" rel="noopener">ZhouJiaHuan的GitHub<a href="https://github.com/ZhouJiaHuan" target="_blank" rel="noopener">https://github.com/ZhouJiaHuan</a></a></p><p><a href="https://blog.csdn.net/zz683693/article/category/6966040" target="_blank" rel="noopener">zz683693<a href="https://blog.csdn.net/zz683693/article/category/6966040" target="_blank" rel="noopener">https://blog.csdn.net/zz683693/article/category/6966040</a></a></p><p><a href="http://www.pudn.com/Download/item/id/3283143.html" target="_blank" rel="noopener">Nao机器人接力赛<a href="http://www.pudn.com/Download/item/id/3283143.html" target="_blank" rel="noopener">http://www.pudn.com/Download/item/id/3283143.html</a></a></p><h2 id="BHuman"><a href="#BHuman" class="headerlink" title="BHuman"></a>BHuman</h2><p><a href="https://blog.csdn.net/qq_34062822/article/category/7666151" target="_blank" rel="noopener">大神博客1<a href="https://blog.csdn.net/qq_34062822/article/category/7666151" target="_blank" rel="noopener">https://blog.csdn.net/qq_34062822/article/category/7666151</a></a></p><p><a href="https://blog.csdn.net/weixin_42895991/article/category/8542835" target="_blank" rel="noopener">大神博客2<a href="https://blog.csdn.net/weixin_42895991/article/category/8542835" target="_blank" rel="noopener">https://blog.csdn.net/weixin_42895991/article/category/8542835</a></a></p><p><a href="https://blog.csdn.net/liuying_1001/article/category/836993" target="_blank" rel="noopener">liuying_1001的博客<a href="https://blog.csdn.net/liuying_1001/article/category/836993" target="_blank" rel="noopener">https://blog.csdn.net/liuying_1001/article/category/836993</a></a></p><p><a href="https://sisterchen.github.io/" target="_blank" rel="noopener">sisterchen的博客<a href="https://sisterchen.github.io/" target="_blank" rel="noopener">https://sisterchen.github.io/</a></a></p><hr>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;在这里整理了一些关于Nao机器人的学习资料。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="Nao机器人" scheme="http://ahoj.cc//categories/Nao%E6%9C%BA%E5%99%A8%E4%BA%BA/"/>
+    
+    
+      <category term="Nao机器人" scheme="http://ahoj.cc/tags/Nao%E6%9C%BA%E5%99%A8%E4%BA%BA/"/>
+    
+  </entry>
   
   <entry>
     <title>【Nao机器人】BHuman之SimRobot</title>
