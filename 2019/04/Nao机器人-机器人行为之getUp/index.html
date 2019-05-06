@@ -123,7 +123,7 @@
 <meta property="og:image" content="https://ws1.sinaimg.cn/large/006wR0dcly1g1s7vs9tnaj31g40retgw.jpg">
 <meta property="og:image" content="https://ws1.sinaimg.cn/large/006wR0dcly1g1s83yxataj30xc0hi42s.jpg">
 <meta property="og:image" content="https://ws1.sinaimg.cn/large/006wR0dcly1g1s8au5aawj30gu0cgmz6.jpg">
-<meta property="og:updated_time" content="2019-04-05T16:47:15.320Z">
+<meta property="og:updated_time" content="2019-05-06T09:58:15.279Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="【Nao机器人】机器人行为之getUp">
 <meta name="twitter:description" content="在赛场上机器人是很难避免跌倒的（守门员经常会扑倒挡球），在 BHuman 中带了跌倒后站起的行为，这篇文章是记录下最近对此行为运行过程的分析。">
@@ -466,7 +466,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2019-04-06 00:47:15" itemprop="dateModified" datetime="2019-04-06T00:47:15+08:00">2019-04-06</time>
+                <time title="修改时间：2019-05-06 17:58:15" itemprop="dateModified" datetime="2019-05-06T17:58:15+08:00">2019-05-06</time>
               
             
           </span>
@@ -539,8 +539,8 @@
 
       
         <p>在赛场上机器人是很难避免跌倒的（守门员经常会扑倒挡球），在 BHuman 中带了跌倒后站起的行为，这篇文章是记录下最近对此行为运行过程的分析。</p>
-<p><img src="https://ws1.sinaimg.cn/large/006wR0dcly1g1ru217cjvj318y0m8qv5.jpg" alt="守门员扑球"></p>
 <a id="more"></a>
+<p><img src="https://ws1.sinaimg.cn/large/006wR0dcly1g1ru217cjvj318y0m8qv5.jpg" alt="守门员扑球"></p>
 <h2 id="HandleGameState-h"><a href="#HandleGameState-h" class="headerlink" title="HandleGameState.h"></a>HandleGameState.h</h2><p>在赛场上机器人可能因为各种因素跌倒，所以跌倒的状态判断是<strong>全局的</strong>，当跌倒后，停止执行后面的动作，转去执行 getUp。可以看到，这里调用了 theFallDownState 模块，下面进到里面看看。</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(theFallDownState.state == FallDownState::fallen)</span><br><span class="line">	  <span class="keyword">goto</span> getUp;</span><br></pre></td></tr></table></figure>
 <h3 id="FallDownState"><a href="#FallDownState" class="headerlink" title="FallDownState"></a>FallDownState</h3><p>FallDownState，是一个摔倒状态的结构体，里面有机器人关于跌倒的 6 个 state 和 4 个 direction。</p>
