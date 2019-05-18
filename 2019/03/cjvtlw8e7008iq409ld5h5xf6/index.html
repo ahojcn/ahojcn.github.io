@@ -1,0 +1,495 @@
+<!DOCTYPE html><html lang="zh-Hans"><head><meta name="generator" content="Hexo 3.8.0"><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta name="description" content="Cpp-类和对象"><meta name="keywords" content="Cpp"><meta name="author" content="ahoj"><meta name="copyright" content="ahoj"><title>Cpp-类和对象 | ahoj's blog</title><link rel="shortcut icon" href="/bitbug_favicon.ico"><link rel="stylesheet" href="/css/index.css?version=1.6.1"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@latest/css/font-awesome.min.css?version=1.6.1"><link rel="dns-prefetch" href="https://cdn.staticfile.org"><link rel="dns-prefetch" href="https://cdn.bootcss.com"><link rel="dns-prefetch" href="https://creativecommons.org"><script>var GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"search.xml","languages":{"hits_empty":"找不到您查询的内容:${query}"}},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  }
+} </script></head><body><canvas class="fireworks"></canvas><i class="fa fa-arrow-right" id="toggle-sidebar" aria-hidden="true"></i><div id="sidebar"><div class="toggle-sidebar-info text-center"><span data-toggle="切换文章详情">切换站点概览</span><hr></div><div class="sidebar-toc"><div class="sidebar-toc__title">目录</div><div class="sidebar-toc__progress"><span class="progress-notice">你已经读了</span><span class="progress-num">0</span><span class="progress-percentage">%</span><div class="sidebar-toc__progress-bar"></div></div><div class="sidebar-toc__content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#类的引入"><span class="toc-number">1.</span> <span class="toc-text">类的引入</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#访问限定符及封装"><span class="toc-number">2.</span> <span class="toc-text">访问限定符及封装</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#访问限定符"><span class="toc-number">2.1.</span> <span class="toc-text">访问限定符</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#封装"><span class="toc-number">2.2.</span> <span class="toc-text">封装</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#类的实例化"><span class="toc-number">3.</span> <span class="toc-text">类的实例化</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#类的对象模型"><span class="toc-number">4.</span> <span class="toc-text">类的对象模型</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#计算类对象的大小"><span class="toc-number">4.1.</span> <span class="toc-text">计算类对象的大小</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#内存对齐规则"><span class="toc-number">4.2.</span> <span class="toc-text">内存对齐规则</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#this-指针"><span class="toc-number">5.</span> <span class="toc-text">this 指针</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-个默认成员函数"><span class="toc-number">6.</span> <span class="toc-text">6 个默认成员函数</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#构造函数"><span class="toc-number">6.1.</span> <span class="toc-text">构造函数</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#成员变量命名风格"><span class="toc-number">6.1.1.</span> <span class="toc-text">成员变量命名风格</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#析构函数"><span class="toc-number">6.2.</span> <span class="toc-text">析构函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#拷贝构造"><span class="toc-number">6.3.</span> <span class="toc-text">拷贝构造</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#类型转换构造"><span class="toc-number">6.4.</span> <span class="toc-text">类型转换构造</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#运算符重载"><span class="toc-number">7.</span> <span class="toc-text">运算符重载</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#const"><span class="toc-number">8.</span> <span class="toc-text">const</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#const-修饰类的成员变量"><span class="toc-number">8.1.</span> <span class="toc-text">const 修饰类的成员变量</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#const-修饰类的成员函数"><span class="toc-number">8.2.</span> <span class="toc-text">const 修饰类的成员函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#const-对象"><span class="toc-number">8.3.</span> <span class="toc-text">const 对象</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#取地址及-const-取地址操作符重载"><span class="toc-number">8.4.</span> <span class="toc-text">取地址及 const 取地址操作符重载</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#再谈构造函数"><span class="toc-number">9.</span> <span class="toc-text">再谈构造函数</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#初始化列表"><span class="toc-number">9.1.</span> <span class="toc-text">初始化列表</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#C-11成员初始化新方式"><span class="toc-number">9.2.</span> <span class="toc-text">C++ 11成员初始化新方式</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#static-成员"><span class="toc-number">10.</span> <span class="toc-text">static 成员</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#友元"><span class="toc-number">11.</span> <span class="toc-text">友元</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#友元函数"><span class="toc-number">11.1.</span> <span class="toc-text">友元函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#友元类"><span class="toc-number">11.2.</span> <span class="toc-text">友元类</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#内部类"><span class="toc-number">12.</span> <span class="toc-text">内部类</span></a></li></ol></div></div><div class="author-info hide"><div class="author-info__avatar text-center"><img src="https://i.loli.net/2019/05/18/5ce01a928835c26008.jpg"></div><div class="author-info__name text-center">ahoj</div><div class="author-info__description text-center">思想的本质就是不安</div><div class="follow-button"><a href="https://github.com/ahojcn">GitHub</a></div><hr><div class="author-info-articles"><a class="author-info-articles__archives article-meta" href="/archives"><span class="pull-left">文章</span><span class="pull-right">58</span></a><a class="author-info-articles__tags article-meta" href="/tags"><span class="pull-left">标签</span><span class="pull-right">19</span></a><a class="author-info-articles__categories article-meta" href="/categories"><span class="pull-left">分类</span><span class="pull-right">14</span></a></div><hr><div class="author-info-links"><div class="author-info-links__title text-center">朋友们</div><a class="author-info-links__name text-center" href="https://zouchanglin.cn/">Tim</a><a class="author-info-links__name text-center" href="http://www.ijam8.com/">Jam</a><a class="author-info-links__name text-center" href="https://blog.csdn.net/jack_wang128801">jack_wang128801</a><a class="author-info-links__name text-center" href="https://blog.csdn.net/weixin_43232955">Mr.Q_</a></div></div></div><div id="content-outer"><div class="no-bg" id="top-container"><div id="page-header"><span class="pull-left"> <a id="site-name" href="/">ahoj's blog</a></span><i class="fa fa-bars toggle-menu pull-right" aria-hidden="true"></i><span class="pull-right menus"><a class="site-page social-icon search"><i class="fa fa-search"></i><span> 搜索</span></a><a class="site-page" href="/">主页</a><a class="site-page" href="/archives">文章</a><a class="site-page" href="/tags">标签</a><a class="site-page" href="/categories">分类</a><a class="site-page" href="/about">关于</a></span></div><div id="post-info"><div id="post-title">Cpp-类和对象</div><div id="post-meta"><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 2019-03-15</time><span class="post-meta__separator">|</span><i class="fa fa-inbox post-meta__icon" aria-hidden="true"></i><a class="post-meta__categories" href="/categories/Cpp/">Cpp</a></div></div></div><div class="layout" id="content-inner"><article id="post"><div class="article-container" id="post-content"><p>类和对象的知识，面向对象Code吧。</p>
+<a id="more"></a>
+<h2 id="类的引入"><a href="#类的引入" class="headerlink" title="类的引入"></a>类的引入</h2><p>万物皆对象。类是一种用户自定义的数据类型,包括表示属性的成员变量和表示行为的成员函数，类是现实世界对象的抽象,对象是类虚拟世界的实例。</p>
+<ul>
+<li><p>C++ 中 struct 中不仅可以有变量，还可以有函数。</p>
+</li>
+<li><p>类定义结束时后面分号。</p>
+</li>
+<li><p>成员函数声明和定义可以全部放在类体中，需要注意：成员函数如果在类中定义，编译器可能会将其当成内联函数处理。</p>
+</li>
+<li><p>一般定义在 .h 文件中，定义放在 .cpp 文件中。</p>
+</li>
+<li><p>面向对象三大特性：封装、继承、多态。</p>
+</li>
+</ul>
+<h2 id="访问限定符及封装"><a href="#访问限定符及封装" class="headerlink" title="访问限定符及封装"></a>访问限定符及封装</h2><h3 id="访问限定符"><a href="#访问限定符" class="headerlink" title="访问限定符"></a>访问限定符</h3><p>C++ 实现封装的方式：用类将对象的属性与方法结合在一块，让对象更加完善，通过访问权限选择性的将其接口提供给外部的用户使用。</p>
+<p>public 公有的、protected 保护的、private 私有的。</p>
+<ul>
+<li><p>public 修饰的成员在类外可以直接被访问。</p>
+</li>
+<li><p>protected 和 private 修饰的成员在类外不能直接被访问。</p>
+</li>
+<li><p>访问权限作用域从该访问限定符出现的位置开始直到下一个访问限定符出现时为止。</p>
+</li>
+<li><p>class 的默认访问权限为 private ，struct 默认为 public (因为struct要兼容C)。</p>
+</li>
+<li><p>访问限定符只在编译时有用，当数据映射到内存后，没有任何访问限定符上的区别。</p>
+</li>
+</ul>
+<h3 id="封装"><a href="#封装" class="headerlink" title="封装"></a>封装</h3><p>封装：将数据和操作数据的方法进行有机结合，隐藏对象的属性和实现细节，仅对外公开接口来和对象进行交互。</p>
+<p>封装本质上是一种管理：我们如何管理兵马俑呢？比如如果什么都不管，兵马俑就被随意破坏了。那么我们<br>首先建了一座房子把兵马俑给封装起来。但是我们目的全封装起来，不让别人看。所以我们开放了售票通<br>道，可以买票突破封装在合理的监管机制下进去参观。类也是一样，我们使用类数据和方法都封装到一下。<br>不想给别人看到的，我们使用 protected/private 把成员封装起来。开放一些共有的成员函数对成员合理的访<br>问。所以封装本质是一种管理。</p>
+<h2 id="类的实例化"><a href="#类的实例化" class="headerlink" title="类的实例化"></a>类的实例化</h2><p>用类类型创建对象的过程，称为类的实例化。</p>
+<p>类好比是一个房子的设计图纸，类的实例化就是按照图纸建造一个房子。一个设计图可以建好几套房子。</p>
+<p>造对象~~~。</p>
+<h2 id="类的对象模型"><a href="#类的对象模型" class="headerlink" title="类的对象模型"></a>类的对象模型</h2><h3 id="计算类对象的大小"><a href="#计算类对象的大小" class="headerlink" title="计算类对象的大小"></a>计算类对象的大小</h3><p>❓ 类中既可以有成员变量，又可以有成员函数，那么一个类的对象中包含了什么？如何计算一个类的大小？</p>
+<p>✔️ 只保存成员变量，成员函数存放在公共的代码段。一个类的大小，实际就是该类中”成员变量”之和，当然也要进行内存对齐，注意空类的大小，空类比较特殊，编译器给了空类一个字节来唯一标识这个类。</p>
+<p>🌰 栗子：</p>
+<pre><code class="cpp">class A1
+{
+  public:
+    void f1() {}
+
+  private:
+    int _a;
+};
+// 类中仅有成员函数
+class A2
+{
+  public:
+    void f2() {}
+};
+// 类中什么都没有---空类
+class A3
+{
+};
+
+int main()
+{
+    cout &lt;&lt; &quot;sizeof(A1) : &quot; &lt;&lt; sizeof(A1) &lt;&lt; endl;    // 4
+    cout &lt;&lt; &quot;sizeof(A2) : &quot; &lt;&lt; sizeof(A2) &lt;&lt; endl;    // 1
+    cout &lt;&lt; &quot;sizeof(A3) : &quot; &lt;&lt; sizeof(A3) &lt;&lt; endl;    // 1
+    return 0;
+}
+</code></pre>
+<h3 id="内存对齐规则"><a href="#内存对齐规则" class="headerlink" title="内存对齐规则"></a>内存对齐规则</h3><p>结构体内存对齐规则：</p>
+<ul>
+<li><p>第一个成员在与结构体偏移量为 0 的地址处。</p>
+</li>
+<li><p>其他成员变量要对齐到某个数字(对齐数)的整数倍的地址处。</p>
+<ul>
+<li><p>对齐数 = 编译器默认的一个对齐数与该成员大小的较小值。</p>
+</li>
+<li><p>VS 中默认的对齐数为 8，gcc 中的对齐数为 4 。</p>
+</li>
+</ul>
+</li>
+<li><p>结构体总大小为：最大对齐数(所有变量类型最大者与默认对齐参数取最小)的整数倍。</p>
+</li>
+<li><p>如果嵌套了结构体的情况，嵌套的结构体对齐到自己的最大对齐数的整数倍处，结构体的整体大小就是所有最大对齐数(含嵌套结构体的对齐数)的整数倍。</p>
+</li>
+</ul>
+<p>结构体的内存对齐规则适用于类。</p>
+<p>⚠️ 类中嵌套的类是不占用空间的，只有当有了类的对象后，才会占用空间。</p>
+<pre><code class="cpp">class A1
+{
+  public:
+    void f1() {}
+
+  private:
+    int _a;
+
+    class A2
+    {
+    };
+};    // sizeof(A1) = 4
+</code></pre>
+<p>❓ 为什么要进行内存对齐？</p>
+<p>✔️ <a href="https://www.cnblogs.com/jijiji/p/4854581.html" target="_blank" rel="noopener">https://www.cnblogs.com/jijiji/p/4854581.html</a></p>
+<p>❓ 如何让结构体按照指定的对齐参数进行对齐？</p>
+<p>✔️ <code>#pragma pack(4)</code></p>
+<p>❓ 如何知道结构体中某个成员相对于结构体起始位置的偏移量？</p>
+<p>✔️ 造个对象，地址相减。</p>
+<p>✔️ <code>&amp;(((type*)0)-&gt;m)</code>。</p>
+<p>❓ 什么是大小端？如何测试某台机器是大端还是小端？有没有遇到过要考虑大小端的场景？</p>
+<p>✔️ 在网络通信中会涉及到。</p>
+<h2 id="this-指针"><a href="#this-指针" class="headerlink" title="this 指针"></a>this 指针</h2><p>成员函数最终会被编译成与对象无关的普通函数。除了成员变量，丢失所有信息。</p>
+<p>C++ 编译器给每个“成员函数“增加了一个隐藏的指针参数，让该指针指向当前对象(函数运行时调用该函数的对象)，在函数体中所有成员变量的操作，都是通过该指针去访问。只不过所有的操作对用户是透明的，即用户不需要来传递，编译器自动完成。</p>
+<ul>
+<li><p>this 指针是 const 的，类型为对象的类型。</p>
+</li>
+<li><p>只能在“成员函数”的内部使用。</p>
+</li>
+<li><p>this 指针本质上其实是一个成员函数的形参，是对象调用成员函数时，将对象地址作为实参传递给 this 形参。所以对象中不存储 this 指针。</p>
+</li>
+<li><p>this 指针是成员函数第一个隐含的指针形参，一般情况由编译器通过 ecx 寄存器自动传递，不需要用户传递。</p>
+</li>
+</ul>
+<p><img src="https://ws1.sinaimg.cn/large/006wR0dcly1g1d5shp7ywj315m0ggmzu.jpg" alt></p>
+<h2 id="6-个默认成员函数"><a href="#6-个默认成员函数" class="headerlink" title="6 个默认成员函数"></a>6 个默认成员函数</h2><p>任何一个类在我们不写的情况下，都会自动生成下面6个默认成员函数。</p>
+<p><code>class Date {};</code></p>
+<ul>
+<li>初始化和清理<ul>
+<li><a href="#构造函数">构造函数</a>：完成初始化工作</li>
+<li><a href="#析构函数">析构函数</a>：完成清理工作</li>
+</ul>
+</li>
+<li>拷贝复制<ul>
+<li><a href="#拷贝构造">拷贝构造</a>：使用同类对象初始化创建对象</li>
+<li>赋值重载：把一个对象赋值给另一个对象</li>
+</ul>
+</li>
+<li><a href="#取地址及 const 取地址操作符重载">取地址重载</a><ul>
+<li>主要是普通对象和 const 对象取地址，这两个很少会自己实现</li>
+</ul>
+</li>
+</ul>
+<h3 id="构造函数"><a href="#构造函数" class="headerlink" title="构造函数"></a>构造函数</h3><p>构造函数是一个特殊的成员函数，名字与类名相同，创建类类型对象时由编译器<strong>自动调用</strong>，保证每个数据成员都有一个合适的初始值，并且在对象的<strong>生命周期内只调用一次</strong>。</p>
+<ul>
+<li><p>构造函数可以重载。</p>
+</li>
+<li><p>为成员变量赋初始值，分配资源（是给对象的成员变量分配资源），设置对象的初始状态。</p>
+</li>
+<li><p>函数名与类名相同，没有返回类型。</p>
+</li>
+<li><p>对象创建时自动调用且只调用一次。</p>
+<ul>
+<li>栈区创建对象：对象定义语句。</li>
+<li>堆区创建对象：new 操作符。</li>
+</ul>
+</li>
+<li><p>自定义成员类型要调用自己的构造函数，编译器自动生成的构造函数会自己调用它。</p>
+</li>
+<li><p>对象创建过程：</p>
+<ol>
+<li>为整个对象分配内存；</li>
+<li>构造基类部分（如果存在基类）；</li>
+<li>构造成员变量；</li>
+<li>执行构造函数代码。</li>
+</ol>
+</li>
+<li><p>一般访问属性为 public，除非我们不允许外部创建对象。</p>
+</li>
+</ul>
+<p>⚠️</p>
+<ul>
+<li>构造函数的虽然名称叫构造，但是需要注意的是构造函数的主要任务<strong>并不是给对象开空间创建对象，而是初始化对象，给对象里的成员变量开空间、赋值</strong>。 </li>
+<li>如果通过无参构造函数创建对象时，对象后面不用跟括号，否则就成了函数声明。如<code>Date d3();</code>，声明了d3函数，该函数无参，返回一个日期类型的对象。</li>
+<li>如果类中没有显式定义构造函数，则编译器会自动生成一个无参的默认构造函数，一旦用户显式定义编译器将不再生成。</li>
+<li>无参的构造函数和全缺省的构造函数都称为默认构造函数，并且默认构造函数只能有一个。</li>
+<li>无参构造和全缺省构造都称为默认构造函数，并且默认只能有一个。</li>
+</ul>
+<h4 id="成员变量命名风格"><a href="#成员变量命名风格" class="headerlink" title="成员变量命名风格"></a>成员变量命名风格</h4><p><code>m_name</code>、<code>_age</code>，具体看要求~，主要是和参数做区分。</p>
+<h3 id="析构函数"><a href="#析构函数" class="headerlink" title="析构函数"></a>析构函数</h3><p>与构造函数功能相反，析构函数不是完成对象的销毁，局部对象销毁工作是由编译器完成的。而对象在销毁时会自动调用析构函数，完成类的一些资源清理工作。</p>
+<ul>
+<li>无参数无返回值。</li>
+<li>只有一个析构函数，不能重载。</li>
+<li>负责对象销毁时回收对象占用资源。</li>
+<li>自定义成员类型要调用自己的析构，编译器自动生成的析构函数会自己调用它。</li>
+<li>在析构函数中 delete / free 构造函数中 new / malloc 的东西。</li>
+<li>在用完对象后 delete 对象，调用析构函数，当对象的生命周期后，自动调用析构函数。</li>
+</ul>
+<p>⚠️ 析构函数中，释放空间前要判断要释放的空间是否为 NULL / nullptr，释放完后要指向空，避免野指针。</p>
+<h3 id="拷贝构造"><a href="#拷贝构造" class="headerlink" title="拷贝构造"></a>拷贝构造</h3><p>用已存在的类类型对象创建新对象时由编译器自动调用。</p>
+<ul>
+<li><p>拷贝构造函数是构造函数的一个重载形式。</p>
+</li>
+<li><p>参数只有一个且必须使用引用传参（并且加 const 修饰），使用传值方式会引发无穷递归调用。</p>
+<p><img src="https://ws1.sinaimg.cn/large/006wR0dcly1g1d5ssmkd1j31ck0okdj7.jpg" alt></p>
+</li>
+<li><p>如果一个类没有定义拷贝构造函数，那么编译器提供一个默认拷贝构造函数（public）。</p>
+</li>
+<li><p>系统生成默认的拷贝构造函数。 默认的拷贝构造函数对象按内存存储按字节序完成拷<br>贝，这种拷贝我们叫做<strong>浅拷贝</strong>，或者值拷贝。</p>
+<p>例如：成员变量中有一个<code>char *</code>的成员变量，系统生成的默认拷贝构造会拷贝这个指针变量的值（指向的地址）给新的对象，这样，这两个对象就指向的同一块空间，在析构的时候会出现问题。</p>
+</li>
+</ul>
+<h3 id="类型转换构造"><a href="#类型转换构造" class="headerlink" title="类型转换构造"></a>类型转换构造</h3><p>构造函数不仅可以构造与初始化对象，<strong>对于单个参数的构造函数，还具有类型转换的作用</strong>。</p>
+<pre><code class="cpp">class Date {
+public:
+    Date(int year):_year(year){}
+private:
+    int _year;
+    int _month:
+    int _day; 
+};
+void TestDate()
+{
+    Date d1(2018);
+    // 用一个整形变量给日期类型对象赋值
+    // 实际编译器背后会用2019构造一个无名对象，最后用无名对象给d1对象进行赋值 
+    d1 = 2019;
+}
+</code></pre>
+<p>上述代码可读性不是很好，用 <strong>explicit</strong> 修饰构造函数，将会禁止单参构造函数的隐式转换。</p>
+<pre><code class="cpp">explicit Date(int year):_year(year){}
+</code></pre>
+<h2 id="运算符重载"><a href="#运算符重载" class="headerlink" title="运算符重载"></a>运算符重载</h2><ul>
+<li>不能通过连接其他符号来创建新的操作符：比如 operator@。</li>
+<li>重载操作符必须有一个类类型或者枚举类型的操作数，<code>int operator+(int a, int b) {}</code>，就是不可以的。</li>
+<li>作为类成员的重载函数时，其形参看起来比操作数数目少 1 成员函数的操作符有一个默认的形参 this，限定为第一个形参，<code>bool operator==(Date* this, const Date&amp; d2)</code>，调用<code>cout&lt;&lt;(d1 == d2)&lt;&lt;endl;</code>相当于<code>d1.operator==(d2)</code>。</li>
+<li>一个类如果没有显式定义赋值运算符重载，编译器也会生成一个，完成对象按字节序的值拷贝。</li>
+<li><code>#</code>、<code>-&gt;*</code>、<code>.*</code>、<code>::</code> 、<code>sizeof</code>、<code>?:</code>、 <code>.</code> 注意以上5个运算符不能重载。这个经常在笔试选择题中出现。</li>
+</ul>
+<p>⚠️  <code>.</code>、<code>.*</code>运算符不能重载是为了保证访问成员的功能不能被改变，域运算符合<code>sizeof</code>运算符的运算对象是类型而不是变量或一般表达式，不具备重载的特征。</p>
+<p>❓ 运算符重载成全局的就需要成员变量是共有的，封装性如何保证？</p>
+<p>✔️ 友元或者直接重载成成员函数。</p>
+<p>⚠️ <img src="https://ws1.sinaimg.cn/large/006wR0dcly1g1d5t2d0lkj319k0lygr0.jpg" alt></p>
+<p>⚠️ 重载前置++（<code>Complex&amp; operator++()</code>）和后置++（<code>Complex operator++(int)</code>，哑元占位，用来区分）这种的运算符应注意！</p>
+<p><img src="https://ws1.sinaimg.cn/large/006wR0dcly1g1d5tfcs8jj317c0rm77z.jpg" alt></p>
+<h2 id="const"><a href="#const" class="headerlink" title="const"></a>const</h2><h3 id="const-修饰类的成员变量"><a href="#const-修饰类的成员变量" class="headerlink" title="const 修饰类的成员变量"></a>const 修饰类的成员变量</h3><p>必须使用初始化参数列表初始化，初始化之后不能修改。</p>
+<pre><code class="cpp">class A
+{
+    A():m_a(10){}   //常成员变量必须用这种方式赋初始值
+    ~A(){}
+private:
+    const int m_a;
+};
+</code></pre>
+<h3 id="const-修饰类的成员函数"><a href="#const-修饰类的成员函数" class="headerlink" title="const 修饰类的成员函数"></a>const 修饰类的成员函数</h3><p>将 const 修饰的类成员函数称之为 const 成员函数，const 修饰类成员函数，实际修饰该成员函数隐含的 this 指针，表明在该成员函数中不能对类的任何成员进行修改，也叫常函数。</p>
+<p>⚠️ 常函数内部无法修改成员变量的值，除非 <strong>mutable</strong> 修饰该成员变量。</p>
+<p><code>void Display() const{...}</code> &lt;=&gt; <code>void Display(const Date* this){...}</code></p>
+<h3 id="const-对象"><a href="#const-对象" class="headerlink" title="const 对象"></a>const 对象</h3><ul>
+<li><p>这个对象里的成员变量是无法修改的。</p>
+</li>
+<li><p>被const修饰的对象，对象指针或对象引用，统称为<strong>常对象</strong>。</p>
+</li>
+<li><p>常对象只能调用常函数，非常对象即可调用常函数，也可调用非常函数，优先调用非常版本。</p>
+</li>
+<li><p>成员函数常版本和非常版本可以构成重载。</p>
+</li>
+</ul>
+<p>⚠️ 区别的标记并不是谁离得近，而是他在<code>*</code>号的前面还是后面。</p>
+<pre><code class="cpp">const Person* p = &amp;p1;//对象是const
+Person const* p = &amp;p1;//对象是const
+Person *const p = &amp;p1;//指针是const
+</code></pre>
+<h3 id="取地址及-const-取地址操作符重载"><a href="#取地址及-const-取地址操作符重载" class="headerlink" title="取地址及 const 取地址操作符重载"></a>取地址及 const 取地址操作符重载</h3><p>这两个默认成员函数一般不用重新定义，编译器默认会生成。</p>
+<pre><code class="cpp">class Date
+{
+public :
+    Date* operator&amp;()
+    {
+        return this ;
+    }
+    const Date* operator&amp;()const
+    {
+        return this ;
+    }
+private :
+    int _year ; // 年
+    int _month ; // 月
+    int _day ; // 日
+};
+</code></pre>
+<p>⚠️ 这两个运算符一般不需要重载，使用编译器生成的默认取地址的重载即可，只有特殊情况，才需要重载，比<br>如<strong>想让别人获取到指定的内容!</strong></p>
+<h2 id="再谈构造函数"><a href="#再谈构造函数" class="headerlink" title="再谈构造函数"></a>再谈构造函数</h2><pre><code class="cpp">public:
+    Date(int year, int month, int day)
+    {
+        _year = year;
+        _month = month;
+        _day = day;
+    }
+</code></pre>
+<p>虽然上述构造函数调用之后，对象中已经有了一个初始值，但是不能将其称作为类对象成员的初始化，构造<br>函数体中的语句只能将其称作为赋初值，而不能称作初始化。因为初始化只能初始化一次，而构造函数体内<br>可以多次赋值。</p>
+<pre><code class="cpp">class Person { ... };
+class Currency { ... };
+
+class SavingsAccount
+{
+public:
+    SavingsAccount(const char* name,const char* address,int cents);    // 这里是不合适的
+    // Person and Currency都有自己的构造函数，应该由自己来初始化自己，而不是SavingsAccount来构造
+    ~SavingAccount();
+    void print();
+private:
+    Person m_saver;
+    Currency m_balance;
+};
+</code></pre>
+<h3 id="初始化列表"><a href="#初始化列表" class="headerlink" title="初始化列表"></a>初始化列表</h3><p>初始化列表：以一个冒号开始，接着是一个以逗号分隔的数据成员列表，每个”成员变量”后面跟一个放在括 号中的初始值或表达式。</p>
+<pre><code class="cpp">// So:
+SavingsAccount::SavingsAccount(const char * name,const char* address,int cents):m_saver(name,address),m_balance(0,cents){}
+
+void SavingsAccount::print()
+{
+    m_saver.print();    //print() in saver
+    m_balance.print();  //print() in balance
+}
+</code></pre>
+<p>⚠️</p>
+<ul>
+<li>每个成员变量在初始化列表中只能出现一次（初始化只能初始化一次）。</li>
+<li>类中包含以下成员，必须放在初始化列表位置进行初始化：<ul>
+<li>引用成员变量（引用在定义的是时候必须初始化）</li>
+<li>const 成员变量（和上面一个道理，const在定义的时候必须初始化一个值）</li>
+<li>类类型成员（该类没有默认构造函数，如果有，要通过自己的构造函数来初始化）</li>
+</ul>
+</li>
+<li>成员变量在类中声明次序就是其在初始化列表中的初始化顺序，与其在初始化列表中的先后次序无关。</li>
+</ul>
+<h3 id="C-11成员初始化新方式"><a href="#C-11成员初始化新方式" class="headerlink" title="C++ 11成员初始化新方式"></a>C++ 11成员初始化新方式</h3><p>非静态成员变量，可以在成员声明时，直接初始化。</p>
+<p>相当于给无参构造函数一个缺省参数。</p>
+<h2 id="static-成员"><a href="#static-成员" class="headerlink" title="static 成员"></a>static 成员</h2><p>声明为 static 的类成员称为类的静态成员，用 static 修饰的成员变量，称之为静态成员变量；用 static 修饰的成员函数，称之为静态成员函数。</p>
+<p>面试题：实现一个类，计算中程序中创建出了多少个类对象。</p>
+<pre><code class="cpp">class A
+{
+public:
+    A() {++_scount;}
+    A(const A&amp; t) {++_scount;}
+    static int GetACount() { return _scount;}
+private:
+    static int _scount;
+};
+int Test::_count = 0;
+void TestA()
+{
+    cout&lt;&lt;A::GetACount()&lt;&lt;endl;
+    A a1, a2;
+    A a3(a1);
+    cout&lt;&lt;A::GetACount()&lt;&lt;endl;
+}
+</code></pre>
+<p>⚠️ </p>
+<ul>
+<li>静态的成员变量一定要在类外进行初始化。</li>
+<li>静态成员为所有类对象所共享，不属于某个具体的实例。</li>
+<li>静态成员变量必须在类外定义，定义时不添加static关键字。</li>
+<li>类静态成员即可用<code>类名::静态成员</code>或者<code>对象.静态成员</code>来访问。</li>
+<li>静态成员函数没有隐藏的 this 指针，不能访问任何非静态成员。</li>
+<li>静态成员和类的普通成员一样，也有public、protected、private3种访问级别，也可以具有返回值，const修饰符等参数。</li>
+</ul>
+<p>❓ 静态成员函数可以调用非静态成员函数吗？</p>
+<p>✔️ 不可以，非静态的成员函数默认有一个参数（this指针），但是静态成员函数没有这个 this 指针传给他，所以不可以调用。</p>
+<p>❓ 非静态成员函数可以调用类的静态成员函数吗？</p>
+<p>✔️ 可以。</p>
+<h2 id="友元"><a href="#友元" class="headerlink" title="友元"></a>友元</h2><p>友元提供了一种突破封装的方式，有时提供了便利。但是友元会增加<strong>耦合度</strong>，破坏了封装，所以友元不宜多用。</p>
+<h3 id="友元函数"><a href="#友元函数" class="headerlink" title="友元函数"></a>友元函数</h3><p>友元函数可以直接访问类的私有成员，它是定义在类外部的普通函数，不属于任何类，但需要在类的内部声明，声明时需要加 friend 关键字。</p>
+<ul>
+<li>友元函数可访问类的私有成员，但不是类的成员函数</li>
+<li>友元函数不能用 const 修饰</li>
+<li>友元函数可以在类定义的任何地方声明，不受类访问限定符限制</li>
+<li>一个函数可以是多个类的友元函数</li>
+<li>友元函数的调用与普通函数的调用和原理相同</li>
+</ul>
+<p>问题：现在我们尝试去重载operator&lt;&lt;，然后发现我们没办法将operator&lt;&lt;重载成成员函数。因为 cout 的输出流对象和隐含的this指针在抢占第一个参数的位置。this 指针默认是第一个参数也就是左操作数了。但是实际使用中cout需要是第一个形参对象，才能正常使用。所以我们要将operator&lt;&lt;重载成全局函数。但是这样的话，又会导致类外没办法访问成员，那么这里就需要友元来解决。operator&gt;&gt;同理。</p>
+<pre><code class="cpp">class Date
+{
+public:
+    Date(int year, int month, int day)
+        : _year(year)
+        , _month(month)
+        , _day(day) {}
+    ostream&amp; operator&lt;&lt;(ostream&amp; _cout)
+    {
+        _cout&lt;&lt;d._year&lt;&lt;&quot;-&quot;&lt;&lt;d._month&lt;&lt;&quot;-&quot;&lt;&lt;d._day;
+        return _cout;
+    }
+private:
+    int _year;
+    int _month;
+    int _day 
+};
+int main() {
+    Date d(2017, 12, 24);
+    d&lt;&lt;cout;    // 这种使用方式很别扭，不符合使用习惯
+    return 0;
+}
+</code></pre>
+<p>使用友元修改后：</p>
+<pre><code class="cpp">class Date
+{
+    friend ostream&amp; operator&lt;&lt;(ostream&amp; _cout, const Date&amp; d);
+    friend istream&amp; operator&gt;&gt;(istream&amp; _cin, const Date&amp; d);
+public:
+    Date(int year, int month, int day)
+        : _year(year)
+        , _month(month)
+        , _day(day)
+    {}
+private:
+    int _year;
+    int _month;
+    int _day 
+};
+ostream&amp; operator&lt;&lt;(ostream&amp; _cout, const Date&amp; d)
+{
+    _cout&lt;&lt;d._year&lt;&lt;&quot;-&quot;&lt;&lt;d._month&lt;&lt;&quot;-&quot;&lt;&lt;d._day;
+    return _cout;
+}
+istream&amp; operator&gt;&gt;(istream&amp; _cin, const Date&amp; d)
+{
+    _cin&gt;&gt;d._year;
+    _cin&gt;&gt;d._month;
+    _cin&gt;&gt;d._day;
+    return _cin;
+}
+int main() {
+    Date d;
+    cin&gt;&gt;d;
+    cout&lt;&lt;d&lt;&lt;endl;
+    return 0;
+}
+</code></pre>
+<h3 id="友元类"><a href="#友元类" class="headerlink" title="友元类"></a>友元类</h3><p>友元类的所有成员函数都可以是另一个类的友元函数，都可以访问另一个类中的非公有成员。</p>
+<ul>
+<li><p>友元关系是单向的，不具有交换性。</p>
+<p>我把你当朋友，带你去我家吃好吃的，你却不把我当朋友，不带我去你家。</p>
+</li>
+<li><p>友元关系不能传递。</p>
+<p>如果 B 是 A 的友元，C 是 B 的友元，则不能说明 C 时 A 的友元。</p>
+</li>
+</ul>
+<h2 id="内部类"><a href="#内部类" class="headerlink" title="内部类"></a>内部类</h2><p>如果一个类定义在另一个类的内部，这个内部类就叫做内部类。注意此时这个内部类是一个独立的类，它不属于外部类，更不能通过外部类的对象去调用内部类。外部类对内部类没有任何优越的访问权限。</p>
+<ul>
+<li>内部类可以定义在外部类的 public、protected、private 都是可以的。</li>
+<li>内部类可以直接访问外部类中的 static、枚举成员，不需要外部类的对象/类名。</li>
+<li>sizeof(外部类)=外部类，和内部类没有任何关系。</li>
+</ul>
+<p>⚠️ 内部类就是外部类的友元类。注意友元类的定义，内部类可以通过外部类的对象参数来访问外部类中的所有成员。但是外部类不是内部类的友元。</p>
+<pre><code class="cpp">class A
+{
+private:
+    static int k;
+    int h;
+public:
+    class B
+    {
+    public:
+        void foo(const A&amp; a)
+        {
+            cout &lt;&lt; k &lt;&lt; endl;//OK
+            cout &lt;&lt; a.h &lt;&lt; endl;//OK
+        }
+    }; 
+};
+int A::k = 1;
+int main() 
+{
+    A::B b;
+    b.foo(A());
+    return 0; 
+}
+</code></pre>
+<hr>
+</div></article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">ahoj</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://ahoj.cc/2019/03/cjvtlw8e7008iq409ld5h5xf6/">https://ahoj.cc/2019/03/cjvtlw8e7008iq409ld5h5xf6/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://ahoj.cc">ahoj's blog</a>！</span></div></div><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Cpp/">Cpp</a></div><nav id="pagination"><div class="prev-post pull-left"><a href="/2019/03/cjvtlw6i0002bq409yen34xsm/"><i class="fa fa-chevron-left">  </i><span>Linux-基础命令</span></a></div><div class="next-post pull-right"><a href="/2019/03/cjvtlw80v007kq409m0x7fn7a/"><span>Cpp-入门</span><i class="fa fa-chevron-right"></i></a></div></nav><div id="vcomment"></div><script src="https://cdn1.lncld.net/static/js/3.0.4/av-min.js"></script><script src="https://cdn.jsdelivr.net/npm/valine/dist/Valine.min.js"></script><script>var notify = 'false' == true ? true : false;
+var verify = 'false' == true ? true : false;
+var GUEST_INFO = ['nick','mail','link'];
+var guest_info = 'nick,mail,link'.split(',').filter(function(item){
+  return GUEST_INFO.indexOf(item) > -1
+});
+guest_info = guest_info.length == 0 ? GUEST_INFO :guest_info;
+window.valine = new Valine({
+  el:'#vcomment',
+  notify:notify,
+  verify:verify,
+  appId:'yy9oH4ap0AOjoGWG7vbV9w2v-gzGzoHsz',
+  appKey:'27EcRosAo5WUi5KH16i9nAq1',
+  placeholder:'说点什么吧~ 不足之处或者...',
+  avatar:'mm',
+  guest_info:guest_info,
+  pageSize:'10',
+  lang: 'zh-cn'
+})</script></div></div><footer><div class="layout" id="footer"><div class="copyright">&copy;2019 By ahoj</div><div class="framework-info"><span>驱动 - </span><a href="http://hexo.io"><span>Hexo</span></a><span class="footer-separator">|</span><span>主题 - </span><a href="https://github.com/Molunerfinn/hexo-theme-melody"><span>Melody</span></a></div><div class="busuanzi"><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><span id="busuanzi_container_page_pv"><i class="fa fa-file-o"></i><span id="busuanzi_value_page_pv"></span><span></span></span></div></div></footer><i class="fa fa-arrow-up" id="go-up" aria-hidden="true"></i><script src="https://cdn.jsdelivr.net/npm/animejs@latest/anime.min.js"></script><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@latest/velocity.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-ui-pack@latest/velocity.ui.min.js"></script><script src="/js/utils.js?version=1.6.1"></script><script src="/js/fancybox.js?version=1.6.1"></script><script src="/js/sidebar.js?version=1.6.1"></script><script src="/js/copy.js?version=1.6.1"></script><script src="/js/fireworks.js?version=1.6.1"></script><script src="/js/transition.js?version=1.6.1"></script><script src="/js/scroll.js?version=1.6.1"></script><script src="/js/head.js?version=1.6.1"></script><script src="/js/search/local-search.js"></script><script>if(/Android|webOS|iPhone|iPod|BlackBerry/i.test(navigator.userAgent)) {
+  $('#nav').addClass('is-mobile')
+  $('footer').addClass('is-mobile')
+}</script><div class="search-dialog" id="local-search"><div class="search-dialog__title" id="local-search-title">本地搜索</div><div id="local-input-panel"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章"></div></div></div><hr><div id="local-search-results"><div id="local-hits"></div><div id="local-stats"><div class="local-search-stats__hr" id="hr"><span>由</span> <a href="https://github.com/wzpan/hexo-generator-search" style="color:#49B1F5;">hexo-generator-search</a>
+ <span>提供支持</span></div></div></div><span class="search-close-button"><i class="fa fa-times"></i></span></div><div class="search-mask"></div></body></html>

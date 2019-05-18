@@ -1,0 +1,422 @@
+<!DOCTYPE html><html lang="zh-Hans"><head><meta name="generator" content="Hexo 3.8.0"><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta name="description" content="Java-网络编程"><meta name="keywords" content="JavaSE"><meta name="author" content="ahoj"><meta name="copyright" content="ahoj"><title>Java-网络编程 | ahoj's blog</title><link rel="shortcut icon" href="/bitbug_favicon.ico"><link rel="stylesheet" href="/css/index.css?version=1.6.1"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@latest/css/font-awesome.min.css?version=1.6.1"><link rel="dns-prefetch" href="https://cdn.staticfile.org"><link rel="dns-prefetch" href="https://cdn.bootcss.com"><link rel="dns-prefetch" href="https://creativecommons.org"><script>var GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"search.xml","languages":{"hits_empty":"找不到您查询的内容:${query}"}},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  }
+} </script></head><body><canvas class="fireworks"></canvas><i class="fa fa-arrow-right" id="toggle-sidebar" aria-hidden="true"></i><div id="sidebar"><div class="toggle-sidebar-info text-center"><span data-toggle="切换文章详情">切换站点概览</span><hr></div><div class="sidebar-toc"><div class="sidebar-toc__title">目录</div><div class="sidebar-toc__progress"><span class="progress-notice">你已经读了</span><span class="progress-num">0</span><span class="progress-percentage">%</span><div class="sidebar-toc__progress-bar"></div></div><div class="sidebar-toc__content"><ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#网络模型"><span class="toc-number">1.</span> <span class="toc-text">网络模型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#网络编程三要素"><span class="toc-number">2.</span> <span class="toc-text">网络编程三要素</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#InetAddress"><span class="toc-number">3.</span> <span class="toc-text">InetAddress</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Q-amp-A"><span class="toc-number">3.1.</span> <span class="toc-text">Q &amp; A</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Socket"><span class="toc-number">4.</span> <span class="toc-text">Socket</span></a></li></ol><li class="toc-item toc-level-2"><a class="toc-link" href="#UDP-传输"><span class="toc-number"></span> <span class="toc-text">UDP 传输</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#TCP传输容易出现的问题"><span class="toc-number">1.</span> <span class="toc-text">TCP传输容易出现的问题</span></a></li></ol></li></div></div><div class="author-info hide"><div class="author-info__avatar text-center"><img src="https://i.loli.net/2019/05/18/5ce01a928835c26008.jpg"></div><div class="author-info__name text-center">ahoj</div><div class="author-info__description text-center">思想的本质就是不安</div><div class="follow-button"><a href="https://github.com/ahojcn">GitHub</a></div><hr><div class="author-info-articles"><a class="author-info-articles__archives article-meta" href="/archives"><span class="pull-left">文章</span><span class="pull-right">58</span></a><a class="author-info-articles__tags article-meta" href="/tags"><span class="pull-left">标签</span><span class="pull-right">19</span></a><a class="author-info-articles__categories article-meta" href="/categories"><span class="pull-left">分类</span><span class="pull-right">14</span></a></div><hr><div class="author-info-links"><div class="author-info-links__title text-center">朋友们</div><a class="author-info-links__name text-center" href="https://zouchanglin.cn/">Tim</a><a class="author-info-links__name text-center" href="http://www.ijam8.com/">Jam</a><a class="author-info-links__name text-center" href="https://blog.csdn.net/jack_wang128801">jack_wang128801</a><a class="author-info-links__name text-center" href="https://blog.csdn.net/weixin_43232955">Mr.Q_</a></div></div></div><div id="content-outer"><div class="no-bg" id="top-container"><div id="page-header"><span class="pull-left"> <a id="site-name" href="/">ahoj's blog</a></span><i class="fa fa-bars toggle-menu pull-right" aria-hidden="true"></i><span class="pull-right menus"><a class="site-page social-icon search"><i class="fa fa-search"></i><span> 搜索</span></a><a class="site-page" href="/">主页</a><a class="site-page" href="/archives">文章</a><a class="site-page" href="/tags">标签</a><a class="site-page" href="/categories">分类</a><a class="site-page" href="/about">关于</a></span></div><div id="post-info"><div id="post-title">Java-网络编程</div><div id="post-meta"><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 2019-02-26</time><span class="post-meta__separator">|</span><i class="fa fa-inbox post-meta__icon" aria-hidden="true"></i><a class="post-meta__categories" href="/categories/JavaSE/">JavaSE</a></div></div></div><div class="layout" id="content-inner"><article id="post"><div class="article-container" id="post-content"><p>有人说，20世纪最伟大的发明不是计算机，而是计算机网络。</p>
+<p>还有人说，如果你买了计算机而没有联网，就等于买了电话机而没有接电话线一样。</p>
+<a id="more"></a>
+<h3 id="网络模型"><a href="#网络模型" class="headerlink" title="网络模型"></a>网络模型</h3><p>计算机网络之间以何种规则进行通信，就是网络模型研究问题。</p>
+<p>网络模型一般是指：</p>
+<ul>
+<li><p>OSI（Open System Interconnection开放系统互连）参考模型 </p>
+</li>
+<li><p>TCP/IP参考模型 </p>
+</li>
+</ul>
+<p><img src="https://s2.ax1x.com/2019/02/26/koGO4H.md.jpg" alt="网络模型"></p>
+<p><strong>网络模型7层概述：</strong> </p>
+<ol>
+<li><p><strong>物理层</strong>：主要定义物理设备标准，如网线的接口类型、光纤的接口类型、各种传输介质的传输速率等。它的主要作用是传输比特流（就是由1、0转化为电流强弱来进行传输,到达目的地后在转化为1、0，也就是我们常说的数模转换与模数转换）。这一层的数据叫做比特。 </p>
+</li>
+<li><p><strong>数据链路层</strong>：主要将从物理层接收的数据进行MAC地址（网卡的地址）的封装与解封装。常把这一层的数据叫做帧。在这一层工作的设备是交换机，数据通过交换机来传输。 </p>
+</li>
+<li><p><strong>网络层</strong>：主要将从下层接收到的数据进行IP地址（例192.168.0.1)的封装与解封装。在这一层工作的设备是路由器，常把这一层的数据叫做数据包。 </p>
+</li>
+<li><p><strong>传输层</strong>：定义了一些传输数据的协议和端口号（WWW端口80等），如：TCP（传输控制协议，传输效率低，可靠性强，用于传输可靠性要求高，数据量大的数据），UDP（用户数据报协议，与TCP特性恰恰相反，用于传输可靠性要求不高，数据量小的数据，如QQ聊天数据就是通过这种方式传输的）。 主要是将从下层接收的数据进行分段和传输，到达目的地址后再进行重组。常常把这一层数据叫做段。 </p>
+</li>
+<li><p><strong>会话层</strong>：通过传输层（端口号：传输端口与接收端口）建立数据传输的通路。主要在你的系统之间发起会话或者接受会话请求（设备之间需要互相认识可以是IP也可以是MAC或者是主机名） </p>
+</li>
+<li><p><strong>表示层</strong>：主要是进行对接收的数据进行解释、加密与解密、压缩与解压缩等（也就是把计算机能够识别的东西转换成人能够能识别的东西（如图片、声音等）。 </p>
+</li>
+<li><p><strong>应用层</strong>： 主要是一些终端的应用，比如说FTP（各种文件下载），WEB（IE浏览），QQ之类的（可以把它理解成我们在电脑屏幕上可以看到的东西．就是终端应用）。 </p>
+</li>
+</ol>
+<h3 id="网络编程三要素"><a href="#网络编程三要素" class="headerlink" title="网络编程三要素"></a>网络编程三要素</h3><ol>
+<li><p><strong>IP 地址</strong></p>
+<p>要想让网络中的计算机能够互相通信，必须为每台计算机指定一个标识号，通过这个标识号来指定要接受数据的计算机和识别发送的计算机，在TCP/IP协议中，这个标识号就是IP地址。为了方便对IP地址的获取和操作，java 提供了一个类 InetAddress 供使用。</p>
+<pre><code class="java">A:所谓IP地址就是给每个连接在Internet上的主机分配的一个32bit地址。按照TCP/IP规定，IP地址用二进制来表示，每个IP地址长32bit，比特换算成字节，就是4个字节。例如一个采用二进制形式的IP地址是“00001010000000000000000000000001”，这么长的地址，人们处理起来也太费劲了。为了方便人们的使用，IP地址经常被写成十进制的形式，中间使用符号“.”分开不同的字节。于是，上面的IP地址可以表示为“10.0.0.1”。IP地址的这种表示法叫做“点分十进制表示法”，这显然比1和0容易记忆得多。
+
+B:IP地址的组成
+IP地址 = 网络号码+主机地址
+
+    A类IP地址:第一段号码为网络号码，剩下的三段号码为本地计算机的号码
+    B类IP地址:前二段号码为网络号码，剩下的二段号码为本地计算机的号码
+    C类IP地址:前三段号码为网络号码，剩下的一段号码为本地计算机的号码
+
+特殊地址:
+127.0.0.1 回环地址,可用于测试本机的网络是否有问题。 ping 127.0.0.1   
+
+xxx.xxx.xxx.0 网络地址
+xxx.xxx.xxx.255 广播地址，向此地址发送udp数据包将广播出去，此网段下所有主机都可以收到信息。
+
+A类    1.0.0.1---127.255.255.254
+    (1)10.X.X.X是私有地址(私有地址就是在互联网上不使用，而被用在局域网络中的地址)                    (2)127.X.X.X是保留地址，用做循环测试用的
+B类    128.0.0.1---191.255.255.254    172.16.0.0---172.31.255.255是私有地址
+    169.254.X.X是保留地址
+C类    192.0.0.1---223.255.255.254
+    192.168.X.X是私有地址
+D类    224.0.0.1---239.255.255.254
+E类    240.0.0.1---247.255.255.254
+</code></pre>
+</li>
+<li><p><strong>端口号</strong></p>
+<p>物理端口：网卡口。</p>
+<p>逻辑端口：逻辑端口 。</p>
+<p>A:每个网络程序都会至少有一个逻辑端口；</p>
+<p>B:用于标识进程的逻辑地址，不同进程的标识；</p>
+<p>C:有效端口：0~65535，其中0~1024系统使用或保留端口。 </p>
+</li>
+<li><p><strong>传输协议</strong></p>
+<p><strong>UDP</strong>：将数据源和目的封装成数据包中，不需要建立连接；每个数据报的大小在限制在64k；因无连接，是不可靠协议；不需要建立连接，速度快。</p>
+<p><strong>TCP</strong>：建立连接，形成传输数据的通道；在连接中进行大数据量传输；通过三次握手完成连接，是可靠协议；必须建立连接，效率会稍低。</p>
+<pre><code class="shell">udp：面向无连接， 不可靠， 速度快， 将数据封包传输，数据包最大64k。 
+举例：聊天留言，在线视频，视频会议，发短信，邮局包裹。 
+
+tcp：面向连接，安全可靠，效率稍低，通过三次握手确保连接的建立。 
+举例：下载，打电话，QQ聊天(你在线吗,在线,就回应下,就开始聊天了)。
+</code></pre>
+</li>
+</ol>
+<h3 id="InetAddress"><a href="#InetAddress" class="headerlink" title="InetAddress"></a>InetAddress</h3><pre><code class="java">获取任意主机：getByName
+主机名：getHostName
+主机Ip地址：getHostAddress
+
+public class InetAddressDemo {
+    public static void main(String[] args) throws UnknownHostException {
+        InetAddress add = InetAddress.getByName(&quot;8.8.8.8&quot;);
+
+        String name = add.getHostName();
+        String ip = add.getHostAddress();
+
+        System.out.println(name + &quot;---&quot; + ip);
+    }
+}
+</code></pre>
+<h4 id="Q-amp-A"><a href="#Q-amp-A" class="headerlink" title="Q &amp; A"></a>Q &amp; A</h4><p><code>Q</code>：没有构造方法，那么如何使类提供的功能呢？</p>
+<blockquote>
+<p>如果一个类没有构造方法 </p>
+<ol>
+<li><p>成员全部都是静态的（例如：Math、Arrays、Collections）；</p>
+</li>
+<li><p>单例设计模式（例如：Runtime）；</p>
+</li>
+<li><p>类中有静态方法返回该类的对象。</p>
+</li>
+</ol>
+</blockquote>
+<h3 id="Socket"><a href="#Socket" class="headerlink" title="Socket"></a>Socket</h3><p>Socket套接字：网络上具有唯一标识的IP地址和端口号组合在一起才能构成唯一能识别的标识符套接字。</p>
+<p>Socket原理机制：</p>
+<ul>
+<li><p>通信的两端都有Socket。</p>
+</li>
+<li><p>网络通信其实就是Socket间的通信。</p>
+</li>
+<li><p>数据在两个Socket间通过IO传输。</p>
+</li>
+</ul>
+<p><img src="https://s2.ax1x.com/2019/02/26/koJRqf.png" alt="Socket原理"></p>
+<h2 id="UDP-传输"><a href="#UDP-传输" class="headerlink" title="UDP 传输"></a>UDP 传输</h2><ul>
+<li><p>DatagramSocket与DatagramPacket </p>
+</li>
+<li><p>建立发送端，接收端。 </p>
+</li>
+<li><p>建立数据包。 </p>
+</li>
+<li><p>调用Socket的发送接收方法。 </p>
+</li>
+<li><p>关闭Socket。 </p>
+</li>
+<li><p>发送端与接收端是两个独立的运行程序。 </p>
+</li>
+</ul>
+<pre><code class="java">UDP传输-发送端思路
+    1:建立udp的socket服务
+    2:将要发送的数据封装成数据包
+    3:通过udp的socket服务,将数据包发送出
+    4:关闭资源
+
+UDP传输-接收端思路
+    1:建立udp的socket服务.
+    2:通过receive方法接收数据
+    3:将收到的数据存储到数据包对象中
+    4:通过数据包对象的功能来完成对接收到数据进行解析.
+    5:可以对资源进行关闭
+</code></pre>
+<p>举个🌰：</p>
+<pre><code class="java">// 接收端 ReceiveDemo.java
+public class ReceiveDemo {
+    public static void main(String[] args) throws IOException {
+        DatagramSocket ds = new DatagramSocket(10086);
+
+        byte[] buf = new byte[1024];
+        int length = buf.length;
+
+        DatagramPacket dp = new DatagramPacket(buf, length);
+
+        ds.receive(dp);    // 阻塞式方法，没数据就等着。
+
+        byte[] buffer = dp.getData();
+        int len = dp.getLength();
+        String str = new String(buffer,0, len);
+
+        InetAddress address = dp.getAddress();
+        String ip = address.getHostAddress();
+
+        System.out.println(ip + &quot; said : &quot; + str);
+
+        ds.close();
+    }
+}
+</code></pre>
+<pre><code class="java">// 发送端 SendDemo.java
+public class SendDemo {
+    public static void main(String[] args) throws IOException{
+        DatagramSocket ds = new DatagramSocket();
+
+        byte[] buf = &quot;hello udp&quot;.getBytes();
+        int length = buf.length;
+
+        InetAddress address = InetAddress.getByName(&quot;127.0.0.1&quot;);
+
+        DatagramPacket dp = new DatagramPacket(buf, length, address, 10086);
+
+        ds.send(dp);
+        ds.close();
+    }
+}
+</code></pre>
+<ul>
+<li><p>UDP 案例</p>
+<p><code>`</code>java<br>从键盘录入数据进行发送，如果输入的是886那么客户端就结束输入数据。<br>这个时候完全可以把发送端代码发给大家了，我把接收端代码开启，大家就可以实现聊天了，但是，大家都要看我们的屏幕，即使我把接收端发给大家也是一样的，如何改进呢，使用广播地址即可。<br>最后，把刚才发送和接收程序分别用线程进行封装，完成一个UDP的聊天程序。</p>
+<p>这个时候，就需要和io结合起来使用了。还得注意一个问题，这个时候接收端，要一直开启，否则接收一句就关闭了。所以，用死循环，并且，服务不关闭。代码如下：<br>class SendDemo2<br>{</p>
+<pre><code>public static void main(String[] args) throws Exception
+{
+    DatagramSocket ds = new DatagramSocket();
+
+    BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+
+    String line = null;
+
+    while((line=br.readLine())!=null)
+    {
+        if(&quot;886&quot;.equals(line))
+        {
+            break;
+        }
+        byte[] by = line.getBytes();
+        DatagramPacket dp = new DatagramPacket(by,by.length,InetAddress.getByName(“192.168.1.255&quot;),10000);
+        ds.send(dp);
+    }
+
+    ds.close();
+}
+</code></pre><p>}</p>
+<p>class ReceiveDemo2<br>{</p>
+<pre><code>public static void main(String[] args) throws Exception
+{
+    DatagramSocket ds = new DatagramSocket(10000);  //如果10000端口已经被使用了,这个服务起不来
+
+    //我这边是循序接收的啊.无限循环
+    while(true)
+    {
+        byte[] by = new byte[1024];
+        DatagramPacket dp = new DatagramPacket(by,by.length);
+</code></pre></li>
+</ul>
+<pre><code>          ds.receive(dp);
+
+          //通过数据包对象的方法获取其中的数据内容,包括地址,端口,数据主体
+          String ip = dp.getAddress().getHostAddress();
+          int port = dp.getPort();
+
+          byte[] by2 = dp.getData();
+          String text = new String(by2,0,dp.getLength());
+
+          System.out.println(ip+&quot;...&quot;+port+&quot;...&quot;+text);
+
+      }
+      //关闭资源
+      //ds.close();
+  }
+</code></pre><p>  }</p>
+<p>  用线程封装后的代码如下：<br>  public class SendThread implements Runnable {</p>
+<pre><code>  private DatagramSocket ds;
+
+  public SendThread(DatagramSocket ds) {
+      this.ds = ds;
+  }
+
+  @Override
+  public void run() {
+      // 创建UDP发送端的服务
+      try {
+          // 把键盘录入数据用高效缓冲流封装
+          BufferedReader br = new BufferedReader(new InputStreamReader(
+                  System.in));
+
+          String line = null;
+          while ((line = br.readLine()) != null) {
+              if (&quot;886&quot;.equals(line)) {
+                  break;
+              }
+              byte[] bys = line.getBytes();
+              // 数据包
+              DatagramPacket dp = new DatagramPacket(bys, bys.length,
+                      InetAddress.getByName(&quot;192.168.1.255&quot;), 12345);
+              // 发送数据
+              ds.send(dp);
+          }
+
+          // 关闭资源
+          ds.close();
+      } catch (IOException e) {
+          e.printStackTrace();
+      }
+  }
+</code></pre><p>  }</p>
+<p>  public class ReceiveThread implements Runnable {</p>
+<pre><code>  private DatagramSocket ds;
+
+  public ReceiveThread(DatagramSocket ds) {
+      this.ds = ds;
+  }
+
+  @Override
+  public void run() {
+      try {
+          // 为了循环多次接受
+          while (true) {
+              // 创建字节数组作为数据包的缓冲区
+              byte[] bys = new byte[1024];
+              DatagramPacket dp = new DatagramPacket(bys, bys.length);
+              // 读取数据包数据
+              ds.receive(dp);
+
+              // 解析数据包
+              String ip = dp.getAddress().getHostAddress();
+              int port = dp.getPort();
+
+              String text = new String(dp.getData(), 0, dp.getLength());
+              System.out.println(ip + &quot;***&quot; + port + &quot;***&quot; + text);
+          }
+      } catch (IOException e) {
+          e.printStackTrace();
+      }
+  }
+</code></pre><p>  }</p>
+<p>  public class ChatDemo {<br>      public static void main(String[] args) throws IOException {<br>          DatagramSocket sds = new DatagramSocket();<br>          DatagramSocket rds = new DatagramSocket(12345);</p>
+<pre><code>      SendThread st = new SendThread(sds);
+      ReceiveThread rt = new ReceiveThread(rds);
+
+      Thread t1 = new Thread(st);
+      Thread t2 = new Thread(rt);
+
+      t1.start();
+      t2.start();
+  }
+</code></pre><p>  }</p>
+<pre><code>
+
+
+## TCP 传输
+
++ Socket和ServerSocket
+
++ 建立客户端和服务器端
+
++ 建立连接后，通过Socket中的IO流进行数据的传输
+
++ 关闭socket
+
++ 同样，客户端与服务器端是两个独立的应用程序。
+
+```shell
+客户端思路
+    1:建立客户端的Socket服务,并明确要连接的服务器。
+    2:如果连接建立成功,就表明,已经建立了数据传输的通道.就可以在该通道通过IO进行数据的读取和写入.该通道称为Socket流,Socket流中既有读取流,也有写入流.
+    3:通过Socket对象的方法,可以获取这两个流
+    4:通过流的对象可以对数据进行传输
+    5:如果传输数据完毕,关闭资源
+
+服务端思路
+    1:建立服务器端的socket服务，需要一个端口
+    2:服务端没有直接流的操作,而是通过accept方法获取客户端对象，在通过获取到的客户端对象的流和客户端进行通信
+    3:通过客户端的获取流对象的方法,读取数据或者写入数据
+    4:如果服务完成,需要关闭客户端,然后关闭服务器，但是,一般会关闭客户端,不会关闭服务器,因为服务端是一直提供服务的
+</code></pre><p>举个🌰：</p>
+<pre><code class="java">// 客户端
+public class ClientDemo {
+    public static void main(String[] args) throws IOException {
+        Socket s = new Socket(&quot;127.0.0.1&quot;, 9999);
+
+        // 向服务器发送数据
+        OutputStream os = s.getOutputStream();
+        os.write(&quot;吼吼吼&quot;.getBytes());
+
+        // 从服务器接收返回的数据
+        InputStream is = s.getInputStream();
+        byte[] buf = new byte[1024];
+        int len = is.read(buf);
+        String Client = new String(buf, 0, len);
+        System.out.println(&quot;client : &quot; + Client);
+
+        s.close();
+    }
+}
+
+// 服务端
+public class ServerDemo {
+    public static void main(String[] args) throws IOException {
+        ServerSocket ss = new ServerSocket(9999);
+
+        // 监听 9999 端口，与客户端建立连接
+        Socket s = ss.accept();
+
+        // 接收数据
+        InputStream is = s.getInputStream();
+        byte[] str = new byte[1024];
+        int len = is.read(str);
+        String server = new String(str, 0, len);
+        System.out.println(&quot;server : &quot; + server);
+
+        // 向客户端返回一个数据
+        OutputStream os = s.getOutputStream();
+        os.write(&quot;数据已收到&quot;.getBytes());
+
+        // 关闭连接
+        s.close();
+    }
+}
+</code></pre>
+<h3 id="TCP传输容易出现的问题"><a href="#TCP传输容易出现的问题" class="headerlink" title="TCP传输容易出现的问题"></a>TCP传输容易出现的问题</h3><p>客户端连接上服务端，两端都在等待，没有任何数据传输。</p>
+<p>通过例程分析：因为read方法或者readLine方法是阻塞式。</p>
+<p>解决办法：自定义结束标记，使用shutdownInput，shutdownOutput方法。</p>
+<hr>
+</div></article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">ahoj</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://ahoj.cc/2019/02/cjvtlw80x007oq409mpv94muj/">https://ahoj.cc/2019/02/cjvtlw80x007oq409mpv94muj/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://ahoj.cc">ahoj's blog</a>！</span></div></div><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/JavaSE/">JavaSE</a></div><nav id="pagination"><div class="prev-post pull-left"><a href="/2019/02/cjvtlw6hg0013q4099oy4w22s/"><i class="fa fa-chevron-left">  </i><span>Git-基础命令</span></a></div><div class="next-post pull-right"><a href="/2019/02/cjvtlw8e8008kq409pgwcq8hi/"><span>Java-多线程</span><i class="fa fa-chevron-right"></i></a></div></nav><div id="vcomment"></div><script src="https://cdn1.lncld.net/static/js/3.0.4/av-min.js"></script><script src="https://cdn.jsdelivr.net/npm/valine/dist/Valine.min.js"></script><script>var notify = 'false' == true ? true : false;
+var verify = 'false' == true ? true : false;
+var GUEST_INFO = ['nick','mail','link'];
+var guest_info = 'nick,mail,link'.split(',').filter(function(item){
+  return GUEST_INFO.indexOf(item) > -1
+});
+guest_info = guest_info.length == 0 ? GUEST_INFO :guest_info;
+window.valine = new Valine({
+  el:'#vcomment',
+  notify:notify,
+  verify:verify,
+  appId:'yy9oH4ap0AOjoGWG7vbV9w2v-gzGzoHsz',
+  appKey:'27EcRosAo5WUi5KH16i9nAq1',
+  placeholder:'说点什么吧~ 不足之处或者...',
+  avatar:'mm',
+  guest_info:guest_info,
+  pageSize:'10',
+  lang: 'zh-cn'
+})</script></div></div><footer><div class="layout" id="footer"><div class="copyright">&copy;2019 By ahoj</div><div class="framework-info"><span>驱动 - </span><a href="http://hexo.io"><span>Hexo</span></a><span class="footer-separator">|</span><span>主题 - </span><a href="https://github.com/Molunerfinn/hexo-theme-melody"><span>Melody</span></a></div><div class="busuanzi"><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><span id="busuanzi_container_page_pv"><i class="fa fa-file-o"></i><span id="busuanzi_value_page_pv"></span><span></span></span></div></div></footer><i class="fa fa-arrow-up" id="go-up" aria-hidden="true"></i><script src="https://cdn.jsdelivr.net/npm/animejs@latest/anime.min.js"></script><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@latest/velocity.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-ui-pack@latest/velocity.ui.min.js"></script><script src="/js/utils.js?version=1.6.1"></script><script src="/js/fancybox.js?version=1.6.1"></script><script src="/js/sidebar.js?version=1.6.1"></script><script src="/js/copy.js?version=1.6.1"></script><script src="/js/fireworks.js?version=1.6.1"></script><script src="/js/transition.js?version=1.6.1"></script><script src="/js/scroll.js?version=1.6.1"></script><script src="/js/head.js?version=1.6.1"></script><script src="/js/search/local-search.js"></script><script>if(/Android|webOS|iPhone|iPod|BlackBerry/i.test(navigator.userAgent)) {
+  $('#nav').addClass('is-mobile')
+  $('footer').addClass('is-mobile')
+}</script><div class="search-dialog" id="local-search"><div class="search-dialog__title" id="local-search-title">本地搜索</div><div id="local-input-panel"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章"></div></div></div><hr><div id="local-search-results"><div id="local-hits"></div><div id="local-stats"><div class="local-search-stats__hr" id="hr"><span>由</span> <a href="https://github.com/wzpan/hexo-generator-search" style="color:#49B1F5;">hexo-generator-search</a>
+ <span>提供支持</span></div></div></div><span class="search-close-button"><i class="fa fa-times"></i></span></div><div class="search-mask"></div></body></html>

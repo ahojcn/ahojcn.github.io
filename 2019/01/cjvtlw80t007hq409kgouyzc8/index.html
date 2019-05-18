@@ -1,0 +1,408 @@
+<!DOCTYPE html><html lang="zh-Hans"><head><meta name="generator" content="Hexo 3.8.0"><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta name="description" content="递归问题"><meta name="keywords" content="Algorithm"><meta name="author" content="ahoj"><meta name="copyright" content="ahoj"><title>递归问题 | ahoj's blog</title><link rel="shortcut icon" href="/bitbug_favicon.ico"><link rel="stylesheet" href="/css/index.css?version=1.6.1"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@latest/css/font-awesome.min.css?version=1.6.1"><link rel="dns-prefetch" href="https://cdn.staticfile.org"><link rel="dns-prefetch" href="https://cdn.bootcss.com"><link rel="dns-prefetch" href="https://creativecommons.org"><script>var GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"search.xml","languages":{"hits_empty":"找不到您查询的内容:${query}"}},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  }
+} </script></head><body><canvas class="fireworks"></canvas><i class="fa fa-arrow-right" id="toggle-sidebar" aria-hidden="true"></i><div id="sidebar"><div class="toggle-sidebar-info text-center"><span data-toggle="切换文章详情">切换站点概览</span><hr></div><div class="sidebar-toc"><div class="sidebar-toc__title">目录</div><div class="sidebar-toc__progress"><span class="progress-notice">你已经读了</span><span class="progress-num">0</span><span class="progress-percentage">%</span><div class="sidebar-toc__progress-bar"></div></div><div class="sidebar-toc__content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#如何理解递归"><span class="toc-number">1.</span> <span class="toc-text">如何理解递归</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#递归需要满足的条件"><span class="toc-number">2.</span> <span class="toc-text">递归需要满足的条件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#递归代码如何实现"><span class="toc-number">3.</span> <span class="toc-text">递归代码如何实现</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#要注意栈溢出！"><span class="toc-number">4.</span> <span class="toc-text">要注意栈溢出！</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#警惕重复计算"><span class="toc-number">5.</span> <span class="toc-text">警惕重复计算</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#递归代码改写为非递归代码"><span class="toc-number">6.</span> <span class="toc-text">递归代码改写为非递归代码</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#经典递归问题"><span class="toc-number">7.</span> <span class="toc-text">经典递归问题</span></a></li></ol></div></div><div class="author-info hide"><div class="author-info__avatar text-center"><img src="https://i.loli.net/2019/05/18/5ce01a928835c26008.jpg"></div><div class="author-info__name text-center">ahoj</div><div class="author-info__description text-center">思想的本质就是不安</div><div class="follow-button"><a href="https://github.com/ahojcn">GitHub</a></div><hr><div class="author-info-articles"><a class="author-info-articles__archives article-meta" href="/archives"><span class="pull-left">文章</span><span class="pull-right">58</span></a><a class="author-info-articles__tags article-meta" href="/tags"><span class="pull-left">标签</span><span class="pull-right">19</span></a><a class="author-info-articles__categories article-meta" href="/categories"><span class="pull-left">分类</span><span class="pull-right">14</span></a></div><hr><div class="author-info-links"><div class="author-info-links__title text-center">朋友们</div><a class="author-info-links__name text-center" href="https://zouchanglin.cn/">Tim</a><a class="author-info-links__name text-center" href="http://www.ijam8.com/">Jam</a><a class="author-info-links__name text-center" href="https://blog.csdn.net/jack_wang128801">jack_wang128801</a><a class="author-info-links__name text-center" href="https://blog.csdn.net/weixin_43232955">Mr.Q_</a></div></div></div><div id="content-outer"><div class="no-bg" id="top-container"><div id="page-header"><span class="pull-left"> <a id="site-name" href="/">ahoj's blog</a></span><i class="fa fa-bars toggle-menu pull-right" aria-hidden="true"></i><span class="pull-right menus"><a class="site-page social-icon search"><i class="fa fa-search"></i><span> 搜索</span></a><a class="site-page" href="/">主页</a><a class="site-page" href="/archives">文章</a><a class="site-page" href="/tags">标签</a><a class="site-page" href="/categories">分类</a><a class="site-page" href="/about">关于</a></span></div><div id="post-info"><div id="post-title">递归问题</div><div id="post-meta"><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 2019-01-07</time><span class="post-meta__separator">|</span><i class="fa fa-inbox post-meta__icon" aria-hidden="true"></i><a class="post-meta__categories" href="/categories/Algorithm/">Algorithm</a></div></div></div><div class="layout" id="content-inner"><article id="post"><div class="article-container" id="post-content"><p>学习《数据结构与算法之美》时的笔记。</p>
+<a id="more"></a>
+<h2 id="如何理解递归"><a href="#如何理解递归" class="headerlink" title="如何理解递归"></a>如何理解递归</h2><p>例：领导分配给你一个任务量为n的任务，你做了一部分，然后把剩下的n-1分配给别人，别人又做了一部分，把剩下的n-2分配给了另一个人，直到最后一个人，做了一部分，然后把任务完成返回给他上一个人。</p>
+<p>这个任务下发的过程叫<strong>递</strong>，任务返回的过程叫<strong>归</strong>。</p>
+<p>基本上，所有的递归问题都可以用递推公式来表示，上面这个例子，递推公式表示为：<code>f(n)=f(n-1)+1 其中，f(1)=1</code>。</p>
+<p>上述递归问题的代码表示如下：</p>
+<pre><code class="C">int f(int n) 
+{
+  if (n == 1) 
+      return 1;
+  return f(n-1) + 1;
+}
+</code></pre>
+<h2 id="递归需要满足的条件"><a href="#递归需要满足的条件" class="headerlink" title="递归需要满足的条件"></a>递归需要满足的条件</h2><p>1）一个问题可以分解为几个字问题的解</p>
+<p>2）这个问题与分解之后的字问题，除了数据规模不同，求解思路完全一样</p>
+<p>3）存在递归终止条件</p>
+<p>举个栗子：</p>
+<p>树的定义是一种递归形式的定义，对于树的前序遍历，有：</p>
+<pre><code class="c">void PreOrder(struct TreeNode *root)
+{
+    if (root == NULL)    // 递归的终止条件
+        return;
+
+    /* 处理root */
+    PreOrder(root-&gt;left);    // 递推，左子树
+    PreOrder(root-&gt;right);    // 递推，右子树
+}
+</code></pre>
+<p>在一些树的相关题目中，以这种递推的思想来处理问题还是比较方便的。</p>
+<h2 id="递归代码如何实现"><a href="#递归代码如何实现" class="headerlink" title="递归代码如何实现"></a>递归代码如何实现</h2><p>写递归代码最关键的是写出递推公式，找到终止条件。</p>
+<p>青蛙跳台阶问题：</p>
+<p>假设有n个台阶，每次青蛙可以跳1个台阶或者2个台阶，请问走完这n个台阶有多少种走法？</p>
+<p>例如：有7个台阶，可以2，2，2，1上去，也可以1，2，1，1，2这样上去，总之走法很多，如何编程实现呢？</p>
+<p>分析：根据第一步走法把所有走法分为2类，第一类：第一步走了1个台阶，第二类：第一步走了2个台阶。所以n个台阶的走法 =（先走1个台阶后，n-1个台阶的走法）+（先走2个台阶后，n-2个台阶的走法）</p>
+<p>用递推公式表示就是：</p>
+<p><code>f(n) = f(n-1)+f(n-2)</code></p>
+<p>递推的终止条件：</p>
+<p>当有一个台阶时，不需要再继续递归，只有一中走法。</p>
+<p>当有两个台阶时，可以每次走1个台阶，走两次，也可以一次两个。</p>
+<p>当有三个台阶时，就分解为有一个台阶和两个台阶的问题了。</p>
+<p>所以有：</p>
+<pre><code class="C">int f(int n) 
+{
+  if (n == 1) 
+      return 1;
+  if (n == 2) 
+      return 2;
+  return f(n-1) + f(n-2);
+}
+</code></pre>
+<p><strong>人脑几乎没办法把整个递归的过程一步一步想清楚，所以很多时候，我们只需要把它抽象成一个递推公式，不用想一层一层的调用关系，这些交给计算机来做就好了。</strong></p>
+<h2 id="要注意栈溢出！"><a href="#要注意栈溢出！" class="headerlink" title="要注意栈溢出！"></a>要注意栈溢出！</h2><p>如果递归求解的数据规模很大，调用层次很深，就会有栈溢出的发生。</p>
+<p>我的一次栈溢出的经历：在练习用递归模拟strlen函数功能时，如下代码：</p>
+<pre><code class="C">int my_strlen(char *str)
+{
+    if(*str == &#39;\0&#39;)
+        return 0;
+    return 1 + my_strlen(str++);
+}
+</code></pre>
+<p>这里传进去的始终是str，所以没有终止的一直压栈，导致栈溢出。</p>
+<p><strong>解决栈溢出的方法：</strong></p>
+<p>1）限制递归深度</p>
+<blockquote>
+<p>这种做法并不能完全解决问题，因为最大允许的递归深度和当前线程剩余的栈空间大小有关，事先无法计算，如果实时计算，代码过于复杂，影响可读性。所以对于最大深度比较小的情况，如10、50，就可以用这种方法，否则这种方法并不是很实用。</p>
+</blockquote>
+<p>2）在堆区模拟系统的工作栈</p>
+<blockquote>
+<p>如果需要可以采用这种方法。</p>
+</blockquote>
+<h2 id="警惕重复计算"><a href="#警惕重复计算" class="headerlink" title="警惕重复计算"></a>警惕重复计算</h2><p>以青蛙跳台阶的问题为例：</p>
+<p><img src="https://static001.geekbang.org/resource/image/e7/bf/e7e778994e90265344f6ac9da39e01bf.jpg" alt="图片引用自极客时间"></p>
+<p>从图中可以看到：想要计算f(5)，需要先计算f(4)和f(3)，而f(4)还需要计算f(3)，因此，f(3)被重复计算了多次，这就是重复计算问题！</p>
+<p>还有个例子：递归方法求第n个斐波那契数，也会有同一n重复计算多次的现象。</p>
+<p>当计算第50个斐波那契数时，f(3)被计算了上亿次，这个计算花了10分钟左右！</p>
+<p><strong>重复计算的解决方法：</strong></p>
+<p>为了避免这种重复计算带来的负面开销，可以通过引入散列表来保存已经求过的f(k)。当递归调用到f(k)时，先看下是否求解过了，如果是直接从散列表中取这个值，就不需要再次计算了。</p>
+<h2 id="递归代码改写为非递归代码"><a href="#递归代码改写为非递归代码" class="headerlink" title="递归代码改写为非递归代码"></a>递归代码改写为非递归代码</h2><p>递归有利有弊，递归的问题不仅仅就上面说的重复计算和栈溢出，递归的空间复杂度有时也比较高。</p>
+<p>如果用递归方法求第n个斐波那契数，时间开销比较大，还是用循环比较好。</p>
+<p>对于上文中两个例子改写如下：</p>
+<pre><code class="C">/* 领导分配工作 */
+int f(int n) 
+{
+  int ret = 1;
+  for (int i = 2; i &lt;= n; ++i) 
+  {
+    ret = ret + 1;
+  }
+  return ret;
+}
+</code></pre>
+<pre><code class="C">/* 青蛙跳台阶问题 */
+int f(int n) 
+{
+  if (n == 1) 
+      return 1;
+  if (n == 2) 
+      return 2;
+
+  int ret = 0;
+  int pre = 2;
+  int prepre = 1;
+  for (int i = 3; i &lt;= n; ++i) 
+  {
+    ret = pre + prepre;
+    prepre = pre;
+    pre = ret;
+  }
+  return ret;
+}
+</code></pre>
+<p><strong>这种思路其实是将递归改成了“手动”递归，本质没有变，增加了实现难度。</strong></p>
+<h2 id="经典递归问题"><a href="#经典递归问题" class="headerlink" title="经典递归问题"></a>经典递归问题</h2><ul>
+<li>在n个球中，任意取m个(不放回)，求有多少种取法</li>
+</ul>
+<pre><code class="c">#include &lt;stdio.h&gt;
+
+int f(int n, int m)
+{
+    if (n&lt;m)    // 3个球取4个出来 显然是0种取法
+    {
+        return 0;
+    }
+    if (m==0)   // 3个球取0个出来 有1种取法
+    {
+        return 1;
+    }
+    if (n==m)   // 3个球取3个出来 有1种取法
+    {
+        return 1;
+    }
+    return f(n-1, m-1) + f(n-1, m);
+}
+
+int main(int argc, const char * argv[])
+{
+    int k = f(5, 3);
+    printf(&quot;%d\n&quot;, k);
+
+    return 0;
+}
+</code></pre>
+<ul>
+<li>求n个元素的全排列</li>
+</ul>
+<pre><code class="c">// abc acb bac bca cab cba
+#include &lt;stdio.h&gt;
+
+void f(char data[], int length, int cur)
+{
+    if(cur==length)
+        printf(&quot;%s\n&quot;, data);
+    for(int i=cur; i&lt;length; i++)
+    {
+        {    // 试探
+            char tmp = data[i];
+            data[i] = data[cur];
+            data[cur] = tmp;
+        }
+
+        f(data, length, cur+1);
+
+        {    // 回溯
+            char tmp = data[i];
+            data[i] = data[cur];
+            data[cur] = tmp;
+        }
+    }
+}
+
+int main()
+{
+    char data[] = &quot;abcd&quot;;
+    int length = sizeof(data)/sizeof(data[0]) - 1;
+    //printf(&quot;%d\n&quot;,length);
+    f(data, length, 0);
+    return 0;
+}
+</code></pre>
+<ul>
+<li>两个串的最大公共子序列的长度</li>
+</ul>
+<pre><code class="c">// 可解!
+
+#include &lt;stdio.h&gt;
+#include &lt;string.h&gt;
+
+int MAX(int a, int b)
+{
+    return a&gt;b?a:b;
+}
+
+int f(char *s1, char *s2)
+{
+    if (strlen(s1)*strlen(s2) == 0)
+    {
+        return 0;
+    }
+    if (s1[0] == s2[0])
+    {
+        return f(s1+1, s2+1) + 1;
+    }
+    else
+    {
+        return MAX(f(s1+1, s2), f(s1, s2+1));
+    }
+}
+
+int main(int argc, const char * argv[])
+{
+    char *s1 = &quot;abc&quot;;
+    char *s2 = &quot;xbacd&quot;;
+
+    int ret = f(s1, s2);
+    printf(&quot;%d\n&quot;, ret);
+
+    return 0;
+}
+</code></pre>
+<ul>
+<li>字符串反转</li>
+</ul>
+<pre><code class="c">// 反转串
+// 例如：abc  -&gt;  cba
+
+#include &lt;stdio.h&gt;
+#include &lt;string.h&gt;
+
+void ReverseString(char *p)
+{
+    int length = strlen(p);
+    if(length &lt;= 1)
+    {
+        return;
+    }
+    else
+    {
+        char tmp = p[0];
+        p[0] = p[length-1];
+        p[length-1] = &#39;\0&#39;;
+        ReverseString(p+1);
+        p[length-1] = tmp;
+    }
+}
+
+int main()
+{
+    char p[] = &quot;abcd&quot;;
+    ReverseString(p);
+    printf(&quot;%s\n&quot;, p);
+    return 0;
+}
+</code></pre>
+<ul>
+<li>组合问题</li>
+</ul>
+<pre><code class="c">// 组合问题
+// 3个A 2个B可以组成多少 种 排列
+// 如：AAABB AABBA等
+
+#include &lt;stdio.h&gt;
+
+// m个A n个B
+int f(int m, int n)
+{
+    if(m == 0 || n == 0)
+    {
+        return 1;
+    }
+    // 假设首位置为A，则剩下m-1个A和n个B的组合问题 + 首位置为B...
+    return f(m-1, n) + f(m, n-1);
+}
+
+int main()
+{
+    printf(&quot;%d\n&quot;, f(3, 1));
+    return 0;
+}
+
+</code></pre>
+<ul>
+<li>杨辉三角</li>
+</ul>
+<pre><code class="c">// 杨辉三角
+// 计算第m层第n个元素
+
+/*
+ 1
+ 1 1
+ 1 2 1
+ 1 3 3 1
+ 1 4 6 4 1
+ 1 5 10 10 5 1
+ */
+
+#include &lt;stdio.h&gt;
+
+int f(int m, int n)
+{
+    if(n == 0)
+    {
+        return 1;
+    }
+    if(m == n)
+    {
+        return 1;
+    }
+    return f(m-1, n) + f(m-1, n-1);
+}
+
+int main()
+{
+    int leval = 5;  // 第5行 0-5共6个元素
+    for(int i=0; i&lt;=leval; i++)
+    {
+        printf(&quot;%d &quot;, f(leval, i));
+    }
+    printf(&quot;\n&quot;);
+    return 0;
+}
+
+</code></pre>
+<ul>
+<li>整数划分问题</li>
+</ul>
+<pre><code class="c">// 整数划分问题
+// n = 6
+/*
+ 6
+ 5+1
+ 4+2,4+1+1
+ 3+3,3+2+1,3+1+1+1
+ 2+2+2,2+2+1+1,2+1+1+1+1
+ 1+1+1+1+1+1
+ */
+
+#include &lt;stdio.h&gt;
+
+#define MAXSIZE 1024
+
+// arr-&gt;缓冲，cur-&gt;当前位置
+void f(int n, int arr[], int cur)
+{
+    if(n&lt;=0)
+    {
+        for(int i=0; i&lt;cur; i++)
+        {
+            printf(&quot;%d &quot;, arr[i]);
+        }
+        printf(&quot;\n&quot;);
+        return;
+    }
+
+    for(int i=n; i&gt;0; i--)
+    {
+        if(cur&gt;0 &amp;&amp; i&gt;arr[cur-1])
+        {
+            continue;
+        }
+        arr[cur] = i;
+        f(n-i, arr, cur+1);
+    }
+}
+
+int main()
+{
+    int arr[MAXSIZE] = {0};
+    f(6, arr, 0);
+    return 0;
+}
+
+</code></pre>
+<hr>
+<blockquote>
+<p> 参考文章：《数据结构与算法之美》</p>
+</blockquote>
+</div></article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">ahoj</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://ahoj.cc/2019/01/cjvtlw80t007hq409kgouyzc8/">https://ahoj.cc/2019/01/cjvtlw80t007hq409kgouyzc8/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://ahoj.cc">ahoj's blog</a>！</span></div></div><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Algorithm/">Algorithm</a></div><nav id="pagination"><div class="prev-post pull-left"><a href="/2019/01/cjvtlw8130084q409d855cusv/"><i class="fa fa-chevron-left">  </i><span>错题整理</span></a></div><div class="next-post pull-right"><a href="/2019/01/cjvtlw6gv0007q409ye094ano/"><span>时间复杂度分析</span><i class="fa fa-chevron-right"></i></a></div></nav><div id="vcomment"></div><script src="https://cdn1.lncld.net/static/js/3.0.4/av-min.js"></script><script src="https://cdn.jsdelivr.net/npm/valine/dist/Valine.min.js"></script><script>var notify = 'false' == true ? true : false;
+var verify = 'false' == true ? true : false;
+var GUEST_INFO = ['nick','mail','link'];
+var guest_info = 'nick,mail,link'.split(',').filter(function(item){
+  return GUEST_INFO.indexOf(item) > -1
+});
+guest_info = guest_info.length == 0 ? GUEST_INFO :guest_info;
+window.valine = new Valine({
+  el:'#vcomment',
+  notify:notify,
+  verify:verify,
+  appId:'yy9oH4ap0AOjoGWG7vbV9w2v-gzGzoHsz',
+  appKey:'27EcRosAo5WUi5KH16i9nAq1',
+  placeholder:'说点什么吧~ 不足之处或者...',
+  avatar:'mm',
+  guest_info:guest_info,
+  pageSize:'10',
+  lang: 'zh-cn'
+})</script></div></div><footer><div class="layout" id="footer"><div class="copyright">&copy;2019 By ahoj</div><div class="framework-info"><span>驱动 - </span><a href="http://hexo.io"><span>Hexo</span></a><span class="footer-separator">|</span><span>主题 - </span><a href="https://github.com/Molunerfinn/hexo-theme-melody"><span>Melody</span></a></div><div class="busuanzi"><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><span id="busuanzi_container_page_pv"><i class="fa fa-file-o"></i><span id="busuanzi_value_page_pv"></span><span></span></span></div></div></footer><i class="fa fa-arrow-up" id="go-up" aria-hidden="true"></i><script src="https://cdn.jsdelivr.net/npm/animejs@latest/anime.min.js"></script><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@latest/velocity.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-ui-pack@latest/velocity.ui.min.js"></script><script src="/js/utils.js?version=1.6.1"></script><script src="/js/fancybox.js?version=1.6.1"></script><script src="/js/sidebar.js?version=1.6.1"></script><script src="/js/copy.js?version=1.6.1"></script><script src="/js/fireworks.js?version=1.6.1"></script><script src="/js/transition.js?version=1.6.1"></script><script src="/js/scroll.js?version=1.6.1"></script><script src="/js/head.js?version=1.6.1"></script><script src="/js/search/local-search.js"></script><script>if(/Android|webOS|iPhone|iPod|BlackBerry/i.test(navigator.userAgent)) {
+  $('#nav').addClass('is-mobile')
+  $('footer').addClass('is-mobile')
+}</script><div class="search-dialog" id="local-search"><div class="search-dialog__title" id="local-search-title">本地搜索</div><div id="local-input-panel"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章"></div></div></div><hr><div id="local-search-results"><div id="local-hits"></div><div id="local-stats"><div class="local-search-stats__hr" id="hr"><span>由</span> <a href="https://github.com/wzpan/hexo-generator-search" style="color:#49B1F5;">hexo-generator-search</a>
+ <span>提供支持</span></div></div></div><span class="search-close-button"><i class="fa fa-times"></i></span></div><div class="search-mask"></div></body></html>

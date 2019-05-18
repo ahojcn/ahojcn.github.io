@@ -1,0 +1,70 @@
+<!DOCTYPE html><html lang="zh-Hans"><head><meta name="generator" content="Hexo 3.8.0"><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta name="description" content="【Nao机器人】CABSL有限状态机"><meta name="keywords" content="Nao机器人,BHuman"><meta name="author" content="ahoj"><meta name="copyright" content="ahoj"><title>【Nao机器人】CABSL有限状态机 | ahoj's blog</title><link rel="shortcut icon" href="/bitbug_favicon.ico"><link rel="stylesheet" href="/css/index.css?version=1.6.1"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@latest/css/font-awesome.min.css?version=1.6.1"><link rel="dns-prefetch" href="https://cdn.staticfile.org"><link rel="dns-prefetch" href="https://cdn.bootcss.com"><link rel="dns-prefetch" href="https://creativecommons.org"><script>var GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"search.xml","languages":{"hits_empty":"找不到您查询的内容:${query}"}},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  }
+} </script></head><body><canvas class="fireworks"></canvas><i class="fa fa-arrow-right" id="toggle-sidebar" aria-hidden="true"></i><div id="sidebar"><div class="toggle-sidebar-info text-center"><span data-toggle="切换文章详情">切换站点概览</span><hr></div><div class="sidebar-toc"><div class="sidebar-toc__title">目录</div><div class="sidebar-toc__progress"><span class="progress-notice">你已经读了</span><span class="progress-num">0</span><span class="progress-percentage">%</span><div class="sidebar-toc__progress-bar"></div></div><div class="sidebar-toc__content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#执行顺序"><span class="toc-number">1.</span> <span class="toc-text">执行顺序</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#CABSL"><span class="toc-number">2.</span> <span class="toc-text">CABSL</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#option"><span class="toc-number">2.1.</span> <span class="toc-text">option</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#common-transition"><span class="toc-number">2.1.1.</span> <span class="toc-text">common_transition</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#state"><span class="toc-number">2.1.2.</span> <span class="toc-text">state</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#initial-state"><span class="toc-number">2.1.3.</span> <span class="toc-text">initial_state</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#action-done"><span class="toc-number">2.1.4.</span> <span class="toc-text">action_done</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#action-aborted"><span class="toc-number">2.1.5.</span> <span class="toc-text">action_aborted</span></a></li></ol></li></ol></li></ol></div></div><div class="author-info hide"><div class="author-info__avatar text-center"><img src="https://i.loli.net/2019/05/18/5ce01a928835c26008.jpg"></div><div class="author-info__name text-center">ahoj</div><div class="author-info__description text-center">思想的本质就是不安</div><div class="follow-button"><a href="https://github.com/ahojcn">GitHub</a></div><hr><div class="author-info-articles"><a class="author-info-articles__archives article-meta" href="/archives"><span class="pull-left">文章</span><span class="pull-right">58</span></a><a class="author-info-articles__tags article-meta" href="/tags"><span class="pull-left">标签</span><span class="pull-right">19</span></a><a class="author-info-articles__categories article-meta" href="/categories"><span class="pull-left">分类</span><span class="pull-right">14</span></a></div><hr><div class="author-info-links"><div class="author-info-links__title text-center">朋友们</div><a class="author-info-links__name text-center" href="https://zouchanglin.cn/">Tim</a><a class="author-info-links__name text-center" href="http://www.ijam8.com/">Jam</a><a class="author-info-links__name text-center" href="https://blog.csdn.net/jack_wang128801">jack_wang128801</a><a class="author-info-links__name text-center" href="https://blog.csdn.net/weixin_43232955">Mr.Q_</a></div></div></div><div id="content-outer"><div class="no-bg" id="top-container"><div id="page-header"><span class="pull-left"> <a id="site-name" href="/">ahoj's blog</a></span><i class="fa fa-bars toggle-menu pull-right" aria-hidden="true"></i><span class="pull-right menus"><a class="site-page social-icon search"><i class="fa fa-search"></i><span> 搜索</span></a><a class="site-page" href="/">主页</a><a class="site-page" href="/archives">文章</a><a class="site-page" href="/tags">标签</a><a class="site-page" href="/categories">分类</a><a class="site-page" href="/about">关于</a></span></div><div id="post-info"><div id="post-title">【Nao机器人】CABSL有限状态机</div><div id="post-meta"><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 2019-04-03</time><span class="post-meta__separator">|</span><i class="fa fa-inbox post-meta__icon" aria-hidden="true"></i><a class="post-meta__categories" href="/categories/Nao机器人/">Nao机器人</a></div></div></div><div class="layout" id="content-inner"><article id="post"><div class="article-container" id="post-content"><p>这里主要总结下最近看的关于 CABSL 的代码和资料。</p>
+<p>行为规范语言 CABSL （有限状态机）控制机器人在比赛中的行为。B-Human 系统中执行动作选择的部分称为行为控制。</p>
+<a id="more"></a>
+<p>😁 下面这个图放大其实还清楚，在官方文档的 6.1 节。</p>
+<p><img src="https://ws1.sinaimg.cn/large/006wR0dcly1g1pt6yuhf7j30vw17sh6h.jpg" alt="6-1"></p>
+<h2 id="执行顺序"><a href="#执行顺序" class="headerlink" title="执行顺序"></a>执行顺序</h2><p>机器人比赛执行的策略文件都在<code>Modules/BehaviorControl/BehaviorControl/Options</code>下，Roles 中包含了Bhuman 源码中自带的一个Striker Demo。</p>
+<p>Soccer.h 是 Bhuman 代码执行的根目录，Nao开机后就会执行 Soccer.h 中的代码。</p>
+<p>在注释中触发实际足球行为的主要状态，这里调用的是<code>Modules/BehaviorControl/BehaviorControl/Options/GameControl/HandlePenaltyState.h</code>，对应的状态为：按一次胸口 Nao 站起来(upright)，两次进入惩罚模式(penalized)，三个非惩罚(notPenalized)，开始执行 Striker 的代码。</p>
+<p><img src="https://ws1.sinaimg.cn/large/006wR0dcly1g1ptjrxpclj32lc1i0x6q.jpg" alt="Soccer.h"></p>
+<p><img src="https://ws1.sinaimg.cn/large/006wR0dcly1g1ptrjs3zkj32lc1i0x6q.jpg" alt="HandlePenaltyState.h"></p>
+<p>在<code>HandlePenaltyState.h</code>的最后，我们可以看到：</p>
+<pre><code class="cpp">  /** Play soccer! */
+  state(playing)
+  {
+    action
+    {
+      PlayingState();
+    }
+  }
+</code></pre>
+<p>跟进到 <code>PlayingState.h</code> 中：</p>
+<p><img src="https://ws1.sinaimg.cn/large/006wR0dcly1g1ptv6048zj313o0us17z.jpg" alt="PlayingState.h"></p>
+<p>好吧，终于进来了，如上面所说，最终调用到<code>Striker()</code>这个前锋Demo：</p>
+<p><img src="https://ws1.sinaimg.cn/large/006wR0dcly1g1ptxc11hlj32lc1i0qv6.jpg" alt="Demo.h"></p>
+<h2 id="CABSL"><a href="#CABSL" class="headerlink" title="CABSL"></a>CABSL</h2><blockquote>
+<p>在 CABSL 中，使用了以下的基本元素：options(选项), states(状态), transitions(转换), actions(动作)。一个行为由一组在选项图中排列的选项组成。有一个单一的启动选项，所有其他选项都被调用;这是选项图的root。每个选项都是有限状态机，它􏰉述了一个特定的行为部分，比如机器人的技能或头部运动，或者它结合了这样的基本特征。每个选项都以它的 intital_state 开始。在一个状态中，可以执行的动作可以调用另一个选项，并执行任何 c++代码，例如修改行为控制􏰈供的 representations。此外，在每个状态内都有一项关于转换到另一个状态(在选项内)的决定。像动作一样，转换能够执行 c++代码。【译 6.1】</p>
+</blockquote>
+<h3 id="option"><a href="#option" class="headerlink" title="option"></a>option</h3><h4 id="common-transition"><a href="#common-transition" class="headerlink" title="common_transition"></a>common_transition</h4><p>option 可以理解为机器娃的一套动作。</p>
+<p>在每一个 option 中 <code>common_transition</code> 是<strong>全局的（此option）</strong>不停运行的逻辑判断，优先级别最高，不论当前执行到哪一个 state，只要满足了 <code>common_transition</code> 中的条件，就会跳出，goto 到指定的另一个 option。</p>
+<p><em>如下图中，当摄像头不 ok 他就一直 sitDown。</em></p>
+<p><img src="https://ws1.sinaimg.cn/large/006wR0dcly1g1pu8o6j5hj316o0c87eq.jpg" alt></p>
+<h4 id="state"><a href="#state" class="headerlink" title="state"></a>state</h4><p>state 是一种状态，只能通过 goto 进入。state 中有普通的 transition(不是必须有) 和 action。</p>
+<p>action 是执行的一些动作，可以是某些函数或者跳到别的地方。transition 是在这个 state 中一直在判断，当满足条件就 goto 跳转。</p>
+<p><img src="https://ws1.sinaimg.cn/large/006wR0dcly1g1puj34yljj31ik0hgngj.jpg" alt="state"></p>
+<h4 id="initial-state"><a href="#initial-state" class="headerlink" title="initial_state"></a>initial_state</h4><p>initial_state 是进 option 中的初始化状态，进入 option 后自动执行 initial_state 中的行为。</p>
+<h4 id="action-done"><a href="#action-done" class="headerlink" title="action_done"></a>action_done</h4><p>action_done 表示 state 中的 action 执行完毕在 transition 中判断 action_done 可以在 state 动作执行完后跳到别的 state 中。</p>
+<h4 id="action-aborted"><a href="#action-aborted" class="headerlink" title="action_aborted"></a>action_aborted</h4><p>action_aborted 表示动作未执行完或者意外终止。</p>
+<hr>
+</div></article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">ahoj</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://ahoj.cc/2019/04/cjvtlw6ib0030q409m8kzclt3/">https://ahoj.cc/2019/04/cjvtlw6ib0030q409m8kzclt3/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://ahoj.cc">ahoj's blog</a>！</span></div></div><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Nao机器人/">Nao机器人</a><a class="post-meta__tags" href="/tags/BHuman/">BHuman</a></div><nav id="pagination"><div class="prev-post pull-left"><a href="/2019/04/cjvtlw6ii003iq409rcey7fh0/"><i class="fa fa-chevron-left">  </i><span>【Nao机器人】机器人行为之getUp</span></a></div><div class="next-post pull-right"><a href="/2019/04/cjvtlw6ia002yq40952dbgwk0/"><span>【Nao机器人】BHuman项目结构</span><i class="fa fa-chevron-right"></i></a></div></nav><div id="vcomment"></div><script src="https://cdn1.lncld.net/static/js/3.0.4/av-min.js"></script><script src="https://cdn.jsdelivr.net/npm/valine/dist/Valine.min.js"></script><script>var notify = 'false' == true ? true : false;
+var verify = 'false' == true ? true : false;
+var GUEST_INFO = ['nick','mail','link'];
+var guest_info = 'nick,mail,link'.split(',').filter(function(item){
+  return GUEST_INFO.indexOf(item) > -1
+});
+guest_info = guest_info.length == 0 ? GUEST_INFO :guest_info;
+window.valine = new Valine({
+  el:'#vcomment',
+  notify:notify,
+  verify:verify,
+  appId:'yy9oH4ap0AOjoGWG7vbV9w2v-gzGzoHsz',
+  appKey:'27EcRosAo5WUi5KH16i9nAq1',
+  placeholder:'说点什么吧~ 不足之处或者...',
+  avatar:'mm',
+  guest_info:guest_info,
+  pageSize:'10',
+  lang: 'zh-cn'
+})</script></div></div><footer><div class="layout" id="footer"><div class="copyright">&copy;2019 By ahoj</div><div class="framework-info"><span>驱动 - </span><a href="http://hexo.io"><span>Hexo</span></a><span class="footer-separator">|</span><span>主题 - </span><a href="https://github.com/Molunerfinn/hexo-theme-melody"><span>Melody</span></a></div><div class="busuanzi"><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><span id="busuanzi_container_page_pv"><i class="fa fa-file-o"></i><span id="busuanzi_value_page_pv"></span><span></span></span></div></div></footer><i class="fa fa-arrow-up" id="go-up" aria-hidden="true"></i><script src="https://cdn.jsdelivr.net/npm/animejs@latest/anime.min.js"></script><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@latest/velocity.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-ui-pack@latest/velocity.ui.min.js"></script><script src="/js/utils.js?version=1.6.1"></script><script src="/js/fancybox.js?version=1.6.1"></script><script src="/js/sidebar.js?version=1.6.1"></script><script src="/js/copy.js?version=1.6.1"></script><script src="/js/fireworks.js?version=1.6.1"></script><script src="/js/transition.js?version=1.6.1"></script><script src="/js/scroll.js?version=1.6.1"></script><script src="/js/head.js?version=1.6.1"></script><script src="/js/search/local-search.js"></script><script>if(/Android|webOS|iPhone|iPod|BlackBerry/i.test(navigator.userAgent)) {
+  $('#nav').addClass('is-mobile')
+  $('footer').addClass('is-mobile')
+}</script><div class="search-dialog" id="local-search"><div class="search-dialog__title" id="local-search-title">本地搜索</div><div id="local-input-panel"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章"></div></div></div><hr><div id="local-search-results"><div id="local-hits"></div><div id="local-stats"><div class="local-search-stats__hr" id="hr"><span>由</span> <a href="https://github.com/wzpan/hexo-generator-search" style="color:#49B1F5;">hexo-generator-search</a>
+ <span>提供支持</span></div></div></div><span class="search-close-button"><i class="fa fa-times"></i></span></div><div class="search-mask"></div></body></html>

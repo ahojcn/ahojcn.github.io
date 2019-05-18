@@ -1,0 +1,270 @@
+<!DOCTYPE html><html lang="zh-Hans"><head><meta name="generator" content="Hexo 3.8.0"><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta name="description" content="【Nao机器人】BHuman中的类-Pose2f"><meta name="keywords" content="Nao机器人,BHuman"><meta name="author" content="ahoj"><meta name="copyright" content="ahoj"><title>【Nao机器人】BHuman中的类-Pose2f | ahoj's blog</title><link rel="shortcut icon" href="/bitbug_favicon.ico"><link rel="stylesheet" href="/css/index.css?version=1.6.1"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@latest/css/font-awesome.min.css?version=1.6.1"><link rel="dns-prefetch" href="https://cdn.staticfile.org"><link rel="dns-prefetch" href="https://cdn.bootcss.com"><link rel="dns-prefetch" href="https://creativecommons.org"><script>var GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"search.xml","languages":{"hits_empty":"找不到您查询的内容:${query}"}},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  }
+} </script></head><body><canvas class="fireworks"></canvas><i class="fa fa-arrow-right" id="toggle-sidebar" aria-hidden="true"></i><div id="sidebar"><div class="toggle-sidebar-info text-center"><span data-toggle="切换文章详情">切换站点概览</span><hr></div><div class="sidebar-toc"><div class="sidebar-toc__title">目录</div><div class="sidebar-toc__progress"><span class="progress-notice">你已经读了</span><span class="progress-num">0</span><span class="progress-percentage">%</span><div class="sidebar-toc__progress-bar"></div></div><div class="sidebar-toc__content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#成员变量"><span class="toc-number">1.</span> <span class="toc-text">成员变量</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#构造函数"><span class="toc-number">2.</span> <span class="toc-text">构造函数</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#声明"><span class="toc-number">2.1.</span> <span class="toc-text">声明</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#实现"><span class="toc-number">2.2.</span> <span class="toc-text">实现</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#操作符重载"><span class="toc-number">3.</span> <span class="toc-text">操作符重载</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#声明-1"><span class="toc-number">3.1.</span> <span class="toc-text">声明</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#实现-1"><span class="toc-number">3.2.</span> <span class="toc-text">实现</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#成员函数"><span class="toc-number">4.</span> <span class="toc-text">成员函数</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#声明-2"><span class="toc-number">4.1.</span> <span class="toc-text">声明</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#实现-2"><span class="toc-number">4.2.</span> <span class="toc-text">实现</span></a></li></ol></li></ol></div></div><div class="author-info hide"><div class="author-info__avatar text-center"><img src="https://i.loli.net/2019/05/18/5ce01a928835c26008.jpg"></div><div class="author-info__name text-center">ahoj</div><div class="author-info__description text-center">思想的本质就是不安</div><div class="follow-button"><a href="https://github.com/ahojcn">GitHub</a></div><hr><div class="author-info-articles"><a class="author-info-articles__archives article-meta" href="/archives"><span class="pull-left">文章</span><span class="pull-right">58</span></a><a class="author-info-articles__tags article-meta" href="/tags"><span class="pull-left">标签</span><span class="pull-right">19</span></a><a class="author-info-articles__categories article-meta" href="/categories"><span class="pull-left">分类</span><span class="pull-right">14</span></a></div><hr><div class="author-info-links"><div class="author-info-links__title text-center">朋友们</div><a class="author-info-links__name text-center" href="https://zouchanglin.cn/">Tim</a><a class="author-info-links__name text-center" href="http://www.ijam8.com/">Jam</a><a class="author-info-links__name text-center" href="https://blog.csdn.net/jack_wang128801">jack_wang128801</a><a class="author-info-links__name text-center" href="https://blog.csdn.net/weixin_43232955">Mr.Q_</a></div></div></div><div id="content-outer"><div class="no-bg" id="top-container"><div id="page-header"><span class="pull-left"> <a id="site-name" href="/">ahoj's blog</a></span><i class="fa fa-bars toggle-menu pull-right" aria-hidden="true"></i><span class="pull-right menus"><a class="site-page social-icon search"><i class="fa fa-search"></i><span> 搜索</span></a><a class="site-page" href="/">主页</a><a class="site-page" href="/archives">文章</a><a class="site-page" href="/tags">标签</a><a class="site-page" href="/categories">分类</a><a class="site-page" href="/about">关于</a></span></div><div id="post-info"><div id="post-title">【Nao机器人】BHuman中的类-Pose2f</div><div id="post-meta"><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 2019-04-19</time><span class="post-meta__separator">|</span><i class="fa fa-inbox post-meta__icon" aria-hidden="true"></i><a class="post-meta__categories" href="/categories/Nao机器人/">Nao机器人</a></div></div></div><div class="layout" id="content-inner"><article id="post"><div class="article-container" id="post-content"><p>Pose2f 应该是 BHuman 中的一个比较重要的工具类吧，在代码中经常用到，以前不知道是干啥的，刚才看了下，记录下来。</p>
+<p><code>Src/Tools/Math/Pose2f.h</code></p>
+<p><strong>TODO：</strong> 学习类 Angle、Pose3f、Vector2f(我猜是个类似于vector的容器，不过里面存的东西要仔细研究下)等。<br><strong>ADD：</strong> Pose3f 与 Pose2f 大致相同，不过使用了 Vector3f，多了一个 z 作为参数。。。<br>在 Vector2f 的变量中还可以调用 <code>angle()</code> 函数，猜想：应该这两个类中有这个方法。<br>在 Egien.h 中只看到了一些容器的声明，引入了头文件 <code>Egien/Dense</code>，看了下，应该是 naoqi 的库中带的。<br><strong>ADD：</strong> 刚才看代码的过程中发现，有下面这两句：图像中的位置 Vector2i(image)，场地中的位置 Vector2f(field)。</p>
+<pre><code class="cpp">(Vector2i)(Vector2i::Zero()) positionInImage, /**&lt; Position in the image. 在图像中的位置 */
+(Vector2f)(Vector2f::Zero()) positionOnField, /**&lt; Position relative to robot on the field. 在场地中的位置 */
+</code></pre>
+<a id="more"></a>
+<p><img src="https://wx1.sinaimg.cn/mw690/006wR0dcly1g28dqlqoqij31hc0dago6.jpg" alt></p>
+<h2 id="成员变量"><a href="#成员变量" class="headerlink" title="成员变量"></a>成员变量</h2><pre><code class="cpp">// Angle是类型，0是默认值，rotation是变量名。
+(Angle)(0) rotation,        /** rotation 旋转/转动 */
+// 同上，还有就是在BHuman中的流式结构体中经常看到这种的变量声明，包括以后自己添加也是要按照这样的规范来写。
+(Vector2f)(Vector2f::Zero()) translation,    /** translation 转化 */
+</code></pre>
+<hr>
+<h2 id="构造函数"><a href="#构造函数" class="headerlink" title="构造函数"></a>构造函数</h2><h3 id="声明"><a href="#声明" class="headerlink" title="声明"></a>声明</h3><pre><code class="cpp">// 构造函数，默认
+Pose2f() = default;
+// 拷贝构造，默认
+Pose2f(const Pose2f&amp; other) = default;
+// 传入两个float类型的变量x，y。
+Pose2f(const float x, const float y);
+// 传入一个Vector2f对象的引用，至于这个对象是干啥的，我再看看。。。我的猜想是从这个转换到这个。。。哈哈哈
+Pose2f(const Vector2f&amp; translation);
+// 传入一个Angle(角度)
+Pose2f(const Angle rotation);
+
+Pose2f(const Angle rotation, const Vector2f&amp; translation);
+Pose2f(const Angle rotation, const float x, const float y);
+Pose2f(const float rot, const float x, const float y);
+</code></pre>
+<h3 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h3><pre><code class="cpp">inline Pose2f::Pose2f(const float x, const float y) :
+  translation(x, y){}
+
+inline Pose2f::Pose2f(const Vector2f&amp; translation) :
+  translation(translation){}
+
+inline Pose2f::Pose2f(const Angle rotation) :
+  rotation(rotation){}
+
+inline Pose2f::Pose2f(const Angle rotation, const Vector2f&amp; translation) :
+  rotation(rotation), translation(translation){}
+
+inline Pose2f::Pose2f(const Angle rotation, const float x, const float y) :
+  rotation(rotation), translation(x, y){}
+
+inline Pose2f::Pose2f(const float rot, const float x, const float y) :
+  rotation(rot), translation(x, y){}
+</code></pre>
+<hr>
+<h2 id="操作符重载"><a href="#操作符重载" class="headerlink" title="操作符重载"></a>操作符重载</h2><h3 id="声明-1"><a href="#声明-1" class="headerlink" title="声明"></a>声明</h3><pre><code class="cpp">Pose2f&amp; operator=(const Pose2f&amp; other) = default;
+
+Vector2f operator*(const Vector2f&amp; other) const;
+
+/**
+ * Concatenation of this pose with another. The resulting rotation is not normalized!
+ * 这个姿势和另一个 pose 的串联。结果的旋转没有标准化!
+ * Use operator+ / operator+= for normalized(标准化的) rotations(旋转).
+ */
+Pose2f operator*(const Pose2f&amp; other) const;
+Pose2f&amp; operator*=(const Pose2f&amp; other);
+
+/**
+ * Concatenation of this pose with another pose. The resulting rotation is not normalized!
+ * 这个姿势和另一个 pose 的连接。结果的旋转没有标准化!
+ */
+Pose2f operator+(const Pose2f&amp; other) const;
+Pose2f&amp; operator+=(const Pose2f&amp; other);
+
+/**
+ * Difference of this pose relative to another pose. So if A+B=C is the addition/concatenation, this calculates C-A=B.
+ * 这个姿势相对于另一个 pose 的不同之处。如果A+B=C是加法/串联，这就计算出C-A=B。
+ *
+ * @param other The other pose that will be used as origin for the new pose.
+ * @return A reference to this pose after calculating the difference.
+ */
+Pose2f&amp; operator-=(const Pose2f&amp; other);
+
+/**
+ * Difference of this pose relative to another pose.
+ * 这个姿势相对于另一个 pose 的不同之处。
+ *
+ * @param other The other pose that will be used as origin for the new pose.
+ * @return The resulting pose.
+ */
+Pose2f operator-(const Pose2f&amp; other) const;
+
+/** unary minus */
+Pose2f operator-() const;
+
+/**
+ * Comparison of another pose with this one.
+ * 比较另一个 pose 和这个。
+ *
+ * @param other The other pose that will be compared to this one
+ * @return Whether the two poses are equal.
+ */
+bool operator==(const Pose2f&amp; other) const;
+
+/**
+ * Comparison of another pose with this one.
+ * 比较另一个 pose 和这个。
+ *
+ * @param other The other pose that will be compared to this one
+ * @return Whether the two poses are unequal.
+ */
+bool operator!=(const Pose2f&amp; other) const;
+</code></pre>
+<h3 id="实现-1"><a href="#实现-1" class="headerlink" title="实现"></a>实现</h3><pre><code class="cpp">inline Vector2f Pose2f::operator*(const Vector2f&amp; other) const
+{
+  const float s = std::sin(rotation);
+  const float c = std::cos(rotation);
+  return (Vector2f(other.x() * c - other.y() * s, other.x() * s + other.y() * c) + translation);
+}
+
+inline Pose2f Pose2f::operator*(const Pose2f&amp; other) const
+{
+  return Pose2f(*this) *= other;
+}
+
+inline Pose2f&amp; Pose2f::operator*=(const Pose2f&amp; other)
+{
+  translation = *this * other.translation;
+  rotation += other.rotation;
+  rotation.normalize();
+  return *this;
+}
+
+inline Pose2f Pose2f::operator+(const Pose2f&amp; other) const
+{
+  return Pose2f(*this) += other;
+}
+
+inline Pose2f&amp; Pose2f::operator+=(const Pose2f&amp; other)
+{
+  translation = *this * other.translation;
+  rotation += other.rotation;
+  rotation.normalize();
+  return *this;
+}
+
+inline Pose2f&amp; Pose2f::operator-=(const Pose2f&amp; other)
+{
+  translation -= other.translation;
+  Pose2f p(-other.rotation);
+  return *this = p + *this;
+}
+
+inline Pose2f Pose2f::operator-(const Pose2f&amp; other) const
+{
+  return Pose2f(*this) -= other;
+}
+
+inline Pose2f Pose2f::operator-() const
+{
+  return Pose2f() - (*this);
+}
+
+inline bool Pose2f::operator==(const Pose2f&amp; other) const
+{
+  return ((translation == other.translation) &amp;&amp; (rotation == other.rotation));
+}
+
+inline bool Pose2f::operator!=(const Pose2f&amp; other) const
+{
+  return !(Pose2f(*this) == other);
+}
+</code></pre>
+<hr>
+<h2 id="成员函数"><a href="#成员函数" class="headerlink" title="成员函数"></a>成员函数</h2><h3 id="声明-2"><a href="#声明-2" class="headerlink" title="声明"></a>声明</h3><pre><code class="cpp">Pose2f&amp; translate(const Vector2f&amp; trans);
+Pose2f&amp; translate(const float x, const float y);
+Pose2f&amp; rotate(const Angle&amp; rot);
+
+/** Inverts this pose and returns reference to this.
+ * 反转此pose并返回对该位姿的引用。*/
+Pose2f&amp; invert();
+/** Calculates the inverse transformation of this pose
+ * 计算这个位姿的逆变换*/
+Pose2f inverse() const;
+
+Pose2f dotMirror() const;
+
+bool isFinite() const;
+
+/**
+ * The function creates a random pose.
+ * 该函数创建一个随机的姿态。
+ * @param x The range for x-values of the pose.
+ * @param y The range for y-values of the pose.
+ * @param angle The range for the rotation of the pose.
+ */
+static Pose2f random(const Rangef&amp; angle, const Rangef&amp; x, const Rangef&amp; y),
+</code></pre>
+<h3 id="实现-2"><a href="#实现-2" class="headerlink" title="实现"></a>实现</h3><pre><code class="cpp">inline Pose2f&amp; Pose2f::translate(const Vector2f&amp; trans)
+{
+  translation = *this * trans;
+  return *this;
+}
+
+inline Pose2f&amp; Pose2f::translate(const float x, const float y)
+{
+  translation = *this * Vector2f(x, y);
+  return *this;
+}
+
+inline Pose2f&amp; Pose2f::rotate(const Angle&amp; rot)
+{
+  rotation += rot;
+  return *this;
+}
+
+inline Pose2f&amp; Pose2f::invert()
+{
+  rotation = -rotation;
+  const Vector2f trans = -translation;
+  translation = Eigen::Rotation2D&lt;float&gt;(rotation) * trans;
+  return *this;
+}
+
+inline Pose2f Pose2f::inverse() const
+{
+  return Pose2f(*this).invert();
+}
+
+inline Pose2f Pose2f::dotMirror() const
+{
+  return Pose2f(Angle::normalize(rotation + pi), -translation);
+}
+
+inline bool Pose2f::isFinite() const
+{
+  return std::isfinite(translation.x()) &amp;&amp; std::isfinite(translation.y()) &amp;&amp; std::isfinite(rotation);
+}
+
+inline Pose2f Pose2f::random(const Rangef&amp; angle, const Rangef&amp; x, const Rangef&amp; y)
+{
+  return Pose2f(Random::uniform(angle.min, angle.max), Vector2f(Random::uniform(x.min, x.max), Random::uniform(y.min, y.max)));
+}
+</code></pre>
+<hr>
+</div></article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">ahoj</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://ahoj.cc/2019/04/cjvtlw6i5002oq4091ejvw8kc/">https://ahoj.cc/2019/04/cjvtlw6i5002oq4091ejvw8kc/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://ahoj.cc">ahoj's blog</a>！</span></div></div><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Nao机器人/">Nao机器人</a><a class="post-meta__tags" href="/tags/BHuman/">BHuman</a></div><nav id="pagination"><div class="prev-post pull-left"><a href="/2019/04/cjvtlw6i4002mq409vo4iw61c/"><i class="fa fa-chevron-left">  </i><span>【Nao机器人】BHuman中的类-MarkedLine</span></a></div><div class="next-post pull-right"><a href="/2019/04/cjvtlw810007xq40994s7anhi/"><span>【Nao机器人】Robocup场地信息</span><i class="fa fa-chevron-right"></i></a></div></nav><div id="vcomment"></div><script src="https://cdn1.lncld.net/static/js/3.0.4/av-min.js"></script><script src="https://cdn.jsdelivr.net/npm/valine/dist/Valine.min.js"></script><script>var notify = 'false' == true ? true : false;
+var verify = 'false' == true ? true : false;
+var GUEST_INFO = ['nick','mail','link'];
+var guest_info = 'nick,mail,link'.split(',').filter(function(item){
+  return GUEST_INFO.indexOf(item) > -1
+});
+guest_info = guest_info.length == 0 ? GUEST_INFO :guest_info;
+window.valine = new Valine({
+  el:'#vcomment',
+  notify:notify,
+  verify:verify,
+  appId:'yy9oH4ap0AOjoGWG7vbV9w2v-gzGzoHsz',
+  appKey:'27EcRosAo5WUi5KH16i9nAq1',
+  placeholder:'说点什么吧~ 不足之处或者...',
+  avatar:'mm',
+  guest_info:guest_info,
+  pageSize:'10',
+  lang: 'zh-cn'
+})</script></div></div><footer><div class="layout" id="footer"><div class="copyright">&copy;2019 By ahoj</div><div class="framework-info"><span>驱动 - </span><a href="http://hexo.io"><span>Hexo</span></a><span class="footer-separator">|</span><span>主题 - </span><a href="https://github.com/Molunerfinn/hexo-theme-melody"><span>Melody</span></a></div><div class="busuanzi"><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><span id="busuanzi_container_page_pv"><i class="fa fa-file-o"></i><span id="busuanzi_value_page_pv"></span><span></span></span></div></div></footer><i class="fa fa-arrow-up" id="go-up" aria-hidden="true"></i><script src="https://cdn.jsdelivr.net/npm/animejs@latest/anime.min.js"></script><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@latest/velocity.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-ui-pack@latest/velocity.ui.min.js"></script><script src="/js/utils.js?version=1.6.1"></script><script src="/js/fancybox.js?version=1.6.1"></script><script src="/js/sidebar.js?version=1.6.1"></script><script src="/js/copy.js?version=1.6.1"></script><script src="/js/fireworks.js?version=1.6.1"></script><script src="/js/transition.js?version=1.6.1"></script><script src="/js/scroll.js?version=1.6.1"></script><script src="/js/head.js?version=1.6.1"></script><script src="/js/search/local-search.js"></script><script>if(/Android|webOS|iPhone|iPod|BlackBerry/i.test(navigator.userAgent)) {
+  $('#nav').addClass('is-mobile')
+  $('footer').addClass('is-mobile')
+}</script><div class="search-dialog" id="local-search"><div class="search-dialog__title" id="local-search-title">本地搜索</div><div id="local-input-panel"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章"></div></div></div><hr><div id="local-search-results"><div id="local-hits"></div><div id="local-stats"><div class="local-search-stats__hr" id="hr"><span>由</span> <a href="https://github.com/wzpan/hexo-generator-search" style="color:#49B1F5;">hexo-generator-search</a>
+ <span>提供支持</span></div></div></div><span class="search-close-button"><i class="fa fa-times"></i></span></div><div class="search-mask"></div></body></html>

@@ -1,0 +1,149 @@
+<!DOCTYPE html><html lang="zh-Hans"><head><meta name="generator" content="Hexo 3.8.0"><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta name="description" content="C-数据在内存中存储"><meta name="keywords" content="C"><meta name="author" content="ahoj"><meta name="copyright" content="ahoj"><title>C-数据在内存中存储 | ahoj's blog</title><link rel="shortcut icon" href="/bitbug_favicon.ico"><link rel="stylesheet" href="/css/index.css?version=1.6.1"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@latest/css/font-awesome.min.css?version=1.6.1"><link rel="dns-prefetch" href="https://cdn.staticfile.org"><link rel="dns-prefetch" href="https://cdn.bootcss.com"><link rel="dns-prefetch" href="https://creativecommons.org"><script>var GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"search.xml","languages":{"hits_empty":"找不到您查询的内容:${query}"}},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  }
+} </script></head><body><canvas class="fireworks"></canvas><i class="fa fa-arrow-right" id="toggle-sidebar" aria-hidden="true"></i><div id="sidebar"><div class="toggle-sidebar-info text-center"><span data-toggle="切换文章详情">切换站点概览</span><hr></div><div class="sidebar-toc"><div class="sidebar-toc__title">目录</div><div class="sidebar-toc__progress"><span class="progress-notice">你已经读了</span><span class="progress-num">0</span><span class="progress-percentage">%</span><div class="sidebar-toc__progress-bar"></div></div><div class="sidebar-toc__content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#整型"><span class="toc-number">1.</span> <span class="toc-text">整型</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#存整数"><span class="toc-number">1.1.</span> <span class="toc-text">存整数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#取整数"><span class="toc-number">1.2.</span> <span class="toc-text">取整数</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#浮点型"><span class="toc-number">2.</span> <span class="toc-text">浮点型</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#浮点数的表示"><span class="toc-number">2.1.</span> <span class="toc-text">浮点数的表示</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#浮点数的存储"><span class="toc-number">2.2.</span> <span class="toc-text">浮点数的存储</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#关于浮点数的栗子"><span class="toc-number">2.3.</span> <span class="toc-text">关于浮点数的栗子</span></a></li></ol></li></ol></div></div><div class="author-info hide"><div class="author-info__avatar text-center"><img src="https://i.loli.net/2019/05/18/5ce01a928835c26008.jpg"></div><div class="author-info__name text-center">ahoj</div><div class="author-info__description text-center">思想的本质就是不安</div><div class="follow-button"><a href="https://github.com/ahojcn">GitHub</a></div><hr><div class="author-info-articles"><a class="author-info-articles__archives article-meta" href="/archives"><span class="pull-left">文章</span><span class="pull-right">58</span></a><a class="author-info-articles__tags article-meta" href="/tags"><span class="pull-left">标签</span><span class="pull-right">19</span></a><a class="author-info-articles__categories article-meta" href="/categories"><span class="pull-left">分类</span><span class="pull-right">14</span></a></div><hr><div class="author-info-links"><div class="author-info-links__title text-center">朋友们</div><a class="author-info-links__name text-center" href="https://zouchanglin.cn/">Tim</a><a class="author-info-links__name text-center" href="http://www.ijam8.com/">Jam</a><a class="author-info-links__name text-center" href="https://blog.csdn.net/jack_wang128801">jack_wang128801</a><a class="author-info-links__name text-center" href="https://blog.csdn.net/weixin_43232955">Mr.Q_</a></div></div></div><div id="content-outer"><div class="no-bg" id="top-container"><div id="page-header"><span class="pull-left"> <a id="site-name" href="/">ahoj's blog</a></span><i class="fa fa-bars toggle-menu pull-right" aria-hidden="true"></i><span class="pull-right menus"><a class="site-page social-icon search"><i class="fa fa-search"></i><span> 搜索</span></a><a class="site-page" href="/">主页</a><a class="site-page" href="/archives">文章</a><a class="site-page" href="/tags">标签</a><a class="site-page" href="/categories">分类</a><a class="site-page" href="/about">关于</a></span></div><div id="post-info"><div id="post-title">C-数据在内存中存储</div><div id="post-meta"><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 2019-02-17</time><span class="post-meta__separator">|</span><i class="fa fa-inbox post-meta__icon" aria-hidden="true"></i><a class="post-meta__categories" href="/categories/C/">C</a></div></div></div><div class="layout" id="content-inner"><article id="post"><div class="article-container" id="post-content"><p>C语言中各种数据类型在内存中是怎么存储的。</p>
+<a id="more"></a>
+<h2 id="整型"><a href="#整型" class="headerlink" title="整型"></a>整型</h2><p>char、short、int、long</p>
+<h3 id="存整数"><a href="#存整数" class="headerlink" title="存整数"></a>存整数</h3><ol>
+<li><p>无符号数：原、反、补码一样</p>
+</li>
+<li><p>有符号数：</p>
+<ul>
+<li><p>正数：原、反、补码一样</p>
+</li>
+<li><p>负数：补码表示</p>
+</li>
+</ul>
+</li>
+</ol>
+<p>举个栗子：</p>
+<p>-10 : 有符号 =&gt; 负数 =&gt; 存它的补码<br>原： 1000 1010<br>反： 1111 0101<br>补： 1111 0110     (最终存入内存中的-10)</p>
+<h3 id="取整数"><a href="#取整数" class="headerlink" title="取整数"></a>取整数</h3><p>看是什么类型(有符号整数 / 无符号整数)</p>
+<ol>
+<li><p>无符号整数：直接取</p>
+</li>
+<li><p>有符号整数：</p>
+<ul>
+<li><p>正数：直接取</p>
+</li>
+<li><p>负数：补 =&gt; 原再取</p>
+</li>
+</ul>
+</li>
+</ol>
+<p>例如：</p>
+<pre><code class="c">#include &lt;stdio.h&gt;
+int main()
+{
+    char a = -1;
+    signed char b = -1;
+    unsigned char c = -1;
+    printf(&quot;a=%d,b=%d,c=%d\n&quot;, a, b, c);
+    return 0;
+}
+</code></pre>
+<p>输出：<code>-1,-1,255</code></p>
+<p>a和b的结果是一样的，这里就分析下a：</p>
+<p>存：a是有符号数负数</p>
+<pre><code class="c">a = -1
+    原： 1000 0001
+    反： 1111 1110
+    补： 1111 1111
+    1.存的时候不考虑类型，直接存 -1 的补码 1111 1111
+    2.在%d输出的时候，会发生整型提升，整型提升默认的是按照变量的原始类型添加前面的比特位，这里的a是有符号的所以前面添加 1，变为 11111111 11111111 11111111 11111111，这样的话用%d输出，结果是 -1。
+</code></pre>
+<pre><code class="c">c = -1
+    还是一样的，存的时候不考虑类型，存 -1 的补码 1111 1111
+    在%d输出的时候，整型提升，添加比特位，这里的c是unsigned类型的，所以前面添加 0，变为：
+    00000000 00000000 00000000 11111111
+    这样，以%d输出就是255咯。
+</code></pre>
+<h2 id="浮点型"><a href="#浮点型" class="headerlink" title="浮点型"></a>浮点型</h2><p>float、double、long double，浮点数的表示范围在float.h中定义</p>
+<h3 id="浮点数的表示"><a href="#浮点数的表示" class="headerlink" title="浮点数的表示"></a>浮点数的表示</h3><p>根据国际标准IEEE 754，任意一个二进制浮点数可以表示为：(-1) ^ S * M * 2^E</p>
+<ul>
+<li>(-1)^S表示符号位，S=0时，为正，S=1时，为负。</li>
+<li>M表示有效数字，大于等于1，小于2。</li>
+<li>2^E表示指数位。</li>
+</ul>
+<p>栗子：</p>
+<p>十进制5.0，写成二进制101.0，相当于1.01 * 2^2，其中S=0，M=1.01，E=2。</p>
+<p>十进制-5.0，二进制为-101.0，相当于-1.01 * 2^2，其中S=1，M=1.01，E=2。</p>
+<h3 id="浮点数的存储"><a href="#浮点数的存储" class="headerlink" title="浮点数的存储"></a>浮点数的存储</h3><p>对于32位的浮点数(单精度)，最高的1位是符号位S，接着的8位是指数E，剩下的23位为有效数字M。</p>
+<p>对于64位的浮点数(双精度)，最高的1位是符号位S，接着的11位是指数E，剩下的52位为有效数字M。</p>
+<p>对于有效数字M和指数E，还有一些特别的规定：</p>
+<ol>
+<li><p>有效数字M</p>
+<p>在计算机内部存储M时，默认这个数的第一位总是1，因此可以被舍去，只保存小数点后面的部分。比如在保存1.01的时候，只保存01，等到读取的时候，再讲第一位的1加上去。这样，就节省出了1位有效数字。以32位浮点数为例，留给M的只有23位，舍去第一位后，就可以保存24位有效数字。</p>
+</li>
+<li><p>指数E</p>
+<p>由内存分配可以看出，E没有符号位，E是一个无符号整数。这意味着，如果E为8位，它的取值范围位0-255。如果E位11位，它的取值范围为0-2047。但是，在科学计数法中E是可以出现负数的，所以IEEE规定，存入内存时E的真实值必须再加上一个中间数，对于8位的E，中间数位127；对于11位的E，中间数是1023。</p>
+</li>
+</ol>
+<p>比如：2^{10}的E是10，保存为32位浮点数时，必须保存成10+127=137，即10001001。</p>
+<ul>
+<li><p>E不全为0或不全为1</p>
+<p>此时指数E的计算值减去127(或1023)，得到真实值，再在有效数字M前加上第一位的1。</p>
+<p>比如：0.5的二进制形式为0.1，由于规定M的正数部分必须为1，即小数点右移1位，为1.0 * 2 ^ {-1}，其阶码为-1+127=126，表示为01111110，而尾数1.0去掉整数部分为0，补齐0到23位，最终0.5的二进制表示为：<code>0 01111110 00000000000000000000000</code>。</p>
+</li>
+<li><p>E全为0(浮点数0)</p>
+<p>这时，浮点数的指数 E 等于1-127(或1-1023)即为真实值，有效数字M不再加上第一位的1，而是还原为0.xxxxxx的小数。这样做是为了表示+0 ~ -0，以及接近于0的很小的数字。</p>
+</li>
+<li><p>E全为1(最小、最大浮点数)</p>
+<p>这时，如果有效数字M全为 0 ，表示 +∞ 和 -∞ (正负取决于符号位S)。</p>
+</li>
+</ul>
+<h3 id="关于浮点数的栗子"><a href="#关于浮点数的栗子" class="headerlink" title="关于浮点数的栗子"></a>关于浮点数的栗子</h3><pre><code class="c">int main()
+{
+    int n = 9;
+    // 第一部分
+    float *pFloat = (float*)&amp;n;
+    printf(&quot;n:%d\n&quot;, n);
+    printf(&quot;*pFloat:%f\n&quot;, *pFloat);
+
+    // 第二部分
+    *pFloat = 9.0;
+    printf(&quot;n:%d\n&quot;, n);
+    printf(&quot;*pFloat:%f\n&quot;, *pFloat);
+
+    return 0;
+}
+</code></pre>
+<p><img src="https://wx2.sinaimg.cn/mw690/006wR0dcly1fx4bfr4hy3j30ew066t94.jpg" alt="pic"></p>
+<p>第一部分：</p>
+<p>首先把<code>0x00000009</code>(16进制)拆分：符号位S=0，后面8位E=00000000，最后23位M=000 0000 0000 0000 0000 1001。</p>
+<p>9最终表示为浮点数为：<code>0000 0000 0000 0000 0000 0000 0000 1001</code>。指数位E全为0，改写成浮点数为：(-1) ^ 0 * 0.000 0000 0000 0000 0000 0000 0000 1001 * 2 ^ {-126} = 1.001 * 2 ^ {-146}​。</p>
+<p>显然，这是一个很小的接近于0的正数，所以用十进制小数表示为0.000000。</p>
+<p>第二部分：</p>
+<p>浮点数9.0表示为二进制：1001.0，即1.001 * 2 ^ 3。</p>
+<p>M=1.001，E=3+127=130。</p>
+<p>写成二进制：<code>0 10000010 001 0000 0000 0000 0000 0000</code>，这个32位的二进制数，表示成十进制正是，1091567616。</p>
+<hr>
+</div></article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">ahoj</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://ahoj.cc/2019/02/cjvtlw6h3000hq409bxphd8hw/">https://ahoj.cc/2019/02/cjvtlw6h3000hq409bxphd8hw/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://ahoj.cc">ahoj's blog</a>！</span></div></div><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/C/">C</a></div><nav id="pagination"><div class="prev-post pull-left"><a href="/2019/02/cjvtlw8e6008hq409ok58gft6/"><i class="fa fa-chevron-left">  </i><span>C-指针</span></a></div><div class="next-post pull-right"><a href="/2019/02/cjvtlw6gy000bq409splbep9c/"><span>C-大小端</span><i class="fa fa-chevron-right"></i></a></div></nav><div id="vcomment"></div><script src="https://cdn1.lncld.net/static/js/3.0.4/av-min.js"></script><script src="https://cdn.jsdelivr.net/npm/valine/dist/Valine.min.js"></script><script>var notify = 'false' == true ? true : false;
+var verify = 'false' == true ? true : false;
+var GUEST_INFO = ['nick','mail','link'];
+var guest_info = 'nick,mail,link'.split(',').filter(function(item){
+  return GUEST_INFO.indexOf(item) > -1
+});
+guest_info = guest_info.length == 0 ? GUEST_INFO :guest_info;
+window.valine = new Valine({
+  el:'#vcomment',
+  notify:notify,
+  verify:verify,
+  appId:'yy9oH4ap0AOjoGWG7vbV9w2v-gzGzoHsz',
+  appKey:'27EcRosAo5WUi5KH16i9nAq1',
+  placeholder:'说点什么吧~ 不足之处或者...',
+  avatar:'mm',
+  guest_info:guest_info,
+  pageSize:'10',
+  lang: 'zh-cn'
+})</script></div></div><footer><div class="layout" id="footer"><div class="copyright">&copy;2019 By ahoj</div><div class="framework-info"><span>驱动 - </span><a href="http://hexo.io"><span>Hexo</span></a><span class="footer-separator">|</span><span>主题 - </span><a href="https://github.com/Molunerfinn/hexo-theme-melody"><span>Melody</span></a></div><div class="busuanzi"><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><span id="busuanzi_container_page_pv"><i class="fa fa-file-o"></i><span id="busuanzi_value_page_pv"></span><span></span></span></div></div></footer><i class="fa fa-arrow-up" id="go-up" aria-hidden="true"></i><script src="https://cdn.jsdelivr.net/npm/animejs@latest/anime.min.js"></script><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@latest/velocity.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-ui-pack@latest/velocity.ui.min.js"></script><script src="/js/utils.js?version=1.6.1"></script><script src="/js/fancybox.js?version=1.6.1"></script><script src="/js/sidebar.js?version=1.6.1"></script><script src="/js/copy.js?version=1.6.1"></script><script src="/js/fireworks.js?version=1.6.1"></script><script src="/js/transition.js?version=1.6.1"></script><script src="/js/scroll.js?version=1.6.1"></script><script src="/js/head.js?version=1.6.1"></script><script src="/js/search/local-search.js"></script><script>if(/Android|webOS|iPhone|iPod|BlackBerry/i.test(navigator.userAgent)) {
+  $('#nav').addClass('is-mobile')
+  $('footer').addClass('is-mobile')
+}</script><div class="search-dialog" id="local-search"><div class="search-dialog__title" id="local-search-title">本地搜索</div><div id="local-input-panel"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章"></div></div></div><hr><div id="local-search-results"><div id="local-hits"></div><div id="local-stats"><div class="local-search-stats__hr" id="hr"><span>由</span> <a href="https://github.com/wzpan/hexo-generator-search" style="color:#49B1F5;">hexo-generator-search</a>
+ <span>提供支持</span></div></div></div><span class="search-close-button"><i class="fa fa-times"></i></span></div><div class="search-mask"></div></body></html>

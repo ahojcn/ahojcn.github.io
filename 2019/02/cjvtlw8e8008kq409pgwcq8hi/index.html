@@ -1,0 +1,589 @@
+<!DOCTYPE html><html lang="zh-Hans"><head><meta name="generator" content="Hexo 3.8.0"><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta name="description" content="Java-多线程"><meta name="keywords" content="JavaSE"><meta name="author" content="ahoj"><meta name="copyright" content="ahoj"><title>Java-多线程 | ahoj's blog</title><link rel="shortcut icon" href="/bitbug_favicon.ico"><link rel="stylesheet" href="/css/index.css?version=1.6.1"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@latest/css/font-awesome.min.css?version=1.6.1"><link rel="dns-prefetch" href="https://cdn.staticfile.org"><link rel="dns-prefetch" href="https://cdn.bootcss.com"><link rel="dns-prefetch" href="https://creativecommons.org"><script>var GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"search.xml","languages":{"hits_empty":"找不到您查询的内容:${query}"}},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  }
+} </script></head><body><canvas class="fireworks"></canvas><i class="fa fa-arrow-right" id="toggle-sidebar" aria-hidden="true"></i><div id="sidebar"><div class="toggle-sidebar-info text-center"><span data-toggle="切换文章详情">切换站点概览</span><hr></div><div class="sidebar-toc"><div class="sidebar-toc__title">目录</div><div class="sidebar-toc__progress"><span class="progress-notice">你已经读了</span><span class="progress-num">0</span><span class="progress-percentage">%</span><div class="sidebar-toc__progress-bar"></div></div><div class="sidebar-toc__content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#多线程概述"><span class="toc-number">1.</span> <span class="toc-text">多线程概述</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#进程"><span class="toc-number">1.1.</span> <span class="toc-text">进程</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#多进程的意义"><span class="toc-number">1.1.1.</span> <span class="toc-text">多进程的意义</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#线程"><span class="toc-number">1.2.</span> <span class="toc-text">线程</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#多线程的意义"><span class="toc-number">1.2.1.</span> <span class="toc-text">多线程的意义</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#并行和并发"><span class="toc-number">1.3.</span> <span class="toc-text">并行和并发</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Q-amp-A"><span class="toc-number">1.4.</span> <span class="toc-text">Q &amp; A</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#多线程实现"><span class="toc-number">2.</span> <span class="toc-text">多线程实现</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#继承-Thread-类"><span class="toc-number">2.1.</span> <span class="toc-text">继承 Thread 类</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#CODE"><span class="toc-number">2.1.1.</span> <span class="toc-text">CODE</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Q-amp-A-1"><span class="toc-number">2.1.2.</span> <span class="toc-text">Q &amp; A</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Thread-类的方法"><span class="toc-number">2.1.3.</span> <span class="toc-text">Thread 类的方法</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#实现-Runnable-接口"><span class="toc-number">2.2.</span> <span class="toc-text">实现 Runnable 接口</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#CODE，卖电影票案例"><span class="toc-number">2.2.1.</span> <span class="toc-text">CODE，卖电影票案例</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#继承接口的好处"><span class="toc-number">2.2.2.</span> <span class="toc-text">继承接口的好处</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#线程调度和优先级"><span class="toc-number">3.</span> <span class="toc-text">线程调度和优先级</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#线程调度模型"><span class="toc-number">3.1.</span> <span class="toc-text">线程调度模型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#线程的优先级"><span class="toc-number">3.2.</span> <span class="toc-text">线程的优先级</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#线程控制"><span class="toc-number">4.</span> <span class="toc-text">线程控制</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#线程的生命周期"><span class="toc-number">5.</span> <span class="toc-text">线程的生命周期</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#线程安全"><span class="toc-number">6.</span> <span class="toc-text">线程安全</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#卖电影票案例出现的问题"><span class="toc-number">6.1.</span> <span class="toc-text">卖电影票案例出现的问题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#多线程安全问题的原因"><span class="toc-number">6.2.</span> <span class="toc-text">多线程安全问题的原因</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#解决多线程安全问题"><span class="toc-number">6.3.</span> <span class="toc-text">解决多线程安全问题</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#解决方案-1-同步代码块"><span class="toc-number">6.3.1.</span> <span class="toc-text">解决方案 1 同步代码块</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#解决方案-2-同步方法"><span class="toc-number">6.3.2.</span> <span class="toc-text">解决方案 2 同步方法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#解决方案-3-静态同步方法"><span class="toc-number">6.3.3.</span> <span class="toc-text">解决方案 3 静态同步方法</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#JDK5-中-Lock-锁的使用"><span class="toc-number">6.4.</span> <span class="toc-text">JDK5 中 Lock 锁的使用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#线程同步的特点"><span class="toc-number">6.5.</span> <span class="toc-text">线程同步的特点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Q-amp-A-2"><span class="toc-number">6.6.</span> <span class="toc-text">Q &amp; A</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#死锁问题"><span class="toc-number">7.</span> <span class="toc-text">死锁问题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#线程间通信"><span class="toc-number">8.</span> <span class="toc-text">线程间通信</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#等待唤醒机制"><span class="toc-number">8.1.</span> <span class="toc-text">等待唤醒机制</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Q-amp-A-3"><span class="toc-number">8.2.</span> <span class="toc-text">Q &amp; A</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#线程组"><span class="toc-number">9.</span> <span class="toc-text">线程组</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#线程池"><span class="toc-number">10.</span> <span class="toc-text">线程池</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#匿名内部类方式使用多线程"><span class="toc-number">11.</span> <span class="toc-text">匿名内部类方式使用多线程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#定时器"><span class="toc-number">12.</span> <span class="toc-text">定时器</span></a></li></ol></div></div><div class="author-info hide"><div class="author-info__avatar text-center"><img src="https://i.loli.net/2019/05/18/5ce01a928835c26008.jpg"></div><div class="author-info__name text-center">ahoj</div><div class="author-info__description text-center">思想的本质就是不安</div><div class="follow-button"><a href="https://github.com/ahojcn">GitHub</a></div><hr><div class="author-info-articles"><a class="author-info-articles__archives article-meta" href="/archives"><span class="pull-left">文章</span><span class="pull-right">58</span></a><a class="author-info-articles__tags article-meta" href="/tags"><span class="pull-left">标签</span><span class="pull-right">19</span></a><a class="author-info-articles__categories article-meta" href="/categories"><span class="pull-left">分类</span><span class="pull-right">14</span></a></div><hr><div class="author-info-links"><div class="author-info-links__title text-center">朋友们</div><a class="author-info-links__name text-center" href="https://zouchanglin.cn/">Tim</a><a class="author-info-links__name text-center" href="http://www.ijam8.com/">Jam</a><a class="author-info-links__name text-center" href="https://blog.csdn.net/jack_wang128801">jack_wang128801</a><a class="author-info-links__name text-center" href="https://blog.csdn.net/weixin_43232955">Mr.Q_</a></div></div></div><div id="content-outer"><div class="no-bg" id="top-container"><div id="page-header"><span class="pull-left"> <a id="site-name" href="/">ahoj's blog</a></span><i class="fa fa-bars toggle-menu pull-right" aria-hidden="true"></i><span class="pull-right menus"><a class="site-page social-icon search"><i class="fa fa-search"></i><span> 搜索</span></a><a class="site-page" href="/">主页</a><a class="site-page" href="/archives">文章</a><a class="site-page" href="/tags">标签</a><a class="site-page" href="/categories">分类</a><a class="site-page" href="/about">关于</a></span></div><div id="post-info"><div id="post-title">Java-多线程</div><div id="post-meta"><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 2019-02-26</time><span class="post-meta__separator">|</span><i class="fa fa-inbox post-meta__icon" aria-hidden="true"></i><a class="post-meta__categories" href="/categories/JavaSE/">JavaSE</a></div></div></div><div class="layout" id="content-inner"><article id="post"><div class="article-container" id="post-content"><a id="more"></a>
+<h2 id="多线程概述"><a href="#多线程概述" class="headerlink" title="多线程概述"></a>多线程概述</h2><h3 id="进程"><a href="#进程" class="headerlink" title="进程"></a>进程</h3><p>正在运行的程序，是系统进行资源分配和调用的独立单位。 </p>
+<p>每一个进程都有它自己的内存空间和系统资源。 </p>
+<h4 id="多进程的意义"><a href="#多进程的意义" class="headerlink" title="多进程的意义"></a>多进程的意义</h4><p>单进程计算机只能做一件事情。而现在的计算机都可以一边玩游戏(游戏进程),一边听音乐(音乐进程)，所以常见的操作系统都是多进程操作系统。比如：Windows，Mac和Linux等，能在同一个时间段内执行多个任务。</p>
+<p>对于单核计算机来讲，游戏进程和音乐进程是同时运行的吗?不是。</p>
+<p>因为CPU在某个时间点上只能做一件事情，计算机是在游戏进程和音乐进程间做着频繁切换，且切换速度很快，所以，我们感觉游戏和音乐在同时进行，其实并不是同时执行的。</p>
+<p>多进程的作用不是提高执行速度，而是提高CPU的使用率。</p>
+<h3 id="线程"><a href="#线程" class="headerlink" title="线程"></a>线程</h3><p>是进程中的单个顺序控制流，是一条执行路径。</p>
+<p>一个进程如果只有一条执行路径，则称为单线程程序。 </p>
+<p>一个进程如果有多条执行路径，则称为多线程程序。 </p>
+<h4 id="多线程的意义"><a href="#多线程的意义" class="headerlink" title="多线程的意义"></a>多线程的意义</h4><p>多线程的作用不是提高执行速度，而是为了提高应用程序的使用率。</p>
+<p>而多线程却给了我们一个错觉：让我们认为多个线程是并发执行的。其实不是。</p>
+<p>因为多个线程共享同一个进程的资源(堆内存和方法区)，但是栈内存是独立的，一个线程一个栈。所以他们仍然是在抢CPU的资源执行。一个时间点上只有能有一个线程执行。而且谁抢到，这个不一定，所以，造成了线程运行的随机性。</p>
+<h3 id="并行和并发"><a href="#并行和并发" class="headerlink" title="并行和并发"></a>并行和并发</h3><p>并行：前者是逻辑上同时发生，指在某一个时间内同时运行多个程序。</p>
+<p>并发：后者是物理上同时发生，指在某一个时间点同时运行多个程序。</p>
+<p>那么，我们能不能实现真正意义上的并发呢，是可以的，多个CPU就可以实现，不过得知道如何调度和控制它们。</p>
+<h3 id="Q-amp-A"><a href="#Q-amp-A" class="headerlink" title="Q &amp; A"></a>Q &amp; A</h3><p><code>Q</code>：Java 程序的运行原理及 JVM 的启动是多线程的吗?</p>
+<blockquote>
+<p>Java 命令去启动 JVM，JVM会启动一个进程，该进程会启动一个主线程。<br>JVM 的启动是多线程的，因为它最低有两个线程启动了，主线程和垃圾回收线程。</p>
+</blockquote>
+<h2 id="多线程实现"><a href="#多线程实现" class="headerlink" title="多线程实现"></a>多线程实现</h2><h3 id="继承-Thread-类"><a href="#继承-Thread-类" class="headerlink" title="继承 Thread 类"></a>继承 Thread 类</h3><ul>
+<li>自定义类 MyThread 继承 Thread 类；</li>
+<li>MyThread 类里面重写 run()；</li>
+<li>创建对象；</li>
+<li>启动线程。</li>
+</ul>
+<h4 id="CODE"><a href="#CODE" class="headerlink" title="CODE"></a>CODE</h4><ul>
+<li><p>MyThread.java</p>
+<pre><code class="java">public class MyThread extends Thread {
+    @Override
+    public void run() {
+        for (int i = 0; i &lt; 100; i++) {
+            System.out.println(getName() + &quot;---&quot; + i);
+        }
+    }
+}
+</code></pre>
+</li>
+<li><p>MyThreadTest.java</p>
+<pre><code class="java">public class MyThreadTest {
+    public static void main(String[] args) {
+        MyThread my1 = new MyThread();
+        MyThread my2 = new MyThread();
+
+        my1.setName(&quot;ahoj&quot;);
+        my2.setName(&quot;baozi&quot;);
+
+        my1.start();
+        my2.start();
+
+        System.out.println(Thread.currentThread().getName());
+    }
+}
+</code></pre>
+</li>
+</ul>
+<h4 id="Q-amp-A-1"><a href="#Q-amp-A-1" class="headerlink" title="Q &amp; A"></a>Q &amp; A</h4><p><code>Q1</code>：为什么是 run() 方法呢？</p>
+<blockquote>
+<p>不是类中的所有代码都需要被线程执行的。这个时候，为了区分哪些代码能够被线程执行，java提供了Thread类中的run()用来包含那些被线程执行的代码。</p>
+</blockquote>
+<p><code>Q2</code>：线程能不能多次启动(start)？</p>
+<blockquote>
+<p><strong>不可以</strong><br>通过Thread实例的start()，一个Thread的实例只能产生一个线程。一个Thread的实例一旦调用start()方法，这个实例的started标记就标记为true，事实中不管这个线程后来有没有执行到底，只要调用了一次start()就再也没有机会运行了。<br>一个线程对象只能调用一次start方法.从new到等待运行是单行道,所以如果你对一个已经启动的线程对象再调用一次start方法的话,会产生:IllegalThreadStateException异常. 可以被重复调用的是run()方法。</p>
+</blockquote>
+<p><code>Q3</code>：run()和start()方法的区别</p>
+<blockquote>
+<p>run()方法: 在本线程内调用该Runnable对象的run()方法，可以重复多次调用；<br>start()方法: 启动一个线程，调用该Runnable对象的run()方法，不能多次启动一个线程</p>
+</blockquote>
+<h4 id="Thread-类的方法"><a href="#Thread-类的方法" class="headerlink" title="Thread 类的方法"></a>Thread 类的方法</h4><pre><code class="java">public final String getName();
+public final void setName(String name);    // 设置线程名称也可以通过构造的方式
+
+public static Thread currentThread();    // 返回当前正在执行的线程对象
+</code></pre>
+<h3 id="实现-Runnable-接口"><a href="#实现-Runnable-接口" class="headerlink" title="实现 Runnable 接口"></a>实现 Runnable 接口</h3><p>步骤：</p>
+<ul>
+<li>自定义类MyRunnable实现Runnable接口；</li>
+<li>重写run()方法；</li>
+<li>创建MyRunnable类的对象；</li>
+<li>创建Thread类的对象，并把C步骤的对象作为构造参数传递；</li>
+<li>启动线程。</li>
+</ul>
+<h4 id="CODE，卖电影票案例"><a href="#CODE，卖电影票案例" class="headerlink" title="CODE，卖电影票案例"></a>CODE，卖电影票案例</h4><ul>
+<li><p>SellTickets.java</p>
+<pre><code class="java">public class SellTickets implements Runnable{
+
+    private int tickets = 100; 
+
+    @Override
+    public void run() {
+        while (true) {
+            if (tickets &gt; 0) {
+                try {
+                    Thread.sleep(100);    // 模拟现实中延迟的情况，延迟0.1秒
+                    System.out.println(Thread.currentThread().getName() + &quot;正在出售第 &quot; + (tickets--) + &quot; 张票&quot;);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
+}
+</code></pre>
+</li>
+<li><p>SellTicketsDemo.java</p>
+<pre><code class="java">public class SellTicketsDemo {
+    public static void main(String[] args) {
+        SellTickets st = new SellTickets();
+
+        Thread t1 = new Thread(st, &quot;窗口1&quot;);
+        Thread t2 = new Thread(st, &quot;窗口2&quot;);
+        Thread t3 = new Thread(st, &quot;窗口3&quot;);
+
+        t1.start();
+        t2.start();
+        t3.start();
+    }
+}
+</code></pre>
+</li>
+</ul>
+<h4 id="继承接口的好处"><a href="#继承接口的好处" class="headerlink" title="继承接口的好处"></a>继承接口的好处</h4><p>可以避免由于Java单继承带来的局限性。<br>适合多个相同程序的代码去处理同一个资源的情况，把线程同程序的代码，数据有效分离，较好的体现了面向对象的设计思想。</p>
+<h2 id="线程调度和优先级"><a href="#线程调度和优先级" class="headerlink" title="线程调度和优先级"></a>线程调度和优先级</h2><p>计算机只有一个 CPU，那么 CPU 在某一个时刻只能执行一条指令，线程只有得到 CPU时间片，也就是使用权，才可以执行指令。那么Java是如何对线程进行调用的呢？</p>
+<h3 id="线程调度模型"><a href="#线程调度模型" class="headerlink" title="线程调度模型"></a>线程调度模型</h3><ul>
+<li><p>分时调度模型</p>
+<p>所有线程轮流使用 CPU 的使用权，平均分配每个线程占用 CPU 的时间片。</p>
+</li>
+<li><p>抢占式调度模型</p>
+<p>优先让优先级高的线程使用 CPU，如果线程的优先级相同，那么会随机选择一个，优先级高的线程获取的 CPU 时间片相对多一些。 </p>
+</li>
+</ul>
+<p>Java使用的是抢占式调度模型。</p>
+<h3 id="线程的优先级"><a href="#线程的优先级" class="headerlink" title="线程的优先级"></a>线程的优先级</h3><p>默认优先级：5 </p>
+<p>优先级范围：1（低） ~ 10（高） </p>
+<p>线程优先级仅代表几率，在多次运行的时候才能看到比较好的效果，1、2次说明不了什么问题。 </p>
+<pre><code class="java">public final int getPriority();    // 获取优先级
+public final void setPriority(int newPriority); // 设置优先级
+</code></pre>
+<h2 id="线程控制"><a href="#线程控制" class="headerlink" title="线程控制"></a>线程控制</h2><pre><code class="java">线程休眠
+public static void sleep(long millis)
+
+线程加入
+public final void join()：等待该线程终止，为了让某些线程执行完毕别人才可以执行。
+
+线程礼让
+public static void yield()：暂停正在执行的线程对象，并执行其他线程代码。在一定程度上礼让，但不能保证就是你执行一次我执行一次。
+
+后台线程
+public final void setDaemon(boolean on)：将线程标记为守护线程或用户线程。
+当正在运行的线程都是守护线程时，Java虚拟机退出，该方法必须在启动线程前调用。
+举例：坦克大战中的坦克就是守护老巢的守护线程，当老巢报废后，结束！
+
+中断线程
+public final void stop()：过于暴力，直接停止线程，后面的代码也不会执行。
+public void interrupt()：把线程的状态终止，并抛出一个异常，后面的代码还会继续执行完。
+</code></pre>
+<h2 id="线程的生命周期"><a href="#线程的生命周期" class="headerlink" title="线程的生命周期"></a>线程的生命周期</h2><p>新建、就绪、运行、阻塞、死亡。</p>
+<p><img src="https://wx2.sinaimg.cn/mw690/006wR0dcly1g0itc1css9j30s60eqdj9.jpg" alt="线程生命周期"></p>
+<h2 id="线程安全"><a href="#线程安全" class="headerlink" title="线程安全"></a>线程安全</h2><p>线程安全问题在理想状态下，不容易出现，但一旦出现对软件的影响是非常大的。</p>
+<h3 id="卖电影票案例出现的问题"><a href="#卖电影票案例出现的问题" class="headerlink" title="卖电影票案例出现的问题"></a>卖电影票案例出现的问题</h3><p>为了更符合真实的场景，加入了休眠100毫秒。<a href="#CODE，卖电影票案例">卖电影票案例</a></p>
+<p>问题1：相同的票出现多次</p>
+<p>CPU的一次操作必须是原子性的，例如 ticket– 就不是原子性的操作。</p>
+<p>问题2：还出现了负数的票</p>
+<p>随机性和延迟导致的</p>
+<h3 id="多线程安全问题的原因"><a href="#多线程安全问题的原因" class="headerlink" title="多线程安全问题的原因"></a>多线程安全问题的原因</h3><ol>
+<li>是否有多线程环境</li>
+<li>是否有共享数据</li>
+<li>是否有多条语句操作共享数据</li>
+</ol>
+<h3 id="解决多线程安全问题"><a href="#解决多线程安全问题" class="headerlink" title="解决多线程安全问题"></a>解决多线程安全问题</h3><p>基本思想：让程序没有安全问题的环境。</p>
+<p>把多个语句操作共享数据的代码给锁起来，让任意时刻只能有一个线程执行即可。</p>
+<h4 id="解决方案-1-同步代码块"><a href="#解决方案-1-同步代码块" class="headerlink" title="解决方案 1 同步代码块"></a>解决方案 1 同步代码块</h4><p>同步代码块，格式如下，这里的 对象 可以是任意的对象，相当于一把钥匙，这个钥匙只能有一把。</p>
+<pre><code class="java">synchronized(对象){
+    需要同步的代码;
+}
+</code></pre>
+<p>举个🌰：​​</p>
+<pre><code class="java">public class SellTickets implements Runnable {
+    private int tickets = 100;
+    private Object obj = new Object();
+
+    @Override
+    public void run() {
+        while (true) {
+            synchronized (obj) {
+                if (tickets &gt; 0) {
+                    try {
+                        Thread.sleep(100);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    System.out.println(Thread.currentThread().getName() + &quot;正在出售第 &quot; + (tickets--) + &quot; 张票&quot;);
+                }
+            }
+        }
+    }
+}
+</code></pre>
+<h4 id="解决方案-2-同步方法"><a href="#解决方案-2-同步方法" class="headerlink" title="解决方案 2 同步方法"></a>解决方案 2 同步方法</h4><p>把同步加在方法上，这里的锁对象是this。</p>
+<p>举个🌰：</p>
+<pre><code class="java">public class SellTickets implements Runnable {
+
+    private int tickets = 100;
+
+    @Override
+    public void run() {
+        while (true) {
+            sellTickets();
+        }
+    }
+
+    private synchronized void sellTickets() {
+        if (tickets &gt; 0) {
+            try {
+                Thread.sleep(100);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            System.out.println(Thread.currentThread().getName() + &quot;正在出售第 &quot; + (tickets--) + &quot; 张票&quot;);
+        }
+    }
+
+}
+</code></pre>
+<h4 id="解决方案-3-静态同步方法"><a href="#解决方案-3-静态同步方法" class="headerlink" title="解决方案 3 静态同步方法"></a>解决方案 3 静态同步方法</h4><p>把同步加在方法上，这里的锁对象是当前类的字节码文件对象。</p>
+<p>举个🌰：此时锁对象是当前类的字节码文件对象 SellTickets.class</p>
+<pre><code class="java">public class SellTickets implements Runnable {
+
+    private static int tickets = 100;
+
+    @Override
+    public void run() {
+        while (true) {
+            sellTickets();
+        }
+    }
+
+    private static synchronized void sellTickets() {
+        if (tickets &gt; 0) {
+            try {
+                Thread.sleep(100);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            System.out.println(Thread.currentThread().getName() + &quot;正在出售第 &quot; + (tickets--) + &quot; 张票&quot;);
+        }
+    }
+}
+</code></pre>
+<h3 id="JDK5-中-Lock-锁的使用"><a href="#JDK5-中-Lock-锁的使用" class="headerlink" title="JDK5 中 Lock 锁的使用"></a>JDK5 中 Lock 锁的使用</h3><p>虽然我们可以理解同步代码块和同步方法的锁对象问题，但是我们并没有直接看到在哪里加上了锁，在哪里释放了锁，为了更清晰的表达如何加锁和释放锁，JDK5以后提供了一个新的锁对象Lock。</p>
+<pre><code class="java">// Lock 接口
+void lock();
+void unlock();
+// ReentrantLock 是Lock的实现类
+</code></pre>
+<p>举个🌰：</p>
+<pre><code class="java">public class SellTickets implements Runnable {
+
+    private int tickets = 100;
+
+    // 定义锁对象
+    private Lock lock = new ReentrantLock();
+
+    @Override
+    public void run() {
+        while (true) {
+            try {
+                // 加锁
+                lock.lock();
+
+                if (tickets &gt; 0) {
+                    try {
+                        Thread.sleep(100);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    System.out.println(Thread.currentThread().getName() + &quot;正在出售 &quot; + (tickets--) + &quot; 张票&quot;);
+                }
+            } finally {
+
+                // 释放锁
+                lock.unlock();
+            }
+        }
+    }
+}
+</code></pre>
+<h3 id="线程同步的特点"><a href="#线程同步的特点" class="headerlink" title="线程同步的特点"></a>线程同步的特点</h3><p>同步的前提：多个线程、多个线程使用的是同一个锁对象 </p>
+<p>同步的好处：同步的出现解决了多线程的安全问题。</p>
+<p>同步的弊端：当线程相当多时，因为每个线程都会去判断同步上的锁，这是很耗费资源的，无形中会降低程序的运行效率。</p>
+<p>这就是线程同步，效率低。不同步效率高的解释。</p>
+<h3 id="Q-amp-A-2"><a href="#Q-amp-A-2" class="headerlink" title="Q &amp; A"></a>Q &amp; A</h3><p><code>Q1</code>：在集合中有一些是线程不安全的集合，当需要使用多线程的时候怎么办？</p>
+<blockquote>
+<p>用Collections工具类的方法把一个线程不安全的集合类变成一个线程安全的集合类。例如：<code>List&lt;String&gt; list1 = Collections.synchronizedList(new ArrayList&lt;String&gt;());</code></p>
+</blockquote>
+<p><code>Q2</code>：那么，到底使用谁？</p>
+<blockquote>
+<p>如果锁对象是this，就可以考虑使用同步方法。 否则能使用同步代码块的尽量使用同步代码块。 </p>
+</blockquote>
+<h2 id="死锁问题"><a href="#死锁问题" class="headerlink" title="死锁问题"></a>死锁问题</h2><p>同步弊端 </p>
+<ul>
+<li>效率低 </li>
+<li>如果出现了同步嵌套，就容易产生死锁问题 </li>
+</ul>
+<p>死锁问题及其代码 </p>
+<ul>
+<li>是指两个或者两个以上的线程在执行的过程中，因争夺资源产生的一种互相等待现象 </li>
+</ul>
+<p>举个🌰：</p>
+<pre><code class="java">// MyLock.java
+public class MyLock {
+    public static final Object objA = new Object();
+    public static final Object objB = new Object();
+}
+</code></pre>
+<pre><code class="java">// DieLock.java
+public class DieLock extends Thread{
+
+    private boolean flag;
+
+    public DieLock(boolean flag) {
+        this.flag = flag;
+    }
+
+    @Override
+    public void run() {
+        if (flag) {
+            synchronized (MyLock.objA) {
+                System.out.println(&quot;if objA&quot;);
+                synchronized (MyLock.objB) {
+                    System.out.println(&quot;if objB&quot;);
+                }
+            }
+        } else {
+            synchronized (MyLock.objB) {
+                System.out.println(&quot;else objB&quot;);
+                synchronized (MyLock.objA) {
+                    System.out.println(&quot;else objA&quot;);
+                }
+            }
+        }
+    }
+}
+</code></pre>
+<pre><code class="java">// DieLockDemo.java
+public class DieLockDemo {
+    public static void main(String[] args) {
+        DieLock dl1 = new DieLock(true);
+        DieLock dl2 = new DieLock(false);
+
+        dl1.start();
+        dl2.start();
+    }
+}
+</code></pre>
+<p><img src="https://s2.ax1x.com/2019/02/26/koVLSe.jpg" alt="死锁"></p>
+<h2 id="线程间通信"><a href="#线程间通信" class="headerlink" title="线程间通信"></a>线程间通信</h2><p>针对同一个资源的操作有不同种类的线程。</p>
+<p>举例：卖票有进的，也有出的。</p>
+<p>通过设置线程(生产者)和获取线程(消费者)针对同一个学生对象进行操作。</p>
+<p><img src="https://s2.ax1x.com/2019/02/26/koZklQ.jpg" alt="生产者、消费者"></p>
+<h3 id="等待唤醒机制"><a href="#等待唤醒机制" class="headerlink" title="等待唤醒机制"></a>等待唤醒机制</h3><p>Object 类中提供了三个方法：</p>
+<pre><code class="java">wait():等待唤醒，立即释放锁，将来醒过来的时候是从此处醒来。 
+notify():唤醒，唤醒并不代表可以立马执行，还必须抢CPU执行权 
+notifyAll():唤醒所有线程 
+</code></pre>
+<p>这些方法的调用，必须通过锁对象来调用。</p>
+<p><img src="https://s2.ax1x.com/2019/02/26/koezPf.png" alt="进程间通信，等待唤醒机制"></p>
+<p>举个🌰：</p>
+<pre><code class="java">// GetThread.java
+public class GetThread implements Runnable {
+
+    private Student s = new Student();
+
+    public GetThread(Student s) {
+        this.s = s;
+    }
+
+    @Override
+    public void run() {
+        while (true) {
+            synchronized (s) {
+                s.get();
+            }
+        }
+    }
+
+}
+</code></pre>
+<pre><code class="java">// SetThread.java
+public class SetThread implements Runnable {
+
+    private Student s = new Student();
+    private int x = 0;
+
+    public SetThread(Student s) {
+        this.s = s;
+    }
+
+    @Override
+    public void run() {
+        while (true) {
+            synchronized (s) {
+                if (x % 2 == 0) {
+                    s.set(&quot;xiaohei&quot;, 21);
+                } else {
+                    s.set(&quot;baozi&quot;, 20);
+                }
+                x++;
+            }
+        }
+    }
+
+}
+</code></pre>
+<pre><code class="java">// Student.java
+public class Student {
+    private String name;
+    private int age;
+    private boolean flag;
+
+    public synchronized void set(String name, int age) {
+        if (this.flag) {
+            try {
+                this.wait();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+
+        this.name = name;
+        this.age = age;
+
+        this.flag = true;
+        this.notify();
+    }
+
+    public synchronized void get() {
+        if (!this.flag) {
+            try {
+                this.wait();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+
+        System.out.println(this.name + &quot;---&quot; + this.age);
+        this.flag = false;
+        this.notify();
+    }
+}
+</code></pre>
+<pre><code class="java">// StudentDemo.java
+public class StudentDemo {
+    public static void main(String[] args) {
+        Student s = new Student();
+
+        GetThread gt = new GetThread(s);
+        SetThread st = new SetThread(s);
+
+        Thread t1 = new Thread(gt);
+        Thread t2 = new Thread(st);
+
+        t1.start();
+        t2.start();
+    }
+}
+</code></pre>
+<h3 id="Q-amp-A-3"><a href="#Q-amp-A-3" class="headerlink" title="Q &amp; A"></a>Q &amp; A</h3><p><code>Q</code>：wait()、notify()、notifyAll()，用来操作线程为什么定义在了Object类中？</p>
+<blockquote>
+<p>这些方法存在与同步中。</p>
+<p>使用这些方法时必须要标识所属的同步的锁。</p>
+<p>锁可以是任意对象，所以任意对象调用的方法一定定义Object类中。</p>
+</blockquote>
+<h2 id="线程组"><a href="#线程组" class="headerlink" title="线程组"></a>线程组</h2><p>Java中使用ThreadGroup来表示线程组。</p>
+<p>它可以对一批线程进行分类管理，Java允许程序直接对线程组进行控制。 </p>
+<p>默认情况下，所有的线程都属于主线程组。 </p>
+<pre><code class="java">public final ThreadGroup getThreadGroup();
+</code></pre>
+<p>也可以给线程设置分组 </p>
+<pre><code class="java">Thread(ThreadGroup group, Runnable target, String name);
+</code></pre>
+<h2 id="线程池"><a href="#线程池" class="headerlink" title="线程池"></a>线程池</h2><p>程序启动一个新线程成本是比较高的，因为它涉及到要与操作系统进行交互。而使用线程池可以很好的提高性能，尤其是当程序中要创建大量生存期很短的线程时，更应该考虑使用线程池。</p>
+<p>线程池里的每一个线程代码结束后，并不会死亡，而是再次回到线程池中成为空闲状态，等待下一个对象来使用。</p>
+<p>在JDK5之前，我们必须手动实现自己的线程池，从JDK5开始，Java内置支持线程池。</p>
+<p>JDK5新增了一个Executors工厂类来产生线程池，有如下几个方法：</p>
+<pre><code class="java">public static ExecutorService newCachedThreadPool();
+    创建一个具有缓存功能的线程池 
+    缓存：百度浏览过的信息再次访问 
+public static ExecutorService newFixedThreadPool(int nThreads);
+    创建一个可重用的，具有固定线程数的线程池
+public static ExecutorService newSingleThreadExecutor();
+    创建一个只有单线程的线程池，相当于上个方法的参数是1
+</code></pre>
+<p>这些方法的返回值是ExecutorService对象，该对象表示一个线程池，可以执行Runnable对象或者Callable对象代表的线程。它提供了如下方法：</p>
+<pre><code class="java">Future&lt;?&gt; submit(Runnable task);
+&lt;T&gt; Future&lt;T&gt; submit(Callable&lt;T&gt; task);
+</code></pre>
+<p>线程池的好处：线程池里的每一个线程代码结束后，并不会死亡，而是再次回到线程池中成为空闲状态，等待下一个对象来使用。 </p>
+<pre><code class="java">// ExecutorsDemo.java
+public class ExecutorsDemo {
+    public static void main(String[] args) {
+        ExecutorService pool = Executors.newFixedThreadPool(2);    // 创建Runnable实例
+
+        pool.submit(new MyRunnable());    // 提交Runnable实例
+        pool.submit(new MyRunnable());    // 提交Runnable实例
+
+        pool.shutdown();    // 关闭线程池
+    }
+}
+</code></pre>
+<pre><code class="java">// MyRunnable.java
+public class MyRunnable implements Runnable {
+    @Override
+    public void run() {
+        for (int i = 0; i &lt; 100; i++) {
+            System.out.println(Thread.currentThread().getName() + &quot;:&quot; + i);
+        }
+    }
+}
+</code></pre>
+<h2 id="匿名内部类方式使用多线程"><a href="#匿名内部类方式使用多线程" class="headerlink" title="匿名内部类方式使用多线程"></a>匿名内部类方式使用多线程</h2><p>匿名内部类方式使用多线程 </p>
+<pre><code class="java">new Thread() {
+    代码…
+}.start();
+
+new Thread(new Runnable() {
+    代码…
+}).start();
+</code></pre>
+<pre><code class="java">new Thread() {
+    public void run() {
+        for (int x = 0; x &lt; 100; x++) {
+            System.out.println(getName() + &quot;---&quot; + x);
+        }
+    };
+}.start();
+
+new Thread(new Runnable() {
+    @Override
+    public void run() {
+        for (int x = 0; x &lt; 100; x++) {
+            System.out.println(Thread.currentThread().getName() + &quot;---&quot; + x);
+        }
+    }
+}).start();
+</code></pre>
+<h2 id="定时器"><a href="#定时器" class="headerlink" title="定时器"></a>定时器</h2><p>定时器是一个应用十分广泛的线程工具，可用于调度多个定时任务以后台线程的方式执行。在Java中，可以通过Timer和TimerTask类来实现定义调度的功能。</p>
+<pre><code class="java">// Timer
+public Timer();
+public void schedule(TimerTask task, long delay);
+public void schedule(TimerTask task,long delay,long period);
+
+// TimerTask
+public abstract void run()
+public boolean cancel()
+</code></pre>
+<p>开发中，Quartz是一个完全由java编写的开源调度框架。 </p>
+<hr>
+</div></article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">ahoj</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://ahoj.cc/2019/02/cjvtlw8e8008kq409pgwcq8hi/">https://ahoj.cc/2019/02/cjvtlw8e8008kq409pgwcq8hi/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://ahoj.cc">ahoj's blog</a>！</span></div></div><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/JavaSE/">JavaSE</a></div><nav id="pagination"><div class="prev-post pull-left"><a href="/2019/02/cjvtlw80x007oq409mpv94muj/"><i class="fa fa-chevron-left">  </i><span>Java-网络编程</span></a></div><div class="next-post pull-right"><a href="/2019/02/cjvtlw80w007mq409docbfq0j/"><span>Java-IO</span><i class="fa fa-chevron-right"></i></a></div></nav><div id="vcomment"></div><script src="https://cdn1.lncld.net/static/js/3.0.4/av-min.js"></script><script src="https://cdn.jsdelivr.net/npm/valine/dist/Valine.min.js"></script><script>var notify = 'false' == true ? true : false;
+var verify = 'false' == true ? true : false;
+var GUEST_INFO = ['nick','mail','link'];
+var guest_info = 'nick,mail,link'.split(',').filter(function(item){
+  return GUEST_INFO.indexOf(item) > -1
+});
+guest_info = guest_info.length == 0 ? GUEST_INFO :guest_info;
+window.valine = new Valine({
+  el:'#vcomment',
+  notify:notify,
+  verify:verify,
+  appId:'yy9oH4ap0AOjoGWG7vbV9w2v-gzGzoHsz',
+  appKey:'27EcRosAo5WUi5KH16i9nAq1',
+  placeholder:'说点什么吧~ 不足之处或者...',
+  avatar:'mm',
+  guest_info:guest_info,
+  pageSize:'10',
+  lang: 'zh-cn'
+})</script></div></div><footer><div class="layout" id="footer"><div class="copyright">&copy;2019 By ahoj</div><div class="framework-info"><span>驱动 - </span><a href="http://hexo.io"><span>Hexo</span></a><span class="footer-separator">|</span><span>主题 - </span><a href="https://github.com/Molunerfinn/hexo-theme-melody"><span>Melody</span></a></div><div class="busuanzi"><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><span id="busuanzi_container_page_pv"><i class="fa fa-file-o"></i><span id="busuanzi_value_page_pv"></span><span></span></span></div></div></footer><i class="fa fa-arrow-up" id="go-up" aria-hidden="true"></i><script src="https://cdn.jsdelivr.net/npm/animejs@latest/anime.min.js"></script><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@latest/velocity.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-ui-pack@latest/velocity.ui.min.js"></script><script src="/js/utils.js?version=1.6.1"></script><script src="/js/fancybox.js?version=1.6.1"></script><script src="/js/sidebar.js?version=1.6.1"></script><script src="/js/copy.js?version=1.6.1"></script><script src="/js/fireworks.js?version=1.6.1"></script><script src="/js/transition.js?version=1.6.1"></script><script src="/js/scroll.js?version=1.6.1"></script><script src="/js/head.js?version=1.6.1"></script><script src="/js/search/local-search.js"></script><script>if(/Android|webOS|iPhone|iPod|BlackBerry/i.test(navigator.userAgent)) {
+  $('#nav').addClass('is-mobile')
+  $('footer').addClass('is-mobile')
+}</script><div class="search-dialog" id="local-search"><div class="search-dialog__title" id="local-search-title">本地搜索</div><div id="local-input-panel"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章"></div></div></div><hr><div id="local-search-results"><div id="local-hits"></div><div id="local-stats"><div class="local-search-stats__hr" id="hr"><span>由</span> <a href="https://github.com/wzpan/hexo-generator-search" style="color:#49B1F5;">hexo-generator-search</a>
+ <span>提供支持</span></div></div></div><span class="search-close-button"><i class="fa fa-times"></i></span></div><div class="search-mask"></div></body></html>

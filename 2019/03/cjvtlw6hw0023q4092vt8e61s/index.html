@@ -1,0 +1,104 @@
+<!DOCTYPE html><html lang="zh-Hans"><head><meta name="generator" content="Hexo 3.8.0"><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta name="description" content="Nodejs-处理POST文件数据"><meta name="keywords" content="JavaScript,Node.js"><meta name="author" content="ahoj"><meta name="copyright" content="ahoj"><title>Nodejs-处理POST文件数据 | ahoj's blog</title><link rel="shortcut icon" href="/bitbug_favicon.ico"><link rel="stylesheet" href="/css/index.css?version=1.6.1"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@latest/css/font-awesome.min.css?version=1.6.1"><link rel="dns-prefetch" href="https://cdn.staticfile.org"><link rel="dns-prefetch" href="https://cdn.bootcss.com"><link rel="dns-prefetch" href="https://creativecommons.org"><script>var GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"search.xml","languages":{"hits_empty":"找不到您查询的内容:${query}"}},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  }
+} </script></head><body><canvas class="fireworks"></canvas><i class="fa fa-arrow-right" id="toggle-sidebar" aria-hidden="true"></i><div id="sidebar"><div class="toggle-sidebar-info text-center"><span data-toggle="切换文章详情">切换站点概览</span><hr></div><div class="sidebar-toc"><div class="sidebar-toc__title">目录</div><div class="sidebar-toc__progress"><span class="progress-notice">你已经读了</span><span class="progress-num">0</span><span class="progress-percentage">%</span><div class="sidebar-toc__progress-bar"></div></div><div class="sidebar-toc__content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#原生处理"><span class="toc-number">1.</span> <span class="toc-text">原生处理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#multiparty-包"><span class="toc-number">2.</span> <span class="toc-text">multiparty 包</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#安装"><span class="toc-number">2.1.</span> <span class="toc-text">安装</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#使用"><span class="toc-number">2.2.</span> <span class="toc-text">使用</span></a></li></ol></li></ol></div></div><div class="author-info hide"><div class="author-info__avatar text-center"><img src="https://i.loli.net/2019/05/18/5ce01a928835c26008.jpg"></div><div class="author-info__name text-center">ahoj</div><div class="author-info__description text-center">思想的本质就是不安</div><div class="follow-button"><a href="https://github.com/ahojcn">GitHub</a></div><hr><div class="author-info-articles"><a class="author-info-articles__archives article-meta" href="/archives"><span class="pull-left">文章</span><span class="pull-right">58</span></a><a class="author-info-articles__tags article-meta" href="/tags"><span class="pull-left">标签</span><span class="pull-right">19</span></a><a class="author-info-articles__categories article-meta" href="/categories"><span class="pull-left">分类</span><span class="pull-right">14</span></a></div><hr><div class="author-info-links"><div class="author-info-links__title text-center">朋友们</div><a class="author-info-links__name text-center" href="https://zouchanglin.cn/">Tim</a><a class="author-info-links__name text-center" href="http://www.ijam8.com/">Jam</a><a class="author-info-links__name text-center" href="https://blog.csdn.net/jack_wang128801">jack_wang128801</a><a class="author-info-links__name text-center" href="https://blog.csdn.net/weixin_43232955">Mr.Q_</a></div></div></div><div id="content-outer"><div class="no-bg" id="top-container"><div id="page-header"><span class="pull-left"> <a id="site-name" href="/">ahoj's blog</a></span><i class="fa fa-bars toggle-menu pull-right" aria-hidden="true"></i><span class="pull-right menus"><a class="site-page social-icon search"><i class="fa fa-search"></i><span> 搜索</span></a><a class="site-page" href="/">主页</a><a class="site-page" href="/archives">文章</a><a class="site-page" href="/tags">标签</a><a class="site-page" href="/categories">分类</a><a class="site-page" href="/about">关于</a></span></div><div id="post-info"><div id="post-title">Nodejs-处理POST文件数据</div><div id="post-meta"><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 2019-03-31</time><span class="post-meta__separator">|</span><i class="fa fa-inbox post-meta__icon" aria-hidden="true"></i><a class="post-meta__categories" href="/categories/JavaScript/">JavaScript</a></div></div></div><div class="layout" id="content-inner"><article id="post"><div class="article-container" id="post-content"><a id="more"></a>
+<pre><code class="html">&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot; dir=&quot;ltr&quot;&gt;
+  &lt;head&gt;
+    &lt;meta charset=&quot;utf-8&quot;&gt;
+    &lt;title&gt;&lt;/title&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;form action=&quot;http://localhost:8080/upload&quot; method=&quot;post&quot; enctype=&quot;multipart/form-data&quot;&gt;
+      用户：&lt;input type=&quot;text&quot; name=&quot;username&quot;&gt;&lt;br&gt;
+      密码：&lt;input type=&quot;password&quot; name=&quot;password&quot;&gt;&lt;br&gt;
+      &lt;input type=&quot;file&quot; name=&quot;f1&quot;&gt;
+      &lt;input type=&quot;submit&quot; value=&quot;提交&quot;&gt;
+    &lt;/form&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+<p>Nodejs中原生不带处理文件数据的包。</p>
+<p>POST 文件：</p>
+<p><img src="https://ws1.sinaimg.cn/large/006wR0dcly1g1maxevu28j30ua0ko485.jpg" alt></p>
+<h2 id="原生处理"><a href="#原生处理" class="headerlink" title="原生处理"></a>原生处理</h2><pre><code>POST文件
+&lt;分隔符&gt;\r\n字段信息\r\n\r\n内容\r\n&lt;分隔符&gt;\r\n字段头\r\n\r\n内容\r\n&lt;分隔符&gt;\r\n字段头\r\n\r\n内容\r\n&lt;分隔符&gt;--
+</code></pre><ol>
+<li>用&lt;分隔符&gt;切分</li>
+</ol>
+<pre><code>[
+  null,
+  &quot;\r\n字段信息\r\n\r\n内容\r\n&quot;,
+  &quot;\r\n字段信息\r\n\r\n内容\r\n&quot;,
+  &quot;\r\n字段信息\r\n\r\n内容\r\n&quot;,
+  &#39;--&#39;
+]
+</code></pre><ol start="2">
+<li>第0个和最后1个，扔掉</li>
+</ol>
+<pre><code>[
+  &quot;\r\n字段信息\r\n\r\n内容\r\n&quot;,
+  &quot;\r\n字段信息\r\n\r\n内容\r\n&quot;,
+  &quot;\r\n字段信息\r\n\r\n内容\r\n&quot;,
+]
+</code></pre><ol start="3">
+<li>每一项</li>
+</ol>
+<pre><code>&quot;\r\n字段信息\r\n\r\n内容\r\n&quot;
+
+&quot;字段信息\r\n\r\n内容&quot;
+&quot;字段信息&quot;, &quot;内容&quot;
+</code></pre><h2 id="multiparty-包"><a href="#multiparty-包" class="headerlink" title="multiparty 包"></a>multiparty 包</h2><h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><p><code>npm i multiparty -D</code></p>
+<h3 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h3><pre><code class="js">const http=require(&#39;http&#39;);
+const multiparty=require(&#39;multiparty&#39;);
+
+http.createServer((req, res)=&gt;{
+  let form=new multiparty.Form({
+    uploadDir: &#39;./upload&#39;        // 上传到哪里
+  });
+
+  form.parse(req);
+
+  form.on(&#39;field&#39;, (name, value)=&gt;{
+    console.log(&#39;字段：&#39;, name, value);
+  });
+  form.on(&#39;file&#39;, (name, file)=&gt;{
+    console.log(&#39;文件：&#39;, name, file);
+  });
+
+  form.on(&#39;close&#39;, ()=&gt;{
+    console.log(&#39;表单解析完成&#39;);
+  });
+}).listen(8080);
+</code></pre>
+<p>上传的文件名是随机的，重名概率不大(特别小)，万一重复就会覆盖之前的文件。</p>
+<hr>
+</div></article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">ahoj</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://ahoj.cc/2019/03/cjvtlw6hw0023q4092vt8e61s/">https://ahoj.cc/2019/03/cjvtlw6hw0023q4092vt8e61s/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://ahoj.cc">ahoj's blog</a>！</span></div></div><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/JavaScript/">JavaScript</a><a class="post-meta__tags" href="/tags/Node-js/">Node.js</a></div><nav id="pagination"><div class="prev-post pull-left"><a href="/2019/03/cjvtlw6hv001zq409k9gyl7yp/"><i class="fa fa-chevron-left">  </i><span>Nodejs-几个系统包</span></a></div><div class="next-post pull-right"><a href="/2019/03/cjvtlw8110080q409ijx19qv8/"><span>【Nao机器人】机器人校准</span><i class="fa fa-chevron-right"></i></a></div></nav><div id="vcomment"></div><script src="https://cdn1.lncld.net/static/js/3.0.4/av-min.js"></script><script src="https://cdn.jsdelivr.net/npm/valine/dist/Valine.min.js"></script><script>var notify = 'false' == true ? true : false;
+var verify = 'false' == true ? true : false;
+var GUEST_INFO = ['nick','mail','link'];
+var guest_info = 'nick,mail,link'.split(',').filter(function(item){
+  return GUEST_INFO.indexOf(item) > -1
+});
+guest_info = guest_info.length == 0 ? GUEST_INFO :guest_info;
+window.valine = new Valine({
+  el:'#vcomment',
+  notify:notify,
+  verify:verify,
+  appId:'yy9oH4ap0AOjoGWG7vbV9w2v-gzGzoHsz',
+  appKey:'27EcRosAo5WUi5KH16i9nAq1',
+  placeholder:'说点什么吧~ 不足之处或者...',
+  avatar:'mm',
+  guest_info:guest_info,
+  pageSize:'10',
+  lang: 'zh-cn'
+})</script></div></div><footer><div class="layout" id="footer"><div class="copyright">&copy;2019 By ahoj</div><div class="framework-info"><span>驱动 - </span><a href="http://hexo.io"><span>Hexo</span></a><span class="footer-separator">|</span><span>主题 - </span><a href="https://github.com/Molunerfinn/hexo-theme-melody"><span>Melody</span></a></div><div class="busuanzi"><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><span id="busuanzi_container_page_pv"><i class="fa fa-file-o"></i><span id="busuanzi_value_page_pv"></span><span></span></span></div></div></footer><i class="fa fa-arrow-up" id="go-up" aria-hidden="true"></i><script src="https://cdn.jsdelivr.net/npm/animejs@latest/anime.min.js"></script><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@latest/velocity.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-ui-pack@latest/velocity.ui.min.js"></script><script src="/js/utils.js?version=1.6.1"></script><script src="/js/fancybox.js?version=1.6.1"></script><script src="/js/sidebar.js?version=1.6.1"></script><script src="/js/copy.js?version=1.6.1"></script><script src="/js/fireworks.js?version=1.6.1"></script><script src="/js/transition.js?version=1.6.1"></script><script src="/js/scroll.js?version=1.6.1"></script><script src="/js/head.js?version=1.6.1"></script><script src="/js/search/local-search.js"></script><script>if(/Android|webOS|iPhone|iPod|BlackBerry/i.test(navigator.userAgent)) {
+  $('#nav').addClass('is-mobile')
+  $('footer').addClass('is-mobile')
+}</script><div class="search-dialog" id="local-search"><div class="search-dialog__title" id="local-search-title">本地搜索</div><div id="local-input-panel"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章"></div></div></div><hr><div id="local-search-results"><div id="local-hits"></div><div id="local-stats"><div class="local-search-stats__hr" id="hr"><span>由</span> <a href="https://github.com/wzpan/hexo-generator-search" style="color:#49B1F5;">hexo-generator-search</a>
+ <span>提供支持</span></div></div></div><span class="search-close-button"><i class="fa fa-times"></i></span></div><div class="search-mask"></div></body></html>

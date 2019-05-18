@@ -1,0 +1,197 @@
+<!DOCTYPE html><html lang="zh-Hans"><head><meta name="generator" content="Hexo 3.8.0"><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta name="description" content="时间复杂度分析"><meta name="keywords" content="Algorithm"><meta name="author" content="ahoj"><meta name="copyright" content="ahoj"><title>时间复杂度分析 | ahoj's blog</title><link rel="shortcut icon" href="/bitbug_favicon.ico"><link rel="stylesheet" href="/css/index.css?version=1.6.1"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@latest/css/font-awesome.min.css?version=1.6.1"><link rel="dns-prefetch" href="https://cdn.staticfile.org"><link rel="dns-prefetch" href="https://cdn.bootcss.com"><link rel="dns-prefetch" href="https://creativecommons.org"><script>var GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"search.xml","languages":{"hits_empty":"找不到您查询的内容:${query}"}},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  }
+} </script></head><body><canvas class="fireworks"></canvas><i class="fa fa-arrow-right" id="toggle-sidebar" aria-hidden="true"></i><div id="sidebar"><div class="toggle-sidebar-info text-center"><span data-toggle="切换文章详情">切换站点概览</span><hr></div><div class="sidebar-toc"><div class="sidebar-toc__title">目录</div><div class="sidebar-toc__progress"><span class="progress-notice">你已经读了</span><span class="progress-num">0</span><span class="progress-percentage">%</span><div class="sidebar-toc__progress-bar"></div></div><div class="sidebar-toc__content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#为什么要分析复杂度"><span class="toc-number">1.</span> <span class="toc-text">为什么要分析复杂度</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#大O复杂度表示法"><span class="toc-number">2.</span> <span class="toc-text">大O复杂度表示法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#时间复杂度分析原则"><span class="toc-number">3.</span> <span class="toc-text">时间复杂度分析原则</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#只关注循环次数最多的一段代码"><span class="toc-number">3.1.</span> <span class="toc-text">只关注循环次数最多的一段代码</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#加法原则"><span class="toc-number">3.2.</span> <span class="toc-text">加法原则</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#乘法原则"><span class="toc-number">3.3.</span> <span class="toc-text">乘法原则</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#常见的几种时间复杂度"><span class="toc-number">4.</span> <span class="toc-text">常见的几种时间复杂度</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#O-1"><span class="toc-number">4.1.</span> <span class="toc-text">O(1)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#O-logn-、O-nlogn"><span class="toc-number">4.2.</span> <span class="toc-text">O(logn)、O(nlogn)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#O-m-n-、O-m-n"><span class="toc-number">4.3.</span> <span class="toc-text">O(m+n)、O(m*n)</span></a></li></ol></li></ol></div></div><div class="author-info hide"><div class="author-info__avatar text-center"><img src="https://i.loli.net/2019/05/18/5ce01a928835c26008.jpg"></div><div class="author-info__name text-center">ahoj</div><div class="author-info__description text-center">思想的本质就是不安</div><div class="follow-button"><a href="https://github.com/ahojcn">GitHub</a></div><hr><div class="author-info-articles"><a class="author-info-articles__archives article-meta" href="/archives"><span class="pull-left">文章</span><span class="pull-right">58</span></a><a class="author-info-articles__tags article-meta" href="/tags"><span class="pull-left">标签</span><span class="pull-right">19</span></a><a class="author-info-articles__categories article-meta" href="/categories"><span class="pull-left">分类</span><span class="pull-right">14</span></a></div><hr><div class="author-info-links"><div class="author-info-links__title text-center">朋友们</div><a class="author-info-links__name text-center" href="https://zouchanglin.cn/">Tim</a><a class="author-info-links__name text-center" href="http://www.ijam8.com/">Jam</a><a class="author-info-links__name text-center" href="https://blog.csdn.net/jack_wang128801">jack_wang128801</a><a class="author-info-links__name text-center" href="https://blog.csdn.net/weixin_43232955">Mr.Q_</a></div></div></div><div id="content-outer"><div class="no-bg" id="top-container"><div id="page-header"><span class="pull-left"> <a id="site-name" href="/">ahoj's blog</a></span><i class="fa fa-bars toggle-menu pull-right" aria-hidden="true"></i><span class="pull-right menus"><a class="site-page social-icon search"><i class="fa fa-search"></i><span> 搜索</span></a><a class="site-page" href="/">主页</a><a class="site-page" href="/archives">文章</a><a class="site-page" href="/tags">标签</a><a class="site-page" href="/categories">分类</a><a class="site-page" href="/about">关于</a></span></div><div id="post-info"><div id="post-title">时间复杂度分析</div><div id="post-meta"><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 2019-01-03</time><span class="post-meta__separator">|</span><i class="fa fa-inbox post-meta__icon" aria-hidden="true"></i><a class="post-meta__categories" href="/categories/Algorithm/">Algorithm</a></div></div></div><div class="layout" id="content-inner"><article id="post"><div class="article-container" id="post-content"><p>此文是学习《数据结构与算法之美》时的笔记。</p>
+<a id="more"></a>
+<h2 id="为什么要分析复杂度"><a href="#为什么要分析复杂度" class="headerlink" title="为什么要分析复杂度"></a>为什么要分析复杂度</h2><p>事后统计法</p>
+<p>将代码跑一遍，通过统计、监控得到执行时间和占用空间，这种方法有很大的局限性。</p>
+<p>1.1 测试结果非常依赖测试环境<br>最近有很多同学问我怎么选一款电脑，我首先会问什么需求(电脑用来干什么?是编程开发、还是后期制作、还是游戏或者是追剧？)。对于后期制作方面，选i7当然比i5好，i7的渲染能力是实测强于i5的。对于游戏，i7和i5性能发挥差不多，所以买i5处理器划算。当然还需要考虑散热以及预算等问题。。等等。对于编程测试环境的硬件不同会对测试结果有很大影响。</p>
+<p>1.2 测试结果受数据规模的影响很大<br>对于同一种排序算法，待排序数据的有序度不一样，排序的执行时间就会有很大的差别。如果测试数据很小，测试结果可能无法真实的反应算法的性能。</p>
+<h2 id="大O复杂度表示法"><a href="#大O复杂度表示法" class="headerlink" title="大O复杂度表示法"></a>大O复杂度表示法</h2><pre><code class="c">/*求1，2，3，……，n的累加和*/
+int add(int n)
+{
+    int sum = 0;
+    int i = 1;
+    for(; i&lt;=n; i++)
+    {
+        sum = sum + i;
+    }
+    return sum;
+}
+</code></pre>
+<p>假设每行代码执行时间一样为unit_time，T(n)为这段代码的执行时间。</p>
+<p><code>T(n) = (2n+2)*unit_time</code></p>
+<pre><code class="c">int fun(int n)
+{
+    int sum = 0;
+    int i = 1;
+    int j = 1;
+    for(; i&lt;=n; i++)
+    {
+        for(; j&lt;=n; j++)
+        {
+            sum = sum + i*j;
+        }
+    }
+    return sum;
+}
+</code></pre>
+<p>上面这段代码的执行时间为：<code>T(n) = (2n^2 + 2n +3)*unit_time</code></p>
+<p>所有代码的执行时间T(n)与每行代码的执行次数n成正比</p>
+<p>所有就有：<code>T(n) = O(f(n))</code></p>
+<p>大O时间复杂度实际上并不表示具体代码真正的执行时间，而是表示代码执行时间随数据规模增长的变化趋势，也称为<strong>渐进时间复杂度</strong>。当n很大时，公式中的低阶、常量、系数并不左右增长趋势，所以可以忽略。</p>
+<p>故，以上两个例子的时间复杂度记为：<code>T(n)=O(n)    T(n) = O(n^2)</code></p>
+<h2 id="时间复杂度分析原则"><a href="#时间复杂度分析原则" class="headerlink" title="时间复杂度分析原则"></a>时间复杂度分析原则</h2><h3 id="只关注循环次数最多的一段代码"><a href="#只关注循环次数最多的一段代码" class="headerlink" title="只关注循环次数最多的一段代码"></a>只关注循环次数最多的一段代码</h3><p>大O只表示一种变化趋势，所以在分析一个算法、一段代码的时候，只关注循环执行次数最多的那一段就可以了。</p>
+<pre><code class="c">int fun1(int n)
+{
+    int sum = 0;
+    int i = 1;
+    for( ; i&lt;=n; i++)
+    {
+        sum = sum + i;
+    }
+    return sum;
+}
+</code></pre>
+<p>fun1的总时间复杂度为<code>O(n)</code></p>
+<h3 id="加法原则"><a href="#加法原则" class="headerlink" title="加法原则"></a>加法原则</h3><p>总复杂度等于量级最大的那段代码的时间复杂度。</p>
+<pre><code class="c">int fun2(int n)
+{
+    int sum1 = 0;
+    int p = 1;
+    for( ; p&lt;100; p++)
+    {
+        sum1 = sum1 + p;
+    }
+
+    int sum2 = 0;
+    int q = 1;
+    for( ; q&lt;n; q++)
+    {
+        sum2 = sum2 + q;
+    }
+
+    int sum3 = 0;
+    int i = 1;
+    int j = 1;
+    for( ; i&lt;=n; i++)
+    {
+        j = 1;
+        for( ; j&lt;=n; j++)
+        {
+            sum3 = sum3 + i*j;
+        }
+    }
+
+    return sum1+sum2+sum3;
+}
+</code></pre>
+<p>第一段执行了100次，和n的规模无关。</p>
+<p>第二段代码时间复杂度为O(n)。</p>
+<p>第三段代码时间复杂度为O(n^2)。</p>
+<p><strong>综合这三段代码的时间复杂度，取最大量级，所以这段代码的时间复杂度为O(n^2)。</strong></p>
+<h3 id="乘法原则"><a href="#乘法原则" class="headerlink" title="乘法原则"></a>乘法原则</h3><p>嵌套代码的复杂度等于嵌套内外代码复杂度的乘积。</p>
+<pre><code class="c">int fun1(int n)
+{
+    int ret = 0;
+    int i = 1;
+    for( ; i&lt;n; i++)
+    {
+        ret = ret + fun2(i);
+    }
+    return ret;
+}
+
+int fun2(int n)
+{
+    int sum = 0;
+    int i = 1;
+    for( ; i&lt;n; i++)
+    {
+        sum = sum + i;
+    }
+    return sum;
+}
+</code></pre>
+<p>这段代码的时间复杂度为：<code>O(n^2)</code></p>
+<h2 id="常见的几种时间复杂度"><a href="#常见的几种时间复杂度" class="headerlink" title="常见的几种时间复杂度"></a>常见的几种时间复杂度</h2><p>指数阶：O(2^n) 和 阶乘阶：O(n!)成为非多项式量级。</p>
+<blockquote>
+<p>通常把时间复杂度为非多项式量级的算法问题成为NP问题(Non-Deterministic Polynomial，非确定多项式)。当数据规模n越来越大时，NP问题算法的执行时间会几句增加，非常低效。</p>
+</blockquote>
+<h3 id="O-1"><a href="#O-1" class="headerlink" title="O(1)"></a>O(1)</h3><pre><code class="c">int i = 1;
+int j = 2;
+int sum = i + j;
+</code></pre>
+<h3 id="O-logn-、O-nlogn"><a href="#O-logn-、O-nlogn" class="headerlink" title="O(logn)、O(nlogn)"></a>O(logn)、O(nlogn)</h3><pre><code class="c">/* 1 */
+int i = 1;
+while( i&lt;=n )
+{
+    i = i*2;
+}
+</code></pre>
+<pre><code class="c">/* 2 */
+int i = 1;
+while( i&lt;=n )
+{
+    i = i*3;
+}
+</code></pre>
+<p>1 代码的复杂度为<code>log2(n)</code></p>
+<p>2 代码的复杂度为<code>log3(n)</code></p>
+<p>对数是可以相互转换的:<code>log3(n) = log3(2) * log2(n)</code>所以:<code>O(log3(n)) = O(C * log2(n))</code>，其中C是一个常量，我们忽略系数C。</p>
+<p>故将对数阶时间复杂度均表示为:<code>log(n)</code></p>
+<p><strong>如果一段代码的时间复杂度为<code>log(n)</code>，执行了n遍，时间复杂度就为<code>nlogn(n)</code>。</strong></p>
+<h3 id="O-m-n-、O-m-n"><a href="#O-m-n-、O-m-n" class="headerlink" title="O(m+n)、O(m*n)"></a>O(m+n)、O(m*n)</h3><pre><code class="c">int fun1(int m, int n)
+{
+    int sum1 = 0;
+    int i = 1;
+    for( ; i&lt;m; i++)
+    {
+        sum1 = sum1 + i;
+    }
+
+    int sum2 = 0;
+    int j = 1;
+    for( ; j&lt;n; j++)
+    {
+        sum2 = sum2 + j
+    }
+
+    return sum1+sum2;
+}
+</code></pre>
+<p>这段代码的时间复杂度为：<code>O(m+n)</code>。</p>
+<p>针对这种情况，时间复杂度和m、n均有关，加法原则就不正确了，乘法原则依然正确。</p>
+<hr>
+<blockquote>
+<p>参考文章：《数据结构与算法之美》</p>
+</blockquote>
+</div></article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">ahoj</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://ahoj.cc/2019/01/cjvtlw6gv0007q409ye094ano/">https://ahoj.cc/2019/01/cjvtlw6gv0007q409ye094ano/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://ahoj.cc">ahoj's blog</a>！</span></div></div><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Algorithm/">Algorithm</a></div><nav id="pagination"><div class="prev-post pull-left"><a href="/2019/01/cjvtlw80t007hq409kgouyzc8/"><i class="fa fa-chevron-left">  </i><span>递归问题</span></a></div><div class="next-post pull-right"><a href="/2018/10/cjvtlw80s007gq409yd1a8gps/"><span>ASM-汇编语言程序设计基础</span><i class="fa fa-chevron-right"></i></a></div></nav><div id="vcomment"></div><script src="https://cdn1.lncld.net/static/js/3.0.4/av-min.js"></script><script src="https://cdn.jsdelivr.net/npm/valine/dist/Valine.min.js"></script><script>var notify = 'false' == true ? true : false;
+var verify = 'false' == true ? true : false;
+var GUEST_INFO = ['nick','mail','link'];
+var guest_info = 'nick,mail,link'.split(',').filter(function(item){
+  return GUEST_INFO.indexOf(item) > -1
+});
+guest_info = guest_info.length == 0 ? GUEST_INFO :guest_info;
+window.valine = new Valine({
+  el:'#vcomment',
+  notify:notify,
+  verify:verify,
+  appId:'yy9oH4ap0AOjoGWG7vbV9w2v-gzGzoHsz',
+  appKey:'27EcRosAo5WUi5KH16i9nAq1',
+  placeholder:'说点什么吧~ 不足之处或者...',
+  avatar:'mm',
+  guest_info:guest_info,
+  pageSize:'10',
+  lang: 'zh-cn'
+})</script></div></div><footer><div class="layout" id="footer"><div class="copyright">&copy;2019 By ahoj</div><div class="framework-info"><span>驱动 - </span><a href="http://hexo.io"><span>Hexo</span></a><span class="footer-separator">|</span><span>主题 - </span><a href="https://github.com/Molunerfinn/hexo-theme-melody"><span>Melody</span></a></div><div class="busuanzi"><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><span id="busuanzi_container_page_pv"><i class="fa fa-file-o"></i><span id="busuanzi_value_page_pv"></span><span></span></span></div></div></footer><i class="fa fa-arrow-up" id="go-up" aria-hidden="true"></i><script src="https://cdn.jsdelivr.net/npm/animejs@latest/anime.min.js"></script><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@latest/velocity.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-ui-pack@latest/velocity.ui.min.js"></script><script src="/js/utils.js?version=1.6.1"></script><script src="/js/fancybox.js?version=1.6.1"></script><script src="/js/sidebar.js?version=1.6.1"></script><script src="/js/copy.js?version=1.6.1"></script><script src="/js/fireworks.js?version=1.6.1"></script><script src="/js/transition.js?version=1.6.1"></script><script src="/js/scroll.js?version=1.6.1"></script><script src="/js/head.js?version=1.6.1"></script><script src="/js/search/local-search.js"></script><script>if(/Android|webOS|iPhone|iPod|BlackBerry/i.test(navigator.userAgent)) {
+  $('#nav').addClass('is-mobile')
+  $('footer').addClass('is-mobile')
+}</script><div class="search-dialog" id="local-search"><div class="search-dialog__title" id="local-search-title">本地搜索</div><div id="local-input-panel"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章"></div></div></div><hr><div id="local-search-results"><div id="local-hits"></div><div id="local-stats"><div class="local-search-stats__hr" id="hr"><span>由</span> <a href="https://github.com/wzpan/hexo-generator-search" style="color:#49B1F5;">hexo-generator-search</a>
+ <span>提供支持</span></div></div></div><span class="search-close-button"><i class="fa fa-times"></i></span></div><div class="search-mask"></div></body></html>

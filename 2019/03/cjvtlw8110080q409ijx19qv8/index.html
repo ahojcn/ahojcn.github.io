@@ -1,0 +1,84 @@
+<!DOCTYPE html><html lang="zh-Hans"><head><meta name="generator" content="Hexo 3.8.0"><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta name="description" content="【Nao机器人】机器人校准"><meta name="keywords" content="Nao机器人,BHuman"><meta name="author" content="ahoj"><meta name="copyright" content="ahoj"><title>【Nao机器人】机器人校准 | ahoj's blog</title><link rel="shortcut icon" href="/bitbug_favicon.ico"><link rel="stylesheet" href="/css/index.css?version=1.6.1"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@latest/css/font-awesome.min.css?version=1.6.1"><link rel="dns-prefetch" href="https://cdn.staticfile.org"><link rel="dns-prefetch" href="https://cdn.bootcss.com"><link rel="dns-prefetch" href="https://creativecommons.org"><script>var GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"search.xml","languages":{"hits_empty":"找不到您查询的内容:${query}"}},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  }
+} </script></head><body><canvas class="fireworks"></canvas><i class="fa fa-arrow-right" id="toggle-sidebar" aria-hidden="true"></i><div id="sidebar"><div class="toggle-sidebar-info text-center"><span data-toggle="切换文章详情">切换站点概览</span><hr></div><div class="sidebar-toc"><div class="sidebar-toc__title">目录</div><div class="sidebar-toc__progress"><span class="progress-notice">你已经读了</span><span class="progress-num">0</span><span class="progress-percentage">%</span><div class="sidebar-toc__progress-bar"></div></div><div class="sidebar-toc__content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#整体物理校准"><span class="toc-number">1.</span> <span class="toc-text">整体物理校准</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#关节校准"><span class="toc-number">2.</span> <span class="toc-text">关节校准</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#手动调整关节偏差"><span class="toc-number">2.1.</span> <span class="toc-text">手动调整关节偏差</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#使用关节校准器-JointCalibrator"><span class="toc-number">2.2.</span> <span class="toc-text">使用关节校准器(JointCalibrator)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#让-Nao-直立"><span class="toc-number">2.3.</span> <span class="toc-text">让 Nao 直立</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#相机校准"><span class="toc-number">3.</span> <span class="toc-text">相机校准</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#颜色校准"><span class="toc-number">4.</span> <span class="toc-text">颜色校准</span></a></li></ol></div></div><div class="author-info hide"><div class="author-info__avatar text-center"><img src="https://i.loli.net/2019/05/18/5ce01a928835c26008.jpg"></div><div class="author-info__name text-center">ahoj</div><div class="author-info__description text-center">思想的本质就是不安</div><div class="follow-button"><a href="https://github.com/ahojcn">GitHub</a></div><hr><div class="author-info-articles"><a class="author-info-articles__archives article-meta" href="/archives"><span class="pull-left">文章</span><span class="pull-right">58</span></a><a class="author-info-articles__tags article-meta" href="/tags"><span class="pull-left">标签</span><span class="pull-right">19</span></a><a class="author-info-articles__categories article-meta" href="/categories"><span class="pull-left">分类</span><span class="pull-right">14</span></a></div><hr><div class="author-info-links"><div class="author-info-links__title text-center">朋友们</div><a class="author-info-links__name text-center" href="https://zouchanglin.cn/">Tim</a><a class="author-info-links__name text-center" href="http://www.ijam8.com/">Jam</a><a class="author-info-links__name text-center" href="https://blog.csdn.net/jack_wang128801">jack_wang128801</a><a class="author-info-links__name text-center" href="https://blog.csdn.net/weixin_43232955">Mr.Q_</a></div></div></div><div id="content-outer"><div class="no-bg" id="top-container"><div id="page-header"><span class="pull-left"> <a id="site-name" href="/">ahoj's blog</a></span><i class="fa fa-bars toggle-menu pull-right" aria-hidden="true"></i><span class="pull-right menus"><a class="site-page social-icon search"><i class="fa fa-search"></i><span> 搜索</span></a><a class="site-page" href="/">主页</a><a class="site-page" href="/archives">文章</a><a class="site-page" href="/tags">标签</a><a class="site-page" href="/categories">分类</a><a class="site-page" href="/about">关于</a></span></div><div id="post-info"><div id="post-title">【Nao机器人】机器人校准</div><div id="post-meta"><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 2019-03-31</time><span class="post-meta__separator">|</span><i class="fa fa-inbox post-meta__icon" aria-hidden="true"></i><a class="post-meta__categories" href="/categories/Nao机器人/">Nao机器人</a></div></div></div><div class="layout" id="content-inner"><article id="post"><div class="article-container" id="post-content"><p>正确校准的机器人非常重要，因为软件要求NAO的所有部件都在预期的位置。否则，NAO将无法稳定行走，从图像坐标投影到世界坐标(反之亦然)将是错误的。<br>一般来说，很多计算都是不可靠的。NAO的两个物理组件可以通过SimRobot进行校准，关节和摄像机。经常检查这些校准是很重要的，特别是对关节来说。<br>随着时间的推移和使用，关节会磨损。尤其是髋关节。除此之外，B-Human软件还使用四种颜色类(官方文档4.1.4节)，这些颜色类也需要校准。改变位置或光照条件可能需要对其进行调整。</p>
+<a id="more"></a>
+<h2 id="整体物理校准"><a href="#整体物理校准" class="headerlink" title="整体物理校准"></a>整体物理校准</h2><p>物理校准过程可以分为三个步骤，总体目标是一个直立的机器人，以及一个正确校准的相机。</p>
+<p>第一步：让双脚处于一个平面的位置。这并不意味着机器人必须站直。这是通过把机器人抬起来，这样就可以看到脚的底部。然后改变脚和腿的关节偏移量，直到两脚都是平面的，两腿平行。两条腿之间的距离可以在腿的灰色部分测量。它们之间的距离应该是10厘米。</p>
+<p>第二步：<a href="#相机校准">相机校准</a>。这个步骤还可以测量身体相对于脚的倾斜程度。该测量可用于第三步。</p>
+<p>第三步：使用第二步的测量量以改进关节的校准和机器人的扶正。在某些情况下，可能需要重复这些步骤，因为联合校准中的大变化可能使相机校准无效。</p>
+<h2 id="关节校准"><a href="#关节校准" class="headerlink" title="关节校准"></a>关节校准</h2><p>BHuman 支持两种关节校准方法。一是通过手动调整每个关节的偏移量；二是使用使用逆运动学的关节校准模块来校准。<br>整个校准过程的第三步(整体物理校准的第三步)只能通过关节校准器完成。在这两种方法之间切换时，需要<strong>保存关节校准，重新部署NAO，重启bhuman</strong>。否则，前面做的更改将不会生效。</p>
+<p>在改变关节偏移量之前，机器人必须处于固定关节角度的站立位置。否则，运动引擎的平衡机构可能会移动腿，打乱关节的校准。<br>使用：<code>get representation:MotionRequest</code>，在返回的语句中设置<code>motion = stand</code>，校准完成后记得保存，<code>save representation:JointCalibration</code>。</p>
+<h3 id="手动调整关节偏差"><a href="#手动调整关节偏差" class="headerlink" title="手动调整关节偏差"></a>手动调整关节偏差</h3><p>首先，机器人必须切换到一个固定的支架上，否则运动引擎的平衡机械手可能会移动机器人的腿，打乱关节的校准：<code>mr StandArmRequest CalibrationStand</code>，<code>mr StandLegRequest CalibrationStand</code>。</p>
+<p>有两种方法可以调整关节偏移。<br>要么使用 get 来请求 JointCalibration 表示形式：<code>get representation:JointCalibration</code>修改返回的校准，然后设置它。<br>要么通过使用数据视图，更加方便：<code>vd representation:JointCalibration</code>。</p>
+<p>⚠️ 注意：JointCalibration 还包含每个关节的其他信息，不应该改变！</p>
+<h3 id="使用关节校准器-JointCalibrator"><a href="#使用关节校准器-JointCalibrator" class="headerlink" title="使用关节校准器(JointCalibrator)"></a>使用关节校准器(JointCalibrator)</h3><p>首先设置关节校准器，提供关节校准器并切换到校准台：<code>call Calibrators/Joint</code><br>当需要全新校准时，可对关节校准进行复位：<code>dr module:JointCalibrator:reset</code><br>然后，可以修改脚的平移和旋转。再次使用：<code>get module:JointCalibrator:offsets</code>或：<code>vd module:JointCalibrator:offsets</code></p>
+<p>⚠️ 注意：调整的单位是毫米，旋转是度数为基准的。</p>
+<h3 id="让-Nao-直立"><a href="#让-Nao-直立" class="headerlink" title="让 Nao 直立"></a>让 Nao 直立</h3><p>相机校准还计算身体旋转的旋转。这些值可以传递给关节校准器，然后将NAO设置在垂直位置。命令：</p>
+<pre><code>get representation:CameraCalibration 
+call Calibrators/Joint
+</code></pre><p>将 bodyRotationCorrection(CameraCalibration 表示)的值复制到 bodyRotation (JointCalibration 表示)中。之后，设置 bodyRotationCorrection(CameraCalibration 表示) 为零。通过使用具有自动化标志的自动相机校准器，可以自动或多或少地使这些动作成为可能。</p>
+<p>最后一步是在同一时间调整双脚的移动(大部分时间是在同一方向)，使它们垂直于躯干下方。直线激光对这项任务非常有用。当全部操作完成时，通过执行下面的命令来保存校准：</p>
+<pre><code>save representation:JointCalibration 
+save representation:CameraCalibration
+</code></pre><p>然后重新部署NAO并重新启动bhuman。</p>
+<p><img src="https://ws1.sinaimg.cn/large/006wR0dcly1g1lxci0ou4j31fg0nihdt.jpg" alt="机器人校准2.1"></p>
+<p>图：校准程序之前(a)和之后(b)的投影线</p>
+<h2 id="相机校准"><a href="#相机校准" class="headerlink" title="相机校准"></a>相机校准</h2><p>使用 AutomaticCameraCalibrator 模块校准相机(参考4.1.2.1节)，请遵循以下步骤：</p>
+<ol>
+<li>将模拟器连接到现场的机器人，并将其放置在确定的位置上(例如，罚球线)。 </li>
+<li>运行SimRobot配置文件Calibrators/Camera.con(在控制台输入 <code>call Calibrators/Camera</code>)。这将初始化校准过程，并进一步将命令或帮助打印到稍后将需要的模拟器控制台。</li>
+<li>使用AutomaticCameraCalibrator模块(自动相机校准模块)，例如将机器人放在罚球线，控制台输入<code>set module:AutomaticCameraCalibrator:robotPose rotation = 0;translation= {x = -3200;y = 0;}</code>，来宣告机器人在球场上的位置。</li>
+<li>若要自动生成以下关节校准的命令以纠正身体旋转，可通过：<code>set module:AutomaticCame raCalibrator:setJointOffsets true</code>，优化完成后，只需输入生成的命令，从而纠正旋转。</li>
+<li>启动点收集：<code>dr module:AutomaticCameraCalibrator:start</code>，然后等待输出”Accumulation finished. Waiting to optimize. . . “。这个过程包括：两个摄像头采集样本进行校准，头部运动覆盖整个场地。<strong>上面相机的样本是蓝色的，下面相机的样本是红色的。</strong>图像上方的图形表示样本数量是否足以优化，可以(绿色)不可以(红色)。</li>
+<li>如果对某些特定示例的集合不满意，可以通过左击找到示例的图像中的示例来删除示例。如果缺少一些示例，可以通过<code>Ctrl+左键单击</code>将它们手动添加到相应的图像中。</li>
+<li>使用自动校准程序：<code>dr module:AutomaticCameraCalibrator:optimize</code>，然后等待优化收敛。</li>
+</ol>
+<p><img src="https://ws1.sinaimg.cn/large/006wR0dcly1g1lxz0nn55j31aa0d8tzx.jpg" alt></p>
+<p>图：三个有趣的相机校准阶段。a)为校准器的起点。b)为控件从采集的样本开始后的视图。c)为优化后的阶段。</p>
+<h2 id="颜色校准"><a href="#颜色校准" class="headerlink" title="颜色校准"></a>颜色校准</h2><p>校准颜色类分为两个步骤。</p>
+<p>首先：相机驱动程序的参数必须根据环境的需要进行更新。使用<code>get representation:CameraSettings</code>返回当前摄像机的参数。</p>
+<p>此外：将生成必要的set命令。一些比较重要的参数：</p>
+<ul>
+<li><strong>whiteBalanceTemperature：</strong> 白平衡。可用区间为[2700,6500]。</li>
+<li><strong>exposure：</strong> 曝光，可用区间为[0,1000]。通常，使用140的曝光，等于14毫秒。数值越大，图像越模糊。</li>
+<li><strong>gain：</strong> 增益，可用区间为[0,255]。通常，增益设置为50 - 70。高增益值会导致图像嘈杂。</li>
+<li><strong>autoWhiteBalance：</strong> 启用(1)/禁用(0)自动白平衡。此参数应<strong>始终禁用</strong>，因为白平衡中的更改可能会更改颜色并打乱颜色校准。另一方面，环境色温的真实变化也会产生同样的结果。</li>
+<li><strong>autoExposure：</strong> 启用(1)/禁用(0)自动曝光。在标准室内锦标赛等静态灯光条件下进行比赛时，应始终禁用此参数，因为自动化往往会选择高于需要的值，从而导致图像模糊。然而，对于2016年机器人世界杯户外比赛中出现的动态光环境，使用相机驱动程序的自动化可能是必要的。在这种情况下，可以使用参数autoExposureAlgorithm和亮度来改变其行为。</li>
+</ul>
+<p>相机驱动程序可以做一次自动白平衡。该功能可以通过以下命令触发：</p>
+<pre><code>dr module:CameraProvider:doWhiteBalanceUpper 
+dr module:CameraProvider:doWhiteBalanceLower
+</code></pre><p>在设置好相机驱动程序的参数后，必须更新color类的参数(cf. section . 4.1.4)。为此，需要使用分割的上下摄像头图像和颜色校准视图打开视图，(参看第10.1.4.1节和第10.1.4.1节)。完成color类校准并保存当前参数后，可以使用copyfiles/bush来部署当前设置。确保文件cameraSettingsV5.cfg(或cameraSettingsV4.cfg，如果NAO是V4模型)和fieldColorsCalibrationV5.cfg(或fieldColorsCalibrationV4.cfg)更新了并存储在正确的位置。</p>
+<p><img src="https://ws1.sinaimg.cn/large/006wR0dcly1g1lydfjatyj31720gae81.jpg" alt></p>
+<p>The left figure shows an image with improper white balance. The right figure shows the same image with better settings for white balance.</p>
+<hr>
+</div></article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">ahoj</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://ahoj.cc/2019/03/cjvtlw8110080q409ijx19qv8/">https://ahoj.cc/2019/03/cjvtlw8110080q409ijx19qv8/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://ahoj.cc">ahoj's blog</a>！</span></div></div><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Nao机器人/">Nao机器人</a><a class="post-meta__tags" href="/tags/BHuman/">BHuman</a></div><nav id="pagination"><div class="prev-post pull-left"><a href="/2019/03/cjvtlw6hw0023q4092vt8e61s/"><i class="fa fa-chevron-left">  </i><span>Nodejs-处理POST文件数据</span></a></div><div class="next-post pull-right"><a href="/2019/03/cjvtlw6id0036q409897cgtih/"><span>【Nao机器人】ssh使用Nao</span><i class="fa fa-chevron-right"></i></a></div></nav><div id="vcomment"></div><script src="https://cdn1.lncld.net/static/js/3.0.4/av-min.js"></script><script src="https://cdn.jsdelivr.net/npm/valine/dist/Valine.min.js"></script><script>var notify = 'false' == true ? true : false;
+var verify = 'false' == true ? true : false;
+var GUEST_INFO = ['nick','mail','link'];
+var guest_info = 'nick,mail,link'.split(',').filter(function(item){
+  return GUEST_INFO.indexOf(item) > -1
+});
+guest_info = guest_info.length == 0 ? GUEST_INFO :guest_info;
+window.valine = new Valine({
+  el:'#vcomment',
+  notify:notify,
+  verify:verify,
+  appId:'yy9oH4ap0AOjoGWG7vbV9w2v-gzGzoHsz',
+  appKey:'27EcRosAo5WUi5KH16i9nAq1',
+  placeholder:'说点什么吧~ 不足之处或者...',
+  avatar:'mm',
+  guest_info:guest_info,
+  pageSize:'10',
+  lang: 'zh-cn'
+})</script></div></div><footer><div class="layout" id="footer"><div class="copyright">&copy;2019 By ahoj</div><div class="framework-info"><span>驱动 - </span><a href="http://hexo.io"><span>Hexo</span></a><span class="footer-separator">|</span><span>主题 - </span><a href="https://github.com/Molunerfinn/hexo-theme-melody"><span>Melody</span></a></div><div class="busuanzi"><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><span id="busuanzi_container_page_pv"><i class="fa fa-file-o"></i><span id="busuanzi_value_page_pv"></span><span></span></span></div></div></footer><i class="fa fa-arrow-up" id="go-up" aria-hidden="true"></i><script src="https://cdn.jsdelivr.net/npm/animejs@latest/anime.min.js"></script><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@latest/velocity.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-ui-pack@latest/velocity.ui.min.js"></script><script src="/js/utils.js?version=1.6.1"></script><script src="/js/fancybox.js?version=1.6.1"></script><script src="/js/sidebar.js?version=1.6.1"></script><script src="/js/copy.js?version=1.6.1"></script><script src="/js/fireworks.js?version=1.6.1"></script><script src="/js/transition.js?version=1.6.1"></script><script src="/js/scroll.js?version=1.6.1"></script><script src="/js/head.js?version=1.6.1"></script><script src="/js/search/local-search.js"></script><script>if(/Android|webOS|iPhone|iPod|BlackBerry/i.test(navigator.userAgent)) {
+  $('#nav').addClass('is-mobile')
+  $('footer').addClass('is-mobile')
+}</script><div class="search-dialog" id="local-search"><div class="search-dialog__title" id="local-search-title">本地搜索</div><div id="local-input-panel"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章"></div></div></div><hr><div id="local-search-results"><div id="local-hits"></div><div id="local-stats"><div class="local-search-stats__hr" id="hr"><span>由</span> <a href="https://github.com/wzpan/hexo-generator-search" style="color:#49B1F5;">hexo-generator-search</a>
+ <span>提供支持</span></div></div></div><span class="search-close-button"><i class="fa fa-times"></i></span></div><div class="search-mask"></div></body></html>

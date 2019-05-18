@@ -1,0 +1,271 @@
+<!DOCTYPE html><html lang="zh-Hans"><head><meta name="generator" content="Hexo 3.8.0"><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta name="description" content="C-字符串相关的库函数"><meta name="keywords" content="C"><meta name="author" content="ahoj"><meta name="copyright" content="ahoj"><title>C-字符串相关的库函数 | ahoj's blog</title><link rel="shortcut icon" href="/bitbug_favicon.ico"><link rel="stylesheet" href="/css/index.css?version=1.6.1"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@latest/css/font-awesome.min.css?version=1.6.1"><link rel="dns-prefetch" href="https://cdn.staticfile.org"><link rel="dns-prefetch" href="https://cdn.bootcss.com"><link rel="dns-prefetch" href="https://creativecommons.org"><script>var GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"search.xml","languages":{"hits_empty":"找不到您查询的内容:${query}"}},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  }
+} </script></head><body><canvas class="fireworks"></canvas><i class="fa fa-arrow-right" id="toggle-sidebar" aria-hidden="true"></i><div id="sidebar"><div class="toggle-sidebar-info text-center"><span data-toggle="切换文章详情">切换站点概览</span><hr></div><div class="sidebar-toc"><div class="sidebar-toc__title">目录</div><div class="sidebar-toc__progress"><span class="progress-notice">你已经读了</span><span class="progress-num">0</span><span class="progress-percentage">%</span><div class="sidebar-toc__progress-bar"></div></div><div class="sidebar-toc__content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#字符串函数"><span class="toc-number">1.</span> <span class="toc-text">字符串函数</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#strlen"><span class="toc-number">1.1.</span> <span class="toc-text">strlen()</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#strcpy"><span class="toc-number">1.2.</span> <span class="toc-text">strcpy()</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#strncpy"><span class="toc-number">1.3.</span> <span class="toc-text">strncpy()</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#strcat"><span class="toc-number">1.4.</span> <span class="toc-text">strcat()</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#strncat"><span class="toc-number">1.5.</span> <span class="toc-text">strncat()</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#strcmp"><span class="toc-number">1.6.</span> <span class="toc-text">strcmp()</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#strncmp"><span class="toc-number">1.7.</span> <span class="toc-text">strncmp()</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#strstr"><span class="toc-number">1.8.</span> <span class="toc-text">strstr()</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#strtok"><span class="toc-number">1.9.</span> <span class="toc-text">strtok()</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#strerror"><span class="toc-number">1.10.</span> <span class="toc-text">strerror()</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#字符函数"><span class="toc-number">2.</span> <span class="toc-text">字符函数</span></a></li></ol></div></div><div class="author-info hide"><div class="author-info__avatar text-center"><img src="https://i.loli.net/2019/05/18/5ce01a928835c26008.jpg"></div><div class="author-info__name text-center">ahoj</div><div class="author-info__description text-center">思想的本质就是不安</div><div class="follow-button"><a href="https://github.com/ahojcn">GitHub</a></div><hr><div class="author-info-articles"><a class="author-info-articles__archives article-meta" href="/archives"><span class="pull-left">文章</span><span class="pull-right">58</span></a><a class="author-info-articles__tags article-meta" href="/tags"><span class="pull-left">标签</span><span class="pull-right">19</span></a><a class="author-info-articles__categories article-meta" href="/categories"><span class="pull-left">分类</span><span class="pull-right">14</span></a></div><hr><div class="author-info-links"><div class="author-info-links__title text-center">朋友们</div><a class="author-info-links__name text-center" href="https://zouchanglin.cn/">Tim</a><a class="author-info-links__name text-center" href="http://www.ijam8.com/">Jam</a><a class="author-info-links__name text-center" href="https://blog.csdn.net/jack_wang128801">jack_wang128801</a><a class="author-info-links__name text-center" href="https://blog.csdn.net/weixin_43232955">Mr.Q_</a></div></div></div><div id="content-outer"><div class="no-bg" id="top-container"><div id="page-header"><span class="pull-left"> <a id="site-name" href="/">ahoj's blog</a></span><i class="fa fa-bars toggle-menu pull-right" aria-hidden="true"></i><span class="pull-right menus"><a class="site-page social-icon search"><i class="fa fa-search"></i><span> 搜索</span></a><a class="site-page" href="/">主页</a><a class="site-page" href="/archives">文章</a><a class="site-page" href="/tags">标签</a><a class="site-page" href="/categories">分类</a><a class="site-page" href="/about">关于</a></span></div><div id="post-info"><div id="post-title">C-字符串相关的库函数</div><div id="post-meta"><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 2019-03-11</time><span class="post-meta__separator">|</span><i class="fa fa-inbox post-meta__icon" aria-hidden="true"></i><a class="post-meta__categories" href="/categories/C/">C</a></div></div></div><div class="layout" id="content-inner"><article id="post"><div class="article-container" id="post-content"><p>C语言中关于字符串处理的一些函数。</p>
+<a id="more"></a>
+<h2 id="字符串函数"><a href="#字符串函数" class="headerlink" title="字符串函数"></a>字符串函数</h2><p><code>#include &lt;string.h&gt;</code></p>
+<h3 id="strlen"><a href="#strlen" class="headerlink" title="strlen()"></a>strlen()</h3><p><code>size_t strlen(const char *s);</code></p>
+<ul>
+<li>以<code>\0</code>作为结束标志，这个函数返回的是字符串中第一个<code>\0</code>前面的字符个数，不包括<code>\0</code>。</li>
+<li>函数的返回值是<code>size_t</code>，是一个无符号的数。</li>
+</ul>
+<pre><code class="c">#include &lt;stdio.h&gt;
+#include &lt;string.h&gt;
+
+int main(int argc, const char * argv[])
+{
+    const char * s1 = &quot;abcdef&quot;;
+    const char * s2 = &quot;ab&quot;;
+    if(strlen(s2) - strlen(s1) &gt; 0)    // 无符号数 - 无符号数 = 无符号数
+    {
+        printf(&quot;s1 &lt; s2\n&quot;);    // 输出这句！
+    }
+    else
+    {
+        printf(&quot;s1 &gt; s2\n&quot;);
+    }
+
+    return 0;
+}
+</code></pre>
+<h3 id="strcpy"><a href="#strcpy" class="headerlink" title="strcpy()"></a>strcpy()</h3><p><code>char * stpcpy(char * dst, const char * src);</code></p>
+<ul>
+<li><p>函数的返回值是拷贝后的<code>dst</code>的地址。</p>
+</li>
+<li><p>源字符串必须以<code>\0</code>结束。</p>
+</li>
+<li><p>会将源字符串中的<code>\0</code>拷贝到目标空间。</p>
+</li>
+<li><p>目标空间必须足够大，足以容纳源字符串。</p>
+</li>
+<li><p>目标空间必须可以改变！</p>
+<h3 id="strncpy"><a href="#strncpy" class="headerlink" title="strncpy()"></a>strncpy()</h3><p><code>char * strncpy(char * dst, const char * src, size_t len);</code></p>
+<ul>
+<li>拷贝len个字符串从源字符串到目标字符串</li>
+<li>如果源字符串的长度小于len，拷贝完源字符串之后，在目标后面继续追加0，直到len个。</li>
+</ul>
+<p><img src="https://wx3.sinaimg.cn/mw690/006wR0dcly1fxoyvwya4wj314i0u0wi3.jpg" alt="strncpy"></p>
+</li>
+</ul>
+<h3 id="strcat"><a href="#strcat" class="headerlink" title="strcat()"></a>strcat()</h3><p><code>char * strcat(char *restrict s1, const char *restrict s2);</code></p>
+<ul>
+<li><p>源字符串必须以<code>\0</code>结束。</p>
+</li>
+<li><p>目标空间必须足够大，足以容纳源字符串。</p>
+</li>
+<li><p>目标空间必须可以改变！</p>
+</li>
+<li><p><strong>字符串自己给自己拼接，会把<code>\0</code>覆盖掉（因为拼接过程是一个字符一个字符的copy）。</strong></p>
+<h3 id="strncat"><a href="#strncat" class="headerlink" title="strncat()"></a>strncat()</h3><p><code>char * strncat(char *restrict s1, const char *restrict s2, size_t n);</code></p>
+<ul>
+<li>从s2中拷贝n个字符串到s1字符串的后面，如果s2字符串的长度小于n，只拷贝到<code>\0</code>为止。</li>
+</ul>
+<p><img src="https://wx2.sinaimg.cn/mw690/006wR0dcly1fxoz0lmbpzj314e0u0gpy.jpg" alt="strncat"></p>
+</li>
+</ul>
+<h3 id="strcmp"><a href="#strcmp" class="headerlink" title="strcmp()"></a>strcmp()</h3><p><code>int strcmp(const char *s1, const char *s2);</code></p>
+<p>注意！这个函数比较的是对应位置的ascii码的大小，而不是比较长度。</p>
+<ul>
+<li><p><code>s1 &gt; s2</code>，返回大于0的数。</p>
+</li>
+<li><p><code>s1 == s2</code>，返回0。</p>
+</li>
+<li><p><code>s1 &lt; s2</code>，返回小于0的数。</p>
+<h3 id="strncmp"><a href="#strncmp" class="headerlink" title="strncmp()"></a>strncmp()</h3><p><code>int strncmp(const char *s1, const char *s2, size_t n);</code></p>
+<ul>
+<li>比较到出现第一个字符不一样的地方或一个字符串结束或者n个字符全部比完。</li>
+</ul>
+<p>栗子：查找以<code>R2</code>开头的字符串。</p>
+<pre><code class="c">int main()
+{
+    char str[][5] = { &quot;R2D2&quot;, &quot;C3PO&quot;, &quot;R2A6&quot; };
+    for(int n=0; n&lt;3; n++)
+    {
+        if(strncmp(str[n], &quot;R2xx&quot;, 2) == 0)
+        {
+            printf(&quot;%s\n&quot;, str[n]);
+        }
+    }
+
+    return 0;
+}
+</code></pre>
+</li>
+</ul>
+<h3 id="strstr"><a href="#strstr" class="headerlink" title="strstr()"></a>strstr()</h3><p><code>char * strstr(const char *haystack, const char *needle);</code></p>
+<ul>
+<li>查找第二个字符串参数在第一个参数重首次出现的地方，返回指向这个地方的指针。</li>
+</ul>
+<p>栗子：</p>
+<pre><code class="c">int main()
+{
+    char str[] = &quot;This is a simple string!&quot;;
+    char * p = NULL;
+    p = strstr(str, &quot;simple&quot;);
+    printf(&quot;%s\n&quot;, p);
+    strncpy(p, &quot;aaaaaa&quot;, 6);
+    puts(p);
+
+    return 0;
+}
+</code></pre>
+<h3 id="strtok"><a href="#strtok" class="headerlink" title="strtok()"></a>strtok()</h3><p><code>char * strtok(char *restrict str, const char *restrict sep);</code></p>
+<p><strong>打散字符串！</strong></p>
+<ul>
+<li><p>第一个参数str是要打散的字符串，第二个参数是个字符串，定义了用作分隔符的字符集合。</p>
+</li>
+<li><p>第一个参数必须是可以修改的。打散的过程其实就是将str中出现sep的地方替换为<code>\0</code>，对于str中连续出现的分隔符，只会将第一个分隔符替换为<code>\0</code>，其他的跳过。</p>
+<p>例如：str = <code>str:::str:end</code>，sep = <code>:</code>。</p>
+</li>
+<li><p><code>strtok</code>函数的第一个参数不为<code>NULL</code>，函数将找到<code>str</code>中第一个标记，<code>strtok</code>函数将保存它在字符串中的位置。</p>
+</li>
+<li><p><code>strtok</code>函数的第一个参数为<code>NULL</code>，函数将在同一个字符串中被保存的位置开始，查找下一个标记。</p>
+</li>
+<li><p>如果字符串中不存在更多的标记，返回<code>NULL</code>指针。</p>
+</li>
+</ul>
+<p>栗子1：</p>
+<pre><code class="c">#include &lt;stdio.h&gt;
+#include &lt;string.h&gt;
+
+int main()
+{
+    char str[100] = &quot;abcdefg@qq.com&quot;;
+    char *e = &quot;@.&quot;;
+    char *p = NULL;
+    p = strtok(str, e);
+
+    while(p != NULL)
+    {
+        puts(p);
+        p = strtok(NULL, e);
+    }
+
+    return 0;
+}
+</code></pre>
+<p>栗子2：</p>
+<pre><code class="c">int main()
+{
+    char str[100] = &quot;str::::str...end&quot;;
+    char *e = &quot;:.&quot;;
+    char *p = strtok(str, e);
+    while(p != NULL)
+    {
+        puts(p);
+        p = strtok(NULL, e);
+    }
+
+    return 0;
+}
+</code></pre>
+<p><img src="https://wx4.sinaimg.cn/mw690/006wR0dcly1fxp0450dcuj30zt0u0n3a.jpg" alt="strtok"></p>
+<p>可以看到，当出现连续的分隔符时候，只会把第一个分隔符替换为<code>\0</code>，跳过后面的分隔符，返回的值是遇到的第一个不是分隔符的地址。</p>
+<h3 id="strerror"><a href="#strerror" class="headerlink" title="strerror()"></a>strerror()</h3><p><code>char * strerror(int errnum);</code></p>
+<ul>
+<li>返回错误码，对应的错误信息。</li>
+</ul>
+<p>栗子：输出结果：<strong>No such file or directory</strong></p>
+<pre><code class="c">#include &lt;stdio.h&gt;
+#include &lt;string.h&gt;
+#include &lt;errno.h&gt;
+
+int main()
+{
+    FILE *fp = fopen(&quot;test.txt&quot;, &quot;r&quot;);
+    if(fp == NULL)
+    {
+        printf(&quot;%s\n&quot;, strerror(errno));
+    }
+
+    return 0;
+}
+</code></pre>
+<p>在C库中，<code>errno.h</code>是一个全局的错误码，成功为0，不成功为非0。非0表示失败，还有为什么失败的字符串描述。</p>
+<p>main函数的返回值称为程序的退出码，在Linux下使用：<code>echo $?</code>命令可以查看最近一次程序执行完成的退出码。</p>
+<p><img src="https://wx2.sinaimg.cn/mw690/006wR0dcly1fxp159wyw3j30xc09k768.jpg" alt="echo $?"></p>
+<h2 id="字符函数"><a href="#字符函数" class="headerlink" title="字符函数"></a>字符函数</h2><p><code>#include &lt;ctype.h&gt;</code></p>
+<table>
+<thead>
+<tr>
+<th>函数</th>
+<th>参数满足以下条件，返回值为1</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>iscntrl()</td>
+<td>任何控制字符</td>
+</tr>
+<tr>
+<td>isspace()</td>
+<td>空白字符：空格、换页符、换行、回车、制表符<code>\t</code>或者垂直制表符<code>\v</code></td>
+</tr>
+<tr>
+<td>isdigit()</td>
+<td>十进制数字：0～9</td>
+</tr>
+<tr>
+<td>isxdigit()</td>
+<td>十六进制数字：0～9、A～F、a～f</td>
+</tr>
+<tr>
+<td>islower()</td>
+<td>是小写字母</td>
+</tr>
+<tr>
+<td>isupper()</td>
+<td>是大写字母</td>
+</tr>
+<tr>
+<td>isalpha()</td>
+<td>是字母a~z、A~Z</td>
+</tr>
+<tr>
+<td>isalnum()</td>
+<td>是字母或者十进制数字</td>
+</tr>
+<tr>
+<td>ispunct()</td>
+<td>标点符号，任何不属于数字或字母的图形字符(可打印)</td>
+</tr>
+<tr>
+<td>isgraph()</td>
+<td>任何图形字符</td>
+</tr>
+<tr>
+<td>isprint()</td>
+<td>任何可打印的字符</td>
+</tr>
+</tbody>
+</table>
+<hr>
+</div></article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">ahoj</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://ahoj.cc/2019/03/cjvtlw6h1000gq409qcno5k8j/">https://ahoj.cc/2019/03/cjvtlw6h1000gq409qcno5k8j/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://ahoj.cc">ahoj's blog</a>！</span></div></div><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/C/">C</a></div><nav id="pagination"><div class="prev-post pull-left"><a href="/2019/03/cjvtlw6h7000lq409jic5yu3v/"><i class="fa fa-chevron-left">  </i><span>C-数组的不对称边界</span></a></div><div class="next-post pull-right"><a href="/2019/03/cjvtlw6i2002hq4095qvyj3k2/"><span>Matlab基础</span><i class="fa fa-chevron-right"></i></a></div></nav><div id="vcomment"></div><script src="https://cdn1.lncld.net/static/js/3.0.4/av-min.js"></script><script src="https://cdn.jsdelivr.net/npm/valine/dist/Valine.min.js"></script><script>var notify = 'false' == true ? true : false;
+var verify = 'false' == true ? true : false;
+var GUEST_INFO = ['nick','mail','link'];
+var guest_info = 'nick,mail,link'.split(',').filter(function(item){
+  return GUEST_INFO.indexOf(item) > -1
+});
+guest_info = guest_info.length == 0 ? GUEST_INFO :guest_info;
+window.valine = new Valine({
+  el:'#vcomment',
+  notify:notify,
+  verify:verify,
+  appId:'yy9oH4ap0AOjoGWG7vbV9w2v-gzGzoHsz',
+  appKey:'27EcRosAo5WUi5KH16i9nAq1',
+  placeholder:'说点什么吧~ 不足之处或者...',
+  avatar:'mm',
+  guest_info:guest_info,
+  pageSize:'10',
+  lang: 'zh-cn'
+})</script></div></div><footer><div class="layout" id="footer"><div class="copyright">&copy;2019 By ahoj</div><div class="framework-info"><span>驱动 - </span><a href="http://hexo.io"><span>Hexo</span></a><span class="footer-separator">|</span><span>主题 - </span><a href="https://github.com/Molunerfinn/hexo-theme-melody"><span>Melody</span></a></div><div class="busuanzi"><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><span id="busuanzi_container_page_pv"><i class="fa fa-file-o"></i><span id="busuanzi_value_page_pv"></span><span></span></span></div></div></footer><i class="fa fa-arrow-up" id="go-up" aria-hidden="true"></i><script src="https://cdn.jsdelivr.net/npm/animejs@latest/anime.min.js"></script><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@latest/velocity.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-ui-pack@latest/velocity.ui.min.js"></script><script src="/js/utils.js?version=1.6.1"></script><script src="/js/fancybox.js?version=1.6.1"></script><script src="/js/sidebar.js?version=1.6.1"></script><script src="/js/copy.js?version=1.6.1"></script><script src="/js/fireworks.js?version=1.6.1"></script><script src="/js/transition.js?version=1.6.1"></script><script src="/js/scroll.js?version=1.6.1"></script><script src="/js/head.js?version=1.6.1"></script><script src="/js/search/local-search.js"></script><script>if(/Android|webOS|iPhone|iPod|BlackBerry/i.test(navigator.userAgent)) {
+  $('#nav').addClass('is-mobile')
+  $('footer').addClass('is-mobile')
+}</script><div class="search-dialog" id="local-search"><div class="search-dialog__title" id="local-search-title">本地搜索</div><div id="local-input-panel"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章"></div></div></div><hr><div id="local-search-results"><div id="local-hits"></div><div id="local-stats"><div class="local-search-stats__hr" id="hr"><span>由</span> <a href="https://github.com/wzpan/hexo-generator-search" style="color:#49B1F5;">hexo-generator-search</a>
+ <span>提供支持</span></div></div></div><span class="search-close-button"><i class="fa fa-times"></i></span></div><div class="search-mask"></div></body></html>

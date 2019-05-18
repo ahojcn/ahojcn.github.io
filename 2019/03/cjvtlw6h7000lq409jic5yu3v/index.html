@@ -1,0 +1,165 @@
+<!DOCTYPE html><html lang="zh-Hans"><head><meta name="generator" content="Hexo 3.8.0"><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta name="description" content="C-数组的不对称边界"><meta name="keywords" content="C"><meta name="author" content="ahoj"><meta name="copyright" content="ahoj"><title>C-数组的不对称边界 | ahoj's blog</title><link rel="shortcut icon" href="/bitbug_favicon.ico"><link rel="stylesheet" href="/css/index.css?version=1.6.1"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@latest/css/font-awesome.min.css?version=1.6.1"><link rel="dns-prefetch" href="https://cdn.staticfile.org"><link rel="dns-prefetch" href="https://cdn.bootcss.com"><link rel="dns-prefetch" href="https://creativecommons.org"><script>var GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"search.xml","languages":{"hits_empty":"找不到您查询的内容:${query}"}},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  }
+} </script></head><body><canvas class="fireworks"></canvas><i class="fa fa-arrow-right" id="toggle-sidebar" aria-hidden="true"></i><div id="sidebar"><div class="toggle-sidebar-info text-center"><span data-toggle="切换文章详情">切换站点概览</span><hr></div><div class="sidebar-toc"><div class="sidebar-toc__title">目录</div><div class="sidebar-toc__progress"><span class="progress-notice">你已经读了</span><span class="progress-num">0</span><span class="progress-percentage">%</span><div class="sidebar-toc__progress-bar"></div></div><div class="sidebar-toc__content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#一个小问题"><span class="toc-number">1.</span> <span class="toc-text">一个小问题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#不对称边界"><span class="toc-number">2.</span> <span class="toc-text">不对称边界</span></a></li></ol></div></div><div class="author-info hide"><div class="author-info__avatar text-center"><img src="https://i.loli.net/2019/05/18/5ce01a928835c26008.jpg"></div><div class="author-info__name text-center">ahoj</div><div class="author-info__description text-center">思想的本质就是不安</div><div class="follow-button"><a href="https://github.com/ahojcn">GitHub</a></div><hr><div class="author-info-articles"><a class="author-info-articles__archives article-meta" href="/archives"><span class="pull-left">文章</span><span class="pull-right">58</span></a><a class="author-info-articles__tags article-meta" href="/tags"><span class="pull-left">标签</span><span class="pull-right">19</span></a><a class="author-info-articles__categories article-meta" href="/categories"><span class="pull-left">分类</span><span class="pull-right">14</span></a></div><hr><div class="author-info-links"><div class="author-info-links__title text-center">朋友们</div><a class="author-info-links__name text-center" href="https://zouchanglin.cn/">Tim</a><a class="author-info-links__name text-center" href="http://www.ijam8.com/">Jam</a><a class="author-info-links__name text-center" href="https://blog.csdn.net/jack_wang128801">jack_wang128801</a><a class="author-info-links__name text-center" href="https://blog.csdn.net/weixin_43232955">Mr.Q_</a></div></div></div><div id="content-outer"><div class="no-bg" id="top-container"><div id="page-header"><span class="pull-left"> <a id="site-name" href="/">ahoj's blog</a></span><i class="fa fa-bars toggle-menu pull-right" aria-hidden="true"></i><span class="pull-right menus"><a class="site-page social-icon search"><i class="fa fa-search"></i><span> 搜索</span></a><a class="site-page" href="/">主页</a><a class="site-page" href="/archives">文章</a><a class="site-page" href="/tags">标签</a><a class="site-page" href="/categories">分类</a><a class="site-page" href="/about">关于</a></span></div><div id="post-info"><div id="post-title">C-数组的不对称边界</div><div id="post-meta"><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 2019-03-11</time><span class="post-meta__separator">|</span><i class="fa fa-inbox post-meta__icon" aria-hidden="true"></i><a class="post-meta__categories" href="/categories/C/">C</a></div></div></div><div class="layout" id="content-inner"><article id="post"><div class="article-container" id="post-content"><p>不对称边界，在计算机科学中经常会见到，比如一个数组有10个元素，它的下标为<strong>[0,10)</strong>。<br>一个有趣的知识：<a href="https://blog.csdn.net/Hanoi_ahoj/article/details/82931630" target="_blank" rel="noopener">为什么很多编程语言从0开始编号</a></p>
+<a id="more"></a>
+<h2 id="一个小问题"><a href="#一个小问题" class="headerlink" title="一个小问题"></a>一个小问题</h2><p>如果一个数组有10个元素，那么这个数组下表的允许取值范围是什么呢？</p>
+<p>下面代码1，这段代码的运行结果是什么？为什么？</p>
+<pre><code class="c">#include &lt;stdio.h&gt;
+// 代码1
+int main()
+{
+    int i = 0;
+    int arr[10] = {0};
+
+    for(i=0; i&lt;12; i++)    // 注意这里是 i&lt;12
+    {
+        arr[i] = 0;
+        printf(&quot;hey, girl!\n&quot;);
+    }
+
+    return 0;
+}
+</code></pre>
+<p>结果出人意料。</p>
+<p>这段代码在Windows下DevC++下运行结果是：死循环。。。</p>
+<p><img src="https://wx4.sinaimg.cn/mw690/006wR0dcly1fwrgx9ulprj30mz0juabe.jpg" width="50%" height="50%"></p>
+<p>来看看why：</p>
+<pre><code class="c">#include &lt;stdio.h&gt;
+
+int main()
+{
+    int i = 0;
+    int arr[10] = {0};
+
+    printf(&quot;&amp;i = %p\n&quot;, &amp;i);
+    printf(&quot;&amp;arr[0] = %p\n&quot;, &amp;arr[0]);
+    printf(&quot;&amp;arr[10] = %p\n&quot;, &amp;arr[10]);
+    printf(&quot;&amp;arr[11] = %p\n&quot;, &amp;arr[11]);
+
+    return 0;
+ }
+</code></pre>
+<p><img src="https://wx4.sinaimg.cn/mw690/006wR0dcly1fwrh7mtbwmj30k40f6gmp.jpg" width="50%" height="50%"></p>
+<p>从输出的结果可以得到<code>i</code>和<code>arr[]</code>在内存中的样子：</p>
+<p><img src="https://wx3.sinaimg.cn/mw690/006wR0dcly1fwrhofc35gj30kq132abj.jpg" width="30%" height="30%"></p>
+<p><code>&amp;arr[11] == &amp;i</code>，当循环中做<code>arr[11] = 0;</code>这步操作时，也把循环变量i的值改为了0，这样就陷入了一个死循环。</p>
+<p>我们把<code>int i = 0;</code>这句话写在数组<code>int arr[10] = {0};</code>这句的后面再试试：</p>
+<p><img src="https://wx4.sinaimg.cn/mw690/006wR0dcly1fwrhvflpi6j30le0em0tu.jpg" width="40%" height="40%"></p>
+<p>可以看到，这次 i 的地址就在数组arr地址的下面了，这下就不是死循环的情况咯。</p>
+<p>另外！对于不同平台下代码1的运行结果是不同的：</p>
+<ol>
+<li><p>Microsoft Visual Studio在debug下是死循环，但是在release下编译运行程序就不是死循环，debug模式下没有进行任何优化，在release模式下将变量在内存中进行了优化，不会出现死循环。</p>
+</li>
+<li><p>在MAC OS gcc下编译执行代码1，不会死循环，而且不论i是定义在数组上面还是数组下面，i的地址都是在数组首元素地址的前面，数组向后访问，不会访问到i。</p>
+<p><img src="https://wx4.sinaimg.cn/mw690/006wR0dcly1fwrjr2o5x8j31eq0ei0xq.jpg" alt="pic1"></p>
+<p><img src="https://wx2.sinaimg.cn/mw690/006wR0dcly1fwrjnfxuk8j31080fw417.jpg" alt="pic2"></p>
+<p>嘿嘿，如果i是负数的话，还是会改变到循环变量i的地址滴，下面这样：</p>
+<pre><code class="c">#include &lt;stdio.h&gt;
+
+int main()
+{
+    int i = 1234;
+    int arr[10] = {0};
+
+    printf(&quot;&amp;i = %p\n&quot;, &amp;i);
+    printf(&quot;&amp;arr[0] = %p\n&quot;, &amp;arr[0]);
+
+    for(i=0; i&lt;12; i++)
+    {
+        arr[-i] = 1;
+        printf(&quot;nice to meet you!\n&quot;);
+    }
+
+    return 0;
+}
+</code></pre>
+</li>
+</ol>
+<h2 id="不对称边界"><a href="#不对称边界" class="headerlink" title="不对称边界"></a>不对称边界</h2><blockquote>
+<p>C语言中数组的这种特别的设计正是其最大优势所在。    ——《C陷阱与缺陷》</p>
+<p>在编码过程中，for语句循环控制变量采用半开半闭区间的写法。    ——《高质量C++/C编程指南》的建议【4-5-1】</p>
+</blockquote>
+<p>why？</p>
+<p>这个其实是为了增加代码的可读性，看下面这段代码：</p>
+<pre><code class="C">int main()
+{
+    // 1
+    for(int i=16; i&lt;=37; i++)
+    {
+        something1();
+    }
+    // 2
+    for(int j=16; j&lt;38; j++)
+    {
+        something2();
+    }
+
+    return 0;
+}
+</code></pre>
+<p>问题：在第一个循环中<code>something1()</code>被调用了多少次，在第二个循环中<code>something2()</code>被调用多少次。</p>
+<p>答案：37-16+1 = 22次，38-16 = 22。</p>
+<p>显然半开半闭区间比较直观。</p>
+<p><img src="https://wx2.sinaimg.cn/mw690/006wR0dcly1fwrk6oymgvj31kw0wxgsx.jpg" width="50%" height="50%"></p>
+<blockquote>
+<p>这种不对称也许从数学上而言并不优美，但是它对于程序设计的简化效果却足以令人吃惊：</p>
+<ol>
+<li>取值范围的大小就是上界与下界的差。38-16的值是22，恰是不对称边界16和38之间所包括的元素数目。</li>
+<li>如果取值范围为空，那么上界等于下界。</li>
+<li>即使取值范围为空，上界也永远不可能小于下界。</li>
+</ol>
+<p>像C语言这样的数组下标从0开始的语言，不对称边界给程序设计带来的便利尤为明显：这种数组的上界(即第一个“出界点”)恰是循环执行的次数。</p>
+</blockquote>
+<p>按照这种不对称边界的惯例，有如下语句：</p>
+<pre><code class="c">char* my_strcpy(char *str_dest, const char *str_src)
+{
+    assert(str_dest != NULL);
+    assert(str_src != NULL);
+
+    char *tmp = str_dest;
+
+    while((*tmp++ = *str_src++))    // 这里是重点
+    {
+        ;
+    }
+
+    return str_dest;
+}
+</code></pre>
+<p>另外：在计算字符串长度时候，我们可以用这样的上界指针减去字符串首元素地址的指针然后除每个元素大小。</p>
+<p><code>string_length = (upp - downp)/sizeof(downp[0]);</code></p>
+<hr>
+<p>参考书籍：</p>
+<blockquote>
+<p>《高质量C++/C编程指南》、《C陷阱与缺陷》</p>
+</blockquote>
+</div></article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">ahoj</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://ahoj.cc/2019/03/cjvtlw6h7000lq409jic5yu3v/">https://ahoj.cc/2019/03/cjvtlw6h7000lq409jic5yu3v/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://ahoj.cc">ahoj's blog</a>！</span></div></div><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/C/">C</a></div><nav id="pagination"><div class="prev-post pull-left"><a href="/2019/03/cjvtlw6hh0015q4095e0zu2q6/"><i class="fa fa-chevron-left">  </i><span>Git-提交规范</span></a></div><div class="next-post pull-right"><a href="/2019/03/cjvtlw6h1000gq409qcno5k8j/"><span>C-字符串相关的库函数</span><i class="fa fa-chevron-right"></i></a></div></nav><div id="vcomment"></div><script src="https://cdn1.lncld.net/static/js/3.0.4/av-min.js"></script><script src="https://cdn.jsdelivr.net/npm/valine/dist/Valine.min.js"></script><script>var notify = 'false' == true ? true : false;
+var verify = 'false' == true ? true : false;
+var GUEST_INFO = ['nick','mail','link'];
+var guest_info = 'nick,mail,link'.split(',').filter(function(item){
+  return GUEST_INFO.indexOf(item) > -1
+});
+guest_info = guest_info.length == 0 ? GUEST_INFO :guest_info;
+window.valine = new Valine({
+  el:'#vcomment',
+  notify:notify,
+  verify:verify,
+  appId:'yy9oH4ap0AOjoGWG7vbV9w2v-gzGzoHsz',
+  appKey:'27EcRosAo5WUi5KH16i9nAq1',
+  placeholder:'说点什么吧~ 不足之处或者...',
+  avatar:'mm',
+  guest_info:guest_info,
+  pageSize:'10',
+  lang: 'zh-cn'
+})</script></div></div><footer><div class="layout" id="footer"><div class="copyright">&copy;2019 By ahoj</div><div class="framework-info"><span>驱动 - </span><a href="http://hexo.io"><span>Hexo</span></a><span class="footer-separator">|</span><span>主题 - </span><a href="https://github.com/Molunerfinn/hexo-theme-melody"><span>Melody</span></a></div><div class="busuanzi"><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><span id="busuanzi_container_page_pv"><i class="fa fa-file-o"></i><span id="busuanzi_value_page_pv"></span><span></span></span></div></div></footer><i class="fa fa-arrow-up" id="go-up" aria-hidden="true"></i><script src="https://cdn.jsdelivr.net/npm/animejs@latest/anime.min.js"></script><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@latest/velocity.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-ui-pack@latest/velocity.ui.min.js"></script><script src="/js/utils.js?version=1.6.1"></script><script src="/js/fancybox.js?version=1.6.1"></script><script src="/js/sidebar.js?version=1.6.1"></script><script src="/js/copy.js?version=1.6.1"></script><script src="/js/fireworks.js?version=1.6.1"></script><script src="/js/transition.js?version=1.6.1"></script><script src="/js/scroll.js?version=1.6.1"></script><script src="/js/head.js?version=1.6.1"></script><script src="/js/search/local-search.js"></script><script>if(/Android|webOS|iPhone|iPod|BlackBerry/i.test(navigator.userAgent)) {
+  $('#nav').addClass('is-mobile')
+  $('footer').addClass('is-mobile')
+}</script><div class="search-dialog" id="local-search"><div class="search-dialog__title" id="local-search-title">本地搜索</div><div id="local-input-panel"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章"></div></div></div><hr><div id="local-search-results"><div id="local-hits"></div><div id="local-stats"><div class="local-search-stats__hr" id="hr"><span>由</span> <a href="https://github.com/wzpan/hexo-generator-search" style="color:#49B1F5;">hexo-generator-search</a>
+ <span>提供支持</span></div></div></div><span class="search-close-button"><i class="fa fa-times"></i></span></div><div class="search-mask"></div></body></html>

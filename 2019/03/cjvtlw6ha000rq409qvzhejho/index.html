@@ -1,0 +1,231 @@
+<!DOCTYPE html><html lang="zh-Hans"><head><meta name="generator" content="Hexo 3.8.0"><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta name="description" content="Cpp-内存管理"><meta name="keywords" content="Cpp"><meta name="author" content="ahoj"><meta name="copyright" content="ahoj"><title>Cpp-内存管理 | ahoj's blog</title><link rel="shortcut icon" href="/bitbug_favicon.ico"><link rel="stylesheet" href="/css/index.css?version=1.6.1"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@latest/css/font-awesome.min.css?version=1.6.1"><link rel="dns-prefetch" href="https://cdn.staticfile.org"><link rel="dns-prefetch" href="https://cdn.bootcss.com"><link rel="dns-prefetch" href="https://creativecommons.org"><script>var GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"search.xml","languages":{"hits_empty":"找不到您查询的内容:${query}"}},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  }
+} </script></head><body><canvas class="fireworks"></canvas><i class="fa fa-arrow-right" id="toggle-sidebar" aria-hidden="true"></i><div id="sidebar"><div class="toggle-sidebar-info text-center"><span data-toggle="切换文章详情">切换站点概览</span><hr></div><div class="sidebar-toc"><div class="sidebar-toc__title">目录</div><div class="sidebar-toc__progress"><span class="progress-notice">你已经读了</span><span class="progress-num">0</span><span class="progress-percentage">%</span><div class="sidebar-toc__progress-bar"></div></div><div class="sidebar-toc__content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#C-C-内存分布"><span class="toc-number">1.</span> <span class="toc-text">C/C++ 内存分布</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#C-内存管理方式"><span class="toc-number">2.</span> <span class="toc-text">C 内存管理方式</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#malloc-calloc-realloc-和-free"><span class="toc-number">2.1.</span> <span class="toc-text">malloc/calloc/realloc 和 free</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#C-内存管理方式-1"><span class="toc-number">3.</span> <span class="toc-text">C++ 内存管理方式</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#new-amp-delete"><span class="toc-number">3.1.</span> <span class="toc-text">new &amp; delete</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#对于内置类型"><span class="toc-number">3.1.1.</span> <span class="toc-text">对于内置类型</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#对于自定义类型"><span class="toc-number">3.1.2.</span> <span class="toc-text">对于自定义类型</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#operator-new-amp-operator-delete"><span class="toc-number">3.2.</span> <span class="toc-text">operator new &amp; operator delete</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#operator-new"><span class="toc-number">3.2.1.</span> <span class="toc-text">operator new</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#operator-delete"><span class="toc-number">3.2.2.</span> <span class="toc-text">operator delete</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#🌰-重载类专属-operator-new-operator-delete"><span class="toc-number">3.2.3.</span> <span class="toc-text">🌰 重载类专属 operator new/ operator delete</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#new-和-delete-的实现原理"><span class="toc-number">3.3.</span> <span class="toc-text">new 和 delete 的实现原理</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#内置类型"><span class="toc-number">3.3.1.</span> <span class="toc-text">内置类型</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#自定义类型"><span class="toc-number">3.3.2.</span> <span class="toc-text">自定义类型</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#定位-new-表达式（placement-new）"><span class="toc-number">3.4.</span> <span class="toc-text">定位 new 表达式（placement-new）</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#内存泄露"><span class="toc-number">4.</span> <span class="toc-text">内存泄露</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#内存泄露分类"><span class="toc-number">4.1.</span> <span class="toc-text">内存泄露分类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#检测内存泄露"><span class="toc-number">4.2.</span> <span class="toc-text">检测内存泄露</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#避免内存泄漏"><span class="toc-number">4.3.</span> <span class="toc-text">避免内存泄漏</span></a></li></ol></li></ol></div></div><div class="author-info hide"><div class="author-info__avatar text-center"><img src="https://i.loli.net/2019/05/18/5ce01a928835c26008.jpg"></div><div class="author-info__name text-center">ahoj</div><div class="author-info__description text-center">思想的本质就是不安</div><div class="follow-button"><a href="https://github.com/ahojcn">GitHub</a></div><hr><div class="author-info-articles"><a class="author-info-articles__archives article-meta" href="/archives"><span class="pull-left">文章</span><span class="pull-right">58</span></a><a class="author-info-articles__tags article-meta" href="/tags"><span class="pull-left">标签</span><span class="pull-right">19</span></a><a class="author-info-articles__categories article-meta" href="/categories"><span class="pull-left">分类</span><span class="pull-right">14</span></a></div><hr><div class="author-info-links"><div class="author-info-links__title text-center">朋友们</div><a class="author-info-links__name text-center" href="https://zouchanglin.cn/">Tim</a><a class="author-info-links__name text-center" href="http://www.ijam8.com/">Jam</a><a class="author-info-links__name text-center" href="https://blog.csdn.net/jack_wang128801">jack_wang128801</a><a class="author-info-links__name text-center" href="https://blog.csdn.net/weixin_43232955">Mr.Q_</a></div></div></div><div id="content-outer"><div class="no-bg" id="top-container"><div id="page-header"><span class="pull-left"> <a id="site-name" href="/">ahoj's blog</a></span><i class="fa fa-bars toggle-menu pull-right" aria-hidden="true"></i><span class="pull-right menus"><a class="site-page social-icon search"><i class="fa fa-search"></i><span> 搜索</span></a><a class="site-page" href="/">主页</a><a class="site-page" href="/archives">文章</a><a class="site-page" href="/tags">标签</a><a class="site-page" href="/categories">分类</a><a class="site-page" href="/about">关于</a></span></div><div id="post-info"><div id="post-title">Cpp-内存管理</div><div id="post-meta"><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 2019-03-18</time><span class="post-meta__separator">|</span><i class="fa fa-inbox post-meta__icon" aria-hidden="true"></i><a class="post-meta__categories" href="/categories/Cpp/">Cpp</a></div></div></div><div class="layout" id="content-inner"><article id="post"><div class="article-container" id="post-content"><p>C/Cpp 中管理内存的方式。</p>
+<a id="more"></a>
+<h2 id="C-C-内存分布"><a href="#C-C-内存分布" class="headerlink" title="C/C++ 内存分布"></a>C/C++ 内存分布</h2><p><img src="https://ws1.sinaimg.cn/large/006wR0dcly1g1d5txonqqj30dm0ugtal.jpg" alt></p>
+<p><strong>栈：</strong>又叫堆栈，非静态局部变量/函数参数/返回值等等，栈是向下增长的。 </p>
+<p><strong>内存映射段：</strong>是高效的 I/O 映射方式，用于装载一个共享的动态内存库。用户可使用系统接口创建共享共 </p>
+<p>享内存，做进程间通信。 </p>
+<p><strong>堆：</strong>程序运行过程中动态分配，向上生长。</p>
+<p><strong>数据段：</strong>全局数据、静态数据。</p>
+<p><strong>代码段：</strong>只读常量、可执行代码。</p>
+<h2 id="C-内存管理方式"><a href="#C-内存管理方式" class="headerlink" title="C 内存管理方式"></a>C 内存管理方式</h2><h3 id="malloc-calloc-realloc-和-free"><a href="#malloc-calloc-realloc-和-free" class="headerlink" title="malloc/calloc/realloc 和 free"></a>malloc/calloc/realloc 和 free</h3><pre><code class="cpp">void Test () {
+    int* p1 = (int*) malloc(sizeof(int));
+    free(p1);
+    // malloc/calloc/realloc的区别是什么?
+    int* p2 = (int*)calloc(4, sizeof (int)); 
+    int* p3 = (int*)realloc(p2, sizeof(int)*10);
+    // 这里需要free(p2)吗?
+    free(p3);
+}
+</code></pre>
+<p>⚠️ 这里不能<code>free(p2)</code>，因为 realloc 在申请内存时可能会改变存储的地址，这里只需要 free p3 就行。</p>
+<h2 id="C-内存管理方式-1"><a href="#C-内存管理方式-1" class="headerlink" title="C++ 内存管理方式"></a>C++ 内存管理方式</h2><h3 id="new-amp-delete"><a href="#new-amp-delete" class="headerlink" title="new &amp; delete"></a>new &amp; delete</h3><h4 id="对于内置类型"><a href="#对于内置类型" class="headerlink" title="对于内置类型"></a>对于内置类型</h4><pre><code class="cpp">int *p_a = new int;
+int *p_b = new int(233);
+int *p_arr = new int[10];
+
+delete p_a;
+delete p_b;
+delete[] p_arr;
+</code></pre>
+<h4 id="对于自定义类型"><a href="#对于自定义类型" class="headerlink" title="对于自定义类型"></a>对于自定义类型</h4><pre><code class="cpp">class Student
+{ ... };
+
+Student *ps1 = new Student;
+Student *ps2 = new Student[10];
+</code></pre>
+<p>在申请自定义类型的空间时，new 会调用构造函数，delete 会调用析构函数，而 malloc 与 free 不会。</p>
+<h3 id="operator-new-amp-operator-delete"><a href="#operator-new-amp-operator-delete" class="headerlink" title="operator new &amp; operator delete"></a>operator new &amp; operator delete</h3><p>operator new 和 operator delete 是系统提供的<strong>全局函数</strong>，new 在底层调用 operator new 全局函数来申请空间，delete 在底层通过 operator delete 全局函数来释放空间。</p>
+<p>operator new 实际也是通过 malloc 来申请空间，如果 malloc 申请空间成功就直接返回，否则执行用户提供的空间不足应对措施，如果用户提供该措施就继续申请，否则就抛异常。operator delete 最终是通过free来释放空间的。</p>
+<h4 id="operator-new"><a href="#operator-new" class="headerlink" title="operator new"></a>operator new</h4><pre><code class="cpp">/*
+operator new:
+    该函数实际通过malloc来申请空间，当malloc申请空间成功时直接返回;
+    申请空间失败，尝试执行空间不足应对措施，如果改应对措施用户设置了，则执行，否则抛异常。
+*/
+void *__CRTDECL operator new(size_t size) _THROW1(_STD bad_alloc)
+{
+  // try to allocate size bytes
+  void *p;
+  while ((p = malloc(size)) == 0)
+    if (_callnewh(size) == 0)
+    {
+      // report no memory
+      // 如果申请内存失败了，这里会抛出 bad_alloc 类型异常 
+      static const std::bad_alloc nomem;
+      _RAISE(nomem);
+    }
+  return (p); 
+}
+</code></pre>
+<h4 id="operator-delete"><a href="#operator-delete" class="headerlink" title="operator delete"></a>operator delete</h4><pre><code class="cpp">/*
+operator delete: 该函数最终是通过free来释放空间的 */
+void operator delete(void *pUserData)
+{
+  _CrtMemBlockHeader * pHead;
+  RTCCALLBACK(_RTC_Free_hook, (pUserData, 0));
+  if (pUserData == NULL)
+      return;
+  _mlock(_HEAP_LOCK);  /* block other threads */
+  __TRY
+    /* get a pointer to memory block header */
+    pHead = pHdr(pUserData);
+    /* verify block type */
+    _ASSERTE(_BLOCK_TYPE_IS_VALID(pHead-&gt;nBlockUse));
+    _free_dbg( pUserData, pHead-&gt;nBlockUse );    // 释放空间，调用 _free_dbg
+  __FINALLY
+    _munlock(_HEAP_LOCK);  /* release other threads */
+  __END_TRY_FINALLY
+  return;
+}
+
+/*
+    free
+*/
+#define free(p)        _free_dbg(p, _NORMAL_BLOCK)
+</code></pre>
+<h4 id="🌰-重载类专属-operator-new-operator-delete"><a href="#🌰-重载类专属-operator-new-operator-delete" class="headerlink" title="🌰 重载类专属 operator new/ operator delete"></a>🌰 重载类专属 operator new/ operator delete</h4><p>针对链表的节点 ListNode 通过<strong>重载类专属 operator new/ operator delete</strong>，实现链表节点使用内存池申请和释放内存，提高效率。</p>
+<pre><code class="cpp">struct ListNode
+{
+    ListNode* _next;
+    ListNode* _prev;
+    int _data;
+    void* operator new(size_t n)
+    {
+        void* p = nullptr;
+        p = allocator&lt;ListNode&gt;().allocate(1);
+        cout &lt;&lt; &quot;memory pool allocate&quot; &lt;&lt; endl;
+        return p;
+    }
+    void operator delete(void* p)
+    {
+        allocator&lt;ListNode&gt;().deallocate((ListNode*)p, 1);
+        cout &lt;&lt; &quot;memory pool deallocate&quot; &lt;&lt; endl;
+        } 
+};
+
+class List
+{
+public:
+    List()
+    {
+            _head = new ListNode;
+            _head-&gt;_next = _head;
+            _head-&gt;_prev = _head;
+    }
+    ~List() 
+    {
+            ListNode* cur = _head-&gt;_next;
+            while (cur != _head)
+            {
+                ListNode* next = cur-&gt;_next;
+                delete cur;
+                cur = next;
+            }
+            delete _head;
+            _head = nullptr;
+    }
+private:
+    ListNode* _head;
+};
+int main()
+{
+    List l;
+    return 0;
+}
+</code></pre>
+<h3 id="new-和-delete-的实现原理"><a href="#new-和-delete-的实现原理" class="headerlink" title="new 和 delete 的实现原理"></a>new 和 delete 的实现原理</h3><h4 id="内置类型"><a href="#内置类型" class="headerlink" title="内置类型"></a>内置类型</h4><p>如果申请的是内置类型的空间，new 和 malloc，delete 和 free 基本类似。</p>
+<p>不同的地方是：new/delete 申请和释放的是单个元素的空间，new[] 和 delete[] 申请的是连续空间，而且 new 在申请空间失败时会抛异常，malloc 会返回 NULL 。</p>
+<h4 id="自定义类型"><a href="#自定义类型" class="headerlink" title="自定义类型"></a>自定义类型</h4><ul>
+<li>new<ol>
+<li>调用 operator new 函数申请空间</li>
+<li>在申请的空间上执行构造函数，完成对象的构造</li>
+</ol>
+</li>
+<li>delete<ol>
+<li>在空间上执行析构函数，完成对象中资源的清理工作</li>
+<li>调用 operator delete 函数释放对象的空间</li>
+</ol>
+</li>
+<li>new T[N]<ol>
+<li>调用 operator new[] 函数，在 operator new[] 中实际调用 operator new 函数完成 N 个对象空间的申请</li>
+<li>在申请的空间上执行 N 次构造函数</li>
+</ol>
+</li>
+<li>delete[]<ol>
+<li>在释放的对象空间上执行 N 次析构函数，完成 N 个对象中资源的清理</li>
+<li>调用 operator delete[] 释放空间，实际在 operator delete[] 中调用 operator delete 来释放空间</li>
+</ol>
+</li>
+</ul>
+<h3 id="定位-new-表达式（placement-new）"><a href="#定位-new-表达式（placement-new）" class="headerlink" title="定位 new 表达式（placement-new）"></a>定位 new 表达式（placement-new）</h3><p>定位 new 表达式是在已分配的原始内存空间中调用构造函数初始化一个对象。</p>
+<p>使用场景：定位 new 表达式在实际中一般是配合内存池使用。因为内存池分配出的内存没有初始化，所以如果是自定义类型的对象，需要使用 new 的定义表达式进行显示调构造函数进行初始化。</p>
+<p>用法：</p>
+<pre><code class="cpp">new (place_address) type;
+// 或者
+new (place_address) type(initializer-list);
+// place_address 必须是一个指针，initializer-list 是类型的初始化列表
+
+Date* pd = (Date*)malloc(sizeof(Date));
+// 此时的 pd 指向的空间只是一个大小和 Date 对象一样的空间，并不能算是一个对象，构造函数还没有执行
+new(pd)Date(1939,2,3);
+</code></pre>
+<h2 id="内存泄露"><a href="#内存泄露" class="headerlink" title="内存泄露"></a>内存泄露</h2><p><em>内存泄漏指因为疏忽或错误造成程序未能释放已经不再使用的内存的情况。内存泄漏并不是指内存在物理上<br>的消失，而是应用程序分配某段内存后，因为设计错误，失去了对该段内存的控制，因而造成了内存的浪费。</em></p>
+<ul>
+<li><p>内存申请了忘记释放</p>
+<pre><code class="cpp">int* p1 = (int*)malloc(sizeof(int));
+int* p2 = new int;
+</code></pre>
+</li>
+<li><p>异常安全问题</p>
+<pre><code class="cpp">int* p3 = new int[10];
+Func(); // 这里Func函数抛异常导致 delete[] p3未执行，p3没被释放. 
+delete[] p3;
+</code></pre>
+</li>
+</ul>
+<h3 id="内存泄露分类"><a href="#内存泄露分类" class="headerlink" title="内存泄露分类"></a>内存泄露分类</h3><ul>
+<li><p>堆内存泄漏(Heap leak)</p>
+<p>堆内存指的是程序执行中依据须要分配通过malloc / calloc / realloc / new等从堆中分配的一块内存，用完后必须通过调用相应的 free 或者 delete 删掉。假设程序的设计错误导致这部分内存没有被释放，那么以后这部分空间将无法再被使用，就会产生 Heap leak。</p>
+</li>
+<li><p>系统资源泄漏</p>
+<p>指程序使用系统分配的资源，比方套接字、文件描述符、管道等没有使用对应的函数释放掉，导致系统资源的浪费，严重可导致系统效能减少，系统执行不稳定。</p>
+</li>
+</ul>
+<h3 id="检测内存泄露"><a href="#检测内存泄露" class="headerlink" title="检测内存泄露"></a>检测内存泄露</h3><ul>
+<li><a href="https://blog.csdn.net/gatieme/article/details/51959654" target="_blank" rel="noopener">Linux 下内存泄漏检测工具</a></li>
+<li><a href="https://blog.csdn.net/GZrhaunt/article/details/56839765" target="_blank" rel="noopener">Windows 下的第三方工具</a></li>
+<li><a href="https://www.cnblogs.com/liangxiaofeng/p/4318499.html" target="_blank" rel="noopener">内存泄漏工具比较</a></li>
+</ul>
+<h3 id="避免内存泄漏"><a href="#避免内存泄漏" class="headerlink" title="避免内存泄漏"></a>避免内存泄漏</h3><p>事前预防型，如智能指针、良好的设计。</p>
+<p>事后查错型，如泄漏检测工具。 </p>
+<hr>
+</div></article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">ahoj</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://ahoj.cc/2019/03/cjvtlw6ha000rq409qvzhejho/">https://ahoj.cc/2019/03/cjvtlw6ha000rq409qvzhejho/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://ahoj.cc">ahoj's blog</a>！</span></div></div><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Cpp/">Cpp</a></div><nav id="pagination"><div class="prev-post pull-left"><a href="/2019/03/cjvtlw6hb000tq409cbbu7loe/"><i class="fa fa-chevron-left">  </i><span>Cpp-模板初阶</span></a></div><div class="next-post pull-right"><a href="/2019/03/cjvtlw6i0002bq409yen34xsm/"><span>Linux-基础命令</span><i class="fa fa-chevron-right"></i></a></div></nav><div id="vcomment"></div><script src="https://cdn1.lncld.net/static/js/3.0.4/av-min.js"></script><script src="https://cdn.jsdelivr.net/npm/valine/dist/Valine.min.js"></script><script>var notify = 'false' == true ? true : false;
+var verify = 'false' == true ? true : false;
+var GUEST_INFO = ['nick','mail','link'];
+var guest_info = 'nick,mail,link'.split(',').filter(function(item){
+  return GUEST_INFO.indexOf(item) > -1
+});
+guest_info = guest_info.length == 0 ? GUEST_INFO :guest_info;
+window.valine = new Valine({
+  el:'#vcomment',
+  notify:notify,
+  verify:verify,
+  appId:'yy9oH4ap0AOjoGWG7vbV9w2v-gzGzoHsz',
+  appKey:'27EcRosAo5WUi5KH16i9nAq1',
+  placeholder:'说点什么吧~ 不足之处或者...',
+  avatar:'mm',
+  guest_info:guest_info,
+  pageSize:'10',
+  lang: 'zh-cn'
+})</script></div></div><footer><div class="layout" id="footer"><div class="copyright">&copy;2019 By ahoj</div><div class="framework-info"><span>驱动 - </span><a href="http://hexo.io"><span>Hexo</span></a><span class="footer-separator">|</span><span>主题 - </span><a href="https://github.com/Molunerfinn/hexo-theme-melody"><span>Melody</span></a></div><div class="busuanzi"><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><span id="busuanzi_container_page_pv"><i class="fa fa-file-o"></i><span id="busuanzi_value_page_pv"></span><span></span></span></div></div></footer><i class="fa fa-arrow-up" id="go-up" aria-hidden="true"></i><script src="https://cdn.jsdelivr.net/npm/animejs@latest/anime.min.js"></script><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@latest/velocity.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-ui-pack@latest/velocity.ui.min.js"></script><script src="/js/utils.js?version=1.6.1"></script><script src="/js/fancybox.js?version=1.6.1"></script><script src="/js/sidebar.js?version=1.6.1"></script><script src="/js/copy.js?version=1.6.1"></script><script src="/js/fireworks.js?version=1.6.1"></script><script src="/js/transition.js?version=1.6.1"></script><script src="/js/scroll.js?version=1.6.1"></script><script src="/js/head.js?version=1.6.1"></script><script src="/js/search/local-search.js"></script><script>if(/Android|webOS|iPhone|iPod|BlackBerry/i.test(navigator.userAgent)) {
+  $('#nav').addClass('is-mobile')
+  $('footer').addClass('is-mobile')
+}</script><div class="search-dialog" id="local-search"><div class="search-dialog__title" id="local-search-title">本地搜索</div><div id="local-input-panel"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章"></div></div></div><hr><div id="local-search-results"><div id="local-hits"></div><div id="local-stats"><div class="local-search-stats__hr" id="hr"><span>由</span> <a href="https://github.com/wzpan/hexo-generator-search" style="color:#49B1F5;">hexo-generator-search</a>
+ <span>提供支持</span></div></div></div><span class="search-close-button"><i class="fa fa-times"></i></span></div><div class="search-mask"></div></body></html>

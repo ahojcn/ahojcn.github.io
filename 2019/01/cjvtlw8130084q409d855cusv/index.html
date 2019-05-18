@@ -1,0 +1,272 @@
+<!DOCTYPE html><html lang="zh-Hans"><head><meta name="generator" content="Hexo 3.8.0"><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta name="description" content="错题整理"><meta name="keywords" content="C"><meta name="author" content="ahoj"><meta name="copyright" content="ahoj"><title>错题整理 | ahoj's blog</title><link rel="shortcut icon" href="/bitbug_favicon.ico"><link rel="stylesheet" href="/css/index.css?version=1.6.1"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@latest/css/font-awesome.min.css?version=1.6.1"><link rel="dns-prefetch" href="https://cdn.staticfile.org"><link rel="dns-prefetch" href="https://cdn.bootcss.com"><link rel="dns-prefetch" href="https://creativecommons.org"><script>var GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"search.xml","languages":{"hits_empty":"找不到您查询的内容:${query}"}},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  }
+} </script></head><body><canvas class="fireworks"></canvas><i class="fa fa-arrow-right" id="toggle-sidebar" aria-hidden="true"></i><div id="sidebar"><div class="toggle-sidebar-info text-center"><span data-toggle="切换文章详情">切换站点概览</span><hr></div><div class="sidebar-toc"><div class="sidebar-toc__title">目录</div><div class="sidebar-toc__progress"><span class="progress-notice">你已经读了</span><span class="progress-num">0</span><span class="progress-percentage">%</span><div class="sidebar-toc__progress-bar"></div></div><div class="sidebar-toc__content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#考试错题"><span class="toc-number">1.</span> <span class="toc-text">考试错题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#牛客的错题整理"><span class="toc-number">2.</span> <span class="toc-text">牛客的错题整理</span></a></li></ol></div></div><div class="author-info hide"><div class="author-info__avatar text-center"><img src="https://i.loli.net/2019/05/18/5ce01a928835c26008.jpg"></div><div class="author-info__name text-center">ahoj</div><div class="author-info__description text-center">思想的本质就是不安</div><div class="follow-button"><a href="https://github.com/ahojcn">GitHub</a></div><hr><div class="author-info-articles"><a class="author-info-articles__archives article-meta" href="/archives"><span class="pull-left">文章</span><span class="pull-right">58</span></a><a class="author-info-articles__tags article-meta" href="/tags"><span class="pull-left">标签</span><span class="pull-right">19</span></a><a class="author-info-articles__categories article-meta" href="/categories"><span class="pull-left">分类</span><span class="pull-right">14</span></a></div><hr><div class="author-info-links"><div class="author-info-links__title text-center">朋友们</div><a class="author-info-links__name text-center" href="https://zouchanglin.cn/">Tim</a><a class="author-info-links__name text-center" href="http://www.ijam8.com/">Jam</a><a class="author-info-links__name text-center" href="https://blog.csdn.net/jack_wang128801">jack_wang128801</a><a class="author-info-links__name text-center" href="https://blog.csdn.net/weixin_43232955">Mr.Q_</a></div></div></div><div id="content-outer"><div class="no-bg" id="top-container"><div id="page-header"><span class="pull-left"> <a id="site-name" href="/">ahoj's blog</a></span><i class="fa fa-bars toggle-menu pull-right" aria-hidden="true"></i><span class="pull-right menus"><a class="site-page social-icon search"><i class="fa fa-search"></i><span> 搜索</span></a><a class="site-page" href="/">主页</a><a class="site-page" href="/archives">文章</a><a class="site-page" href="/tags">标签</a><a class="site-page" href="/categories">分类</a><a class="site-page" href="/about">关于</a></span></div><div id="post-info"><div id="post-title">错题整理</div><div id="post-meta"><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 2019-01-12</time><span class="post-meta__separator">|</span><i class="fa fa-inbox post-meta__icon" aria-hidden="true"></i><a class="post-meta__categories" href="/categories/C/">C</a></div></div></div><div class="layout" id="content-inner"><article id="post"><div class="article-container" id="post-content"><p>整理了一下一些错题，以便日后回顾。</p>
+<a id="more"></a>
+<h2 id="考试错题"><a href="#考试错题" class="headerlink" title="考试错题"></a>考试错题</h2><ol>
+<li><p>编程实现一个对8bit数据(unsigned char)的指定位(比如第n位)的置0或者置1操作，其他位保持不变。</p>
+<p>函数原型：<code>void bit_set(unsigned char *p_data, unsigned char pos, int flag)</code></p>
+<p>这道题考试的时候我是这么写的：将这个p_data左移、右移。刚才在写关于位段的错题时，想起来还可以这么搞，但是还是移位操作比较方便，嘿嘿，我就试试。</p>
+<pre><code class="c">#include &lt;stdio.h&gt;
+#define A(uc, x) uc##x
+
+#pragma pack(1)
+typedef struct sup
+{
+    unsigned char uc1 : 1;
+    unsigned char uc2 : 1;
+    unsigned char uc3 : 1;
+    unsigned char uc4 : 1;
+    unsigned char uc5 : 1;
+    unsigned char uc6 : 1;
+    unsigned char uc7 : 1;
+    unsigned char uc8 : 1;
+} *pSUP_S;
+#pragma pack()
+
+void bit_set(unsigned char *p_data, unsigned char pos, int flag)
+{
+    pSUP_S ps = (pSUP_S)p_data;
+    switch(pos)
+    {
+        case 1:
+            ps-&gt;A(uc, 1) = flag;
+            break;
+        case 2:
+            ps-&gt;A(uc, 2) = flag;
+            break;
+        case 3:
+            ps-&gt;A(uc, 3) = flag;
+            break;
+        case 4:
+            ps-&gt;A(uc, 4) = flag;
+            break;
+        case 5:
+            ps-&gt;A(uc, 5) = flag;
+            break;
+        case 6:
+            ps-&gt;A(uc, 6) = flag;
+            break;
+        case 7:
+            ps-&gt;A(uc, 7) = flag;
+            break;
+        case 8:
+            ps-&gt;A(uc, 8) = flag;
+            break;
+        default:
+            break;
+    }
+}
+
+void print(unsigned char a)
+{
+    while(a)
+    {
+        printf(&quot;%d&quot;, a%2);
+        a /= 2;
+    }
+    printf(&quot;\n&quot;);
+}
+
+int main()
+{
+    unsigned char a = 1;
+    bit_set(&amp;a, 5, 1);
+    print(a);
+    return 0;
+}
+</code></pre>
+<hr>
+</li>
+<li><p>给出以下定义：</p>
+<p><code>char x[] = &quot;abcdefg&quot;;</code></p>
+<p><code>char y[] = {&#39;a&#39;,&#39;b&#39;,&#39;c&#39;,&#39;d&#39;,&#39;e&#39;,&#39;f&#39;,&#39;g&#39;};</code></p>
+<p>则正确的叙述为（C）</p>
+<p>A）数组x和数组y等价    B）数组x和数组y的长度相同</p>
+<p>C）数组x的长度大于数组y的长度    D）数组x的长度小于y的长度</p>
+<p><strong><em>分析：粗心大意！选项都不看清就选答案？</em></strong></p>
+<hr>
+</li>
+<li><p>设有如下定义：</p>
+<p><code>unsigned long arr[] = {6,7,8,9,10};</code></p>
+<p><code>unsigned long *p;</code></p>
+<p>则下列程序段的输出结果为（6,12）</p>
+<pre><code class="c">p = arr;
+*(p + 3) += 3;
+printf(&quot;%d,%d\n&quot;, *p, *(p + 3));
+</code></pre>
+<p><strong><em>分析：粗心大意！慌什么慌，稳住啊。给数组解引用又不是给你解引用，题看完再写啊。</em></strong></p>
+<hr>
+</li>
+<li><p>全局变量可以定义在被多个.c文件包含着的头文件中（❌）</p>
+<p><strong><em>分析：注意区分定义和声明的概念，definition、declaration！</em></strong></p>
+<hr>
+</li>
+<li><p>下面这道题虽然没错，但是还是想写出来，自己以后看到也注意点，别忘了。</p>
+<pre><code class="c">unsigned char a = 200;
+unsigned char b = 100;
+unsigned char c = 0;
+c = a + b;
+printf(&quot;%d %d &quot;,a+b,c);
+</code></pre>
+<blockquote>
+<p>C的整型算数运算总是至少以缺省整型类型的精度来进行的，为了获得这个精度，表达式中的字符型和短整型操作数在使用之前被转换为普通整型。《C和指针》</p>
+</blockquote>
+<p><strong><em>分析：输出结果为<code>300,44</code>，注意整形提升问题，<a href="https://github.com/ahojcn/Practice/blob/master/Notes/C/%E6%95%B0%E6%8D%AE%E5%9C%A8%E5%86%85%E5%AD%98%E4%B8%AD%E7%9A%84%E5%AD%98%E5%82%A8.md" target="_blank" rel="noopener">整形提升笔记</a></em></strong></p>
+<hr>
+</li>
+<li><p>下面这个题也是粗心大意造成的，但是还是有一点就是没有区分清楚指针数组和数组指针等概念。<a href="http://ahoj.cc/2019/01/cjqmi1m1m0003td09e812j5rm/">关于指针的笔记</a></p>
+<pre><code class="c">unsigned short *pcArr[10][10];
+typedef union unRec
+{
+    unsigned long a;
+    unsigned short b[7];
+    unsigned short c;
+}REC_S;
+REC_S stMax, *pstMax;
+</code></pre>
+<p>当四字节对齐方式时：</p>
+<p><code>sizeof(pcArr) = 400</code>，<strong><em>是一个10•10的指针数组，数组里存放的是指针。</em></strong></p>
+<p><code>sizeof(stMax) = 16</code>，<strong><em>注意这里是union，慌什么！？</em></strong></p>
+<p><code>sizeof(pstMax) = 4</code>，<strong><em>指针的大小</em></strong></p>
+<p><code>sizeof(*pstMax) = 16</code>，<strong><em>钥匙(&amp;)重4kg，拿着钥匙进了你家门。</em></strong></p>
+<hr>
+</li>
+<li><p>结构体定义如下：</p>
+<pre><code class="c">struct B
+{
+    long l1;
+    char c2;
+    char c3;
+    long l4;
+    long l5;
+} *p;
+p = (struct B*)0x100;
+</code></pre>
+<p><code>p + 0x1 = 0x110</code><strong><em>，结构体大小是16，指针p的一步长为16，向前走一步加16(10H)。</em></strong></p>
+<p><code>(unsigned long)p + 0x1 = 101</code><strong><em>，注意是强转成了一个数。</em></strong></p>
+<p><code>(unsigned long *)p + 0x1 = 0x104</code>，<strong><em>强转成了指针。</em></strong></p>
+<hr>
+</li>
+<li><p>有如下定义：</p>
+<pre><code class="c">struct A
+{
+    unsigned char uc1 : 1;
+    unsigned char uc2 : 2;
+    unsigned char uc2 : 6;
+    unsigned char uc3 : 4;
+    unsigned char uc4;
+    unsigned char uc5 : 4;
+    unsigned char uc6;
+} AAA_S;
+</code></pre>
+<p>问：AAA_S在1字节对齐和4字节对齐的情况下，占用的空间大小是：6字节、12字节</p>
+<p><strong><em>分析：对于结构体内存对齐这块掌握的还是不好，也没有整理过笔记什么的，考完试整理一篇笔记，复习复习(预习)。</em></strong></p>
+<hr>
+</li>
+<li><p>以下程序的执行结果为：2 29 0 0</p>
+<pre><code class="c">#pragma pack(4)
+int main(int argc, char const *argv[])
+{
+    unsigned char puc[4];
+    struct tagPIM
+    {
+        unsigned char ucPiml;
+        unsigned char ucData0 : 1;
+        unsigned char ucData1 : 2;
+        unsigned char ucData2 : 3;
+    } *pstPimData;
+    pstPimData = (struct tagPIM *)puc;
+    memset(puc, 0, 4);
+    pstPimData-&gt;ucPiml = 2;    // 2-&gt; 10b
+    pstPimData-&gt;ucData0 = 3;// 3-&gt; 11b
+    pstPimData-&gt;ucData1 = 4;// 4-&gt; 100b
+    pstPimData-&gt;ucData2 = 5;// 5-&gt; 101b
+    printf(&quot;%02x %02x %02x %02x\n&quot;, puc[0], puc[1], puc[2], puc[3]);
+    return 0;
+}
+#pragma pack()
+</code></pre>
+<p><strong><em>分析：首先，结构体tagPIM占4个字节，puc[0]-puc[3]分别指向这4个字节，并初始化为了0，但是tagPIM只用了前两个字节，所以puc[2]和puc[3]的输出结果为0，其余的如下图分析：</em></strong></p>
+<p><strong><em>要注意的几点：第一、ucData0放3(11b)的时候，从低地址开始放，放不下的扔掉，对于ucData1也是。第二、要注意是小端，输出结果的时候是从右往左看的二进制数，还要注意输出的是以16进制的形式输出。</em></strong></p>
+<p><img src="https://wx4.sinaimg.cn/mw690/006wR0dcly1fz40lpyceqj31400u0kjl.jpg" alt="如图"></p>
+<hr>
+</li>
+<li><p><strong><em>注意函数传递的时候，形参的问题。</em></strong></p>
+</li>
+<li><p>添加下面分割线内的代码的初衷是为了给<code>gui_show_image</code>这句代码的执行加上限制条件，请问这样修改有没有隐患，若有，该如何修改？</p>
+<pre><code class="c">// ......
+gui_push_clip();
+/*我是分割线*/
+#ifdef AAA
+    if (show_status == MMI_TRUE)
+#endif
+/*我是分割线*/
+#ifdef BBB
+    gui_show_image(x, y, image_id);
+#endif
+gui_pop_clip();
+update_dt_display();
+// ......
+</code></pre>
+<p><strong><em>分析：这句话我第一眼看没啥啊，仔细看🧐下：如果宏BBB没有被定义，程序的逻辑就变成了下面这样：</em></strong></p>
+<pre><code class="c">if (show_status == MMI_TRUE)
+    gui_pop_clip();
+</code></pre>
+<p><strong><em>修改的方法：加大括号，要养成良好的编码习惯。</em></strong></p>
+</li>
+</ol>
+<h2 id="牛客的错题整理"><a href="#牛客的错题整理" class="headerlink" title="牛客的错题整理"></a>牛客的错题整理</h2><ol>
+<li><p>双链表中至多只有一个节点的后继指针为空（🙆‍♂️）</p>
+<p><strong><em>非循环双链表最后一个节点的后继指针为空；循环双链表没有一个节点的后继指针为空。</em></strong></p>
+</li>
+<li><p>一个长度为99的循环链表，指针A和指针B都指向了链表中的同一个节点，A以步长为1向前移动，B以步长为3向前移动，一共需要同时移动多少步A和B才能再次指向同一个节点？（99）</p>
+<p><strong><em>我选的50，但并不是50，首先是个循环链表，再来就是只有99个元素，设A走x步，那么B走3x步，两个碰到需要$(3x-x) MOD 99 = 0$，x取99才满足。</em></strong></p>
+</li>
+<li><p>在有n个结点的二叉链表中，值为非空的链域的个数为（n-1）</p>
+<p><strong><em>值为空的链域个数为n+1个，为非空的个数为n-1个。</em></strong></p>
+</li>
+<li><p>向一个有127个元素的顺序表中插入一个新元素并保持原来顺序不变，平均要移动（63.5）个元素。</p>
+<p><strong><em>插入：$\frac {n}{2}$，删除：$\frac {n-1}{2}$，查找：$\frac {n+1}{2}$</em></strong></p>
+</li>
+<li><p><strong><em>广义表第一个元素是表头，其余元素是表尾，如果只有一个元素，那么表尾为空即<code>()</code>，在广义表中注意区分空表和有一个为空表的元素的情况。</em></strong></p>
+</li>
+<li><p><strong><em>广义表有如下三个特性：1.层次性：广义表的元素可以是子表，而子表的元素还可以是子表，由此，广义表是一个多层次的结构。2.共享性：广义表可为其他表所共享。3.递归表：广义表可以是其自身的一个子表。</em></strong></p>
+</li>
+<li><p>十字链表是无向图的一种存储结构（🙅‍♂️）。</p>
+<p><strong><em>无向图存储：邻接矩阵、邻接表、多重邻接表。有向图存储：邻接矩阵、邻接表、十字链表</em></strong></p>
+</li>
+</ol>
+<hr>
+<blockquote>
+<p>荐读：《C++/C高质量编程指南》、《C语言深度剖析》</p>
+</blockquote>
+</div></article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">ahoj</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://ahoj.cc/2019/01/cjvtlw8130084q409d855cusv/">https://ahoj.cc/2019/01/cjvtlw8130084q409d855cusv/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://ahoj.cc">ahoj's blog</a>！</span></div></div><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/C/">C</a></div><nav id="pagination"><div class="prev-post pull-left"><a href="/2019/02/cjvtlw6gy000bq409splbep9c/"><i class="fa fa-chevron-left">  </i><span>C-大小端</span></a></div><div class="next-post pull-right"><a href="/2019/01/cjvtlw80t007hq409kgouyzc8/"><span>递归问题</span><i class="fa fa-chevron-right"></i></a></div></nav><div id="vcomment"></div><script src="https://cdn1.lncld.net/static/js/3.0.4/av-min.js"></script><script src="https://cdn.jsdelivr.net/npm/valine/dist/Valine.min.js"></script><script>var notify = 'false' == true ? true : false;
+var verify = 'false' == true ? true : false;
+var GUEST_INFO = ['nick','mail','link'];
+var guest_info = 'nick,mail,link'.split(',').filter(function(item){
+  return GUEST_INFO.indexOf(item) > -1
+});
+guest_info = guest_info.length == 0 ? GUEST_INFO :guest_info;
+window.valine = new Valine({
+  el:'#vcomment',
+  notify:notify,
+  verify:verify,
+  appId:'yy9oH4ap0AOjoGWG7vbV9w2v-gzGzoHsz',
+  appKey:'27EcRosAo5WUi5KH16i9nAq1',
+  placeholder:'说点什么吧~ 不足之处或者...',
+  avatar:'mm',
+  guest_info:guest_info,
+  pageSize:'10',
+  lang: 'zh-cn'
+})</script></div></div><footer><div class="layout" id="footer"><div class="copyright">&copy;2019 By ahoj</div><div class="framework-info"><span>驱动 - </span><a href="http://hexo.io"><span>Hexo</span></a><span class="footer-separator">|</span><span>主题 - </span><a href="https://github.com/Molunerfinn/hexo-theme-melody"><span>Melody</span></a></div><div class="busuanzi"><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><span id="busuanzi_container_page_pv"><i class="fa fa-file-o"></i><span id="busuanzi_value_page_pv"></span><span></span></span></div></div></footer><i class="fa fa-arrow-up" id="go-up" aria-hidden="true"></i><script src="https://cdn.jsdelivr.net/npm/animejs@latest/anime.min.js"></script><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@latest/velocity.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-ui-pack@latest/velocity.ui.min.js"></script><script src="/js/utils.js?version=1.6.1"></script><script src="/js/fancybox.js?version=1.6.1"></script><script src="/js/sidebar.js?version=1.6.1"></script><script src="/js/copy.js?version=1.6.1"></script><script src="/js/fireworks.js?version=1.6.1"></script><script src="/js/transition.js?version=1.6.1"></script><script src="/js/scroll.js?version=1.6.1"></script><script src="/js/head.js?version=1.6.1"></script><script src="/js/search/local-search.js"></script><script>if(/Android|webOS|iPhone|iPod|BlackBerry/i.test(navigator.userAgent)) {
+  $('#nav').addClass('is-mobile')
+  $('footer').addClass('is-mobile')
+}</script><div class="search-dialog" id="local-search"><div class="search-dialog__title" id="local-search-title">本地搜索</div><div id="local-input-panel"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章"></div></div></div><hr><div id="local-search-results"><div id="local-hits"></div><div id="local-stats"><div class="local-search-stats__hr" id="hr"><span>由</span> <a href="https://github.com/wzpan/hexo-generator-search" style="color:#49B1F5;">hexo-generator-search</a>
+ <span>提供支持</span></div></div></div><span class="search-close-button"><i class="fa fa-times"></i></span></div><div class="search-mask"></div></body></html>

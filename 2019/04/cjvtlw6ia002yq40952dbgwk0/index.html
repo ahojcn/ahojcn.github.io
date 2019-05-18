@@ -1,0 +1,60 @@
+<!DOCTYPE html><html lang="zh-Hans"><head><meta name="generator" content="Hexo 3.8.0"><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta name="description" content="【Nao机器人】BHuman项目结构"><meta name="keywords" content="Nao机器人,BHuman"><meta name="author" content="ahoj"><meta name="copyright" content="ahoj"><title>【Nao机器人】BHuman项目结构 | ahoj's blog</title><link rel="shortcut icon" href="/bitbug_favicon.ico"><link rel="stylesheet" href="/css/index.css?version=1.6.1"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@latest/css/font-awesome.min.css?version=1.6.1"><link rel="dns-prefetch" href="https://cdn.staticfile.org"><link rel="dns-prefetch" href="https://cdn.bootcss.com"><link rel="dns-prefetch" href="https://creativecommons.org"><script>var GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"search.xml","languages":{"hits_empty":"找不到您查询的内容:${query}"}},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  }
+} </script></head><body><canvas class="fireworks"></canvas><i class="fa fa-arrow-right" id="toggle-sidebar" aria-hidden="true"></i><div id="sidebar"><div class="toggle-sidebar-info text-center"><span data-toggle="切换文章详情">切换站点概览</span><hr></div><div class="sidebar-toc"><div class="sidebar-toc__title">目录</div><div class="sidebar-toc__progress"><span class="progress-notice">你已经读了</span><span class="progress-num">0</span><span class="progress-percentage">%</span><div class="sidebar-toc__progress-bar"></div></div><div class="sidebar-toc__content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Build"><span class="toc-number">1.</span> <span class="toc-text">Build</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Config"><span class="toc-number">2.</span> <span class="toc-text">Config</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Src"><span class="toc-number">3.</span> <span class="toc-text">Src</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Representations-和-Modules"><span class="toc-number">3.1.</span> <span class="toc-text">Representations 和 Modules</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Representations"><span class="toc-number">3.1.1.</span> <span class="toc-text">Representations</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Modules"><span class="toc-number">3.1.2.</span> <span class="toc-text">Modules</span></a></li></ol></li></ol></li></ol></div></div><div class="author-info hide"><div class="author-info__avatar text-center"><img src="https://i.loli.net/2019/05/18/5ce01a928835c26008.jpg"></div><div class="author-info__name text-center">ahoj</div><div class="author-info__description text-center">思想的本质就是不安</div><div class="follow-button"><a href="https://github.com/ahojcn">GitHub</a></div><hr><div class="author-info-articles"><a class="author-info-articles__archives article-meta" href="/archives"><span class="pull-left">文章</span><span class="pull-right">58</span></a><a class="author-info-articles__tags article-meta" href="/tags"><span class="pull-left">标签</span><span class="pull-right">19</span></a><a class="author-info-articles__categories article-meta" href="/categories"><span class="pull-left">分类</span><span class="pull-right">14</span></a></div><hr><div class="author-info-links"><div class="author-info-links__title text-center">朋友们</div><a class="author-info-links__name text-center" href="https://zouchanglin.cn/">Tim</a><a class="author-info-links__name text-center" href="http://www.ijam8.com/">Jam</a><a class="author-info-links__name text-center" href="https://blog.csdn.net/jack_wang128801">jack_wang128801</a><a class="author-info-links__name text-center" href="https://blog.csdn.net/weixin_43232955">Mr.Q_</a></div></div></div><div id="content-outer"><div class="no-bg" id="top-container"><div id="page-header"><span class="pull-left"> <a id="site-name" href="/">ahoj's blog</a></span><i class="fa fa-bars toggle-menu pull-right" aria-hidden="true"></i><span class="pull-right menus"><a class="site-page social-icon search"><i class="fa fa-search"></i><span> 搜索</span></a><a class="site-page" href="/">主页</a><a class="site-page" href="/archives">文章</a><a class="site-page" href="/tags">标签</a><a class="site-page" href="/categories">分类</a><a class="site-page" href="/about">关于</a></span></div><div id="post-info"><div id="post-title">【Nao机器人】BHuman项目结构</div><div id="post-meta"><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 2019-04-02</time><span class="post-meta__separator">|</span><i class="fa fa-inbox post-meta__icon" aria-hidden="true"></i><a class="post-meta__categories" href="/categories/Nao机器人/">Nao机器人</a></div></div></div><div class="layout" id="content-inner"><article id="post"><div class="article-container" id="post-content"><p>学习 bhuman 代码。</p>
+<a id="more"></a>
+<p><img src="https://ws1.sinaimg.cn/large/006wR0dcly1g1odavs8t0j31fc11ge23.jpg" alt="BHuman代码结构"></p>
+<h2 id="Build"><a href="#Build" class="headerlink" title="Build"></a>Build</h2><p>是编译好的可执行文件，其中包括 Nao 的可执行文件和两个以来的库，分为三个版本(debug、develop、release)。</p>
+<p><img src="https://ws1.sinaimg.cn/large/006wR0dcly1g1odg3ufpuj311y0l0acx.jpg" alt="Build"></p>
+<h2 id="Config"><a href="#Config" class="headerlink" title="Config"></a>Config</h2><p>Config 中是一些配置文件(场地大小了、机器人走路姿态等等)。</p>
+<p>具体的在<a href="http://ahoj.cc/2019/03/Nao%E6%9C%BA%E5%99%A8%E4%BA%BA-BHuman%E4%B8%AD%E7%9A%84Config/">http://ahoj.cc/2019/03/Nao%E6%9C%BA%E5%99%A8%E4%BA%BA-BHuman%E4%B8%AD%E7%9A%84Config/</a> <img src="https://ws1.sinaimg.cn/large/006wR0dcly1g1odnvts9tj30lg0lewhd.jpg" alt="Config"></p>
+<h2 id="Src"><a href="#Src" class="headerlink" title="Src"></a>Src</h2><p><img src="https://ws1.sinaimg.cn/large/006wR0dcly1g1odrsngwyj30jq0bemye.jpg" alt="Src"></p>
+<p>在 Src 中包含了整个项目的源码，其中比较重要的就是 Representations 和 Modules 两个目录。</p>
+<h3 id="Representations-和-Modules"><a href="#Representations-和-Modules" class="headerlink" title="Representations 和 Modules"></a>Representations 和 Modules</h3><p>Representations 是可调用的部分，通过其中提供的一些接口来完成机器人的一些动作。</p>
+<p>Modules 是 Representations 的实现部分。</p>
+<h4 id="Representations"><a href="#Representations" class="headerlink" title="Representations"></a>Representations</h4><p><img src="https://ws1.sinaimg.cn/large/006wR0dcly1g1odxlq7jfj30im0a6ta0.jpg" alt="Representations"></p>
+<p>Representations 中包含 8 个模块，具体待我再研究研究。</p>
+<h4 id="Modules"><a href="#Modules" class="headerlink" title="Modules"></a>Modules</h4><p>在 Modules 下的这个目录(如图)，存放我们踢球的角色文件，BHuman官方给出一个 striker 作为 Demo。</p>
+<p><img src="https://ws1.sinaimg.cn/large/006wR0dcly1g1oe0h8g3qj30io0hedic.jpg" alt="Modules"></p>
+<p><strong>Options.h</strong> 包含所有Options中的文件的路径，通过一个c++头文件将其关联在一起。</p>
+<blockquote>
+<p>All option files that belong to the current behavior have to be included by this file.</p>
+</blockquote>
+<p><img src="https://ws1.sinaimg.cn/large/006wR0dcly1g1oe3ceev2j32lc1i0kjm.jpg" alt="Options.h"></p>
+<p><strong>BehaviorControl.h</strong> 包含options文件中所调用的函数，关联调用的Representations中的文件</p>
+<blockquote>
+<p>Declaration of the C-based state machine behavior control module.</p>
+</blockquote>
+<p><img src="https://ws1.sinaimg.cn/large/006wR0dcly1g1oe5o9zdwj32lc1i0x6q.jpg" alt="BehaviorControl"></p>
+<hr>
+<p>继续看~</p>
+<hr>
+</div></article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">ahoj</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://ahoj.cc/2019/04/cjvtlw6ia002yq40952dbgwk0/">https://ahoj.cc/2019/04/cjvtlw6ia002yq40952dbgwk0/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://ahoj.cc">ahoj's blog</a>！</span></div></div><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Nao机器人/">Nao机器人</a><a class="post-meta__tags" href="/tags/BHuman/">BHuman</a></div><nav id="pagination"><div class="prev-post pull-left"><a href="/2019/04/cjvtlw6ib0030q409m8kzclt3/"><i class="fa fa-chevron-left">  </i><span>【Nao机器人】CABSL有限状态机</span></a></div><div class="next-post pull-right"><a href="/2019/04/cjvtlw6hy0025q409rna9aa4x/"><span>Nodejs-数据通信</span><i class="fa fa-chevron-right"></i></a></div></nav><div id="vcomment"></div><script src="https://cdn1.lncld.net/static/js/3.0.4/av-min.js"></script><script src="https://cdn.jsdelivr.net/npm/valine/dist/Valine.min.js"></script><script>var notify = 'false' == true ? true : false;
+var verify = 'false' == true ? true : false;
+var GUEST_INFO = ['nick','mail','link'];
+var guest_info = 'nick,mail,link'.split(',').filter(function(item){
+  return GUEST_INFO.indexOf(item) > -1
+});
+guest_info = guest_info.length == 0 ? GUEST_INFO :guest_info;
+window.valine = new Valine({
+  el:'#vcomment',
+  notify:notify,
+  verify:verify,
+  appId:'yy9oH4ap0AOjoGWG7vbV9w2v-gzGzoHsz',
+  appKey:'27EcRosAo5WUi5KH16i9nAq1',
+  placeholder:'说点什么吧~ 不足之处或者...',
+  avatar:'mm',
+  guest_info:guest_info,
+  pageSize:'10',
+  lang: 'zh-cn'
+})</script></div></div><footer><div class="layout" id="footer"><div class="copyright">&copy;2019 By ahoj</div><div class="framework-info"><span>驱动 - </span><a href="http://hexo.io"><span>Hexo</span></a><span class="footer-separator">|</span><span>主题 - </span><a href="https://github.com/Molunerfinn/hexo-theme-melody"><span>Melody</span></a></div><div class="busuanzi"><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><span id="busuanzi_container_page_pv"><i class="fa fa-file-o"></i><span id="busuanzi_value_page_pv"></span><span></span></span></div></div></footer><i class="fa fa-arrow-up" id="go-up" aria-hidden="true"></i><script src="https://cdn.jsdelivr.net/npm/animejs@latest/anime.min.js"></script><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@latest/velocity.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-ui-pack@latest/velocity.ui.min.js"></script><script src="/js/utils.js?version=1.6.1"></script><script src="/js/fancybox.js?version=1.6.1"></script><script src="/js/sidebar.js?version=1.6.1"></script><script src="/js/copy.js?version=1.6.1"></script><script src="/js/fireworks.js?version=1.6.1"></script><script src="/js/transition.js?version=1.6.1"></script><script src="/js/scroll.js?version=1.6.1"></script><script src="/js/head.js?version=1.6.1"></script><script src="/js/search/local-search.js"></script><script>if(/Android|webOS|iPhone|iPod|BlackBerry/i.test(navigator.userAgent)) {
+  $('#nav').addClass('is-mobile')
+  $('footer').addClass('is-mobile')
+}</script><div class="search-dialog" id="local-search"><div class="search-dialog__title" id="local-search-title">本地搜索</div><div id="local-input-panel"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章"></div></div></div><hr><div id="local-search-results"><div id="local-hits"></div><div id="local-stats"><div class="local-search-stats__hr" id="hr"><span>由</span> <a href="https://github.com/wzpan/hexo-generator-search" style="color:#49B1F5;">hexo-generator-search</a>
+ <span>提供支持</span></div></div></div><span class="search-close-button"><i class="fa fa-times"></i></span></div><div class="search-mask"></div></body></html>

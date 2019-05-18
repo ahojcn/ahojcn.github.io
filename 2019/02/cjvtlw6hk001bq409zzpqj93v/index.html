@@ -1,0 +1,121 @@
+<!DOCTYPE html><html lang="zh-Hans"><head><meta name="generator" content="Hexo 3.8.0"><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta name="description" content="Java-初识正则表达式"><meta name="keywords" content="Java"><meta name="author" content="ahoj"><meta name="copyright" content="ahoj"><title>Java-初识正则表达式 | ahoj's blog</title><link rel="shortcut icon" href="/bitbug_favicon.ico"><link rel="stylesheet" href="/css/index.css?version=1.6.1"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@latest/css/font-awesome.min.css?version=1.6.1"><link rel="dns-prefetch" href="https://cdn.staticfile.org"><link rel="dns-prefetch" href="https://cdn.bootcss.com"><link rel="dns-prefetch" href="https://creativecommons.org"><script>var GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"search.xml","languages":{"hits_empty":"找不到您查询的内容:${query}"}},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  }
+} </script></head><body><canvas class="fireworks"></canvas><i class="fa fa-arrow-right" id="toggle-sidebar" aria-hidden="true"></i><div id="sidebar"><div class="toggle-sidebar-info text-center"><span data-toggle="切换文章详情">切换站点概览</span><hr></div><div class="sidebar-toc"><div class="sidebar-toc__title">目录</div><div class="sidebar-toc__progress"><span class="progress-notice">你已经读了</span><span class="progress-num">0</span><span class="progress-percentage">%</span><div class="sidebar-toc__progress-bar"></div></div><div class="sidebar-toc__content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#正则表达式概述及基本使用"><span class="toc-number">1.</span> <span class="toc-text">正则表达式概述及基本使用</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#常见规则"><span class="toc-number">1.1.</span> <span class="toc-text">常见规则</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#常用功能"><span class="toc-number">1.2.</span> <span class="toc-text">常用功能</span></a></li></ol></li></ol></div></div><div class="author-info hide"><div class="author-info__avatar text-center"><img src="https://i.loli.net/2019/05/18/5ce01a928835c26008.jpg"></div><div class="author-info__name text-center">ahoj</div><div class="author-info__description text-center">思想的本质就是不安</div><div class="follow-button"><a href="https://github.com/ahojcn">GitHub</a></div><hr><div class="author-info-articles"><a class="author-info-articles__archives article-meta" href="/archives"><span class="pull-left">文章</span><span class="pull-right">58</span></a><a class="author-info-articles__tags article-meta" href="/tags"><span class="pull-left">标签</span><span class="pull-right">19</span></a><a class="author-info-articles__categories article-meta" href="/categories"><span class="pull-left">分类</span><span class="pull-right">14</span></a></div><hr><div class="author-info-links"><div class="author-info-links__title text-center">朋友们</div><a class="author-info-links__name text-center" href="https://zouchanglin.cn/">Tim</a><a class="author-info-links__name text-center" href="http://www.ijam8.com/">Jam</a><a class="author-info-links__name text-center" href="https://blog.csdn.net/jack_wang128801">jack_wang128801</a><a class="author-info-links__name text-center" href="https://blog.csdn.net/weixin_43232955">Mr.Q_</a></div></div></div><div id="content-outer"><div class="no-bg" id="top-container"><div id="page-header"><span class="pull-left"> <a id="site-name" href="/">ahoj's blog</a></span><i class="fa fa-bars toggle-menu pull-right" aria-hidden="true"></i><span class="pull-right menus"><a class="site-page social-icon search"><i class="fa fa-search"></i><span> 搜索</span></a><a class="site-page" href="/">主页</a><a class="site-page" href="/archives">文章</a><a class="site-page" href="/tags">标签</a><a class="site-page" href="/categories">分类</a><a class="site-page" href="/about">关于</a></span></div><div id="post-info"><div id="post-title">Java-初识正则表达式</div><div id="post-meta"><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 2019-02-23</time><span class="post-meta__separator">|</span><i class="fa fa-inbox post-meta__icon" aria-hidden="true"></i><a class="post-meta__categories" href="/categories/Java/">Java</a></div></div></div><div class="layout" id="content-inner"><article id="post"><div class="article-container" id="post-content"><a id="more"></a>
+<h2 id="正则表达式概述及基本使用"><a href="#正则表达式概述及基本使用" class="headerlink" title="正则表达式概述及基本使用"></a>正则表达式概述及基本使用</h2><p>指一个用来描述或者匹配一系列符合某个句法规则的字符串的单个字符串。其实就是一种规则。有自己特殊的应用。</p>
+<h3 id="常见规则"><a href="#常见规则" class="headerlink" title="常见规则"></a>常见规则</h3><p>规则字符在<code>java.util.regex</code>包下的<code>Pattern</code>类中。</p>
+<pre><code class="shell">A:字符
+    x 字符 x。举例：&#39;a&#39;表示字符a
+    \\ 反斜线字符。
+    \n 新行（换行）符 (&#39;\u000A&#39;) 
+    \r 回车符 (&#39;\u000D&#39;)
+
+B:字符类
+    [abc] a、b 或 c（简单类） 
+    [^abc] 任何字符，除了 a、b 或 c（否定） 
+    [a-zA-Z] a到 z 或 A到 Z，两头的字母包括在内（范围） 
+    [0-9] 0到9的字符都包括
+
+C:预定义字符类
+    . 任何字符。我的就是.字符本身，怎么表示呢? \.
+    \d 数字：[0-9]
+    \w 单词字符：[a-zA-Z_0-9]
+        在正则表达式里面组成单词的东西必须有这些东西组成
+
+D:边界匹配器
+    ^ 行的开头 
+    $ 行的结尾 
+    \b 单词边界
+        就是不是单词字符的地方。
+        举例：hello world?haha;xixi
+
+E:Greedy 数量词 
+    X? X，一次或一次也没有
+    X* X，零次或多次
+    X+ X，一次或多次
+    X{n} X，恰好 n 次 
+    X{n,} X，至少 n 次 
+    X{n,m} X，至少 n 次，但是不超过 m 次 
+</code></pre>
+<h3 id="常用功能"><a href="#常用功能" class="headerlink" title="常用功能"></a>常用功能</h3><pre><code class="shell">A:判断功能
+    String类的public boolean matches(String regex):判断此字符串是否匹配给定的正则表达式
+
+B:分割功能
+    String类的public String[] split(String regex):根据给定正则表达式的匹配拆分此字符串。
+
+C:替换功能
+    String类的public String replaceAll(String regex,String replacement):使用给定的 replacement 替换此字符串所有匹配给定的正则表达式的子字符串。
+
+D:获取功能
+    Pattern和Matcher
+        Pattern p = Pattern.compile(&quot;a*b&quot;);
+        Matcher m = p.matcher(&quot;aaaaab&quot;);
+
+        find():查找存不存在
+        group():获取刚才查找过的数据
+</code></pre>
+<p>获取功能的典型调用如下：</p>
+<pre><code class="java">// 典型的调用如下
+// 模式和匹配器的典型调用顺序
+// 把正则表达式编译成模式对象
+Pattern p = Pattern.compile(&quot;a*b&quot;);
+// 通过模式对象得到匹配器对象，这个时候需要的是被匹配的字符串
+Matcher m = p.matcher(&quot;aaaaab&quot;);
+// 调用匹配器对象的功能
+boolean b = m.matches();
+System.out.println(b);
+</code></pre>
+<p>举个栗子：</p>
+<pre><code class="java">/*
+ * 获取功能：
+ * 获取下面这个字符串中由三个字符组成的单词
+ * da jia ting wo shuo,jin tian yao xia yu,bu shang wan zi xi,gao xing bu?
+ */
+public class RegexDemo2 {
+    public static void main(String[] args) {
+        // 定义字符串
+        String s = &quot;da jia ting wo shuo,jin tian yao xia yu,bu shang wan zi xi,gao xing bu?&quot;;
+        // 规则
+        String regex = &quot;\\b\\w{3}\\b&quot;;
+
+        // 把规则编译成模式对象
+        Pattern p = Pattern.compile(regex);
+        // 通过模式对象得到匹配器对象
+        Matcher m = p.matcher(s);
+
+        while (m.find()) {
+            System.out.println(m.group());
+        }
+    }
+}
+</code></pre>
+<hr>
+</div></article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">ahoj</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://ahoj.cc/2019/02/cjvtlw6hk001bq409zzpqj93v/">https://ahoj.cc/2019/02/cjvtlw6hk001bq409zzpqj93v/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://ahoj.cc">ahoj's blog</a>！</span></div></div><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Java/">Java</a></div><nav id="pagination"><div class="prev-post pull-left"><a href="/2019/02/cjvtlw6hq001lq409xrwqkx8j/"><i class="fa fa-chevron-left">  </i><span>Java-集合框架</span></a></div><div class="next-post pull-right"><a href="/2019/02/cjvtlw6h8000nq409wjuubgi8/"><span>C-结构体</span><i class="fa fa-chevron-right"></i></a></div></nav><div id="vcomment"></div><script src="https://cdn1.lncld.net/static/js/3.0.4/av-min.js"></script><script src="https://cdn.jsdelivr.net/npm/valine/dist/Valine.min.js"></script><script>var notify = 'false' == true ? true : false;
+var verify = 'false' == true ? true : false;
+var GUEST_INFO = ['nick','mail','link'];
+var guest_info = 'nick,mail,link'.split(',').filter(function(item){
+  return GUEST_INFO.indexOf(item) > -1
+});
+guest_info = guest_info.length == 0 ? GUEST_INFO :guest_info;
+window.valine = new Valine({
+  el:'#vcomment',
+  notify:notify,
+  verify:verify,
+  appId:'yy9oH4ap0AOjoGWG7vbV9w2v-gzGzoHsz',
+  appKey:'27EcRosAo5WUi5KH16i9nAq1',
+  placeholder:'说点什么吧~ 不足之处或者...',
+  avatar:'mm',
+  guest_info:guest_info,
+  pageSize:'10',
+  lang: 'zh-cn'
+})</script></div></div><footer><div class="layout" id="footer"><div class="copyright">&copy;2019 By ahoj</div><div class="framework-info"><span>驱动 - </span><a href="http://hexo.io"><span>Hexo</span></a><span class="footer-separator">|</span><span>主题 - </span><a href="https://github.com/Molunerfinn/hexo-theme-melody"><span>Melody</span></a></div><div class="busuanzi"><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><span id="busuanzi_container_page_pv"><i class="fa fa-file-o"></i><span id="busuanzi_value_page_pv"></span><span></span></span></div></div></footer><i class="fa fa-arrow-up" id="go-up" aria-hidden="true"></i><script src="https://cdn.jsdelivr.net/npm/animejs@latest/anime.min.js"></script><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@latest/velocity.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-ui-pack@latest/velocity.ui.min.js"></script><script src="/js/utils.js?version=1.6.1"></script><script src="/js/fancybox.js?version=1.6.1"></script><script src="/js/sidebar.js?version=1.6.1"></script><script src="/js/copy.js?version=1.6.1"></script><script src="/js/fireworks.js?version=1.6.1"></script><script src="/js/transition.js?version=1.6.1"></script><script src="/js/scroll.js?version=1.6.1"></script><script src="/js/head.js?version=1.6.1"></script><script src="/js/search/local-search.js"></script><script>if(/Android|webOS|iPhone|iPod|BlackBerry/i.test(navigator.userAgent)) {
+  $('#nav').addClass('is-mobile')
+  $('footer').addClass('is-mobile')
+}</script><div class="search-dialog" id="local-search"><div class="search-dialog__title" id="local-search-title">本地搜索</div><div id="local-input-panel"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章"></div></div></div><hr><div id="local-search-results"><div id="local-hits"></div><div id="local-stats"><div class="local-search-stats__hr" id="hr"><span>由</span> <a href="https://github.com/wzpan/hexo-generator-search" style="color:#49B1F5;">hexo-generator-search</a>
+ <span>提供支持</span></div></div></div><span class="search-close-button"><i class="fa fa-times"></i></span></div><div class="search-mask"></div></body></html>

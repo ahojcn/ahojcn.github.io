@@ -1,0 +1,118 @@
+<!DOCTYPE html><html lang="zh-Hans"><head><meta name="generator" content="Hexo 3.8.0"><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta name="description" content="Cpp-迭代器"><meta name="keywords" content="Cpp"><meta name="author" content="ahoj"><meta name="copyright" content="ahoj"><title>Cpp-迭代器 | ahoj's blog</title><link rel="shortcut icon" href="/bitbug_favicon.ico"><link rel="stylesheet" href="/css/index.css?version=1.6.1"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@latest/css/font-awesome.min.css?version=1.6.1"><link rel="dns-prefetch" href="https://cdn.staticfile.org"><link rel="dns-prefetch" href="https://cdn.bootcss.com"><link rel="dns-prefetch" href="https://creativecommons.org"><script>var GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"search.xml","languages":{"hits_empty":"找不到您查询的内容:${query}"}},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  }
+} </script></head><body><canvas class="fireworks"></canvas><i class="fa fa-arrow-right" id="toggle-sidebar" aria-hidden="true"></i><div id="sidebar"><div class="toggle-sidebar-info text-center"><span data-toggle="切换文章详情">切换站点概览</span><hr></div><div class="sidebar-toc"><div class="sidebar-toc__title">目录</div><div class="sidebar-toc__progress"><span class="progress-notice">你已经读了</span><span class="progress-num">0</span><span class="progress-percentage">%</span><div class="sidebar-toc__progress-bar"></div></div><div class="sidebar-toc__content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#正向迭代器"><span class="toc-number">1.</span> <span class="toc-text">正向迭代器</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#反向迭代器"><span class="toc-number">2.</span> <span class="toc-text">反向迭代器</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#const-迭代器"><span class="toc-number">3.</span> <span class="toc-text">const 迭代器</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#C-11-语法糖-auto"><span class="toc-number">4.</span> <span class="toc-text">C++11 语法糖 auto</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#语法糖-auto-用于-for-循环"><span class="toc-number">4.1.</span> <span class="toc-text">语法糖 auto 用于 for 循环</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#为什么要出现迭代器"><span class="toc-number">5.</span> <span class="toc-text">为什么要出现迭代器</span></a></li></ol></div></div><div class="author-info hide"><div class="author-info__avatar text-center"><img src="https://i.loli.net/2019/05/18/5ce01a928835c26008.jpg"></div><div class="author-info__name text-center">ahoj</div><div class="author-info__description text-center">思想的本质就是不安</div><div class="follow-button"><a href="https://github.com/ahojcn">GitHub</a></div><hr><div class="author-info-articles"><a class="author-info-articles__archives article-meta" href="/archives"><span class="pull-left">文章</span><span class="pull-right">58</span></a><a class="author-info-articles__tags article-meta" href="/tags"><span class="pull-left">标签</span><span class="pull-right">19</span></a><a class="author-info-articles__categories article-meta" href="/categories"><span class="pull-left">分类</span><span class="pull-right">14</span></a></div><hr><div class="author-info-links"><div class="author-info-links__title text-center">朋友们</div><a class="author-info-links__name text-center" href="https://zouchanglin.cn/">Tim</a><a class="author-info-links__name text-center" href="http://www.ijam8.com/">Jam</a><a class="author-info-links__name text-center" href="https://blog.csdn.net/jack_wang128801">jack_wang128801</a><a class="author-info-links__name text-center" href="https://blog.csdn.net/weixin_43232955">Mr.Q_</a></div></div></div><div id="content-outer"><div class="no-bg" id="top-container"><div id="page-header"><span class="pull-left"> <a id="site-name" href="/">ahoj's blog</a></span><i class="fa fa-bars toggle-menu pull-right" aria-hidden="true"></i><span class="pull-right menus"><a class="site-page social-icon search"><i class="fa fa-search"></i><span> 搜索</span></a><a class="site-page" href="/">主页</a><a class="site-page" href="/archives">文章</a><a class="site-page" href="/tags">标签</a><a class="site-page" href="/categories">分类</a><a class="site-page" href="/about">关于</a></span></div><div id="post-info"><div id="post-title">Cpp-迭代器</div><div id="post-meta"><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 2019-03-19</time><span class="post-meta__separator">|</span><i class="fa fa-inbox post-meta__icon" aria-hidden="true"></i><a class="post-meta__categories" href="/categories/Cpp/">Cpp</a></div></div></div><div class="layout" id="content-inner"><article id="post"><div class="article-container" id="post-content"><p>C++中的迭代器用法总结。</p>
+<a id="more"></a>
+<p>对于一个容器的遍历，可以用 for 循环，如下：</p>
+<pre><code class="cpp">vector&lt;string&gt; v;
+v.push_back(&quot;hello&quot;);
+v.push_back(&quot; world&quot;);
+v.emplace_back(&quot;, Cpp&quot;);
+
+for (int i = 0; i &lt; v.size(); i++)
+{
+    cout &lt;&lt; v[i];
+}
+cout &lt;&lt; endl;
+</code></pre>
+<p>也可以用迭代器。</p>
+<p>迭代器：是一种对容器的遍历工具。</p>
+<p>迭代器用起来是指针使用，在内部，不同的容器有不同的实现方式，不一定是原生指针。</p>
+<p>迭代器：正向迭代器、反向迭代器、const迭代器。</p>
+<p>迭代器的函数：</p>
+<pre><code class="cpp">begin()
+  end()
+rbegin()
+  rend()
+</code></pre>
+<p><img src="https://ws1.sinaimg.cn/large/006wR0dcly1g1d5qnucp8j311y0kcgmz.jpg" alt></p>
+<p>C++11 正向、反向有了一些新功能。</p>
+<p><img src="https://ws1.sinaimg.cn/large/006wR0dcly1g1d5p5wz5gj315m0bajvv.jpg" alt="pic-2"></p>
+<h2 id="正向迭代器"><a href="#正向迭代器" class="headerlink" title="正向迭代器"></a>正向迭代器</h2><pre><code class="cpp">vector&lt;string&gt;::iterator vit = v.begin();
+while (vit != v.end())
+{
+    cout &lt;&lt; *vit;
+    vit++;
+}
+cout &lt;&lt; endl;
+</code></pre>
+<h2 id="反向迭代器"><a href="#反向迭代器" class="headerlink" title="反向迭代器"></a>反向迭代器</h2><pre><code class="cpp">vector&lt;string&gt;::reverse_iterator rit = v.rbegin();
+while (rit != v.rend())
+{
+    cout &lt;&lt; *rit;
+    ++rit;
+}
+cout &lt;&lt; endl;
+</code></pre>
+<h2 id="const-迭代器"><a href="#const-迭代器" class="headerlink" title="const 迭代器"></a>const 迭代器</h2><pre><code class="cpp">vector&lt;string&gt;::const_iterator cvit = v.begin();
+while (cvit != v.end())
+{
+    cout &lt;&lt; *cvit;
+    cvit++;
+}
+cout &lt;&lt; endl;
+</code></pre>
+<h2 id="C-11-语法糖-auto"><a href="#C-11-语法糖-auto" class="headerlink" title="C++11 语法糖 auto"></a>C++11 语法糖 auto</h2><p>在写代码的时候编译器智能提示，让把迭代器改成 auto：</p>
+<pre><code class="cpp">auto avit = v.begin();
+while (avit != v.end())
+{
+    cout &lt;&lt; *avit;
+    avit++;
+}
+cout &lt;&lt; endl;
+</code></pre>
+<h3 id="语法糖-auto-用于-for-循环"><a href="#语法糖-auto-用于-for-循环" class="headerlink" title="语法糖 auto 用于 for 循环"></a>语法糖 auto 用于 for 循环</h3><pre><code class="cpp">string str = &quot;abcd&quot;;
+for (auto e : str)
+{
+      cout &lt;&lt; e &lt;&lt; endl;    // 输出 : abcd
+}
+</code></pre>
+<p>感觉尝不到甜头，来一个🌰，感受下：</p>
+<pre><code class="cpp">std::map&lt;std::string, std::vector&lt;std::string&gt;&gt; strVMap;
+std::map&lt;std::string, std::vector&lt;std::string&gt;&gt;::const_reverse_iterator msvit = strVMap.crbegin();
+while (msvit != strVMap.crend)
+{
+      ++msvit;
+}
+
+for (auto e : strVMap)
+{
+      ...
+}
+</code></pre>
+<p><img src="https://ss0.bdstatic.com/94oJfD_bAAcT8t7mm9GUKT-xh_/timg?image&amp;quality=100&amp;size=b4000_4000&amp;sec=1553089425&amp;di=e0639ca58c0bdfd2905e045f6e77c69f&amp;src=http://f.hiphotos.baidu.com/image/pic/item/d1160924ab18972b016d358bedcd7b899e510a1f.jpg" alt="我靠"></p>
+<blockquote>
+<p>好吧，其实用了 auto 编译器编译后也会成迭代器的形式，这个 Java 里的增强 for 也是。</p>
+</blockquote>
+<h2 id="为什么要出现迭代器"><a href="#为什么要出现迭代器" class="headerlink" title="为什么要出现迭代器"></a>为什么要出现迭代器</h2><p>在 STL 中有很多容器，容器实现的方式是一些不同的数据结构，如果我们要遍历这些容器中的内容，就需要注意一些细节问题(比如单链表的遍历，从后往前遍历，等等的细节问题)。</p>
+<p>迭代器用一种统一的方式来访问容器，不用关心具体的访问细节(屏蔽掉了底层复杂的结构细节)。</p>
+<hr>
+</div></article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">ahoj</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://ahoj.cc/2019/03/cjvtlw6hd000xq4092brrh1cy/">https://ahoj.cc/2019/03/cjvtlw6hd000xq4092brrh1cy/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://ahoj.cc">ahoj's blog</a>！</span></div></div><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Cpp/">Cpp</a></div><nav id="pagination"><div class="prev-post pull-left"><a href="/2019/03/cjvtlw6hr001nq409r33z21zw/"><i class="fa fa-chevron-left">  </i><span>JavaScript-ES6笔记</span></a></div><div class="next-post pull-right"><a href="/2019/03/cjvtlw6hb000tq409cbbu7loe/"><span>Cpp-模板初阶</span><i class="fa fa-chevron-right"></i></a></div></nav><div id="vcomment"></div><script src="https://cdn1.lncld.net/static/js/3.0.4/av-min.js"></script><script src="https://cdn.jsdelivr.net/npm/valine/dist/Valine.min.js"></script><script>var notify = 'false' == true ? true : false;
+var verify = 'false' == true ? true : false;
+var GUEST_INFO = ['nick','mail','link'];
+var guest_info = 'nick,mail,link'.split(',').filter(function(item){
+  return GUEST_INFO.indexOf(item) > -1
+});
+guest_info = guest_info.length == 0 ? GUEST_INFO :guest_info;
+window.valine = new Valine({
+  el:'#vcomment',
+  notify:notify,
+  verify:verify,
+  appId:'yy9oH4ap0AOjoGWG7vbV9w2v-gzGzoHsz',
+  appKey:'27EcRosAo5WUi5KH16i9nAq1',
+  placeholder:'说点什么吧~ 不足之处或者...',
+  avatar:'mm',
+  guest_info:guest_info,
+  pageSize:'10',
+  lang: 'zh-cn'
+})</script></div></div><footer><div class="layout" id="footer"><div class="copyright">&copy;2019 By ahoj</div><div class="framework-info"><span>驱动 - </span><a href="http://hexo.io"><span>Hexo</span></a><span class="footer-separator">|</span><span>主题 - </span><a href="https://github.com/Molunerfinn/hexo-theme-melody"><span>Melody</span></a></div><div class="busuanzi"><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><span id="busuanzi_container_page_pv"><i class="fa fa-file-o"></i><span id="busuanzi_value_page_pv"></span><span></span></span></div></div></footer><i class="fa fa-arrow-up" id="go-up" aria-hidden="true"></i><script src="https://cdn.jsdelivr.net/npm/animejs@latest/anime.min.js"></script><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@latest/velocity.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-ui-pack@latest/velocity.ui.min.js"></script><script src="/js/utils.js?version=1.6.1"></script><script src="/js/fancybox.js?version=1.6.1"></script><script src="/js/sidebar.js?version=1.6.1"></script><script src="/js/copy.js?version=1.6.1"></script><script src="/js/fireworks.js?version=1.6.1"></script><script src="/js/transition.js?version=1.6.1"></script><script src="/js/scroll.js?version=1.6.1"></script><script src="/js/head.js?version=1.6.1"></script><script src="/js/search/local-search.js"></script><script>if(/Android|webOS|iPhone|iPod|BlackBerry/i.test(navigator.userAgent)) {
+  $('#nav').addClass('is-mobile')
+  $('footer').addClass('is-mobile')
+}</script><div class="search-dialog" id="local-search"><div class="search-dialog__title" id="local-search-title">本地搜索</div><div id="local-input-panel"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章"></div></div></div><hr><div id="local-search-results"><div id="local-hits"></div><div id="local-stats"><div class="local-search-stats__hr" id="hr"><span>由</span> <a href="https://github.com/wzpan/hexo-generator-search" style="color:#49B1F5;">hexo-generator-search</a>
+ <span>提供支持</span></div></div></div><span class="search-close-button"><i class="fa fa-times"></i></span></div><div class="search-mask"></div></body></html>

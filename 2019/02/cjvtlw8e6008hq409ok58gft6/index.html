@@ -1,0 +1,713 @@
+<!DOCTYPE html><html lang="zh-Hans"><head><meta name="generator" content="Hexo 3.8.0"><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta name="description" content="C-指针"><meta name="keywords" content="C"><meta name="author" content="ahoj"><meta name="copyright" content="ahoj"><title>C-指针 | ahoj's blog</title><link rel="shortcut icon" href="/bitbug_favicon.ico"><link rel="stylesheet" href="/css/index.css?version=1.6.1"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@latest/css/font-awesome.min.css?version=1.6.1"><link rel="dns-prefetch" href="https://cdn.staticfile.org"><link rel="dns-prefetch" href="https://cdn.bootcss.com"><link rel="dns-prefetch" href="https://creativecommons.org"><script>var GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"search.xml","languages":{"hits_empty":"找不到您查询的内容:${query}"}},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  }
+} </script></head><body><canvas class="fireworks"></canvas><i class="fa fa-arrow-right" id="toggle-sidebar" aria-hidden="true"></i><div id="sidebar"><div class="toggle-sidebar-info text-center"><span data-toggle="切换文章详情">切换站点概览</span><hr></div><div class="sidebar-toc"><div class="sidebar-toc__title">目录</div><div class="sidebar-toc__progress"><span class="progress-notice">你已经读了</span><span class="progress-num">0</span><span class="progress-percentage">%</span><div class="sidebar-toc__progress-bar"></div></div><div class="sidebar-toc__content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#理解指针"><span class="toc-number">1.</span> <span class="toc-text">理解指针</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#指针是什么，举个栗子"><span class="toc-number">1.1.</span> <span class="toc-text">指针是什么，举个栗子</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#指针变量"><span class="toc-number">1.2.</span> <span class="toc-text">指针变量</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#void-是个什么鬼"><span class="toc-number">1.3.</span> <span class="toc-text">void *是个什么鬼</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#指针类型"><span class="toc-number">2.</span> <span class="toc-text">指针类型</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#指针类型的作用"><span class="toc-number">2.1.</span> <span class="toc-text">指针类型的作用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#指针的题目"><span class="toc-number">2.2.</span> <span class="toc-text">指针的题目</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#指针和数组"><span class="toc-number">3.</span> <span class="toc-text">指针和数组</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#数组名"><span class="toc-number">3.1.</span> <span class="toc-text">数组名</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#区分指针数组和数组指针"><span class="toc-number">3.2.</span> <span class="toc-text">区分指针数组和数组指针</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#数组指针的使用"><span class="toc-number">3.3.</span> <span class="toc-text">数组指针的使用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#数组传参，指针传参"><span class="toc-number">3.4.</span> <span class="toc-text">数组传参，指针传参</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#函数指针"><span class="toc-number">4.</span> <span class="toc-text">函数指针</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#函数指针-1"><span class="toc-number">4.1.</span> <span class="toc-text">函数指针</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#函数指针数组"><span class="toc-number">4.2.</span> <span class="toc-text">函数指针数组</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#指向函数指针数组的指针"><span class="toc-number">4.3.</span> <span class="toc-text">指向函数指针数组的指针</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#回调函数"><span class="toc-number">4.4.</span> <span class="toc-text">回调函数</span></a></li></ol></li></ol></div></div><div class="author-info hide"><div class="author-info__avatar text-center"><img src="https://i.loli.net/2019/05/18/5ce01a928835c26008.jpg"></div><div class="author-info__name text-center">ahoj</div><div class="author-info__description text-center">思想的本质就是不安</div><div class="follow-button"><a href="https://github.com/ahojcn">GitHub</a></div><hr><div class="author-info-articles"><a class="author-info-articles__archives article-meta" href="/archives"><span class="pull-left">文章</span><span class="pull-right">58</span></a><a class="author-info-articles__tags article-meta" href="/tags"><span class="pull-left">标签</span><span class="pull-right">19</span></a><a class="author-info-articles__categories article-meta" href="/categories"><span class="pull-left">分类</span><span class="pull-right">14</span></a></div><hr><div class="author-info-links"><div class="author-info-links__title text-center">朋友们</div><a class="author-info-links__name text-center" href="https://zouchanglin.cn/">Tim</a><a class="author-info-links__name text-center" href="http://www.ijam8.com/">Jam</a><a class="author-info-links__name text-center" href="https://blog.csdn.net/jack_wang128801">jack_wang128801</a><a class="author-info-links__name text-center" href="https://blog.csdn.net/weixin_43232955">Mr.Q_</a></div></div></div><div id="content-outer"><div class="no-bg" id="top-container"><div id="page-header"><span class="pull-left"> <a id="site-name" href="/">ahoj's blog</a></span><i class="fa fa-bars toggle-menu pull-right" aria-hidden="true"></i><span class="pull-right menus"><a class="site-page social-icon search"><i class="fa fa-search"></i><span> 搜索</span></a><a class="site-page" href="/">主页</a><a class="site-page" href="/archives">文章</a><a class="site-page" href="/tags">标签</a><a class="site-page" href="/categories">分类</a><a class="site-page" href="/about">关于</a></span></div><div id="post-info"><div id="post-title">C-指针</div><div id="post-meta"><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 2019-02-17</time><span class="post-meta__separator">|</span><i class="fa fa-inbox post-meta__icon" aria-hidden="true"></i><a class="post-meta__categories" href="/categories/C/">C</a></div></div></div><div class="layout" id="content-inner"><article id="post"><div class="article-container" id="post-content"><p>还是总结下，嘿嘿，这个之前还没理解。要注意，数组和指针没啥关系！</p>
+<a id="more"></a>
+<h2 id="理解指针"><a href="#理解指针" class="headerlink" title="理解指针"></a>理解指针</h2><h3 id="指针是什么，举个栗子"><a href="#指针是什么，举个栗子" class="headerlink" title="指针是什么，举个栗子"></a>指针是什么，举个栗子</h3><p>我们隔壁的隔壁宿舍最近经营起了零食店。</p>
+<p>我：来5包卫龙大面筋，送到413！</p>
+<p>老板：么马达！来咧！</p>
+<p>现在，假设这栋宿舍楼没有门牌号。</p>
+<p>我：来5包卫龙大面筋，送到……额……4楼一上楼从最左边往右第13个宿舍！</p>
+<p>老板：…… !!!???</p>
+<p>其实指针就像门牌号一样，便于定位查找内存中的数据。</p>
+<p>4GB的内存条有$2^{32}$个房间存数据，没有门牌号怎么找？从第一个开始数？哈哈。</p>
+<p>在C语言中可以这样理解一个变量：</p>
+<pre><code class="c">int main()
+{
+    int a = 10;
+    int *b = &amp;a;
+    return 0;
+}
+</code></pre>
+<p><code>int a = 10;</code>就是<strong>a</strong>这个人从房地产商(系统)那里买来一间房子，里面放着自己的东西<strong>10</strong>，此时<strong>a</strong>这个人的地址是系统知道的，然后<strong>a</strong>把这个地址(&amp;)告诉了他的好朋友<strong>b</strong>，并且给了<strong>b</strong>这间房子的钥匙(*)，这样<strong>b</strong>就可以通过地址找到这个房子地址并且在房间里取或者放自己的东西了。如果<strong>a</strong>不想让<strong>b</strong>乱动家里东西，可以和<strong>b</strong>说“不许乱动哦！”(加上const，嘿嘿)。</p>
+<h3 id="指针变量"><a href="#指针变量" class="headerlink" title="指针变量"></a>指针变量</h3><p>这个其实挺好理解，在中文中，一般把强调的重点放在后面，指针变量是个<strong>变量</strong>。像这样理解的还有：数组<strong>指针</strong>、指针<strong>数组</strong>。</p>
+<p>指针变量是个变量，这个变量里面存的是地址数据。</p>
+<p>指针变量的大小：</p>
+<p>不论是什么类型（包括void *，这个下面细说～）：</p>
+<ul>
+<li>32位环境下，指针变量的大小是4字节。</li>
+<li>64位环境下，指针变量的大小是8字节。</li>
+</ul>
+<p>emmm，怎么理解呢？</p>
+<p>计算机给能访问的内存地址是规范的长度，全0到全1，32位系统下可编址的范围32个比特位(4字节)，64位机器可编址的范围为64个比特位(8字节)。</p>
+<pre><code class="c">#include &lt;stdio.h&gt;
+int main(int argc, const char * argv[])
+{
+    printf(&quot;void*\t%d\n&quot;, sizeof(void *));
+    printf(&quot;char*\t%d\n&quot;, sizeof(char*));
+    printf(&quot;int*\t%d\n&quot;, sizeof(int *));
+    printf(&quot;float*\t%d\n&quot;, sizeof(float*));
+    printf(&quot;double*\t%d\n&quot;, sizeof(double*));
+
+    return 0;
+}
+</code></pre>
+<p>光说不顶用，来验证下，在64位环境下：</p>
+<pre><code class="c">void*    8
+char*    8
+int*    8
+float*    8
+double*    8
+</code></pre>
+<p>32位机下：</p>
+<pre><code class="c">void*    4
+char*    4
+int*    4
+float*    4
+double*    4
+</code></pre>
+<h3 id="void-是个什么鬼"><a href="#void-是个什么鬼" class="headerlink" title="void *是个什么鬼"></a>void *是个什么鬼</h3><p>可以做这样的事：<code>void *vp;</code></p>
+<p>但是void*类型的指针不能被解引用，因为解引用后它不知道要访问多大的空间(int*解引用可以访问4字节的空间，char*解引用后可以访问1字节的空间)。</p>
+<p>void*可以接收任意类型的指针，这样就可以用它来做一些接口方面的事，这就方便了许多。</p>
+<h2 id="指针类型"><a href="#指针类型" class="headerlink" title="指针类型"></a>指针类型</h2><p>对于以下代码：</p>
+<pre><code class="c">int main(int argc, const char * argv[])
+{
+    printf(&quot;char* : %lu\n&quot;,sizeof(char*));
+    printf(&quot;short* : %lu\n&quot;,sizeof(short*));
+    printf(&quot;int* : %lu\n&quot;,sizeof(int*));
+    printf(&quot;float* : %lu\n&quot;,sizeof(float*));
+    printf(&quot;double* : %lu\n&quot;,sizeof(double*));
+    printf(&quot;long double* : %lu\n&quot;,sizeof(long double*));
+    return 0;
+}
+</code></pre>
+<p>在64位机器下运行结果为：</p>
+<p><img src="https://camo.githubusercontent.com/98b19b496e93806971e221b986c1327fd609b9cc/68747470733a2f2f7778312e73696e61696d672e636e2f6d773639302f30303677523064636c793166776576763836786a666a333069753039303734792e6a7067" alt="-64"></p>
+<p>在32位机器下运行结果为：</p>
+<p><img src="https://camo.githubusercontent.com/9196131c1403410461d37d3836786465697e69ca/68747470733a2f2f7778332e73696e61696d672e636e2f6d773639302f30303677523064636c7931667765767631327078746a33316b77306a71646f6f2e6a7067" alt="gcc main.c -m32"></p>
+<p><strong><em>那么问题来了，既然占用大小都是一样的，为什么还要有这么多类型呢？</em></strong></p>
+<h3 id="指针类型的作用"><a href="#指针类型的作用" class="headerlink" title="指针类型的作用"></a>指针类型的作用</h3><ul>
+<li>指针类型决定了对指针解引用的时候有多大的权限（能操作几个字节）。比如：<code>char*</code>的指针解引用只能访问一个字节，而<code>int*</code>的指针解引用就能访问四个字节。</li>
+<li>指针类型决定了指针指向前或者向后一步有多大距离。</li>
+</ul>
+<p>看下面的这段代码：</p>
+<pre><code class="c">int main(int argc, const char * argv[])
+{
+    int i = 0x11223344;
+    int *pi = &amp;i;
+    *pi = 0;
+
+    int c = 0x11223344;
+    char *pc = &amp;c;
+    *pc = 0;
+
+    return 0;
+}
+</code></pre>
+<p>Debug看内存变化：</p>
+<p><a href="https://camo.githubusercontent.com/fa302cfc6e28d6ee72a86a23d8f8e9cbd10d451e/68747470733a2f2f7778332e73696e61696d672e636e2f6d773639302f30303677523064636c7931667765776c32706c77726a33306c303037343734722e6a7067" target="_blank" rel="noopener"><img src="https://camo.githubusercontent.com/fa302cfc6e28d6ee72a86a23d8f8e9cbd10d451e/68747470733a2f2f7778332e73696e61696d672e636e2f6d773639302f30303677523064636c7931667765776c32706c77726a33306c303037343734722e6a7067" alt="p"></a></p>
+<p><a href="https://camo.githubusercontent.com/57a12eddf6d4ca658d9fd2bc6ede68ce474a3b0d/68747470733a2f2f7778322e73696e61696d672e636e2f6d773639302f30303677523064636c7931667765776c6c6d666e336a3330626f30366d3379762e6a7067" target="_blank" rel="noopener"><img src="https://camo.githubusercontent.com/57a12eddf6d4ca658d9fd2bc6ede68ce474a3b0d/68747470733a2f2f7778322e73696e61696d672e636e2f6d773639302f30303677523064636c7931667765776c6c6d666e336a3330626f30366d3379762e6a7067" alt="img"></a></p>
+<p>发现：<code>i=0x11223344</code>在执行<code>*pi=0;</code>后全部变为了0，<code>c=0x11223344</code>在执行<code>*pc=0;</code>后只有高位变成了0</p>
+<p>说明：int*类型的指针解引用后，操作权限是4个字节(int的大小)。char*解引用后，操作权限仅为一个字节。</p>
+<p>指针类型决定了对指针解引用的时候有多大的权限（能操作几个字节）。</p>
+<p>再来看看第二个小点，对于以下代码：</p>
+<pre><code class="c">int main(int argc, const char * argv[])
+{
+    int n = 10;
+    int *pi = &amp;n;
+    char *pc = (char*)&amp;n;
+
+    printf(&quot;&amp;n : %p\n&quot;, &amp;n);
+    printf(&quot;pi : %p\n&quot;, pi);
+    printf(&quot;pi+1 : %p\n&quot;, pi+1);
+    printf(&quot;-----------------------\n&quot;);
+    printf(&quot;pc : %p\n&quot;, pc);
+    printf(&quot;pc+1 : %p\n&quot;, pc+1);
+
+    return 0;
+}
+</code></pre>
+<p>有在64位机下有如下输出：</p>
+<p><a href="https://camo.githubusercontent.com/a923b880ac9b3ed9eba1143f3e79703fe214c301/68747470733a2f2f7778342e73696e61696d672e636e2f6d773639302f30303677523064636c793166776578346f373074356a3330696d3038737766642e6a7067" target="_blank" rel="noopener"><img src="https://camo.githubusercontent.com/a923b880ac9b3ed9eba1143f3e79703fe214c301/68747470733a2f2f7778342e73696e61696d672e636e2f6d773639302f30303677523064636c793166776578346f373074356a3330696d3038737766642e6a7067" alt="pic"></a></p>
+<p>可以看到：<code>pi=pc=&amp;n</code></p>
+<p>但是：<code>pi+1</code> 和 <code>pc+1</code> 不同，<code>pi+1 - pi</code> = 8，<code>pc+1 - pc</code> = 1</p>
+<p>指针类型决定了指针指向前或者向后一步有多大距离。</p>
+<h3 id="指针的题目"><a href="#指针的题目" class="headerlink" title="指针的题目"></a>指针的题目</h3><ol>
+<li>题</li>
+</ol>
+<pre><code class="c">int main(int argc, const char * argv[])
+{
+    int a[5] = {1,2,3,4,5};
+    int *p = (int *)(&amp;a+1); // p指向5后面的那个地址
+    printf(&quot;%d,%d\n&quot;, *(a+1), *(p-1));  //2,5
+
+    return 0;
+}
+</code></pre>
+<ol start="3">
+<li>题</li>
+</ol>
+<pre><code class="c">struct test
+{
+    int Num;
+    char *pcName;
+    shortsDate;
+    char cha[2];
+    shortsBa[4];
+}*p;
+假设结构体test的大小为20个字节，p的地址为0x100000。
+p + 0x1 = ?    // p+1 =&gt; +20
+(unsigned long)p + 0x1 = ?    // 0x100001 (eg: int a = 0, a + 1 = 1)
+(unsigned int *)p + 0x1 = ?    // 0x100004 (加一个指针的大小，32位平台下4)
+</code></pre>
+<ol start="3">
+<li>题</li>
+</ol>
+<pre><code class="c">int main()
+{
+    int a[4] = {1,2,3,4};
+    int *p1 = (int *)(&amp;a+1);
+    int *p2 = (int *)((int)a+1);
+    printf(&quot;%x,%x\n&quot;, p1[-1], *p2);
+    // p1[-1] 输出 4
+    // *p2 这个编译可以通过，但是运行错误
+    return 0;
+}
+</code></pre>
+<p>在内存中：</p>
+<p><img src="https://wx4.sinaimg.cn/mw690/006wR0dcly1fxnh37huqmj31o60u0abh.jpg" alt="指针笔试题3"></p>
+<ol start="4">
+<li>题</li>
+</ol>
+<pre><code class="c">int main()
+{
+    int a[3][2] = { (0,1), (2,3), (4,5) };
+    int *p = a[0];
+    printf(&quot;%d\n&quot;, p[0]); // 输出1
+
+    return 0;
+}
+</code></pre>
+<p>注意逗号表达式：运算结果为后面的值</p>
+<p>所以：</p>
+<p><img src="https://wx3.sinaimg.cn/mw690/006wR0dcly1fxnhbmau9fj30fi0fuq3k.jpg" alt="4"></p>
+<ol start="5">
+<li>题</li>
+</ol>
+<pre><code class="c">int main()
+{
+    int a[5][5];
+    int (*p)[4];//注意这里！
+    p = a;
+    printf(&quot;%p,%d\n&quot;, &amp;p[4][2]-&amp;a[4][2], &amp;p[4][2]-&amp;a[4][2]); //输出： -4的补码，-4
+
+    return 0;
+}
+</code></pre>
+<p><img src="https://wx1.sinaimg.cn/mw690/006wR0dcly1fxnhvji5v2j31nw0poq6g.jpg" alt="5"></p>
+<p>输出他们之间元素的个数。</p>
+<p>因为<code>p[4][2]</code>的地址小于<code>a[4][2]</code>的地址，所以为<code>-4</code>，但是由于输出的时候，<code>%p</code>输出的是地址，也就是一个无符号的数，所以将<code>-4</code>的补码输出，<code>%d</code>正常输出。</p>
+<ol start="6">
+<li>题</li>
+</ol>
+<pre><code class="c">int main()
+{
+    int aa[2][5] = { 1,2,3,4,5,6,7,8,9,10 };
+    int *p1 = (int *)(&amp;aa + 1);
+    int *p2 = (int *)(*(aa + 1));
+    printf(&quot;%d,%d\n&quot;, *(p1-1), *(p2-1));    // 输出10，5
+
+    return 0;
+}
+</code></pre>
+<p><code>&amp;aa+1</code>跨过了整个数组<code>aa</code>的长度，指向元素10后的地址。</p>
+<p><code>aa+1</code>代表的跨过了一个<code>aa</code>的元素，而<code>aa</code>是一个二维数组，它的元素是一个一维数组。如下图：</p>
+<p><img src="https://wx3.sinaimg.cn/mw690/006wR0dcly1fxnigcsmz0j30oy0fiaaw.jpg" alt="6"></p>
+<ol start="7">
+<li>题</li>
+</ol>
+<pre><code class="c">int main()
+{
+    char *a[] = {&quot;work&quot;, &quot;at&quot;, &quot;360&quot;};
+    char **pa = a;
+    pa++;
+    printf(&quot;%s\n&quot;, *pa);    // 输出at
+
+    return 0;
+}
+</code></pre>
+<p><img src="https://wx4.sinaimg.cn/mw690/006wR0dcly1fxnipjqiicj31460c475c.jpg" alt="7"></p>
+<ol start="8">
+<li>题</li>
+</ol>
+<pre><code class="c">int main()
+{
+    char *c[] = { &quot;ENTER&quot;, &quot;NEW&quot;, &quot;POINT&quot;, &quot;FIRST&quot; };
+    int **cp[] = { c+3, c+2, c+1, c };
+    char ***cpp = cp;
+    printf(&quot;%s\n&quot;, **++cpp);        // POINT
+    printf(&quot;%s\n&quot;, *--*++cpp+3);    // ER
+    printf(&quot;%s\n&quot;, *cpp[-2]+3);        // ST
+    printf(&quot;%s\n&quot;, cpp[-1][-1]+1);    // EW
+
+    return 0;
+}
+</code></pre>
+<p><code>++、—</code>的优先级高于<code>*</code>，<code>*</code>的优先级高于<code>+</code>。<code>++cpp</code>会影响<code>cpp</code>的值，但<code>cpp+1</code>不会影响。<code>[]</code>的优先级大于<code>*</code>。</p>
+<p><img src="https://wx2.sinaimg.cn/mw690/006wR0dcly1fxnj61eghkj31fy0l0q5n.jpg" alt="8.1"></p>
+<p><code>**++cpp</code>：先<code>++</code>，此时的<code>cpp</code>指向<code>cp[1]</code>，解引用为<code>c[2]</code>，再解引用即为<code>POINT</code>。</p>
+<p><img src="https://wx2.sinaimg.cn/mw690/006wR0dcly1fxnjdh5q1zj31fq0k00ve.jpg" alt="8.2"></p>
+<p><code>*--*++cpp+3</code>：经过上一步，<code>cpp</code>现在的指向如上图。</p>
+<p>先<code>++</code>，此时<code>cpp</code>指向<code>cp[2]</code>，解引用即为<code>cp[2]</code>，再<code>--</code>，此时改变了<code>cp[2]</code>的指向，他指向<code>c[0]</code>，再解引用即为<code>c[0]</code>，给<code>c[0]+3</code>，输出的结果为<code>ER</code>。</p>
+<p><img src="https://wx2.sinaimg.cn/mw690/006wR0dcly1fxnjlyh6yzj31jm0hy0vf.jpg" alt="8.3"></p>
+<p><code>*cpp[-2]+3</code>：经过上一步，现在的指向如上图所示。</p>
+<p><code>cpp[-2]</code>指向了<code>cp[0]</code>，解引用指向<code>c[3]</code>，<code>c[3]+3</code>输出<code>ST</code>。</p>
+<p><code>cpp[-1][-1]+1</code>：经过上一步并没有改变指针的指向。</p>
+<p><code>cpp[-1][-1]</code>代表<code>c[1]</code>，再<code>+1</code>输出<code>EW</code>。</p>
+<h2 id="指针和数组"><a href="#指针和数组" class="headerlink" title="指针和数组"></a>指针和数组</h2><h3 id="数组名"><a href="#数组名" class="headerlink" title="数组名"></a>数组名</h3><p>除了以下两种情况外，一般情况下，数组名都代表数组首元素的地址。</p>
+<p>数组名代表整个数组的情况：</p>
+<ol>
+<li><p><code>sizeof</code>中的数组名(<strong>只出现数组名</strong>)代表整个数组。<code>sizeof(arr)</code>这里的数组名代表的是整个数组，但是<code>sizeof(arr+0)</code>代表首元素<strong>地址</strong>的大小。</p>
+</li>
+<li><p><code>&amp;arr</code>代表整个数组。(实际上<code>&amp;arr</code>表示的是数组的地址，而不是数组首元素的地址，数组的地址+1，会跳过整个数组的大小)</p>
+</li>
+</ol>
+<pre><code class="c">int arr[5] = {1,2,3,4,5};
+printf(&quot;sizeof(arr) -&gt; %d\n&quot;, sizeof(arr));
+printf(&quot;sizeof(arr+0) -&gt; %d\n&quot;, sizeof(arr+0));
+printf(&quot;sizeof(&amp;arr) -&gt; %d\n&quot;, sizeof(&amp;arr));
+printf(&quot;arr -&gt; %p\n&quot;, arr);
+printf(&quot;&amp;arr -&gt; %p\n&quot;, &amp;arr);
+printf(&quot;arr+1 -&gt; %p\n&quot;, arr+1);
+printf(&quot;&amp;arr+1 -&gt; %p\n&quot;, &amp;arr+1);
+</code></pre>
+<p>输出：</p>
+<pre><code class="c">sizeof(arr) -&gt; 20
+sizeof(arr+0) -&gt; 8    // 64bit环境下指针的大小为8字节，32bit环境下指针的大小为4字节，这里arr+0代表的是首元素地址
+sizeof(&amp;arr) -&gt; 8    // 数组的地址大小(也是一个地址)，占8个字节。
+arr -&gt; 0x7ffeef8929a0
+&amp;arr -&gt; 0x7ffeef8929a0
+arr+1 -&gt; 0x7ffeef8929a4        // 跳过了一个元素
+&amp;arr+1 -&gt; 0x7ffeef8929b4    // 这里跳过了整个数组的大小(20)
+</code></pre>
+<p>对指针+1，实际上加的是这个指针类型的大小，比如整型指针+1，地址+4。</p>
+<h3 id="区分指针数组和数组指针"><a href="#区分指针数组和数组指针" class="headerlink" title="区分指针数组和数组指针"></a>区分指针数组和数组指针</h3><p>指针<strong>数组</strong>：是一个数组，数组的元素的指针。</p>
+<p>数组<strong>指针</strong>：是一个指针，指向数组的指针。</p>
+<p>从字面意思上来看就是谁在后就是什么东西。</p>
+<pre><code class="c">int *p1[10];
+int (*p2)[10];
+</code></pre>
+<p><code>int *p1[10]</code>这里的p1先和<code>[]</code>结合，所以他是数组，是指针数组。</p>
+<p><code>int (*p2)[10]</code>p2先和<code>*</code>结合，是指针，是数组指针。</p>
+<h3 id="数组指针的使用"><a href="#数组指针的使用" class="headerlink" title="数组指针的使用"></a>数组指针的使用</h3><p>数组指针  指向数组，那么数组指针中存的就是数组的地址咯。</p>
+<pre><code class="c">int main(int argc, const char * argv[])
+{
+    int arr[10] = {1,2,3,4,5,6,7,8,9,0};
+    int (*p)[10] = &amp;arr;
+    return 0;
+}
+</code></pre>
+<p>但一般不这么使用。一个数组指针的使用：</p>
+<pre><code class="c">void init_arr(int (*arr)[5], int row, int col)
+{
+    for(int i=0; i&lt;row; i++)
+    {
+        for(int j=0; j&lt;col; j++)
+        {
+            arr[i][j] = i+j;
+        }
+    }
+}
+
+void disp_arr(int (*arr)[5], int row, int col)
+{
+    for(int i=0; i&lt;row; i++)
+    {
+        for(int j=0; j&lt;col; j++)
+        {
+            printf(&quot;%d &quot;, arr[i][j]);
+        }
+        printf(&quot;\n&quot;);
+    }
+}
+
+int main()
+{
+    int arr[3][5] = {0};
+
+    init_arr(arr, 3, 5);
+    disp_arr(arr, 3, 5);
+
+    return 0;
+}
+</code></pre>
+<h3 id="数组传参，指针传参"><a href="#数组传参，指针传参" class="headerlink" title="数组传参，指针传参"></a>数组传参，指针传参</h3><ul>
+<li><p>一维数组传参</p>
+<pre><code class="c">void test11(int arr[]){;}  // ok
+void test12(int arr[10]){;}    // ok
+void test13(int *arr){;}   // ok
+
+void test21(int *arr[20]){;}   // ok
+void test22(int **arr){;}  // ok
+
+int main()
+{
+    int arr1[10] = {0};
+    int *arr2[20] = {0};  //// 数组指针
+    test11(arr1);
+    test12(arr1);
+    test13(arr1);
+
+    test21(arr2);
+    test22(arr2);
+
+    return 0;
+}
+</code></pre>
+</li>
+<li><p>二维数组传参</p>
+<pre><code class="c">void test(int arr[3][5]){;} // ok
+void test(int arr[][]){;}   // error!
+void test(int arr[][5]){;}  // ok
+void test(int *arr){;}  // error!
+
+void test(int* arr[5]){;} // error!
+void test(int (*arr)[5]){;} // OK!
+void test(int **arr){;} // error!
+
+int main()
+{
+    int arr[3][5] = {0};
+    test(arr);
+    return 0;
+}
+</code></pre>
+</li>
+</ul>
+<ul>
+<li><p>一级指针传参</p>
+<pre><code class="c">void print(int *p, int size)
+{
+    for(int i=0; i&lt;size; i++)
+    {
+        printf(&quot;%d\n&quot;, *(p+i));
+    }
+}
+
+int main()
+{
+    int arr[10] = {1,2,3,4,5,6,7,8,9};
+    int *p = arr;
+    int size = sizeof(arr)/sizeof(arr[0]);
+    print(p, size);
+
+    return 0;
+}
+</code></pre>
+</li>
+<li><p>二级指针传参</p>
+<pre><code class="c">void test(int **p)
+{
+    printf(&quot;%d\n&quot;, **p);
+}
+
+int main()
+{
+    int n = 10;
+    int *p = &amp;n;
+    int **pp = &amp;p;
+    test(&amp;p);
+    test(pp);
+
+    return 0;
+}
+</code></pre>
+</li>
+</ul>
+<h2 id="函数指针"><a href="#函数指针" class="headerlink" title="函数指针"></a>函数指针</h2><h3 id="函数指针-1"><a href="#函数指针-1" class="headerlink" title="函数指针"></a>函数指针</h3><p>函数名代表的是函数地址</p>
+<pre><code class="c">int test()
+{
+    printf(&quot;ahoj\n&quot;);
+    return 0;
+}
+
+int main()
+{
+    printf(&quot;test    %p\n&quot;, test);
+    printf(&quot;&amp;test   %p\n&quot;, &amp;test);
+    test();
+
+    return 0;
+}
+</code></pre>
+<p>输出：</p>
+<pre><code class="c">test    0x100000ef0
+&amp;test   0x100000ef0
+ahoj
+</code></pre>
+<p>函数也是有地址滴，要保存函数地址，就要用到函数指针。</p>
+<pre><code class="c">void (*pf1)();    // 函数指针，先和*结合，再与()结合。pf1是一个指针，指向一个无参数的函数，返回值为void
+void *pf2();    // 返回值为void *的函数
+</code></pre>
+<p>到这里才理解了《C陷阱和缺陷》里的那段代码：<code>(*(void (*)())0)();</code></p>
+<p>这里的$0$被强制转换为<code>void(*)()</code>，函数指针=&gt;解引用，0代表一个函数的地址（地址为0处的函数）</p>
+<p>再来看个代码：<code>void (*signal(int, void(*)(int)))(int);</code></p>
+<p>这是一段函数声明，函数的返回值为：signal先与*结合=&gt;是个函数指针，指向一个参数为<code>(int, 函数指针类型)</code>的一个函数。参数为：int。</p>
+<p>对于上面的两行代码，太复杂，需要简化一下：</p>
+<pre><code class="c">typedef void(*pfun_t)(int);    // pfun_t是一个函数指针，指向一个参数为int的函数
+pfun_t signal(int, pfun_t);    // signal的返回值是个函数指针，参数是int和一个函数指针
+</code></pre>
+<h3 id="函数指针数组"><a href="#函数指针数组" class="headerlink" title="函数指针数组"></a>函数指针数组</h3><p>数组用来存放相同类型数据的，那么把函数的地址存到一个数组中，这个数组就叫做<strong>函数指针数组</strong>。</p>
+<p><code>int (*parr[10])();</code></p>
+<p><code>parr</code>先和<code>[]</code>结合，说明<code>parr</code>是个数组，数组的内容是什么类型呢？是<code>int (*)()</code>类型的函数指针。</p>
+<ul>
+<li><p>函数指针数组的用途：<strong>转移表</strong>（例子：计算器）</p>
+<p>普通版：</p>
+<pre><code class="c">#include &lt;stdio.h&gt;
+
+int add(int a, int b)
+{
+    return a+b;
+}
+int sub(int a, int b)
+{
+    return a-b;
+}
+int mul(int a, int b)
+{
+    return a*b;
+}
+int diiv(int a, int b)
+{
+    return a/b;
+}
+int main()
+{
+    int x, y;
+    int input = 1;
+    int ret = 0;
+    while(input)
+    {
+        printf(&quot;=========\n&quot;);
+        printf(&quot;( 1. +  )\n&quot;);
+        printf(&quot;( 2. -  )\n&quot;);
+        printf(&quot;( 3. *  )\n&quot;);
+        printf(&quot;( 4. \\  )\n&quot;);
+        printf(&quot;=========\n&quot;);
+        printf(&quot;choice&gt;&quot;);
+        scanf(&quot;%d&quot;, &amp;input);
+        switch(input)
+        {
+            case 1:
+                printf(&quot;&lt;(a b)&gt;&quot;);
+                scanf(&quot;%d%d&quot;, &amp;x, &amp;y);
+                ret = add(x, y);
+                break;
+            case 2:
+                printf(&quot;&lt;(a b)&gt;&quot;);
+                scanf(&quot;%d%d&quot;, &amp;x, &amp;y);
+                ret = sub(x, y);
+            case 3:
+                printf(&quot;&lt;(a b)&gt;&quot;);
+                scanf(&quot;%d%d&quot;, &amp;x, &amp;y);
+                ret = mul(x, y);
+            case 4:
+                printf(&quot;&lt;(a b)&gt;&quot;);
+                scanf(&quot;%d%d&quot;, &amp;x, &amp;y);
+                ret = diiv(x, y);
+            default:
+                printf(&quot;error!\n&quot;);
+                break;
+        }
+        printf(&quot;ret = %d\n&quot;, ret);
+    }
+
+    return 0;
+}
+</code></pre>
+<p>函数指针数组实现：</p>
+<pre><code class="c">int main()
+{
+    int x, y;
+    int input = 1;
+    int ret = 0;
+    int (*p[5])(int x, int y) = {0, add, sub, mul, diiv};   // 转移表
+    while(input)
+    {
+        printf(&quot;=========\n&quot;);
+        printf(&quot;( 1. +  )\n&quot;);
+        printf(&quot;( 2. -  )\n&quot;);
+        printf(&quot;( 3. *  )\n&quot;);
+        printf(&quot;( 4. \\  )\n&quot;);
+        printf(&quot;=========\n&quot;);
+        printf(&quot;choice&gt;&quot;);
+        scanf(&quot;%d&quot;, &amp;input);
+        if((input&lt;=4 &amp;&amp; input&gt;=1))
+        {
+            printf(&quot;a b &gt;&quot;);
+            scanf(&quot;%d%d&quot;, &amp;x, &amp;y);
+            ret = (*p[input])(x,y);
+        }
+        else
+        {
+            printf(&quot;error!&quot;);
+        }
+        printf(&quot;ret = %d\n&quot;, ret);
+    }
+
+    return 0;
+}
+</code></pre>
+</li>
+</ul>
+<h3 id="指向函数指针数组的指针"><a href="#指向函数指针数组的指针" class="headerlink" title="指向函数指针数组的指针"></a>指向函数指针数组的指针</h3><p>上面这个东西，首先是个指针，指向一个数组，数组的元素是函数指针。</p>
+<pre><code class="c">void test(const char *str)
+{
+    printf(&quot;%s\n&quot;, str);
+}
+
+int main()
+{
+    // 函数指针pf
+    void (*pf)(const char *) = test;
+
+    // 函数指针的数组pfarr
+    void (*pfarr[5])(const char *str);
+    pfarr[0] = test;
+
+    // 指向函数指针数组pfarr的指针ppfarr
+    void (*(*ppfarr)[10])(const char *) = &amp;pfarr;
+
+    return 0;
+}
+</code></pre>
+<h3 id="回调函数"><a href="#回调函数" class="headerlink" title="回调函数"></a>回调函数</h3><blockquote>
+<p>回调函数就是一个通过函数指针调用的函数。如果把函数的地址作为参数传递给另一个函数，当这个指针被用来调用其所指向的函数时，称为这是一个回调函数。</p>
+<p>回调函数不是由该函数的实现方法直接调用，而是在特定的事件或条件发生时由另外的一方调用的，用于对事件或条件进行相应。</p>
+<p><a href="https://baike.baidu.com/item/%E5%9B%9E%E8%B0%83%E5%87%BD%E6%95%B0/7545973?fr=aladdin" target="_blank" rel="noopener">百度百科</a></p>
+</blockquote>
+<p>简单认识qsort函数：</p>
+<pre><code class="c">#include &lt;stdlib.h&gt;
+void
+qsort(void *base, size_t nel, size_t width, int (*compar)(const void *, const void *));
+</code></pre>
+<p>返回值<code>void</code>，第一个参数是要排序的数组，第二个参数要排序数组元素的个数，第三个参数时每个元素的大小（所占字节数，比如int类型占4字节），第四个参数是一个比较大小用的回调函数（这个函数返回一个整数，参数为两个指针）。</p>
+<p>qsort函数的使用：</p>
+<pre><code class="c">#include &lt;stdio.h&gt;
+#include &lt;math.h&gt;
+#include &lt;stdlib.h&gt;
+
+int int_cmp(const void * p1, const void *p2)
+{
+//    return (*(int *)p1 &lt; *(int *)p2); //这样只对正整数有效
+    int x = *(int *)p1;
+    int y = *(int *)p2;
+    if(x &lt; y)
+        return -1;
+    else if(x == y)
+        return 0;
+    else
+        return 1;
+}
+
+int main(int argc, const char * argv[])
+{
+    int arr[] = {11,33,22,-11,-22,-300,32,0};
+
+    qsort(arr, sizeof(arr)/sizeof(arr[0]), sizeof(int), int_cmp);
+
+    for(int i=0; i&lt;sizeof(arr)/sizeof(arr[0]); i++)
+    {
+        printf(&quot;%d &quot;, arr[i]);
+    }
+    printf(&quot;\n&quot;);
+
+    return 0;
+}
+</code></pre>
+<p>使用冒泡排序模拟实现qsort这种类型的排序函数：</p>
+<pre><code class="C">#include &lt;stdio.h&gt;
+#include &lt;math.h&gt;
+#include &lt;stdlib.h&gt;
+
+int int_cmp(const void * p1, const void *p2)
+{
+//    return (*(int *)p1 &lt; *(int *)p2); //这样只对正整数有效
+    int x = *(int *)p1;
+    int y = *(int *)p2;
+    if(x &lt; y)
+        return -1;
+    else if(x == y)
+        return 0;
+    else
+        return 1;
+}
+
+void swap(void *p1, void *p2, int size)
+{
+    for(int i=0; i&lt;size; i++)
+    {
+        char tmp = *((char *)p1+i);
+        *((char *)p1+i) = *((char *)p2+i);
+        *((char *)p2+i) = tmp;
+    }
+}
+
+void
+myqsort(void *base,
+        int len,
+        int width,
+        int (*cmp)(void *p1, void *p2))
+{
+    for(int i=0; i&lt;len; i++)
+    {
+        for(int j=0; j&lt;len-1-i; j++)
+        {
+            if( cmp((char *)base+j*width,(char *)base+(j+1)*width) &gt; 0 )
+            {
+                swap((char *)base+j*width,
+                     (char *)base+(j+1)*width,
+                     sizeof(int));
+            }
+        }
+    }
+}
+
+int main(int argc, const char * argv[])
+{
+    int arr[] = {11,33,22,-11,-22,-300,32,0};
+
+    qsort(arr, sizeof(arr)/sizeof(arr[0]), sizeof(int), int_cmp);
+
+    for(int i=0; i&lt;sizeof(arr)/sizeof(arr[0]); i++)
+    {
+        printf(&quot;%d &quot;, arr[i]);
+    }
+    printf(&quot;\n&quot;);
+
+    return 0;
+}
+</code></pre>
+<hr>
+<blockquote>
+<p>参考：《C和指针》、《剑指offer》</p>
+</blockquote>
+</div></article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">ahoj</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://ahoj.cc/2019/02/cjvtlw8e6008hq409ok58gft6/">https://ahoj.cc/2019/02/cjvtlw8e6008hq409ok58gft6/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://ahoj.cc">ahoj's blog</a>！</span></div></div><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/C/">C</a></div><nav id="pagination"><div class="prev-post pull-left"><a href="/2019/02/cjvtlw6gq0003q409uwo6vqm5/"><i class="fa fa-chevron-left">  </i><span>二分查找</span></a></div><div class="next-post pull-right"><a href="/2019/02/cjvtlw6h3000hq409bxphd8hw/"><span>C-数据在内存中存储</span><i class="fa fa-chevron-right"></i></a></div></nav><div id="vcomment"></div><script src="https://cdn1.lncld.net/static/js/3.0.4/av-min.js"></script><script src="https://cdn.jsdelivr.net/npm/valine/dist/Valine.min.js"></script><script>var notify = 'false' == true ? true : false;
+var verify = 'false' == true ? true : false;
+var GUEST_INFO = ['nick','mail','link'];
+var guest_info = 'nick,mail,link'.split(',').filter(function(item){
+  return GUEST_INFO.indexOf(item) > -1
+});
+guest_info = guest_info.length == 0 ? GUEST_INFO :guest_info;
+window.valine = new Valine({
+  el:'#vcomment',
+  notify:notify,
+  verify:verify,
+  appId:'yy9oH4ap0AOjoGWG7vbV9w2v-gzGzoHsz',
+  appKey:'27EcRosAo5WUi5KH16i9nAq1',
+  placeholder:'说点什么吧~ 不足之处或者...',
+  avatar:'mm',
+  guest_info:guest_info,
+  pageSize:'10',
+  lang: 'zh-cn'
+})</script></div></div><footer><div class="layout" id="footer"><div class="copyright">&copy;2019 By ahoj</div><div class="framework-info"><span>驱动 - </span><a href="http://hexo.io"><span>Hexo</span></a><span class="footer-separator">|</span><span>主题 - </span><a href="https://github.com/Molunerfinn/hexo-theme-melody"><span>Melody</span></a></div><div class="busuanzi"><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><span id="busuanzi_container_page_pv"><i class="fa fa-file-o"></i><span id="busuanzi_value_page_pv"></span><span></span></span></div></div></footer><i class="fa fa-arrow-up" id="go-up" aria-hidden="true"></i><script src="https://cdn.jsdelivr.net/npm/animejs@latest/anime.min.js"></script><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@latest/velocity.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-ui-pack@latest/velocity.ui.min.js"></script><script src="/js/utils.js?version=1.6.1"></script><script src="/js/fancybox.js?version=1.6.1"></script><script src="/js/sidebar.js?version=1.6.1"></script><script src="/js/copy.js?version=1.6.1"></script><script src="/js/fireworks.js?version=1.6.1"></script><script src="/js/transition.js?version=1.6.1"></script><script src="/js/scroll.js?version=1.6.1"></script><script src="/js/head.js?version=1.6.1"></script><script src="/js/search/local-search.js"></script><script>if(/Android|webOS|iPhone|iPod|BlackBerry/i.test(navigator.userAgent)) {
+  $('#nav').addClass('is-mobile')
+  $('footer').addClass('is-mobile')
+}</script><div class="search-dialog" id="local-search"><div class="search-dialog__title" id="local-search-title">本地搜索</div><div id="local-input-panel"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章"></div></div></div><hr><div id="local-search-results"><div id="local-hits"></div><div id="local-stats"><div class="local-search-stats__hr" id="hr"><span>由</span> <a href="https://github.com/wzpan/hexo-generator-search" style="color:#49B1F5;">hexo-generator-search</a>
+ <span>提供支持</span></div></div></div><span class="search-close-button"><i class="fa fa-times"></i></span></div><div class="search-mask"></div></body></html>

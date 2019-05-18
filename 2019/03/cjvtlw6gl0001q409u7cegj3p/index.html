@@ -1,0 +1,82 @@
+<!DOCTYPE html><html lang="zh-Hans"><head><meta name="generator" content="Hexo 3.8.0"><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta name="description" content="ASM-MASM的使用"><meta name="keywords" content="微机原理"><meta name="author" content="ahoj"><meta name="copyright" content="ahoj"><title>ASM-MASM的使用 | ahoj's blog</title><link rel="shortcut icon" href="/bitbug_favicon.ico"><link rel="stylesheet" href="/css/index.css?version=1.6.1"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@latest/css/font-awesome.min.css?version=1.6.1"><link rel="dns-prefetch" href="https://cdn.staticfile.org"><link rel="dns-prefetch" href="https://cdn.bootcss.com"><link rel="dns-prefetch" href="https://creativecommons.org"><script>var GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"search.xml","languages":{"hits_empty":"找不到您查询的内容:${query}"}},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  }
+} </script></head><body><canvas class="fireworks"></canvas><i class="fa fa-arrow-right" id="toggle-sidebar" aria-hidden="true"></i><div id="sidebar"><div class="toggle-sidebar-info text-center"><span data-toggle="切换文章详情">切换站点概览</span><hr></div><div class="sidebar-toc"><div class="sidebar-toc__title">目录</div><div class="sidebar-toc__progress"><span class="progress-notice">你已经读了</span><span class="progress-num">0</span><span class="progress-percentage">%</span><div class="sidebar-toc__progress-bar"></div></div><div class="sidebar-toc__content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#在32位机上（学校的机子上，Win7-x86）"><span class="toc-number">1.</span> <span class="toc-text">在32位机上（学校的机子上，Win7_x86）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#在64位Windows机器上"><span class="toc-number">2.</span> <span class="toc-text">在64位Windows机器上</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#在Mac上汇编"><span class="toc-number">3.</span> <span class="toc-text">在Mac上汇编</span></a></li></ol></div></div><div class="author-info hide"><div class="author-info__avatar text-center"><img src="https://i.loli.net/2019/05/18/5ce01a928835c26008.jpg"></div><div class="author-info__name text-center">ahoj</div><div class="author-info__description text-center">思想的本质就是不安</div><div class="follow-button"><a href="https://github.com/ahojcn">GitHub</a></div><hr><div class="author-info-articles"><a class="author-info-articles__archives article-meta" href="/archives"><span class="pull-left">文章</span><span class="pull-right">58</span></a><a class="author-info-articles__tags article-meta" href="/tags"><span class="pull-left">标签</span><span class="pull-right">19</span></a><a class="author-info-articles__categories article-meta" href="/categories"><span class="pull-left">分类</span><span class="pull-right">14</span></a></div><hr><div class="author-info-links"><div class="author-info-links__title text-center">朋友们</div><a class="author-info-links__name text-center" href="https://zouchanglin.cn/">Tim</a><a class="author-info-links__name text-center" href="http://www.ijam8.com/">Jam</a><a class="author-info-links__name text-center" href="https://blog.csdn.net/jack_wang128801">jack_wang128801</a><a class="author-info-links__name text-center" href="https://blog.csdn.net/weixin_43232955">Mr.Q_</a></div></div></div><div id="content-outer"><div class="no-bg" id="top-container"><div id="page-header"><span class="pull-left"> <a id="site-name" href="/">ahoj's blog</a></span><i class="fa fa-bars toggle-menu pull-right" aria-hidden="true"></i><span class="pull-right menus"><a class="site-page social-icon search"><i class="fa fa-search"></i><span> 搜索</span></a><a class="site-page" href="/">主页</a><a class="site-page" href="/archives">文章</a><a class="site-page" href="/tags">标签</a><a class="site-page" href="/categories">分类</a><a class="site-page" href="/about">关于</a></span></div><div id="post-info"><div id="post-title">ASM-MASM的使用</div><div id="post-meta"><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 2019-03-03</time><span class="post-meta__separator">|</span><i class="fa fa-inbox post-meta__icon" aria-hidden="true"></i><a class="post-meta__categories" href="/categories/微机原理/">微机原理</a></div></div></div><div class="layout" id="content-inner"><article id="post"><div class="article-container" id="post-content"><p>如何使用 MASM 编写汇编程序。</p>
+<a id="more"></a>
+<p>汇编语言工具包：链接:<a href="https://pan.baidu.com/s/1biXtlVcb1HW9WoiliD6SbQ" target="_blank" rel="noopener">https://pan.baidu.com/s/1biXtlVcb1HW9WoiliD6SbQ</a>  密码:86zz</p>
+<p>一下介绍的是使用MASM来翻译和链接汇编程序，还有一款 emu8086 的软件也挺好用，还支持 debug 单步运行。😼</p>
+<h2 id="在32位机上（学校的机子上，Win7-x86）"><a href="#在32位机上（学校的机子上，Win7-x86）" class="headerlink" title="在32位机上（学校的机子上，Win7_x86）"></a>在32位机上（学校的机子上，Win7_x86）</h2><ol>
+<li><p>将工具包中<code>MASM</code>文件夹复制到C盘下</p>
+<p><img src="https://wx3.sinaimg.cn/mw690/006wR0dcly1fy4dcg8n15j31400u01l3.jpg" alt="1"></p>
+</li>
+<li><p>打开<code>cmd</code>，来到这个目录下</p>
+<p><img src="https://wx1.sinaimg.cn/mw690/006wR0dcly1fy4dcb5af0j31400u04qq.jpg" alt="2"></p>
+</li>
+<li><p>创建一个<code>1.asm</code>文件，使用<code>edit</code>工具进行编辑（edit就是个编辑器，还是<code>notepad</code>好用）</p>
+<p><img src="https://wx4.sinaimg.cn/mw690/006wR0dcly1fy4dcfblo2j31400u0b2a.jpg" alt="3"></p>
+</li>
+<li><p>使用<code>edit</code>编辑代码，并保存</p>
+<p><img src="https://wx2.sinaimg.cn/mw690/006wR0dcly1fy4dcfkwj5j31400u04qs.jpg" alt="4"></p>
+</li>
+<li><p><code>masm 1;</code>进行汇编，会生成一个<code>1.obj</code>文件</p>
+<p><img src="https://wx4.sinaimg.cn/mw690/006wR0dcly1fy4dccm188j31400u07wi.jpg" alt="5"></p>
+</li>
+<li><p><code>link 1;</code>链接文件</p>
+<p><img src="https://wx4.sinaimg.cn/mw690/006wR0dcly1fy4dcd87f9j31400u01l0.jpg" alt="6"></p>
+</li>
+<li><p><code>1.exe</code>或者<code>1;</code>运行程序</p>
+<p><img src="https://wx3.sinaimg.cn/mw690/006wR0dcly1fy4dcf7bvrj31400u0b2b.jpg" alt="7.1"></p>
+<p><img src="https://wx1.sinaimg.cn/mw690/006wR0dcly1fy4dchnkh8j31400u01l0.jpg" alt="7.2"></p>
+</li>
+</ol>
+<h2 id="在64位Windows机器上"><a href="#在64位Windows机器上" class="headerlink" title="在64位Windows机器上"></a>在64位Windows机器上</h2><p>要使用一个叫 DOSBox 的工具来模拟32位环境。</p>
+<ol>
+<li><p>安装 DOSBox 一路 next</p>
+</li>
+<li><p>运行 DOSbox</p>
+</li>
+<li><p>绑定 MASM 的路径</p>
+<p><code>mount C C:\MASM</code></p>
+<p><img src="https://wx1.sinaimg.cn/mw690/006wR0dcly1fy4dnaccokj30a306pdgx.jpg" alt="3"></p>
+</li>
+<li><p>切换到挂载的C盘</p>
+<p><img src="https://wx2.sinaimg.cn/mw690/006wR0dcly1fy4dne2bbmj309i06cwff.jpg" alt="4"></p>
+</li>
+<li><p>然后就可以和上面一样咯</p>
+<p><img src="https://wx3.sinaimg.cn/mw690/006wR0dcly1fy4dnhkdj8j309h06d0tj.jpg" alt="5.1"></p>
+<p><img src="https://wx1.sinaimg.cn/mw690/006wR0dcly1fy4dnkr1jyj30a306pwff.jpg" alt="5.2"></p>
+<p><img src="https://wx1.sinaimg.cn/mw690/006wR0dcly1fy4dnnynksj30a706raau.jpg" alt="5.3"></p>
+</li>
+</ol>
+<h2 id="在Mac上汇编"><a href="#在Mac上汇编" class="headerlink" title="在Mac上汇编"></a>在Mac上汇编</h2><p>DOSBox 也有 Mac 版本的。</p>
+<p><a href="https://blog.csdn.net/zach_z/article/details/78171329" target="_blank" rel="noopener">MAC上编写汇编程序</a></p>
+<hr>
+</div></article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">ahoj</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://ahoj.cc/2019/03/cjvtlw6gl0001q409u7cegj3p/">https://ahoj.cc/2019/03/cjvtlw6gl0001q409u7cegj3p/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://ahoj.cc">ahoj's blog</a>！</span></div></div><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/微机原理/">微机原理</a></div><nav id="pagination"><div class="prev-post pull-left"><a href="/2019/03/cjvtlw6i2002hq4095qvyj3k2/"><i class="fa fa-chevron-left">  </i><span>Matlab基础</span></a></div><div class="next-post pull-right"><a href="/2019/02/cjvtlw6hg0013q4099oy4w22s/"><span>Git-基础命令</span><i class="fa fa-chevron-right"></i></a></div></nav><div id="vcomment"></div><script src="https://cdn1.lncld.net/static/js/3.0.4/av-min.js"></script><script src="https://cdn.jsdelivr.net/npm/valine/dist/Valine.min.js"></script><script>var notify = 'false' == true ? true : false;
+var verify = 'false' == true ? true : false;
+var GUEST_INFO = ['nick','mail','link'];
+var guest_info = 'nick,mail,link'.split(',').filter(function(item){
+  return GUEST_INFO.indexOf(item) > -1
+});
+guest_info = guest_info.length == 0 ? GUEST_INFO :guest_info;
+window.valine = new Valine({
+  el:'#vcomment',
+  notify:notify,
+  verify:verify,
+  appId:'yy9oH4ap0AOjoGWG7vbV9w2v-gzGzoHsz',
+  appKey:'27EcRosAo5WUi5KH16i9nAq1',
+  placeholder:'说点什么吧~ 不足之处或者...',
+  avatar:'mm',
+  guest_info:guest_info,
+  pageSize:'10',
+  lang: 'zh-cn'
+})</script></div></div><footer><div class="layout" id="footer"><div class="copyright">&copy;2019 By ahoj</div><div class="framework-info"><span>驱动 - </span><a href="http://hexo.io"><span>Hexo</span></a><span class="footer-separator">|</span><span>主题 - </span><a href="https://github.com/Molunerfinn/hexo-theme-melody"><span>Melody</span></a></div><div class="busuanzi"><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><span id="busuanzi_container_page_pv"><i class="fa fa-file-o"></i><span id="busuanzi_value_page_pv"></span><span></span></span></div></div></footer><i class="fa fa-arrow-up" id="go-up" aria-hidden="true"></i><script src="https://cdn.jsdelivr.net/npm/animejs@latest/anime.min.js"></script><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@latest/velocity.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-ui-pack@latest/velocity.ui.min.js"></script><script src="/js/utils.js?version=1.6.1"></script><script src="/js/fancybox.js?version=1.6.1"></script><script src="/js/sidebar.js?version=1.6.1"></script><script src="/js/copy.js?version=1.6.1"></script><script src="/js/fireworks.js?version=1.6.1"></script><script src="/js/transition.js?version=1.6.1"></script><script src="/js/scroll.js?version=1.6.1"></script><script src="/js/head.js?version=1.6.1"></script><script src="/js/search/local-search.js"></script><script>if(/Android|webOS|iPhone|iPod|BlackBerry/i.test(navigator.userAgent)) {
+  $('#nav').addClass('is-mobile')
+  $('footer').addClass('is-mobile')
+}</script><div class="search-dialog" id="local-search"><div class="search-dialog__title" id="local-search-title">本地搜索</div><div id="local-input-panel"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章"></div></div></div><hr><div id="local-search-results"><div id="local-hits"></div><div id="local-stats"><div class="local-search-stats__hr" id="hr"><span>由</span> <a href="https://github.com/wzpan/hexo-generator-search" style="color:#49B1F5;">hexo-generator-search</a>
+ <span>提供支持</span></div></div></div><span class="search-close-button"><i class="fa fa-times"></i></span></div><div class="search-mask"></div></body></html>

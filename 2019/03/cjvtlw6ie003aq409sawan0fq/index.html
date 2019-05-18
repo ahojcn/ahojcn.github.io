@@ -1,0 +1,81 @@
+<!DOCTYPE html><html lang="zh-Hans"><head><meta name="generator" content="Hexo 3.8.0"><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta name="description" content="【Nao机器人】刷机"><meta name="keywords" content="Nao机器人,BHuman"><meta name="author" content="ahoj"><meta name="copyright" content="ahoj"><title>【Nao机器人】刷机 | ahoj's blog</title><link rel="shortcut icon" href="/bitbug_favicon.ico"><link rel="stylesheet" href="/css/index.css?version=1.6.1"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@latest/css/font-awesome.min.css?version=1.6.1"><link rel="dns-prefetch" href="https://cdn.staticfile.org"><link rel="dns-prefetch" href="https://cdn.bootcss.com"><link rel="dns-prefetch" href="https://creativecommons.org"><script>var GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"search.xml","languages":{"hits_empty":"找不到您查询的内容:${query}"}},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  }
+} </script></head><body><canvas class="fireworks"></canvas><i class="fa fa-arrow-right" id="toggle-sidebar" aria-hidden="true"></i><div id="sidebar"><div class="toggle-sidebar-info text-center"><span data-toggle="切换文章详情">切换站点概览</span><hr></div><div class="sidebar-toc"><div class="sidebar-toc__title">目录</div><div class="sidebar-toc__progress"><span class="progress-notice">你已经读了</span><span class="progress-num">0</span><span class="progress-percentage">%</span><div class="sidebar-toc__progress-bar"></div></div><div class="sidebar-toc__content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#BHuman-to-Naoqi"><span class="toc-number">1.</span> <span class="toc-text">BHuman to Naoqi</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#准备"><span class="toc-number">1.1.</span> <span class="toc-text">准备</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#步骤"><span class="toc-number">1.2.</span> <span class="toc-text">步骤</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Naoqi-to-BHuman"><span class="toc-number">2.</span> <span class="toc-text">Naoqi to BHuman</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#准备-1"><span class="toc-number">2.1.</span> <span class="toc-text">准备</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#步骤-1"><span class="toc-number">2.2.</span> <span class="toc-text">步骤</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#编译项目"><span class="toc-number">2.2.1.</span> <span class="toc-text">编译项目</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#配置网络"><span class="toc-number">2.2.2.</span> <span class="toc-text">配置网络</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#拷贝编译好的文件到Nao"><span class="toc-number">2.2.3.</span> <span class="toc-text">拷贝编译好的文件到Nao</span></a></li></ol></li></ol></li></ol></div></div><div class="author-info hide"><div class="author-info__avatar text-center"><img src="https://i.loli.net/2019/05/18/5ce01a928835c26008.jpg"></div><div class="author-info__name text-center">ahoj</div><div class="author-info__description text-center">思想的本质就是不安</div><div class="follow-button"><a href="https://github.com/ahojcn">GitHub</a></div><hr><div class="author-info-articles"><a class="author-info-articles__archives article-meta" href="/archives"><span class="pull-left">文章</span><span class="pull-right">58</span></a><a class="author-info-articles__tags article-meta" href="/tags"><span class="pull-left">标签</span><span class="pull-right">19</span></a><a class="author-info-articles__categories article-meta" href="/categories"><span class="pull-left">分类</span><span class="pull-right">14</span></a></div><hr><div class="author-info-links"><div class="author-info-links__title text-center">朋友们</div><a class="author-info-links__name text-center" href="https://zouchanglin.cn/">Tim</a><a class="author-info-links__name text-center" href="http://www.ijam8.com/">Jam</a><a class="author-info-links__name text-center" href="https://blog.csdn.net/jack_wang128801">jack_wang128801</a><a class="author-info-links__name text-center" href="https://blog.csdn.net/weixin_43232955">Mr.Q_</a></div></div></div><div id="content-outer"><div class="no-bg" id="top-container"><div id="page-header"><span class="pull-left"> <a id="site-name" href="/">ahoj's blog</a></span><i class="fa fa-bars toggle-menu pull-right" aria-hidden="true"></i><span class="pull-right menus"><a class="site-page social-icon search"><i class="fa fa-search"></i><span> 搜索</span></a><a class="site-page" href="/">主页</a><a class="site-page" href="/archives">文章</a><a class="site-page" href="/tags">标签</a><a class="site-page" href="/categories">分类</a><a class="site-page" href="/about">关于</a></span></div><div id="post-info"><div id="post-title">【Nao机器人】刷机</div><div id="post-meta"><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 2019-03-30</time><span class="post-meta__separator">|</span><i class="fa fa-inbox post-meta__icon" aria-hidden="true"></i><a class="post-meta__categories" href="/categories/Nao机器人/">Nao机器人</a></div></div></div><div class="layout" id="content-inner"><article id="post"><div class="article-container" id="post-content"><p>给 Nao (小宝贝) 部署 Naoqi 系统和 BHuman 系统。</p>
+<a id="more"></a>
+<p><img src="https://ws1.sinaimg.cn/large/006wR0dcly1g1l8kwg4i9j30hs0hs16e.jpg" alt="Nao"></p>
+<p>机器人相关软件的下载地址：<a href="https://community.ald.softbankrobotics.com/en/resources/software/language/en-gb" target="_blank" rel="noopener">https://community.ald.softbankrobotics.com/en/resources/software/language/en-gb</a></p>
+<h2 id="BHuman-to-Naoqi"><a href="#BHuman-to-Naoqi" class="headerlink" title="BHuman to Naoqi"></a>BHuman to Naoqi</h2><h3 id="准备"><a href="#准备" class="headerlink" title="准备"></a>准备</h3><ul>
+<li>U盘</li>
+<li>flasher-2.1.0.19-linux64</li>
+<li>opennao-atom-system-image-2.1.4.13_2015-08-27.opn</li>
+</ul>
+<h3 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h3><ol>
+<li>在Ubuntu下，将U盘格式化。</li>
+<li>解压flasher-2.1.0.19-linux64，<code>cd</code>到这个解压好的目录下，<code>l</code>查看当前目录下的文件（ps：如果文件名右上角有*，说明权限不够，<code>sudo</code>即可）。</li>
+<li><code>cd bin/</code>然后执行<code>sudo ./flasher</code></li>
+<li>输入nao的密码(一般是<code>0</code>)</li>
+<li>把 u盘插入 Nao 的脑壳，按住胸前按钮直到次按钮不停的高频闪烁，释放按钮，Nao 进入自动刷机状态，等待十几分钟，听到 OGNAK 后说明刷机完成，拔出U盘。</li>
+<li>在 linux 下关闭 Wi-Fi 连接，用网线连接机器人和电脑,编辑一个新网络,断开并重新连接,此时按机器人胸前按钮，会得到一个 ip。(如果是虚拟机要更改成桥连模式,关闭外网)，有时会听到“I cannot connect to the network”，多按几次（一般是3次）可以成功报出 IP，如果还是不行，先将NAO随意连接到其他任意设置的网络，之后断开，再连接回预设网络，方可成功。（由于刷好机后的NAO的有线IP都是以169.254开头，所以可以将Ethernet网的IPv4设置成：Address: 169.254.xxx.xxx; Netmask: 255.255.0.0; Gateway: 169.254.xxx.xxx）。</li>
+</ol>
+<h2 id="Naoqi-to-BHuman"><a href="#Naoqi-to-BHuman" class="headerlink" title="Naoqi to BHuman"></a>Naoqi to BHuman</h2><p>BHuman项目：<a href="https://github.com/bhuman/BHumanCodeRelease" target="_blank" rel="noopener">https://github.com/bhuman/BHumanCodeRelease</a></p>
+<p>注意：在部署bhuman之前，确保机器人的系统为naoqi，版本号为2.1.4.13，如若不是，请<a href="#BHuman to Naoqi">给机器人部署naoqi系统</a>。</p>
+<h3 id="准备-1"><a href="#准备-1" class="headerlink" title="准备"></a>准备</h3><ul>
+<li>电脑、网线、安装 CodeLite</li>
+<li>BHumanCodeRelease-master.zip</li>
+<li>GameController-master.zip</li>
+<li>naoqi-sdk-2.1.4.13-linux32.tar.gz</li>
+</ul>
+<h3 id="步骤-1"><a href="#步骤-1" class="headerlink" title="步骤"></a>步骤</h3><h4 id="编译项目"><a href="#编译项目" class="headerlink" title="编译项目"></a>编译项目</h4><ol>
+<li>新建一个文件夹<code>robotcup</code>，将上面三个压缩包放到这个新建的目录下。</li>
+<li>BHumanCodeRelease-master.zip解压，提取出来。把naoqi-sdk-2.1.4.13-linux32.tar.gz复制到robotcup/BHumanCodeRelease-master/Install路径下。</li>
+<li>进入<code>/robotcup/BHumanCodeRelease-master/Install</code>执行<code>./installAlcommon naoqi-sdk-2.1.4.13-linux32.tar.gz</code></li>
+<li>进入<code>/robotcup/BHumanCodeRelease-master/Make/LinuxCodeLite</code>执行<code>./generate</code></li>
+<li>然后执行<code>codelite</code>，选中B-Human,右键选中Build-&gt;ReBuild Workspace</li>
+</ol>
+<h4 id="配置网络"><a href="#配置网络" class="headerlink" title="配置网络"></a>配置网络</h4><p>进入<code>/robotcup/BHumanCodeRelease-master/Install/Network/Profiles</code>编辑<code>default</code>文件，配置Wi-Fi信息。</p>
+<h4 id="拷贝编译好的文件到Nao"><a href="#拷贝编译好的文件到Nao" class="headerlink" title="拷贝编译好的文件到Nao"></a>拷贝编译好的文件到Nao</h4><ol>
+<li><p>进入<code>/robotcup/BHumanCodeRelease-master/Install</code>执行<code>./createRobot -d -t 17 -r 2 roboname</code>（参数：-d为清空之前的，-t后跟team number，-r后跟机器人序号，roboname是设定机器人名字）</p>
+</li>
+<li><p>执行<code>./addRobotIds -ip 192.168.66.4 roboname</code>（192.168.66.4是让机器人自己报的现在的ip，roboname是设定的名字）</p>
+</li>
+<li><p>执行<code>./installRobot 192.168.66.4</code>（192.168.66.4同上）</p>
+</li>
+<li><p>执行完上述操作后，就成功将机器人的IP设置为：192.168.teamNumber.robotNumber（上述步骤会分别在代码的Config/Robots/下创建相应的内容，./createRobot -d -t 20 -r 10 dashu 会在Config/Robots/下穿件名为dashu的文件夹；./addRobotIds<br>-ip 169.254.210.108 dashu会在Config/Robots/robots.cfg中增加机器人的配置信息）</p>
+</li>
+<li><p>然后将电脑端连接的网络配置更改为192.168.xxx.xxx就可以了，或者在做完前面操作后，将机器人和电脑用网线连起来。</p>
+</li>
+<li><p>然后执行：<code>./copyfiles Release 192.168.17.2</code>。</p>
+</li>
+</ol>
+<p>欧阔~</p>
+<hr>
+</div></article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">ahoj</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://ahoj.cc/2019/03/cjvtlw6ie003aq409sawan0fq/">https://ahoj.cc/2019/03/cjvtlw6ie003aq409sawan0fq/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://ahoj.cc">ahoj's blog</a>！</span></div></div><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Nao机器人/">Nao机器人</a><a class="post-meta__tags" href="/tags/BHuman/">BHuman</a></div><nav id="pagination"><div class="prev-post pull-left"><a href="/2019/03/cjvtlw6i9002uq4090ldybzef/"><i class="fa fa-chevron-left">  </i><span>【Nao机器人】BHuman的组件和配置</span></a></div><div class="next-post pull-right"><a href="/2019/03/cjvtlw6i3002iq4099m6fwa0j/"><span>【Nao机器人】BHuman中的Config</span><i class="fa fa-chevron-right"></i></a></div></nav><div id="vcomment"></div><script src="https://cdn1.lncld.net/static/js/3.0.4/av-min.js"></script><script src="https://cdn.jsdelivr.net/npm/valine/dist/Valine.min.js"></script><script>var notify = 'false' == true ? true : false;
+var verify = 'false' == true ? true : false;
+var GUEST_INFO = ['nick','mail','link'];
+var guest_info = 'nick,mail,link'.split(',').filter(function(item){
+  return GUEST_INFO.indexOf(item) > -1
+});
+guest_info = guest_info.length == 0 ? GUEST_INFO :guest_info;
+window.valine = new Valine({
+  el:'#vcomment',
+  notify:notify,
+  verify:verify,
+  appId:'yy9oH4ap0AOjoGWG7vbV9w2v-gzGzoHsz',
+  appKey:'27EcRosAo5WUi5KH16i9nAq1',
+  placeholder:'说点什么吧~ 不足之处或者...',
+  avatar:'mm',
+  guest_info:guest_info,
+  pageSize:'10',
+  lang: 'zh-cn'
+})</script></div></div><footer><div class="layout" id="footer"><div class="copyright">&copy;2019 By ahoj</div><div class="framework-info"><span>驱动 - </span><a href="http://hexo.io"><span>Hexo</span></a><span class="footer-separator">|</span><span>主题 - </span><a href="https://github.com/Molunerfinn/hexo-theme-melody"><span>Melody</span></a></div><div class="busuanzi"><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><span id="busuanzi_container_page_pv"><i class="fa fa-file-o"></i><span id="busuanzi_value_page_pv"></span><span></span></span></div></div></footer><i class="fa fa-arrow-up" id="go-up" aria-hidden="true"></i><script src="https://cdn.jsdelivr.net/npm/animejs@latest/anime.min.js"></script><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@latest/velocity.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-ui-pack@latest/velocity.ui.min.js"></script><script src="/js/utils.js?version=1.6.1"></script><script src="/js/fancybox.js?version=1.6.1"></script><script src="/js/sidebar.js?version=1.6.1"></script><script src="/js/copy.js?version=1.6.1"></script><script src="/js/fireworks.js?version=1.6.1"></script><script src="/js/transition.js?version=1.6.1"></script><script src="/js/scroll.js?version=1.6.1"></script><script src="/js/head.js?version=1.6.1"></script><script src="/js/search/local-search.js"></script><script>if(/Android|webOS|iPhone|iPod|BlackBerry/i.test(navigator.userAgent)) {
+  $('#nav').addClass('is-mobile')
+  $('footer').addClass('is-mobile')
+}</script><div class="search-dialog" id="local-search"><div class="search-dialog__title" id="local-search-title">本地搜索</div><div id="local-input-panel"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章"></div></div></div><hr><div id="local-search-results"><div id="local-hits"></div><div id="local-stats"><div class="local-search-stats__hr" id="hr"><span>由</span> <a href="https://github.com/wzpan/hexo-generator-search" style="color:#49B1F5;">hexo-generator-search</a>
+ <span>提供支持</span></div></div></div><span class="search-close-button"><i class="fa fa-times"></i></span></div><div class="search-mask"></div></body></html>

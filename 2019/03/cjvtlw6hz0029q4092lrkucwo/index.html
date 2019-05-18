@@ -1,0 +1,157 @@
+<!DOCTYPE html><html lang="zh-Hans"><head><meta name="generator" content="Hexo 3.8.0"><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta name="description" content="JavaScript-正则表达式"><meta name="keywords" content="JavaScript"><meta name="author" content="ahoj"><meta name="copyright" content="ahoj"><title>JavaScript-正则表达式 | ahoj's blog</title><link rel="shortcut icon" href="/bitbug_favicon.ico"><link rel="stylesheet" href="/css/index.css?version=1.6.1"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@latest/css/font-awesome.min.css?version=1.6.1"><link rel="dns-prefetch" href="https://cdn.staticfile.org"><link rel="dns-prefetch" href="https://cdn.bootcss.com"><link rel="dns-prefetch" href="https://creativecommons.org"><script>var GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"search.xml","languages":{"hits_empty":"找不到您查询的内容:${query}"}},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  }
+} </script></head><body><canvas class="fireworks"></canvas><i class="fa fa-arrow-right" id="toggle-sidebar" aria-hidden="true"></i><div id="sidebar"><div class="toggle-sidebar-info text-center"><span data-toggle="切换文章详情">切换站点概览</span><hr></div><div class="sidebar-toc"><div class="sidebar-toc__title">目录</div><div class="sidebar-toc__progress"><span class="progress-notice">你已经读了</span><span class="progress-num">0</span><span class="progress-percentage">%</span><div class="sidebar-toc__progress-bar"></div></div><div class="sidebar-toc__content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#search"><span class="toc-number">1.</span> <span class="toc-text">search</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#match"><span class="toc-number">2.</span> <span class="toc-text">match</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#replace"><span class="toc-number">3.</span> <span class="toc-text">replace</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#test"><span class="toc-number">4.</span> <span class="toc-text">test</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#元字符"><span class="toc-number">5.</span> <span class="toc-text">元字符 []</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#转义"><span class="toc-number">6.</span> <span class="toc-text">转义 \</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#量词-n"><span class="toc-number">7.</span> <span class="toc-text">量词 {n}</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#修饰符"><span class="toc-number">8.</span> <span class="toc-text">修饰符 ^</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#或"><span class="toc-number">9.</span> <span class="toc-text">或 |</span></a></li></ol></div></div><div class="author-info hide"><div class="author-info__avatar text-center"><img src="https://i.loli.net/2019/05/18/5ce01a928835c26008.jpg"></div><div class="author-info__name text-center">ahoj</div><div class="author-info__description text-center">思想的本质就是不安</div><div class="follow-button"><a href="https://github.com/ahojcn">GitHub</a></div><hr><div class="author-info-articles"><a class="author-info-articles__archives article-meta" href="/archives"><span class="pull-left">文章</span><span class="pull-right">58</span></a><a class="author-info-articles__tags article-meta" href="/tags"><span class="pull-left">标签</span><span class="pull-right">19</span></a><a class="author-info-articles__categories article-meta" href="/categories"><span class="pull-left">分类</span><span class="pull-right">14</span></a></div><hr><div class="author-info-links"><div class="author-info-links__title text-center">朋友们</div><a class="author-info-links__name text-center" href="https://zouchanglin.cn/">Tim</a><a class="author-info-links__name text-center" href="http://www.ijam8.com/">Jam</a><a class="author-info-links__name text-center" href="https://blog.csdn.net/jack_wang128801">jack_wang128801</a><a class="author-info-links__name text-center" href="https://blog.csdn.net/weixin_43232955">Mr.Q_</a></div></div></div><div id="content-outer"><div class="no-bg" id="top-container"><div id="page-header"><span class="pull-left"> <a id="site-name" href="/">ahoj's blog</a></span><i class="fa fa-bars toggle-menu pull-right" aria-hidden="true"></i><span class="pull-right menus"><a class="site-page social-icon search"><i class="fa fa-search"></i><span> 搜索</span></a><a class="site-page" href="/">主页</a><a class="site-page" href="/archives">文章</a><a class="site-page" href="/tags">标签</a><a class="site-page" href="/categories">分类</a><a class="site-page" href="/about">关于</a></span></div><div id="post-info"><div id="post-title">JavaScript-正则表达式</div><div id="post-meta"><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 2019-03-25</time><span class="post-meta__separator">|</span><i class="fa fa-inbox post-meta__icon" aria-hidden="true"></i><a class="post-meta__categories" href="/categories/JavaScript/">JavaScript</a></div></div></div><div class="layout" id="content-inner"><article id="post"><div class="article-container" id="post-content"><p>在JS中使用正则。</p>
+<a id="more"></a>
+<p>正则表达式用来干啥？</p>
+<p>用来匹配字符串，校验数据来保证安全性，采集一些数据。</p>
+<p>在 JS 中用正则的两种风格：</p>
+<pre><code class="js">//JS风格
+let re=new RegExp(&#39;\\d+&#39;, &#39;g&#39;);
+
+//perl风格
+let re=/\d+/g;
+</code></pre>
+<h2 id="search"><a href="#search" class="headerlink" title="search"></a>search</h2><p><code>search</code> 是字符串的方法，用来在字符串中找符合正则表达式的字符，返回一个下标。</p>
+<pre><code class="js">let str=&#39;Aweaqesdfaerq&#39;;
+let re=/a/i;    // i 忽略大小写
+alert(str.search(re));
+</code></pre>
+<h2 id="match"><a href="#match" class="headerlink" title="match"></a>match</h2><p><code>match</code> 也是字符串的方法，用来提取出来字符串中匹配正则表达式的字符，返回的是一个数组，里面是符合要求的字符串。</p>
+<pre><code class="js">let str=&#39;f34rrfsdf 45tsdgsrdg 5terg56456fdghdr675 dsf3434535645645645674567&#39;;
+let re=/\d+/g;    // g 全局匹配。 \d 是转义字符，表示所有的数字， + 是尽可能多的数字。
+alert(str.match(re));
+</code></pre>
+<h2 id="replace"><a href="#replace" class="headerlink" title="replace"></a>replace</h2><p><code>replace</code> 也是字符串的方法，替换掉匹配正则表达式的东西。</p>
+<pre><code class="js">let str=&#39;asdfde we fsadfas weAr efAf&#39;;
+alert(str.replace(/a/gi, &#39;*&#39;));    // 用 * 替换掉 str 中所有的 a 忽略大小写
+
+// 去掉所有的空格
+let str=&#39; dffsdfsd   dfasdfsadf asdf asdf asdf  &#39;;
+alert(str.replace(/\s+/g, &#39;&#39;));
+
+// 下面的代码，将 ## 分割的东西用 p 标签包裹起来
+window.onload=function (){
+  let oDiv=document.getElementById(&#39;div1&#39;);
+  let str=&#39;sdfsf##dfasderferfef##dfdfsgdsgf##dgdfbfdghg&#39;;
+
+  oDiv.innerHTML=str.split(/##/g).map(item=&gt;{
+    return `&lt;p&gt;${item}&lt;/p&gt;`;
+  }).join(&#39;&#39;);
+};
+</code></pre>
+<h2 id="test"><a href="#test" class="headerlink" title="test"></a>test</h2><p><code>test</code> 是正则的方法，举个🌰：注意test有个毛病，就是有一部分正则符合就让过，这种情况下就要使用<a href="#修饰符 `^ $`">修饰符<code>^ $</code></a></p>
+<pre><code class="html">// 校验 QQ 号，1开头 5-12 个数字
+&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot; dir=&quot;ltr&quot;&gt;
+  &lt;head&gt;
+    &lt;meta charset=&quot;utf-8&quot;&gt;
+    &lt;title&gt;&lt;/title&gt;
+    &lt;script&gt;
+    window.onload=function (){
+      let oTxt=document.getElementById(&#39;txt1&#39;);
+      let oBtn=document.getElementById(&#39;btn1&#39;);
+
+      oBtn.onclick=function (){
+        let re=/^[1-9]\d{4,11}$/;
+
+        if(re.test(oTxt.value)){
+          alert(&#39;通过&#39;);
+        }else{
+          alert(&#39;不对&#39;);
+        }
+      };
+    };
+    &lt;/script&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;input type=&quot;text&quot; id=&quot;txt1&quot;&gt;
+    &lt;input type=&quot;button&quot; value=&quot;校验&quot; id=&quot;btn1&quot;&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+<h2 id="元字符"><a href="#元字符" class="headerlink" title="元字符 []"></a>元字符 <code>[]</code></h2><ol>
+<li><p>任何<strong>一个</strong></p>
+<pre><code class="js">/a[abc]q/   匹配的是：aaq,abq,acq
+但是不能匹配 abbq
+</code></pre>
+</li>
+<li><p>范围</p>
+<pre><code class="js">/[a-z]/i
+/[0-9]/
+/[a-z0-9]/
+注意：如果要匹配 3-55 不能这样写 [3-59]
+</code></pre>
+</li>
+<li><p>排除</p>
+<pre><code class="js">[^a-z0-9]        匹配除了 a-z 0-9 以外的东西
+</code></pre>
+</li>
+</ol>
+<h2 id="转义"><a href="#转义" class="headerlink" title="转义 \"></a>转义 <code>\</code></h2><pre><code class="js">\d    [0-9]
+\w    [a-z0-9_]
+\s    空白
+.     任意字符
+
+\D    [^0-9]
+\W    [^a-z0-9_]
+\S    非空白
+</code></pre>
+<h2 id="量词-n"><a href="#量词-n" class="headerlink" title="量词 {n}"></a>量词 <code>{n}</code></h2><p>在正则中不加量词，就是一个。</p>
+<pre><code class="js">{n}       /a{6}/  匹配6个a    /\d{11}/ 匹配11个数字
+{n,m}     /\d{5,12}/    匹配5-12个数字
+{n,}      /\w{6,}/        匹配6个[a-z0-9_]中的字符
++   {1,}    最少一个，多了不限
+?   {0,1}    要么有，要么没有
+
+/\.jsx?/    可以匹配 .js  .jsx
+
+a 任何字符5-18个 z
+/a.{5,18}z/
+</code></pre>
+<h2 id="修饰符"><a href="#修饰符" class="headerlink" title="修饰符 ^"></a>修饰符 <code>^</code></h2><p>是用来说明条件的。<a href="#test">栗子：校验QQ号</a></p>
+<pre><code class="js">^ 行首            ⚠️注意： ^ 放在 [] 里面是排除，没在里面就是行首
+$ 行尾
+
+/\.js/      匹配：1.js.png    1.html.js.png
+/\.js$/i    匹配：1.js    1231.txt.js
+
+/^https?:\/\//    匹配：http 或者 https
+</code></pre>
+<h2 id="或"><a href="#或" class="headerlink" title="或 |"></a>或 <code>|</code></h2><p>⚠️ 注意，或运算符的优先级特别低，要使用<code>()</code>来提升优先级。</p>
+<pre><code class="js">/\.jpg|gif|png$/
+如果这么写的话，匹配的是：有 .jpg 或 gif 或 png结尾的字符串
+实际上机器认为是这样的 /(\.jpg)|(gif)|(png$)/
+
+所以有：/\.(jpg|gif|png)$/i
+</code></pre>
+<hr>
+</div></article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">ahoj</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://ahoj.cc/2019/03/cjvtlw6hz0029q4092lrkucwo/">https://ahoj.cc/2019/03/cjvtlw6hz0029q4092lrkucwo/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://ahoj.cc">ahoj's blog</a>！</span></div></div><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/JavaScript/">JavaScript</a></div><nav id="pagination"><div class="prev-post pull-left"><a href="/2019/03/cjvtlw6hs001rq4098ayx6bqg/"><i class="fa fa-chevron-left">  </i><span>JavaScript-JSON</span></a></div><div class="next-post pull-right"><a href="/2019/03/cjvtlw6hr001nq409r33z21zw/"><span>JavaScript-ES6笔记</span><i class="fa fa-chevron-right"></i></a></div></nav><div id="vcomment"></div><script src="https://cdn1.lncld.net/static/js/3.0.4/av-min.js"></script><script src="https://cdn.jsdelivr.net/npm/valine/dist/Valine.min.js"></script><script>var notify = 'false' == true ? true : false;
+var verify = 'false' == true ? true : false;
+var GUEST_INFO = ['nick','mail','link'];
+var guest_info = 'nick,mail,link'.split(',').filter(function(item){
+  return GUEST_INFO.indexOf(item) > -1
+});
+guest_info = guest_info.length == 0 ? GUEST_INFO :guest_info;
+window.valine = new Valine({
+  el:'#vcomment',
+  notify:notify,
+  verify:verify,
+  appId:'yy9oH4ap0AOjoGWG7vbV9w2v-gzGzoHsz',
+  appKey:'27EcRosAo5WUi5KH16i9nAq1',
+  placeholder:'说点什么吧~ 不足之处或者...',
+  avatar:'mm',
+  guest_info:guest_info,
+  pageSize:'10',
+  lang: 'zh-cn'
+})</script></div></div><footer><div class="layout" id="footer"><div class="copyright">&copy;2019 By ahoj</div><div class="framework-info"><span>驱动 - </span><a href="http://hexo.io"><span>Hexo</span></a><span class="footer-separator">|</span><span>主题 - </span><a href="https://github.com/Molunerfinn/hexo-theme-melody"><span>Melody</span></a></div><div class="busuanzi"><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><span id="busuanzi_container_page_pv"><i class="fa fa-file-o"></i><span id="busuanzi_value_page_pv"></span><span></span></span></div></div></footer><i class="fa fa-arrow-up" id="go-up" aria-hidden="true"></i><script src="https://cdn.jsdelivr.net/npm/animejs@latest/anime.min.js"></script><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@latest/velocity.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-ui-pack@latest/velocity.ui.min.js"></script><script src="/js/utils.js?version=1.6.1"></script><script src="/js/fancybox.js?version=1.6.1"></script><script src="/js/sidebar.js?version=1.6.1"></script><script src="/js/copy.js?version=1.6.1"></script><script src="/js/fireworks.js?version=1.6.1"></script><script src="/js/transition.js?version=1.6.1"></script><script src="/js/scroll.js?version=1.6.1"></script><script src="/js/head.js?version=1.6.1"></script><script src="/js/search/local-search.js"></script><script>if(/Android|webOS|iPhone|iPod|BlackBerry/i.test(navigator.userAgent)) {
+  $('#nav').addClass('is-mobile')
+  $('footer').addClass('is-mobile')
+}</script><div class="search-dialog" id="local-search"><div class="search-dialog__title" id="local-search-title">本地搜索</div><div id="local-input-panel"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章"></div></div></div><hr><div id="local-search-results"><div id="local-hits"></div><div id="local-stats"><div class="local-search-stats__hr" id="hr"><span>由</span> <a href="https://github.com/wzpan/hexo-generator-search" style="color:#49B1F5;">hexo-generator-search</a>
+ <span>提供支持</span></div></div></div><span class="search-close-button"><i class="fa fa-times"></i></span></div><div class="search-mask"></div></body></html>

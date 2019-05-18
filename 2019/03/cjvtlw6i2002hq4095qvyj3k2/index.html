@@ -1,0 +1,321 @@
+<!DOCTYPE html><html lang="zh-Hans"><head><meta name="generator" content="Hexo 3.8.0"><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta name="description" content="Matlab基础"><meta name="keywords" content="Matlab"><meta name="author" content="ahoj"><meta name="copyright" content="ahoj"><title>Matlab基础 | ahoj's blog</title><link rel="shortcut icon" href="/bitbug_favicon.ico"><link rel="stylesheet" href="/css/index.css?version=1.6.1"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@latest/css/font-awesome.min.css?version=1.6.1"><link rel="dns-prefetch" href="https://cdn.staticfile.org"><link rel="dns-prefetch" href="https://cdn.bootcss.com"><link rel="dns-prefetch" href="https://creativecommons.org"><script>var GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"search.xml","languages":{"hits_empty":"找不到您查询的内容:${query}"}},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  }
+} </script></head><body><canvas class="fireworks"></canvas><i class="fa fa-arrow-right" id="toggle-sidebar" aria-hidden="true"></i><div id="sidebar"><div class="toggle-sidebar-info text-center"><span data-toggle="切换文章详情">切换站点概览</span><hr></div><div class="sidebar-toc"><div class="sidebar-toc__title">目录</div><div class="sidebar-toc__progress"><span class="progress-notice">你已经读了</span><span class="progress-num">0</span><span class="progress-percentage">%</span><div class="sidebar-toc__progress-bar"></div></div><div class="sidebar-toc__content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#基础命令"><span class="toc-number">1.</span> <span class="toc-text">基础命令</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#基础运算"><span class="toc-number">1.1.</span> <span class="toc-text">基础运算</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#向量运算"><span class="toc-number">1.2.</span> <span class="toc-text">向量运算</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#矩阵运算"><span class="toc-number">1.3.</span> <span class="toc-text">矩阵运算</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Script"><span class="toc-number">1.4.</span> <span class="toc-text">Script</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#语法"><span class="toc-number">2.</span> <span class="toc-text">语法</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#选择"><span class="toc-number">2.1.</span> <span class="toc-text">选择</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#循环"><span class="toc-number">2.2.</span> <span class="toc-text">循环</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#while"><span class="toc-number">2.2.1.</span> <span class="toc-text">while</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#for"><span class="toc-number">2.2.2.</span> <span class="toc-text">for</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Function"><span class="toc-number">3.</span> <span class="toc-text">Function</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#无返回值"><span class="toc-number">3.1.</span> <span class="toc-text">无返回值</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#带返回值function"><span class="toc-number">3.2.</span> <span class="toc-text">带返回值function</span></a></li></ol></li></ol></div></div><div class="author-info hide"><div class="author-info__avatar text-center"><img src="https://i.loli.net/2019/05/18/5ce01a928835c26008.jpg"></div><div class="author-info__name text-center">ahoj</div><div class="author-info__description text-center">思想的本质就是不安</div><div class="follow-button"><a href="https://github.com/ahojcn">GitHub</a></div><hr><div class="author-info-articles"><a class="author-info-articles__archives article-meta" href="/archives"><span class="pull-left">文章</span><span class="pull-right">58</span></a><a class="author-info-articles__tags article-meta" href="/tags"><span class="pull-left">标签</span><span class="pull-right">19</span></a><a class="author-info-articles__categories article-meta" href="/categories"><span class="pull-left">分类</span><span class="pull-right">14</span></a></div><hr><div class="author-info-links"><div class="author-info-links__title text-center">朋友们</div><a class="author-info-links__name text-center" href="https://zouchanglin.cn/">Tim</a><a class="author-info-links__name text-center" href="http://www.ijam8.com/">Jam</a><a class="author-info-links__name text-center" href="https://blog.csdn.net/jack_wang128801">jack_wang128801</a><a class="author-info-links__name text-center" href="https://blog.csdn.net/weixin_43232955">Mr.Q_</a></div></div></div><div id="content-outer"><div class="no-bg" id="top-container"><div id="page-header"><span class="pull-left"> <a id="site-name" href="/">ahoj's blog</a></span><i class="fa fa-bars toggle-menu pull-right" aria-hidden="true"></i><span class="pull-right menus"><a class="site-page social-icon search"><i class="fa fa-search"></i><span> 搜索</span></a><a class="site-page" href="/">主页</a><a class="site-page" href="/archives">文章</a><a class="site-page" href="/tags">标签</a><a class="site-page" href="/categories">分类</a><a class="site-page" href="/about">关于</a></span></div><div id="post-info"><div id="post-title">Matlab基础</div><div id="post-meta"><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 2019-03-11</time><span class="post-meta__separator">|</span><i class="fa fa-inbox post-meta__icon" aria-hidden="true"></i><a class="post-meta__categories" href="/categories/Matlab/">Matlab</a></div></div></div><div class="layout" id="content-inner"><article id="post"><div class="article-container" id="post-content"><p>《Matlab 基础》整理了下 MATLAB 的基础知识，在《计算方法》实验中会用到。</p>
+<a id="more"></a>
+<p>三个区域：</p>
+<p>Command Window 用于输入命令和得到输出结果</p>
+<p>Workspace 记录Command中用到的变量</p>
+<p>Command History 记录Command输入历史</p>
+<h1 id="基础命令"><a href="#基础命令" class="headerlink" title="基础命令"></a>基础命令</h1><h2 id="基础运算"><a href="#基础运算" class="headerlink" title="基础运算"></a>基础运算</h2><ul>
+<li><p>清空屏幕</p>
+<p><code>clc</code></p>
+</li>
+<li><p>注释</p>
+<p><code>%</code></p>
+</li>
+<li><p>加减乘除</p>
+<pre><code class="matlab">1 + 2
+1 - 2
+1 * 2
+1 / 2
+</code></pre>
+</li>
+<li><p>指数</p>
+<ul>
+<li><p>例如$5^2$</p>
+<p><code>5^2</code></p>
+</li>
+</ul>
+</li>
+<li><p>对数</p>
+<ul>
+<li><p>例如：$\ln32$</p>
+<p><code>log(32)</code></p>
+</li>
+<li><p>$\lg32$</p>
+<p><code>log10(32)</code></p>
+</li>
+<li><p>$\log_232$</p>
+<p><code>log2(32)</code></p>
+</li>
+<li><p>$\log_87 = \frac{\log_e7}{\log_e8}$</p>
+<p><code>log(7)/log(8)</code></p>
+</li>
+</ul>
+</li>
+<li><p>三角函数</p>
+<p><code>sin(x)</code></p>
+<p><code>cos(x)</code></p>
+<p>还有一些其他的三角函数，动手试一试。</p>
+</li>
+<li><p>变量</p>
+<p><code>x = 10</code></p>
+<p><code>y = 20</code></p>
+<p><code>x + y</code></p>
+<p>不可以这样<code>x + 1 = 2</code>，没办法直接来解方程。在Matlab中<code>=</code>是赋值符号，不是<strong>等于</strong>。这个类似于C语言。</p>
+<p>可以这样：<code>x = x + 1</code></p>
+<p>输出变量的值：<code>fprintf(&#39;%g\n&#39;, x);</code>或者<code>disp(x);</code></p>
+</li>
+<li><p>按方向键⬆️⬇️用来重复命令</p>
+<p>这个和Linux中一样。</p>
+</li>
+<li><p>$\sqrt3$</p>
+<p><code>sqrt(3)</code></p>
+</li>
+</ul>
+<h2 id="向量运算"><a href="#向量运算" class="headerlink" title="向量运算"></a>向量运算</h2><ul>
+<li><p>$\vec x = (1,2,3)$</p>
+<p><code>x = [1,2,3]</code>或<code>x = [1 2 3]</code></p>
+</li>
+<li><p>$\vec x*2$</p>
+<p>这个是计算$\vec x*2$的值，但是$\vec x$的值并没有改变，只是计算了这个表达式的结果。</p>
+<p><code>x = x * 2</code>，这样才会改变$\vec x$的值，这个和C语言一样～</p>
+</li>
+<li><p>当然也可以做向量和向量的基本运算（加减乘除）等。</p>
+</li>
+<li><p><code>sum(x)</code></p>
+<p>这个命令是用来求和的，例如：</p>
+<pre><code class="matlab">v = [1 2 3];
+disp(sum(v));    % 输出 6
+</code></pre>
+</li>
+</ul>
+<h2 id="矩阵运算"><a href="#矩阵运算" class="headerlink" title="矩阵运算"></a>矩阵运算</h2><ul>
+<li><p>矩阵<br>$$<br>A =<br>\begin{Bmatrix}<br>\mathbf{1} &amp; \mathbf{2} &amp; \mathbf{3} \\<br>\mathbf{4} &amp; \mathbf{5} &amp; \mathbf{6}<br>\end{Bmatrix}<br>$$</p>
+<p>$$<br>B =<br>\begin{Bmatrix}<br>\mathbf{7} &amp; \mathbf{8} &amp; \mathbf{9} \\<br>\mathbf{10} &amp; \mathbf{11} &amp; \mathbf{12}<br>\end{Bmatrix}<br>$$</p>
+</li>
+</ul>
+<p>  输入：<code>A = [1 2 3;4 5 6]</code></p>
+<p>  按上面的输入同样，矩阵B</p>
+<p>  输入：<code>B = [7,8,9;10,11,12]</code></p>
+<p>  然后就可以做矩阵的运算咯，<code>A*B,A+B,A-B,A/B</code>等。</p>
+<p>  注意这里矩阵运算需要遵循矩阵运算规则。</p>
+<ul>
+<li><p>另一种矩阵乘法</p>
+<p>在Matlab中输入<code>A*B</code>就是数学中的矩阵乘法</p>
+<p>还有一种是输入<code>A.*B</code>，这样就是矩阵每个位置($A_{i,j}*B_{i,j}$)对应相乘。</p>
+</li>
+</ul>
+<h2 id="Script"><a href="#Script" class="headerlink" title="Script"></a>Script</h2><ul>
+<li><p>New Script</p>
+<p>在脚本里写一堆命令。</p>
+<p>例如：计算$x+y$</p>
+<pre><code class="matlab">x = 10;    % 加了;后，在command window里，就不会出现x=10的结果。
+y = 20;    % 也可以不加分号。
+x + y
+</code></pre>
+<p>保存脚本扩展名为.m -&gt; 然后在左面切换到刚才保存的文件夹 -&gt; RUN</p>
+<p>写脚本可以实现输入互动，例如：</p>
+<pre><code class="matlab">x = input(&#39;Please input x:&#39;);
+y = input(&#39;Please input y:&#39;);
+
+x + y
+</code></pre>
+<p>然后RUN，输入x，y，就会输出结果。</p>
+<ul>
+<li><p>例子：摄氏温度转华氏温度</p>
+<pre><code class="matlab">C = input(&#39;enter a temperature in Celesius:&#39;);
+F = (C * 1.8) + 32
+
+fprintf(&#39;Fahrenheit = %f\n&#39;, F);
+</code></pre>
+</li>
+</ul>
+</li>
+</ul>
+<h1 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h1><h2 id="选择"><a href="#选择" class="headerlink" title="选择"></a>选择</h2><p>栗子1：</p>
+<pre><code class="matlab">num = input(&#39;enter a number:&#39;);
+
+if num &gt; 0
+    fprintf(&#39;正数\n&#39;);
+elseif num == 0
+    fprintf(&#39;0\n&#39;);
+else
+    fprintf(&#39;负数\n&#39;);
+end
+</code></pre>
+<p>栗子2：</p>
+<pre><code class="matlab">a = input(&#39;a = &#39;);
+b = input(&#39;b = &#39;);
+
+if a &gt; b
+    fprintf(&#39;%g\n&#39;, a);
+else
+    fprintf(&#39;%g\n&#39;, b);
+end
+</code></pre>
+<p>栗子3：</p>
+<pre><code class="matlab">% 1.
+a = input(&#39;a = &#39;);
+b = input(&#39;b = &#39;);
+c = input(&#39;c = &#39;);
+
+if a + b &lt;= c
+    fprintf(&#39;NO\n&#39;);
+elseif a + c &lt;= b
+    fprintf(&#39;NO\n&#39;);
+elseif b + c &lt;= a
+    fprintf(&#39;NO\n&#39;);
+else
+    fprintf(&#39;YES\n&#39;);
+end
+
+
+% 2.
+if (a + b &gt; c) &amp;&amp; (b + c &gt; a) &amp;&amp; (a + c &gt; b)
+    fprintf(&#39;YES\n&#39;);
+else
+    fprintf(&#39;NO\n&#39;);
+end
+</code></pre>
+<h2 id="循环"><a href="#循环" class="headerlink" title="循环"></a>循环</h2><h3 id="while"><a href="#while" class="headerlink" title="while"></a>while</h3><p>栗子1：</p>
+<pre><code class="matlab">t = 1;
+while t &lt;= 5
+    disp(t);
+    t = t + 1;
+end
+
+</code></pre>
+<p>栗子2：</p>
+<pre><code class="matlab">a = input(&#39;a = &#39;);
+b = input(&#39;b = &#39;);
+r = mod(a, b);
+
+while r ~= 0
+    a = b;
+    b = r;
+    r = mod(a, b);
+end
+
+disp(b);
+
+</code></pre>
+<h3 id="for"><a href="#for" class="headerlink" title="for"></a>for</h3><p>栗子1：</p>
+<pre><code class="matlab">% 输出 1 ～ 5
+for i = 1 : 5
+    disp(i);
+end
+
+% 输出 5 ～ -5
+for i = 5 : -1 : -5     % 这的-1表示步长，步长默认为 1，步长可以为小数。
+    disp(i);
+end
+
+</code></pre>
+<p>栗子2：</p>
+<pre><code class="matlab">s = 0;
+for i = 1 : 100
+    s = s + i;
+end
+
+disp(s);
+
+</code></pre>
+<p>栗子3：计算</p>
+<p>$\frac{1}{1}+\frac{1}{2}+\frac{1}{3}+…+\frac{1}{100} = ?$</p>
+<pre><code class="matlab">s = 0;
+
+for i = 1 : 100
+    s = s + (1 / i);
+end
+
+disp(s);
+
+</code></pre>
+<p>栗子4：</p>
+<p>$$\frac{1}{1}-\frac{1}{2}+\frac{1}{3}-…-\frac{1}{100} =?$$</p>
+<pre><code class="matlab">sum = 0;
+flag = -1;
+
+for i = 1 : 100
+    sum = sum + (1 / i)*flag;
+end
+
+</code></pre>
+<p>栗子5：for loop和向量</p>
+<pre><code class="matlab">v = [1 2 3 4 5 6 7 8 9 100];
+
+for i = v
+    disp(i);
+end
+
+</code></pre>
+<h1 id="Function"><a href="#Function" class="headerlink" title="Function"></a>Function</h1><h2 id="无返回值"><a href="#无返回值" class="headerlink" title="无返回值"></a>无返回值</h2><p>新建一个function。</p>
+<p>栗子1：计算$1+2+3+…+100 = ?$</p>
+<pre><code class="matlab">function mysum1( )
+    s = 0;
+    for i = 1 : 100
+        s = s + i;
+    end
+    disp(s);
+end
+
+</code></pre>
+<p>运行：<code>mysum1()</code></p>
+<p>栗子2：计算$1+2+3+…+n = ?$</p>
+<pre><code class="matlab">function mysum2( n )
+    s = 0;
+    for i = 1 : n
+        s = s + i;
+    end
+    disp(s);
+end
+
+</code></pre>
+<p>运行：<code>mysum2(100)</code></p>
+<p>栗子3：计算$n+(n+1)+(n+2)+…+m = ?$</p>
+<pre><code class="matlab">function mysum3( n, m )
+    s = 0;
+    for i = n : m
+        s = s + i;
+    end
+    disp(s);
+end
+
+</code></pre>
+<p>运行：<code>mysum(4, 10)</code></p>
+<blockquote>
+<p>上面这个例子，在command window调用时，我们需要把他的结果保存在一个变量中，如：<code>s1 = mysum(4,10)</code>。就会出错，这个就是没有返回值。</p>
+</blockquote>
+<h2 id="带返回值function"><a href="#带返回值function" class="headerlink" title="带返回值function"></a>带返回值function</h2><pre><code class="matlab">function ret = mysum3( n, m )
+    s = 0;
+    for i = n : m
+        s = s + i;
+    end
+    ret = s;    % return
+end
+
+</code></pre>
+<p>此时：<code>s1 = mysum(4, 10)</code></p>
+<p>这样就完成了一个具有返回值的function。</p>
+<hr>
+</div></article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">ahoj</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://ahoj.cc/2019/03/cjvtlw6i2002hq4095qvyj3k2/">https://ahoj.cc/2019/03/cjvtlw6i2002hq4095qvyj3k2/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://ahoj.cc">ahoj's blog</a>！</span></div></div><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Matlab/">Matlab</a></div><nav id="pagination"><div class="prev-post pull-left"><a href="/2019/03/cjvtlw6h1000gq409qcno5k8j/"><i class="fa fa-chevron-left">  </i><span>C-字符串相关的库函数</span></a></div><div class="next-post pull-right"><a href="/2019/03/cjvtlw6gl0001q409u7cegj3p/"><span>ASM-MASM的使用</span><i class="fa fa-chevron-right"></i></a></div></nav><div id="vcomment"></div><script src="https://cdn1.lncld.net/static/js/3.0.4/av-min.js"></script><script src="https://cdn.jsdelivr.net/npm/valine/dist/Valine.min.js"></script><script>var notify = 'false' == true ? true : false;
+var verify = 'false' == true ? true : false;
+var GUEST_INFO = ['nick','mail','link'];
+var guest_info = 'nick,mail,link'.split(',').filter(function(item){
+  return GUEST_INFO.indexOf(item) > -1
+});
+guest_info = guest_info.length == 0 ? GUEST_INFO :guest_info;
+window.valine = new Valine({
+  el:'#vcomment',
+  notify:notify,
+  verify:verify,
+  appId:'yy9oH4ap0AOjoGWG7vbV9w2v-gzGzoHsz',
+  appKey:'27EcRosAo5WUi5KH16i9nAq1',
+  placeholder:'说点什么吧~ 不足之处或者...',
+  avatar:'mm',
+  guest_info:guest_info,
+  pageSize:'10',
+  lang: 'zh-cn'
+})</script></div></div><footer><div class="layout" id="footer"><div class="copyright">&copy;2019 By ahoj</div><div class="framework-info"><span>驱动 - </span><a href="http://hexo.io"><span>Hexo</span></a><span class="footer-separator">|</span><span>主题 - </span><a href="https://github.com/Molunerfinn/hexo-theme-melody"><span>Melody</span></a></div><div class="busuanzi"><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><span id="busuanzi_container_page_pv"><i class="fa fa-file-o"></i><span id="busuanzi_value_page_pv"></span><span></span></span></div></div></footer><i class="fa fa-arrow-up" id="go-up" aria-hidden="true"></i><script src="https://cdn.jsdelivr.net/npm/animejs@latest/anime.min.js"></script><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@latest/velocity.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-ui-pack@latest/velocity.ui.min.js"></script><script src="/js/utils.js?version=1.6.1"></script><script src="/js/fancybox.js?version=1.6.1"></script><script src="/js/sidebar.js?version=1.6.1"></script><script src="/js/copy.js?version=1.6.1"></script><script src="/js/fireworks.js?version=1.6.1"></script><script src="/js/transition.js?version=1.6.1"></script><script src="/js/scroll.js?version=1.6.1"></script><script src="/js/head.js?version=1.6.1"></script><script src="/js/search/local-search.js"></script><script>if(/Android|webOS|iPhone|iPod|BlackBerry/i.test(navigator.userAgent)) {
+  $('#nav').addClass('is-mobile')
+  $('footer').addClass('is-mobile')
+}</script><div class="search-dialog" id="local-search"><div class="search-dialog__title" id="local-search-title">本地搜索</div><div id="local-input-panel"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章"></div></div></div><hr><div id="local-search-results"><div id="local-hits"></div><div id="local-stats"><div class="local-search-stats__hr" id="hr"><span>由</span> <a href="https://github.com/wzpan/hexo-generator-search" style="color:#49B1F5;">hexo-generator-search</a>
+ <span>提供支持</span></div></div></div><span class="search-close-button"><i class="fa fa-times"></i></span></div><div class="search-mask"></div></body></html>
