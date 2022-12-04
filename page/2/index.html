@@ -73,7 +73,7 @@
             
 		</nav>
 		<nav>
-			总文章数 150
+			总文章数 149
 		</nav>
 		<nav class="header-nav">
 			<div class="social">
@@ -148,191 +148,6 @@
           </div>
           <div id="js-content" class="content-ll">
             
-  
-    <article id="post-Nginx配置实例" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/07/18/Nginx%E9%85%8D%E7%BD%AE%E5%AE%9E%E4%BE%8B/">Nginx配置实例</a>
-    </h1>
-  
-
-        
-        <a href="/2020/07/18/Nginx%E9%85%8D%E7%BD%AE%E5%AE%9E%E4%BE%8B/" class="archive-article-date">
-  	<time datetime="2020-07-18T10:55:32.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-07-18</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="反向代理"><a href="#反向代理" class="headerlink" title="反向代理"></a>反向代理</h2><h3 id="实例-1"><a href="#实例-1" class="headerlink" title="实例 1"></a>实例 1</h3><p><strong>实现效果</strong></p>
-<p>打开浏览器，输入地址，跳转到 Linux 的 Tomcat 的主页面中。</p>
-<p><img src="https://i.loli.net/2020/07/18/mcLFe9oyCOBHqkT.png"></p>
-<p><strong>准备工作</strong></p>
-<p>安装 Tomcat，使用默认端口 8080。</p>
-<p>下载、解压、运行 /bin/startup.sh 即可。</p>
-<p>开放防火墙的 8080 端口，重启防火墙。</p>
-<p>验证完了 tomcat 安装好后，可以关闭 8080 端口。</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">firewall-cmd --zone=public --remove-port=8080/tcp --permanent</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://i.loli.net/2020/07/18/YDROMrLmEx9nbXe.png"></p>
-<p><strong>配置 nginx</strong></p>
-<p>保存配置文件，reload 即可。</p>
-<p><img src="https://i.loli.net/2020/07/18/bqHJYkBIuiShpyL.png"></p>
-<p><img src="https://i.loli.net/2020/07/18/e7Lk2ZKFScPEoHs.png"></p>
-<h3 id="实例-2"><a href="#实例-2" class="headerlink" title="实例 2"></a>实例 2</h3><p><strong>实现效果</strong></p>
-<p>使用 nginx 反向代理，根据访问的路径跳转到不同端口的服务中</p>
-<p>nginx 监听端口 80</p>
-<p>访问 <a target="_blank" rel="noopener" href="http://ip/edu/">http://ip/edu/</a> 跳转到 127.0.0.1:8080</p>
-<p>访问 <a target="_blank" rel="noopener" href="http://ip/vod/">http://ip/vod/</a> 跳转到 127.0.0.1:8081</p>
-<p><strong>准备工作</strong></p>
-<p>创建两个 tomcat 服务器，一个 8080，一个 8081(修改配置文件)，复制两个 tomcat 文件夹，启动 tomcat。</p>
-<p>创建文件夹和测试页面，放在 tomcat 下的 webapps 目录下即可。</p>
-<p><img src="https://i.loli.net/2020/07/18/zCoLsqmXMfb6av7.png"></p>
-<p><img src="https://i.loli.net/2020/07/18/cvThDunSd5bOEak.png"></p>
-<p><strong>配置</strong> <strong>nginx</strong></p>
-<p><img src="https://i.loli.net/2020/07/18/8f2DHsAbJymSuKh.png"></p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">= 用户不含正则表达式的 uri 前，要求请求字符串与 uri 严格匹配，如果匹配成功，就停止继续向下搜索并立即处理该请求。</span><br><span class="line"></span><br><span class="line">~ 用于表示 uri 包含正则表达式，并且区分大小写。</span><br><span class="line"></span><br><span class="line">~* 用于表示 uri 包含正则表达式，不区分大小写。</span><br><span class="line"></span><br><span class="line">^~ 用于不含正则表达式的 uri 前，要求 nginx 服务器找到标识 uri 和请求字符串匹配度最高的 location 后，立即使用此 location 处理请求，而不再使用 location 块中的正则 uri 和请求字符串做匹配。</span><br><span class="line"></span><br><span class="line">注意：如果 uri 包含正则表达式，则必须要有 ~ 或者 ~* 标识！</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://i.loli.net/2020/07/18/XTy8t2vsuOE9Z7a.png"></p>
-<p><img src="https://i.loli.net/2020/07/18/IpdMPTfH5zC7ay3.png"></p>
-<h2 id="负载均衡"><a href="#负载均衡" class="headerlink" title="负载均衡"></a>负载均衡</h2><p>Linux 下提供负载均衡的东西有：Nginx、LVS、Haproxy 等。</p>
-<p>nginx 提供的几种负载均衡分配策略：</p>
-<ul>
-<li><p>轮询（默认）</p>
-<p>每个请求按时间顺序逐一分配到不同的服务器上，如果后端 down 掉，就自动剔除。</p>
-</li>
-<li><p>weight</p>
-<p>权重，默认权重为 1，权重越高被分配的客户端越多。</p>
-<p>指定轮询几率，weight 和访问比例成正比，用于后端服务器性能不均的情况。</p>
-<p>配置方式就是：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">upstream myserver &#123;</span><br><span class="line">	server 127.0.0.1:8080;</span><br><span class="line">	server 127.0.0.1:8081;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
-<li><p>ip_hash</p>
-<p>每个请求按 ip 的 hash 结果分配，这样每个访客固定一个后端服务器，可以解决 session 共享的问题。</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">upstream myserver &#123;</span><br><span class="line">	ip_hash;</span><br><span class="line">	server 127.0.0.1:8080;</span><br><span class="line">	server 127.0.0.1:8081;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
-<li><p>fair（第三方）</p>
-<p>按后端服务器的响应时间来分配请求，响应时间短的优先分配。</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">upstream myserver &#123;</span><br><span class="line">	server 127.0.0.1:8080;</span><br><span class="line">	server 127.0.0.1:8081;</span><br><span class="line">	fair;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
-</ul>
-<p><strong>实现效果</strong></p>
-<p>浏览器输入地址，负载均衡效果，访问平均到 8080 和 8081 中。</p>
-<p><strong>准备工作</strong></p>
-<p>两台 tomcat 服务器，8080 和 8081，创建统一的页面 edu/a.html。</p>
-<p><img src="https://i.loli.net/2020/07/18/C6leUZYzGxBIWfb.png"></p>
-<p><strong>配置 nginx</strong></p>
-<p>http 块中配置 upstream，在 location 中增加 proxy_pass。</p>
-<p><img src="https://i.loli.net/2020/07/18/US5CeJZGDjyd614.png"></p>
-<p><img src="https://i.loli.net/2020/07/18/JBWfYczj2w4T9Cm.gif"></p>
-<h2 id="动静分离"><a href="#动静分离" class="headerlink" title="动静分离"></a>动静分离</h2><p><strong>什么是动静分离？</strong></p>
-<p>简单来说就是动态和静态请求分来，不能理解成知识单纯的把动态页面和静态页面物理分离。</p>
-<p>严格来说是动态请求跟静态请求分开，可以理解成用 nginx 处理静态页面，tomcat 处理动态页面。</p>
-<p>动静分离从目前实现角度来说大致分为 2 种。</p>
-<ol>
-<li><p>纯粹把静态文件独立成单独的域名，放在独立的服务器上，也是目前主流的方案。</p>
-<img src="https://i.loli.net/2020/07/18/x9hIqsVmdPXZ6lN.png" style="zoom:25%;" /></li>
-<li><p>动态和静态文件混合在一起发布，通过 nginx 分开。</p>
-<p>通过 location 指定不同的后缀实现不同的请求转发。通过 expires 参数设置，可以使浏览器缓存过期时间，减少与服务器之间的请求和流量。具体 expires 定义：是给一个资源设置一个过期时间，无需去服务端验证，直接通过浏览器自身确认是否过期即可，不会产生额外的流量。此种方法非常适合不经常变动的资源。（如果经常更新的文件，不建议使用 expires 来缓存），我这里设置 3d，表示 3 天内访问这个 url，发送一个请求，比对服务器该文件最后更新时间有没有变换，没有变化则不从服务器专区，返回状态码 304，如果有修改，直接从服务器重新下载，返回状态码 200。</p>
-</li>
-</ol>
-<p><strong>准备工作</strong></p>
-<p>准备静态资源，等会访问。</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">[root@centos-7 data]# ls image/</span><br><span class="line">1.jpg</span><br><span class="line">[root@centos-7 data]# ls www/</span><br><span class="line">a.html</span><br><span class="line">[root@centos-7 data]# pwd</span><br><span class="line">/data</span><br><span class="line">[root@centos-7 data]#</span><br></pre></td></tr></table></figure>
-
-<p><strong>配置 nginx</strong></p>
-<p>当然，要加 expires 也是在 location 中加入。</p>
-<img src="https://i.loli.net/2020/07/18/D7R1mT5yHxGLYOw.png" style="zoom:33%;" />
-
-<img src="https://i.loli.net/2020/07/18/reaoNEO8AHQKpsc.png" style="zoom:33%;" />
-
-<h2 id="高可用配置"><a href="#高可用配置" class="headerlink" title="高可用配置"></a>高可用配置</h2><p>如果只有一个 nginx 来做代理，挂了怎么办？</p>
-<p>nginx 可以做主备使用的方案。</p>
-<p><img src="https://i.loli.net/2020/07/18/QTLFAbEijPn86Go.png"></p>
-<p>这两个 nginx 都需要需要用到 keepalived。</p>
-<p>这两个 nginx 对外需要提供一个虚拟 ip。</p>
-<p><strong>准备工作</strong></p>
-<p>1、需要两台 nginx 服务器</p>
-<p>2、需要在两台服务器上安装 keepalived</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install keepalived</span><br></pre></td></tr></table></figure>
-
-<p>查看是否安装好</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@centos-7 nginx]# rpm -q -a keepalived</span><br><span class="line">keepalived-1.3.5-16.el7.x86_64</span><br></pre></td></tr></table></figure>
-
-<p>默认的 keepalived 配置在 /etc/keepalived/keepalived.conf</p>
-<p>3、需要虚拟 ip</p>
-<p>高可用配置</p>
-<p>​    主要修改 keepalived 的配置文件。</p>
-<p>​    配置文件如下文，注意有的 keeplived 使用 shell 来检测的，shell 脚本如下文。</p>
-<p>然后将两台服务器上的 nginx 和 keepalived 都启动。</p>
-<p>​    启动 keepalived</p>
-<p>​    systemctl start keepalived.service</p>
-<p>​    然后通过虚拟 IP 访问，虚拟 IP 在 keepalived 的配置文件中的虚拟ip。</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">#</span><span class="language-bash">!/bin/bash</span></span><br><span class="line">A=`ps -C nginx --no-header | wc -l`</span><br><span class="line">if [ $A -eq 0 ]; then</span><br><span class="line">	/usr/local/nginx/sbin/nginx</span><br><span class="line">  sleep 2</span><br><span class="line">  if [ `ps -C nginx --no-header | wc -l` -eq 0 ]; then</span><br><span class="line">  	killall keepalived</span><br><span class="line">  fi</span><br><span class="line">fi</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br></pre></td><td class="code"><pre><span class="line">! <span class="attribute">Configuration</span> File for keepalived</span><br><span class="line"></span><br><span class="line"><span class="comment"># 全局定义</span></span><br><span class="line">global_defs &#123;</span><br><span class="line">   <span class="section">notification_email</span> &#123;</span><br><span class="line">     acassen@firewall.<span class="attribute">loc</span></span><br><span class="line">     failover<span class="variable">@firewall</span>.loc</span><br><span class="line">     sysadmin<span class="variable">@firewall</span>.loc</span><br><span class="line">   &#125;</span><br><span class="line">   notification_email_from Alexandre.Cassen<span class="variable">@firewall</span>.loc</span><br><span class="line">   smtp_server <span class="number">192.168.200.1</span></span><br><span class="line">   smtp_connect_timeout <span class="number">30</span></span><br><span class="line">   router_id LVS_DEVEL   <span class="comment"># 服务器的名字，这个就是全局的唯一值，在 /etc/hosts 中，也可以随便</span></span><br><span class="line">   vrrp_skip_check_adv_addr</span><br><span class="line">   vrrp_strict</span><br><span class="line">   vrrp_garp_interval <span class="number">0</span></span><br><span class="line">   vrrp_gna_interval <span class="number">0</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 虚拟 ip 配置</span></span><br><span class="line">vrrp_instance VI_1 &#123;</span><br><span class="line">    <span class="attribute">state</span> MASTER  <span class="comment"># 备份服务器上将这里改为 BACKUP</span></span><br><span class="line">    interface eth0 <span class="comment"># 网卡，</span></span><br><span class="line">    virtual_router_id <span class="number">51</span>  <span class="comment"># 主、备机器的 virtual_router_id 必须相同，唯一标识</span></span><br><span class="line">    priority <span class="number">100</span>  <span class="comment"># 主、备机器取不同的优先级，主机值较大，备份机器较小</span></span><br><span class="line">    advert_int <span class="number">1</span> <span class="comment"># 时间间隔，每隔多少秒发送一个心跳</span></span><br><span class="line">    authentication &#123;  <span class="comment"># 权限校验方式，用的是 pass，密码是 1111</span></span><br><span class="line">        <span class="attribute">auth_type</span> PASS</span><br><span class="line">        auth_pass <span class="number">1111</span></span><br><span class="line">    &#125;</span><br><span class="line">    virtual_ipaddress &#123;  <span class="comment"># VRRP H 虚拟地址，也可以绑定一个ip</span></span><br><span class="line">        192.168.200.16</span><br><span class="line">        192.168.200.17</span><br><span class="line">        192.168.200.18</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 如果使用 shell 脚本的方式检测，取消注释如下配置</span></span><br><span class="line"><span class="attribute">vrrp_script</span> chk_http_port &#123;</span><br><span class="line">  <span class="attribute">script</span> <span class="string">&quot;/usr/local/src/nginx_check.sh&quot;</span>  <span class="comment"># 上文中的 shell 路径</span></span><br><span class="line">  interval <span class="number">2</span>  <span class="comment"># 检测脚本执行的间隔</span></span><br><span class="line">  weight <span class="number">2</span>  <span class="comment"># 权重，比如 -20 当脚本条件成立，当前主机的权重降低 20</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment"># 如果不使用上面的这个 vrrp_script 就使用下面的配置</span></span><br><span class="line"></span><br><span class="line">virtual_server <span class="number">192.168.200.100</span> <span class="number">443</span> &#123;</span><br><span class="line">    <span class="attribute">delay_loop</span> <span class="number">6</span></span><br><span class="line">    lb_algo rr</span><br><span class="line">    lb_kind NAT</span><br><span class="line">    persistence_timeout <span class="number">50</span></span><br><span class="line">    protocol TCP</span><br><span class="line"></span><br><span class="line">    real_server <span class="number">192.168.201.100</span> <span class="number">443</span> &#123;</span><br><span class="line">        <span class="attribute">weight</span> <span class="number">1</span></span><br><span class="line">        SSL_GET &#123;</span><br><span class="line">            <span class="section">url</span> &#123;</span><br><span class="line">              <span class="attribute">path</span> /</span><br><span class="line">              digest ff20ad2481f97b1754ef3e12ecd3a9cc</span><br><span class="line">            &#125;</span><br><span class="line">            url &#123;</span><br><span class="line">              <span class="attribute">path</span> /mrtg/</span><br><span class="line">              digest 9b3a0c85a887a256d6939da88aabd8cd</span><br><span class="line">            &#125;</span><br><span class="line">            connect_timeout <span class="number">3</span></span><br><span class="line">            nb_get_retry <span class="number">3</span></span><br><span class="line">            delay_before_retry <span class="number">3</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">virtual_server <span class="number">10.10.10.2</span> <span class="number">1358</span> &#123;</span><br><span class="line">    <span class="attribute">delay_loop</span> <span class="number">6</span></span><br><span class="line">    lb_algo rr</span><br><span class="line">    lb_kind NAT</span><br><span class="line">    persistence_timeout <span class="number">50</span></span><br><span class="line">    protocol TCP</span><br><span class="line"></span><br><span class="line">    sorry_server <span class="number">192.168.200.200</span> <span class="number">1358</span></span><br><span class="line"></span><br><span class="line">    real_server <span class="number">192.168.200.2</span> <span class="number">1358</span> &#123;</span><br><span class="line">        <span class="attribute">weight</span> <span class="number">1</span></span><br><span class="line">        HTTP_GET &#123;</span><br><span class="line">            <span class="section">url</span> &#123;</span><br><span class="line">              <span class="attribute">path</span> /testurl/test.jsp</span><br><span class="line">              digest 640205b7b0fc66c1ea91c463fac6334d</span><br><span class="line">            &#125;</span><br><span class="line">            url &#123;</span><br><span class="line">              <span class="attribute">path</span> /testurl2/test.jsp</span><br><span class="line">              digest 640205b7b0fc66c1ea91c463fac6334d</span><br><span class="line">            &#125;</span><br><span class="line">            url &#123;</span><br><span class="line">              <span class="attribute">path</span> /testurl3/test.jsp</span><br><span class="line">              digest 640205b7b0fc66c1ea91c463fac6334d</span><br><span class="line">            &#125;</span><br><span class="line">            connect_timeout <span class="number">3</span></span><br><span class="line">            nb_get_retry <span class="number">3</span></span><br><span class="line">            delay_before_retry <span class="number">3</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    real_server <span class="number">192.168.200.3</span> <span class="number">1358</span> &#123;</span><br><span class="line">        <span class="attribute">weight</span> <span class="number">1</span></span><br><span class="line">        HTTP_GET &#123;</span><br><span class="line">            <span class="section">url</span> &#123;</span><br><span class="line">              <span class="attribute">path</span> /testurl/test.jsp</span><br><span class="line">              digest 640205b7b0fc66c1ea91c463fac6334c</span><br><span class="line">            &#125;</span><br><span class="line">            url &#123;</span><br><span class="line">              <span class="attribute">path</span> /testurl2/test.jsp</span><br><span class="line">              digest 640205b7b0fc66c1ea91c463fac6334c</span><br><span class="line">            &#125;</span><br><span class="line">            connect_timeout <span class="number">3</span></span><br><span class="line">            nb_get_retry <span class="number">3</span></span><br><span class="line">            delay_before_retry <span class="number">3</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">virtual_server <span class="number">10.10.10.3</span> <span class="number">1358</span> &#123;</span><br><span class="line">    <span class="attribute">delay_loop</span> <span class="number">3</span></span><br><span class="line">    lb_algo rr</span><br><span class="line">    lb_kind NAT</span><br><span class="line">    persistence_timeout <span class="number">50</span></span><br><span class="line">    protocol TCP</span><br><span class="line"></span><br><span class="line">    real_server <span class="number">192.168.200.4</span> <span class="number">1358</span> &#123;</span><br><span class="line">        <span class="attribute">weight</span> <span class="number">1</span></span><br><span class="line">        HTTP_GET &#123;</span><br><span class="line">            <span class="section">url</span> &#123;</span><br><span class="line">              <span class="attribute">path</span> /testurl/test.jsp</span><br><span class="line">              digest 640205b7b0fc66c1ea91c463fac6334d</span><br><span class="line">            &#125;</span><br><span class="line">            url &#123;</span><br><span class="line">              <span class="attribute">path</span> /testurl2/test.jsp</span><br><span class="line">              digest 640205b7b0fc66c1ea91c463fac6334d</span><br><span class="line">            &#125;</span><br><span class="line">            url &#123;</span><br><span class="line">              <span class="attribute">path</span> /testurl3/test.jsp</span><br><span class="line">              digest 640205b7b0fc66c1ea91c463fac6334d</span><br><span class="line">            &#125;</span><br><span class="line">            connect_timeout <span class="number">3</span></span><br><span class="line">            nb_get_retry <span class="number">3</span></span><br><span class="line">            delay_before_retry <span class="number">3</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    real_server <span class="number">192.168.200.5</span> <span class="number">1358</span> &#123;</span><br><span class="line">        <span class="attribute">weight</span> <span class="number">1</span></span><br><span class="line">        HTTP_GET &#123;</span><br><span class="line">            <span class="section">url</span> &#123;</span><br><span class="line">              <span class="attribute">path</span> /testurl/test.jsp</span><br><span class="line">              digest 640205b7b0fc66c1ea91c463fac6334d</span><br><span class="line">            &#125;</span><br><span class="line">            url &#123;</span><br><span class="line">              <span class="attribute">path</span> /testurl2/test.jsp</span><br><span class="line">              digest 640205b7b0fc66c1ea91c463fac6334d</span><br><span class="line">            &#125;</span><br><span class="line">            url &#123;</span><br><span class="line">              <span class="attribute">path</span> /testurl3/test.jsp</span><br><span class="line">              digest 640205b7b0fc66c1ea91c463fac6334d</span><br><span class="line">            &#125;</span><br><span class="line">            connect_timeout <span class="number">3</span></span><br><span class="line">            nb_get_retry <span class="number">3</span></span><br><span class="line">            delay_before_retry <span class="number">3</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<p>EOF</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Nginx</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">运维</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/07/18/Nginx%E9%85%8D%E7%BD%AE%E5%AE%9E%E4%BE%8B/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
   
     <article id="post-Nginx基础知识" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
@@ -1455,6 +1270,193 @@
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2020/05/04/UDP%E5%8D%8F%E8%AE%AE%E3%80%81UDP%E7%BC%96%E7%A8%8B%E3%80%81%E6%9C%89%E8%BF%9E%E6%8E%A5%E7%9A%84UDP/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-回显程序" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/04/07/%E5%9B%9E%E6%98%BE%E7%A8%8B%E5%BA%8F/">回显程序</a>
+    </h1>
+  
+
+        
+        <a href="/2020/04/07/%E5%9B%9E%E6%98%BE%E7%A8%8B%E5%BA%8F/" class="archive-article-date">
+  	<time datetime="2020-04-07T14:59:21.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-04-07</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="基础铺垫"><a href="#基础铺垫" class="headerlink" title="基础铺垫"></a>基础铺垫</h2><p>首先来简单说几个问题。</p>
+<p><strong>1、程序双击后发生了什么？</strong><br>程序双击后，程序会被操作系统装载入内存，包括程序的代码、数据等信息。然后从程序的入口开始执行。</p>
+<p><strong>2、本机的不同程序间可以相互对话(通信)吗？</strong><br>当然是可以的，召唤师们经常用的 WeGame 和 LOL 是两个程序，当你在 WeGame 登录后点击启动 LOL，通常情况下再不用在 LOL 输入账号密码了，说明你再 WeGame 登录的账号信息也给了 LOL 的程序。至于是如何给的？<br>举个实现的例子：当你登录 WeGame 后，你会获得一个 ticket，这个 ticket 代表你的小票，这个小票就有着你的身份信息，你可以凭着这个小票进入召唤师峡谷。这个还得看程序员的具体的实现。</p>
+<p>这个就属于<em>进程间通信</em>。</p>
+<p><strong>3、如何实现不同主机间的不同进程的对话(通信)？</strong><br>当然可以，你电脑上的 QQ 和室友电脑上的 QQ，双击后会被载入自己的内存，那么你发的话是如何被室友收到的呢？这个就是不同主机间不同进程的通信，利用网络通信！</p>
+<p><strong>4、那问题 3 中的两个 QQ 进程是如何找到对方的呢？</strong><br>举个栗子：假设你有个女朋友，你的女朋友在北京上大学，你在西安上大学，你的女朋友给你准备了一份礼物，她要把这个礼物寄给你，她会填写快递信息如：<br>【中国陕西省西安市xxx区，西安xxx大学，xxx收，手机号xxx】<br>快递小哥可以根据这个地址和手机号唯一的定位到你，然后把快递送到你手里。</p>
+<p>在计算机中也是有唯一标识的，这个东西就是 ==IP== 地址，IP 地址标识了网络上的一台主机。<br>IP 地址就相当于【中国陕西省西安市xxx区，西安xxx大学】。<br>但是你的电脑上正在运行着很多程序，QQ、LOL、WeGame 等等，对方怎么知道这个包裹发给哪个程序呢？这个就需要另一个东西叫==端口号==。这个端口号就唯一的标识了你电脑上的一个程序。<br>端口号就相当于【xxx收，手机号xxx】。</p>
+<p>这样就可以唯一的标识一个网络上一个主机的一个进程了。</p>
+<p><strong>5、什么是协议？</strong><br>协议就是一种约定，用 4 中的栗子来说，你的女朋友给你寄的是特产烤鸭，她打电话给你说让你拿到后热一下再吃，这就是一种协议。<br>当然你也可以拿到后不热直接吃。（别吃坏肚子了）<br>当然她使用中文填写的快递地址信息也是和快递小哥的一种协议(约定)。</p>
+<p><strong>6、计算机有大端和小端之分，那数据在网络上传输的时候是按照什么方式传输呢？</strong><br>规定网络传输的数据都以大端序传输，即先发出的数据是低地址，后发出的数据是高地址。<br>发送主机通常将发送缓冲区中的数据按内存地址从低到高的顺序发出；<br>接收主机把从网络上接到的字节依次保存在接收缓冲区中,也是按内存地址从低到高的顺序保存；<br>TCP/IP协议规定，网络数据流应采用大端字节序，即低地址高字节；<br>不管这台主机是大端机还是小端机，都会按照这个 TCP/IP 规定的网络字节序来发送/接收数据；<br>如果当前发送主机是小端，就需要先将数据转成大端；否则就忽略，直接发送即可。</p>
+<p>为使网络程序具有可移植性，使同样的C代码在大端和小端计算机上编译后都能正常运行，下文的代码实现均会做网络字节序和主机字节序的转换。<br>转换需要用到的函数：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;arpa/inet.h&gt;</span></span></span><br><span class="line"><span class="type">uint32_t</span> <span class="title function_">htonl</span><span class="params">(<span class="type">uint32_t</span> hostlong)</span>;  <span class="comment">// host to network long</span></span><br><span class="line"><span class="type">uint16_t</span> <span class="title function_">htons</span><span class="params">(<span class="type">uint16_t</span> hostshort)</span>;  <span class="comment">// host to network short</span></span><br><span class="line"><span class="type">uint32_t</span> <span class="title function_">ntohl</span><span class="params">(<span class="type">uint32_t</span> netlong)</span>;  <span class="comment">// network to host long</span></span><br><span class="line"><span class="type">uint16_t</span> <span class="title function_">ntohs</span><span class="params">(<span class="type">uint16_t</span> netshort)</span>;  <span class="comment">// network to host short</span></span><br></pre></td></tr></table></figure>
+
+<hr>
+<p>好了铺垫就到这里，来说说 UDP 协议。</p>
+<h2 id="UDP-协议"><a href="#UDP-协议" class="headerlink" title="UDP 协议"></a>UDP 协议</h2><p>UDP 协议就是一种约定，约定了“快递小哥”拿到包裹后根据什么找到你。</p>
+<p>UDP 协议格式如下：<br><img src="https://img-blog.csdnimg.cn/20200407105156814.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0hhbm9pX2Fob2o=,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>其中需要注意的是：<br>1、2 个字节的 UDP 长度，是这整个 UDP 协议的长度，也就是说上面这张图的数据部分最多放 65535 - 64 字节的数据。<a target="_blank" rel="noopener" href="https://blog.csdn.net/caoshangpa/article/details/51530685">资料：TCP、UDP数据包大小的限制</a><br>2、校验和，如果校验和出错（和实际收到的数据校验和对不上），这个包裹就被丢弃了。</p>
+<h2 id="UDP-网络回显程序"><a href="#UDP-网络回显程序" class="headerlink" title="UDP 网络回显程序"></a>UDP 网络回显程序</h2><p>实现如下功能：<br>客户端  — hello —&gt;  服务器<br>客户端  &lt;— hello — 服务器</p>
+<p><img src="https://img-blog.csdnimg.cn/2020040715031538.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0hhbm9pX2Fob2o=,size_16,color_FFFFFF,t_70" alt="回显服务器测试"></p>
+<h3 id="服务端实现"><a href="#服务端实现" class="headerlink" title="服务端实现"></a>服务端实现</h3><ol>
+<li>创建一个 socket；</li>
+<li>服务器需要绑定一个固定的 IP 和端口号方便客户端找到他；</li>
+<li>服务器启动并监听这个端口号；</li>
+<li>循环处理：收到请求、处理请求、返回响应。</li>
+</ol>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gcc echo_server.c -o echo_server</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// echo_server.c</span></span><br><span class="line"><span class="comment">// UDP 回显服务器</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;string.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;sys/types.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;sys/socket.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;netinet/in.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;arpa/inet.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="comment">// 创建 socket</span></span><br><span class="line">    <span class="type">int</span> fd = socket(AF_INET, SOCK_DGRAM, <span class="number">0</span>);</span><br><span class="line">    <span class="keyword">if</span> (fd &lt; <span class="number">0</span>) &#123;</span><br><span class="line">        perror(<span class="string">&quot;socket&quot;</span>);</span><br><span class="line">        <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 绑定 IP 和 port</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">sockaddr_in</span> <span class="title">addr</span>;</span></span><br><span class="line">    addr.sin_family = AF_INET;</span><br><span class="line">    addr.sin_addr.s_addr = inet_addr(<span class="string">&quot;0.0.0.0&quot;</span>);</span><br><span class="line">    addr.sin_port = htons(<span class="number">8080</span>);</span><br><span class="line">    <span class="type">int</span> ret = bind(fd, (<span class="keyword">struct</span> sockaddr*)&amp;addr, <span class="keyword">sizeof</span>(addr));</span><br><span class="line">    <span class="keyword">if</span> (ret &lt; <span class="number">0</span>) &#123;</span><br><span class="line">        perror(<span class="string">&quot;bind&quot;</span>);</span><br><span class="line">        <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;server start!\n&quot;</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 循环处理收到的请求、返回响应</span></span><br><span class="line">    <span class="keyword">while</span> (<span class="number">1</span>) &#123;</span><br><span class="line">        <span class="comment">// 读取请求</span></span><br><span class="line">        <span class="type">char</span> buf[<span class="number">1024</span>] = &#123;<span class="number">0</span>&#125;;</span><br><span class="line">        <span class="class"><span class="keyword">struct</span> <span class="title">sockaddr_in</span> <span class="title">client_addr</span>;</span>  <span class="comment">// 客户端 ip 和 port</span></span><br><span class="line">        <span class="type">socklen_t</span> len = <span class="keyword">sizeof</span>(client_addr);</span><br><span class="line"></span><br><span class="line">        <span class="type">ssize_t</span> n = recvfrom(fd, buf, <span class="keyword">sizeof</span>(buf) - <span class="number">1</span>, <span class="number">0</span>, (<span class="keyword">struct</span> sockaddr*)&amp;client_addr, &amp;len);</span><br><span class="line">        <span class="keyword">if</span> (n &lt; <span class="number">0</span>) &#123;</span><br><span class="line">            perror(<span class="string">&quot;recvfrom&quot;</span>);</span><br><span class="line">            <span class="keyword">continue</span>;  <span class="comment">// 当一次读取失败，服务器不退出</span></span><br><span class="line">        &#125;</span><br><span class="line">        buf[n] = <span class="string">&#x27;\0&#x27;</span>;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 处理请求</span></span><br><span class="line">        <span class="comment">// 因为是回显服务器，原封不动返回给客户端</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">// 返回响应</span></span><br><span class="line">        n = sendto(fd, buf, <span class="built_in">strlen</span>(buf), <span class="number">0</span>, (<span class="keyword">struct</span> sockaddr*)&amp;client_addr, len);</span><br><span class="line">        <span class="keyword">if</span> (n &lt; <span class="number">0</span>) &#123;</span><br><span class="line">            perror(<span class="string">&quot;sendto&quot;</span>);</span><br><span class="line">            <span class="keyword">continue</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;[%s:%d] buf: %s\n&quot;</span>, inet_ntoa(client_addr.sin_addr), ntohs(client_addr.sin_port), buf);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    close(fd);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="客户端实现"><a href="#客户端实现" class="headerlink" title="客户端实现"></a>客户端实现</h3><ol>
+<li>创建 socket；</li>
+<li>配置要连接服务器的 ip 和 port；</li>
+<li>循环处理：获取输入、发送给服务器、获取响应结果。</li>
+</ol>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gcc echo_client.c -o echo_client</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// echo_client.c</span></span><br><span class="line"><span class="comment">// UDP 回显客户端</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;sys/types.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;sys/socket.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;netinet/in.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;arpa/inet.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="comment">// 创建 socket</span></span><br><span class="line">    <span class="type">int</span> fd = socket(AF_INET6, SOCK_DGRAM, <span class="number">0</span>);</span><br><span class="line">    <span class="keyword">if</span> (fd &lt; <span class="number">0</span>) &#123;</span><br><span class="line">        perror(<span class="string">&quot;socket&quot;</span>);</span><br><span class="line">        <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 配置要连接服务器的 ip 和 port</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">sockaddr_in</span> <span class="title">server_addr</span>;</span></span><br><span class="line">    server_addr.sin_family = AF_INET;</span><br><span class="line">    server_addr.sin_addr.s_addr = inet_addr(<span class="string">&quot;127.0.0.1&quot;</span>);</span><br><span class="line">    server_addr.sin_port = htons(<span class="number">8080</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span> (<span class="number">1</span>) &#123;</span><br><span class="line">        <span class="comment">// 获取输入</span></span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;input&gt; &quot;</span>);</span><br><span class="line">        <span class="type">char</span> input[<span class="number">1024</span>] = &#123;<span class="number">0</span>&#125;;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">&quot;%s&quot;</span>, &amp;input);</span><br><span class="line">        </span><br><span class="line">        <span class="comment">// 将输入发送给服务器</span></span><br><span class="line">        sendto(fd, input, <span class="keyword">sizeof</span>(input), <span class="number">0</span>, (<span class="keyword">struct</span> sockaddr*)&amp;server_addr, <span class="keyword">sizeof</span>(server_addr));</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;req: %s\n&quot;</span>, input);</span><br><span class="line">        </span><br><span class="line">        <span class="comment">// 接收响应</span></span><br><span class="line">        <span class="type">char</span> resp[<span class="number">1024</span>] = &#123;<span class="number">0</span>&#125;;</span><br><span class="line">        recvfrom(fd, resp, <span class="keyword">sizeof</span>(resp), <span class="number">0</span>, (<span class="keyword">struct</span> sockaddr*)&amp;server_addr, <span class="keyword">sizeof</span>(server_addr));</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;resp: %s\n&quot;</span>, resp);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    close(fd);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="实现说明"><a href="#实现说明" class="headerlink" title="实现说明"></a>实现说明</h3><p><strong>1、socket()</strong></p>
+<p>socket 函数用来创建一个建立网络通信的端点。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;sys/types.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;sys/socket.h&gt;</span></span></span><br><span class="line"><span class="type">int</span> <span class="title function_">socket</span><span class="params">(<span class="type">int</span> domain, <span class="type">int</span> type, <span class="type">int</span> protocol)</span>;</span><br></pre></td></tr></table></figure>
+
+<p>参数：<br>domain，在上面的代码中使用 AF_NET，即 IPv4，当然还有其他的选项：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">Name                Purpose                          Man page</span><br><span class="line">AF_UNIX, AF_LOCAL   Local communication              unix(7)</span><br><span class="line">AF_INET             IPv4 Internet protocols          ip(7)</span><br><span class="line">AF_INET6            IPv6 Internet protocols          ipv6(7)</span><br><span class="line">AF_IPX              IPX - Novell protocols</span><br><span class="line">AF_NETLINK          Kernel user interface device     netlink(7)</span><br><span class="line">AF_X25              ITU-T X.25 / ISO-8208 protocol   x25(7)</span><br><span class="line">AF_AX25             Amateur radio AX.25 protocol</span><br><span class="line">AF_ATMPVC           Access to raw ATM PVCs</span><br><span class="line">AF_APPLETALK        Appletalk                        ddp(7)</span><br><span class="line">AF_PACKET           Low level packet interface       packet(7)</span><br></pre></td></tr></table></figure>
+
+<p>type，套接字具有指定的类型，该类型指定通信语义。即代表协议，上述代码中使用 SOCK_DGRAM 代表 UDP。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">SOCK_STREAM 	TCP协议使用这个</span><br><span class="line">SOCK_DGRAM 		UDP协议</span><br></pre></td></tr></table></figure>
+
+<p>protocol，用来指定 socket 所使用的传输协议编号，通常为0。</p>
+<p>返回值：<br>失败返回 -1，成功返回对应的文件描述符。</p>
+<p><strong>2、bind()</strong><br>当使用 socket() 来创建一个 socket 时候，它存在于名称空间(地址族)中，但没有分配给它地址。<br>bind 用来给 socket 绑定 ip 和 端口。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">bind</span><span class="params">(<span class="type">int</span> sockfd, <span class="type">const</span> <span class="keyword">struct</span> sockaddr *addr, <span class="type">socklen_t</span> addrlen)</span>;</span><br></pre></td></tr></table></figure>
+
+<p>返回值：<br>成功返回 0，失败返回 -1。<br>参数：<br>sockfd，创建的 socket 文件描述符。<br>addr，这个结构体存储协议族、ip、port等信息。<br>addr_len，addr 的大小。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">sockaddr</span> &#123;</span></span><br><span class="line">	<span class="type">sa_family_t</span> sa_family;</span><br><span class="line">	<span class="type">char</span>        sa_data[<span class="number">14</span>];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>socket API 可以都用 struct sockaddr * 类型表示, 在使用的时候需要强制转化成 sockaddr_in；<br>这样的好处是程序的通用性，可以接收IPv4、IPv6, 以及UNIX Domain Socket 各种类型的sockaddr结构体指针做为参数;<br><img src="https://img-blog.csdnimg.cn/20200407153746953.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0hhbm9pX2Fob2o=,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+</blockquote>
+<p><strong>3、sendto()</strong></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">ssize_t</span> <span class="title function_">sendto</span><span class="params">(<span class="type">int</span> sockfd, <span class="type">const</span> <span class="type">void</span> *buf, <span class="type">size_t</span> len, <span class="type">int</span> flags,</span></span><br><span class="line"><span class="params">                        <span class="type">const</span> <span class="keyword">struct</span> sockaddr *dest_addr, <span class="type">socklen_t</span> addrlen)</span>;</span><br></pre></td></tr></table></figure>
+
+<p>发送 buf 中的数据 len 个给 dest_addr。</p>
+<p><strong>4、recvfrom()</strong></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">ssize_t</span> <span class="title function_">recvfrom</span><span class="params">(<span class="type">int</span> sockfd, <span class="type">void</span> *buf, <span class="type">size_t</span> len, <span class="type">int</span> flags,</span></span><br><span class="line"><span class="params">                        <span class="keyword">struct</span> sockaddr *src_addr, <span class="type">socklen_t</span> *addrlen)</span>;</span><br></pre></td></tr></table></figure>
+
+<p>接收到一个数据，src_addr 是输出型参数，代表谁发给我的。</p>
+<h2 id="封装-UDP-socket"><a href="#封装-UDP-socket" class="headerlink" title="封装 UDP socket"></a>封装 UDP socket</h2><p>可以看到，上面服务端、客户端实现时候，有一些同样的操作要做，那为了后面使用方便，封装一个 UDP 的 socket 类来实现这些共同的操作。</p>
+<p>来分析一下需求：<br>客户端程序需要：</p>
+<ul>
+<li>创建 socket</li>
+<li>关闭 socket</li>
+<li>接收数据</li>
+<li>发送数据</li>
+</ul>
+<p>服务端程序需要：</p>
+<ul>
+<li>创建 socket</li>
+<li>关闭 socket</li>
+<li>接收数据</li>
+<li>发送数据</li>
+<li>绑定端口号</li>
+</ul>
+<h3 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h3><p>udp_socket.hpp</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">ifndef</span> __UDP_SOCKET__</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __UDP_SOCKET__</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;unistd.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;sys/types.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;sys/socket.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;netinet/in.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;arpa/inet.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;string&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">UdpSocket</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	<span class="built_in">UdpSocket</span>() : <span class="built_in">m_fd</span>(<span class="number">-1</span>) &#123;&#125;</span><br><span class="line">    ~<span class="built_in">UdpSocket</span>() &#123;</span><br><span class="line">        <span class="built_in">Close</span>();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 创建一个 UDP socket</span></span><br><span class="line">    <span class="comment">// 成功返回 true，失败返回 false</span></span><br><span class="line">	<span class="function"><span class="type">bool</span> <span class="title">Create</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        m_fd = <span class="built_in">socket</span>(AF_INET, SOCK_DGRAM, <span class="number">0</span>);</span><br><span class="line">        <span class="keyword">return</span> m_fd == <span class="number">-1</span> ? <span class="literal">false</span> : <span class="literal">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 关闭 socket</span></span><br><span class="line">    <span class="comment">// 成功返回 true，失败返回 false</span></span><br><span class="line">    <span class="function"><span class="type">bool</span> <span class="title">Close</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">close</span>(m_fd) == <span class="number">-1</span> ? <span class="literal">false</span> : <span class="literal">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 绑定 ip 和 port</span></span><br><span class="line">    <span class="function"><span class="type">bool</span> <span class="title">Bind</span><span class="params">(<span class="type">const</span> std::string&amp; ip, <span class="type">const</span> std::<span class="type">uint16_t</span>&amp; port)</span> </span>&#123;</span><br><span class="line">        sockaddr_in addr;</span><br><span class="line">        addr.sin_family = AF_INET;</span><br><span class="line">        addr.sin_addr.s_addr = <span class="built_in">inet_addr</span>(ip.<span class="built_in">c_str</span>());</span><br><span class="line">        addr.sin_port = <span class="built_in">htons</span>(port);</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">bind</span>(m_fd, (sockaddr*)&amp;addr, <span class="built_in">sizeof</span>(addr)) == <span class="number">-1</span> ? <span class="literal">false</span> : <span class="literal">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 接收数据</span></span><br><span class="line">    <span class="function"><span class="type">bool</span> <span class="title">RecvFrom</span><span class="params">(std::string* msg, std::string* ip=<span class="literal">nullptr</span>, std::<span class="type">uint16_t</span>* port=<span class="literal">nullptr</span>)</span> </span>&#123;</span><br><span class="line">        <span class="type">char</span> buf[<span class="number">1024</span>] = &#123; <span class="number">0</span> &#125;;</span><br><span class="line">        sockaddr_in peer;</span><br><span class="line">        <span class="type">socklen_t</span> peer_len = <span class="built_in">sizeof</span>(peer);</span><br><span class="line">        <span class="type">ssize_t</span> n = <span class="built_in">recvfrom</span>(m_fd, buf, <span class="built_in">sizeof</span>(buf) - <span class="number">1</span>, <span class="number">0</span>, (sockaddr*)&amp;peer, &amp;peer_len);</span><br><span class="line">        <span class="keyword">if</span> (n &lt; <span class="number">0</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        *msg = buf;</span><br><span class="line">        <span class="keyword">if</span> (ip != <span class="literal">nullptr</span>) &#123;</span><br><span class="line">            *ip = <span class="built_in">inet_ntoa</span>(peer.sin_addr);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (port != <span class="literal">nullptr</span>) &#123;</span><br><span class="line">            *port = <span class="built_in">ntohs</span>(peer.sin_port);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 发送数据</span></span><br><span class="line">    <span class="function"><span class="type">bool</span> <span class="title">SendTo</span><span class="params">(<span class="type">const</span> std::string&amp; msg, <span class="type">const</span> std::string&amp; ip, <span class="type">const</span> std::<span class="type">uint16_t</span>&amp; port)</span> </span>&#123;</span><br><span class="line">        sockaddr_in addr;</span><br><span class="line">        addr.sin_family = AF_INET;</span><br><span class="line">        addr.sin_addr.s_addr = <span class="built_in">inet_addr</span>(ip.<span class="built_in">c_str</span>());</span><br><span class="line">        addr.sin_port = <span class="built_in">htons</span>(port);</span><br><span class="line">        <span class="type">ssize_t</span> n = <span class="built_in">sendto</span>(m_fd, msg.<span class="built_in">c_str</span>(), msg.<span class="built_in">size</span>(), <span class="number">0</span>, (sockaddr*)&amp;addr, <span class="built_in">sizeof</span>(addr));</span><br><span class="line">        <span class="keyword">return</span> n == <span class="number">-1</span> ? <span class="literal">false</span> : <span class="literal">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">	<span class="type">int</span> m_fd;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">endif</span> <span class="comment">// __UDP_SOCKET__</span></span></span><br></pre></td></tr></table></figure>
+
+<h3 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 回显客户端</span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;udp_socket.hpp&quot;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    UdpSocket socket;</span><br><span class="line">    <span class="type">bool</span> ret = socket.<span class="built_in">Create</span>();</span><br><span class="line">    <span class="keyword">if</span> (!ret) &#123;</span><br><span class="line">        <span class="built_in">perror</span>(<span class="string">&quot;Socket::Create()&quot;</span>);</span><br><span class="line">        <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">while</span> (<span class="literal">true</span>) &#123;</span><br><span class="line">        std::string input;</span><br><span class="line">        std::cout &lt;&lt; <span class="string">&quot;input&gt; &quot;</span>;</span><br><span class="line">        std::cin &gt;&gt; input;</span><br><span class="line"></span><br><span class="line">        ret = socket.<span class="built_in">SendTo</span>(input, <span class="string">&quot;127.0.0.1&quot;</span>, <span class="number">8080</span>);</span><br><span class="line">        <span class="keyword">if</span> (!ret) &#123;</span><br><span class="line">            <span class="built_in">perror</span>(<span class="string">&quot;Socket::SendTo()&quot;</span>);</span><br><span class="line">            <span class="keyword">continue</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        std::string resp;</span><br><span class="line">        ret = socket.<span class="built_in">RecvFrom</span>(&amp;resp);</span><br><span class="line">        <span class="keyword">if</span> (!ret) &#123;</span><br><span class="line">            <span class="built_in">perror</span>(<span class="string">&quot;Socket::RecvFrom()&quot;</span>);</span><br><span class="line">            <span class="keyword">continue</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    socket.<span class="built_in">Close</span>();</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>测试结果：OK<br><img src="https://img-blog.csdnimg.cn/20200407163623280.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0hhbm9pX2Fob2o=,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<hr>
+<p>EOF</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">C</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Linux</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">计算机网络</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">C++</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/Linux//" class="article-tag-list-link color1">Linux</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/04/07/%E5%9B%9E%E6%98%BE%E7%A8%8B%E5%BA%8F/">展开全文 >></a>
         </p>
       
 

@@ -73,7 +73,7 @@
             
 		</nav>
 		<nav>
-			总文章数 150
+			总文章数 149
 		</nav>
 		<nav class="header-nav">
 			<div class="social">
@@ -148,112 +148,6 @@
           </div>
           <div id="js-content" class="content-ll">
             
-  
-    <article id="post-JavaScript-Nodejs-几个系统包" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/03/31/JavaScript-Nodejs-%E5%87%A0%E4%B8%AA%E7%B3%BB%E7%BB%9F%E5%8C%85/">Nodejs-几个系统包</a>
-    </h1>
-  
-
-        
-        <a href="/2019/03/31/JavaScript-Nodejs-%E5%87%A0%E4%B8%AA%E7%B3%BB%E7%BB%9F%E5%8C%85/" class="archive-article-date">
-  	<time datetime="2019-03-31T12:32:46.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-03-31</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <span id="more"></span>
-
-<h2 id="assert"><a href="#assert" class="headerlink" title="assert"></a>assert</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="title function_">assert</span>(<span class="number">5</span>&lt;<span class="number">3</span>, <span class="string">&#x27;aaa&#x27;</span>);</span><br><span class="line"></span><br><span class="line">assert.<span class="title function_">deepEqual</span>(变量, 预期值, msg); <span class="comment">// 深度比较，相当于 ==</span></span><br><span class="line">assert.<span class="title function_">deepStrictEqual</span>(变量, 预期值, msg);	<span class="comment">// 相当于 === (比较类型)</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="path"><a href="#path" class="headerlink" title="path"></a>path</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> path=<span class="built_in">require</span>(<span class="string">&#x27;path&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> str=<span class="string">&#x27;/root/a/b/1.txt&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(path.<span class="title function_">dirname</span>(str));	<span class="comment">// 文件夹名 /root/a/b</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(path.<span class="title function_">extname</span>(str));	<span class="comment">// 扩展名 .txt</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(path.<span class="title function_">basename</span>(str));	<span class="comment">// 文件名 1.txt</span></span><br><span class="line"></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(path.<span class="title function_">resolve</span>(<span class="string">&#x27;/root/a/b&#x27;</span>, <span class="string">&#x27;../c&#x27;</span>, <span class="string">&#x27;build&#x27;</span>, <span class="string">&#x27;..&#x27;</span>, <span class="string">&#x27;strict&#x27;</span>));</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(path.<span class="title function_">resolve</span>(__dirname, <span class="string">&#x27;build&#x27;</span>));</span><br><span class="line"><span class="comment">// __dirname 类似于C中的宏，是当前路径</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="url"><a href="#url" class="headerlink" title="url"></a>url</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> url=<span class="built_in">require</span>(<span class="string">&#x27;url&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> str=<span class="string">&#x27;http://www.bing.com:8080/a/b/1.html?a=1&amp;a=2&amp;a=3&#x27;</span>;</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(url.<span class="title function_">parse</span>(str, <span class="literal">true</span>));	<span class="comment">// true表示解析后面的参数(query)，解析成 JSON，不加true就是一个字符串</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="querystring"><a href="#querystring" class="headerlink" title="querystring"></a>querystring</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> querystring=<span class="built_in">require</span>(<span class="string">&#x27;querystring&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(querystring.<span class="title function_">parse</span>(<span class="string">&quot;a=12&amp;b=5&amp;c=99&quot;</span>));</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(querystring.<span class="title function_">stringify</span>(&#123;<span class="attr">a</span>: <span class="number">12</span>, <span class="attr">b</span>: <span class="number">99</span>, <span class="attr">c</span>: <span class="string">&#x27;blue&#x27;</span>&#125;));</span><br></pre></td></tr></table></figure>
-
-<h2 id="net"><a href="#net" class="headerlink" title="net"></a>net</h2><p>网络通信。</p>
-<p><strong>OSI七层参考模型</strong><br>物理层 &gt; 数据链路层 &gt; 网络层(IP) &gt; 传输层(TCP) &gt; 会话层 &gt; 表现层 &gt; 应用层(HTTP)</p>
-<p><strong>5层模型</strong><br>物理层 &gt; 数据链路层 &gt; 网络层(IP) &gt; 传输层(TCP) &gt; 应用层(HTTP)</p>
-<p>net就是传输层(TCP)的一个包，可以保证质量。</p>
-<hr>
-<p>TCP：保证质量，特别适合网络传输文件，不能丢数据。</p>
-<p>UDP：保证速度，特别适合网络视频直播等，丢一两帧问题不大。</p>
-<hr>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">JavaScript</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">Node.js</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/JavaScript//" class="article-tag-list-link color1">JavaScript</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/03/31/JavaScript-Nodejs-%E5%87%A0%E4%B8%AA%E7%B3%BB%E7%BB%9F%E5%8C%85/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
   
     <article id="post-JavaScript-Nodejs-处理POST文件数据" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
@@ -1142,6 +1036,93 @@
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2019/03/26/JavaScript-JSON/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-JavaScript-正则表达式" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/03/25/JavaScript-%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/">JavaScript-正则表达式</a>
+    </h1>
+  
+
+        
+        <a href="/2019/03/25/JavaScript-%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/" class="archive-article-date">
+  	<time datetime="2019-03-25T15:18:07.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-03-25</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>在JS中使用正则。</p>
+        
+          <a class="article-more-a" href="/2019/03/25/JavaScript-%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">JavaScript</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/JavaScript//" class="article-tag-list-link color1">JavaScript</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/03/25/JavaScript-%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/">展开全文 >></a>
         </p>
       
 
